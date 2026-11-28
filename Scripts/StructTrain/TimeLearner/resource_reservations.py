@@ -90,6 +90,24 @@ def _overlap(left, right):
     return a == b or a.is_relative_to(b) or b.is_relative_to(a)
 
 
+def coalesce_resource_requests(values):
+    """Merge identical producer requests; retain the registry's strict guard.
+
+    A shared tool/SDK tree legitimately has two readers in the producer's
+    description. A source/output collision must never become a write lease.
+    Keep the first requested spelling so the normal alias guard remains active.
+    """
+    _require(type(values) is list and 1<=len(values)<=64, 'invalid_reservation_resources')
+    result={}
+    for value in values:
+        parsed=_resources([value])[0];key=parsed['canonical_path']
+        if key in result:
+            _require(result[key]['access']==value['access'], 'reservation_resource_access_collision')
+        else:
+            result[key]=dict(value)
+    return list(result.values())
+
+
 def _disk_device(path):
     path = Path(path)
     while not path.exists():
@@ -418,6 +436,60 @@ class Reservations:
             connection.execute('INSERT INTO closed_worker_recoveries VALUES (?,?,?)', (token, now, _json(event)))
             connection.execute('UPDATE leases SET state=\'released\',updated=?,release_note=? WHERE token=?',
                                (now, note, token))
+        return event
+
+    def recover_closed_external_controller(self, token, contained_directories, *, note):
+        """Explicit recovery for a dead outside controller and its bound children.
+
+        The first unit must name the lease owner as its original launcher.
+        Further units must name that first unit's bound main as their launcher.
+        All supplied units are freshly checked closed. This legacy quantity
+        lease operation never infers execution success or scientific validity.
+        """
+        from .contained_process import inspect as inspect_contained
+        _require(not self.managed_units, 'external_controller_recovery_requires_legacy_quantity_lease')
+        _require(type(note) is str and bool(note.strip()) and len(note)<=1024,
+                 'reservation_release_reason_required')
+        _require(type(contained_directories) is list and bool(contained_directories),
+                 'external_controller_recovery_directories_required')
+        directories=[Path(p).resolve(strict=True) for p in contained_directories]
+        _require(len(directories)==len(set(directories)), 'external_controller_recovery_duplicate_directory')
+        with self._transaction() as connection:
+            row=connection.execute('SELECT * FROM leases WHERE token=?',(token,)).fetchone()
+            _require(row is not None,'reservation_token_unknown')
+            lease=self._decode(row);owner=lease['owner'];caller=_identity()
+            _require(lease['state']=='held','reservation_not_held')
+            _require(caller['uid']==owner['uid'] and caller['boot_id']==owner['boot_id'],
+                     'reservation_recovery_worker_epoch_changed')
+            _require(_owner_status(owner) in ('missing','exited','pid_reused'),
+                     'reservation_recovery_owner_not_closed')
+            groups=[];expected=owner
+            for index,directory in enumerate(directories):
+                closure=inspect_contained(directory)
+                request=json.loads((directory/'request.json').read_text(encoding='utf-8'))
+                controller=request['controller'];binding=closure['binding']
+                _require(all(controller.get(k)==expected[k] for k in ('pid','start_ticks')) and
+                         request['uid']==owner['uid'] and request['boot_id']==owner['boot_id'] and
+                         binding['request_sha256']==request['sha256'],
+                         'external_controller_recovery_ancestry_changed')
+                _require(closure['all_processes_closed'] is True,'reservation_recovery_descendants_not_closed')
+                groups.append(dict(directory=str(directory),closure=closure))
+                if index==0:
+                    expected=dict(uid=owner['uid'],boot_id=owner['boot_id'],
+                                  pid=binding['initial_main_pid'],start_ticks=binding['initial_start_ticks'])
+            _require(_owner_status(owner) in ('missing','exited','pid_reused'),
+                     'reservation_recovery_owner_not_closed')
+            now=time.time()
+            event=dict(kind='timelearner_closed_external_controller_recovery',schema_version=1,
+                token=token,job_id=lease['job_id'],recorded_unix=now,administrator=caller,owner=owner,
+                owner_status=_owner_status(owner),groups=groups,note=note,resources=lease['resources'],
+                complete_child_inventory_is_callers_obligation=True,
+                successful_execution_attested=False,scientific_verdict=None)
+            connection.execute('CREATE TABLE IF NOT EXISTS closed_worker_recoveries ('
+                               'token TEXT PRIMARY KEY, recorded REAL NOT NULL, event TEXT NOT NULL)')
+            connection.execute('INSERT INTO closed_worker_recoveries VALUES (?,?,?)',(token,now,_json(event)))
+            connection.execute('UPDATE leases SET state=\'released\',updated=?,release_note=? WHERE token=?',
+                               (now,note,token))
         return event
 
     def register_managed_intent(self, token, directory, attempt_id, *, memory_bytes, tasks, maximum_wall_seconds):

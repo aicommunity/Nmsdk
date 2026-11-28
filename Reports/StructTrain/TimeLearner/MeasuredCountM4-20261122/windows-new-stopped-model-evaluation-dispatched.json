@@ -1,0 +1,28 @@
+{
+  "via_jump": "10.245.1.12",
+  "host": "10.245.1.14",
+  "operator_sha256": "018f292d0e1724b667270581c64ba1c95be4a9cc5ca9d626f1c480379e12461a",
+  "returncode": 0,
+  "stderr": "",
+  "observation": {
+    "dispatched": true,
+    "job": "windows-measured-count-stopped-baseline-k1",
+    "source_root": "80330fc51c4713c7bd1936be98e43ec0217b2337",
+    "controls_commit": "28f4a527df869229d1a712420cbc37034fc0b1b0",
+    "task": {
+      "scientific_verdict": null,
+      "instance": "{DDDA3A56-32F0-4EA6-BDE8-4E2D54E1DC44}",
+      "execution_time_limit": "PT8H",
+      "task": "TimeLearner-windows-measured-count-stopped-baseline-k1",
+      "engine_pid": 11512
+    },
+    "source_model_revision": "b3286d53576e57d37b753b244b8e6261a97086f034bc6cf7efbd610410ff9b23",
+    "source_Train_not_restarted": true,
+    "stages": [
+      "complete-source-preparation",
+      "native-eight-pattern-baseline",
+      "full-independent-evaluation-audit"
+    ],
+    "scientific_verdict": null
+  }
+}

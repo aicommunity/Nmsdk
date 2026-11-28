@@ -1,0 +1,110 @@
+{
+  "kind": "timelearner_external_scientific_result_reference",
+  "schema_version": 1,
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/ef/efe78c7d45558ee847457e54ae297b36e41ffa237a4d8af9c85736b78840fc04",
+      "sha256": "efe78c7d45558ee847457e54ae297b36e41ffa237a4d8af9c85736b78840fc04",
+      "bytes": 22658
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/b8/b8bd180ea4b45448e1fc7e5b0f71b1bd243bbeedcbb5c6a1b2fc7210613444e0",
+      "sha256": "b8bd180ea4b45448e1fc7e5b0f71b1bd243bbeedcbb5c6a1b2fc7210613444e0",
+      "bytes": 8128608
+    },
+    "restoration.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/76/76b6b577998ec78a8559dc05a5a8172c36be11cc36f34cba4eca1d3e819132e1",
+      "sha256": "76b6b577998ec78a8559dc05a5a8172c36be11cc36f34cba4eca1d3e819132e1",
+      "bytes": 397
+    },
+    "visual-review.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/14/14fe08d40f4ea8eb5d3e9efcc0b789f6c9cb82c7ce6757121522cf01a728834c",
+      "sha256": "14fe08d40f4ea8eb5d3e9efcc0b789f6c9cb82c7ce6757121522cf01a728834c",
+      "bytes": 6877
+    }
+  },
+  "source_catalog": {
+    "relative_path": "experiments/2026-11-27/Windows14-epoch22-gallery-accepted-fr114.json",
+    "bytes": 3993,
+    "sha256": "6bc9a6d3815d62a2624af55214e7187b018e25662f23f22cd20b8ced3332da15"
+  },
+  "source_members": 251,
+  "gallery_members": 140,
+  "observations": 16,
+  "PNG": 32,
+  "SVG": 32,
+  "cases": [
+    {
+      "id": "baseline",
+      "source_catalog": {
+        "relative_path": "experiments/2026-11-27/Windows14-epoch22-recognition-accepted-fr58.json",
+        "bytes": 4323,
+        "sha256": "d64d5d105a1e4ad4097ad554f7329bdefc08ee0cec0b8f01472c2bab4caaba7d"
+      },
+      "model_revision": "b1430c16b95da83567a01dcd314dbec36c92d2f6965308119ba66b0e14d0f2fc",
+      "observations": 8,
+      "counts": {
+        "TP": 0,
+        "FP": 0,
+        "FN": 1,
+        "TN": 7,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 0.0,
+        "foil_response_rate": 0.0
+      },
+      "frozen_model_verified": true
+    },
+    {
+      "id": "confirmation",
+      "source_catalog": {
+        "relative_path": "experiments/2026-11-27/Windows14-epoch22-recognition-accepted-fr58.json",
+        "bytes": 4323,
+        "sha256": "d64d5d105a1e4ad4097ad554f7329bdefc08ee0cec0b8f01472c2bab4caaba7d"
+      },
+      "model_revision": "2783e83684eef31e0a258e271e0c2c3acf30a9a9ab175fc20632577b5b9028a6",
+      "observations": 8,
+      "counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.75,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.2857142857142857
+      },
+      "frozen_model_verified": true
+    }
+  ],
+  "all16_observations_reaudited_and_byte_compared": true,
+  "all_reader_loaded_bytes_verified": true,
+  "all_reader_processes_closed": true,
+  "visual_review_complete": true,
+  "new_native_experiment": false,
+  "scientific_verdict": null,
+  "peer_catalog": {
+    "relative_path": "experiments/2026-11-27/Windows14-epoch22-gallery-independent-fr111.json",
+    "bytes": 3294,
+    "sha256": "48a1c1c62c278f03fdbdff87e06e7622de7c7ab5b5c7b88e02f6d0a7ee69e0ad"
+  },
+  "unique_PNG": 22,
+  "unique_PNG_directly_opened": 22,
+  "identical_copies_covered": 10
+}

@@ -1,0 +1,81 @@
+{
+  "catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-25/Windows-Classic-cap8-physical-projection-dz26.json",
+    "sha256": "0be1123e8683ee0e9a324a098dd17151d13775e4c748d620c9988d4764cfb73e",
+    "size": 3193
+  },
+  "kind": "timelearner_Classic_cap8_complete_physical_DATA_and_queued_conversion_archive",
+  "schema_version": 1,
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/ba/bac1203f0ce988a7b2ff8848ca13e2907b159af651ebbe9adf34e079e77efe6a",
+      "sha256": "bac1203f0ce988a7b2ff8848ca13e2907b159af651ebbe9adf34e079e77efe6a",
+      "bytes": 5454
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/7f/7fec34cb2158c689ff948958f83f01bd8650492da409c8cb6c68bec8c3de6004",
+      "sha256": "7fec34cb2158c689ff948958f83f01bd8650492da409c8cb6c68bec8c3de6004",
+      "bytes": 66080
+    },
+    "compact-training-readback": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/c0/c055a09fa0760abc750ccc75eb52d2370f3e7806691867a24ab7446bb9a69119",
+      "sha256": "c055a09fa0760abc750ccc75eb52d2370f3e7806691867a24ab7446bb9a69119",
+      "bytes": 47054
+    }
+  },
+  "restoration": {
+    "kind": "timelearner_native_bundle_restoration",
+    "schema_version": 1,
+    "archive_sha256": "7fec34cb2158c689ff948958f83f01bd8650492da409c8cb6c68bec8c3de6004",
+    "archive_members_verified": 29,
+    "retained_regular_files": 29,
+    "compatibility": null,
+    "omitted_redundant_aliases": [],
+    "source_archive_modified": false,
+    "native_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "physical_DATA": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/Windows-cap8-physical-projection-dz26/independent-restored/physical-projection-job/physical-model-DATA.json",
+    "sha256": "c59a598667418354f32085ce2d0681df01add8c08ec5113bd1acf23ae29a1280",
+    "size": 20162851
+  },
+  "source_model_revision": "b82b884e18fb1871a1db8d6925586c2e50946cb073598d7726b8bcf79c938e56",
+  "physical_DATA_audit": {
+    "kind": "physical_model_data_audit",
+    "schema_version": 1,
+    "data_only": true,
+    "model_revision": "b82b884e18fb1871a1db8d6925586c2e50946cb073598d7726b8bcf79c938e56",
+    "pattern_size": 4,
+    "branch": false,
+    "frequency_hz": 2000,
+    "threshold_path": "$.LTZone",
+    "threshold_classes": [
+      "TLNativeFast3F2000_LTZone"
+    ],
+    "effective_threshold": 100,
+    "source_training_evidence_checked": false,
+    "native_import_verified": false,
+    "training_certificate_transferred": false,
+    "calibration_confirmed": false,
+    "evaluation_verdict": null,
+    "explicit_conversion_data": false,
+    "native_conversion_verified": false
+  },
+  "projection_process_closed": true,
+  "queued_native_conversion_controls_sha256": "5736ceff20c0526d4b84f6f7068671a23072f777bcd667a21eded3a025ef3196",
+  "source_original_training_outcome": "budget_exhausted",
+  "native_import_verified": false,
+  "calibration_performed": false,
+  "classification_performed": false,
+  "scientific_verdict": null
+}

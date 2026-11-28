@@ -1,0 +1,153 @@
+{
+  "kind": "timelearner_compact_actual_count_physical_DATA_replay",
+  "schema_version": 1,
+  "observed_utc": "2026-11-22T00:49:18.859340+00:00",
+  "host": "10.245.1.14",
+  "queue": {
+    "execution": "completed",
+    "validity": "valid",
+    "physical_export_complete": true,
+    "all_eight_DATA_waveforms_and_events_preserved": true,
+    "model_revision": "364de8215f2f818c7ecebf2c31f3650afa719f7c53b20901374dea6c8d68a5d4",
+    "threshold": 0.06760345444849075,
+    "counts": {
+      "TP": 1,
+      "FP": 1,
+      "FN": 0,
+      "TN": 6,
+      "targets": 1,
+      "foils": 7,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.875,
+      "target_hit_rate": 1.0,
+      "foil_response_rate": 0.14285714285714285
+    },
+    "physical_model": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-count-recognition-physical-export-a1\\native\\model.json",
+    "physical_model_data_bytes": 11537278,
+    "source_calibration_audit": {
+      "path": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-count-stopped-threshold-a1\\independent-audit.json",
+      "sha256": "1cb9cc166b8d885aa6266d97bd2cf60e77cf1e0dbcf61d9607c70cebcb10ed72",
+      "size": 376574
+    },
+    "replay_terminal": {
+      "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-count-recognition-physical-replay-a1\\terminal.json",
+      "sha256": "542f5f4ec160c0da71e1245e972fb3cf6ba077785b367521acc9b7a727c6f993",
+      "size": 15539
+    },
+    "next_operation": "frozen_new_foil_order_ITI_probes_and_all_pattern_figures",
+    "training_completed": false,
+    "independently_heldout_evaluation": false,
+    "scientific_verdict": null
+  },
+  "closed_process": {
+    "execution": "completed",
+    "wall_seconds": 896.2096920000622,
+    "returncode": 0,
+    "all_processes_closed": true,
+    "runtime_provenance": "loaded_files_captured"
+  },
+  "source_model_data_sha256": "40b9066c9f262bee3ff1ededb19c7b5bf59b80dee315dbda38fd907186a8f1b6",
+  "all_samples_and_events_preserved": true,
+  "rows": [
+    {
+      "trial_id": "branch-count-M4/physical-DATA-replay/windows-a1/trial-0",
+      "sample_id": "phasea-row-0",
+      "samples": 4001,
+      "spike_count": 1,
+      "maximum_absolute_sample_difference": 0.0,
+      "waveform_difference_reason": null,
+      "waveform_preserved": true,
+      "stimulus_and_spike_events_preserved": true
+    },
+    {
+      "trial_id": "branch-count-M4/physical-DATA-replay/windows-a1/trial-1",
+      "sample_id": "phasea-row-1",
+      "samples": 4001,
+      "spike_count": 0,
+      "maximum_absolute_sample_difference": 0.0,
+      "waveform_difference_reason": null,
+      "waveform_preserved": true,
+      "stimulus_and_spike_events_preserved": true
+    },
+    {
+      "trial_id": "branch-count-M4/physical-DATA-replay/windows-a1/trial-2",
+      "sample_id": "phasea-row-2",
+      "samples": 4001,
+      "spike_count": 0,
+      "maximum_absolute_sample_difference": 0.0,
+      "waveform_difference_reason": null,
+      "waveform_preserved": true,
+      "stimulus_and_spike_events_preserved": true
+    },
+    {
+      "trial_id": "branch-count-M4/physical-DATA-replay/windows-a1/trial-3",
+      "sample_id": "phasea-row-3",
+      "samples": 4001,
+      "spike_count": 0,
+      "maximum_absolute_sample_difference": 0.0,
+      "waveform_difference_reason": null,
+      "waveform_preserved": true,
+      "stimulus_and_spike_events_preserved": true
+    },
+    {
+      "trial_id": "branch-count-M4/physical-DATA-replay/windows-a1/trial-4",
+      "sample_id": "phasea-row-4",
+      "samples": 4001,
+      "spike_count": 1,
+      "maximum_absolute_sample_difference": 0.0,
+      "waveform_difference_reason": null,
+      "waveform_preserved": true,
+      "stimulus_and_spike_events_preserved": true
+    },
+    {
+      "trial_id": "branch-count-M4/physical-DATA-replay/windows-a1/trial-5",
+      "sample_id": "phasea-row-5",
+      "samples": 4001,
+      "spike_count": 0,
+      "maximum_absolute_sample_difference": 0.0,
+      "waveform_difference_reason": null,
+      "waveform_preserved": true,
+      "stimulus_and_spike_events_preserved": true
+    },
+    {
+      "trial_id": "branch-count-M4/physical-DATA-replay/windows-a1/trial-6",
+      "sample_id": "phasea-row-6",
+      "samples": 4001,
+      "spike_count": 0,
+      "maximum_absolute_sample_difference": 0.0,
+      "waveform_difference_reason": null,
+      "waveform_preserved": true,
+      "stimulus_and_spike_events_preserved": true
+    },
+    {
+      "trial_id": "branch-count-M4/physical-DATA-replay/windows-a1/trial-7",
+      "sample_id": "phasea-row-7",
+      "samples": 4001,
+      "spike_count": 0,
+      "maximum_absolute_sample_difference": 0.0,
+      "waveform_difference_reason": null,
+      "waveform_preserved": true,
+      "stimulus_and_spike_events_preserved": true
+    }
+  ],
+  "central_DATA_primary_publication_pending": false,
+  "scientific_verdict": null,
+  "central_DATA_archive": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/3e/3e177b6b76e0ba6c6e163fbb98327df84f16e313bc5a21300aa60ed91317a66c",
+    "sha256": "3e177b6b76e0ba6c6e163fbb98327df84f16e313bc5a21300aa60ed91317a66c",
+    "bytes": 396976
+  },
+  "central_DATA_bundle": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/40/40a97a284b02c612e65fb3b8c17e91aae1a16ef95ca215027b9dd501d7fe38ae",
+    "sha256": "40a97a284b02c612e65fb3b8c17e91aae1a16ef95ca215027b9dd501d7fe38ae",
+    "bytes": 15856
+  },
+  "separate_Windows_tree_all_members_verified": true,
+  "independent_host_restoration_pending": true
+}

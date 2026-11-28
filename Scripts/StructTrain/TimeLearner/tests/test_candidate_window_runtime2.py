@@ -56,6 +56,17 @@ class CandidateWindowRuntime2DeclarationTest(unittest.TestCase):
     def make(self):
         config,p,source,binding=source_data();return runtime2(config,p,binding['model_identity']['sha256']),config,p
 
+    def test_opt_in_N0_length_policy_is_part_of_the_current_search(self):
+        plan,config,p=self.make();plan['search']['normalization']='N0'
+        plan['search']['maximum_n0_length_proposals']=4
+        audit_candidate_window_runtime_plan(plan,config,p)
+        for value in (0,True,1.5,int(plan['search']['maximum_candidates_per_input'])+1):
+            plan['search']['maximum_n0_length_proposals']=value
+            with self.subTest(value=value),self.assertRaises(EvidenceError):
+                audit_candidate_window_runtime_plan(plan,config,p)
+        plan['search']['maximum_n0_length_proposals']=4;plan['search']['normalization']='N1'
+        with self.assertRaises(EvidenceError):audit_candidate_window_runtime_plan(plan,config,p)
+
     def test_real_runtime_shape_binds_full_protocol_and_is_not_cold7(self):
         plan,config,p=self.make();result=audit_candidate_window_runtime_plan(plan,config,p)
         self.assertEqual(result['runtime_plan_schema_version'],2);self.assertFalse(result['current_search_derived_from_cold_configuration'])

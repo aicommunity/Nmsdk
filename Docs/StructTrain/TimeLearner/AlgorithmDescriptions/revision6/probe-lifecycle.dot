@@ -1,0 +1,28 @@
+digraph Sequence {
+ graph [bgcolor=white,pad=0.12,overlap=true,splines=line,outputorder=edgesfirst];
+ node [shape=box,fontname="Times New Roman",fontsize=17,margin="0.10,0.08",pin=true];
+ edge [fontname="Times New Roman",fontsize=15,arrowsize=0.7];
+ a [label="Модуль\nобучения",pos="0,6!"];
+ b [label="Вычислитель\nRdk",pos="2.3,6!"];
+ c [label="Нейрон",pos="4.6,6!"];
+ d [label="Измеритель\nпробы",pos="6.9,6!"];
+ node [shape=point,width=0.01,label=""];
+ a1 [pos="0,5.1!"];b1 [pos="2.3,5.1!"];c1 [pos="4.6,5.1!"];d1 [pos="6.9,5.1!"];
+ a2 [pos="0,4.2!"];b2 [pos="2.3,4.2!"];c2 [pos="4.6,4.2!"];d2 [pos="6.9,4.2!"];
+ a3 [pos="0,3.3!"];b3 [pos="2.3,3.3!"];c3 [pos="4.6,3.3!"];d3 [pos="6.9,3.3!"];
+ a4 [pos="0,2.4!"];b4 [pos="2.3,2.4!"];c4 [pos="4.6,2.4!"];d4 [pos="6.9,2.4!"];
+ a5 [pos="0,1.5!"];b5 [pos="2.3,1.5!"];c5 [pos="4.6,1.5!"];d5 [pos="6.9,1.5!"];
+ a6 [pos="0,0.6!"];b6 [pos="2.3,0.6!"];c6 [pos="4.6,0.6!"];d6 [pos="6.9,0.6!"];
+ a7 [pos="0,0.1!"];return1 [pos="1.5,0.6!"];return2 [pos="1.5,0.1!"];
+ edge [style=dashed,arrowhead=none,color=gray];
+ a->a1->a2->a3->a4->a5->a6->a7;b->b1->b2->b3->b4->b5->b6;
+ c->c1->c2->c3->c4->c5->c6;d->d1->d2->d3->d4->d5->d6;
+ edge [style=solid,arrowhead=normal,color=black];
+ a1->c1 [label="Правка и сброс между пробами"];
+ a2->d2 [label="Открыть наблюдение до первого стимула"];
+ b3->c3 [label="Штатный такт"];
+ c4->d4 [label="Отсчёт и события"];
+ d5->a5 [label="Завершённое наблюдение"];
+ a6->return1 [label="Выбор следующего\nдействия",arrowhead=none];
+ return1->return2 [arrowhead=none];return2->a7;
+}

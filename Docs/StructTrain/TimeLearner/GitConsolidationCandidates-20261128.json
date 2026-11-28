@@ -1,0 +1,574 @@
+{
+  "kind": "timelearner_git_consolidation_review",
+  "schema_version": 1,
+  "UTC": "2026-11-28T11:21:16.779696+00:00",
+  "status": "review_only_no_branch_merge_or_creation_executed",
+  "scientific_goal_unchanged": true,
+  "current_branches": {
+    "root": {
+      "branch": "codex/timelearner-revision6-source-20261128",
+      "head": "cf1880522c4ac906a0a341a95b8afcba95e1ac09",
+      "clean": true,
+      "advertised_origin_same_branch": "cf1880522c4ac906a0a341a95b8afcba95e1ac09",
+      "origin_develop": "87e7da0205b6bb0d582f7b4f2551c935fd7f2350",
+      "origin_develop_is_ancestor": true,
+      "direct_current_into_develop_merge_tree_passed": true,
+      "direct_merge_tree_equals_current_tree": true,
+      "parent_branch": "codex/timelearner-stopped-pipeline-source-20261128",
+      "parent_origin_evidence": [
+        "f9bcec8c250c49fd54e9a65fb6486ebcdd77ef9c\tcheckout: moving from codex/timelearner-stopped-pipeline-source-20261128 to codex/timelearner-revision6-source-20261128"
+      ]
+    },
+    "PulseLib": {
+      "branch": "codex/timelearner-private-image-empty-xml-20261128",
+      "head": "f8ddbd0895e9da0c0c5348612869a3e2ca95a1b1",
+      "clean": true,
+      "advertised_origin_same_branch": "f8ddbd0895e9da0c0c5348612869a3e2ca95a1b1",
+      "origin_develop": "891259ea08d6f88ae1631737935a140e2380a625",
+      "origin_develop_is_ancestor": true,
+      "direct_current_into_develop_merge_tree_passed": true,
+      "direct_merge_tree_equals_current_tree": true,
+      "parent_branch": "codex/timelearner-zero-feedback-cache-20261128",
+      "parent_origin_evidence": [
+        "d97b1b5f33244a4a35bd88032c347dc21c8dfdea\tcheckout: moving from codex/timelearner-zero-feedback-cache-20261128 to codex/timelearner-private-image-empty-xml-20261128"
+      ]
+    },
+    "Rdk": {
+      "branch": "codex/timelearner-portable-native-xml-20261127",
+      "head": "26129caa576a6b727ee2d76718e9fe9b2674e811",
+      "clean": true,
+      "advertised_origin_same_branch": "26129caa576a6b727ee2d76718e9fe9b2674e811",
+      "origin_develop": "10e9d05aa658dd2203c89bc84ba9166595b50014",
+      "origin_develop_is_ancestor": true,
+      "direct_current_into_develop_merge_tree_passed": true,
+      "direct_merge_tree_equals_current_tree": true,
+      "parent_branch": "codex/timelearner-integral-xml",
+      "parent_origin_evidence": [
+        "561986e9f336ee5914e2d119de90b005e06f3639\tcheckout: moving from codex/timelearner-integral-xml to codex/timelearner-portable-native-xml-20261127"
+      ]
+    },
+    "Bin": {
+      "branch": "codex/timelearner-script-retirement",
+      "head": "2c285cb472134fc92394153c089603a830a03f70",
+      "clean": true,
+      "advertised_origin_same_branch": "2c285cb472134fc92394153c089603a830a03f70",
+      "origin_develop": "b4f66eb137d3e1c19539890dbdee06faa3e1020b",
+      "origin_develop_is_ancestor": true,
+      "direct_current_into_develop_merge_tree_passed": true,
+      "direct_merge_tree_equals_current_tree": true,
+      "parent_branch": "develop",
+      "parent_origin_evidence": [
+        "8cb6dba07b30432272984c8ce3136b48ad06f064\tcheckout: moving from develop to codex/timelearner-script-retirement"
+      ]
+    }
+  },
+  "potential_merges_in_dependency_order": [
+    {
+      "repository": "Rdk",
+      "source": "codex/timelearner-portable-native-xml-20261127",
+      "target": "codex/timelearner-integral-xml",
+      "option": "--no-ff",
+      "pair_probe_passed": true,
+      "use_updated_parent_after_prior_merge": true
+    },
+    {
+      "repository": "Rdk",
+      "source": "codex/timelearner-integral-xml",
+      "target": "develop",
+      "option": "--no-ff",
+      "pair_probe_passed": true,
+      "use_updated_parent_after_prior_merge": true
+    },
+    {
+      "repository": "PulseLib",
+      "source": "codex/timelearner-private-image-empty-xml-20261128",
+      "target": "codex/timelearner-zero-feedback-cache-20261128",
+      "option": "--no-ff",
+      "pair_probe_passed": true,
+      "use_updated_parent_after_prior_merge": true
+    },
+    {
+      "repository": "PulseLib",
+      "source": "codex/timelearner-zero-feedback-cache-20261128",
+      "target": "develop",
+      "option": "--no-ff",
+      "pair_probe_passed": true,
+      "use_updated_parent_after_prior_merge": true
+    },
+    {
+      "repository": "Bin",
+      "source": "codex/timelearner-script-retirement",
+      "target": "develop",
+      "option": "--no-ff",
+      "pair_probe_passed": true,
+      "use_updated_parent_after_prior_merge": true
+    },
+    {
+      "repository": "root",
+      "source": "codex/timelearner-revision6-source-20261128",
+      "target": "codex/timelearner-stopped-pipeline-source-20261128",
+      "option": "--no-ff",
+      "pair_probe_passed": true,
+      "use_updated_parent_after_prior_merge": true
+    },
+    {
+      "repository": "root",
+      "source": "codex/timelearner-stopped-pipeline-source-20261128",
+      "target": "develop",
+      "option": "--no-ff",
+      "pair_probe_passed": true,
+      "use_updated_parent_after_prior_merge": true
+    }
+  ],
+  "minimum_alternative": [
+    {
+      "repository": "Rdk",
+      "source": "codex/timelearner-portable-native-xml-20261127",
+      "target": "develop",
+      "option": "--no-ff"
+    },
+    {
+      "repository": "PulseLib",
+      "source": "codex/timelearner-private-image-empty-xml-20261128",
+      "target": "develop",
+      "option": "--no-ff"
+    },
+    {
+      "repository": "Bin",
+      "source": "codex/timelearner-script-retirement",
+      "target": "develop",
+      "option": "--no-ff"
+    },
+    {
+      "repository": "root",
+      "source": "codex/timelearner-revision6-source-20261128",
+      "target": "develop",
+      "option": "--no-ff"
+    }
+  ],
+  "local_develop_behind_origin": {
+    "root": 40,
+    "PulseLib": 4,
+    "Rdk": 0,
+    "Bin": 0
+  },
+  "all_four_current_branches_already_include_their_origin_develop": true,
+  "new_branch_proposal": {
+    "name": "dendr_timelearner",
+    "currently_exists_in_local_or_advertised_origin": false,
+    "children": [
+      "Rdk",
+      "PulseLib",
+      "Bin"
+    ],
+    "sequence": [
+      "Integrate selected current child branches with explicit merge commits; publish and verify their exact resulting commits.",
+      "Record the exact new child merge commit gitlinks in the root integration branch without changing other submodules.",
+      "Integrate the root current branch with explicit merge commits; verify recursive source closure and selected affected checks.",
+      "Create dendr_timelearner in the three child repositories from the integrated develop points and in the root from the root commit with those exact gitlinks.",
+      "If adopted, create separate task branches/worktrees from dendr_timelearner; preserve --no-ff integration and child-before-root publication; do not change live frozen source/runtime."
+    ],
+    "new_branch_does_not_imply_full_plan_or_scientific_acceptance": true
+  },
+  "additional_candidate": {
+    "repository": "Rdk",
+    "source": "codex/timelearner-load-replaces-input-bindings",
+    "head": "1bb59eb2fad5def426637d8640e3f6bb092d576f",
+    "proposed_target": "develop",
+    "scope": "One documentation-only commit: Docs/Engine/FullGraphLoadInputBindings.ru.md updates formerly pending six native Load and fresh-process transfer evidence; no code change.",
+    "automatic_merge_selected": false
+  },
+  "outside_current_history": {
+    "root": {
+      "local_count": 45,
+      "local_branches": [
+        "codex/fixture-asymrm-retired-paths-restored",
+        "codex/timelearner-candidate-cursor-ab",
+        "codex/timelearner-candidate-window-foreign-authority",
+        "codex/timelearner-candidate-window-reader53-plan",
+        "codex/timelearner-closed-python-validation",
+        "codex/timelearner-cold-envelope-include-a2-paired-preparation",
+        "codex/timelearner-cold-envelope-pair-source-materialization",
+        "codex/timelearner-cold-envelope-profile-paired-preparation",
+        "codex/timelearner-cold-envelope-unfixed",
+        "codex/timelearner-cold-envelope-unfixed-include",
+        "codex/timelearner-cold-envelope-unfixed-owning",
+        "codex/timelearner-cold-envelope-unfixed-value",
+        "codex/timelearner-cold-schema-native-preparation",
+        "codex/timelearner-cold6-a4-production-preparation",
+        "codex/timelearner-collector-input-capabilities",
+        "codex/timelearner-composite-archive-fixtures",
+        "codex/timelearner-configured-probe",
+        "codex/timelearner-dataset-snapshot-fixture",
+        "codex/timelearner-domain-reports",
+        "codex/timelearner-frozen-iti-reset",
+        "codex/timelearner-invalid-budget-baseline",
+        "codex/timelearner-lifetime37-incremental-a3-preparation",
+        "codex/timelearner-ltzone-mode-regressions",
+        "codex/timelearner-manual-control-lifetime",
+        "codex/timelearner-manual-control-native-preparation",
+        "codex/timelearner-manual-control-unfixed-native-preparation",
+        "codex/timelearner-native-canonical25-a2-plan",
+        "codex/timelearner-native-canonical25-plan",
+        "codex/timelearner-native-configure-metadata19-plan",
+        "codex/timelearner-native-lifetime33-a2-build-negative",
+        "codex/timelearner-native-lifetime33-build-negative",
+        "codex/timelearner-native-lifetime37-a3-build-negative",
+        "codex/timelearner-native-sdk-preparation-proposal",
+        "codex/timelearner-native48-fresh-canonical-plan",
+        "codex/timelearner-native48-full-sdk-canonical-plan",
+        "codex/timelearner-native48-source-control-plan-v2",
+        "codex/timelearner-native48-source-control-plan-v3",
+        "codex/timelearner-owned-native-controller40-plan",
+        "codex/timelearner-owned-plot-cache-isolation",
+        "codex/timelearner-package6-proof",
+        "codex/timelearner-rest-state-archive-sdk",
+        "codex/timelearner-rising-edge-source-review",
+        "codex/timelearner-runtime2-reader73-a2-plan",
+        "codex/timelearner-runtime2-reader73-plan",
+        "codex/timelearner-windows-job-drain"
+      ],
+      "task_named_advertised_count": 64,
+      "task_named_advertised_branches": [
+        {
+          "branch": "codex/timelearner-candidate-cursor-ab",
+          "sha": "c0439c406c43e9926de52f12a3e6a654056a1ed3"
+        },
+        {
+          "branch": "codex/timelearner-candidate-window-foreign-authority",
+          "sha": "c22c522b4d688fe6f46bd00166acf7070e8f8638"
+        },
+        {
+          "branch": "codex/timelearner-candidate-window-pure40-m40-a1-evidence",
+          "sha": "56729f8202c54421a17bd66ceec5f7526ab5b0b3"
+        },
+        {
+          "branch": "codex/timelearner-candidate-window-reader53-plan",
+          "sha": "29b386cef1a7d3edb94c88a53a3e488594f44db9"
+        },
+        {
+          "branch": "codex/timelearner-closed-python-validation",
+          "sha": "45c0c8767f64d58b29fc8a51da465295c014bd3e"
+        },
+        {
+          "branch": "codex/timelearner-cold-envelope-include-a2-paired-preparation",
+          "sha": "2b9aa284953f84ac9df6f0420fdeb6a3050e026f"
+        },
+        {
+          "branch": "codex/timelearner-cold-envelope-pair-source-materialization",
+          "sha": "392bd023b1f46749189948de90f8e4fd354d2e6c"
+        },
+        {
+          "branch": "codex/timelearner-cold-envelope-profile-paired-preparation",
+          "sha": "233a63c75aacd72e3859051c015f356aea9888c7"
+        },
+        {
+          "branch": "codex/timelearner-cold-envelope-unfixed",
+          "sha": "9202398f1c99ef3e3559a2833545c0162339e36a"
+        },
+        {
+          "branch": "codex/timelearner-cold-envelope-unfixed-include",
+          "sha": "db1baa0c2bb887ddb56d35b0a0cd9124245b9bb8"
+        },
+        {
+          "branch": "codex/timelearner-cold-envelope-unfixed-owning",
+          "sha": "aa3eb1136b6f838abce0d9f9020d859b7b494bcb"
+        },
+        {
+          "branch": "codex/timelearner-cold-envelope-unfixed-value",
+          "sha": "3fb234e837913da6e08dfafd0305c314fb02ed1a"
+        },
+        {
+          "branch": "codex/timelearner-cold-schema-native-preparation",
+          "sha": "9f317e461dae10f5feb544140d36a2a14faab9bd"
+        },
+        {
+          "branch": "codex/timelearner-cold6-a4-production-preparation",
+          "sha": "cc0bf3aa33e6f4ca3904b331a83e4302cc44af06"
+        },
+        {
+          "branch": "codex/timelearner-collector-input-capabilities",
+          "sha": "0b34c64197a66ea6841e024c04158bbe68a9a3cc"
+        },
+        {
+          "branch": "codex/timelearner-collector65-operator-input",
+          "sha": "040fee881ee67417bcf243a58e26b1a3e514fa70"
+        },
+        {
+          "branch": "codex/timelearner-composite-archive-m40-asan-a2-negative",
+          "sha": "15c97bc69cee67901aeb95a31c3ad3f917a3d1a3"
+        },
+        {
+          "branch": "codex/timelearner-composite-cancellation-m40-asan-a1-negative",
+          "sha": "16bbae16fcbfec4374a786c0e7850d041709a6f1"
+        },
+        {
+          "branch": "codex/timelearner-composite-deadline-m40-asan-a1-evidence",
+          "sha": "0cf746c8aca2aba7c9cfe4b54ee3cb175ca23413"
+        },
+        {
+          "branch": "codex/timelearner-composite-slow-deadline-m40-asan-a1-evidence",
+          "sha": "999fd23e684ae9cf408b43160731af62cde61607"
+        },
+        {
+          "branch": "codex/timelearner-configured-ownership-h21-evidence",
+          "sha": "ccb77d867be31dc8721c0e828e792d4a0301e4a0"
+        },
+        {
+          "branch": "codex/timelearner-configured-probe",
+          "sha": "1e9b2627520dc02c659a06d710c04217b9268676"
+        },
+        {
+          "branch": "codex/timelearner-dataset-snapshot-fixture",
+          "sha": "d874dc0189b775e3819e5531d6e3532afa097009"
+        },
+        {
+          "branch": "codex/timelearner-declared-basin-temporal-a1-evidence",
+          "sha": "e2bd19076b5159613ff90fbd72b9c502ebcb2117"
+        },
+        {
+          "branch": "codex/timelearner-domain-reports",
+          "sha": "a182f8c19c1484f363210b898a91dc5ce68283ee"
+        },
+        {
+          "branch": "codex/timelearner-elder-a3-collector-mapping-negative",
+          "sha": "c69fa061857f4c6b02c4a433e52897f826919e41"
+        },
+        {
+          "branch": "codex/timelearner-elder-a3-corrected-negative",
+          "sha": "508466d94f93a0ccbeac129e52f0e28a3e666a67"
+        },
+        {
+          "branch": "codex/timelearner-frozen-iti-reset",
+          "sha": "f4be24e6f72810a4d37ff25a7ed7c80048eae006"
+        },
+        {
+          "branch": "codex/timelearner-invalid-budget-baseline",
+          "sha": "7b111939359a4167a0ab902aa29fa97007cf29e6"
+        },
+        {
+          "branch": "codex/timelearner-lifetime37-incremental-a3-preparation",
+          "sha": "e0fa2fc48bd5c5ddd747d4be48ba295032b2f66b"
+        },
+        {
+          "branch": "codex/timelearner-ltzone-mode-regressions",
+          "sha": "582e0e68b3ab7883d46bca9328f6a15d06cd6d99"
+        },
+        {
+          "branch": "codex/timelearner-manual-control-lifetime",
+          "sha": "781b75b3987f99e8647ca09e0397cb640dfaf17d"
+        },
+        {
+          "branch": "codex/timelearner-manual-control-native-preparation",
+          "sha": "0aea4493447d382f8f32bc504861b331fb2d0732"
+        },
+        {
+          "branch": "codex/timelearner-manual-control-unfixed-native-preparation",
+          "sha": "e98ec5bd59256f1ae44ca4d55c806cd0aed7389c"
+        },
+        {
+          "branch": "codex/timelearner-migration-negative-presence-fixture",
+          "sha": "28a49e25cea5b334ddebdb1d7d17f3be805a8f9a"
+        },
+        {
+          "branch": "codex/timelearner-native-acceptance-full248-m40-a3-negative",
+          "sha": "64cbc45d4a5c8b7d316beaee765657af61a80f16"
+        },
+        {
+          "branch": "codex/timelearner-native-acceptance-metadata12-m40-a1-evidence",
+          "sha": "9d3df1663eceddaa6c608da3caa69d8e146b2736"
+        },
+        {
+          "branch": "codex/timelearner-native-acceptance-metadata13-m40-a2-evidence",
+          "sha": "242ab7939c1839d2d1b4c40f7fb9c488b323cbc2"
+        },
+        {
+          "branch": "codex/timelearner-native-acceptance-preparation-m40-a1-evidence",
+          "sha": "e8332fb850b35691f0d59676bc8358bbaba60183"
+        },
+        {
+          "branch": "codex/timelearner-native-acceptance-preparation-m40-a2-evidence",
+          "sha": "3a7d334cfa9c0e55bdd3370ef331dad6b2eaa01d"
+        },
+        {
+          "branch": "codex/timelearner-native-canonical25-a2-plan",
+          "sha": "c4abc634f088ec7524b61c0bde17d1d8446266b8"
+        },
+        {
+          "branch": "codex/timelearner-native-canonical25-plan",
+          "sha": "f7012bc2a35c3f3701ef48cea0acdb75c2960457"
+        },
+        {
+          "branch": "codex/timelearner-native-configure-metadata19-plan",
+          "sha": "0c380855a0f13b66908a4a89418edf79bf659d5d"
+        },
+        {
+          "branch": "codex/timelearner-native-lifetime33-a2-build-negative",
+          "sha": "7d8a548ad7e6a7a929c2d000523023773d3c1ac5"
+        },
+        {
+          "branch": "codex/timelearner-native-lifetime33-build-negative",
+          "sha": "be526592ac7dcd2f94b419fae4f48e7980ae8f88"
+        },
+        {
+          "branch": "codex/timelearner-native-lifetime37-a3-build-negative",
+          "sha": "c901bb05347c20618693aa1b4c8bf68e3dec7cb5"
+        },
+        {
+          "branch": "codex/timelearner-native-sdk-preparation-proposal",
+          "sha": "afb05a6f50f0e0627de46bd8e112172310e04e1f"
+        },
+        {
+          "branch": "codex/timelearner-native48-fresh-canonical-plan",
+          "sha": "1c1119c8277a6460d41b8975fc7df802ad9d23d0"
+        },
+        {
+          "branch": "codex/timelearner-native48-full-sdk-canonical-plan",
+          "sha": "b6b3913b5e1e32fb7bcc44998c4420694edb9b24"
+        },
+        {
+          "branch": "codex/timelearner-native48-source-control-plan-v2",
+          "sha": "c6eef44c18088ebb49be2e4d322c0bbc4fdab21a"
+        },
+        {
+          "branch": "codex/timelearner-native48-source-control-plan-v3",
+          "sha": "cab9d1811ee3d8c4752a164fa326868cb62b4b14"
+        },
+        {
+          "branch": "codex/timelearner-owned-native-controller40-plan",
+          "sha": "0f81b463ef0a4b53f56652236bdac85a9fb09be5"
+        },
+        {
+          "branch": "codex/timelearner-package6-proof",
+          "sha": "a1b95b39c7d3d88bee081141628b1df614bbacba"
+        },
+        {
+          "branch": "codex/timelearner-plan-tools-restored-negative-asan-a1",
+          "sha": "02df8f3a1d6bdba1f45fcae82a52e29ce85b9f74"
+        },
+        {
+          "branch": "codex/timelearner-plan-tools-restored-negative-normal-a1",
+          "sha": "7e14df12ca0986fcddbf2623c5e010bf3109cd19"
+        },
+        {
+          "branch": "codex/timelearner-rest-state-archive-sdk",
+          "sha": "4b4f96b2302b2387a92bbf389653f2350ded0249"
+        },
+        {
+          "branch": "codex/timelearner-rising-edge-source-review",
+          "sha": "2152755b424049d1d5ff52f046b178877f2c9cc6"
+        },
+        {
+          "branch": "codex/timelearner-runtime2-reader73-a2-plan",
+          "sha": "8ddb12fef1b085a32bdfb979eaeb7942ba8e083c"
+        },
+        {
+          "branch": "codex/timelearner-runtime2-reader73-plan",
+          "sha": "f14a991cc0ef23ce38bab9210bb8dc0b8546ab9b"
+        },
+        {
+          "branch": "codex/timelearner-windows-job-drain",
+          "sha": "840b3c8b43d1caff816f51cebb378c56ad173ae3"
+        },
+        {
+          "branch": "plan/2026-10-25-dendrite-limits",
+          "sha": "63a8ba38ce9350976f4d1f711fa640099a85bfcd"
+        },
+        {
+          "branch": "stage08/boundary-lifecycle-baseline",
+          "sha": "ee6041e0e8a2c51e1598b48dcac11a0134fe43fd"
+        },
+        {
+          "branch": "stage08/posttune-native-baseline",
+          "sha": "2e5083932400b08ccc6a6a56e98e790f10ba7b39"
+        },
+        {
+          "branch": "stage08/transient-stimulus-baseline",
+          "sha": "e595ae61aa208f1f36274d332f59b1496e540264"
+        }
+      ],
+      "scope": "Historical/rejected/validation/preparation and other side branches; these are a review inventory, not an instruction to merge all of them."
+    },
+    "PulseLib": {
+      "local_count": 5,
+      "local_branches": [
+        "codex/timelearner-capacitance-cursors",
+        "codex/timelearner-cold-envelope-unfixed",
+        "codex/timelearner-cold-envelope-unfixed-include",
+        "codex/timelearner-cold-envelope-unfixed-owning",
+        "codex/timelearner-cold-envelope-unfixed-value"
+      ],
+      "task_named_advertised_count": 6,
+      "task_named_advertised_branches": [
+        {
+          "branch": "codex/timelearner-capacitance-cursors",
+          "sha": "5fed73a0379d5599656e40f58e0600469d43f28c"
+        },
+        {
+          "branch": "codex/timelearner-cold-envelope-unfixed",
+          "sha": "feb6b4bc02768727d1dbb74a397e95a3327ca7f1"
+        },
+        {
+          "branch": "codex/timelearner-cold-envelope-unfixed-include",
+          "sha": "81ec3c4fc55eb0591b3c56f42395df4b0bfa5440"
+        },
+        {
+          "branch": "codex/timelearner-cold-envelope-unfixed-owning",
+          "sha": "24d864e8158d60e0e910cfd144a40b32c7d64938"
+        },
+        {
+          "branch": "codex/timelearner-cold-envelope-unfixed-value",
+          "sha": "2263447871f13a28063a4367fe2159b74bcba431"
+        },
+        {
+          "branch": "verify/timelearner-s03-s04",
+          "sha": "dbc825836cd363eeebfab71af650995d1cc92c9d"
+        }
+      ],
+      "scope": "Historical/rejected/validation/preparation and other side branches; these are a review inventory, not an instruction to merge all of them."
+    },
+    "Rdk": {
+      "local_count": 0,
+      "local_branches": [],
+      "task_named_advertised_count": 1,
+      "task_named_advertised_branches": [
+        {
+          "branch": "codex/timelearner-load-replaces-input-bindings",
+          "sha": "1bb59eb2fad5def426637d8640e3f6bb092d576f"
+        }
+      ],
+      "scope": "Historical/rejected/validation/preparation and other side branches; these are a review inventory, not an instruction to merge all of them."
+    },
+    "Bin": {
+      "local_count": 0,
+      "local_branches": [],
+      "task_named_advertised_count": 0,
+      "task_named_advertised_branches": [],
+      "scope": "Historical/rejected/validation/preparation and other side branches; these are a review inventory, not an instruction to merge all of them."
+    }
+  },
+  "known_exclusions": {
+    "PulseLib_negative_controls": [
+      "codex/timelearner-cold-envelope-unfixed",
+      "codex/timelearner-cold-envelope-unfixed-include",
+      "codex/timelearner-cold-envelope-unfixed-owning",
+      "codex/timelearner-cold-envelope-unfixed-value"
+    ],
+    "PulseLib_capacitance_cursors": "Unique history contains a merge commit only; no unique non-merge commit versus the current branch.",
+    "root_negative_example": "codex/fixture-asymrm-retired-paths-restored deliberately restores an old Bin gitlink and must not be imported as production work.",
+    "root_windows_job_drain": "Separate unintegrated proposal with code/tests; not selected automatically merely because its name matches the task."
+  },
+  "user_checkout": {
+    "path": "E:/Science-Repo/nmsdk-git",
+    "observed_branch": "autoPreset",
+    "not_an_integration_target": true,
+    "not_modified": true
+  },
+  "root_current_gitlinks": {
+    "Bin": "2c285cb472134fc92394153c089603a830a03f70",
+    "Rdk": "26129caa576a6b727ee2d76718e9fe9b2674e811",
+    "PulseLib": "f8ddbd0895e9da0c0c5348612869a3e2ca95a1b1"
+  },
+  "runtime_policy": "Do not checkout, update or build inside active experiment directories. Consolidation uses separate integration worktrees and does not restart live experiments.",
+  "whole_plan_accepted": false
+}

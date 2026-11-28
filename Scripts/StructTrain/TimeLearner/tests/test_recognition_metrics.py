@@ -1,6 +1,7 @@
 import copy
 import gzip
 import json
+import math
 import os
 from pathlib import Path
 import subprocess
@@ -8,7 +9,7 @@ import sys
 import tempfile
 import unittest
 
-from Scripts.StructTrain.TimeLearner.native_evidence import EvidenceError, load
+from Scripts.StructTrain.TimeLearner.native_evidence import EvidenceError, load, number
 from Scripts.StructTrain.TimeLearner.model_identity import canonical_model_sha256
 from Scripts.StructTrain.TimeLearner.recognition_metrics import load_evaluation, score_recognition_evaluation
 
@@ -27,8 +28,22 @@ class RecognitionMetricsTest(unittest.TestCase):
         for path in paths:
             package = load(path);prefix = path.name.removesuffix("_owner_recognition_state.json")
             observations = [load(root/f"{prefix}_frozen_trial_{i}.json") for i in range(4)]
-            initial = package["source_solo"]["configuration"]["model"]["initial_isi"]
-            hashes = [canonical_model_sha256(initial), canonical_model_sha256(list(reversed(initial)))]
+            model = package["source_solo"]["configuration"]["model"]
+            initial = model["initial_isi"]
+            patterns = [initial, list(reversed(initial))]
+            hashes = [canonical_model_sha256(pattern) for pattern in patterns]
+            # FrozenTrialChecks declares a 30 ms tail after the input pattern,
+            # rounded up to the native tick. This is the fixture's request,
+            # not a duration inferred from the recorded observation window.
+            # Use its ordered binary64 addition; Python's compensated sum can
+            # otherwise select a different ceil boundary.
+            frequency = number(model["frequency_hz"])
+            durations = []
+            for pattern in patterns:
+                span = 0.
+                for value in pattern:
+                    span += number(value)
+                durations.append(math.ceil((span+.03)*frequency)/frequency)
             spec = {"kind": "timelearner_recognition_evaluation_spec", "schema_version": 1,
                     "run_id": prefix+"_frozen", "model_revision": package["model_revision"],
                     "coverage_policy": "per_trial_windows",
@@ -37,7 +52,7 @@ class RecognitionMetricsTest(unittest.TestCase):
                     "trials": [{"trial_id": f"trial_{i}", "sample_id": "foil_reverse" if i % 2 else "training_target",
                                 "label": "foil" if i % 2 else "target", "pattern_hash": hashes[i % 2],
                                 "reset_policy": "reset_per_trial" if i < 2 else "preserve_neuron_dynamics",
-                                "presentation_index": i, "duration": .12, "observation": f"trial-{i}.json.gz"}
+                                "presentation_index": i, "duration": durations[i % 2], "observation": f"trial-{i}.json.gz"}
                                for i in range(4)]}
             cancelled = load(root/f"{prefix}_frozen_trial_cancelled.json")
             cls.cases.append((path, package, spec, observations, cancelled))
@@ -197,6 +212,17 @@ class RecognitionMetricsTest(unittest.TestCase):
         changed = copy.deepcopy(observations);changed[0]["samples"][0]["soma"][0] = float("nan")
         with self.assertRaises(EvidenceError):
             score_recognition_evaluation(spec, changed, package)
+
+    def test_changed_declared_duration_cannot_inherit_a_complete_window(self):
+        for _, package, spec, observations, _ in self.cases:
+            # Preserve every recorded sample and its complete/valid flags.
+            # Changing the declared request by one tick must still fail.
+            for index, observation in enumerate(observations):
+                changed = copy.deepcopy(spec)
+                changed["trials"][index]["duration"] += 1./number(observation["frequency_hz"])
+                with self.subTest(trial=index), self.assertRaisesRegex(
+                        EvidenceError, "evaluation_trial_duration_mismatch"):
+                    score_recognition_evaluation(changed, observations, package)
 
     def test_diagnostic_source_cannot_pose_as_completed_training(self):
         _, package, spec, observations, _ = self.cases[0]

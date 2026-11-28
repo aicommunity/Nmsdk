@@ -1,0 +1,197 @@
+{
+  "kind": "timelearner_external_scientific_result_reference",
+  "schema_version": 1,
+  "source_catalog": {
+    "relative_path": "experiments/2026-11-27/Native-image-rest-response-independent-fr262.json",
+    "bytes": 7167,
+    "sha256": "0ccb444547d7fc8aa759284d7ebf06a9297de4d6d1c213ed7007b0c73e42959d"
+  },
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/6c/6c7cd84292890437527b90587d4162080b4077ab71b1a65cd4eac4d32b8218eb",
+      "sha256": "6c7cd84292890437527b90587d4162080b4077ab71b1a65cd4eac4d32b8218eb",
+      "bytes": 39221
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/d4/d4e157515cec9377f39e33a40ee30a024e1b56b91fda988e287a46c1dad9a06a",
+      "sha256": "d4e157515cec9377f39e33a40ee30a024e1b56b91fda988e287a46c1dad9a06a",
+      "bytes": 33207408
+    }
+  },
+  "analysis": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/3b/3b7f37959d31c9d04ee1cfcc1e14ad130c83fecd470d65f36c5ed7de2577a3d1",
+    "sha256": "3b7f37959d31c9d04ee1cfcc1e14ad130c83fecd470d65f36c5ed7de2577a3d1",
+    "bytes": 23456
+  },
+  "members": 230,
+  "parent_test_invocations": 8,
+  "unique_parent_test_identifiers": 4,
+  "mismatching_archive_pairs": 9,
+  "all_actual_loaded_bytes_verified": true,
+  "all_signed_archive_and_native_XML_digests_verified": true,
+  "all9_mismatching_archive_pairs_compared": true,
+  "implementation_fix": false,
+  "native_responses": [
+    {
+      "member": "after-telemetry-native/image-rest-response-2000-cycle-0.json",
+      "frequency_hz": 2000,
+      "cycle": 0,
+      "samples": 200,
+      "source_soma_absolute_peak": 0.008167404090168251,
+      "source_and_imported_native_inputs_clocks_channels_and_soma_equal": true
+    },
+    {
+      "member": "after-telemetry-native/image-rest-response-2000-cycle-1.json",
+      "frequency_hz": 2000,
+      "cycle": 1,
+      "samples": 200,
+      "source_soma_absolute_peak": 0.008167404090168251,
+      "source_and_imported_native_inputs_clocks_channels_and_soma_equal": true
+    },
+    {
+      "member": "after-telemetry-native/image-rest-response-2000-cycle-2.json",
+      "frequency_hz": 2000,
+      "cycle": 2,
+      "samples": 200,
+      "source_soma_absolute_peak": 0.008167404090168251,
+      "source_and_imported_native_inputs_clocks_channels_and_soma_equal": true
+    },
+    {
+      "member": "after-telemetry-native/image-rest-response-20000-cycle-0.json",
+      "frequency_hz": 20000,
+      "cycle": 0,
+      "samples": 2000,
+      "source_soma_absolute_peak": 0.011586134744678955,
+      "source_and_imported_native_inputs_clocks_channels_and_soma_equal": true
+    },
+    {
+      "member": "after-telemetry-native/image-rest-response-20000-cycle-1.json",
+      "frequency_hz": 20000,
+      "cycle": 1,
+      "samples": 2000,
+      "source_soma_absolute_peak": 0.011586134744678955,
+      "source_and_imported_native_inputs_clocks_channels_and_soma_equal": true
+    },
+    {
+      "member": "after-telemetry-native/image-rest-response-20000-cycle-2.json",
+      "frequency_hz": 20000,
+      "cycle": 2,
+      "samples": 2000,
+      "source_soma_absolute_peak": 0.011586134744678955,
+      "source_and_imported_native_inputs_clocks_channels_and_soma_equal": true
+    },
+    {
+      "member": "pair-native/image-rest-response-2000-cycle-0.json",
+      "frequency_hz": 2000,
+      "cycle": 0,
+      "samples": 200,
+      "source_soma_absolute_peak": 0.008167404090168251,
+      "source_and_imported_native_inputs_clocks_channels_and_soma_equal": true
+    },
+    {
+      "member": "pair-native/image-rest-response-2000-cycle-1.json",
+      "frequency_hz": 2000,
+      "cycle": 1,
+      "samples": 200,
+      "source_soma_absolute_peak": 0.008167404090168251,
+      "source_and_imported_native_inputs_clocks_channels_and_soma_equal": true
+    },
+    {
+      "member": "pair-native/image-rest-response-2000-cycle-2.json",
+      "frequency_hz": 2000,
+      "cycle": 2,
+      "samples": 200,
+      "source_soma_absolute_peak": 0.008167404090168251,
+      "source_and_imported_native_inputs_clocks_channels_and_soma_equal": true
+    },
+    {
+      "member": "pair-native/image-rest-response-20000-cycle-0.json",
+      "frequency_hz": 20000,
+      "cycle": 0,
+      "samples": 2000,
+      "source_soma_absolute_peak": 0.011586134744678955,
+      "source_and_imported_native_inputs_clocks_channels_and_soma_equal": true
+    },
+    {
+      "member": "pair-native/image-rest-response-20000-cycle-1.json",
+      "frequency_hz": 20000,
+      "cycle": 1,
+      "samples": 2000,
+      "source_soma_absolute_peak": 0.011586134744678955,
+      "source_and_imported_native_inputs_clocks_channels_and_soma_equal": true
+    },
+    {
+      "member": "pair-native/image-rest-response-20000-cycle-2.json",
+      "frequency_hz": 20000,
+      "cycle": 2,
+      "samples": 2000,
+      "source_soma_absolute_peak": 0.011586134744678955,
+      "source_and_imported_native_inputs_clocks_channels_and_soma_equal": true
+    },
+    {
+      "member": "single2000-native/image-rest-response-2000-cycle-0.json",
+      "frequency_hz": 2000,
+      "cycle": 0,
+      "samples": 200,
+      "source_soma_absolute_peak": 0.008167404090168251,
+      "source_and_imported_native_inputs_clocks_channels_and_soma_equal": true
+    },
+    {
+      "member": "single2000-native/image-rest-response-2000-cycle-1.json",
+      "frequency_hz": 2000,
+      "cycle": 1,
+      "samples": 200,
+      "source_soma_absolute_peak": 0.008167404090168251,
+      "source_and_imported_native_inputs_clocks_channels_and_soma_equal": true
+    },
+    {
+      "member": "single2000-native/image-rest-response-2000-cycle-2.json",
+      "frequency_hz": 2000,
+      "cycle": 2,
+      "samples": 200,
+      "source_soma_absolute_peak": 0.008167404090168251,
+      "source_and_imported_native_inputs_clocks_channels_and_soma_equal": true
+    },
+    {
+      "member": "single20000-native/image-rest-response-20000-cycle-0.json",
+      "frequency_hz": 20000,
+      "cycle": 0,
+      "samples": 2000,
+      "source_soma_absolute_peak": 0.011586134744678955,
+      "source_and_imported_native_inputs_clocks_channels_and_soma_equal": true
+    },
+    {
+      "member": "single20000-native/image-rest-response-20000-cycle-1.json",
+      "frequency_hz": 20000,
+      "cycle": 1,
+      "samples": 2000,
+      "source_soma_absolute_peak": 0.011586134744678955,
+      "source_and_imported_native_inputs_clocks_channels_and_soma_equal": true
+    },
+    {
+      "member": "single20000-native/image-rest-response-20000-cycle-2.json",
+      "frequency_hz": 20000,
+      "cycle": 2,
+      "samples": 2000,
+      "source_soma_absolute_peak": 0.011586134744678955,
+      "source_and_imported_native_inputs_clocks_channels_and_soma_equal": true
+    }
+  ],
+  "all18_native_responses_equal": true,
+  "scientific_verdict": null,
+  "source_kind": "timelearner_actual_native_image_rest_archive_field_differences",
+  "upstream_source_catalog": {
+    "relative_path": "experiments/2026-11-27/Native-image-rest-diagnostic-jump12-fr252.json",
+    "bytes": 2485,
+    "sha256": "345ce0b9d77129bbc96cac0b5b7ae8fc06b06745733e4648cb4bd79309dd64e4"
+  }
+}

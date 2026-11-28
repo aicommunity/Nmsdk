@@ -1,0 +1,230 @@
+{
+  "kind": "timelearner_closed_threshold_observation_audit_receipt",
+  "schema_version": 1,
+  "observed_utc": "2026-11-22T10:07:33.583147+00:00",
+  "original_execution_axis": "process_error",
+  "observed_validity_axis": "valid",
+  "original_execution_reclassified": false,
+  "original_pipeline_result_still_rejected": true,
+  "observation_audit": {
+    "path": "/home/user/timelearner-refactor/readbacks/classic-count-closed-observation-audit-elder-c1/observation-audit.json",
+    "sha256": "9b41fd63bacebe7b2b9a85f14b17a37efe5d9ecc576db9e70583dc02c07b2143",
+    "size": 212322
+  },
+  "observations": {
+    "validity": "valid",
+    "counts": {
+      "TP": 1,
+      "FP": 1,
+      "FN": 0,
+      "TN": 6,
+      "targets": 1,
+      "foils": 7,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.875,
+      "target_hit_rate": 1.0,
+      "foil_response_rate": 0.14285714285714285
+    },
+    "model_revision": "02ffd5532d133673c5e50803eb93d82e2f22fcddce7f433f4fe64b3a2835cafc",
+    "threshold": 0.020736298148054874,
+    "trials": [
+      {
+        "trial_id": "s11-classic-count-recognition-elder-a1/baseline/trial-0",
+        "sample_id": "phasea-row-0",
+        "label": "target",
+        "presentation_index": 0,
+        "reset_policy": "reset_per_trial",
+        "response_begin": 0.01,
+        "response_end": 2.0,
+        "spike_count": 1,
+        "window_spikes": [
+          0.4935
+        ],
+        "early_spikes": [],
+        "late_spikes": [],
+        "classification": "TP"
+      },
+      {
+        "trial_id": "s11-classic-count-recognition-elder-a1/baseline/trial-1",
+        "sample_id": "phasea-row-1",
+        "label": "foil",
+        "presentation_index": 1,
+        "reset_policy": "reset_per_trial",
+        "response_begin": 2.0105,
+        "response_end": 4.000500000000001,
+        "spike_count": 0,
+        "window_spikes": [],
+        "early_spikes": [],
+        "late_spikes": [],
+        "classification": "TN"
+      },
+      {
+        "trial_id": "s11-classic-count-recognition-elder-a1/baseline/trial-2",
+        "sample_id": "phasea-row-2",
+        "label": "foil",
+        "presentation_index": 2,
+        "reset_policy": "reset_per_trial",
+        "response_begin": 4.011,
+        "response_end": 6.001,
+        "spike_count": 0,
+        "window_spikes": [],
+        "early_spikes": [],
+        "late_spikes": [],
+        "classification": "TN"
+      },
+      {
+        "trial_id": "s11-classic-count-recognition-elder-a1/baseline/trial-3",
+        "sample_id": "phasea-row-3",
+        "label": "foil",
+        "presentation_index": 3,
+        "reset_policy": "reset_per_trial",
+        "response_begin": 6.0115,
+        "response_end": 8.0015,
+        "spike_count": 0,
+        "window_spikes": [],
+        "early_spikes": [],
+        "late_spikes": [],
+        "classification": "TN"
+      },
+      {
+        "trial_id": "s11-classic-count-recognition-elder-a1/baseline/trial-4",
+        "sample_id": "phasea-row-4",
+        "label": "foil",
+        "presentation_index": 4,
+        "reset_policy": "reset_per_trial",
+        "response_begin": 8.012,
+        "response_end": 10.002,
+        "spike_count": 0,
+        "window_spikes": [],
+        "early_spikes": [],
+        "late_spikes": [],
+        "classification": "TN"
+      },
+      {
+        "trial_id": "s11-classic-count-recognition-elder-a1/baseline/trial-5",
+        "sample_id": "phasea-row-5",
+        "label": "foil",
+        "presentation_index": 5,
+        "reset_policy": "reset_per_trial",
+        "response_begin": 10.0125,
+        "response_end": 12.0025,
+        "spike_count": 0,
+        "window_spikes": [],
+        "early_spikes": [],
+        "late_spikes": [],
+        "classification": "TN"
+      },
+      {
+        "trial_id": "s11-classic-count-recognition-elder-a1/baseline/trial-6",
+        "sample_id": "phasea-row-6",
+        "label": "foil",
+        "presentation_index": 6,
+        "reset_policy": "reset_per_trial",
+        "response_begin": 12.013,
+        "response_end": 14.003,
+        "spike_count": 1,
+        "window_spikes": [
+          12.495
+        ],
+        "early_spikes": [],
+        "late_spikes": [],
+        "classification": "FP"
+      },
+      {
+        "trial_id": "s11-classic-count-recognition-elder-a1/baseline/trial-7",
+        "sample_id": "phasea-row-7",
+        "label": "foil",
+        "presentation_index": 7,
+        "reset_policy": "reset_per_trial",
+        "response_begin": 14.0135,
+        "response_end": 16.003500000000003,
+        "spike_count": 0,
+        "window_spikes": [],
+        "early_spikes": [],
+        "late_spikes": [],
+        "classification": "TN"
+      }
+    ],
+    "original_execution_axis": "process_error",
+    "original_execution_reclassified": false,
+    "all_input_bytes_unchanged": true,
+    "complete_source_history_audited": true,
+    "scientific_verdict": null
+  },
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "2892ff6afd328873f86b531c7dca8c446c01429242d2db759cacbd4c840c6920",
+      "unit": "timelearner-0a09a676-3353-46df-81b3-8eff4eabbf82.service",
+      "invocation_id": "7664f7feb6e0499f8299550e145d5264",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-0a09a676-3353-46df-81b3-8eff4eabbf82.service",
+      "initial_main_pid": 900476,
+      "initial_start_ticks": "490923258",
+      "sha256": "6798ca042551c913cd787aaa7afcc35765793dac704392d52c615acf2cb36cc7"
+    }
+  },
+  "controller_result": {
+    "reason": null,
+    "record_errors": [],
+    "last_before_cleanup": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "2892ff6afd328873f86b531c7dca8c446c01429242d2db759cacbd4c840c6920",
+        "unit": "timelearner-0a09a676-3353-46df-81b3-8eff4eabbf82.service",
+        "invocation_id": "7664f7feb6e0499f8299550e145d5264",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-0a09a676-3353-46df-81b3-8eff4eabbf82.service",
+        "initial_main_pid": 900476,
+        "initial_start_ticks": "490923258",
+        "sha256": "6798ca042551c913cd787aaa7afcc35765793dac704392d52c615acf2cb36cc7"
+      },
+      "state": {
+        "Type": "exec",
+        "Restart": "no",
+        "RemainAfterExit": "yes",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "1",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "17179869184",
+        "TasksMax": "128",
+        "KillMode": "control-group",
+        "Description": "TimeLearner contained attempt 0a09a676-3353-46df-81b3-8eff4eabbf82",
+        "LoadState": "loaded",
+        "ActiveState": "active",
+        "SubState": "exited",
+        "InvocationID": "7664f7feb6e0499f8299550e145d5264"
+      },
+      "memory_max": 17179869184,
+      "tasks_max": 128,
+      "scientific_verdict": null
+    },
+    "outer_binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "2892ff6afd328873f86b531c7dca8c446c01429242d2db759cacbd4c840c6920",
+      "unit": "timelearner-0a09a676-3353-46df-81b3-8eff4eabbf82.service",
+      "invocation_id": "7664f7feb6e0499f8299550e145d5264",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-0a09a676-3353-46df-81b3-8eff4eabbf82.service",
+      "initial_main_pid": 900476,
+      "initial_start_ticks": "490923258",
+      "sha256": "6798ca042551c913cd787aaa7afcc35765793dac704392d52c615acf2cb36cc7"
+    },
+    "outer_closed": true,
+    "children_closed": [],
+    "disk_peak_increment": 270336,
+    "minimum_free": 49430831104,
+    "execution_success_not_inferred_from_cleanup": true,
+    "scientific_verdict": null
+  },
+  "original_threshold_primary_centrally_archived": false,
+  "scientific_verdict": null
+}

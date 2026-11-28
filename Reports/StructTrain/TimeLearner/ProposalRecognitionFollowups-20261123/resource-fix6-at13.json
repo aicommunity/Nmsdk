@@ -1,0 +1,24 @@
+{
+  "kind": "timelearner_recognition_resource_fix_scoped_verification",
+  "schema_version": 1,
+  "source_root": "83c0839e84c846214e2b01ff32fb74e72c2a1d59",
+  "tests": {
+    "expected": 6,
+    "executed": 6,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": true
+  },
+  "tests_log": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/b8/b8856cb33e984b09551f0df90c77a451be3d836f819b15fb862288d06461a24a",
+    "sha256": "b8856cb33e984b09551f0df90c77a451be3d836f819b15fb862288d06461a24a",
+    "bytes": 1500
+  },
+  "not_native_model_tests": true,
+  "fix": "Coalesce identical canonical read requests; preserve every write and reject read/write collisions; strict registry duplicate guard retained",
+  "scientific_verdict": null
+}

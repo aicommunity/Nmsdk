@@ -1,0 +1,191 @@
+{
+  "kind": "timelearner_actual_q3_local_integer_normalization_context_review",
+  "schema_version": 1,
+  "source_compact": {
+    "archive_restored_path": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/Elder-q3-full-primary-independent-eg27/full_Train/restored/classic-q3-full-primary-audit-and-DATA-elder-dy4/compact-training-readback.json",
+    "sha256": "dca809e31db790a7a5b2d6f6c05b6eda1ed1b44a89f40ab3a393b9ea107ac9eb",
+    "bytes": 38148
+  },
+  "source_full_primary_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-25/Elder-q3-full-Train-and-native-timeout-primary-eg23.json",
+    "sha256": "09e918d02d975bfc362fde74bd44507eb63c4d9173517c041b9b68c6b4ba689e",
+    "size": 6528
+  },
+  "source_full_primary_independent_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-25/Elder-q3-full-primary-independent-eg27.json",
+    "sha256": "241a3270e3c395e50af514caa0471bd35757e6462e31addeba84c52e84449a5e",
+    "size": 3551
+  },
+  "source_pulse_commit": "e36996cd53a545782b54c76d610162c602567399",
+  "actual_training_job_sha256": "c990d360d49d8d73fc5fb2f620f750d671d3c305796bc94e4921aae238a56b5c",
+  "training_outcome": "budget_exhausted",
+  "completed_boundary": false,
+  "tolerances": {
+    "amplitude_absolute": 0.00001,
+    "amplitude_relative": 0,
+    "sync": 0.02
+  },
+  "local_points": [
+    {
+      "amplitude_residual": -0.001118787289492329,
+      "anchor_group_id": "classic-candidate-round-robin-q3-cold-elder-dv31/session/1/search/53/composite/41",
+      "anchor_semantic_proof_id": "a08878c0c7975bb4801538544be36b18a4dec2cfbdffe76cfe1ea8add3d70dcc",
+      "anchor_trial_id": "classic-candidate-round-robin-q3-cold-elder-dv31/session/1/search/53",
+      "full_parameters": [
+        {
+          "length": 241,
+          "resistance": 86000000,
+          "synapses": 12
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 10
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 0,
+      "measurement_group_id": "classic-candidate-round-robin-q3-cold-elder-dv31/session/1/search/54/composite/42",
+      "model_epoch": 16,
+      "model_revision": "a1e1d53e54fb4c082df06b80402d494a0f9f9e69c70eb3e59f252de450739807",
+      "parameter_change_cost": 251,
+      "parameters": {
+        "length": 241,
+        "resistance": 86000000,
+        "synapses": 12
+      },
+      "semantic_proof_id": "44c2f189b5264559b51aedaba21c738971ea754242ac172a56457e1d0a080ebf",
+      "timing_high": 0.008000000000038199,
+      "timing_low": 0.008000000000038199,
+      "trial_id": "classic-candidate-round-robin-q3-cold-elder-dv31/session/1/search/54",
+      "within_amplitude": false,
+      "within_timing": true
+    },
+    {
+      "amplitude_residual": 0.0003371597840141627,
+      "anchor_group_id": "classic-candidate-round-robin-q3-cold-elder-dv31/session/1/search/56/composite/43",
+      "anchor_semantic_proof_id": "55498da61caca3e2a140256e355a5c669c20011f0784c429ea60e12bcaab28fa",
+      "anchor_trial_id": "classic-candidate-round-robin-q3-cold-elder-dv31/session/1/search/56",
+      "full_parameters": [
+        {
+          "length": 241,
+          "resistance": 86000000,
+          "synapses": 13
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 10
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 0,
+      "measurement_group_id": "classic-candidate-round-robin-q3-cold-elder-dv31/session/1/search/57/composite/44",
+      "model_epoch": 17,
+      "model_revision": "0471efcd0f01895c9cb6fdf0889a69a5c1450c0ca76b0297b8f5b58d33b2fd89",
+      "parameter_change_cost": 252,
+      "parameters": {
+        "length": 241,
+        "resistance": 86000000,
+        "synapses": 13
+      },
+      "semantic_proof_id": "154b0a28d34744bc9bf3ffd8b0676384521c8957b5817bb84e91d7de932f6510",
+      "timing_high": 0.007999999999981355,
+      "timing_low": 0.007999999999981355,
+      "trial_id": "classic-candidate-round-robin-q3-cold-elder-dv31/session/1/search/57",
+      "within_amplitude": false,
+      "within_timing": true
+    },
+    {
+      "amplitude_residual": 0.0016903741138704076,
+      "anchor_group_id": "classic-candidate-round-robin-q3-cold-elder-dv31/session/1/search/59/composite/45",
+      "anchor_semantic_proof_id": "c0f020329c992b3e6e4aee105f6f0359a44df449f03e0c0d162836c44e602647",
+      "anchor_trial_id": "classic-candidate-round-robin-q3-cold-elder-dv31/session/1/search/59",
+      "full_parameters": [
+        {
+          "length": 241,
+          "resistance": 86000000,
+          "synapses": 14
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 10
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 0,
+      "measurement_group_id": "classic-candidate-round-robin-q3-cold-elder-dv31/session/1/search/60/composite/46",
+      "model_epoch": 18,
+      "model_revision": "41ba084e3abbc1dcdcb44cae2ffa49cadd91667ac27630e38033cddb4d4823f7",
+      "parameter_change_cost": 253,
+      "parameters": {
+        "length": 241,
+        "resistance": 86000000,
+        "synapses": 14
+      },
+      "semantic_proof_id": "0f0e82500954848fbeda03eb6a9941c6ce6e1f7c40063e13a0ce432b3cbd1648",
+      "timing_high": 0.007999999999924512,
+      "timing_low": 0.007999999999924512,
+      "trial_id": "classic-candidate-round-robin-q3-cold-elder-dv31/session/1/search/60",
+      "within_amplitude": false,
+      "within_timing": true
+    }
+  ],
+  "amplitude_step_between_12_and_13": 0.0014559470735064917,
+  "secant_fractional_count_hypothesis": 12.768425796411575,
+  "local_rank_prefers_13": true,
+  "global_infeasibility_inferred": false,
+  "alternative_visit_incumbent_restoration_tested": false,
+  "source_terminal_actual": [
+    {
+      "length": 241,
+      "resistance": 86000000,
+      "synapses": 14
+    },
+    {
+      "length": 201,
+      "resistance": 86000000,
+      "synapses": 11
+    },
+    {
+      "length": 121,
+      "resistance": 86000000,
+      "synapses": 8
+    },
+    {
+      "length": 1,
+      "resistance": 86000000,
+      "synapses": 1
+    }
+  ],
+  "fresh_all_input_certificate_inferred": false,
+  "scientific_verdict": null
+}

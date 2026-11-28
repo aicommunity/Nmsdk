@@ -1,0 +1,36 @@
+{
+  "ssh_key_login": true,
+  "via_jump": "10.245.1.12",
+  "host_ip": "10.245.1.14",
+  "readiness": {
+    "output_exists": true,
+    "records": {
+      "build-process/owned-process.json": {
+        "executable": "C:\\Windows\\System32\\cmd.exe",
+        "creation_filetime": "134394262094726010",
+        "pid": 192,
+        "job_name": "Local\\TimeLearner-25ed4930-52b5-411d-aa5f-9f4fb22643ac",
+        "runtime_fingerprint": "0350b128f181355273d7a8134316bb5dbb6557d53c20658e7f6f95ca0b43a17a",
+        "suspended_until_limits_applied": true
+      }
+    },
+    "kernel_job": {
+      "name": "Local\\TimeLearner-25ed4930-52b5-411d-aa5f-9f4fb22643ac",
+      "active_processes": 7,
+      "total_processes": 152
+    },
+    "logs": [
+      {
+        "name": "build-process/stdout.log",
+        "bytes": 3199,
+        "tail": "D:93894dd)\n-- DeployVcpkgDlls: Configured DLL deployment for NeuroModeler\n-- DeployVcpkgDlls: Configured DLL deployment for NeuroModelerConsole\n-- UGenericMutex tests directory created\n-- Math tests directory created\n-- ComponentSystem integration tests directory created\n-- PropertyConnections integration tests directory created\n-- Serialization integration tests directory created\n-- Libraries integration tests directory created\n-- Migration integration tests directory created\n-- Interactive GUI integration tests are disabled (NMSDK_ENABLE_INTERACTIVE_GUI_TESTS=OFF)\n-- The C compiler identification is MSVC 19.51.36260.0\n-- Detecting C compiler ABI info\n-- Detecting C compiler ABI info - done\n-- Check for working C compiler: C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/cl.exe - skipped\n-- Detecting C compile features\n-- Detecting C compile features - done\n-- Configuring done (6.4s)\n-- Generating done (1.5s)\n-- Build files have been written to: C:/Projects/TimeLearnerWorker/build-timing-neighbourhood-win-a2\n[0/2] Re-checking globbed directories...\r\n[1/534] Automatic MOC and UIC for target rdk.static.qt\r\n[2/534] Building CXX object Rdk\\CMakeFiles\\rdk.static.qt.dir\\rdk.static.qt_autogen\\mocs_compilation.cpp.obj\r\n[3/534] Building CXX object Rdk\\CMakeFiles\\rdk.static.qt.dir\\Core\\Application\\Qt\\UServerTransportTcpQt.cpp.obj\r\n[4/534] Building CXX object Rdk\\CMakeFiles\\rdk.static.qt.dir\\Core\\Application\\UAppCore.cpp.obj\r\n[5/534] Building CXX object Rdk\\CMakeFiles\\rdk.static.qt.dir\\Core\\Application\\UApplication.cpp.obj\r\n[6/534] Building CXX object Rdk\\CMakeFiles\\rdk.static.qt.dir\\Core\\Application\\UBroadcasterInterface.cpp.obj\r\n[7/534] Building CXX object Rdk\\CMakeFiles\\rdk.static.qt.dir\\Core\\Application\\UChannelProfiler.cpp.obj\r\n"
+      },
+      {
+        "name": "build-process/stderr.log",
+        "bytes": 2403,
+        "tail": "v) at C:/Projects/TimeLearnerWorker/build-a4/vcpkg_installed/x64-windows-tl/share/boost/vcpkg-cmake-wrapper.cmake:3 (_find_package):\n  Policy CMP0167 is not set: The FindBoost module is removed.  Run \"cmake\n  --help-policy CMP0167\" for policy details.  Use the cmake_policy command to\n  set the policy and suppress this warning.\n\nCall Stack (most recent call first):\n  C:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (include)\n  Libraries/Rdk-CvBasicLib/CMakeLists.txt:47 (find_package)\nThis warning is for project developers.  Use -Wno-dev to suppress it.\n\nCMake Warning (dev) at C:/Projects/TimeLearnerWorker/build-a4/vcpkg_installed/x64-windows-tl/share/boost/vcpkg-cmake-wrapper.cmake:3 (_find_package):\n  Policy CMP0167 is not set: The FindBoost module is removed.  Run \"cmake\n  --help-policy CMP0167\" for policy details.  Use the cmake_policy command to\n  set the policy and suppress this warning.\n\nCall Stack (most recent call first):\n  C:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (include)\n  App/NeuroModeler/CMakeLists.txt:271 (find_package)\nThis warning is for project developers.  Use -Wno-dev to suppress it.\n\nCMake Warning (dev) at C:/Projects/TimeLearnerWorker/build-a4/vcpkg_installed/x64-windows-tl/share/boost/vcpkg-cmake-wrapper.cmake:3 (_find_package):\n  Policy CMP0167 is not set: The FindBoost module is removed.  Run \"cmake\n  --help-policy CMP0167\" for policy details.  Use the cmake_policy command to\n  set the policy and suppress this warning.\n\nCall Stack (most recent call first):\n  C:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (include)\n  App/NeuroModelerConsole/CMakeLists.txt:61 (find_package)\nThis warning is for project developers.  Use -Wno-dev to suppress it.\n\nCMake Warning:\n  Manually-specified variables were not used by the project:\n\n    VCPKG_OVERLAY_TRIPLETS\n\n\n"
+      }
+    ]
+  },
+  "remote_outcome_requires_command_readback": true
+}

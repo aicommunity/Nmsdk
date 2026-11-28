@@ -1,0 +1,50 @@
+{
+  "kind": "Classic_cap24_complete_primary_peer_reader_acceptance_evidence",
+  "schema_version": 1,
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/00/00cb6aa5de9b4efd6865dfa675b4d18adc1a1a726823ad237190dca0bb60bebf",
+      "sha256": "00cb6aa5de9b4efd6865dfa675b4d18adc1a1a726823ad237190dca0bb60bebf",
+      "bytes": 5413
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/f6/f610def40995e19b74e447b62328a3887220f3c790403fb3122df26f61861e47",
+      "sha256": "f610def40995e19b74e447b62328a3887220f3c790403fb3122df26f61861e47",
+      "bytes": 6047416
+    }
+  },
+  "members": 26,
+  "analysis": {
+    "kind": "Classic_cap24_complete_primary_peer_reader_acceptance",
+    "schema_version": 1,
+    "peer_reader_catalog": {
+      "relative_path": "experiments/2026-11-28/Classic-cap24-1274-independent-fr685.json",
+      "bytes": 3090,
+      "sha256": "1530065f4b409e27042a6071057870ba229fc20dd1372f6318768a063bc1fb67"
+    },
+    "peer_members": 32,
+    "original_primary_members": 1274,
+    "whole_peer_bundle_restored": true,
+    "peer_Git_and_loaded_bytes_verified": true,
+    "physical_DATA_bytes_verified": true,
+    "full_original_production_audit_equals_saved": true,
+    "original_primary_catalog_hash_verified": true,
+    "training_outcome": "budget_exhausted",
+    "completed_boundary": false,
+    "new_native_calculation": false,
+    "new_Train": false,
+    "classification_performed": false,
+    "original_closed_native_ownership_not_reattested": true,
+    "auxiliary_final_publisher_loaded_map": "unknown",
+    "full_stage_or_goal_acceptance": false,
+    "scientific_verdict": null
+  },
+  "controls_commit": "5efc4144e65858b7d86a4ad719c32da3d085b585",
+  "scientific_verdict": null
+}

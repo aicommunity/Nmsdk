@@ -1,0 +1,89 @@
+{
+  "kind": "timelearner_real_component_Delay_baseline",
+  "schema_version": 1,
+  "observed_utc": "2026-11-23T20:12:38.168260+00:00",
+  "job": "delay-ownership-baseline-after-science-m40-al1",
+  "actual": {
+    "kind": "timelearner_actual_Delay_property_baseline",
+    "schema_version": 1,
+    "completed_cpp_cases": 10,
+    "failed_cpp_ids": [
+      "TimeLearnerDelayOwnership.ClassicLegacyCandidateAppliedImmediately",
+      "TimeLearnerDelayOwnership.BranchLegacyCandidateAppliedImmediately",
+      "TimeLearnerDelayOwnership.ClassicLegacyCandidateRetainsObservationFloor",
+      "TimeLearnerDelayOwnership.BranchLegacyCandidateRetainsObservationFloor",
+      "TimeLearnerDelayOwnership.ClassicRejectsNonFiniteDelay",
+      "TimeLearnerDelayOwnership.BranchRejectsNonFiniteDelay",
+      "TimeLearnerDelayOwnership.ClassicNativeOwnedMutationRejected",
+      "TimeLearnerDelayOwnership.BranchNativeOwnedMutationRejected"
+    ],
+    "passed_cpp_cases": 2,
+    "junit": {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/delay-ownership-baseline-after-science-m40-al1/junit.xml",
+      "sha256": "e942011ea4f98244e4961b64f31dbbb71505ee57c2e1af4ef11949859955f9c4",
+      "size": 19127
+    },
+    "native_result": {
+      "kind": "timelearner_process_result",
+      "schema_version": 2,
+      "execution": "process_error",
+      "reason": "nonzero_exit_or_missing_terminal_status",
+      "returncode": 1,
+      "wall_seconds": 2.0186552414670587,
+      "model_time": null,
+      "runtime_provenance": "loaded_files_captured",
+      "mapping_error": null,
+      "runtime_fingerprint": "455885ef2b17599bdeabe442104b38df536fc478b6b993a02101ba02ea4a8aa0",
+      "ownership_scope": "bound_cgroup",
+      "all_processes_closed": true,
+      "scientific_verdict": null,
+      "operational_diagnostics": {
+        "kind": "timelearner_operational_diagnostics",
+        "schema_version": 1,
+        "policy": "owned-streams-v1",
+        "status": "needs_review",
+        "error_records": 0,
+        "warning_records": 0,
+        "unclassified_stderr_chunks": 2,
+        "reasons": [],
+        "examples": [
+          {
+            "stream": "stderr.log",
+            "chunk": 1,
+            "severity": "unclassified",
+            "excerpt": "PulseLibTestRuntime executable=/media/user/Data/TimeLearnerRefactor/runtime-delay-ownership-baseline-after-science-m40-al1/Test_PulseLib_DelayOwnership ini=/media/user/Data/TimeLearnerRefactor/runtime-delay-ownership-baseline-after-science-m40-al1/NeuroMod"
+          },
+          {
+            "stream": "stderr.log",
+            "chunk": 2,
+            "severity": "unclassified",
+            "excerpt": "PulseLibTestRuntime work_directory=/media/user/Data/TimeLearnerRefactor/readbacks/delay-ownership-baseline-after-science-m40-al1/native.test-events-log"
+          }
+        ],
+        "streams": [
+          {
+            "path": "stdout.log",
+            "bytes": 9516,
+            "sha256": "0c9420fd5fb3f72c35a202c5d8ac3cf2f9f18431edba00cf8c047e67cb7e9be5"
+          },
+          {
+            "path": "stderr.log",
+            "bytes": 424,
+            "sha256": "21b424148343d3f27165e407f2d244e2fd69d663584f956d7cbd625500e3de73"
+          }
+        ],
+        "contained_streams_match": true,
+        "scientific_verdict": null
+      }
+    },
+    "source_root": "4bea7241768a87d39e3ac64061a8efa48e9368be",
+    "SDK_root": "b2c3cb65ab572c680a56f28b86d40445b9392b0c",
+    "PulseLib": "3f5a2205a4e6c02de545cdc214172482ac53c4b2",
+    "test_source_blob": "15389a75ce460fbc3825d123f35e366504cb2404",
+    "scientific_verdict": null,
+    "algorithm_fixed": false
+  },
+  "queue_kernel_live": false,
+  "algorithm_fixed": false,
+  "scientific_verdict": null
+}

@@ -1,0 +1,165 @@
+{
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-28/Native-typed-dynamic-revision-analysis-fr695.json",
+    "size": 6695,
+    "sha256": "c1e62de9dc1f3489fafad170d68a2f7315ae2d6718a29f3d10fb7b55b50f1cb1"
+  },
+  "catalog": {
+    "kind": "typed_native_dynamic_revision_counter_analysis_evidence",
+    "schema_version": 1,
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/c0/c03cec3cebf6dbf81418a50da2f58e9af12fde3e300a5f458362082d1eae0b8e",
+        "sha256": "c03cec3cebf6dbf81418a50da2f58e9af12fde3e300a5f458362082d1eae0b8e",
+        "bytes": 15578
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/3f/3f71536e1048850a6ad96f56398cd653916a3b0f2e990679829d2455a439ddbe",
+        "sha256": "3f71536e1048850a6ad96f56398cd653916a3b0f2e990679829d2455a439ddbe",
+        "bytes": 6077444
+      }
+    },
+    "members": 100,
+    "analysis": {
+      "kind": "actual_typed_native_dynamics_revision_read_analysis",
+      "schema_version": 1,
+      "source_catalog": {
+        "relative_path": "experiments/2026-11-27/Native-matrix436-lifecycle-counters-primary-fr590.json",
+        "bytes": 2494,
+        "sha256": "3661436d2df656ad3baef093243860658b9590e282fbd811822d43af8b82112c"
+      },
+      "previous_full_restoration_reused": true,
+      "original4805_readback_previously_completed": true,
+      "counter_source_members_verified_now": 67,
+      "counter_rows": 67,
+      "providers": {
+        "typed": 67,
+        "full": 0
+      },
+      "paired_providers": 0,
+      "full_provider_AB_not_present_in_this_source": true,
+      "all_typed_read_accounting_consistent": true,
+      "selected_M4_cases": {
+        "Branch_20000_N4_native_executor": {
+          "member": "original/lifecycle/native/Branch_20000_N4_native_executor.revision_reads.json",
+          "counter": {
+            "path": "/home/user/Nmsdk-experiments/Native-typed-dynamic-analysis-fr695/counters/4.json",
+            "sha256": "d8a9ede1716fd898ece42eea6b582a5d4e3698d666105f17e6c273f3ab7a2eb7",
+            "size": 556
+          },
+          "full_boundary_reads": 6,
+          "kind": "native_probe_revision_reads",
+          "native_ticks": 11401,
+          "observer_cache_hits": 22796,
+          "observer_full_reads": 5,
+          "revision_provider": "typed",
+          "run_id": "Branch_20000_N4_native_executor",
+          "sampled_frames": 11401,
+          "schema_version": 1,
+          "scientific_training_result": false,
+          "scope": "first_probe",
+          "storage_profile": "Branch_20000_N4_native_executor",
+          "tick_revision_reads": 22801,
+          "trial_id": "Branch_20000_N4_native_executor/probe0",
+          "wall_seconds": 36.19529721
+        },
+        "Branch_2000_N4_native_executor": {
+          "member": "original/lifecycle/native/Branch_2000_N4_native_executor.revision_reads.json",
+          "counter": {
+            "path": "/home/user/Nmsdk-experiments/Native-typed-dynamic-analysis-fr695/counters/25.json",
+            "sha256": "bdcdf139b8c89d76393b48f79161d8c402b9264c8e8f905faa193f8f2e1d21c9",
+            "size": 549
+          },
+          "full_boundary_reads": 6,
+          "kind": "native_probe_revision_reads",
+          "native_ticks": 1141,
+          "observer_cache_hits": 2276,
+          "observer_full_reads": 5,
+          "revision_provider": "typed",
+          "run_id": "Branch_2000_N4_native_executor",
+          "sampled_frames": 1141,
+          "schema_version": 1,
+          "scientific_training_result": false,
+          "scope": "first_probe",
+          "storage_profile": "Branch_2000_N4_native_executor",
+          "tick_revision_reads": 2281,
+          "trial_id": "Branch_2000_N4_native_executor/probe0",
+          "wall_seconds": 3.558285069
+        },
+        "Classic_20000_N4_native_executor": {
+          "member": "original/lifecycle/native/Classic_20000_N4_native_executor.revision_reads.json",
+          "counter": {
+            "path": "/home/user/Nmsdk-experiments/Native-typed-dynamic-analysis-fr695/counters/36.json",
+            "sha256": "af3e57bbd635758788a4714a7a90eea4401e8f9fefeff55dbec081d4bff48d8e",
+            "size": 560
+          },
+          "full_boundary_reads": 6,
+          "kind": "native_probe_revision_reads",
+          "native_ticks": 11401,
+          "observer_cache_hits": 22796,
+          "observer_full_reads": 5,
+          "revision_provider": "typed",
+          "run_id": "Classic_20000_N4_native_executor",
+          "sampled_frames": 11401,
+          "schema_version": 1,
+          "scientific_training_result": false,
+          "scope": "first_probe",
+          "storage_profile": "Classic_20000_N4_native_executor",
+          "tick_revision_reads": 22801,
+          "trial_id": "Classic_20000_N4_native_executor/probe0",
+          "wall_seconds": 72.862495123
+        },
+        "Classic_2000_N4_native_executor": {
+          "member": "original/lifecycle/native/Classic_2000_N4_native_executor.revision_reads.json",
+          "counter": {
+            "path": "/home/user/Nmsdk-experiments/Native-typed-dynamic-analysis-fr695/counters/58.json",
+            "sha256": "63309602c03c2eeab8cd151d415ae967f7d2a670fe2c877e8f8a8cf9cd432435",
+            "size": 552
+          },
+          "full_boundary_reads": 6,
+          "kind": "native_probe_revision_reads",
+          "native_ticks": 1141,
+          "observer_cache_hits": 2276,
+          "observer_full_reads": 5,
+          "revision_provider": "typed",
+          "run_id": "Classic_2000_N4_native_executor",
+          "sampled_frames": 1141,
+          "schema_version": 1,
+          "scientific_training_result": false,
+          "scope": "first_probe",
+          "storage_profile": "Classic_2000_N4_native_executor",
+          "tick_revision_reads": 2281,
+          "trial_id": "Classic_2000_N4_native_executor/probe0",
+          "wall_seconds": 8.649571289
+        }
+      },
+      "new_native_calculation": false,
+      "new_Train": false,
+      "scope": "actual native first-probe dynamics in archived integration fixtures; not the currently trained large graph",
+      "current_live_Train_not_profiled": true,
+      "wall_times_are_observations_not_speedup_estimates": true,
+      "scientific_training_result": false,
+      "scientific_verdict": null,
+      "revision_failure_fixture_source": {
+        "path": "/home/user/Nmsdk/Tests/Integration/Libraries/Test_PulseLib_NativeExecution.cpp",
+        "sha256": "90fa68fcd7c531cb3ebd8bb1c731a25fcd09ecbbd22c37098e2e082ab96f81c9",
+        "size": 113966
+      },
+      "intentional_failed_attempt_before_observer": {
+        "profile": "Classic_2000_N2_native_executor_fault11",
+        "calls": 1,
+        "reason": "RevisionFailure thrown in provider before observer.Read"
+      }
+    },
+    "reader_controls_commit": "0b693ab3820af5c402a27d4c0e3336bbcb8a2cef",
+    "reader_loaded_maps_and_bytes_retained": true,
+    "independent_readback_pending": true,
+    "scientific_verdict": null
+  }
+}

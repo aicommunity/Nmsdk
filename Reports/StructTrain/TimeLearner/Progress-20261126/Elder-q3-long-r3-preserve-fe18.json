@@ -1,0 +1,58 @@
+{
+  "kind": "timelearner_q3_long_r3_preserve_independent_primary_reference",
+  "schema_version": 1,
+  "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+  "catalog": {
+    "relative_path": "experiments/2026-11-26/Elder-q3-long-r3-preserve-independent-fe17.json",
+    "bytes": 28907,
+    "sha256": "832239f91bbc4770bfc86e00daa9c60173055ff9d9aa04262ca11b19eba1d36c"
+  },
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/54/54acf9012971bbf174298a2e8064be1d2a67347469723fd70a62adf44a868b8d",
+      "sha256": "54acf9012971bbf174298a2e8064be1d2a67347469723fd70a62adf44a868b8d",
+      "bytes": 12257
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/e7/e77c5892ec97e418f6a5429af3b2f58af4b75078d6f0c5b8fb0dba7bb6ed5a29",
+      "sha256": "e77c5892ec97e418f6a5429af3b2f58af4b75078d6f0c5b8fb0dba7bb6ed5a29",
+      "bytes": 1240404
+    }
+  },
+  "members": 77,
+  "observations": 8,
+  "counts": {
+    "TP": 1,
+    "FP": 2,
+    "FN": 0,
+    "TN": 5,
+    "targets": 1,
+    "foils": 7,
+    "target_trials_with_outside_spikes": 0,
+    "accuracy": 0.75,
+    "target_hit_rate": 1,
+    "foil_response_rate": 0.2857142857142857
+  },
+  "target_position": 5,
+  "model_revision": "2783e83684eef31e0a258e271e0c2c3acf30a9a9ab175fc20632577b5b9028a6",
+  "threshold": 0.023252703356543683,
+  "actual_first_input_interval_seconds": 2.0005,
+  "last_quiet_tail_seconds": 2.0005000000000006,
+  "all8_paired_complete_responses_compared": true,
+  "all_signals_equal_within_declared_tolerance": true,
+  "all_events_equal": true,
+  "maximum_absolute_signal_difference": 5.3734794391857577e-14,
+  "comparison_policy": "reset_vs_preserve_same_order_and_windows",
+  "gallery_review_pending": true,
+  "new_Train": false,
+  "new_threshold": false,
+  "independently_accepted_primary_cases_total": 8,
+  "full32_case_matrix_complete": false,
+  "scientific_verdict": null
+}

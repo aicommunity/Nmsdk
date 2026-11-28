@@ -1,0 +1,544 @@
+{
+  "m40": {
+    "observed_utc": "2026-11-23T19:46:23.706735+00:00",
+    "job": "classic-n0-proposal-full-primary-audit-m40-ac6",
+    "queue-owner.json": {
+      "pid": 1588883,
+      "start_ticks": "450881253",
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "uid": 1000
+    },
+    "queue-state.json": {
+      "reason": "waiting_for_original_native_and_controller_closure",
+      "observed_utc": "2026-11-23T19:46:14.540971+00:00",
+      "native_closed": false,
+      "controller_closed": false,
+      "elapsed_wait_seconds": 29559.493242301047,
+      "no_Train_restarted": true,
+      "scientific_verdict": null
+    },
+    "dispatch.json": {
+      "pid": 1588883,
+      "start_ticks": "450881253",
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "uid": 1000
+    },
+    "queue_kernel_live": true,
+    "actual_Train": {
+      "execution": "running",
+      "all_processes_closed": false,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "25a0f26d3387252760fb3ea14bc7cb9aee36c33a7a8a196af84791ecb603d8d2",
+        "unit": "timelearner-7a061d31-ad66-4886-9a29-2d8250c54c1d.service",
+        "invocation_id": "52237d6a949b4028a998cfe11c4b4cf0",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-7a061d31-ad66-4886-9a29-2d8250c54c1d.service",
+        "initial_main_pid": 1423053,
+        "initial_start_ticks": "450583490",
+        "sha256": "0582602e51c99dbd686fe7edbcca36a72691a108f7f06c10828839fab9e4687f"
+      },
+      "raw_trials": 0
+    },
+    "controls_publication": {
+      "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-23/n0-proposal-full-native-SDK-m40/post-Train-primary-audit-queue-ac7.json",
+      "record": {
+        "kind": "timelearner_exact_Train_post_completion_primary_audit_queue",
+        "schema_version": 1,
+        "source_root": "051390eaf8975b38fa945fc514fd94b74ae042dc",
+        "controls_commit": "d5800d9aece0f66ca0581f131a130e3559df4ba1",
+        "controls_bundle": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/61/61076c1668e5abda1a2ec1154e80a7fc19e4f969d7f4b4bde31213e9aed1aba6",
+          "sha256": "61076c1668e5abda1a2ec1154e80a7fc19e4f969d7f4b4bde31213e9aed1aba6",
+          "bytes": 3862
+        },
+        "dispatch": {
+          "pid": 1588883,
+          "start_ticks": "450881253",
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "uid": 1000
+        },
+        "original_Train": "classic-n0-proposal-cold-m40-aa21",
+        "audit_not_yet_completed": true,
+        "scientific_verdict": null
+      }
+    }
+  },
+  "elder": {
+    "observed_utc": "2026-11-23T19:46:24.013551+00:00",
+    "job": "classic-n0-proposal-full-primary-audit-elder-ae4",
+    "queue-owner.json": {
+      "pid": 1155342,
+      "start_ticks": "500649504",
+      "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+      "uid": 1000
+    },
+    "queue-state.json": {
+      "reason": "waiting_for_original_native_and_controller_closure",
+      "observed_utc": "2026-11-23T19:46:11.843295+00:00",
+      "native_closed": false,
+      "controller_closed": false,
+      "elapsed_wait_seconds": 26447.444627666846,
+      "no_Train_restarted": true,
+      "scientific_verdict": null
+    },
+    "dispatch.json": {
+      "pid": 1155342,
+      "start_ticks": "500649504",
+      "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+      "uid": 1000
+    },
+    "queue_kernel_live": true,
+    "actual_Train": {
+      "execution": "running",
+      "all_processes_closed": false,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "51ab07298f83fea6489c8e57a7dc07b1daea65c7a19c40ca4bb583af28637d04",
+        "unit": "timelearner-3ce6b441-441b-42d3-8a42-95425e253ff1.service",
+        "invocation_id": "073a475bf9a14f248abe51e6c761f50f",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-3ce6b441-441b-42d3-8a42-95425e253ff1.service",
+        "initial_main_pid": 1112225,
+        "initial_start_ticks": "500567073",
+        "sha256": "5c8793dc2df9d411e8a3e0d02c1dfef908850c990dddaa74decaba7e1d51ae5f"
+      },
+      "raw_trials": 462
+    },
+    "controls_publication": {
+      "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-23/n0-proposal-cold-Classic-elder/post-Train-primary-audit-ae5.json",
+      "record": {
+        "kind": "timelearner_Elder_exact_Train_primary_audit_queue",
+        "schema_version": 1,
+        "source_root": "b2c3cb65ab572c680a56f28b86d40445b9392b0c",
+        "controls_commit": "364d9ce59512df91651c08fb023ba9614293e266",
+        "controls_bundle": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/9f/9f8f190d7701ef4664d84d9b16d054d25f06e928b8d1c6a21ae1f59658e8660f",
+          "sha256": "9f8f190d7701ef4664d84d9b16d054d25f06e928b8d1c6a21ae1f59658e8660f",
+          "bytes": 3856
+        },
+        "dispatch": {
+          "pid": 1155342,
+          "start_ticks": "500649504",
+          "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+          "uid": 1000
+        },
+        "original_Train": "classic-n0-proposal-cold-elder-ab3",
+        "audit_not_yet_completed": true,
+        "scientific_verdict": null
+      }
+    },
+    "closed_probe_metadata": {
+      "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-461.json",
+      "keys": [
+        "current_base_revision",
+        "evidence_schema_version",
+        "kind",
+        "native_status",
+        "observation",
+        "prepared",
+        "reasons",
+        "requested_specification",
+        "requires_fresh_verification"
+      ],
+      "preview": {
+        "kind": "timelearner_native_probe_evidence",
+        "observation": {
+          "burst_assignments": [],
+          "complete": true,
+          "end_reason": "window_closed",
+          "first_stimulus_time": 828.296,
+          "peaks": [],
+          "reasons": [],
+          "sample_count": 3601,
+          "schema_version": 6,
+          "specification": {
+            "baseline": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "begin": 828.286,
+            "effective_model_revision": "9a7159f50d6853f3ce155a4714eb87e7387346210b20c6f39a0fa8966c1100bb",
+            "end": 830.0859999999999,
+            "expected_stimulus_ids": [
+              "pulse0",
+              "pulse1",
+              "pulse2"
+            ],
+            "maximum_sample_gap": 0.0005,
+            "maximum_samples": 3605,
+            "minimum_amplitude": 1e-06,
+            "pattern_hash": "33fa19968966369ad058cac59c1077ad8236a008d43136bf4c2b87eefeb8e5e1",
+            "peak_selection": "isolated_window",
+            "record_spikes": false,
+            "run_id": "matched-count/20261123/classic/M4/proposal-reservation-after-elder-same-host/session/1",
+            "sample_id": "phasea-target",
+            "schema_version": 6,
+            "stimulus_profile": {
+              "amplitude": 1,
+              "frequency_deviation": 0,
+              "frequency_hz": 2000,
+              "generator_class": "NPulseGeneratorTransit",
+              "pulse_length": 0.001,
+              "use_pattern_output": false,
+              "use_transit_signal": false
+            },
+            "stimulus_subset": {
+              "physical_input_count": 4,
+              "purpose": "stimulus_subset_characterization",
+              "source_ordinals": [
+                0,
+                1,
+                2
+              ],
+              "source_training_pattern_hash": "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451"
+            },
+            "time_frame": "absolute_model_time",
+            "trial_id": "matched-count/20261123/classic/M4/proposal-reservation-after-elder-same-host/session/1/search/108/composite/77/native/4",
+            "wave_assignment": "window_only",
+            "windows": []
+          },
+          "spike_count": null,
+          "spikes": [],
+          "stimuli": [
+            {
+              "id": "pulse0",
+              "relative_to_trial_start": 0.010000000000104592,
+              "time": 828.296
+            },
+            {
+              "id": "pulse1",
+              "relative_to_trial_start": 0.09000000000003183,
+              "time": 828.376
+            },
+            {
+              "id": "pulse2",
+              "relative_to_trial_start": 0.25,
+              "time": 828.536
+            }
+          ],
+          "valid": true
+        }
+      }
+    }
+  },
+  "delay": {
+    "observed_utc": "2026-11-23T19:46:23.612961+00:00",
+    "job": "delay-ownership-baseline-after-science-m40-al1",
+    "dispatch.json": {
+      "job": "delay-ownership-baseline-after-science-m40-al1",
+      "dispatched": true,
+      "owner": {
+        "pid": 2599552,
+        "start_ticks": "452740562",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "uid": 1000
+      },
+      "controls_commit": "2fb316b6cb43c54c732484375a6dd6d11c263a22",
+      "controls_backup_catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/prepared-controls/20261123-delay-baseline-after-science-m40-al1.json",
+      "backups": {
+        "controls": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/f6/f618cee29bec141d89b074a3e0663edcfb64398a86dfb09525c9933a2a351bae",
+          "sha256": "f618cee29bec141d89b074a3e0663edcfb64398a86dfb09525c9933a2a351bae",
+          "bytes": 10953
+        },
+        "executable": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/8c/8c2df71dd80a515b0dcf3aba7958c68a8c79a08717d66dd1965a8bc91461ae53",
+          "sha256": "8c2df71dd80a515b0dcf3aba7958c68a8c79a08717d66dd1965a8bc91461ae53",
+          "bytes": 26773232
+        },
+        "compile_result": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/ed/ed2ce7bd14f46377bc8ee6f132d77f1459e0aa742c463c22eed1aac5f41415bf",
+          "sha256": "ed2ce7bd14f46377bc8ee6f132d77f1459e0aa742c463c22eed1aac5f41415bf",
+          "bytes": 16685
+        },
+        "test_source": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/f0/f0e95989447db0275adb9c1b5acc2882582de05df145fbbe7de19f2c2d487c16",
+          "sha256": "f0e95989447db0275adb9c1b5acc2882582de05df145fbbe7de19f2c2d487c16",
+          "bytes": 8389
+        }
+      },
+      "expected_cpp_tests": 10,
+      "queued_after_exact_scientific_Train_and_primary_audit": true,
+      "tests_executed": 0,
+      "algorithm_fixed": false,
+      "scientific_verdict": null
+    },
+    "queue-owner.json": {
+      "pid": 2599552,
+      "start_ticks": "452740562",
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "uid": 1000
+    },
+    "queue-state.json": {
+      "reason": "waiting_for_scientific_Train_and_its_primary_audit",
+      "observed_utc": "2026-11-23T19:46:19.176954+00:00",
+      "Train_all_processes_closed": false,
+      "primary_queue_live": true,
+      "available_slots": 0,
+      "elapsed_wait_seconds": 10971.107882536948,
+      "native_tests_started": false
+    },
+    "queue_kernel_live": true
+  },
+  "m40-followup": {
+    "host": "M40",
+    "observed_utc": "2026-11-23T19:46:23.561704+00:00",
+    "job": "classic-proposal-stopped-recognition-m40-ao3",
+    "queue-dispatch.json": {
+      "queued": true,
+      "job": "classic-proposal-stopped-recognition-m40-ao3",
+      "host": "M40",
+      "source_root": "b2c3cb65ab572c680a56f28b86d40445b9392b0c",
+      "controls_commit": "5b02db8577909d086c70fdddcf4cefdefb846cc3",
+      "request": {
+        "path": "/media/user/Data/TimeLearnerRefactor/requests/classic-proposal-stopped-recognition-m40-ao3/request.json",
+        "sha256": "fb554ea0f39562279a2ae8c31ff124f16fb94a56a487cb49e0ac0a7b6210dafd",
+        "size": 1005
+      },
+      "template": {
+        "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-prepared-long-model-threshold-m40-a1-inputs/native-job-source.json",
+        "sha256": "810cd728d2001432d1c89d6413bebd518fbeeb54812da13e8f73c075c83e00cc",
+        "size": 5948
+      },
+      "queue_owner": {
+        "pid": 2732375,
+        "start_ticks": "452977035",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "uid": 1000
+      },
+      "original_Train": "classic-n0-proposal-cold-m40-aa21",
+      "original_primary_audit": "classic-n0-proposal-full-primary-audit-m40-ac6",
+      "dependency": {
+        "controls": "/media/user/Data/TimeLearnerRefactor/requests/delay-ownership-baseline-after-science-m40-al1",
+        "owner": {
+          "pid": 2599552,
+          "start_ticks": "452740562",
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "uid": 1000
+        }
+      },
+      "new_native_execution_started": false,
+      "conditional_outcome": "only audited budget_exhausted with no completed boundary; different outcome is explicitly not dispatched",
+      "calibration_protocol": "historical_same_matrix",
+      "actual_selected_threshold_replay_required": true,
+      "original_Train_not_restarted": true,
+      "scientific_verdict": null
+    },
+    "queue-owner.json": {
+      "pid": 2732375,
+      "start_ticks": "452977035",
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "uid": 1000
+    },
+    "queue-state.json": {
+      "reason": "waiting_for_exact_Train_full_primary_audit_and_declared_dependency",
+      "observed_utc": "2026-11-23T19:46:08.714681+00:00",
+      "Train_closed": false,
+      "primary_queue_live": true,
+      "dependency_live": true,
+      "available_slots": 0,
+      "elapsed_wait_seconds": 8595.915739200078,
+      "new_native_execution_started": false
+    },
+    "queue_kernel_live": true
+  },
+  "elder-followup": {
+    "host": "Elder-1",
+    "observed_utc": "2026-11-23T19:46:24.117905+00:00",
+    "job": "classic-proposal-stopped-recognition-elder-ao3",
+    "queue-dispatch.json": {
+      "queued": true,
+      "job": "classic-proposal-stopped-recognition-elder-ao3",
+      "host": "Elder-1",
+      "source_root": "b2c3cb65ab572c680a56f28b86d40445b9392b0c",
+      "controls_commit": "78cbdb091f7926f0be60412e789b3f144cf9eb1b",
+      "request": {
+        "path": "/home/user/timelearner-refactor/requests/classic-proposal-stopped-recognition-elder-ao3/request.json",
+        "sha256": "6f74ec448d40e27d79810071ed8f0f1ecdae951bcaf459380ca3a8c1ca3ac026",
+        "size": 992
+      },
+      "template": {
+        "path": "/home/user/timelearner-refactor/readbacks/s11-prepared-long-model-threshold-elder-a1-inputs/native-job-source.json",
+        "sha256": "458835c52d6b80e03846e33f8bb6c04b4a6323d5b053a932acb61f734585db2d",
+        "size": 5970
+      },
+      "queue_owner": {
+        "pid": 2088016,
+        "start_ticks": "502431803",
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "uid": 1000
+      },
+      "original_Train": "classic-n0-proposal-cold-elder-ab3",
+      "original_primary_audit": "classic-n0-proposal-full-primary-audit-elder-ae4",
+      "dependency": null,
+      "new_native_execution_started": false,
+      "conditional_outcome": "only audited budget_exhausted with no completed boundary; different outcome is explicitly not dispatched",
+      "calibration_protocol": "historical_same_matrix",
+      "actual_selected_threshold_replay_required": true,
+      "original_Train_not_restarted": true,
+      "scientific_verdict": null
+    },
+    "queue-owner.json": {
+      "pid": 2088016,
+      "start_ticks": "502431803",
+      "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+      "uid": 1000
+    },
+    "queue-state.json": {
+      "reason": "waiting_for_exact_Train_full_primary_audit_and_declared_dependency",
+      "observed_utc": "2026-11-23T19:46:14.928900+00:00",
+      "Train_closed": false,
+      "primary_queue_live": true,
+      "dependency_live": false,
+      "available_slots": 0,
+      "elapsed_wait_seconds": 8627.604685138911,
+      "new_native_execution_started": false
+    },
+    "queue_kernel_live": true
+  },
+  "m40_after_raw_to_stopped_promotion": {
+    "observed_utc": "2026-11-23T19:48:48.513273+00:00",
+    "actual_native": {
+      "execution": "running",
+      "all_processes_closed": false,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "25a0f26d3387252760fb3ea14bc7cb9aee36c33a7a8a196af84791ecb603d8d2",
+        "unit": "timelearner-7a061d31-ad66-4886-9a29-2d8250c54c1d.service",
+        "invocation_id": "52237d6a949b4028a998cfe11c4b4cf0",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-7a061d31-ad66-4886-9a29-2d8250c54c1d.service",
+        "initial_main_pid": 1423053,
+        "initial_start_ticks": "450583490",
+        "sha256": "0582602e51c99dbd686fe7edbcca36a72691a108f7f06c10828839fab9e4687f"
+      }
+    },
+    "source_job": "classic-n0-proposal-cold-m40-aa21",
+    "raw_trials": 0,
+    "stopped_trial_json": 637,
+    "stopped_trial_csv": 637,
+    "/media/user/Data/TimeLearnerRefactor/readbacks/classic-n0-proposal-cold-m40-aa21": [],
+    "/media/user/Data/TimeLearnerRefactor/readbacks/classic-n0-proposal-cold-m40-aa21/train": [],
+    "/media/user/Data/TimeLearnerRefactor/readbacks/classic-n0-proposal-cold-m40-aa21/train/native": [],
+    "primary_queue_live": true,
+    "queue-state.json": {
+      "reason": "waiting_for_original_native_and_controller_closure",
+      "observed_utc": "2026-11-23T19:48:44.659159+00:00",
+      "native_closed": false,
+      "controller_closed": false,
+      "elapsed_wait_seconds": 29709.611430373974,
+      "no_Train_restarted": true,
+      "scientific_verdict": null
+    }
+  },
+  "windows": {
+    "via_jump": "10.245.1.12",
+    "host": "10.245.1.14",
+    "operator_sha256": "b7e93be16db2e9eeed2e62bdd65aa3ca3820a0814273c90733bc3cd8a1d3a855",
+    "returncode": 0,
+    "stderr": "",
+    "observation": {
+      "observed_utc": "2026-11-23T19:42:55.602032+00:00",
+      "job": "windows-two-sweep-recognition-aq7",
+      "task": {
+        "last_result": 267009,
+        "instances": 1,
+        "state": 4
+      },
+      "disk_free_bytes": 1418951741440,
+      "queue-owner.json": {
+        "pid": 18148,
+        "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+        "creation_filetime": "134399321290196236"
+      },
+      "queue-state.json": {
+        "reason": "waiting_for_exact_two_sweep_Train_and_full_primary_task",
+        "observed_utc": "2026-11-23T19:42:51.445363+00:00",
+        "source_native_running": true,
+        "source_primary_running": true,
+        "elapsed_wait_seconds": 4442.072731000138,
+        "no_Train_restarted": true,
+        "new_native_execution_started": false
+      },
+      "queue_kernel_live": true,
+      "phases_started": [],
+      "original_native_live": true,
+      "raw_trials": 1493,
+      "original_primary_owner_live": true
+    }
+  },
+  "kind": "timelearner_three_original_Trains_and_declared_followups",
+  "schema_version": 1,
+  "new_scientific_Train_outcome": null,
+  "no_Train_restarted": true,
+  "new_fixed_DATA_holdout_queue": {
+    "observed_utc": "2026-11-23T19:44:52.373428+00:00",
+    "job": "fixed-classic-matched-duration-holdout-m40-as6",
+    "queue_kernel_live": true,
+    "queue-owner.json": {
+      "pid": 3197579,
+      "start_ticks": "453825710",
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "uid": 1000
+    },
+    "queue-state.json": {
+      "reason": "waiting_for_previously_queued_scientific_work",
+      "observed_utc": "2026-11-23T19:44:44.602749+00:00",
+      "prerequisite_owner_live": {
+        "primary": true,
+        "delay": true,
+        "recognition": true
+      },
+      "source_Train_all_processes_closed": false,
+      "recognition_supervisor_live": false,
+      "recognition_terminal_present": false,
+      "recognition_phases_closed": true,
+      "reserved_slots": 1,
+      "elapsed_wait_seconds": 25.05369543749839,
+      "new_native_started": false
+    },
+    "independent_controls_recovery": {
+      "controls_commit": "dea704e3d96c15bd0d6ac7de71828eeb5ee7f27e",
+      "all_files_verified": [
+        ".gitattributes",
+        "orchestration.json",
+        "predeclared-condition.json",
+        "predeclared-protocol.json",
+        "queue-spec.json",
+        "queue.py",
+        "runtime.json",
+        "supervisor.py",
+        "worker.py"
+      ],
+      "files": 9,
+      "bundle_record": {
+        "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/objects/sha256/e4/e4791debbeda349641ff2abcd88c23aa438e47450781209e9961778a8a8b6f1a",
+        "sha256": "e4791debbeda349641ff2abcd88c23aa438e47450781209e9961778a8a8b6f1a",
+        "size": 22184
+      },
+      "source_root": "6574ae49e7286c0ee437eaa1146d11e3ac32bfcc",
+      "new_native_results": null
+    }
+  }
+}

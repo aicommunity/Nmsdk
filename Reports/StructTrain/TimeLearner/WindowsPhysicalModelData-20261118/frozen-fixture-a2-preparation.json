@@ -1,0 +1,123 @@
+{
+  "preparation": {
+    "transport": "verified Git object payload via SSH SFTP; source code only",
+    "prepared": {
+      "prepared": true,
+      "started": false,
+      "source": "C:\\Projects\\TimeLearnerWorker\\source-frozen-physical-model-evaluation-win-a2",
+      "root": "28f748a17c9ff870790c263d563ad268c77219f1",
+      "pulse": "5f8b281fc1d679ae7927f7ad7410d3ff675a522a",
+      "namespace_files": 4646,
+      "namespace_blob": "767342b1cf357cfa6bcaec66890a61017c5d3e26",
+      "specification_blob": "45d6a0a64c40cdb47443a7e8e3a48c848900f741",
+      "controls_commit": "71be4205ae2042e7cb1cc26e6f720a67db411b25",
+      "controls": "C:\\Projects\\TimeLearnerWorker\\controls\\frozen-physical-model-evaluation-win-a2",
+      "launch_script": "C:\\Projects\\TimeLearnerWorker\\source-frozen-physical-model-evaluation-win-a2\\Scripts\\StructTrain\\TimeLearner\\workers\\windows-vs2026\\launch-sdk-build.ps1",
+      "attempt": "windows-frozen-physical-model-evaluation-sdk-build-a2",
+      "expected_cpp_tests": 247,
+      "verification": {
+        "kind": "windows_verified_sdk",
+        "schema_version": 1,
+        "source_root": "C:\\Projects\\TimeLearnerWorker\\source-frozen-physical-model-evaluation-win-a2",
+        "namespace_git_blob": "767342b1cf357cfa6bcaec66890a61017c5d3e26",
+        "verified_files": 4646,
+        "physical_files": 4646,
+        "closure": [
+          {
+            "role": "root",
+            "head": "28f748a17c9ff870790c263d563ad268c77219f1",
+            "tracked_clean": true,
+            "alternates": false
+          },
+          {
+            "role": "Bin",
+            "head": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+            "tracked_clean": true,
+            "alternates": false
+          },
+          {
+            "role": "Libraries/Nmsdk-MotionControlLib",
+            "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+            "tracked_clean": true,
+            "alternates": false
+          },
+          {
+            "role": "Libraries/Nmsdk-PulseLib",
+            "head": "5f8b281fc1d679ae7927f7ad7410d3ff675a522a",
+            "tracked_clean": true,
+            "alternates": false
+          },
+          {
+            "role": "Libraries/Rdk-BasicLib",
+            "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+            "tracked_clean": true,
+            "alternates": false
+          },
+          {
+            "role": "Libraries/Rdk-CvBasicLib",
+            "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+            "tracked_clean": true,
+            "alternates": false
+          },
+          {
+            "role": "Libraries/Rdk-HardwareLib",
+            "head": "de40b008e990105856726e01230dde19f42a90a9",
+            "tracked_clean": true,
+            "alternates": false
+          },
+          {
+            "role": "Rdk",
+            "head": "de4134235c0dcb8b91fd9a43b267348ad1a163ca",
+            "tracked_clean": true,
+            "alternates": false
+          }
+        ],
+        "compiled_or_models_or_tests": false,
+        "scientific_verdict": null
+      },
+      "build_specification": {
+        "kind": "timelearner_private_windows_build",
+        "schema_version": 1,
+        "source_root": "C:\\Projects\\TimeLearnerWorker\\source-frozen-physical-model-evaluation-win-a2",
+        "source_commit": "28f748a17c9ff870790c263d563ad268c77219f1",
+        "namespace_git_blob": "767342b1cf357cfa6bcaec66890a61017c5d3e26",
+        "expected_source_files": 4646,
+        "installed_dependencies": "C:/Projects/TimeLearnerWorker/build-a4/vcpkg_installed",
+        "build_root": "C:\\Projects\\TimeLearnerWorker\\build-frozen-physical-model-evaluation-win-a2",
+        "runtime_root": "C:\\Projects\\TimeLearnerWorker\\runtime-frozen-physical-model-evaluation-win-a2",
+        "output_root": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-frozen-physical-model-evaluation-sdk-build-a2",
+        "worker_sha256": "c31340a8883110ffdf1ac1a57056ada4063ab28d4208cf35652ebd0a1cc381a1",
+        "profile_sha256": {
+          "vcpkg.json": "444c0eae22c7ab2e3355b40d9f53793d3defe2b3cc59488eac40c7be1a52c92e",
+          "triplets/x64-windows-tl.cmake": "26eaf5b6e9ee2ffeb9a380b0a2d7148cff6374c9870f381e69e8c78aec144718"
+        },
+        "installed_status_sha256": "7e02dc6d4b89d5711c3b62c60d607430189dcc3c599da8581449c300bf0b63ca",
+        "visual_studio_root": "C:/Program Files/Microsoft Visual Studio/18/Community",
+        "compiler": "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/cl.exe",
+        "vsdevcmd_sha256": "a7815e85d636828e5cf70fe4235b11fcb41750896a4d2d60756b43bacaf4f0b2",
+        "vcpkg_commit": "1577f17ee57f42a0ef6d75bbb82cb37d0b76d7e8"
+      },
+      "scientific_worker_admitted": false
+    }
+  },
+  "dispatch": {
+    "ssh_key_login": true,
+    "via_jump": "10.245.1.12",
+    "host_ip": "10.245.1.14",
+    "readiness": {
+      "scientific_verdict": null,
+      "tool_commit": "28f748a17c9ff870790c263d563ad268c77219f1",
+      "task": "TimeLearner-windows-frozen-physical-model-evaluation-sdk-build-a2",
+      "specification_git_blob": "45d6a0a64c40cdb47443a7e8e3a48c848900f741",
+      "instance": "{5724AC8C-2C61-470F-9B12-ED3CB74CC4BE}",
+      "kind": "windows_sdk_build_dispatch",
+      "output": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-frozen-physical-model-evaluation-sdk-build-a2",
+      "worker_sha256": "c31340a8883110ffdf1ac1a57056ada4063ab28d4208cf35652ebd0a1cc381a1"
+    },
+    "remote_outcome_requires_command_readback": true
+  },
+  "build_accepted": null,
+  "native_verified": false,
+  "scientific_verdict": null,
+  "assessment": "build_dispatched_acceptance_pending"
+}

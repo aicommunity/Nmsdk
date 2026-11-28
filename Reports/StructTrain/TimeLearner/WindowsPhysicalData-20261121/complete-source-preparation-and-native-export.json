@@ -1,0 +1,130 @@
+{
+  "preparation_dispatch": {
+    "started": true,
+    "name": "windows-recognition-physical-export-prepare-a1",
+    "controls_commit": "07bcd63c2530872402f453557ae5f07245d6f341",
+    "task": {
+      "scientific_verdict": null,
+      "instance": "{184DFBE3-0E13-4A04-B2BD-D64F53B016D9}",
+      "execution_time_limit": "PT2H",
+      "task": "TimeLearner-windows-recognition-physical-export-prepare-a1",
+      "engine_pid": 21352
+    },
+    "source_root": "16e243055f74f0f53d5a558a82f8f81a6652fdd5",
+    "source_model_revision": "e3149bcebad4b9655060834c1f63e4730b2704ca27e6d92650209f66bb74e0d6",
+    "destination": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-recognition-physical-export-a1",
+    "inputs": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-recognition-physical-export-a1-inputs",
+    "memory_bytes": 12884901888,
+    "maximum_wall_seconds": 3600,
+    "source_history_preserved": true,
+    "native_export_started": false,
+    "scientific_verdict": null
+  },
+  "preparation_completion": {
+    "controls": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-recognition-physical-export-prepare-a1",
+    "controller/terminal.json": {
+      "preparation_completed": true,
+      "destination": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-recognition-physical-export-a1",
+      "source_model_revision": "e3149bcebad4b9655060834c1f63e4730b2704ca27e6d92650209f66bb74e0d6",
+      "source_package_sha256": "c95366f2e637a178024b0f5a1b5005befe1f0513c1961fee15a8cad092039350",
+      "all_processes_closed": true,
+      "native_export_started": false
+    },
+    "controller/process-result.json": {
+      "kind": "timelearner_windows_process_result",
+      "execution": "completed",
+      "reason": "exit_zero",
+      "returncode": 0,
+      "all_processes_closed": true,
+      "wall_seconds": 58.429842700017616
+    },
+    "owned_process": {
+      "pid": 18840,
+      "open_error": 87
+    },
+    "test_log_tail": "",
+    "task": {
+      "last_result": 0,
+      "instances": [],
+      "state": 3
+    }
+  },
+  "native_dispatch": {
+    "started": true,
+    "name": "windows-recognition-physical-export-a1",
+    "controls_commit": "96560581422846e7a0dabb693669de172316fd7f",
+    "task": {
+      "scientific_verdict": null,
+      "instance": "{FF3B60FF-B9E4-4544-879B-E4E5402B54EC}",
+      "execution_time_limit": "PT2H",
+      "task": "TimeLearner-windows-recognition-physical-export-a1",
+      "engine_pid": 14676
+    },
+    "source_root": "16e243055f74f0f53d5a558a82f8f81a6652fdd5",
+    "source_model_revision": "e3149bcebad4b9655060834c1f63e4730b2704ca27e6d92650209f66bb74e0d6",
+    "source_package_sha256": "c95366f2e637a178024b0f5a1b5005befe1f0513c1961fee15a8cad092039350",
+    "output": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-recognition-physical-export-a1",
+    "memory_bytes": 8589934592,
+    "maximum_wall_seconds": 3600,
+    "source_history_preserved": true,
+    "model_or_threshold_changed": false,
+    "scientific_verdict": null
+  },
+  "native_completion": {
+    "controls": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-recognition-physical-export-a1",
+    "tests/terminal.json": {
+      "native_process_completed": true,
+      "physical_roundtrip_verified": true,
+      "model_revision": "e3149bcebad4b9655060834c1f63e4730b2704ca27e6d92650209f66bb74e0d6",
+      "model_sha256": "924c8f689ce84eecec1d4f0deb21ca34148703dd9e204f7bc5a80717afcc5c18",
+      "source_package_sha256": "c95366f2e637a178024b0f5a1b5005befe1f0513c1961fee15a8cad092039350"
+    },
+    "tests/process-result.json": {
+      "kind": "timelearner_windows_process_result",
+      "execution": "completed",
+      "reason": "exit_zero",
+      "returncode": 0,
+      "all_processes_closed": true,
+      "runtime_provenance": "loaded_files_captured",
+      "wall_seconds": 307.7649672999978
+    },
+    "tests/native/execution.json": {
+      "execution": "completed",
+      "kind": "timelearner_native_physical_model_export_execution",
+      "model_revision": "e3149bcebad4b9655060834c1f63e4730b2704ca27e6d92650209f66bb74e0d6",
+      "model_sha256": "924c8f689ce84eecec1d4f0deb21ca34148703dd9e204f7bc5a80717afcc5c18",
+      "physical_roundtrip_verified": true,
+      "sha256": "5bba29463da0154cdb6a8a8910c5c7367adae43f0909bca7cddc2db80428e3e7"
+    },
+    "owned_process": {
+      "pid": 19928,
+      "same_creation": false,
+      "same_executable": false,
+      "running": true
+    },
+    "test_log_tail": "",
+    "task": {
+      "last_result": 0,
+      "instances": [],
+      "state": 3
+    },
+    "native_files": [
+      {
+        "name": "execution.json",
+        "bytes": 1500
+      },
+      {
+        "name": "input-projection.json",
+        "bytes": 686
+      },
+      {
+        "name": "model.json",
+        "bytes": 11334968
+      }
+    ]
+  },
+  "owned_PID_reused_after_closure": true,
+  "training_completed": false,
+  "source_DATA_response_equivalence_not_yet_measured": true,
+  "scientific_verdict": null
+}

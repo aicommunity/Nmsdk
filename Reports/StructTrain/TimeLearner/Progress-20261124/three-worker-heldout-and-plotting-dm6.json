@@ -1,0 +1,791 @@
+{
+  "kind": "timelearner_three_workers_heldout_and_plotting_progress",
+  "schema_version": 1,
+  "root_code": "b41e9f9f1cd0222ebeb3b5a77041868afbc4f940",
+  "goal_status": "active",
+  "fully_accepted_stages": [
+    0
+  ],
+  "source_models_unchanged": true,
+  "old_native_experiments_not_restarted": true,
+  "M40": {
+    "observed_utc": "2026-11-24T17:04:59.110853+00:00",
+    "controller_live": true,
+    "controller": {
+      "pid": 2243591,
+      "start_ticks": "459533664",
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "uid": 1000
+    },
+    "completed_cases": [
+      {
+        "case": "r0-long-preserve",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "final_quiet_tail_seconds": 2.0005000000000006,
+        "observed_utc": "2026-11-24T12:15:40.866938+00:00"
+      },
+      {
+        "case": "r0-long-reset",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "final_quiet_tail_seconds": 2.0005000000000006,
+        "observed_utc": "2026-11-24T11:59:54.666885+00:00"
+      },
+      {
+        "case": "r0-short-preserve",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "final_quiet_tail_seconds": 2.0004999999999997,
+        "observed_utc": "2026-11-24T12:31:06.048539+00:00"
+      },
+      {
+        "case": "r0-short-reset",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "final_quiet_tail_seconds": 2.0004999999999997,
+        "observed_utc": "2026-11-24T12:23:27.731160+00:00"
+      },
+      {
+        "case": "r1-long-preserve",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "final_quiet_tail_seconds": 2.0005000000000006,
+        "observed_utc": "2026-11-24T13:02:36.038212+00:00"
+      },
+      {
+        "case": "r1-long-reset",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "final_quiet_tail_seconds": 2.0005000000000006,
+        "observed_utc": "2026-11-24T12:46:55.915035+00:00"
+      },
+      {
+        "case": "r1-short-preserve",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "final_quiet_tail_seconds": 2.0004999999999997,
+        "observed_utc": "2026-11-24T13:17:53.390997+00:00"
+      },
+      {
+        "case": "r1-short-reset",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "final_quiet_tail_seconds": 2.0004999999999997,
+        "observed_utc": "2026-11-24T13:10:14.993950+00:00"
+      },
+      {
+        "case": "r2-long-preserve",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "final_quiet_tail_seconds": 2.0005000000000006,
+        "observed_utc": "2026-11-24T13:49:25.578038+00:00"
+      },
+      {
+        "case": "r2-long-reset",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "final_quiet_tail_seconds": 2.0005000000000006,
+        "observed_utc": "2026-11-24T13:33:37.709042+00:00"
+      },
+      {
+        "case": "r2-short-preserve",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "final_quiet_tail_seconds": 2.0004999999999997,
+        "observed_utc": "2026-11-24T14:04:46.400080+00:00"
+      },
+      {
+        "case": "r2-short-reset",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "final_quiet_tail_seconds": 2.0004999999999997,
+        "observed_utc": "2026-11-24T13:57:11.569662+00:00"
+      },
+      {
+        "case": "r3-long-preserve",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "final_quiet_tail_seconds": 2.0005000000000006,
+        "observed_utc": "2026-11-24T14:36:20.074939+00:00"
+      },
+      {
+        "case": "r3-long-reset",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "final_quiet_tail_seconds": 2.0005000000000006,
+        "observed_utc": "2026-11-24T14:20:37.163827+00:00"
+      },
+      {
+        "case": "r3-short-preserve",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "final_quiet_tail_seconds": 2.0004999999999997,
+        "observed_utc": "2026-11-24T14:51:48.669120+00:00"
+      },
+      {
+        "case": "r3-short-reset",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "final_quiet_tail_seconds": 2.0004999999999997,
+        "observed_utc": "2026-11-24T14:44:05.893594+00:00"
+      },
+      {
+        "case": "r4-long-preserve",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "final_quiet_tail_seconds": 2.0005000000000006,
+        "observed_utc": "2026-11-24T15:23:23.230664+00:00"
+      },
+      {
+        "case": "r4-long-reset",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "final_quiet_tail_seconds": 2.0005000000000006,
+        "observed_utc": "2026-11-24T15:07:38.859383+00:00"
+      },
+      {
+        "case": "r4-short-preserve",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "final_quiet_tail_seconds": 2.0004999999999997,
+        "observed_utc": "2026-11-24T15:38:47.299597+00:00"
+      },
+      {
+        "case": "r4-short-reset",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "final_quiet_tail_seconds": 2.0004999999999997,
+        "observed_utc": "2026-11-24T15:31:08.798933+00:00"
+      },
+      {
+        "case": "r5-long-preserve",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "final_quiet_tail_seconds": 2.0005000000000006,
+        "observed_utc": "2026-11-24T16:10:20.572832+00:00"
+      },
+      {
+        "case": "r5-long-reset",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "final_quiet_tail_seconds": 2.0005000000000006,
+        "observed_utc": "2026-11-24T15:54:34.988973+00:00"
+      },
+      {
+        "case": "r5-short-preserve",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "final_quiet_tail_seconds": 2.0004999999999997,
+        "observed_utc": "2026-11-24T16:25:43.454851+00:00"
+      },
+      {
+        "case": "r5-short-reset",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "final_quiet_tail_seconds": 2.0004999999999997,
+        "observed_utc": "2026-11-24T16:18:05.499326+00:00"
+      },
+      {
+        "case": "r6-long-preserve",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "final_quiet_tail_seconds": 2.0005000000000006,
+        "observed_utc": "2026-11-24T16:57:16.511224+00:00"
+      },
+      {
+        "case": "r6-long-reset",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "final_quiet_tail_seconds": 2.0005000000000006,
+        "observed_utc": "2026-11-24T16:41:37.111462+00:00"
+      }
+    ],
+    "completed": 26,
+    "declared": 32,
+    "open_groups": [],
+    "reserved": {
+      "disk_bytes": 32212254720,
+      "memory_bytes": 12884901888,
+      "slots": 1
+    },
+    "Classic_gallery_queue": {
+      "owner.json": {
+        "pid": 2961442,
+        "start_ticks": "461042103",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "uid": 1000
+      },
+      "owner_live": true,
+      "waiting.json": {
+        "waiting_for": "existing_branch_matrix_and_worker_slot",
+        "maximum_wait_seconds": 43200,
+        "native_model_job_started": false
+      }
+    }
+  },
+  "Elder": {
+    "kind": "timelearner_matched_count_execution_status",
+    "schema_version": 1,
+    "request": {
+      "path": "/home/user/timelearner-refactor/requests/classic-n0-length-policy0-elder-dh3/request.json",
+      "sha256": "cfbdb4c1f2e0613a00941e11d50c8fd4f7073a1dff083821e0ceb383f564a984",
+      "size": 1630
+    },
+    "job_id": "classic-n0-length-policy0-elder-dh3",
+    "controller": "/home/user/timelearner-refactor/readbacks/classic-n0-length-policy0-elder-dh3-controller",
+    "output": "/home/user/timelearner-refactor/readbacks/classic-n0-length-policy0-elder-dh3",
+    "supervisor_live": true,
+    "terminal": null,
+    "all_processes_closed": false,
+    "execution_status_only": true,
+    "full_primary_audit_inferred": false,
+    "training_certificate_verified": false,
+    "scientific_verdict": null,
+    "observed_utc": "2026-11-24T17:05:02.095126+00:00",
+    "groups": [
+      {
+        "path": "/home/user/timelearner-refactor/readbacks/classic-n0-length-policy0-elder-dh3-controller/process/contained",
+        "execution": "running",
+        "all_processes_closed": false,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "b8fcb4aad25df888b5ff96c88606d6a947385061be5d4d0b966f9b9ffe698a5c",
+          "unit": "timelearner-c5fa04d9-d2ad-4245-9373-3f11b9bb87ef.service",
+          "invocation_id": "3ca557824c40478eaac32979fde82850",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-c5fa04d9-d2ad-4245-9373-3f11b9bb87ef.service",
+          "initial_main_pid": 1974176,
+          "initial_start_ticks": "509620392",
+          "sha256": "e3913b037cf71d8214894af7e3568e896c1465cb312d8fc1d7d8c87ec09af6da"
+        }
+      },
+      {
+        "path": "/home/user/timelearner-refactor/readbacks/classic-n0-length-policy0-elder-dh3/preflight/process/contained",
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "257ddba33dc187d126775d1918a3b4b7be8715ea9ded7c434821fc2021deca79",
+          "unit": "timelearner-24ef8bc5-0e73-485e-af0d-eb9dcc7968bd.service",
+          "invocation_id": "5792461ebf264b13b47aaedcbf993512",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-24ef8bc5-0e73-485e-af0d-eb9dcc7968bd.service",
+          "initial_main_pid": 1978129,
+          "initial_start_ticks": "509621273",
+          "sha256": "ab8c0ea787cc19cb4e893185824db727e4c1572310becbbf39e63f967c3b3355"
+        }
+      },
+      {
+        "path": "/home/user/timelearner-refactor/readbacks/classic-n0-length-policy0-elder-dh3/factor-preflight/process/contained",
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "47633e4b44a13308bfc45e9f7dfdea43ebd45ab1c67d5ff84ed213c54d3221aa",
+          "unit": "timelearner-a5f5c69d-087e-4a6a-aa10-d43ca256f6ed.service",
+          "invocation_id": "cf5fecc13e2f4da788e7d1eddf40af15",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-a5f5c69d-087e-4a6a-aa10-d43ca256f6ed.service",
+          "initial_main_pid": 1978231,
+          "initial_start_ticks": "509621602",
+          "sha256": "eb9cc2b8c6401c66fd3385fe762fc90bf3faf84a56dde0a7ff7c5964e18d024c"
+        }
+      },
+      {
+        "path": "/home/user/timelearner-refactor/readbacks/classic-n0-length-policy0-elder-dh3/train/process/contained",
+        "execution": "running",
+        "all_processes_closed": false,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "bd0c634415f7cbf4b12c01129e12c3052ca136740ba2f46c480b04d2d73c45e9",
+          "unit": "timelearner-57bc516d-46b1-40d6-8a3c-91680e8af462.service",
+          "invocation_id": "e83771a663ca4716829a42bee337ba6f",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-57bc516d-46b1-40d6-8a3c-91680e8af462.service",
+          "initial_main_pid": 1978333,
+          "initial_start_ticks": "509621879",
+          "sha256": "f2699f447958fb1f40a02488e5889b15208bc3cd7195d2e6fb2079edad872a3d"
+        }
+      }
+    ],
+    "native_observations": 0
+  },
+  "Windows": {
+    "observed_host_utc": "2026-11-24T17:06:58.042601+00:00",
+    "task": {
+      "last_result": 267009,
+      "instances": 0,
+      "state": 4
+    },
+    "files": {
+      "owner.json": {
+        "pid": 20704,
+        "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+        "creation_filetime": "134400135781373285"
+      },
+      "install-result.json": {
+        "kind": "timelearner_windows_process_result",
+        "schema_version": 1,
+        "execution": "completed",
+        "validity": "valid",
+        "reason": "exit_zero",
+        "returncode": 0,
+        "scientific_verdict": null,
+        "thread_limit_enforced": false,
+        "memory_limit_semantics": "job_committed_virtual_memory",
+        "wall_budget_scope": "whole_attempt_including_preparation",
+        "descendants_at_main_exit": [],
+        "all_processes_closed": true,
+        "cooperative_capture": "not_requested",
+        "runtime_provenance": "loaded_files_captured",
+        "observed_module_files": 66,
+        "wall_seconds": 24.591451699845493,
+        "child_resumed": true,
+        "job_name": "Local\\TimeLearner-23633ef2-b10b-4b2f-9413-1571d3cfcc76"
+      },
+      "resolved-packages.json": {
+        "matplotlib": {
+          "version": "3.11.2",
+          "source": "https://files.pythonhosted.org/packages/ea/61/4315ef0d63937fe56f451887b4a0be3b8e8b22cf1d92a8d157caac54570d/matplotlib-3.11.2-cp314-cp314-win_amd64.whl",
+          "sha256": "ecea603dd2fbf8242fd31a305a8b12a4ece2de28096870c65fdd0d1e35b8d9a6"
+        },
+        "numpy": {
+          "version": "2.5.5",
+          "source": "https://files.pythonhosted.org/packages/74/e2/494516771374b43060c1b778b371cba53d576abd3aee1275eecd73896e3b/numpy-2.5.5-cp314-cp314-win_amd64.whl",
+          "sha256": "20145b11776d2f7570cd61351b156a51d3a341822282095baa819d87272bc710"
+        },
+        "pillow": {
+          "version": "13.0.0",
+          "source": "https://files.pythonhosted.org/packages/50/e2/7ad17747517e4c813dca78257d6bb593466f8231baf1384bc98d92745edb/pillow-13.0.0-cp314-cp314-win_amd64.whl",
+          "sha256": "f7cbb7a64e7ec664775195e4f81923bc8a93d9451b963f844e59118f63147a7a"
+        },
+        "contourpy": {
+          "version": "1.4.0",
+          "source": "https://files.pythonhosted.org/packages/15/41/3df8cc14bb572c8b447f9dfbc876703f0f2f2896058285b5c87a1d4a638d/contourpy-1.4.0-cp314-cp314-win_amd64.whl",
+          "sha256": "181bea01bc742734ae672fa00c717d855dd35e1f029536406538c52e7b0cd73d"
+        },
+        "cycler": {
+          "version": "0.12.1",
+          "source": "https://files.pythonhosted.org/packages/e7/05/c19819d5e3d95294a6f5947fb9b9629efb316b96de511b418c53d245aae6/cycler-0.12.1-py3-none-any.whl",
+          "sha256": "85cef7cff222d8644161529808465972e51340599459b8ac3ccbac5a854e0d30"
+        },
+        "fonttools": {
+          "version": "4.68.0",
+          "source": "https://files.pythonhosted.org/packages/96/41/c9ca629ffe1b883c1422540a8a11a4ea09616366ab585ab4ee9833f2cd75/fonttools-4.68.0-cp314-cp314-win_amd64.whl",
+          "sha256": "1782f2cf952eb262c4126b1f57b5f0e027e71bf2b632350a033dec526f448428"
+        },
+        "kiwisolver": {
+          "version": "1.5.1",
+          "source": "https://files.pythonhosted.org/packages/4e/0e/49522e1ab5788cbaf63a26fbd3b851f9028616828c961b8a31b35cb96df8/kiwisolver-1.5.1-cp314-cp314-win_amd64.whl",
+          "sha256": "f4167e87b397f273dc2356fcf1eaf50a6bac51e6105f45103ef7129c8efb0255"
+        },
+        "packaging": {
+          "version": "26.4",
+          "source": "https://files.pythonhosted.org/packages/ba/7b/5504f91c9c2733f693d7759e50ede5d27119d4da7e5836c46d3b5ff81d56/packaging-26.4-py3-none-any.whl",
+          "sha256": "81383611a09c1bc0b08b76e0fd5829d7c6824c65b27a6aee339da133f4233ea2"
+        },
+        "pyparsing": {
+          "version": "3.3.3",
+          "source": "https://files.pythonhosted.org/packages/38/bb/d215ee7c73b61497b28a5503f9f53523f294fcc936762b7caf90e0c1c2b5/pyparsing-3.3.3-py3-none-any.whl",
+          "sha256": "ece8c00a69cf01b45d0b1dedabb469c90d8caf996d4fda40f147627a122849a4"
+        },
+        "python-dateutil": {
+          "version": "4.0.0",
+          "source": "https://files.pythonhosted.org/packages/2f/a9/52b89563d154433d79b51ed1eb4842bf7334cb2696891a7fe135618853d7/python_dateutil-4.0.0-py3-none-any.whl",
+          "sha256": "a5e246f79eb80475e691bf93862cead98decd8a498cf53ba0516fcdc0f50dc1c"
+        },
+        "tzdata": {
+          "version": "2026.6",
+          "source": "https://files.pythonhosted.org/packages/0a/66/9a06c2227fedfd4919f0eaaa8b94377d9730882a7e4f95823c9a331ab5e1/tzdata-2026.6-py2.py3-none-any.whl",
+          "sha256": "0a10eec6e13ef16b627fabed9a5f2ba61a62b1c67f327305f4e7e412a70b4aec"
+        }
+      },
+      "plotting-runtime.json": {
+        "python": "3.14.2",
+        "python_executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+        "matplotlib": "3.11.2",
+        "pillow": "13.0.0"
+      },
+      "pip-bootstrap-pin.json": {
+        "kind": "timelearner_isolated_pip_bootstrap",
+        "schema_version": 1,
+        "version": "26.3",
+        "url": "https://files.pythonhosted.org/packages/07/25/ee8c38ae72d66b844ce8eb9711ba905dba21ca1a8a0c960057c41cd23337/pip-26.3-py3-none-any.whl",
+        "sha256": "f3b60b20ffaadd4415ed7957212a38ac63fa4c5fa375bd0f4a797777940fad13",
+        "bytes": 1950951,
+        "metadata_sha256": "2b634ed9b7d74d2dc52d9c579c0ee1d91fb15c2c53b23969c1eaa1b7173b209c",
+        "base_python_environment_modified": false
+      }
+    },
+    "owners": [
+      {
+        "path": "C:\\Projects\\TimeLearnerWorker\\controls\\heldout-report-isolated-dm5\\install-process\\owned-process.json",
+        "owner": {
+          "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+          "creation_filetime": "134400135794014386",
+          "pid": 9612,
+          "job_name": "Local\\TimeLearner-23633ef2-b10b-4b2f-9413-1571d3cfcc76",
+          "runtime_fingerprint": "9937812ed4e29695d58e15f30cd4fa6f9fb1a51c76ebfad1e89522dcd21aa0af",
+          "suspended_until_limits_applied": true
+        },
+        "live": false
+      },
+      {
+        "path": "C:\\Projects\\TimeLearnerWorker\\controls\\heldout-report-isolated-dm5\\render-process\\owned-process.json",
+        "owner": {
+          "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+          "creation_filetime": "134400136042183739",
+          "pid": 14168,
+          "job_name": "Local\\TimeLearner-4d150c80-d250-448b-9ece-61302c09072e",
+          "runtime_fingerprint": "9937812ed4e29695d58e15f30cd4fa6f9fb1a51c76ebfad1e89522dcd21aa0af",
+          "suspended_until_limits_applied": true
+        },
+        "live": true
+      }
+    ],
+    "controller_live": true,
+    "cache_exists": true,
+    "cache_files": 5,
+    "png_files": 1,
+    "dispatch": {
+      "dispatched": true,
+      "task": {
+        "instance": "{6006D92D-8DD9-4F62-9E93-681CBA2712AF}",
+        "registered": true,
+        "task": "TimeLearner-Heldout-report-isolated-dm5",
+        "principal_run_level": 0,
+        "principal_logon_type": 2
+      },
+      "controls_commit": "ddbf3315d3411252d781bfaf82b61711c96e2cf4",
+      "controls_bundle": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\controls\\heldout-report-isolated-dm5\\controls.bundle",
+        "sha256": "3523d99697bd4dce1d57b5695339958824cd5f85ec0d34926d9f38633a8a53a8",
+        "size": 5439
+      },
+      "isolated_plot_dependencies": true,
+      "actual_heldout_gallery_queued": true,
+      "native_neuron_execution": false,
+      "source_Train_unchanged": true,
+      "scientific_verdict": null
+    },
+    "previous_failed_attempt": {
+      "observed_host_utc": "2026-11-24T17:02:16.470813+00:00",
+      "task": {
+        "last_result": 1,
+        "instances": 0,
+        "state": 3
+      },
+      "files": {
+        "owner.json": {
+          "pid": 12496,
+          "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+          "creation_filetime": "134400128727176382"
+        },
+        "exception.json": {
+          "reason": "isolated_plot_dependency_install_failed",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Projects\\TimeLearnerWorker\\controls\\heldout-report-isolated-dl14\\worker.py\", line 19, in <module>\n    write(c/'install-result.json',install);assert install['execution']=='completed'and install['returncode']==0 and install['all_processes_closed'],'isolated_plot_dependency_install_failed'\n                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: isolated_plot_dependency_install_failed\n",
+          "scientific_verdict": null
+        },
+        "install-result.json": {
+          "kind": "timelearner_windows_process_result",
+          "schema_version": 1,
+          "execution": "process_error",
+          "validity": "provenance_missing",
+          "reason": "windows_executable_mapping_not_observed",
+          "returncode": 1,
+          "scientific_verdict": null,
+          "thread_limit_enforced": false,
+          "memory_limit_semantics": "job_committed_virtual_memory",
+          "wall_budget_scope": "whole_attempt_including_preparation",
+          "descendants_at_main_exit": [],
+          "all_processes_closed": true,
+          "cooperative_capture": "not_requested",
+          "runtime_provenance": "not_captured",
+          "wall_seconds": 2.093515899963677,
+          "child_resumed": true,
+          "job_name": "Local\\TimeLearner-8b8b096d-8024-4bb0-814f-84cf642a5b3a"
+        }
+      },
+      "owners": [
+        {
+          "path": "C:\\Projects\\TimeLearnerWorker\\controls\\heldout-report-isolated-dl14\\install-process\\owned-process.json",
+          "owner": {
+            "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+            "creation_filetime": "134400128739963450",
+            "pid": 6376,
+            "job_name": "Local\\TimeLearner-8b8b096d-8024-4bb0-814f-84cf642a5b3a",
+            "runtime_fingerprint": "9937812ed4e29695d58e15f30cd4fa6f9fb1a51c76ebfad1e89522dcd21aa0af",
+            "suspended_until_limits_applied": true
+          },
+          "live": false
+        }
+      ],
+      "controller_live": false,
+      "cache_exists": false,
+      "cache_files": 0,
+      "png_files": 0
+    }
+  },
+  "scientific_verdict": null
+}

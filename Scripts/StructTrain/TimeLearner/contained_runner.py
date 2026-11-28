@@ -10,6 +10,7 @@ import time
 
 from . import contained_process
 from .native_evidence import load, require
+from .native_test_environment import ARTIFACT_ENVIRONMENT
 from .process_runner import verify_runtime, _start_identity, _write
 from .process_limits import validate_limits
 from .runtime import loaded_process_files
@@ -64,7 +65,7 @@ def execute(manifest, arguments, working_directory, output, maximum_wall_seconds
         args.extend(['--timelearner-capture-directory', str(output)])
     environment = {key: os.environ[key] for key in
                    ('ASAN_OPTIONS', 'TIMELEARNER_EXECUTION_OUTPUT', 'TIMELEARNER_COMPOSITE_OUTPUT',
-                    'TIMELEARNER_CANONICAL_PACKAGE')
+                    'TIMELEARNER_CANONICAL_PACKAGE', *sorted(ARTIFACT_ENVIRONMENT))
                    if key in os.environ}
     begin = time.monotonic()
     outcome, reason, mappings, mapping_error = 'process_error', 'launch_not_completed', None, None

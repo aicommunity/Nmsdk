@@ -20,6 +20,7 @@
 #include "TimeLearner/NativeLearnedState.h"
 #include "TimeLearner/NativeCompositeLearnedState.h"
 #include "TimeLearner/NativeTrainingBindings.h"
+#include "TimeLearner/NativeMeasuredTrainingBoundary.h"
 #include "TimeLearner/CandidateWindowRecoveryLedger.h"
 #include "TimeLearner/NativeRecognitionState.h"
 #include "TimeLearner/NativeRecognitionObservationValidation.h"
@@ -30,6 +31,7 @@
 #include "TimeLearner/ProbeEvidenceJson.h"
 #include "../Support/ConsoleLikeInit.h"
 #include "../Support/PhysicalArchiveComparison.h"
+#include "../Support/TerminalPhysicalDataTransfer.h"
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QDir>
@@ -89,8 +91,8 @@ public:
     std::vector<ValidatedCompositeMeasurement> referenceMeasurements;
     std::map<std::string,ValidatedProbeMeasurement> observedScalars;
     std::vector<double> groupBegins;
-    unsigned frequency;std::size_t rawSamples=0,preparations=0;
-    NativeCompositeFixture(unsigned hz=2000,bool merged=false,std::size_t groupBudget=64,bool bindC0=false,bool n0=false,bool connectedNeed=false,std::size_t dimension=2,double wallBudget=0.,bool distinctAttachments=false,double probeDuration=0.,int maximumCableLength=8):frequency(hz) {
+    unsigned frequency;std::size_t rawSamples=0,preparations=0,serviceAttemptAtConstruction=0;
+    NativeCompositeFixture(unsigned hz=2000,bool merged=false,std::size_t groupBudget=64,bool bindC0=false,bool n0=false,bool connectedNeed=false,std::size_t dimension=2,double wallBudget=0.,bool distinctAttachments=false,double probeDuration=0.,int maximumCableLength=8,int initialFirstInputSynapses=1):frequency(hz) {
         const auto& core=NmsdkTests::InitEngineForPulseLibTests();storage=core.storage;environment=core.environment;
         environment->DestroyModel();environment->SetUseIndTimeStepFlag(false);environment->GetTime().SetTime(0);
         Require(environment->CreateModel("NModel"),"composite_fixture_model");model=dynamic_pointer_cast<UNet>(environment->GetModel());
@@ -107,10 +109,14 @@ public:
         NativeModelSpec s;s.branch=branch;s.frequencyHz=hz;s.neuronClass=registered.neuronClass;
         s.normalization=n0?Normalization::SynapseCount:Normalization::TipResistance;
         s.editPolicy.normalization=s.normalization;s.editPolicy.maximumCableLength=maximumCableLength;
-        for(std::size_t i=0;i<dimension;++i){s.inputs.push_back({distinctAttachments?int(dimension-i):(i+1==dimension?1:2),1,{}});s.initialIsi.push_back(i?((merged && i==1)?.001:.08):.01);}
+        for(std::size_t i=0;i<dimension;++i){s.inputs.push_back({distinctAttachments?int(dimension-i):(i+1==dimension?1:2),i?1:initialFirstInputSynapses,{}});s.initialIsi.push_back(i?((merged && i==1)?.001:.08):.01);}
         modelSpec=s;
         const auto built=owner->ConstructNativeModel(s);Require(built.status==NativeModelBuildStatus::Constructed,built.reason.c_str());
         model->Init();model->Reset();
+        // Storage may reuse a learner instance. The service's monotonic session
+        // identity survives Reset/InvalidateTarget; count this case's starts
+        // relative to that identity, without resetting production authority.
+        serviceAttemptAtConstruction=owner->NativeTrainingController().SessionAttempt();
         owner->IsNeedToTrain=true;
         if(connectedNeed) {
             flag=UEPtr<CompositeTrainingFlag>(new CompositeTrainingFlag);flag->SetStorage(storage);flag->SetEnvironment(environment);flag->Default();
@@ -439,6 +445,108 @@ TEST(NativeCompositeTraining,ClassicPreparedDeclarationExpiresAfterOwnerReset){P
 TEST(NativeCompositeTraining,BranchPreparedDeclarationExpiresAfterOwnerReset){PreparedOwnerReset<NNeuronTimeLearnerBranch>();}
 TEST(NativeCompositeTraining,ClassicN0FreshRepeatCaptureSearchFinal2000){SearchAndFinal<NNeuronTimeLearner>(2000,false,true);}
 TEST(NativeCompositeTraining,BranchN0FreshRepeatCaptureSearchFinal2000){SearchAndFinal<NNeuronTimeLearnerBranch>(2000,false,true);}
+
+namespace {
+template<class Owner> void SaveMeasuredCountGroup(NativeCompositeFixture<Owner>& f,const std::string& stage) {
+    const auto output=std::getenv("TIMELEARNER_COMPOSITE_OUTPUT");if(!output)return;
+    const auto folder=QString::fromLocal8Bit(output)+"/measured-count/"+
+        (NativeCompositeFixture<Owner>::branch?"branch-":"classic-")+QString::number(f.frequency)+"/"+QString::fromStdString(stage);
+    Require(QDir().mkpath(folder),"measured_count_output_directory");
+    const auto write=[&](const QString& name,const QByteArray& bytes) {
+        QFile file(folder+"/"+name);Require(file.open(QIODevice::WriteOnly|QIODevice::NewOnly),"measured_count_output_new_only");
+        Require(file.write(bytes)==bytes.size() && file.flush(),"measured_count_output_write");
+    };
+    Require(bool(f.attempt->Group()),"measured_count_group_missing");
+    const auto& group=*f.attempt->Group();std::vector<const MatchedOmissionTrace*> traces{&group.witness.fullBefore};
+    for(const auto& t:group.witness.omitEachInput)traces.push_back(&t);traces.push_back(&group.witness.fullAfter);
+    MatchedOmissionPrimary primary;std::vector<QString> paths;
+    for(std::size_t i=0;i<traces.size();++i) {
+        const auto path=QString("trace-%1.csv").arg(qulonglong(i));paths.push_back(path);
+        const auto bytes=EncodeMatchedOmissionPrimaryTrace(*traces[i],group.packets[i]);primary.emplace(path,bytes);write(path,bytes);
+    }
+    write("group.json",QJsonDocument(EncodeMatchedOmissionEvidence(group,paths,primary)).toJson());
+    if(f.attempt->Selection())write("selection.json",QJsonDocument(EncodeNativeCompositeSelection(*f.attempt->Selection())).toJson());
+}
+
+// A warm recovery control, not a cold-training or classification result. Capture
+// actual per-input goals at Ns=8, deliberately return only input0 to Ns=1, then
+// ask the production controller to propose and MEASURE an integer from the two
+// actual same-geometry responses. No waveform, peak or reference is invented.
+template<class Owner> void MeasuredCountNativeProposal(unsigned frequency) {
+    // Declare the reference graph before native construction. Parameter edits
+    // require a consumed probe boundary; a newly built actor has none yet.
+    NativeCompositeFixture<Owner> f(frequency,false,32,false,true,false,2,0.,false,0.,8,8);
+    const auto captured=f.owner->ReadNativeParameters();auto original=captured;original[0].synapses=1;
+    ASSERT_EQ(captured[0].synapses,8);
+    ASSERT_EQ(f.owner->ReadNativeParameters(),captured);
+    for(std::size_t i=0;i<f.protocol.inputs.size();++i) {
+        f.Run(f.Request(i,"count-reference","count-reference/"+std::to_string(i)),CompositeMeasurementPurpose::Reference);
+        SaveMeasuredCountGroup(f,"reference-"+std::to_string(i));
+        ASSERT_TRUE(f.attempt->Measurement())<<f.attempt->RejectionReason();
+        f.referenceMeasurements.push_back(*f.attempt->Measurement());
+    }
+    const auto references=CapturedReferences::CaptureComposite(f.protocol,f.referenceMeasurements);
+    const auto edit=f.owner->ApplyNativeParameters(original);ASSERT_EQ(edit.status,NativeEditStatus::Applied)<<edit.reason;
+    ASSERT_EQ(f.owner->ReadNativeParameters(),original);
+    BoundedTrainingConfig cfg;cfg.runId="native-measured-count";cfg.initialModelRevision=f.Revision();cfg.initialModelEpoch=1;
+    cfg.normalization=Normalization::SynapseCount;cfg.maximumProbes=32;cfg.maximumEdits=16;
+    cfg.maximumCandidatesPerInput=8;cfg.maximumSweeps=1;cfg.tolerances.sync=.2;
+    for(const auto& p:original)cfg.bounds.push_back({p.length,p.length,p.synapses,p.synapses,p.resistance,p.resistance});
+    cfg.bounds[0].maximumSynapses=16;
+    BoundedTrainingSession search(references,cfg,original,NativeCompositeFixture<Owner>::branch,f.owner->ReadNativeTrainingCapacitance());
+    std::vector<CandidateEvidence> measured;std::size_t actions=0;std::optional<int> expectedProposal;
+    while(const auto action=search.NextAction()) {
+        ASSERT_LT(++actions,32u);ASSERT_FALSE(action->finalVerification);EXPECT_FALSE(search.Certificate());
+        if(action->kind==TrainingActionKind::Edit) {
+            const auto before=f.owner->ReadNativeParameters();EXPECT_EQ(before,search.Parameters());
+            const auto changed=f.owner->ApplyNativeTrainingParameters(action->parameters,action->capacitance);
+            ASSERT_EQ(changed.status,NativeEditStatus::Applied)<<changed.reason;
+            const auto effective=f.owner->ReadNativeParameters();ASSERT_EQ(effective,action->parameters);
+            for(std::size_t i=0;i<effective.size();++i) {
+                EXPECT_EQ(effective[i].length,original[i].length);EXPECT_DOUBLE_EQ(effective[i].resistance,original[i].resistance);
+                if(i)EXPECT_EQ(effective[i].synapses,original[i].synapses);
+            }
+            search.Applied(action->serial,effective,f.Revision(),f.owner->ReadNativeTrainingCapacitance());continue;
+        }
+        ASSERT_EQ(action->kind,TrainingActionKind::Probe);
+        const auto before=search.Evidence().size();const auto revision=f.Revision();
+        f.Run(f.Request(action->inputIndex,action->runId,action->trialId,action->modelEpoch),CompositeMeasurementPurpose::Search,
+            [&,serial=action->serial](const auto& prepared){search.ArmComposite(serial,prepared);});
+        SaveMeasuredCountGroup(f,"search-"+std::to_string(action->serial));
+        ASSERT_TRUE(f.attempt->Measurement())<<f.attempt->RejectionReason();ASSERT_EQ(f.Revision(),revision);
+        search.ConsumeComposite(*f.attempt->Measurement(),revision);
+        if(search.Evidence().size()==before)continue; // The fresh anchor is not an active-input residual.
+        const auto& e=search.Evidence().back();ASSERT_EQ(e.inputIndex,0u);ASSERT_TRUE(e.withinTiming);
+        EXPECT_EQ(e.modelRevision,revision);EXPECT_EQ(e.fullParameters,f.owner->ReadNativeParameters());
+        EXPECT_DOUBLE_EQ(e.measuredRawPotential,f.observedScalars.at(action->trialId).rawPotential);
+        EXPECT_TRUE(std::isfinite(e.amplitudeResidual));measured.push_back(e);
+        if(measured.size()==1)EXPECT_EQ(e.parameters.synapses,1);
+        if(measured.size()==2) {
+            EXPECT_EQ(e.parameters.synapses,2);
+            const auto& a=measured[0];const auto& b=measured[1];
+            ASSERT_LT(a.amplitudeResidual,0.);ASSERT_GT(b.amplitudeResidual,a.amplitudeResidual);
+            ASSERT_LT(b.amplitudeResidual,0.);
+            const double fitted=double(b.parameters.synapses)-b.amplitudeResidual*
+                (b.parameters.synapses-a.parameters.synapses)/(b.amplitudeResidual-a.amplitudeResidual);
+            ASSERT_TRUE(std::isfinite(fitted));expectedProposal=int(std::round(std::clamp(fitted,1.,16.)));
+            ASSERT_GT(*expectedProposal,2);
+        }
+        if(measured.size()==3) {
+            ASSERT_TRUE(expectedProposal);EXPECT_EQ(e.parameters.synapses,*expectedProposal);
+            EXPECT_NE(e.modelRevision,measured[1].modelRevision);EXPECT_FALSE(search.Certificate());
+            search.ExternalStop();break;
+        }
+    }
+    ASSERT_EQ(measured.size(),3u)<<search.Reason();EXPECT_EQ(search.Status(),TrainingStatus::ExternalStop);
+    EXPECT_FALSE(search.Certificate());EXPECT_EQ(search.AcceptedCompositeObservations(),6u);
+    EXPECT_EQ(search.IssuedProbes(),6u);EXPECT_EQ(f.attempt->IssuedNativeProbes(),32u);EXPECT_EQ(f.preparations,32u);
+}
+}
+TEST(NativeMeasuredCount,ClassicActualSameGeometry2000){MeasuredCountNativeProposal<NNeuronTimeLearner>(2000);}
+TEST(NativeMeasuredCount,BranchActualSameGeometry2000){MeasuredCountNativeProposal<NNeuronTimeLearnerBranch>(2000);}
+TEST(NativeMeasuredCount,ClassicActualSameGeometry20000){MeasuredCountNativeProposal<NNeuronTimeLearner>(20000);}
+TEST(NativeMeasuredCount,BranchActualSameGeometry20000){MeasuredCountNativeProposal<NNeuronTimeLearnerBranch>(20000);}
+
 TEST(NativeCompositeTraining,ClassicSetterStopBetweenFinalCloseAndConsume){RequestRemovedBeforeFinalConsume<NNeuronTimeLearner>(RequestStop::Setter);}
 TEST(NativeCompositeTraining,BranchSetterStopBetweenFinalCloseAndConsume){RequestRemovedBeforeFinalConsume<NNeuronTimeLearnerBranch>(RequestStop::Setter);}
 TEST(NativeCompositeTraining,ClassicDirectDataStopBetweenFinalCloseAndConsume){RequestRemovedBeforeFinalConsume<NNeuronTimeLearner>(RequestStop::DirectData);}
@@ -527,7 +635,7 @@ template<class Owner> void ServiceWarmReset() {
     const auto& warm=f.owner->NativeTrainingController();ASSERT_EQ(warm.Outcome(),TrainingStatus::Exact)<<warm.Reason();
     EXPECT_EQ(warm.CompositeSourceBinding(),source);EXPECT_EQ(warm.CompositeReferenceGroupIds(),references);
     EXPECT_NE(warm.Certificate()->CompositeProofIds(),oldProof);EXPECT_EQ(f.owner->ReadNativeTrainingCapacitance()->origin,oldC0);
-    EXPECT_EQ(f.preparations-prepared,4*warm.Search()->IssuedProbes());EXPECT_EQ(warm.SessionAttempt(),2u);
+    EXPECT_EQ(f.preparations-prepared,4*warm.Search()->IssuedProbes());EXPECT_EQ(warm.SessionAttempt(),f.serviceAttemptAtConstruction+2);
     EXPECT_EQ(warm.CompositeNativeProbes(),f.preparations-prepared);
     ASSERT_GE(warm.CompositeMeasurements().size(),2u);
     EXPECT_NE(warm.CompositeMeasurements().front().liveAttemptBinding,warm.CompositeMeasurements().back().liveAttemptBinding);
@@ -596,7 +704,7 @@ template<class Owner> void ServiceWarmDoesNotReplayCancelledRaw() {
     };
     ServiceStart(f,p);ServiceTicks(f);ASSERT_EQ(closed,1u);ASSERT_EQ(f.owner->NativeTrainingController().Outcome(),TrainingStatus::ExternalStop);
     f.owner->Reset();f.owner->BeginNativeTraining(p);EXPECT_EQ(closed,1u);ServiceTicks(f);
-    const auto& service=f.owner->NativeTrainingController();EXPECT_EQ(service.SessionAttempt(),2u);
+    const auto& service=f.owner->NativeTrainingController();EXPECT_EQ(service.SessionAttempt(),f.serviceAttemptAtConstruction+2);
     EXPECT_EQ(service.Outcome(),TrainingStatus::Exact)<<service.Reason();EXPECT_TRUE(service.Certificate());
     EXPECT_EQ(closed,1+service.CompositeNativeProbes());EXPECT_EQ(identities.size(),closed);
 }
@@ -1769,7 +1877,14 @@ template<class Owner> void EnableCandidateWindow(NativeCompositeFixture<Owner>& 
 }
 template<class Owner> void SaveCandidateWindowGroup(NativeCompositeFixture<Owner>& f,const std::string& stage) {
     const auto output=std::getenv("TIMELEARNER_COMPOSITE_OUTPUT");if(!output)return;
-    const std::string directory=std::string(NativeCompositeFixture<Owner>::branch?"branch-native-window5/":"classic-native-window5/")+stage;
+    const auto* test=::testing::UnitTest::GetInstance()->current_test_info();
+    Require(test,"window5_current_test_required");
+    const auto testId=std::string(test->test_suite_name())+"."+test->name();
+    // A stage name is unique within a case, not within a combined invocation.
+    // Keep NewOnly and a bounded path component on Windows as well as Linux.
+    const auto scope=QCryptographicHash::hash(QByteArray::fromStdString(testId),QCryptographicHash::Sha256).toHex();
+    const std::string directory="case-"+scope.toStdString()+"/"+
+        (NativeCompositeFixture<Owner>::branch?"branch-native-window5/":"classic-native-window5/")+stage;
     const auto base=QString::fromLocal8Bit(output)+"/"+QString::fromStdString(directory);Require(QDir().mkpath(base),"window5_output_directory");
     const auto write=[&](const QString& name,const QByteArray& bytes){QFile file(base+"/"+name);Require(file.open(QIODevice::WriteOnly|QIODevice::NewOnly),"window5_output_new_only");
         Require(file.write(bytes)==bytes.size() && file.flush(),"window5_output_write");};
@@ -2532,8 +2647,8 @@ template<class Owner> void CandidateWindowServiceStartsBeforeAnyNativeQueue() {
     const auto plan=MakeConfiguredNativeTrainingPlan(configuration);const auto initial=f.Revision();f.attempt.reset();
     f.owner->BeginNativeTraining(plan);const auto& service=f.owner->NativeTrainingController();
     ASSERT_EQ(service.State(),NativeTrainingState::CapturingReferences)<<service.Reason();
-    EXPECT_EQ(service.SessionAttempt(),1u);EXPECT_EQ(service.Plan().protocol.schemaVersion,5u);
-    EXPECT_EQ(service.Configuration().runId,configuration.runId+"/session/1");
+    EXPECT_EQ(service.SessionAttempt(),f.serviceAttemptAtConstruction+1);EXPECT_EQ(service.Plan().protocol.schemaVersion,5u);
+    EXPECT_EQ(service.Configuration().runId,configuration.runId+"/session/"+std::to_string(f.serviceAttemptAtConstruction+1));
     EXPECT_EQ(service.CompositeInitialConfiguration()["schema_version"],QJsonValue(7));
     EXPECT_EQ(service.CompositeInitialConfiguration()["run_id"],QJsonValue(QString::fromStdString(configuration.runId)));
     EXPECT_FALSE(service.References());EXPECT_FALSE(service.Certificate());EXPECT_TRUE(service.CompositeReferenceGroupIds().empty());
@@ -2632,7 +2747,7 @@ template<class Owner> void WindowServiceGrowth(bool warm) {
         SaveWindowService(f,"grown-before-warm");f.owner->Reset();bool stoppedOnFreshInput=false;
         plan.compositeSink=[&](const auto& record){if(record.purpose==CompositeMeasurementPurpose::Search && record.logical.inputIndex==0 && record.consumed){
             stoppedOnFreshInput=true;f.owner->IsNeedToTrain=false;}};
-        f.owner->BeginNativeTraining(plan);ASSERT_EQ(first.State(),NativeTrainingState::Searching)<<first.Reason();EXPECT_EQ(first.SessionAttempt(),2u);
+        f.owner->BeginNativeTraining(plan);ASSERT_EQ(first.State(),NativeTrainingState::Searching)<<first.Reason();EXPECT_EQ(first.SessionAttempt(),f.serviceAttemptAtConstruction+2);
         EXPECT_EQ(first.CompositeMeasurements().size(),history);EXPECT_EQ(first.CompositeGroups(),0u);EXPECT_EQ(first.CompositeNativeProbes(),0u);
         EXPECT_EQ(first.References()->Inputs(),references.Inputs());EXPECT_EQ(f.owner->ReadNativeParameters()[0].length,3);
         ServiceTicks(f);ASSERT_TRUE(stoppedOnFreshInput);EXPECT_EQ(first.Outcome(),TrainingStatus::ExternalStop);EXPECT_FALSE(first.Certificate());
@@ -2673,7 +2788,7 @@ template<class Owner> void WindowServicePartialWarm() {
     ASSERT_EQ(service.CompositeMeasurements().size(),1u);const auto old=service.CompositeMeasurements()[0].groupId;const auto source=service.CompositeSourceBinding();
     EXPECT_FALSE(service.CompositeMeasurements()[0].consumed);EXPECT_FALSE(service.CompositeMeasurements()[0].trainingRequestedAtConsume);SaveWindowService(f,"partial-before-warm");
     f.owner->Reset();f.owner->BeginNativeTraining(plan);ASSERT_EQ(service.State(),NativeTrainingState::CapturingReferences)<<service.Reason();
-    EXPECT_EQ(service.SessionAttempt(),2u);EXPECT_FALSE(service.References());EXPECT_EQ(service.CompositeGroups(),0u);ServiceTicks(f);
+    EXPECT_EQ(service.SessionAttempt(),f.serviceAttemptAtConstruction+2);EXPECT_FALSE(service.References());EXPECT_EQ(service.CompositeGroups(),0u);ServiceTicks(f);
     ASSERT_EQ(service.Outcome(),TrainingStatus::Exact)<<service.Reason();ASSERT_TRUE(service.References());EXPECT_EQ(service.CompositeSourceBinding(),source);
     ASSERT_FALSE(service.CompositeMeasurements().empty());EXPECT_EQ(service.CompositeMeasurements()[0].groupId,old);EXPECT_FALSE(service.CompositeMeasurements()[0].consumed);
     EXPECT_FALSE(service.CompositeMeasurements()[0].trainingRequestedAtConsume);for(const auto& id:service.CompositeReferenceGroupIds())EXPECT_NE(id,old);
@@ -2792,7 +2907,7 @@ template<class Owner> void WindowManualClosedMeasurementAuthority(bool foreignSe
         ServiceTicks(f);const auto& service=f.owner->NativeTrainingController();
         ASSERT_EQ(service.State(),NativeTrainingState::Finished);ASSERT_EQ(service.Outcome(),TrainingStatus::Exact)<<service.Reason();
         ASSERT_TRUE(service.Search());ASSERT_EQ(service.Search()->AppliedEdits(),0u);
-        ASSERT_EQ(service.SessionAttempt(),1u);ASSERT_NE(service.CompositeOwnerFamilyBinding(),oldFamily);
+        ASSERT_EQ(service.SessionAttempt(),f.serviceAttemptAtConstruction+1);ASSERT_NE(service.CompositeOwnerFamilyBinding(),oldFamily);
         ASSERT_EQ(retainedManual->IssuedGroups(),oldGroups);ASSERT_EQ(retainedManual->IssuedNativeProbes(),oldProbes);
         SaveWindowService(f,"foreign-finished-while-manual-proof-pending");
     } else {
@@ -2948,10 +3063,10 @@ template<class Owner> void WindowManualOtherServiceTakeover(ManualTakeoverKind k
     const auto& service=f.owner->NativeTrainingController();
     if(kind==ManualTakeoverKind::FailedBegin) {
         ASSERT_EQ(service.State(),NativeTrainingState::Finished);ASSERT_EQ(service.Outcome(),TrainingStatus::InvalidModel);
-        ASSERT_EQ(service.SessionAttempt(),0u);ASSERT_EQ(service.CompositeNativeProbes(),0u);ASSERT_EQ(f.Time(),beforeTime);
+        ASSERT_EQ(service.SessionAttempt(),f.serviceAttemptAtConstruction);ASSERT_EQ(service.CompositeNativeProbes(),0u);ASSERT_EQ(f.Time(),beforeTime);
         ASSERT_TRUE(service.CompositeSourceBinding().isEmpty()); // Failed BEFORE any service-owned actor exists.
     } else {
-        ASSERT_EQ(service.State(),NativeTrainingState::CapturingReferences)<<service.Reason();ASSERT_EQ(service.SessionAttempt(),1u);
+        ASSERT_EQ(service.State(),NativeTrainingState::CapturingReferences)<<service.Reason();ASSERT_EQ(service.SessionAttempt(),f.serviceAttemptAtConstruction+1);
         ASSERT_EQ(service.Plan().protocol.schemaVersion,kind==ManualTakeoverKind::ScalarThree?3u:4u);
         ServiceTicks(f);ASSERT_EQ(service.State(),NativeTrainingState::Finished);ASSERT_GT(f.Time(),beforeTime);
         ASSERT_EQ(service.Outcome(),TrainingStatus::BudgetExhausted)<<service.Reason();
@@ -3119,7 +3234,7 @@ template<class Owner> void WindowManualImportedNoActorPublicInterruptRevokes() {
     f.owner->Build();f.model->Init();f.model->Reset();ASSERT_TRUE(f.owner->IsReady());ASSERT_TRUE(f.owner->IsInit());
     ASSERT_EQ(f.owner->ControllerVersion.GetData(),2);const auto& service=f.owner->NativeTrainingController();
     ASSERT_EQ(service.State(),NativeTrainingState::Idle);ASSERT_EQ(service.Plan().protocol.schemaVersion,4u);
-    ASSERT_EQ(service.SessionAttempt(),1u);ASSERT_EQ(service.CompositeGroups(),0u);ASSERT_EQ(service.CompositeNativeProbes(),0u);ASSERT_FALSE(service.Search());
+    ASSERT_EQ(service.SessionAttempt(),f.serviceAttemptAtConstruction+1);ASSERT_EQ(service.CompositeGroups(),0u);ASSERT_EQ(service.CompositeNativeProbes(),0u);ASSERT_FALSE(service.Search());
     const auto importedSource=service.CompositeSourceBinding();ASSERT_FALSE(importedSource.isEmpty());
     f.owner->IsNeedToTrain=true; // V2 edge Reset happens BEFORE the new manual observation.
     const auto earliest=f.Time(),earliestWall=Wall();EnableCandidateWindow(f);const auto refs=CaptureWindowReferences(f);
@@ -3131,7 +3246,7 @@ template<class Owner> void WindowManualImportedNoActorPublicInterruptRevokes() {
     SaveCompositeArchive(historical,(std::string(name)+"/old-manual-journal").c_str());
     // Queued manual trials suppress V2 autostart. The imported service still
     // holds only portable proof, not a native actor, throughout these groups.
-    ASSERT_EQ(service.State(),NativeTrainingState::Idle);ASSERT_EQ(service.SessionAttempt(),1u);
+    ASSERT_EQ(service.State(),NativeTrainingState::Idle);ASSERT_EQ(service.SessionAttempt(),f.serviceAttemptAtConstruction+1);
     ASSERT_EQ(service.CompositeGroups(),0u);ASSERT_EQ(service.CompositeNativeProbes(),0u);ASSERT_EQ(service.CompositeSourceBinding(),importedSource);
     const auto life=f.owner->ObserveLifecycle();const auto revision=f.Revision();const auto beforeTime=f.Time();
     const auto neuron=f.owner->template GetComponentL<NPulseNeuron>("Neuron",true);
@@ -3149,7 +3264,7 @@ template<class Owner> void WindowManualImportedNoActorPublicInterruptRevokes() {
     ASSERT_EQ(f.owner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true).Get(),source.Get());
     const auto afterSourceIdentity=NmsdkTools::IdentifyModel(dataset.Get());ASSERT_TRUE(afterSourceIdentity["valid"].toBool());
     ASSERT_EQ(afterSourceIdentity["model"],sourceIdentity["model"]);
-    ASSERT_EQ(service.State(),NativeTrainingState::Idle);ASSERT_EQ(service.SessionAttempt(),1u);ASSERT_EQ(service.CompositeSourceBinding(),importedSource);
+    ASSERT_EQ(service.State(),NativeTrainingState::Idle);ASSERT_EQ(service.SessionAttempt(),f.serviceAttemptAtConstruction+1);ASSERT_EQ(service.CompositeSourceBinding(),importedSource);
     ASSERT_EQ(service.CompositeGroups(),0u);ASSERT_EQ(service.CompositeNativeProbes(),0u);
     const auto replay=DecodeNativeCompositeTrainingArchive(historical.document);ASSERT_EQ(replay.Records().back().semanticProofId,pending.SemanticProofId());
     ASSERT_LT(f.Time()-record.startModel,record.maximumGroupModelSeconds);ASSERT_LT(Wall()-record.startWall,record.maximumGroupWallSeconds);
@@ -3863,7 +3978,7 @@ template<class Owner> void ObservedRequestRestart(bool connected,int mode,bool s
     if(stopPartial)sinks.onSample=[&](const auto&){++samples;};
     f.owner->SetConfiguredNativeEvidenceSinks(sinks);request(true);
     ServiceTicks(f,[&](){if(stopPartial && samples && !stopped){stopped=true;request(false);}});
-    const auto& service=f.owner->NativeTrainingController();ASSERT_EQ(service.SessionAttempt(),1u);
+    const auto& service=f.owner->NativeTrainingController();ASSERT_EQ(service.SessionAttempt(),f.serviceAttemptAtConstruction+1);
     ASSERT_EQ(service.Outcome(),stopPartial?TrainingStatus::ExternalStop:TrainingStatus::Exact)<<service.Reason();
     ASSERT_EQ(bool(service.Certificate()),!stopPartial);ASSERT_EQ(bool(service.References()),!stopPartial);
     const auto source=service.CompositeSourceBinding(),configuration=service.CompositeInitialConfiguration();
@@ -3877,13 +3992,13 @@ template<class Owner> void ObservedRequestRestart(bool connected,int mode,bool s
     if(!stopPartial && (connected || mode==1)) {
         ASSERT_TRUE(f.owner->IsNeedToTrain.GetData());
         for(unsigned i=0;i<8;++i)tick();
-        EXPECT_EQ(service.SessionAttempt(),1u);EXPECT_EQ(service.State(),NativeTrainingState::Finished);
+        EXPECT_EQ(service.SessionAttempt(),f.serviceAttemptAtConstruction+1);EXPECT_EQ(service.State(),NativeTrainingState::Finished);
         // An unobserved connected/direct false->true between native ticks is
         // not claimed as an edge. This deliberately bypasses the local setter.
-        request(false);request(true);tick();EXPECT_EQ(service.SessionAttempt(),1u);
+        request(false);request(true);tick();EXPECT_EQ(service.SessionAttempt(),f.serviceAttemptAtConstruction+1);
     }
     request(false);tick();ASSERT_EQ(service.State(),NativeTrainingState::Finished);
-    request(true);tick();ASSERT_EQ(service.SessionAttempt(),2u)<<service.Reason();
+    request(true);tick();ASSERT_EQ(service.SessionAttempt(),f.serviceAttemptAtConstruction+2)<<service.Reason();
     EXPECT_EQ(service.CompositeSourceBinding(),source);EXPECT_EQ(service.CompositeInitialConfiguration(),configuration);
     EXPECT_EQ(service.CompositeOwnerFamilyBinding(),family);EXPECT_EQ(service.CaptureRevision(),capture);EXPECT_EQ(service.CaptureEpoch(),epoch);
     EXPECT_EQ(f.Revision(),revision);EXPECT_TRUE(f.owner->OwnedNativeCapacitanceState().isEmpty());
@@ -3894,16 +4009,17 @@ template<class Owner> void ObservedRequestRestart(bool connected,int mode,bool s
     }
     EXPECT_EQ(EncodeCompositeRawPrimary(service.CompositeMeasurements().front().rawTrials.front()),firstRaw);
     ServiceTicks(f);ASSERT_EQ(service.Outcome(),TrainingStatus::Exact)<<service.Reason();ASSERT_TRUE(service.Certificate());
-    EXPECT_EQ(service.SessionAttempt(),2u);EXPECT_EQ(service.CompositeSourceBinding(),source);EXPECT_EQ(service.CompositeOwnerFamilyBinding(),family);
+    EXPECT_EQ(service.SessionAttempt(),f.serviceAttemptAtConstruction+2);EXPECT_EQ(service.CompositeSourceBinding(),source);EXPECT_EQ(service.CompositeOwnerFamilyBinding(),family);
     EXPECT_EQ(service.CaptureRevision(),capture);EXPECT_EQ(service.CaptureEpoch(),epoch);
     EXPECT_GT(service.CompositeMeasurements().size(),oldGroups);EXPECT_TRUE(f.owner->OwnedNativeCapacitanceState().isEmpty());
     EXPECT_EQ(EncodeCompositeRawPrimary(service.CompositeMeasurements().front().rawTrials.front()),firstRaw);
     if(captured)EXPECT_EQ(service.References()->Inputs(),captured->Inputs());
     SaveWindowPackage(f,"request-warm",f.owner->ExportNativeLearnedState(CandidateWindowPackageImplementation));
-    for(unsigned i=0;i<8;++i)tick();EXPECT_EQ(service.SessionAttempt(),2u);
+    for(unsigned i=0;i<8;++i)tick();EXPECT_EQ(service.SessionAttempt(),f.serviceAttemptAtConstruction+2);
     SavePortableObject(NativeCompositeFixture<Owner>::branch?"branch-observed-request":"classic-observed-request","request-boundary.json",
         {{"kind","native_observed_request_restart"},{"schema_version",1},{"connected",connected},{"calculate_mode",mode},
-         {"stopped_partial",stopPartial},{"observed_raw_samples",double(samples)},{"initial_attempt",1},{"warm_attempt",2},
+         {"stopped_partial",stopPartial},{"observed_raw_samples",double(samples)},
+         {"initial_attempt",double(f.serviceAttemptAtConstruction+1)},{"warm_attempt",double(f.serviceAttemptAtConstruction+2)},
          {"original_family_preserved",service.CompositeOwnerFamilyBinding()==family},{"original_source_preserved",service.CompositeSourceBinding()==source},
          {"scientific_acceptance",false}});
 }
@@ -4649,7 +4765,11 @@ template<class Owner> const RecoveryPackageFixtureData& ActualRecoveryPackage(bo
     auto response=RecoveryBoundaryResponse(f);const auto neuron=f.owner->template GetComponentL<UNet>("Neuron",true);
     const auto dataset=f.owner->template GetComponentL<UNet>("DatasetMatrix",true);
     const auto neuronBefore=LivePackageComponentXml(neuron),datasetBefore=LivePackageComponentXml(dataset);
-    const auto exportedBoundary=f.owner->ExportNativeLearnedBoundary(RecoveryPackageImplementation);
+    QJsonObject deliveredState;std::size_t deliveries=0;
+    const auto exportedBoundary=f.owner->ExportNativeLearnedBoundary(RecoveryPackageImplementation,[&](const QJsonObject& ready) {
+        ++deliveries;deliveredState=ready;
+    });
+    EXPECT_EQ(deliveries,1u);EXPECT_EQ(deliveredState,exportedBoundary.learnedState);
     const auto& package=exportedBoundary.learnedState;const auto& summary=exportedBoundary.summary;
     EXPECT_EQ(LivePackageComponentXml(neuron),neuronBefore);EXPECT_EQ(LivePackageComponentXml(dataset),datasetBefore);
     Require(package["schema_version"]==QJsonValue(7),"recovery_package_public_export_not_version7");
@@ -5079,3 +5199,404 @@ template<class Owner> void RecordedRecoveryRoundtrip() {
 TEST(NativeRecordedRecoveryArchive,ClassicFullDomainN4Roundtrip){RecordedRecoveryRoundtrip<NNeuronTimeLearner>();}
 TEST(NativeRecordedRecoveryArchive,BranchFullDomainN4Roundtrip){RecordedRecoveryRoundtrip<NNeuronTimeLearnerBranch>();}
 #endif
+
+namespace {
+QJsonObject TerminalColdConsoleJob(ConfiguredNativeTraining configuration,const QJsonObject& profile) {
+    configuration.runId+="/fresh-public-cold9";
+    const auto encoded=EncodeConfiguredNativeTraining(configuration);
+    if(encoded.value("schema_version")!=QJsonValue(9))throw std::invalid_argument("terminal_console_fixture_requires_cold9");
+    return NmsdkWorker::Signed({{"kind","timelearner_native_training_job"},{"schema_version",1},
+        {"owner_class",configuration.model.branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner"},
+        {"implementation_id",CompositePackageImplementation},{"configuration",encoded},{"profile_archives",QJsonArray{profile}},
+        {"optional_modes",QJsonObject{{"sync_capacitance_trim",0},{"post_train_tuning",false},{"auto_calibrate_threshold",false}}},
+        {"calculate_mode",1},{"structure_build_mode",1},
+        {"maximum_model_ticks",std::ceil((configuration.maximumModelSeconds+configuration.duration+1.)*configuration.model.frequencyHz)}});
+}
+template<class Owner> void NativeTerminalCompositePackage(bool window,bool n0,bool completed,bool configured=false,bool recovery=false)
+{
+    NativeCompositeFixture<Owner> f(2000,false,64,false,n0);f.owner->ControllerVersion.SetDataDirect(2);
+    // Existing fixed-geometry transport control. The broad .2 case exercises
+    // an unchanged completed certificate; .02 is the original scientific sync
+    // default and must remain an honestly stopped/no-certificate boundary.
+    auto plan=window?ActualWindowServicePlan(f,completed?.2:.02,false):ServicePlan(f,completed?.2:.02);
+    plan.search.normalization=f.modelSpec.normalization;plan.search.bounds.clear();
+    for(const auto& p:f.owner->ReadNativeParameters())plan.search.bounds.push_back({p.length,p.length,p.synapses,p.synapses,p.resistance,p.resistance});
+    plan.search.maximumCandidatesPerInput=1;plan.search.maximumSweeps=1;plan.search.n0CandidateRepeats=1;
+    if(recovery) {
+        ASSERT_TRUE(window);
+        plan.search.invalidMeasurementRecovery=InvalidMeasurementRecovery::AdvanceRejectedCandidateWindow;
+        plan.search.maximumInvalidObservations=2;
+    }
+    plan.terminalSelection=NativeTerminalSelectionPolicy{configured?7.25:30.};
+    const auto coldConfiguration=window?CaptureCandidateWindowInitialConfiguration(f.modelSpec,plan,f.owner->ReadNativeParameters(),0.):
+        CaptureCompositeInitialConfiguration(f.modelSpec,plan,f.owner->ReadNativeParameters(),0.);
+    if(configured) {
+        const auto encoded=EncodeConfiguredNativeTraining(coldConfiguration);ASSERT_EQ(encoded.value("schema_version"),QJsonValue(9));
+        f.attempt.reset();f.owner->IsNeedToTrain=false;
+        f.owner->ControllerConfiguration=QJsonDocument(encoded).toJson(QJsonDocument::Compact).toStdString();
+        f.owner->Build();f.model->Init();f.model->Reset();ASSERT_TRUE(f.owner->ConfiguredModelInitialized.GetData());
+        ASSERT_TRUE(f.owner->IsReady() && f.owner->IsInit());f.owner->IsNeedToTrain=true;
+        // Start through the ordinary configured owner tick, not Begin(plan).
+    }else ServiceStart(f,plan);
+    ServiceTicks(f);
+    const auto& service=f.owner->NativeTrainingController();
+    ASSERT_EQ(service.State(),NativeTrainingState::Finished)<<service.Reason();
+    ASSERT_EQ(service.Outcome(),completed?TrainingStatus::Exact:TrainingStatus::BudgetExhausted)<<service.Reason();
+    ASSERT_TRUE(service.Plan().terminalSelection);
+    EXPECT_DOUBLE_EQ(service.Plan().terminalSelection->maximumWallSeconds,configured?7.25:30.);
+    EXPECT_EQ(bool(service.Certificate()),completed);
+    QTemporaryDir savedModelDirectory;ASSERT_TRUE(savedModelDirectory.isValid());std::size_t deliveries=0;
+    const auto exported=f.owner->ExportNativeLearnedBoundary(CompositePackageImplementation,[&](const QJsonObject& ready) {
+        ++deliveries;NmsdkWorker::WriteStaged(savedModelDirectory.path(),"closed-model.json",ready);
+    });const auto& package=exported.learnedState;
+    EXPECT_EQ(deliveries,1u);
+    const auto savedModelPath=QDir(savedModelDirectory.path()).filePath("closed-model.json");
+    EXPECT_EQ(NmsdkWorker::ReadDocument(savedModelPath),package);
+    EXPECT_FALSE(QFile::exists(savedModelPath+".pending"));
+    // An interrupted downstream step leaves an importable closed model,
+    // but never an invented execution completion marker.
+    QTemporaryDir interruptedDirectory;ASSERT_TRUE(interruptedDirectory.isValid());
+    EXPECT_THROW(f.owner->ExportNativeLearnedBoundary(CompositePackageImplementation,[&](const QJsonObject& ready) {
+        NmsdkWorker::WriteStaged(interruptedDirectory.path(),"closed-model.json",ready);
+        throw std::runtime_error("fixture_after_state_delivery");
+    }),std::runtime_error);
+    EXPECT_EQ(NmsdkWorker::ReadDocument(QDir(interruptedDirectory.path()).filePath("closed-model.json")),package);
+    EXPECT_FALSE(QFile::exists(QDir(interruptedDirectory.path()).filePath("execution.json")));
+    EXPECT_THROW(NmsdkWorker::WriteStaged(savedModelDirectory.path(),"closed-model.json",QJsonObject{}),std::invalid_argument);
+    EXPECT_EQ(NmsdkWorker::ReadDocument(savedModelPath),package);
+    // Compare the shared checked export against the independent public summary
+    // path. Reusing evidence must preserve every field, not merely its digest.
+    EXPECT_EQ(exported.summary,EncodeNativeTrainingState(service,f.Revision(),f.owner->ReadNativeParameters()));
+    ASSERT_EQ(package.value("schema_version"),QJsonValue(8));EXPECT_EQ(exported.summary.value("schema_version"),QJsonValue(9));
+    const auto historicalSummary=exported.summary.value("historical_summary").toObject();ASSERT_FALSE(historicalSummary.isEmpty());
+    const auto historicalState=package.value("historical_state").toObject();
+    if(historicalState.value("configuration").toObject().value("schema_version")==QJsonValue(9))
+        EXPECT_THROW(PrepareNativeLearnedState(historicalState,f.storage,f.environment,CompositePackageImplementation),std::invalid_argument);
+    EXPECT_EQ(historicalSummary.value("model_epoch"),historicalState.value("model_epoch"));
+    EXPECT_EQ(historicalSummary.value("actual_model_revision"),historicalState.value("model_revision"));
+    EXPECT_EQ(historicalSummary.value("actual_parameters"),historicalState.value("trained_inputs"));
+    EXPECT_EQ(package.value("historical_state").toObject().value("schema_version"),QJsonValue(window?(recovery?7:6):5));
+    if(recovery) {
+        EXPECT_EQ(historicalSummary.value("schema_version"),QJsonValue(8));
+        EXPECT_EQ(historicalSummary.value("recovery_ledger"),historicalState.value("recovery_ledger"));
+    }
+    EXPECT_EQ(package.value("certificate").isNull(),!completed);
+    const auto name=std::string(configured?"configured9-":"")+(NativeCompositeFixture<Owner>::branch?"branch":"classic")+"-terminal-"+(recovery?"recovery5":window?"window5":"fixed4")+
+        (n0?"-N0":"-N1")+(completed?"-completed":"-stopped");
+    QTemporaryDir publicationDirectory;ASSERT_TRUE(publicationDirectory.isValid());QJsonArray publishedArtifacts;
+    const auto publication=NmsdkWorker::PublishCheckedNativeCompositeArchive(publicationDirectory.path(),package,publishedArtifacts);
+    ASSERT_TRUE(publication.Descriptor().isObject());
+    EXPECT_EQ(publication.RecoveryDeliveries(package,publication.Descriptor()),0u);
+    const auto descriptor=publication.Descriptor().toObject();
+    QFile publishedIndex(QDir(publicationDirectory.path()).filePath(descriptor.value("path").toString()));
+    ASSERT_TRUE(publishedIndex.open(QIODevice::ReadOnly));
+    EXPECT_EQ(QJsonDocument::fromJson(publishedIndex.readAll()).object(),historicalState.value("measurement_archive").toObject());
+    auto substituted=package;substituted["model_revision"]="other-actual-model";substituted.remove("sha256");
+    substituted["sha256"]=NmsdkTools::CanonicalModelDataSha256(substituted);
+    EXPECT_THROW(publication.RecoveryDeliveries(substituted,publication.Descriptor()),std::invalid_argument);
+    EXPECT_THROW(publication.RecoveryDeliveries(historicalState,publication.Descriptor()),std::invalid_argument);
+    if(configured) {
+        const QJsonObject base{{"kind","timelearner_native_training_execution"},{"schema_version",1},
+            {"execution","completed"},{"model_revision",package.value("model_revision")}};
+        const auto wire=NmsdkWorker::WrapConfiguredNativeExecution(coldConfiguration,base,package,publication.Descriptor(),
+            package.value("model_revision"),service.CompositeNativeProbes(),service.CompositeSampledFrames(),false,&publication);
+        EXPECT_EQ(wire.value("schema_version"),QJsonValue(6));EXPECT_EQ(wire.value("base_schema_version"),QJsonValue(1));
+        EXPECT_EQ(wire.value("terminal_selection"),package.value("terminal_policy"));
+        const auto boundary=wire.value("terminal_boundary").toObject();
+        EXPECT_EQ(boundary.value("actual_model_epoch"),package.value("model_epoch"));
+        EXPECT_EQ(boundary.value("historical_model_epoch"),historicalState.value("model_epoch"));
+        EXPECT_EQ(boundary.value("historical_package_sha256"),historicalState.value("sha256"));
+        EXPECT_EQ(wire.value("source_measurements").toObject().value("measurement_archive"),publication.Descriptor());
+        EXPECT_THROW(NmsdkWorker::WrapConfiguredNativeExecution(coldConfiguration,base,package,publication.Descriptor(),
+            "other-model",0,0,false,&publication),std::invalid_argument);
+        auto wrongPolicy=coldConfiguration;wrongPolicy.terminalSelection->maximumWallSeconds+=.125;
+        EXPECT_THROW(NmsdkWorker::WrapConfiguredNativeExecution(wrongPolicy,base,package,publication.Descriptor(),
+            package.value("model_revision"),0,0,false,&publication),std::invalid_argument);
+        SavePortableObject(name.c_str(),"terminal-execution6-writer.json",wire);
+        SavePortableObject(name.c_str(),"cold9-job.json",TerminalColdConsoleJob(coldConfiguration,historicalState.value("neuron").toObject()));
+    }
+    SavePortableObject(name.c_str(),"terminal-state8.json",package);SavePortableObject(name.c_str(),"terminal-summary9.json",exported.summary);
+    const auto test=::testing::UnitTest::GetInstance()->current_test_info();ASSERT_TRUE(test);
+    SavePortableObject(name.c_str(),configured?"configuration9-case.json":"terminal-case.json",{{"kind",configured?"native_configured_terminal_case":"native_terminal_portable_case"},{"schema_version",1},
+        {"test_id",QString::fromStdString(std::string(test->test_suite_name())+"/"+test->name())},
+        {"package","terminal-state8.json"},{"summary","terminal-summary9.json"},
+        {"primary_prefix",QJsonValue(QJsonValue::Null)},{"warm_folder",QJsonValue(QJsonValue::Null)}});
+    if(configured) {
+        NmsdkTests::CheckTerminalPhysicalDataTransfer<Owner>(f,plan,package,[&](const QJsonObject& evidence) {
+            SavePortableObject(name.c_str(),"terminal-physical-data.json",evidence);
+        });
+        ASSERT_FALSE(::testing::Test::HasFatalFailure());
+    }
+    const auto epoch=service.ModelEpoch(),transcriptEpoch=service.TranscriptModelEpoch();const auto revision=f.Revision();
+    const auto referenceIds=service.CompositeReferenceGroupIds();const auto clock=f.Time();
+    auto prepared=PrepareNativeLearnedState(package,f.storage,f.environment,CompositePackageImplementation);
+    EXPECT_EQ(f.Time(),clock);EXPECT_FALSE(prepared->service.Search());EXPECT_EQ(bool(prepared->service.Certificate()),completed);
+    EXPECT_EQ(prepared->modelRevision,revision);EXPECT_EQ(prepared->service.ModelEpoch(),epoch);EXPECT_EQ(prepared->service.TranscriptModelEpoch(),transcriptEpoch);
+    EXPECT_EQ(prepared->service.CompositeReferenceGroupIds(),referenceIds);
+    const auto imported=f.owner->ImportNativeLearnedState(package,CompositePackageImplementation);
+    ASSERT_EQ(imported.status,NativeModelBuildStatus::Adopted)<<imported.reason;
+    EXPECT_EQ(f.Revision(),revision);EXPECT_FALSE(f.owner->IsNeedToTrain.GetData());EXPECT_FALSE(f.owner->NativeTrainingController().Search());
+    const auto again=f.owner->ExportNativeLearnedBoundary(CompositePackageImplementation);
+    EXPECT_EQ(again.learnedState.value("schema_version"),QJsonValue(8));EXPECT_EQ(again.learnedState.value("terminal_event"),package.value("terminal_event"));
+    EXPECT_EQ(again.learnedState.value("terminal_journal"),package.value("terminal_journal"));
+    EXPECT_EQ(again.learnedState.value("model_revision"),package.value("model_revision"));EXPECT_EQ(again.learnedState.value("model_epoch"),package.value("model_epoch"));
+    EXPECT_EQ(again.learnedState.value("certificate"),package.value("certificate"));
+    if(!completed) {
+        auto warm=plan;warm.search.runId=name+"/warm";
+        f.owner->Build();f.model->Init();f.model->Reset();
+        ASSERT_TRUE(f.owner->IsReady() && f.owner->IsInit());EXPECT_EQ(f.Revision(),revision);
+        f.owner->IsNeedToTrain=true;f.owner->BeginNativeTraining(warm);
+        ASSERT_TRUE(f.owner->NativeTrainingController().State()==NativeTrainingState::CapturingReferences ||
+            f.owner->NativeTrainingController().State()==NativeTrainingState::Searching)<<f.owner->NativeTrainingController().Reason();
+        // Continue through a real, consumed current-attempt measurement before
+        // stopping. An immediate Start/Stop cannot establish that the old
+        // journal primary survives alongside newly collected native data.
+        const auto warmAttempt=f.owner->NativeTrainingController().Configuration().runId;
+        bool consumedWarmMeasurement=false;
+        ServiceTicks(f,[&]{
+            if(consumedWarmMeasurement)return;
+            const auto& records=f.owner->NativeTrainingController().CompositeMeasurements();
+            consumedWarmMeasurement=std::any_of(records.begin(),records.end(),[&](const auto& r){
+                return r.attemptId==warmAttempt && r.consumed;
+            });
+            if(consumedWarmMeasurement)f.owner->IsNeedToTrain=false;
+        });
+        ASSERT_TRUE(consumedWarmMeasurement);
+        ASSERT_EQ(f.owner->NativeTrainingController().Outcome(),TrainingStatus::ExternalStop);
+        const auto next=f.owner->ExportNativeLearnedBoundary(CompositePackageImplementation);
+        EXPECT_EQ(next.learnedState.value("terminal_journal"),package.value("terminal_journal"));
+        EXPECT_EQ(next.learnedState.value("model_revision"),package.value("model_revision"));
+        EXPECT_EQ(next.learnedState.value("model_epoch"),package.value("model_epoch"));
+        EXPECT_EQ(next.learnedState.value("session_attempt").toDouble(),package.value("session_attempt").toDouble()+1.);
+        auto replay=PrepareNativeLearnedState(next.learnedState,f.storage,f.environment,CompositePackageImplementation);
+        EXPECT_EQ(replay->service.State(),NativeTrainingState::Finished);EXPECT_FALSE(replay->service.Search());
+        SavePortableObject(name.c_str(),"terminal-warm-state8.json",next.learnedState);
+        SavePortableObject(name.c_str(),"terminal-warm-summary9.json",next.summary);
+    }
+}
+}
+TEST(NativeTerminalCompositePackage,ClassicFixedN0Stopped){NativeTerminalCompositePackage<NNeuronTimeLearner>(false,true,false);}
+TEST(NativeTerminalCompositePackage,BranchFixedN0Stopped){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(false,true,false);}
+TEST(NativeTerminalCompositePackage,ClassicFixedN1Stopped){NativeTerminalCompositePackage<NNeuronTimeLearner>(false,false,false);}
+TEST(NativeTerminalCompositePackage,BranchFixedN1Stopped){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(false,false,false);}
+TEST(NativeTerminalCompositePackage,ClassicWindowN0Stopped){NativeTerminalCompositePackage<NNeuronTimeLearner>(true,true,false);}
+TEST(NativeTerminalCompositePackage,BranchWindowN0Stopped){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(true,true,false);}
+TEST(NativeTerminalCompositePackage,ClassicWindowN1Stopped){NativeTerminalCompositePackage<NNeuronTimeLearner>(true,false,false);}
+TEST(NativeTerminalCompositePackage,BranchWindowN1Stopped){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(true,false,false);}
+TEST(NativeTerminalCompositePackage,ClassicFixedCompletedWithoutTransition){NativeTerminalCompositePackage<NNeuronTimeLearner>(false,true,true);}
+TEST(NativeTerminalCompositePackage,BranchFixedCompletedWithoutTransition){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(false,true,true);}
+TEST(NativeTerminalCompositePackage,ClassicWindowCompletedWithoutTransition){NativeTerminalCompositePackage<NNeuronTimeLearner>(true,true,true);}
+TEST(NativeTerminalCompositePackage,BranchWindowCompletedWithoutTransition){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(true,true,true);}
+
+namespace {
+template<class Owner> void ActualCompositeTerminalRestore(bool window,bool n0)
+{
+    NativeCompositeFixture<Owner> f(2000,false,64,false,n0);f.owner->ControllerVersion.SetDataDirect(2);
+    auto plan=window?ActualWindowServicePlan(f,.02,false):ServicePlan(f,.02);
+    plan.search.normalization=f.modelSpec.normalization;plan.search.maximumCandidatesPerInput=2;
+    plan.search.maximumSweeps=1;plan.search.n0CandidateRepeats=1;
+    plan.search.bounds[0].minimumLength=2;plan.search.bounds[0].maximumLength=3;
+    plan.terminalSelection=NativeTerminalSelectionPolicy{30.};
+    // Two references plus a candidate/anchor pair, each with N+2 actual raw
+    // trials. Allow bounded scheduler gaps, then stop inside the NEXT group.
+    // This uses the real model clock, independent of machine/serialization
+    // speed. No synthetic observation, manual physical edit or forged clock.
+    const auto rawPerGroup=plan.protocol.inputs.size()+2;
+    plan.maximumModelSeconds=double(plan.protocol.inputs.size()+2)*double(rawPerGroup)*
+        (plan.probe.specification.end+8./f.frequency)+plan.probe.specification.end/2.;
+    ASSERT_GE(plan.maximumModelSeconds,plan.composite->maximumGroupModelSeconds);
+    const auto name=std::string(NativeCompositeFixture<Owner>::branch?"branch":"classic")+
+        "-terminal-actual-"+(window?"window5":"fixed4")+(n0?"-N0":"-N1");
+    const auto coldConfiguration=window?CaptureCandidateWindowInitialConfiguration(f.modelSpec,plan,f.owner->ReadNativeParameters(),0.):
+        CaptureCompositeInitialConfiguration(f.modelSpec,plan,f.owner->ReadNativeParameters(),0.);
+    std::shared_ptr<const NativeMeasuredTrainingBoundary> selected;
+    QJsonObject unmeasured,unmeasuredDataset;std::vector<InputParameters> unmeasuredParameters;
+    std::size_t unmeasuredEpoch=0;bool sawUnmeasuredEdit=false,sawFinalizing=false;
+    ServiceStart(f,plan);
+    ServiceTicks(f,[&]{
+        const auto& service=f.owner->NativeTrainingController();
+        if(service.SelectedNativeBoundary())selected=service.SelectedNativeBoundary();
+        if(!sawUnmeasuredEdit && selected && service.State()==NativeTrainingState::Searching &&
+            service.ModelEpoch()>selected->Selection().candidate.modelEpoch &&
+            f.Revision()!=selected->NeuronIdentity().value("sha256").toString().toStdString())sawUnmeasuredEdit=true;
+        if(service.State()==NativeTrainingState::Finalizing) {
+            sawFinalizing=true;unmeasuredEpoch=service.ModelEpoch();unmeasuredParameters=f.owner->ReadNativeParameters();
+            auto neuron=f.owner->template GetComponentL<NPulseNeuron>("Neuron",true);
+            auto generator=f.owner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
+            unmeasured=NmsdkTools::IdentifyModel(neuron.Get(),{{&generator->Output,"burst"}});
+            unmeasuredDataset=NmsdkTools::IdentifyModel(f.owner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true).Get());
+        }
+    });
+    const auto& service=f.owner->NativeTrainingController();
+    SavePortableObject(name.c_str(),"restore-precondition.json",{{"kind","native_actual_composite_restore_precondition"},{"schema_version",1},
+        {"observed_unmeasured_edit",sawUnmeasuredEdit},{"observed_finalizing",sawFinalizing},
+        {"model_time_budget",plan.maximumModelSeconds},{"wall_time_budget",plan.maximumWallSeconds},
+        {"state",NativeTrainingStateName(service.State())},{"outcome",TrainingStatusName(service.Outcome())},
+        {"reason",QString::fromStdString(service.Reason())},{"terminal_event",service.TerminalSelectionEvent()},
+        {"scientific_verdict",QJsonValue(QJsonValue::Null)}});
+    ASSERT_TRUE(sawUnmeasuredEdit);ASSERT_TRUE(sawFinalizing);ASSERT_TRUE(selected);
+    ASSERT_EQ(service.State(),NativeTrainingState::Finished)<<service.Reason();
+    ASSERT_EQ(service.Outcome(),TrainingStatus::BudgetExhausted)<<service.Reason();ASSERT_FALSE(service.Certificate());
+    ASSERT_EQ(service.TerminalSelectionEvent().value("status"),QJsonValue("restored"));
+    EXPECT_EQ(service.TerminalSelectionTransactions(),1u);EXPECT_EQ(service.ModelEpoch(),unmeasuredEpoch+1);
+    EXPECT_EQ(service.TranscriptModelEpoch(),unmeasuredEpoch);EXPECT_NE(f.Revision(),unmeasured.value("sha256").toString().toStdString());
+    EXPECT_EQ(f.Revision(),selected->NeuronIdentity().value("sha256").toString().toStdString());
+    EXPECT_EQ(f.owner->ReadNativeParameters(),selected->Selection().candidate.fullParameters);
+    EXPECT_NE(f.owner->ReadNativeParameters(),unmeasuredParameters);
+    const auto exported=f.owner->ExportNativeLearnedBoundary(CompositePackageImplementation);
+    EXPECT_EQ(exported.summary,EncodeNativeTrainingState(service,f.Revision(),f.owner->ReadNativeParameters()));
+    const auto history=exported.learnedState.value("historical_state").toObject();
+    EXPECT_EQ(history.value("model_revision"),unmeasured.value("sha256"));
+    EXPECT_EQ(history.value("model_epoch"),QJsonValue(double(unmeasuredEpoch)));
+    EXPECT_EQ(exported.summary.value("historical_summary").toObject().value("actual_model_revision"),unmeasured.value("sha256"));
+    EXPECT_EQ(history.value("schema_version"),QJsonValue(window?6:5));
+    EXPECT_EQ(selected->DatasetIdentity(),unmeasuredDataset);
+    SavePortableObject(name.c_str(),"terminal-state8.json",exported.learnedState);
+    SavePortableObject(name.c_str(),"terminal-summary9.json",exported.summary);
+    SavePortableObject(name.c_str(),"cold9-job.json",TerminalColdConsoleJob(coldConfiguration,history.value("neuron").toObject()));
+    SavePortableObject(name.c_str(),"source-selected-actual.json",{{"source",unmeasured},
+        {"selected",selected->NeuronIdentity()},{"actual",exported.learnedState.value("neuron").toObject().value("graph").toObject().value("identity")},
+        {"source_epoch",double(unmeasuredEpoch)},{"actual_epoch",double(service.ModelEpoch())}});
+    NmsdkTests::CheckTerminalPhysicalDataTransfer<Owner>(f,plan,exported.learnedState,[&](const QJsonObject& evidence) {
+        SavePortableObject(name.c_str(),"terminal-physical-data.json",evidence);
+    });
+    ASSERT_FALSE(::testing::Test::HasFatalFailure());
+    const auto clock=f.Time();
+    auto prepared=PrepareNativeLearnedState(exported.learnedState,f.storage,f.environment,CompositePackageImplementation);
+    EXPECT_EQ(f.Time(),clock);EXPECT_FALSE(prepared->service.Search());EXPECT_FALSE(prepared->service.Certificate());
+    EXPECT_EQ(prepared->modelRevision,f.Revision());EXPECT_EQ(prepared->service.ModelEpoch(),service.ModelEpoch());
+    const auto before=RecoveryBoundaryResponse(f);
+    const auto imported=f.owner->ImportNativeLearnedState(exported.learnedState,CompositePackageImplementation);
+    ASSERT_EQ(imported.status,NativeModelBuildStatus::Adopted)<<imported.reason;
+    f.owner->Build();f.model->Init();ASSERT_TRUE(f.owner->IsReady() && f.owner->IsInit());
+    const auto after=RecoveryBoundaryResponse(f);ASSERT_FALSE(before.empty());ASSERT_EQ(before.size(),after.size());
+    double excursion=0.;std::size_t edges=0;bool previous=false;
+    for(std::size_t i=0;i<before.size();++i) {
+        EXPECT_NEAR(before[i].time-before.front().time,after[i].time-after.front().time,5e-10);
+        EXPECT_DOUBLE_EQ(before[i].stimulus,after[i].stimulus);
+        const bool active=before[i].stimulus>0.;if(active && !previous)++edges;previous=active;
+        ASSERT_EQ(before[i].potentials.size(),after[i].potentials.size());
+        ASSERT_EQ(before[i].potentials.size(),before.front().potentials.size());
+        for(std::size_t j=0;j<before[i].potentials.size();++j) {
+            ASSERT_TRUE(std::isfinite(before[i].potentials[j]));ASSERT_TRUE(std::isfinite(after[i].potentials[j]));
+            EXPECT_NEAR(before[i].potentials[j],after[i].potentials[j],1e-12);
+            excursion=std::max(excursion,std::abs(before[i].potentials[j]-before.front().potentials[j]));
+        }
+    }
+    EXPECT_EQ(edges,plan.protocol.inputs.size());EXPECT_GT(excursion,1e-6);
+    const auto response=[](const auto& samples){QJsonArray rows;for(const auto& p:samples){QJsonArray row{p.time-samples.front().time,p.stimulus};
+        for(double v:p.potentials)row.append(v);rows.append(row);}return QJsonObject{{"relative_time_stimulus_potentials",rows}};};
+    SavePortableObject(name.c_str(),"response-before.json",response(before));SavePortableObject(name.c_str(),"response-after.json",response(after));
+    const auto test=::testing::UnitTest::GetInstance()->current_test_info();ASSERT_TRUE(test);
+    SavePortableObject(name.c_str(),"actual-terminal-case.json",{{"kind","native_actual_terminal_portable_case"},{"schema_version",1},
+        {"test_id",QString::fromStdString(std::string(test->test_suite_name())+"/"+test->name())},
+        {"package","terminal-state8.json"},{"summary","terminal-summary9.json"}});
+    auto warm=plan;warm.search.runId=name+"/warm";f.owner->IsNeedToTrain=true;f.owner->BeginNativeTraining(warm);
+    SavePortableObject(name.c_str(),"warm-start.json",{{"state",NativeTrainingStateName(service.State())},
+        {"outcome",TrainingStatusName(service.Outcome())},{"reason",QString::fromStdString(service.Reason())},
+        {"actual_epoch",double(service.ModelEpoch())},{"transcript_epoch",double(service.TranscriptModelEpoch())}});
+    ASSERT_TRUE(service.State()==NativeTrainingState::Searching || service.State()==NativeTrainingState::CapturingReferences)<<service.Reason();
+    const auto warmAttempt=service.Configuration().runId;bool consumed=false;
+    ServiceTicks(f,[&]{if(consumed)return;const auto& records=service.CompositeMeasurements();
+        consumed=std::any_of(records.begin(),records.end(),[&](const auto& r){return r.attemptId==warmAttempt && r.consumed;});
+        if(consumed)f.owner->IsNeedToTrain=false;});
+    ASSERT_TRUE(consumed);ASSERT_EQ(service.Outcome(),TrainingStatus::ExternalStop);
+    const auto continued=f.owner->ExportNativeLearnedBoundary(CompositePackageImplementation);
+    EXPECT_EQ(continued.learnedState.value("terminal_journal"),exported.learnedState.value("terminal_journal"));
+    auto replay=PrepareNativeLearnedState(continued.learnedState,f.storage,f.environment,CompositePackageImplementation);
+    EXPECT_FALSE(replay->service.Search());EXPECT_FALSE(replay->service.Certificate());
+    SavePortableObject(name.c_str(),"terminal-warm-state8.json",continued.learnedState);
+    SavePortableObject(name.c_str(),"terminal-warm-summary9.json",continued.summary);
+}
+}
+TEST(NativeActualCompositeTerminalRestore,ClassicFixedN0){ActualCompositeTerminalRestore<NNeuronTimeLearner>(false,true);}
+TEST(NativeActualCompositeTerminalRestore,BranchFixedN0){ActualCompositeTerminalRestore<NNeuronTimeLearnerBranch>(false,true);}
+TEST(NativeActualCompositeTerminalRestore,ClassicFixedN1){ActualCompositeTerminalRestore<NNeuronTimeLearner>(false,false);}
+TEST(NativeActualCompositeTerminalRestore,BranchFixedN1){ActualCompositeTerminalRestore<NNeuronTimeLearnerBranch>(false,false);}
+TEST(NativeActualCompositeTerminalRestore,ClassicWindowN0){ActualCompositeTerminalRestore<NNeuronTimeLearner>(true,true);}
+TEST(NativeActualCompositeTerminalRestore,BranchWindowN0){ActualCompositeTerminalRestore<NNeuronTimeLearnerBranch>(true,true);}
+TEST(NativeActualCompositeTerminalRestore,ClassicWindowN1){ActualCompositeTerminalRestore<NNeuronTimeLearner>(true,false);}
+TEST(NativeActualCompositeTerminalRestore,BranchWindowN1){ActualCompositeTerminalRestore<NNeuronTimeLearnerBranch>(true,false);}
+
+namespace {
+template<class Owner> void TerminalConfigurationAllBaseSchemas()
+{
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);
+    const auto composite=CompositeCold(f);const auto window=ActualCold7Declaration(f);
+    for(int version=1;version<=8;++version) {
+        SCOPED_TRACE(version);auto c=version>=7?window:composite;
+        if(version<=5)c.composite.reset();
+        if(version==2)c.search.n0CandidateRepeats=2;
+        if(version==3 || version==4){c.recordCapacitanceHistory=true;c.capacitanceMaximumRelativeChange=.2;}
+        if(version==4){c.search.capacitanceSearch=CapacitanceSearchPolicy{};c.search.maximumCandidatesPerInput=8;}
+        if(version==5){c.search.invalidMeasurementRecovery=InvalidMeasurementRecovery::AdvanceUnassignedBurst;
+            c.search.maximumInvalidObservations=2;c.peakSelection=PeakSelectionPolicy::AssignedBurstWave;}
+        if(version==8){c.search.invalidMeasurementRecovery=InvalidMeasurementRecovery::AdvanceRejectedCandidateWindow;c.search.maximumInvalidObservations=2;}
+        const auto original=EncodeConfiguredNativeTraining(c);ASSERT_EQ(original.value("schema_version"),QJsonValue(version));
+        const auto legacy=DecodeConfiguredNativeTraining(original);EXPECT_FALSE(legacy.terminalSelection);
+        EXPECT_FALSE(MakeConfiguredNativeTrainingPlan(legacy).terminalSelection);EXPECT_EQ(EncodeConfiguredNativeTraining(legacy),original);
+        c.terminalSelection=NativeTerminalSelectionPolicy{3.5};const auto encoded=EncodeConfiguredNativeTraining(c);
+        EXPECT_EQ(encoded.value("schema_version"),QJsonValue(9));EXPECT_EQ(encoded.value("terminal_base_schema_version"),QJsonValue(version));
+        EXPECT_EQ(encoded.value("base_schema_version"),original.value("base_schema_version"));
+        auto base=encoded;base.remove("terminal_base_schema_version");base.remove("terminal_selection");base["schema_version"]=version;
+        EXPECT_EQ(base,original);
+        const auto parsed=ParseConfiguredNativeTraining(QJsonDocument(encoded).toJson(QJsonDocument::Compact).toStdString());
+        EXPECT_EQ(EncodeConfiguredNativeTraining(parsed),encoded);const auto plan=MakeConfiguredNativeTrainingPlan(parsed);
+        ASSERT_TRUE(plan.terminalSelection);EXPECT_DOUBLE_EQ(plan.terminalSelection->maximumWallSeconds,3.5);
+        EXPECT_DOUBLE_EQ(plan.search.tolerances.amplitudeAbsolute,c.search.tolerances.amplitudeAbsolute);
+        EXPECT_DOUBLE_EQ(plan.search.tolerances.sync,c.search.tolerances.sync);
+        const auto folder=std::string(NativeCompositeFixture<Owner>::branch?"branch":"classic")+"-terminal-configuration9/base-"+std::to_string(version);
+        SavePortableObject(folder.c_str(),"original.json",original);SavePortableObject(folder.c_str(),"configured9.json",encoded);
+        for(bool preflight:{false,true}) {
+            const QJsonObject baseExecution{{"schema_version",1},{"model_revision","actual-initial-model"},
+                {"execution",preflight?"completed":"training_start_failed"}};
+            const auto wire=NmsdkWorker::WrapConfiguredNativeExecution(parsed,baseExecution,{},QJsonValue(QJsonValue::Null),
+                "actual-initial-model",0,0,preflight);
+            EXPECT_EQ(wire.value("schema_version"),QJsonValue(6));EXPECT_EQ(wire.value("base_schema_version"),QJsonValue(1));
+            EXPECT_EQ(wire.value("terminal_selection"),encoded.value("terminal_selection"));
+            EXPECT_TRUE(wire.value("terminal_boundary").isNull());EXPECT_TRUE(wire.value("source_measurements").isNull());
+            EXPECT_EQ(QJsonDocument::fromJson(QJsonDocument(wire).toJson()).object(),wire);
+            SavePortableObject(folder.c_str(),preflight?"execution6-preflight-writer.json":"execution6-start-failure-writer.json",wire);
+        }
+        QJsonObject liveBase{{"schema_version",2},{"model_revision","actual-initial-model"}};
+        EXPECT_THROW(NmsdkWorker::WrapConfiguredNativeExecution(parsed,liveBase,{},QJsonValue(QJsonValue::Null),
+            "actual-initial-model",0,0),std::invalid_argument);
+        liveBase["schema_version"]=1;
+        EXPECT_THROW(NmsdkWorker::WrapConfiguredNativeExecution(parsed,liveBase,{},QJsonValue(QJsonValue::Null),
+            "actual-initial-model",1,1,true),std::invalid_argument);
+        for(const auto& invalid:{QJsonValue(true),QJsonValue("1"),QJsonValue(0),QJsonValue(9),QJsonValue(QJsonValue::Null)}) {
+            auto bad=encoded;bad["terminal_base_schema_version"]=invalid;
+            EXPECT_THROW(DecodeConfiguredNativeTraining(bad),std::invalid_argument);
+        }
+        for(const auto& invalid:{QJsonValue(true),QJsonValue("3.5"),QJsonValue(0),QJsonValue(-1),QJsonValue(QJsonValue::Null)}) {
+            auto bad=encoded;auto policy=bad.value("terminal_selection").toObject();policy["maximum_wall_seconds"]=invalid;bad["terminal_selection"]=policy;
+            EXPECT_THROW(DecodeConfiguredNativeTraining(bad),std::invalid_argument);
+        }
+        auto bad=encoded;auto policy=bad.value("terminal_selection").toObject();policy["unknown_control"]=true;bad["terminal_selection"]=policy;
+        EXPECT_THROW(DecodeConfiguredNativeTraining(bad),std::invalid_argument);
+        bad=encoded;bad["unknown_configuration"]=true;EXPECT_THROW(DecodeConfiguredNativeTraining(bad),std::invalid_argument);
+        bad=original;bad["terminal_selection"]=encoded.value("terminal_selection");EXPECT_THROW(DecodeConfiguredNativeTraining(bad),std::invalid_argument);
+    }
+}
+}
+TEST(NativeTerminalConfiguration,ClassicAllBaseSchemasAreExplicitAndLossless){TerminalConfigurationAllBaseSchemas<NNeuronTimeLearner>();}
+TEST(NativeTerminalConfiguration,BranchAllBaseSchemasAreExplicitAndLossless){TerminalConfigurationAllBaseSchemas<NNeuronTimeLearnerBranch>();}
+
+TEST(NativeTerminalConfiguredEntry,ClassicFixedN0){NativeTerminalCompositePackage<NNeuronTimeLearner>(false,true,true,true);}
+TEST(NativeTerminalConfiguredEntry,BranchFixedN0){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(false,true,true,true);}
+TEST(NativeTerminalConfiguredEntry,ClassicFixedN1){NativeTerminalCompositePackage<NNeuronTimeLearner>(false,false,true,true);}
+TEST(NativeTerminalConfiguredEntry,BranchFixedN1){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(false,false,true,true);}
+TEST(NativeTerminalConfiguredEntry,ClassicWindowN0){NativeTerminalCompositePackage<NNeuronTimeLearner>(true,true,true,true);}
+TEST(NativeTerminalConfiguredEntry,BranchWindowN0){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(true,true,true,true);}
+TEST(NativeTerminalConfiguredEntry,ClassicWindowN1){NativeTerminalCompositePackage<NNeuronTimeLearner>(true,false,true,true);}
+TEST(NativeTerminalConfiguredEntry,BranchWindowN1){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(true,false,true,true);}
+// The long scientific runs use terminal8 over historical recovery7. A plain
+// terminal8/window6 fixture cannot exercise the shared checked recovery ledger.
+TEST(NativeTerminalRecoveryExport,ClassicN0Stopped){NativeTerminalCompositePackage<NNeuronTimeLearner>(true,true,false,false,true);}
+TEST(NativeTerminalRecoveryExport,BranchN0Stopped){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(true,true,false,false,true);}
+TEST(NativeTerminalRecoveryExport,ClassicN1Stopped){NativeTerminalCompositePackage<NNeuronTimeLearner>(true,false,false,false,true);}
+TEST(NativeTerminalRecoveryExport,BranchN1Stopped){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(true,false,false,false,true);}
+TEST(NativeTerminalRecoveryExport,ClassicN0Completed){NativeTerminalCompositePackage<NNeuronTimeLearner>(true,true,true,false,true);}
+TEST(NativeTerminalRecoveryExport,BranchN0Completed){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(true,true,true,false,true);}
+TEST(NativeTerminalRecoveryExport,ClassicN1Completed){NativeTerminalCompositePackage<NNeuronTimeLearner>(true,false,true,false,true);}
+TEST(NativeTerminalRecoveryExport,BranchN1Completed){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(true,false,true,false,true);}

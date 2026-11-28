@@ -1,0 +1,488 @@
+{
+  "kind": "timelearner_compact_closed_actual_evaluation_receipt",
+  "schema_version": 1,
+  "observed_utc": "2026-11-22T23:42:33.464486+00:00",
+  "source": {
+    "path": "C:\\Users\\BAKHSH~1\\AppData\\Local\\Temp\\timelearner-windows-measured-count-closed-inputs-20261123-q1.json",
+    "bytes": 925396,
+    "sha256": "3a6b0f4da994f4fce8ef204671c1192fb6bc89fc3c94dd6779333182181bfb1c"
+  },
+  "jobs": {
+    "windows-measured-count-stopped-baseline-k1": {
+      "terminal": {
+        "file": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-measured-count-stopped-baseline-k1\\orchestration-terminal.json",
+          "sha256": "13714abbaa324f82048e4b7b79a5cd2cc8ebe6fb357336062d2011be6f75d81b",
+          "size": 684
+        },
+        "data": {
+          "execution": "completed",
+          "validity": "valid",
+          "source_root": "80330fc51c4713c7bd1936be98e43ec0217b2337",
+          "source_model_revision": "b3286d53576e57d37b753b244b8e6261a97086f034bc6cf7efbd610410ff9b23",
+          "baseline_counts": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 1,
+            "TN": 7,
+            "targets": 1,
+            "foils": 7,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 0.875,
+            "target_hit_rate": 0.0,
+            "foil_response_rate": 0.0
+          },
+          "full_evaluation_audit_complete": true,
+          "training_completed": false,
+          "classification_after_threshold_not_yet_run": true,
+          "next_operation": "same_matrix_threshold_proposal_and_actual_confirmation",
+          "scientific_verdict": null
+        }
+      },
+      "task": {
+        "last_result": 0,
+        "instances": 0,
+        "state": 3
+      },
+      "independent_audit_record": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-measured-count-stopped-baseline-k1\\independent-audit.json",
+        "sha256": "b7c4a0e4c9a6817799badff260d58d2b9e5a3e5427707590d8c6db547dcac6bd",
+        "size": 361985
+      },
+      "complete_source_history_audited": true,
+      "frozen_model_verified": true,
+      "evaluation_validity": "valid",
+      "model_revision": "b3286d53576e57d37b753b244b8e6261a97086f034bc6cf7efbd610410ff9b23",
+      "effective_threshold": 100.0,
+      "counts": {
+        "TP": 0,
+        "FP": 0,
+        "FN": 1,
+        "TN": 7,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 0.0,
+        "foil_response_rate": 0.0
+      },
+      "trials": [
+        {
+          "trial_id": "branch-measured-count-M4/stopped-baseline/windows-k1/trial-0",
+          "sample_id": "phasea-row-0",
+          "label": "target",
+          "presentation_index": 0,
+          "reset_policy": "reset_per_trial",
+          "response_begin": 0.01,
+          "response_end": 2.0,
+          "spike_count": 0,
+          "window_spikes": [],
+          "early_spikes": [],
+          "late_spikes": [],
+          "classification": "FN"
+        },
+        {
+          "trial_id": "branch-measured-count-M4/stopped-baseline/windows-k1/trial-1",
+          "sample_id": "phasea-row-1",
+          "label": "foil",
+          "presentation_index": 1,
+          "reset_policy": "reset_per_trial",
+          "response_begin": 2.0105,
+          "response_end": 4.000500000000001,
+          "spike_count": 0,
+          "window_spikes": [],
+          "early_spikes": [],
+          "late_spikes": [],
+          "classification": "TN"
+        },
+        {
+          "trial_id": "branch-measured-count-M4/stopped-baseline/windows-k1/trial-2",
+          "sample_id": "phasea-row-2",
+          "label": "foil",
+          "presentation_index": 2,
+          "reset_policy": "reset_per_trial",
+          "response_begin": 4.011,
+          "response_end": 6.001,
+          "spike_count": 0,
+          "window_spikes": [],
+          "early_spikes": [],
+          "late_spikes": [],
+          "classification": "TN"
+        },
+        {
+          "trial_id": "branch-measured-count-M4/stopped-baseline/windows-k1/trial-3",
+          "sample_id": "phasea-row-3",
+          "label": "foil",
+          "presentation_index": 3,
+          "reset_policy": "reset_per_trial",
+          "response_begin": 6.0115,
+          "response_end": 8.0015,
+          "spike_count": 0,
+          "window_spikes": [],
+          "early_spikes": [],
+          "late_spikes": [],
+          "classification": "TN"
+        },
+        {
+          "trial_id": "branch-measured-count-M4/stopped-baseline/windows-k1/trial-4",
+          "sample_id": "phasea-row-4",
+          "label": "foil",
+          "presentation_index": 4,
+          "reset_policy": "reset_per_trial",
+          "response_begin": 8.012,
+          "response_end": 10.002,
+          "spike_count": 0,
+          "window_spikes": [],
+          "early_spikes": [],
+          "late_spikes": [],
+          "classification": "TN"
+        },
+        {
+          "trial_id": "branch-measured-count-M4/stopped-baseline/windows-k1/trial-5",
+          "sample_id": "phasea-row-5",
+          "label": "foil",
+          "presentation_index": 5,
+          "reset_policy": "reset_per_trial",
+          "response_begin": 10.0125,
+          "response_end": 12.0025,
+          "spike_count": 0,
+          "window_spikes": [],
+          "early_spikes": [],
+          "late_spikes": [],
+          "classification": "TN"
+        },
+        {
+          "trial_id": "branch-measured-count-M4/stopped-baseline/windows-k1/trial-6",
+          "sample_id": "phasea-row-6",
+          "label": "foil",
+          "presentation_index": 6,
+          "reset_policy": "reset_per_trial",
+          "response_begin": 12.013,
+          "response_end": 14.003,
+          "spike_count": 0,
+          "window_spikes": [],
+          "early_spikes": [],
+          "late_spikes": [],
+          "classification": "TN"
+        },
+        {
+          "trial_id": "branch-measured-count-M4/stopped-baseline/windows-k1/trial-7",
+          "sample_id": "phasea-row-7",
+          "label": "foil",
+          "presentation_index": 7,
+          "reset_policy": "reset_per_trial",
+          "response_begin": 14.0135,
+          "response_end": 16.003500000000003,
+          "spike_count": 0,
+          "window_spikes": [],
+          "early_spikes": [],
+          "late_spikes": [],
+          "classification": "TN"
+        }
+      ],
+      "training_completed": false,
+      "diagnostic_only": true,
+      "native_process": {
+        "file": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-stopped-baseline-k1\\process-result.json",
+          "sha256": "22c68aaebafc16820f7d2d8c2bc42f5c0c8005dc148cd36d18f45c73d45119e2",
+          "size": 675
+        },
+        "data": {
+          "kind": "timelearner_windows_process_result",
+          "schema_version": 1,
+          "execution": "completed",
+          "validity": "valid",
+          "reason": "exit_zero",
+          "returncode": 0,
+          "scientific_verdict": null,
+          "thread_limit_enforced": false,
+          "memory_limit_semantics": "job_committed_virtual_memory",
+          "wall_budget_scope": "whole_attempt_including_preparation",
+          "descendants_at_main_exit": [],
+          "all_processes_closed": true,
+          "cooperative_capture": "completed",
+          "runtime_provenance": "loaded_files_captured",
+          "observed_module_files": 47,
+          "wall_seconds": 1595.7567971999524,
+          "child_resumed": true,
+          "job_name": "Local\\TimeLearner-2f08df2b-e78c-4085-9d03-1cf627597609"
+        }
+      },
+      "native_execution_record": {
+        "file": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-stopped-baseline-k1\\native\\execution.json",
+          "sha256": "d7980abac83e566aafce6d6b4f7ce96af81bc290006fe32092fe660a6e3ff368",
+          "size": 3098
+        },
+        "data": {
+          "diagnostic_only": true,
+          "evaluation_verdict": null,
+          "execution": "completed",
+          "expected_trials": 8,
+          "frequency_hz": 2000,
+          "job_sha256": "c5375714a800e53077d0aa81f4d50f276789f0ff961be1ed9da981c65194e142",
+          "kind": "timelearner_native_diagnostic_evaluation_execution",
+          "model_revision": "b3286d53576e57d37b753b244b8e6261a97086f034bc6cf7efbd610410ff9b23",
+          "model_sha256": "a9420572d63ce1c5d7cd9cef14e1d8b06bb8acb39cbc2d4a82e56adda94acb1d",
+          "model_ticks": 32008,
+          "model_time_begin": 0,
+          "model_time_end": 16.004,
+          "observed_trials": 8,
+          "run_id": "branch-measured-count-M4/stopped-baseline/windows-k1",
+          "schema_version": 1,
+          "sha256": "1046db51a794ad91342a4a5f129441b1601e1654e08975c7beba28180b826ba6",
+          "source_stopped_sha256": "ba14695798228ac95ab06663409d5bd152f1e27ab2be1300e9147524f7e88f55",
+          "training_outcome": "budget_exhausted",
+          "training_reason": "maximum_sweeps_exhausted"
+        }
+      },
+      "portable_audit_attests_live_execution": false,
+      "native_process_binding_read_separately": true
+    },
+    "windows-measured-count-stopped-threshold-k1": {
+      "terminal": {
+        "file": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-measured-count-stopped-threshold-k1\\orchestration-terminal.json",
+          "sha256": "f96ed7c004dc9b86fda587bd497b58ae27c11351206ab2bcbe3907b3d8854299",
+          "size": 825
+        },
+        "data": {
+          "execution": "completed",
+          "validity": "valid",
+          "source_root": "80330fc51c4713c7bd1936be98e43ec0217b2337",
+          "source_model_revision": "b3286d53576e57d37b753b244b8e6261a97086f034bc6cf7efbd610410ff9b23",
+          "selected_threshold": 0.0858575482028458,
+          "actual_counts": {
+            "TP": 1,
+            "FP": 2,
+            "FN": 0,
+            "TN": 5,
+            "targets": 1,
+            "foils": 7,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 0.75,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.2857142857142857
+          },
+          "report_family_response_requirement_met": true,
+          "full_actual_evaluation_audit_complete": true,
+          "protocol": "historical_same_matrix",
+          "training_completed": false,
+          "independently_heldout_evaluation": false,
+          "next_operation": "physical_DATA_export_replay_and_all_pattern_figures",
+          "scientific_verdict": null
+        }
+      },
+      "task": {
+        "last_result": 0,
+        "instances": 0,
+        "state": 3
+      },
+      "independent_audit_record": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-measured-count-stopped-threshold-k1\\independent-audit.json",
+        "sha256": "5b8b6aa20d3581189edb43fd18786035dfcbf00d4b621fc4ea40a60168d4d9de",
+        "size": 379239
+      },
+      "complete_source_history_audited": true,
+      "frozen_model_verified": true,
+      "evaluation_validity": "valid",
+      "model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+      "effective_threshold": 0.0858575482028458,
+      "counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.75,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.2857142857142857
+      },
+      "trials": [
+        {
+          "trial_id": "branch-measured-count-M4/stopped-baseline/windows-k1/trial-0",
+          "sample_id": "phasea-row-0",
+          "label": "target",
+          "presentation_index": 0,
+          "reset_policy": "reset_per_trial",
+          "response_begin": 0.01,
+          "response_end": 2.0,
+          "spike_count": 1,
+          "window_spikes": [
+            0.4915
+          ],
+          "early_spikes": [],
+          "late_spikes": [],
+          "classification": "TP"
+        },
+        {
+          "trial_id": "branch-measured-count-M4/stopped-baseline/windows-k1/trial-1",
+          "sample_id": "phasea-row-1",
+          "label": "foil",
+          "presentation_index": 1,
+          "reset_policy": "reset_per_trial",
+          "response_begin": 2.0105,
+          "response_end": 4.000500000000001,
+          "spike_count": 0,
+          "window_spikes": [],
+          "early_spikes": [],
+          "late_spikes": [],
+          "classification": "TN"
+        },
+        {
+          "trial_id": "branch-measured-count-M4/stopped-baseline/windows-k1/trial-2",
+          "sample_id": "phasea-row-2",
+          "label": "foil",
+          "presentation_index": 2,
+          "reset_policy": "reset_per_trial",
+          "response_begin": 4.011,
+          "response_end": 6.001,
+          "spike_count": 0,
+          "window_spikes": [],
+          "early_spikes": [],
+          "late_spikes": [],
+          "classification": "TN"
+        },
+        {
+          "trial_id": "branch-measured-count-M4/stopped-baseline/windows-k1/trial-3",
+          "sample_id": "phasea-row-3",
+          "label": "foil",
+          "presentation_index": 3,
+          "reset_policy": "reset_per_trial",
+          "response_begin": 6.0115,
+          "response_end": 8.0015,
+          "spike_count": 0,
+          "window_spikes": [],
+          "early_spikes": [],
+          "late_spikes": [],
+          "classification": "TN"
+        },
+        {
+          "trial_id": "branch-measured-count-M4/stopped-baseline/windows-k1/trial-4",
+          "sample_id": "phasea-row-4",
+          "label": "foil",
+          "presentation_index": 4,
+          "reset_policy": "reset_per_trial",
+          "response_begin": 8.012,
+          "response_end": 10.002,
+          "spike_count": 1,
+          "window_spikes": [
+            8.493
+          ],
+          "early_spikes": [],
+          "late_spikes": [],
+          "classification": "FP"
+        },
+        {
+          "trial_id": "branch-measured-count-M4/stopped-baseline/windows-k1/trial-5",
+          "sample_id": "phasea-row-5",
+          "label": "foil",
+          "presentation_index": 5,
+          "reset_policy": "reset_per_trial",
+          "response_begin": 10.0125,
+          "response_end": 12.0025,
+          "spike_count": 0,
+          "window_spikes": [],
+          "early_spikes": [],
+          "late_spikes": [],
+          "classification": "TN"
+        },
+        {
+          "trial_id": "branch-measured-count-M4/stopped-baseline/windows-k1/trial-6",
+          "sample_id": "phasea-row-6",
+          "label": "foil",
+          "presentation_index": 6,
+          "reset_policy": "reset_per_trial",
+          "response_begin": 12.013,
+          "response_end": 14.003,
+          "spike_count": 1,
+          "window_spikes": [
+            12.4945
+          ],
+          "early_spikes": [],
+          "late_spikes": [],
+          "classification": "FP"
+        },
+        {
+          "trial_id": "branch-measured-count-M4/stopped-baseline/windows-k1/trial-7",
+          "sample_id": "phasea-row-7",
+          "label": "foil",
+          "presentation_index": 7,
+          "reset_policy": "reset_per_trial",
+          "response_begin": 14.0135,
+          "response_end": 16.003500000000003,
+          "spike_count": 0,
+          "window_spikes": [],
+          "early_spikes": [],
+          "late_spikes": [],
+          "classification": "TN"
+        }
+      ],
+      "training_completed": false,
+      "diagnostic_only": true,
+      "native_process": {
+        "file": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-stopped-threshold-k1\\process-result.json",
+          "sha256": "e0eebdf2897a573183edf27cb0534c3fe13535c8ee7a0c0f53f0ade483899cc8",
+          "size": 675
+        },
+        "data": {
+          "kind": "timelearner_windows_process_result",
+          "schema_version": 1,
+          "execution": "completed",
+          "validity": "valid",
+          "reason": "exit_zero",
+          "returncode": 0,
+          "scientific_verdict": null,
+          "thread_limit_enforced": false,
+          "memory_limit_semantics": "job_committed_virtual_memory",
+          "wall_budget_scope": "whole_attempt_including_preparation",
+          "descendants_at_main_exit": [],
+          "all_processes_closed": true,
+          "cooperative_capture": "completed",
+          "runtime_provenance": "loaded_files_captured",
+          "observed_module_files": 47,
+          "wall_seconds": 1941.3346993000014,
+          "child_resumed": true,
+          "job_name": "Local\\TimeLearner-925e1ecf-51fa-4f4d-baeb-825dd4f8631c"
+        }
+      },
+      "native_execution_record": {
+        "file": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-stopped-threshold-k1\\native\\execution.json",
+          "sha256": "3ae8232b9be9bd4197e37ab601f4cf79ea9541559e3080cc3d78643520844143",
+          "size": 3099
+        },
+        "data": {
+          "diagnostic_only": true,
+          "evaluation_verdict": null,
+          "execution": "completed",
+          "expected_trials": 8,
+          "frequency_hz": 2000,
+          "job_sha256": "ed7fd137b6c15e3fd3b1f311f6255eb9403f5dbb30bb55db7be7b0a7b0d11b3a",
+          "kind": "timelearner_native_diagnostic_evaluation_execution",
+          "model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+          "model_sha256": "3e0b4da0de9826f4195f55c5ff730bfa257b90094d69b3d4b065e0793060d464",
+          "model_ticks": 32008,
+          "model_time_begin": 0,
+          "model_time_end": 16.004,
+          "observed_trials": 8,
+          "run_id": "branch-measured-count-M4/stopped-threshold/windows-k1",
+          "schema_version": 1,
+          "sha256": "1e9f4964a09877c96071f2f113fef0b6ba94f2266fe888da90bc6f446a7c80b2",
+          "source_stopped_sha256": "ba14695798228ac95ab06663409d5bd152f1e27ab2be1300e9147524f7e88f55",
+          "training_outcome": "budget_exhausted",
+          "training_reason": "maximum_sweeps_exhausted"
+        }
+      },
+      "portable_audit_attests_live_execution": false,
+      "native_process_binding_read_separately": true
+    }
+  },
+  "full_primary_central_archive_pending": true,
+  "independently_heldout_evaluation": false,
+  "scientific_verdict": null
+}

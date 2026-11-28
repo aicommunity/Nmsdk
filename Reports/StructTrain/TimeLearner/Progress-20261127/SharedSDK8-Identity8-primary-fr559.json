@@ -1,0 +1,51 @@
+{
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/SharedSDK8-Identity8-primary-fr559.json",
+    "size": 1677,
+    "sha256": "08e95a66b0d4a4863077c56dcdb9bd85a473c3adf830ad2cda87cf5ef17c16d2"
+  },
+  "catalog": {
+    "kind": "actual_shared_SDK_reader_and_native_identity_observer_evidence",
+    "schema_version": 1,
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/c0/c0fb00040447ff7364559fd7aac5f99494ff7ad7dd4b6200cc0c0c00ccbf8dc1",
+        "sha256": "c0fb00040447ff7364559fd7aac5f99494ff7ad7dd4b6200cc0c0c00ccbf8dc1",
+        "bytes": 19605
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/e5/e54dfed3d05d9987e76fc6cefcd7152038325160288fb9fa9a29acf739724ceb",
+        "sha256": "e54dfed3d05d9987e76fc6cefcd7152038325160288fb9fa9a29acf739724ceb",
+        "bytes": 31814980
+      }
+    },
+    "members": 104,
+    "expanded_bytes": 123245147,
+    "python_tests": 8,
+    "native_tests": 8,
+    "controls_commit": "7e14898079ab51dc3a870397fbcf75e800ff5945",
+    "source_commit": "122b27b51655941d36198d78d5a7ff0aba80840e",
+    "identity_cost": {
+      "dynamics_calculated": false,
+      "frequency_hz": 2000,
+      "full_seconds": 5.911425095,
+      "kind": "model_revision_observer_cost",
+      "measurement_only": true,
+      "model_sha256": "567e07e56ddca7a007e13f92afb4f3ba4e3bf2883c7440341dec1b24860793cc",
+      "nodes": 169,
+      "observer_seconds": 0.077229404,
+      "reads": 128
+    },
+    "source_and_runtime_frozen": true,
+    "production_same_tree_native_roundtrip_executed": false,
+    "independent_restore_pending": true,
+    "auxiliary_publisher_loaded_map": "unknown",
+    "scientific_verdict": null
+  }
+}

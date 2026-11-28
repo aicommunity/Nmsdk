@@ -1,0 +1,44 @@
+{
+  "kind": "timelearner_Windows_M40_DATA3_eight_reactions_compared_reference",
+  "schema_version": 1,
+  "comparison": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/e3/e320c4e9aa313ed0d2d90f8f1ada69dbe419ae1f189e88e893f986c2f82a8759",
+    "sha256": "e320c4e9aa313ed0d2d90f8f1ada69dbe419ae1f189e88e893f986c2f82a8759",
+    "bytes": 19850
+  },
+  "Windows_primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/7e/7ead36bd9f7cf44fb70d7ab021b6497ee1ca71534c83c2a027caa7a1a1baa4bd",
+    "sha256": "7ead36bd9f7cf44fb70d7ab021b6497ee1ca71534c83c2a027caa7a1a1baa4bd",
+    "bytes": 463704
+  },
+  "Windows_bundle": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/5a/5ac54351c23c3936ae46bfe546c88f986eedcbd221a7ac10edbffc563dad1a49",
+    "sha256": "5ac54351c23c3936ae46bfe546c88f986eedcbd221a7ac10edbffc563dad1a49",
+    "bytes": 15116
+  },
+  "model_revision": "a71ae5270f9c8fe9c03bc479e473b3d08ea9e798bf134c32ad8aa559a2e34d8a",
+  "all_eight_response_preserved": true,
+  "counts": {
+    "TP": 1,
+    "FP": 1,
+    "FN": 0,
+    "TN": 6,
+    "targets": 1,
+    "foils": 7,
+    "target_trials_with_outside_spikes": 0,
+    "accuracy": 0.875,
+    "target_hit_rate": 1.0,
+    "foil_response_rate": 0.14285714285714285
+  },
+  "operation": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/Windows-M40-large-DATA3-eight-comparison-di48",
+  "scientific_verdict": null
+}

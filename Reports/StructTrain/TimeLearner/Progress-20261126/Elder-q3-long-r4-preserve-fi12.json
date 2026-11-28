@@ -1,0 +1,71 @@
+{
+  "kind": "timelearner_q3_long_r4_preserve_independent_primary_reference",
+  "schema_version": 1,
+  "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+  "catalog": {
+    "relative_path": "experiments/2026-11-26/Elder-q3-long-r4-preserve-independent-fi3.json",
+    "bytes": 28905,
+    "sha256": "d291ef4d5e01b9bcde83d8430319db217fe8bc7eaeca977adb11f37ee0e94811"
+  },
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/59/59ab7f15660aa4b4ef1914384cfa60b1304f2c06a8291ff1a4d61aa9f2a1e4a1",
+      "sha256": "59ab7f15660aa4b4ef1914384cfa60b1304f2c06a8291ff1a4d61aa9f2a1e4a1",
+      "bytes": 12257
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/af/af8414c116abe31cbc62b05e5e87de3d25f0394ab4d623b5871f1ab89dbba495",
+      "sha256": "af8414c116abe31cbc62b05e5e87de3d25f0394ab4d623b5871f1ab89dbba495",
+      "bytes": 1236896
+    }
+  },
+  "members": 77,
+  "observations": 8,
+  "counts": {
+    "TP": 1,
+    "FP": 2,
+    "FN": 0,
+    "TN": 5,
+    "targets": 1,
+    "foils": 7,
+    "target_trials_with_outside_spikes": 0,
+    "accuracy": 0.75,
+    "target_hit_rate": 1.0,
+    "foil_response_rate": 0.2857142857142857
+  },
+  "target_position": 4,
+  "model_revision": "2783e83684eef31e0a258e271e0c2c3acf30a9a9ab175fc20632577b5b9028a6",
+  "threshold": 0.023252703356543683,
+  "actual_first_input_interval_seconds": 2.0005,
+  "last_quiet_tail_seconds": 2.0005000000000006,
+  "classification_by_sample_id": {
+    "phasea-row-4": "FP",
+    "phasea-row-5": "TN",
+    "phasea-row-6": "FP",
+    "phasea-row-7": "TN",
+    "phasea-row-0": "TP",
+    "phasea-row-1": "TN",
+    "phasea-row-2": "TN",
+    "phasea-row-3": "TN"
+  },
+  "paired_reset_primary_reference": "Elder-q3-long-r4-reset-fg6.json",
+  "compared_full_windows": 8,
+  "all8_waveforms_equal_within_1e_12": true,
+  "all8_input_and_output_events_equal": true,
+  "maximum_absolute_signal_difference": 5.3512749786932545e-14,
+  "changed_condition": "reset_policy_after_first_trial",
+  "comparison_policy": "reset_vs_preserve_same_order_and_windows",
+  "different_window_samples_not_clipped": [],
+  "source_training_outcome": "budget_exhausted",
+  "new_Train": false,
+  "new_threshold": false,
+  "independently_accepted_primary_cases_total": 10,
+  "full32_case_matrix_complete": false,
+  "scientific_verdict": null
+}

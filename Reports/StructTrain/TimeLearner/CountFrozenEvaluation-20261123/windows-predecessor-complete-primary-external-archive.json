@@ -1,0 +1,528 @@
+{
+  "kind": "timelearner_external_windows_count_predecessor_primary",
+  "schema_version": 1,
+  "package": "/media/user/Data/Nmsdk-StructTrainExpArchive/incoming/20261123-windows-predecessor-complete-primary-h1",
+  "objects": {
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/cf/cfcb9f913b858071612b32c2d6b1b0187cf154399d61fcee28635a397172aa41",
+      "sha256": "cfcb9f913b858071612b32c2d6b1b0187cf154399d61fcee28635a397172aa41",
+      "bytes": 855508
+    },
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/af/af16a13122a912499235b22a3bd93bb00a378e7e546cf493a592eff1b1aaddaf",
+      "sha256": "af16a13122a912499235b22a3bd93bb00a378e7e546cf493a592eff1b1aaddaf",
+      "bytes": 163897
+    },
+    "collection-metadata.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/0a/0a6600ecf7e4d753ace784e9e81930ff337acc4186c8d3b2f47e4015192c89a0",
+      "sha256": "0a6600ecf7e4d753ace784e9e81930ff337acc4186c8d3b2f47e4015192c89a0",
+      "bytes": 18106
+    }
+  },
+  "members": 933,
+  "expanded_bytes": 891549190,
+  "recognition_model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+  "actual_case_results": [
+    {
+      "id": "foil-1-reset",
+      "study": {
+        "protocol": "predecessor",
+        "predecessor": "phasea-row-1",
+        "cadence": "short",
+        "reset_policy": "reset_per_trial"
+      },
+      "counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "TN": 1,
+        "targets": 1,
+        "foils": 1,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 1.0,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.0
+      },
+      "condition_fingerprint": "0dec38f3d1d7fa5f556c0140c77e7df9f8cb0b6e6b38cdf719a45a5760d06647",
+      "original_audit": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-1-reset\\audit.json",
+        "sha256": "5e9e28bf36fa097c1c015bf452b4f0fba5fe0eb5aa9087595647bc889b211624",
+        "size": 3984
+      },
+      "source_native_execution": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-1-reset\\native\\execution.json",
+        "sha256": "edb0862cf5806ed55caba47a6a2f68c0ffc0a172374c5d0884e5985955bcdf24",
+        "size": 2323
+      },
+      "production_primary_reaudit_passed": true
+    },
+    {
+      "id": "foil-1-preserve",
+      "study": {
+        "protocol": "predecessor",
+        "predecessor": "phasea-row-1",
+        "cadence": "short",
+        "reset_policy": "preserve_neuron_dynamics"
+      },
+      "counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "TN": 1,
+        "targets": 1,
+        "foils": 1,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 1.0,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.0
+      },
+      "condition_fingerprint": "0c918461418d11c76a1f933db6fc1abd6b64472cd762dedef1cea7672422f9d3",
+      "original_audit": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-1-preserve\\audit.json",
+        "sha256": "c443914e09da0a1a1a95d72f96653540021f3343b5d501f74280bc5497b83489",
+        "size": 4373
+      },
+      "source_native_execution": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-1-preserve\\native\\execution.json",
+        "sha256": "57ce4c0e9c94a4a0cf7911fc3639aa737503e078e10639c9e5476a1236c504c2",
+        "size": 2326
+      },
+      "production_primary_reaudit_passed": true
+    },
+    {
+      "id": "foil-2-reset",
+      "study": {
+        "protocol": "predecessor",
+        "predecessor": "phasea-row-2",
+        "cadence": "short",
+        "reset_policy": "reset_per_trial"
+      },
+      "counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "TN": 1,
+        "targets": 1,
+        "foils": 1,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 1.0,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.0
+      },
+      "condition_fingerprint": "cfd442b748777daf2fff0856f5c4ecbeb9b1ef5239f9cb39de94f7595313bd2e",
+      "original_audit": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-2-reset\\audit.json",
+        "sha256": "6d2849cf137a00db25cce92057080befbf52b3d11a95b4b270bd73eedb08485c",
+        "size": 3984
+      },
+      "source_native_execution": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-2-reset\\native\\execution.json",
+        "sha256": "55801c2be28b88cc25a1a865f372c24e2b3f1663422875e01b6c1ab13c9c0628",
+        "size": 2323
+      },
+      "production_primary_reaudit_passed": true
+    },
+    {
+      "id": "foil-2-preserve",
+      "study": {
+        "protocol": "predecessor",
+        "predecessor": "phasea-row-2",
+        "cadence": "short",
+        "reset_policy": "preserve_neuron_dynamics"
+      },
+      "counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "TN": 1,
+        "targets": 1,
+        "foils": 1,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 1.0,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.0
+      },
+      "condition_fingerprint": "100e8d8adc7d58a8a995546e0393d2a5ad2c78037587ed4f0b911a2eea524098",
+      "original_audit": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-2-preserve\\audit.json",
+        "sha256": "f688a224911175604557930740756ef3c98e4e7841246f0f71b4d63a8172577b",
+        "size": 4373
+      },
+      "source_native_execution": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-2-preserve\\native\\execution.json",
+        "sha256": "36a24508f15e7f68ecca4889c0a76bb5896254e4eecfa3c37dfdf0d839288bd2",
+        "size": 2326
+      },
+      "production_primary_reaudit_passed": true
+    },
+    {
+      "id": "foil-3-reset",
+      "study": {
+        "protocol": "predecessor",
+        "predecessor": "phasea-row-3",
+        "cadence": "short",
+        "reset_policy": "reset_per_trial"
+      },
+      "counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "TN": 1,
+        "targets": 1,
+        "foils": 1,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 1.0,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.0
+      },
+      "condition_fingerprint": "15302ecb87b9a547ec4934df9d97adde0f7b554df5db2408afe4e9bfb810396e",
+      "original_audit": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-3-reset\\audit.json",
+        "sha256": "7ce690784a10b2214825e490bd0451286ef1d7231a4afc0950dedd636663f6d0",
+        "size": 3984
+      },
+      "source_native_execution": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-3-reset\\native\\execution.json",
+        "sha256": "8175db58d4c6964898a440f43102cb197f4a73f80372e1420001f4ac7f2e6576",
+        "size": 2323
+      },
+      "production_primary_reaudit_passed": true
+    },
+    {
+      "id": "foil-3-preserve",
+      "study": {
+        "protocol": "predecessor",
+        "predecessor": "phasea-row-3",
+        "cadence": "short",
+        "reset_policy": "preserve_neuron_dynamics"
+      },
+      "counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "TN": 1,
+        "targets": 1,
+        "foils": 1,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 1.0,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.0
+      },
+      "condition_fingerprint": "cc956c0f4bda8cc461775a9566c4efc578026e35813a2048e33b0e730468e756",
+      "original_audit": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-3-preserve\\audit.json",
+        "sha256": "2b17041a4bab14674ea7b4e8925081b5092efdb94d0112934f4ec8c44e1a7eb5",
+        "size": 4373
+      },
+      "source_native_execution": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-3-preserve\\native\\execution.json",
+        "sha256": "0daf8520c20eb707d724550d680580dbecec5692eaae310f13716155487d4b3e",
+        "size": 2326
+      },
+      "production_primary_reaudit_passed": true
+    },
+    {
+      "id": "foil-4-reset",
+      "study": {
+        "protocol": "predecessor",
+        "predecessor": "phasea-row-4",
+        "cadence": "short",
+        "reset_policy": "reset_per_trial"
+      },
+      "counts": {
+        "TP": 1,
+        "FP": 1,
+        "FN": 0,
+        "TN": 0,
+        "targets": 1,
+        "foils": 1,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.5,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 1.0
+      },
+      "condition_fingerprint": "fff2605f3765b83671d27c995a830a157e0b03347784f52e21daaabb82279928",
+      "original_audit": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-4-reset\\audit.json",
+        "sha256": "38aad53a90095b43b51a1fb68864cbf45b29efb3326b1bf3ab01d6d5279033cf",
+        "size": 4010
+      },
+      "source_native_execution": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-4-reset\\native\\execution.json",
+        "sha256": "889acc6a973ec03c1c41bd8ba38fd06fe610a8e88490542cdf33e3ef652108ba",
+        "size": 2323
+      },
+      "production_primary_reaudit_passed": true
+    },
+    {
+      "id": "foil-4-preserve",
+      "study": {
+        "protocol": "predecessor",
+        "predecessor": "phasea-row-4",
+        "cadence": "short",
+        "reset_policy": "preserve_neuron_dynamics"
+      },
+      "counts": {
+        "TP": 1,
+        "FP": 1,
+        "FN": 0,
+        "TN": 0,
+        "targets": 1,
+        "foils": 1,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.5,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 1.0
+      },
+      "condition_fingerprint": "ba4f6b073bb98565df90cb0603af6b6f7a969696f9604bdbf0cadc94f3937e48",
+      "original_audit": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-4-preserve\\audit.json",
+        "sha256": "939d2632c49360778c7bf765f0448b46cc42436642bc2c31379eaf6b66b4d5d5",
+        "size": 4398
+      },
+      "source_native_execution": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-4-preserve\\native\\execution.json",
+        "sha256": "c1a7930dd3bc68589fd4ea187d276dfff3edc81fbb1f798902707df398ea87cf",
+        "size": 2326
+      },
+      "production_primary_reaudit_passed": true
+    },
+    {
+      "id": "foil-5-reset",
+      "study": {
+        "protocol": "predecessor",
+        "predecessor": "phasea-row-5",
+        "cadence": "short",
+        "reset_policy": "reset_per_trial"
+      },
+      "counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "TN": 1,
+        "targets": 1,
+        "foils": 1,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 1.0,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.0
+      },
+      "condition_fingerprint": "ab784eb16a0a55e04aa02fa15a4d864c940d1851ed5d8cea2095496f7166ed31",
+      "original_audit": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-5-reset\\audit.json",
+        "sha256": "a8af4a29b48a239a5f04bf0cca03222119554beaea6812ba9006c03f8b97e96a",
+        "size": 3984
+      },
+      "source_native_execution": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-5-reset\\native\\execution.json",
+        "sha256": "c0433c5734f3c57db27941ad38d8053f4646122865a9e8b3f20db597c17ea635",
+        "size": 2323
+      },
+      "production_primary_reaudit_passed": true
+    },
+    {
+      "id": "foil-5-preserve",
+      "study": {
+        "protocol": "predecessor",
+        "predecessor": "phasea-row-5",
+        "cadence": "short",
+        "reset_policy": "preserve_neuron_dynamics"
+      },
+      "counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "TN": 1,
+        "targets": 1,
+        "foils": 1,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 1.0,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.0
+      },
+      "condition_fingerprint": "ddd846f713e662cc7b4ab0845d7393e5f8623066c9203e8a2eca343aa56025d6",
+      "original_audit": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-5-preserve\\audit.json",
+        "sha256": "53fafdd152bd1554dfc361d99d78942d70c9db296b45b9203c4bc502faab64f7",
+        "size": 4391
+      },
+      "source_native_execution": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-5-preserve\\native\\execution.json",
+        "sha256": "9611cd90c209ec8366782c02d149d0e4fd6c37101632052556aa309ee488923f",
+        "size": 2326
+      },
+      "production_primary_reaudit_passed": true
+    },
+    {
+      "id": "foil-6-reset",
+      "study": {
+        "protocol": "predecessor",
+        "predecessor": "phasea-row-6",
+        "cadence": "short",
+        "reset_policy": "reset_per_trial"
+      },
+      "counts": {
+        "TP": 1,
+        "FP": 1,
+        "FN": 0,
+        "TN": 0,
+        "targets": 1,
+        "foils": 1,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.5,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 1.0
+      },
+      "condition_fingerprint": "e74e46ec1da9d378a80068bb898abbbbf8518481bd3a5df5ad0f7325142f94be",
+      "original_audit": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-6-reset\\audit.json",
+        "sha256": "0bf8116ee990c9e3487263c8f18423403049725245a4bf7a558882201006af2e",
+        "size": 4011
+      },
+      "source_native_execution": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-6-reset\\native\\execution.json",
+        "sha256": "e13bcc92d88b24b781e7af836d9b92bcf7955cda9e582e44ed22b705ed6dd3c3",
+        "size": 2323
+      },
+      "production_primary_reaudit_passed": true
+    },
+    {
+      "id": "foil-6-preserve",
+      "study": {
+        "protocol": "predecessor",
+        "predecessor": "phasea-row-6",
+        "cadence": "short",
+        "reset_policy": "preserve_neuron_dynamics"
+      },
+      "counts": {
+        "TP": 1,
+        "FP": 1,
+        "FN": 0,
+        "TN": 0,
+        "targets": 1,
+        "foils": 1,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.5,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 1.0
+      },
+      "condition_fingerprint": "8f97b4fd31408d1515f7f50ffbd9fb771a7e6bb7132ce4bf9bee0957d9c3ab05",
+      "original_audit": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-6-preserve\\audit.json",
+        "sha256": "9b1b90a3666fe77ffef967b484dcf140cf5bfd01e22dcb9ddd9b4438e28190c7",
+        "size": 4399
+      },
+      "source_native_execution": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-6-preserve\\native\\execution.json",
+        "sha256": "62edcfde8fb2c0b417d177ca3e1486af695f0477a72e2493e72b5236b7e859e2",
+        "size": 2326
+      },
+      "production_primary_reaudit_passed": true
+    },
+    {
+      "id": "foil-7-reset",
+      "study": {
+        "protocol": "predecessor",
+        "predecessor": "phasea-row-7",
+        "cadence": "short",
+        "reset_policy": "reset_per_trial"
+      },
+      "counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "TN": 1,
+        "targets": 1,
+        "foils": 1,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 1.0,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.0
+      },
+      "condition_fingerprint": "c71e8bf6e6802c3f1b442ca32af6ad1d9fee15937b1652cdd29a865167b66d66",
+      "original_audit": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-7-reset\\audit.json",
+        "sha256": "bb8b702bf1aeb3fd30fe52aa6acc56b70d0e60ae8697b07f369a7385975713e7",
+        "size": 3984
+      },
+      "source_native_execution": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-7-reset\\native\\execution.json",
+        "sha256": "58eeac2348e16ee0acb0c4c12b49ad0b133cad6a7549c2f26cb0b8e03ec1f6a0",
+        "size": 2323
+      },
+      "production_primary_reaudit_passed": true
+    },
+    {
+      "id": "foil-7-preserve",
+      "study": {
+        "protocol": "predecessor",
+        "predecessor": "phasea-row-7",
+        "cadence": "short",
+        "reset_policy": "preserve_neuron_dynamics"
+      },
+      "counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "TN": 1,
+        "targets": 1,
+        "foils": 1,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 1.0,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.0
+      },
+      "condition_fingerprint": "22c885c7a3c3d9e605eac7247a0451398cf79ba3acfae74e5e4e4ef22b60e7c9",
+      "original_audit": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-7-preserve\\audit.json",
+        "sha256": "59ccf9764c175e689550b39fde67ad6a86f7c376a56ea6fc1cc2fc4823a2a7ad",
+        "size": 4390
+      },
+      "source_native_execution": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-7-preserve\\native\\execution.json",
+        "sha256": "07f3463c35b3eccd2526594ea87c05e5140ee0f7ea90c157ea4e69b902eef509",
+        "size": 2326
+      },
+      "production_primary_reaudit_passed": true
+    }
+  ],
+  "declared_cases": 14,
+  "trials": 28,
+  "protocol_consistency_verified": true,
+  "all_transferred_files_verified": true,
+  "full_local_different_host_member_restoration_completed": true,
+  "full_native_experiment_reexecution_on_another_host": false,
+  "producer_primary_not_removed": true,
+  "large_incoming_duplicate_removed_after_verified_CAS_store": true,
+  "archive_or_model_added_to_Git": false,
+  "scientific_verdict": null,
+  "local_restoration": {
+    "purpose": "Restore exact archived primary bytes for scientific illustrations; no model or numerical test",
+    "restoration": {
+      "kind": "timelearner_native_bundle_restoration",
+      "schema_version": 1,
+      "archive_sha256": "cfcb9f913b858071612b32c2d6b1b0187cf154399d61fcee28635a397172aa41",
+      "archive_members_verified": 933,
+      "retained_regular_files": 933,
+      "compatibility": "retain-regular-glog-aliases-v1",
+      "omitted_redundant_aliases": [],
+      "source_archive_modified": false,
+      "native_execution_attested": false,
+      "scientific_verdict": null
+    },
+    "archive_on_different_host_than_producer": true,
+    "original_producer_files_preserved": true,
+    "numerical_or_model_reexecution": false,
+    "scientific_verdict": null
+  },
+  "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-23/branch-measured-count-M4-windows/predecessor-matrix-complete-primary-h1.json"
+}

@@ -1,0 +1,277 @@
+{
+  "kind": "timelearner_actual_threshold_execution_closures",
+  "schema_version": 1,
+  "workers": {
+    "elder": {
+      "job": "s11-prepared-long-model-threshold-elder-a1",
+      "exists": true,
+      "exception.json": {
+        "reason": "prepared_native_execution_incomplete",
+        "traceback": "Traceback (most recent call last):\n  File \"/home/user/timelearner-refactor/requests/s11-prepared-long-model-threshold-elder-a1/worker.py\", line 132, in main\n    require(result['execution'] == 'completed' and result['all_processes_closed'] and\n  File \"/home/user/timelearner-refactor/source-diagnostic-memory-a1/Scripts/StructTrain/TimeLearner/native_evidence.py\", line 28, in require\n    raise EvidenceError(reason)\nScripts.StructTrain.TimeLearner.native_evidence.EvidenceError: prepared_native_execution_incomplete\n"
+      },
+      "process-result.json": {
+        "kind": "timelearner_process_result",
+        "execution": "process_error",
+        "reason": "nonzero_exit_or_missing_terminal_status",
+        "returncode": 2,
+        "wall_seconds": 2285.5891723008826,
+        "runtime_provenance": "incomplete_loaded_files",
+        "all_processes_closed": true
+      },
+      "native/execution.json": {
+        "execution": "completed",
+        "job_sha256": "39d3f3d5f3ac2887b3bc807e4a97cbdfd4849d3b0adf381d6c7520c0c6199341",
+        "kind": "timelearner_native_diagnostic_evaluation_execution",
+        "model_revision": "ec82f91aaf806a562fcfcc29501eeabbfa0ccd0d2a93bccaf9a7190681c5cda3",
+        "sha256": "7a64e4fb003ed5ffa59c955ac407c31249195f64f5963f9f8e07982a9762e95a"
+      },
+      "trial_packets": 8,
+      "native_files": [
+        {
+          "name": "model-after.json",
+          "bytes": 876624849
+        },
+        {
+          "name": "trial-0.json",
+          "bytes": 1823972
+        },
+        {
+          "name": "trial-7.json",
+          "bytes": 1757517
+        },
+        {
+          "name": "trial-2.json",
+          "bytes": 1753082
+        },
+        {
+          "name": "trial-4.json",
+          "bytes": 1821180
+        },
+        {
+          "name": "model.json",
+          "bytes": 876624849
+        },
+        {
+          "name": "trial-5.json",
+          "bytes": 1757195
+        },
+        {
+          "name": "trial-6.json",
+          "bytes": 1828496
+        },
+        {
+          "name": "trial-1.json",
+          "bytes": 1753126
+        },
+        {
+          "name": "evaluation.json",
+          "bytes": 4039
+        },
+        {
+          "name": "trial-3.json",
+          "bytes": 1752760
+        },
+        {
+          "name": "job.json",
+          "bytes": 814455851
+        },
+        {
+          "name": "execution.json",
+          "bytes": 3133
+        }
+      ],
+      "kernel": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "kernel_cgroup_observed",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "0c2f5e9aabff05d377757f27bdc5ccfdb3d8054a664ce7a47cfa11fa8adcb8e3",
+          "unit": "timelearner-bd61e293-542c-4883-b686-89c1ad616e18.service",
+          "invocation_id": "6bc5c381476640e08aceb7a094d4c2c2",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-bd61e293-542c-4883-b686-89c1ad616e18.service",
+          "initial_main_pid": 774033,
+          "initial_start_ticks": "481470746",
+          "sha256": "1d862d36e040ca4f92ddbc72339f0b12019612f63744887e088f40bcbf8d2138"
+        }
+      }
+    },
+    "m40": {
+      "job": "s11-prepared-long-model-threshold-m40-a1",
+      "exists": true,
+      "terminal.json": {
+        "native_process_completed": true,
+        "observations_independently_audited": false
+      },
+      "process-result.json": {
+        "kind": "timelearner_process_result",
+        "execution": "completed",
+        "reason": "exit_zero_and_whole_group_closed",
+        "returncode": 0,
+        "wall_seconds": 2106.4574583023787,
+        "runtime_provenance": "loaded_files_captured",
+        "all_processes_closed": true
+      },
+      "native/execution.json": {
+        "execution": "completed",
+        "job_sha256": "f6975f445b72c0b712158dc381db29f8603435e8f02e56832a8ce6368d7eb0cd",
+        "kind": "timelearner_native_diagnostic_evaluation_execution",
+        "model_revision": "0fe43bddd70414e903ec41e68eb3433d9b85feaa5799448e2af7793ed8c5ff9f",
+        "sha256": "d1dcc9d9ea949a5e4327b31ddae348bc138585606cabe01b41f86972f54023e2"
+      },
+      "trial_packets": 8,
+      "native_files": [
+        {
+          "name": "evaluation.json",
+          "bytes": 4029
+        },
+        {
+          "name": "trial-3.json",
+          "bytes": 1290633
+        },
+        {
+          "name": "execution.json",
+          "bytes": 3121
+        },
+        {
+          "name": "trial-4.json",
+          "bytes": 1360087
+        },
+        {
+          "name": "trial-5.json",
+          "bytes": 1294898
+        },
+        {
+          "name": "job.json",
+          "bytes": 1229798960
+        },
+        {
+          "name": "model-after.json",
+          "bytes": 1317519948
+        },
+        {
+          "name": "trial-6.json",
+          "bytes": 1294772
+        },
+        {
+          "name": "trial-7.json",
+          "bytes": 1294921
+        },
+        {
+          "name": "trial-2.json",
+          "bytes": 1290773
+        },
+        {
+          "name": "model.json",
+          "bytes": 1317519948
+        },
+        {
+          "name": "trial-1.json",
+          "bytes": 1290889
+        },
+        {
+          "name": "trial-0.json",
+          "bytes": 1356913
+        }
+      ],
+      "kernel": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "f3f36eea746b6cbc3ebbaa1aeb407612e0b50455b6822cc0415d97eee484bef4",
+          "unit": "timelearner-94a641e9-db65-4e0b-92d3-1c83d2659087.service",
+          "invocation_id": "68bdb71cd20b4e5485ea5cca7d903ae2",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-94a641e9-db65-4e0b-92d3-1c83d2659087.service",
+          "initial_main_pid": 2499161,
+          "initial_start_ticks": "432017375",
+          "sha256": "55e4029a8ab5ed3940533c62f497b7e67677b6b6c1898e0fb8a0f810ce805b79"
+        }
+      }
+    },
+    "windows": {
+      "job": "windows-prepared-long-model-threshold-a2",
+      "exists": true,
+      "terminal.json": {
+        "native_process_completed": true,
+        "observations_independently_audited": false
+      },
+      "process-result.json": {
+        "kind": "timelearner_windows_process_result",
+        "execution": "completed",
+        "validity": "valid",
+        "reason": "exit_zero",
+        "returncode": 0,
+        "all_processes_closed": true,
+        "runtime_provenance": "loaded_files_captured",
+        "wall_seconds": 2074.2412276999094
+      },
+      "native/execution.json": {
+        "execution": "completed",
+        "job_sha256": "d91a3f349f44c554d70e3f689c9357b248f684f531e83f305aa07f88e863d372",
+        "kind": "timelearner_native_diagnostic_evaluation_execution",
+        "model_revision": "e3149bcebad4b9655060834c1f63e4730b2704ca27e6d92650209f66bb74e0d6",
+        "sha256": "e31f8d1d3d24b4ae8006aa23ac944f357c4351edf4c3130b3e1ab972ca1f6b81"
+      },
+      "trial_packets": 8,
+      "native_files": [
+        {
+          "name": "evaluation.json",
+          "bytes": 4029
+        },
+        {
+          "name": "execution.json",
+          "bytes": 3134
+        },
+        {
+          "name": "job.json",
+          "bytes": 1010964063
+        },
+        {
+          "name": "model-after.json",
+          "bytes": 1087068564
+        },
+        {
+          "name": "model.json",
+          "bytes": 1087068564
+        },
+        {
+          "name": "trial-0.json",
+          "bytes": 1359970
+        },
+        {
+          "name": "trial-1.json",
+          "bytes": 1290821
+        },
+        {
+          "name": "trial-2.json",
+          "bytes": 1290789
+        },
+        {
+          "name": "trial-3.json",
+          "bytes": 1290685
+        },
+        {
+          "name": "trial-4.json",
+          "bytes": 1360063
+        },
+        {
+          "name": "trial-5.json",
+          "bytes": 1294852
+        },
+        {
+          "name": "trial-6.json",
+          "bytes": 1294706
+        },
+        {
+          "name": "trial-7.json",
+          "bytes": 1294981
+        }
+      ]
+    }
+  },
+  "scientific_verdict": null
+}

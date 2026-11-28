@@ -1,0 +1,1026 @@
+{
+  "kind": "timelearner_checked_Classic_cap8_recognition_repeat_and_temporal_report",
+  "schema_version": 1,
+  "as_of_utc": "2026-11-25T19:21:47Z",
+  "recognition": {
+    "independent_catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-25/Windows-cap8-complete-recognition-independent-ek21.json",
+      "bytes": 17560,
+      "sha256": "829ed2b73fb435ad1f4bd353e5b9185620d0116126f44e2fe06223c5cd4b6f0f"
+    },
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/5a/5af961ff02ba64f26e09adda0691bc0ec770d7f9494a40759a36c4cc26563332",
+        "sha256": "5af961ff02ba64f26e09adda0691bc0ec770d7f9494a40759a36c4cc26563332",
+        "bytes": 52346
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/32/324a72a4a24ad49870ee1a1d9da16d88b43471b5ca8680c5bdb7c409a5f6ffda",
+        "sha256": "324a72a4a24ad49870ee1a1d9da16d88b43471b5ca8680c5bdb7c409a5f6ffda",
+        "bytes": 21019232
+      },
+      "source-result.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/3f/3f1667f6cfebfd1b8e31e899227f29b0daff421a44d2d45d15bed49b9bbf8134",
+        "sha256": "3f1667f6cfebfd1b8e31e899227f29b0daff421a44d2d45d15bed49b9bbf8134",
+        "bytes": 4751
+      }
+    },
+    "retained_original_members": 306,
+    "actual_loaded_executable_and_DLL_files": 47,
+    "counts": {
+      "TP": 1,
+      "FP": 1,
+      "FN": 0,
+      "TN": 6,
+      "targets": 1,
+      "foils": 7,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.875,
+      "target_hit_rate": 1,
+      "foil_response_rate": 0.14285714285714285
+    },
+    "threshold": 0.026339412714535534,
+    "model_revision": "1549d396c21dd14034263084f867066655292fa2de17590973c4be16779176dc",
+    "source_Train_outcome": "budget_exhausted",
+    "source_completed_boundary": false,
+    "calibration_protocol": "historical_same_matrix",
+    "independent_evaluation": false,
+    "target_spike_after_last_input_seconds": 0.003,
+    "early_target_output": false,
+    "sole_false_positive_sample_id": "phasea-row-4",
+    "full_windows": 8,
+    "samples_per_window": 4001,
+    "native_source_closure": {
+      "root": "891a75b39b2b020025aedc7e6158f89fd2f25ed2",
+      "PulseLib": "f2ea795b5a9c4166b1c6b5329bf61b0fff298b3f",
+      "Rdk": "561986e9f336ee5914e2d119de90b005e06f3639",
+      "Bin": "2c285cb472134fc92394153c089603a830a03f70"
+    },
+    "original_Windows_kernel_not_re_attested_on_M40": true
+  },
+  "temporal_report": {
+    "catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-25/Windows-cap8-complete-temporal-report-independent-el7.json",
+      "sha256": "d8f9c9ffe9c9a8f8a8802ba3a06a2ef2eb40b02863dc6a805da803570a633e83",
+      "size": 2920
+    },
+    "members": 666,
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/bc/bca7740f2d179080e8b1283490a929ed89391fa85a76fe73ad1c828e94fb6c4f",
+        "sha256": "bca7740f2d179080e8b1283490a929ed89391fa85a76fe73ad1c828e94fb6c4f",
+        "bytes": 127432
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/6f/6f229a6ae271bda0ea5f7fd18bd2f20651a2fc512d2c9f300237f7dea67e428e",
+        "sha256": "6f229a6ae271bda0ea5f7fd18bd2f20651a2fc512d2c9f300237f7dea67e428e",
+        "bytes": 31244648
+      },
+      "source-result.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/14/14a684071d29caf7b49de769756a77f46fcbfbee9cc7b37ac4c7b0adedc57af2",
+        "sha256": "14a684071d29caf7b49de769756a77f46fcbfbee9cc7b37ac4c7b0adedc57af2",
+        "bytes": 9841
+      }
+    },
+    "restored": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/Windows-cap8-complete-temporal-report-el7/restored",
+    "counts": {
+      "TP": 1,
+      "FP": 1,
+      "FN": 0,
+      "TN": 6,
+      "targets": 1,
+      "foils": 7,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.875,
+      "target_hit_rate": 1,
+      "foil_response_rate": 0.14285714285714285
+    },
+    "all_primary_report_checks_passed": true
+  },
+  "Elder_q3_complete_repeat": {
+    "independent_catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-25/Elder-q3-complete-native-repeat-independent-ek16.json",
+      "bytes": 14909,
+      "sha256": "3f58152b127c13c7c1f72b51c33a81c99f38bdd6100d6f9fdea1a1a134d74d63"
+    },
+    "original_members": 73,
+    "all_eight_waveforms_and_events_independently_compared": true,
+    "source_counts": {
+      "TP": 1,
+      "FP": 2,
+      "FN": 0,
+      "TN": 5
+    },
+    "source_threshold": 0.023252703356543683,
+    "full_primary_objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/9e/9e1e864d90d400ef96b370db09638d673fd9461d43125fc759a9ce2612228d03",
+        "sha256": "9e1e864d90d400ef96b370db09638d673fd9461d43125fc759a9ce2612228d03",
+        "bytes": 11660
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/72/7238ef195d7b4b23f7dc27fceb939fc682d1104f803063b981083809934de64f",
+        "sha256": "7238ef195d7b4b23f7dc27fceb939fc682d1104f803063b981083809934de64f",
+        "bytes": 1239644
+      }
+    }
+  },
+  "shared_protocol_gate": {
+    "independent_catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-25/M40-shared-frozen-study-actual-gate-ek4.json",
+      "bytes": 2886,
+      "sha256": "649815bee313c47baea2900fbc5bfc401c14b2c7667b72c8411f5dae0038ac11"
+    },
+    "root": "0c0843fda30229c5aff3a4152a0bf2e0c7e2c4b7",
+    "tests": 24,
+    "skipped": 0,
+    "assertion_status": "passed",
+    "matrix_fingerprints_unchanged": 3,
+    "case_fingerprints_unchanged": 43,
+    "objects": {
+      "result.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/6d/6d1e8f79e0fad8f32ec9c8932446d7fabd2e73f3fe2c9091fc55a5e0c13e82cb",
+        "sha256": "6d1e8f79e0fad8f32ec9c8932446d7fabd2e73f3fe2c9091fc55a5e0c13e82cb",
+        "bytes": 5401
+      },
+      "unittest.log": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/a2/a2283e32b776068216fcc9c9a54dcecb6d0a59944c2a5a98ad9985153cc68651",
+        "sha256": "a2283e32b776068216fcc9c9a54dcecb6d0a59944c2a5a98ad9985153cc68651",
+        "bytes": 6029
+      },
+      "original-parity.stdout": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/1c/1cfa06b8fa00a27b720b81eb511ee45dd30d22b51d9137d05846fc6a6e508a61",
+        "sha256": "1cfa06b8fa00a27b720b81eb511ee45dd30d22b51d9137d05846fc6a6e508a61",
+        "bytes": 4292
+      },
+      "request.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/25/2559a9c0f8aa12f1ac19e35c0d4294edd2afbc830bcf13e24f6102ea899435b9",
+        "sha256": "2559a9c0f8aa12f1ac19e35c0d4294edd2afbc830bcf13e24f6102ea899435b9",
+        "bytes": 6108
+      },
+      "source.pack": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/09/09652cee1b1b2afd2c01e078a553a293a9180a8c17f1856ed37bd03cb5df96d0",
+        "sha256": "09652cee1b1b2afd2c01e078a553a293a9180a8c17f1856ed37bd03cb5df96d0",
+        "bytes": 5088120
+      },
+      "projection.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/44/444b61f9d3bdc36be9026890293af5ba9acdd69b8a4c582a47365e08f8acbc28",
+        "sha256": "444b61f9d3bdc36be9026890293af5ba9acdd69b8a4c582a47365e08f8acbc28",
+        "bytes": 399895
+      }
+    }
+  },
+  "Windows_followup_preparation": {
+    "dispatched": true,
+    "job": "classic-cap8-frozen-third-grid-win-ek12",
+    "actor_root": "0a1586ca467e72ddc54eaec311bc5dd81d1bceb5",
+    "selected_source_files": 977,
+    "request_tests": 4,
+    "shared_actual_fixture_tests": 24,
+    "source_repeat_owner": {
+      "pid": 1560,
+      "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+      "creation_filetime": "134401038650303672"
+    },
+    "request": {
+      "path": "C:\\Projects\\TimeLearnerWorker\\controls\\classic-cap8-frozen-third-grid-win-ek12\\request.json",
+      "sha256": "7b2efe426e0f4fdbc4705d5cbf1a2d80726bffa1585dccea3962509ddb7107aa",
+      "size": 1334
+    },
+    "controls_commit": "7b588119b52b8ae41fa134a83e9965d6bb2c8f87",
+    "controls_bundle": {
+      "path": "C:\\Projects\\TimeLearnerWorker\\controls\\classic-cap8-frozen-third-grid-win-ek12\\controls.bundle",
+      "sha256": "f817a5af76327f81ff431d1eaa5f9295e53e09250c98775668fb128302bd6d5c",
+      "size": 1880
+    },
+    "task": {
+      "instance": "{7471350A-9C50-474E-86A5-692CA64021FD}",
+      "registered": true,
+      "task": "TimeLearner-classic-cap8-frozen-third-grid-win-ek12"
+    },
+    "native_followups_not_yet_started": true,
+    "new_Train": false,
+    "new_threshold_selection": false,
+    "scientific_verdict": null
+  },
+  "M40_sequential_closed_training": {
+    "catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-25/M40-sequential-closed-training-readback-el9.json",
+      "sha256": "c1563e9967df0f412c82405e341524499e611cb93cfac208e79893ed37eaeec1",
+      "size": 5603
+    },
+    "objects": {
+      "full-primary-audit.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/67/67bb142fc124a92a823a61bcc159249a53a82c1864b844b77ed2905fecc8c8db",
+        "sha256": "67bb142fc124a92a823a61bcc159249a53a82c1864b844b77ed2905fecc8c8db",
+        "bytes": 104594
+      },
+      "compact-training-readback.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/b9/b95cd86f954f08772db7b5ac0a672b3761380986d1051fb6f8ba3b0c33b4d974",
+        "sha256": "b95cd86f954f08772db7b5ac0a672b3761380986d1051fb6f8ba3b0c33b4d974",
+        "bytes": 78949
+      },
+      "worker-terminal.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/4d/4daef7ea86b292e3ad5d64d62d769c983a8a3425999d32babde3e81691f1b708",
+        "sha256": "4daef7ea86b292e3ad5d64d62d769c983a8a3425999d32babde3e81691f1b708",
+        "bytes": 746
+      },
+      "supervisor-result.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/3a/3af2eccdad1ed0c6fef5cebe25839b3ba078a95a9e8180b4d691cd060530f6f1",
+        "sha256": "3af2eccdad1ed0c6fef5cebe25839b3ba078a95a9e8180b4d691cd060530f6f1",
+        "bytes": 2247
+      }
+    },
+    "candidate_records_per_input": {
+      "0": 25,
+      "1": 25,
+      "2": 0,
+      "3": 0
+    },
+    "terminal": {
+      "actual_model_epoch": 48,
+      "search_terminal_epoch": 48,
+      "actual_parameters": [
+        {
+          "length": 241,
+          "resistance": 86000000,
+          "synapses": 13
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 11
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "search_terminal_parameters": [
+        {
+          "length": 241,
+          "resistance": 86000000,
+          "synapses": 13
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 11
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "fresh_all_input_verification": false,
+      "status": "already_current",
+      "stopped_outcome": "budget_exhausted",
+      "stopped_reason": "native_training_time_budget_exhausted",
+      "reason": "",
+      "wall_seconds": 3.5468978779390454
+    },
+    "full_primary_archive_pending": true
+  },
+  "current_workers": {
+    "Elder": {
+      "utc": "2026-11-25T19:21:46.779575+00:00",
+      "owner_live": true,
+      "files": {
+        "scope-result": {
+          "kind": "timelearner_python_validation_result",
+          "schema_version": 1,
+          "suite_id": "actual-Linux-frozen-followup-preparation-ej8",
+          "package_fingerprint": "68466ce545ca4bcef6a1d3c0a23c5849489ad4d82cab736288b5ad04bf265c61",
+          "execution": "completed",
+          "assertion_status": "passed",
+          "expected_test_ids": [
+            "Scripts.StructTrain.TimeLearner.tests.test_actual_linux_DATA_recognition_job.ActualLinuxDATARecognitionJob.test_baseline_passes_production_validator_on_actual_DATA",
+            "Scripts.StructTrain.TimeLearner.tests.test_actual_linux_DATA_recognition_job.ActualLinuxDATARecognitionJob.test_confirmation_uses_complete_schema_and_its_own_run_scope",
+            "Scripts.StructTrain.TimeLearner.tests.test_actual_linux_DATA_recognition_job.ActualLinuxDATARecognitionJob.test_declared_budget_changes_only_the_actual_execution_condition_axis",
+            "Scripts.StructTrain.TimeLearner.tests.test_actual_linux_DATA_recognition_job.ActualLinuxDATARecognitionJob.test_foreign_run_scope_is_rejected_even_with_a_valid_digest",
+            "Scripts.StructTrain.TimeLearner.tests.test_actual_linux_DATA_recognition_job.ActualLinuxDATARecognitionJob.test_invalid_declared_budgets_are_rejected",
+            "Scripts.StructTrain.TimeLearner.tests.test_actual_linux_DATA_recognition_job.ActualLinuxDATARecognitionJob.test_legacy_condition_matches_the_actual_before_timeout_declaration",
+            "Scripts.StructTrain.TimeLearner.tests.test_actual_linux_DATA_recognition_job.ActualLinuxDATARecognitionJob.test_original_rejected_payload_still_fails_before_native_execution",
+            "Scripts.StructTrain.TimeLearner.tests.test_actual_linux_DATA_recognition_job.ActualLinuxDATARecognitionJob.test_schema_version_cannot_silently_add_or_drop_the_execution_budget",
+            "Scripts.StructTrain.TimeLearner.tests.test_actual_linux_frozen_followup_jobs.ActualLinuxFrozenFollowupJobs.test_DATA2_condition_uses_the_actual_native_threshold_without_a_candidate_field",
+            "Scripts.StructTrain.TimeLearner.tests.test_actual_linux_frozen_followup_jobs.ActualLinuxFrozenFollowupJobs.test_all_phases_keep_physics_and_use_their_own_trial_run_scope",
+            "Scripts.StructTrain.TimeLearner.tests.test_actual_linux_frozen_followup_jobs.ActualLinuxFrozenFollowupJobs.test_case_identity_is_independent_of_other_matrix_rows",
+            "Scripts.StructTrain.TimeLearner.tests.test_actual_linux_frozen_followup_jobs.ActualLinuxFrozenFollowupJobs.test_fingerprint_ignores_attempt_identifiers_and_tracks_declared_wall_budget",
+            "Scripts.StructTrain.TimeLearner.tests.test_actual_linux_frozen_followup_jobs.ActualLinuxFrozenFollowupJobs.test_grid_excludes_actual_calibration_foils_without_mutating_model",
+            "Scripts.StructTrain.TimeLearner.tests.test_actual_linux_frozen_followup_jobs.ActualLinuxFrozenFollowupJobs.test_repeat_changes_only_attempt_and_trial_identifiers",
+            "Scripts.StructTrain.TimeLearner.tests.test_actual_linux_frozen_followup_jobs.ActualLinuxFrozenFollowupJobs.test_request_rejects_hidden_threshold_or_training_factors",
+            "Scripts.StructTrain.TimeLearner.tests.test_actual_linux_frozen_followup_jobs.ActualLinuxFrozenFollowupJobs.test_request_requires_exact_predecessor_identity_and_all_integer_phase_budgets",
+            "Scripts.StructTrain.TimeLearner.tests.test_actual_linux_frozen_followup_jobs.ActualLinuxFrozenFollowupJobs.test_third_pulse_has_exact_predeclared_native_times_and_single_target",
+            "Scripts.StructTrain.TimeLearner.tests.test_actual_linux_frozen_followup_jobs.ActualLinuxFrozenFollowupJobs.test_third_pulse_rejects_changed_clock_or_target_or_window",
+            "Scripts.StructTrain.TimeLearner.tests.test_actual_linux_frozen_followup_jobs.ActualLinuxFrozenTiming.test_actual_confirmation_timing_keeps_all_eight_classifications_and_events",
+            "Scripts.StructTrain.TimeLearner.tests.test_actual_linux_frozen_followup_jobs.ActualLinuxFrozenTiming.test_actual_execution_job_cannot_substitute_for_the_evaluation_specification"
+          ],
+          "executed_tests": 20,
+          "failures": [],
+          "errors": [],
+          "skipped": [],
+          "fixtures": {
+            "TIMELEARNER_LINUX_DATA_SEQUENCE_FIXTURE": {
+              "path": "/home/user/timelearner-refactor/requests/classic-q3-frozen-followups-elder-ej8/scope-gate/fixture",
+              "files": 5,
+              "fingerprint": "1fed96610ad54cafc8860c2a1cd7297c5afa6f102415371529e14804cdba9576"
+            },
+            "TIMELEARNER_LINUX_FROZEN_TIMING_FIXTURE": {
+              "path": "/home/user/timelearner-refactor/requests/classic-q3-frozen-followups-elder-ej8/scope-gate/timing-fixture",
+              "files": 10,
+              "fingerprint": "f8002d5887825ed8afb53f987afa959a64eec6c725862e2550a4e58514f5fe61"
+            }
+          },
+          "scientific_verdict": null
+        },
+        "scope-accepted": {
+          "result": {
+            "path": "/home/user/timelearner-refactor/readbacks/classic-q3-frozen-followups-elder-ej8-scope-gate/worker/validation/result.json",
+            "sha256": "26820591a03514bb4b34665eb6057adfc0ee70574246348741cf9149fad76938",
+            "size": 4585
+          },
+          "executed_tests": 20,
+          "skipped": 0,
+          "all_processes_closed": true,
+          "metadata_only": true,
+          "native_response_preservation_not_yet_proven": true
+        }
+      },
+      "phases": {
+        "repeat": {
+          "exists": true,
+          "files": {
+            "terminal.json": {
+              "kind": "timelearner_linux_frozen_physical_followup",
+              "schema_version": 1,
+              "phase": "repeat",
+              "execution": "completed",
+              "validity": "valid",
+              "counts": {
+                "TP": 1,
+                "FP": 2,
+                "FN": 0,
+                "TN": 5,
+                "targets": 1,
+                "foils": 7,
+                "target_trials_with_outside_spikes": 0,
+                "accuracy": 0.75,
+                "target_hit_rate": 1,
+                "foil_response_rate": 0.2857142857142857
+              },
+              "complete_observations": 8,
+              "model_revision": "2783e83684eef31e0a258e271e0c2c3acf30a9a9ab175fc20632577b5b9028a6",
+              "source_model_data_sha256": "a462f9d02759f2bb1ad51f8fba4e07a243b507074a6a1f46040b43f9d06513e3",
+              "threshold": 0.023252703356543683,
+              "condition_fingerprint": "338b450d1f3bfae56bdafe51d1cf893f72a6a7eca0bd0745459b5d89572f4d92",
+              "frozen_model_verified": true,
+              "compared_source_controls": 8,
+              "all_eight_waveforms_and_events_preserved": true,
+              "source_training_outcome": "budget_exhausted",
+              "source_completed_boundary": false,
+              "training_performed": false,
+              "threshold_selected": false,
+              "independent_positive_class": false,
+              "training_certificate_transferred": false,
+              "scientific_verdict": null
+            }
+          },
+          "trials": [
+            {
+              "name": "trial-0.json",
+              "size": 1814211,
+              "mtime": "2026-11-25T17:25:59.497031+00:00"
+            },
+            {
+              "name": "trial-1.json",
+              "size": 1744515,
+              "mtime": "2026-11-25T17:33:33.155954+00:00"
+            },
+            {
+              "name": "trial-2.json",
+              "size": 1744466,
+              "mtime": "2026-11-25T17:41:09.197908+00:00"
+            },
+            {
+              "name": "trial-3.json",
+              "size": 1743956,
+              "mtime": "2026-11-25T17:48:45.249862+00:00"
+            },
+            {
+              "name": "trial-4.json",
+              "size": 1811777,
+              "mtime": "2026-11-25T17:56:19.373791+00:00"
+            },
+            {
+              "name": "trial-5.json",
+              "size": 1748933,
+              "mtime": "2026-11-25T18:03:55.263743+00:00"
+            },
+            {
+              "name": "trial-6.json",
+              "size": 1822601,
+              "mtime": "2026-11-25T18:11:30.326685+00:00"
+            },
+            {
+              "name": "trial-7.json",
+              "size": 1749537,
+              "mtime": "2026-11-25T18:19:03.741605+00:00"
+            }
+          ],
+          "closed": true,
+          "binding": {
+            "kind": "timelearner_contained_binding",
+            "schema_version": 1,
+            "request_sha256": "79716e4f1f83b1a3499103d52d27ce39116d18a5acf388f4b25b45d26898b602",
+            "unit": "timelearner-d1a861e7-5c41-4c12-a3b6-8df55664f493.service",
+            "invocation_id": "a9c77981f0fd4f7ab7466acf32d81426",
+            "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-d1a861e7-5c41-4c12-a3b6-8df55664f493.service",
+            "initial_main_pid": 2869045,
+            "initial_start_ticks": "519683711",
+            "sha256": "c87b6b4cdad194bef52b531597b085f5c29579758d9c7e97618b913763ee3ef6"
+          }
+        },
+        "third-pulse": {
+          "exists": true,
+          "files": {},
+          "trials": [
+            {
+              "name": "trial-0.json",
+              "size": 1745108,
+              "mtime": "2026-11-25T18:29:59.819170+00:00"
+            },
+            {
+              "name": "trial-1.json",
+              "size": 1744975,
+              "mtime": "2026-11-25T18:37:33.387092+00:00"
+            },
+            {
+              "name": "trial-2.json",
+              "size": 1744544,
+              "mtime": "2026-11-25T18:45:07.693024+00:00"
+            },
+            {
+              "name": "trial-3.json",
+              "size": 1811304,
+              "mtime": "2026-11-25T18:52:42.554962+00:00"
+            },
+            {
+              "name": "trial-4.json",
+              "size": 1744353,
+              "mtime": "2026-11-25T19:00:16.380888+00:00"
+            },
+            {
+              "name": "trial-5.json",
+              "size": 1748438,
+              "mtime": "2026-11-25T19:07:51.437829+00:00"
+            },
+            {
+              "name": "trial-6.json",
+              "size": 1748537,
+              "mtime": "2026-11-25T19:15:25.674759+00:00"
+            }
+          ],
+          "closed": false,
+          "binding": {
+            "kind": "timelearner_contained_binding",
+            "schema_version": 1,
+            "request_sha256": "44beddefbfd450a390e9f921de3ced15cc57bc57744580d931ab7d071d07890b",
+            "unit": "timelearner-07fb5e89-795b-42e5-9721-743218c71e8a.service",
+            "invocation_id": "0f5bc7423f7f419fbc27510f9efbc599",
+            "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-07fb5e89-795b-42e5-9721-743218c71e8a.service",
+            "initial_main_pid": 3060069,
+            "initial_start_ticks": "520067261",
+            "sha256": "d717a4289ed27af7e9edd59a4c2380338637fb3b143c9df1a7c9320c78498cf9"
+          }
+        },
+        "new-foils": {
+          "exists": false,
+          "files": {},
+          "trials": []
+        }
+      },
+      "scope_closed": true,
+      "scope_binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "56236a5d8d772dc329b7ca5c0d532f2521064760bfed62dbd964bb5f57380684",
+        "unit": "timelearner-81f7cdb5-3c86-471d-ab04-8f6028baddaf.service",
+        "invocation_id": "4b1f334d022b4affabc748d2cc0cdbe7",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-81f7cdb5-3c86-471d-ab04-8f6028baddaf.service",
+        "initial_main_pid": 2841245,
+        "initial_start_ticks": "519660755",
+        "sha256": "591d63d87628d05c3bacf863cb985a2402c6901c9a53125bfaeb1f118539a113"
+      },
+      "unittest_log_tail": "test_baseline_passes_production_validator_on_actual_DATA (Scripts.StructTrain.TimeLearner.tests.test_actual_linux_DATA_recognition_job.ActualLinuxDATARecognitionJob) ... ok\ntest_confirmation_uses_complete_schema_and_its_own_run_scope (Scripts.StructTrain.TimeLearner.tests.test_actual_linux_DATA_recognition_job.ActualLinuxDATARecognitionJob) ... ok\ntest_declared_budget_changes_only_the_actual_execution_condition_axis (Scripts.StructTrain.TimeLearner.tests.test_actual_linux_DATA_recognition_job.ActualLinuxDATARecognitionJob) ... ok\ntest_foreign_run_scope_is_rejected_even_with_a_valid_digest (Scripts.StructTrain.TimeLearner.tests.test_actual_linux_DATA_recognition_job.ActualLinuxDATARecognitionJob) ... ok\ntest_invalid_declared_budgets_are_rejected (Scripts.StructTrain.TimeLearner.tests.test_actual_linux_DATA_recognition_job.ActualLinuxDATARecognitionJob) ... ok\ntest_legacy_condition_matches_the_actual_before_timeout_declaration (Scripts.StructTrain.TimeLearner.tests.test_actual_linux_DATA_recognition_job.ActualLinuxDATARecognitionJob) ... ok\ntest_original_rejected_payload_still_fails_before_native_execution (Scripts.StructTrain.TimeLearner.tests.test_actual_linux_DATA_recognition_job.ActualLinuxDATARecognitionJob) ... ok\ntest_schema_version_cannot_silently_add_or_drop_the_execution_budget (Scripts.StructTrain.TimeLearner.tests.test_actual_linux_DATA_recognition_job.ActualLinuxDATARecognitionJob) ... ok\ntest_DATA2_condition_uses_the_actual_native_threshold_without_a_candidate_field (Scripts.StructTrain.TimeLearner.tests.test_actual_linux_frozen_followup_jobs.ActualLinuxFrozenFollowupJobs) ... ok\ntest_all_phases_keep_physics_and_use_their_own_trial_run_scope (Scripts.StructTrain.TimeLearner.tests.test_actual_linux_frozen_followup_jobs.ActualLinuxFrozenFollowupJobs) ... ok\ntest_case_identity_is_independent_of_other_matrix_rows (Scripts.StructTrain.TimeLearner.tests.test_actual_linux_frozen_followup_jobs.ActualLinuxFrozenFollowupJobs) ... ok\ntest_fingerprint_ignores_attempt_identifiers_and_tracks_declared_wall_budget (Scripts.StructTrain.TimeLearner.tests.test_actual_linux_frozen_followup_jobs.ActualLinuxFrozenFollowupJobs) ... ok\ntest_grid_excludes_actual_calibration_foils_without_mutating_model (Scripts.StructTrain.TimeLearner.tests.test_actual_linux_frozen_followup_jobs.ActualLinuxFrozenFollowupJobs) ... ok\ntest_repeat_changes_only_attempt_and_trial_identifiers (Scripts.StructTrain.TimeLearner.tests.test_actual_linux_frozen_followup_jobs.ActualLinuxFrozenFollowupJobs) ... ok\ntest_request_rejects_hidden_threshold_or_training_factors (Scripts.StructTrain.TimeLearner.tests.test_actual_linux_frozen_followup_jobs.ActualLinuxFrozenFollowupJobs) ... ok\ntest_request_requires_exact_predecessor_identity_and_all_integer_phase_budgets (Scripts.StructTrain.TimeLearner.tests.test_actual_linux_frozen_followup_jobs.ActualLinuxFrozenFollowupJobs) ... ok\ntest_third_pulse_has_exact_predeclared_native_times_and_single_target (Scripts.StructTrain.TimeLearner.tests.test_actual_linux_frozen_followup_jobs.ActualLinuxFrozenFollowupJobs) ... ok\ntest_third_pulse_rejects_changed_clock_or_target_or_window (Scripts.StructTrain.TimeLearner.tests.test_actual_linux_frozen_followup_jobs.ActualLinuxFrozenFollowupJobs) ... ok\ntest_actual_confirmation_timing_keeps_all_eight_classifications_and_events (Scripts.StructTrain.TimeLearner.tests.test_actual_linux_frozen_followup_jobs.ActualLinuxFrozenTiming) ... ok\ntest_actual_execution_job_cannot_substitute_for_the_evaluation_specification (Scripts.StructTrain.TimeLearner.tests.test_actual_linux_frozen_followup_jobs.ActualLinuxFrozenTiming) ... ok\n\n----------------------------------------------------------------------\nRan 20 tests in 115.823s\n\nOK\n"
+    },
+    "M40": {
+      "utc": "2026-11-25T19:21:46.005176+00:00",
+      "coordinator": {
+        "owner.json": {
+          "pid": 2542702,
+          "start_ticks": "470403875",
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "uid": 1000
+        },
+        "waiting.json": {
+          "utc": "2026-11-25T19:21:44.325550+00:00",
+          "phase": "native_Train",
+          "role": "round-robin-q3",
+          "exact_supervisor": {
+            "pid": 2569204,
+            "start_ticks": "470460126",
+            "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+            "uid": 1000
+          }
+        },
+        "sequential-completed.json": {
+          "execution": "completed",
+          "validity": "valid",
+          "full_primary_audit": {
+            "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-traversal-sequential-m40-dy5-audit/full-primary-audit.json",
+            "sha256": "67bb142fc124a92a823a61bcc159249a53a82c1864b844b77ed2905fecc8c8db",
+            "size": 104594
+          },
+          "compact": {
+            "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-traversal-sequential-m40-dy5-audit/compact-training-readback.json",
+            "sha256": "b95cd86f954f08772db7b5ac0a672b3761380986d1051fb6f8ba3b0c33b4d974",
+            "size": 78949
+          },
+          "training_outcome": "budget_exhausted",
+          "completed_boundary": false,
+          "native_import_verified": false,
+          "classification_performed": false,
+          "scientific_verdict": null
+        },
+        "round-robin-q3-dispatched.json": {
+          "dispatched": true,
+          "job": "classic-traversal-round-robin-q3-m40-dy5",
+          "supervisor_pid": 2569204,
+          "controller": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-traversal-round-robin-q3-m40-dy5-controller",
+          "output": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-traversal-round-robin-q3-m40-dy5",
+          "original_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+          "job_sha256": "2ca1c5f6557f8b834dfcf5eb7d7c74c1b176d2b7d4426a817bf3ae38ec2cf522",
+          "scientific_verdict": null
+        },
+        "owner_live": true
+      },
+      "cases": {
+        "sequential": {
+          "files": {
+            "terminal.json": {
+              "execution": "completed",
+              "validity": "pending_full_primary_audit",
+              "job_sha256": "97d97ebcd30671a704ffe20bb136cb84fc31c6a9a7aee9f17ca89d336b74cea8",
+              "native_execution_sha256": "6faebb8d4b5c7ecd67994cb3275cd41cd1addf309ffb2228b1747abc0d9289ba",
+              "training_outcome": "budget_exhausted",
+              "completed_boundary": false,
+              "package_path": "train_stopped_state.json",
+              "full_primary_audit_complete": false,
+              "training_certificate_verified": false,
+              "evaluation_verdict": null,
+              "scientific_verdict": null
+            },
+            "audit-worker-terminal.json": {
+              "execution": "completed",
+              "validity": "valid",
+              "full_primary_audit": {
+                "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-traversal-sequential-m40-dy5-audit/full-primary-audit.json",
+                "sha256": "67bb142fc124a92a823a61bcc159249a53a82c1864b844b77ed2905fecc8c8db",
+                "size": 104594
+              },
+              "compact": {
+                "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-traversal-sequential-m40-dy5-audit/compact-training-readback.json",
+                "sha256": "b95cd86f954f08772db7b5ac0a672b3761380986d1051fb6f8ba3b0c33b4d974",
+                "size": 78949
+              },
+              "training_outcome": "budget_exhausted",
+              "completed_boundary": false,
+              "native_import_verified": false,
+              "classification_performed": false,
+              "scientific_verdict": null
+            },
+            "audit-supervisor-result.json": {
+              "reason": null,
+              "record_errors": [],
+              "outer_closed": true,
+              "disk_peak_increment": 241664,
+              "minimum_free": 178546839552,
+              "execution_success_not_inferred_from_cleanup": true,
+              "scientific_verdict": null
+            }
+          },
+          "units": {
+            "full-audit": {
+              "closed": true,
+              "binding": {
+                "kind": "timelearner_contained_binding",
+                "schema_version": 1,
+                "request_sha256": "2b1b4bd38b131d666e38b70f2718c043d515a6c4c25b988e5338e6a66d4c36f4",
+                "unit": "timelearner-eb6781f7-07b8-4deb-bf39-6d7f5eaccf22.service",
+                "invocation_id": "6e06ec489b454df088f4b1731cf4c971",
+                "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-eb6781f7-07b8-4deb-bf39-6d7f5eaccf22.service",
+                "initial_main_pid": 2550833,
+                "initial_start_ticks": "470407188",
+                "sha256": "111135debc6ea2a241d96dd10e8eb9c4b8d29fd482ea42fe1a9eac90e8eba8ee"
+              }
+            },
+            "train": {
+              "closed": true,
+              "binding": {
+                "kind": "timelearner_contained_binding",
+                "schema_version": 1,
+                "request_sha256": "997f52a7a8ac8d5a706b305adcee250016d90f96f74ec19b2c484216b913ad0c",
+                "unit": "timelearner-c1a9fbd9-2f8f-4f22-9c39-d72df329ea91.service",
+                "invocation_id": "18eb1261bcf245b5b701fc739d171bec",
+                "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-c1a9fbd9-2f8f-4f22-9c39-d72df329ea91.service",
+                "initial_main_pid": 685550,
+                "initial_start_ticks": "466696927",
+                "sha256": "0e9898edeba35ddd1ecbec5bc3057aed4440408e1a347f820247a30949130984"
+              }
+            }
+          }
+        },
+        "round-robin-q3": {
+          "files": {},
+          "units": {
+            "train": {
+              "closed": false,
+              "binding": {
+                "kind": "timelearner_contained_binding",
+                "schema_version": 1,
+                "request_sha256": "e65051146b9d4008327b07176702610ab72c0fa4aa3756b2bd19b62dacee0e06",
+                "unit": "timelearner-2e1bafb5-dc4d-4f8e-b9e3-c80e1526985d.service",
+                "invocation_id": "6b86df7a44a04650b0cba82c43ab668d",
+                "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-2e1bafb5-dc4d-4f8e-b9e3-c80e1526985d.service",
+                "initial_main_pid": 2577509,
+                "initial_start_ticks": "470464122",
+                "sha256": "4265dd80410681eca3885b1a58ad9487721f6b5c643bbf2dd7ded1268f47d172"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Windows14": {
+      "utc": "2026-11-25T19:18:07.389707+00:00",
+      "controls": {
+        "Classic-cap8-resume-backend-location-ej22": {
+          "files": {
+            "owner.json": {
+              "pid": 12756,
+              "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+              "creation_filetime": "134401019930872925"
+            },
+            "terminal.json": {
+              "kind": "timelearner_Classic_cap8_actual_same_matrix_recognition_result",
+              "schema_version": 1,
+              "execution": "completed",
+              "validity": "valid",
+              "actual_evaluation": {
+                "kind": "timelearner_initial_windows_physical_evaluation",
+                "schema_version": 1,
+                "execution": "completed",
+                "validity": "valid",
+                "native_execution_verified": true,
+                "frozen_model_verified": true,
+                "replay_equality_claimed": false,
+                "model_revision": "1549d396c21dd14034263084f867066655292fa2de17590973c4be16779176dc",
+                "source_model_data_sha256": "3be72f57af38774b79a3bdd75a891c8d5c95c535af76ce7cf765d50ae5a31f12",
+                "threshold": 0.026339412714535534,
+                "counts": {
+                  "TP": 1,
+                  "FP": 1,
+                  "FN": 0,
+                  "TN": 6,
+                  "targets": 1,
+                  "foils": 7,
+                  "target_trials_with_outside_spikes": 0,
+                  "accuracy": 0.875,
+                  "target_hit_rate": 1,
+                  "foil_response_rate": 0.14285714285714285
+                },
+                "complete_observations": 8,
+                "native_execution": {
+                  "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\classic-cap8-data3-confirmation8-ej22\\native\\execution.json",
+                  "sha256": "a537798d43bd384632adf77e86ca1e08ff2887e113d7020f3310c401f4160897",
+                  "size": 3332
+                },
+                "source_training_outcome_unchanged": true,
+                "training_certificate_transferred": false,
+                "calibration_confirmed": false,
+                "scientific_verdict": null
+              },
+              "baseline_evaluation": {
+                "kind": "timelearner_initial_windows_physical_evaluation",
+                "schema_version": 1,
+                "execution": "completed",
+                "validity": "valid",
+                "native_execution_verified": true,
+                "frozen_model_verified": true,
+                "replay_equality_claimed": false,
+                "model_revision": "b82b884e18fb1871a1db8d6925586c2e50946cb073598d7726b8bcf79c938e56",
+                "source_model_data_sha256": "72195b65a6a71908fac1be3ea47ac9a7b16108d1a6f183db7057f485fe1fa7fc",
+                "threshold": 100,
+                "counts": {
+                  "TP": 0,
+                  "FP": 0,
+                  "FN": 1,
+                  "TN": 7,
+                  "targets": 1,
+                  "foils": 7,
+                  "target_trials_with_outside_spikes": 0,
+                  "accuracy": 0.875,
+                  "target_hit_rate": 0,
+                  "foil_response_rate": 0
+                },
+                "complete_observations": 8,
+                "native_execution": {
+                  "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\classic-cap8-data2-baseline8-ea4\\native\\execution.json",
+                  "sha256": "308f59f761e34cc46bbf10920945b348c161661fc5fb99145f0575a6f30b1b64",
+                  "size": 3327
+                },
+                "source_training_outcome_unchanged": true,
+                "training_certificate_transferred": false,
+                "calibration_confirmed": false,
+                "scientific_verdict": null
+              },
+              "proposal": {
+                "path": "C:\\Projects\\TimeLearnerWorker\\controls\\Classic-cap8-resume-backend-location-ej22\\threshold-proposal.json",
+                "sha256": "5f23e2cc30f1fbbf572c3ed5f40d750942c16ac3caab713834fcf6a4a1e77e97",
+                "size": 6184
+              },
+              "source_DATA1_revision": "b82b884e18fb1871a1db8d6925586c2e50946cb073598d7726b8bcf79c938e56",
+              "source_recognition_revision": "b82b884e18fb1871a1db8d6925586c2e50946cb073598d7726b8bcf79c938e56",
+              "source_original_training_outcome": "budget_exhausted",
+              "source_unchanged": true,
+              "working_example_criterion_met": true,
+              "protocol": "historical_same_matrix",
+              "independent_evaluation": false,
+              "training_certificate_transferred": false,
+              "calibration_certificate_transferred": false,
+              "no_new_Train": true,
+              "full_primary_archival_pending": true,
+              "all_pattern_temporal_report_pending": true,
+              "scientific_verdict": null
+            }
+          },
+          "exists": true,
+          "live": false
+        },
+        "Classic-cap8-native-repeat-after-confirmation-ek2": {
+          "files": {
+            "owner.json": {
+              "pid": 1560,
+              "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+              "creation_filetime": "134401038650303672"
+            },
+            "waiting.json": {
+              "utc": "2026-11-25T18:36:20.253351+00:00",
+              "source_owner_live": true,
+              "exact_predecessor": {
+                "pid": 12756,
+                "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+                "creation_filetime": "134401019930872925"
+              },
+              "native_repeat_started": false
+            }
+          },
+          "exists": true,
+          "live": true
+        },
+        "classic-cap8-frozen-third-grid-win-ek12": {
+          "files": {
+            "owner.json": {
+              "pid": 4712,
+              "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+              "creation_filetime": "134401051553912453"
+            },
+            "waiting.json": {
+              "phase": "actual_repeat",
+              "owner_live": true,
+              "exact_owner": {
+                "pid": 1560,
+                "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+                "creation_filetime": "134401038650303672"
+              }
+            }
+          },
+          "exists": true,
+          "live": true,
+          "log_tail": ""
+        }
+      },
+      "jobs": {
+        "classic-cap8-data3-confirmation8-ej22": {
+          "exists": true,
+          "files": {
+            "terminal.json": {
+              "kind": "timelearner_initial_windows_physical_evaluation",
+              "schema_version": 1,
+              "execution": "completed",
+              "validity": "valid",
+              "native_execution_verified": true,
+              "frozen_model_verified": true,
+              "replay_equality_claimed": false,
+              "model_revision": "1549d396c21dd14034263084f867066655292fa2de17590973c4be16779176dc",
+              "source_model_data_sha256": "3be72f57af38774b79a3bdd75a891c8d5c95c535af76ce7cf765d50ae5a31f12",
+              "threshold": 0.026339412714535534,
+              "counts": {
+                "TP": 1,
+                "FP": 1,
+                "FN": 0,
+                "TN": 6,
+                "targets": 1,
+                "foils": 7,
+                "target_trials_with_outside_spikes": 0,
+                "accuracy": 0.875,
+                "target_hit_rate": 1,
+                "foil_response_rate": 0.14285714285714285
+              },
+              "complete_observations": 8,
+              "native_execution": {
+                "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\classic-cap8-data3-confirmation8-ej22\\native\\execution.json",
+                "sha256": "a537798d43bd384632adf77e86ca1e08ff2887e113d7020f3310c401f4160897",
+                "size": 3332
+              },
+              "source_training_outcome_unchanged": true,
+              "training_certificate_transferred": false,
+              "calibration_confirmed": false,
+              "scientific_verdict": null
+            },
+            "process-result.json": {
+              "kind": "timelearner_windows_process_result",
+              "schema_version": 1,
+              "execution": "completed",
+              "validity": "valid",
+              "reason": "exit_zero",
+              "returncode": 0,
+              "scientific_verdict": null,
+              "thread_limit_enforced": false,
+              "memory_limit_semantics": "job_committed_virtual_memory",
+              "wall_budget_scope": "whole_attempt_including_preparation",
+              "descendants_at_main_exit": [],
+              "all_processes_closed": true,
+              "cooperative_capture": "completed",
+              "runtime_provenance": "loaded_files_captured",
+              "observed_module_files": 47,
+              "wall_seconds": 2961.612741400022,
+              "child_resumed": true,
+              "job_name": "Local\\TimeLearner-c8f6325e-2e4c-406b-ad0e-b29f11182ee3"
+            }
+          },
+          "owners": [
+            {
+              "owner": {
+                "executable": "C:\\Projects\\TimeLearnerWorker\\runtime-physical-threshold-DATA3-sdk43-win-dg21\\NeuroModelerConsole.exe",
+                "creation_filetime": "134401023105726292",
+                "pid": 18028,
+                "job_name": "Local\\TimeLearner-c8f6325e-2e4c-406b-ad0e-b29f11182ee3",
+                "runtime_fingerprint": "77fa25c0e052822dea3e3093d304bcd7cf19343308248441af3029ba86da0791",
+                "suspended_until_limits_applied": true
+              },
+              "live": false
+            }
+          ],
+          "trials": [
+            "trial-0.json",
+            "trial-1.json",
+            "trial-2.json",
+            "trial-3.json",
+            "trial-4.json",
+            "trial-5.json",
+            "trial-6.json",
+            "trial-7.json"
+          ]
+        },
+        "classic-cap8-fresh-physical-repeat-ek2": {
+          "exists": true,
+          "files": {},
+          "owners": [
+            {
+              "owner": {
+                "executable": "C:\\Projects\\TimeLearnerWorker\\runtime-physical-threshold-DATA3-sdk43-win-dg21\\NeuroModelerConsole.exe",
+                "creation_filetime": "134401055602388448",
+                "pid": 21912,
+                "job_name": "Local\\TimeLearner-bf3523b9-7796-4105-ae59-25d2cd512f0d",
+                "runtime_fingerprint": "77fa25c0e052822dea3e3093d304bcd7cf19343308248441af3029ba86da0791",
+                "suspended_until_limits_applied": true
+              },
+              "live": true
+            }
+          ],
+          "trials": [
+            "trial-0.json",
+            "trial-1.json",
+            "trial-2.json",
+            "trial-3.json",
+            "trial-4.json",
+            "trial-5.json"
+          ]
+        },
+        "classic-cap8-frozen-third-grid-win-ek12-third-pulse": {
+          "exists": false,
+          "files": {},
+          "owners": [],
+          "trials": []
+        },
+        "classic-cap8-frozen-third-grid-win-ek12-new-foils": {
+          "exists": false,
+          "files": {},
+          "owners": [],
+          "trials": []
+        }
+      }
+    }
+  },
+  "full_plan": {
+    "goal_status": "active",
+    "fully_accepted_stages": [
+      0
+    ],
+    "other_stages_partial": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "remaining_register": "Docs/StructTrain/TimeLearner/PlanRemainingWork-20261123.ru.md",
+    "source_cap24_primary_and_recognition_not_yet_requeued": true
+  },
+  "existing_DOCX_v5_unchanged": true,
+  "scientific_verdict": null
+}

@@ -1,0 +1,191 @@
+{
+  "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-24/Branch-DATA3-ITI-pilot-proof-di8.json",
+  "object": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/8e/8e38bf8591f8c47712c699da4912e33060607842e29a5dcadad56908ac5e79c1",
+    "sha256": "8e38bf8591f8c47712c699da4912e33060607842e29a5dcadad56908ac5e79c1",
+    "bytes": 25513
+  },
+  "counts": {
+    "TP": 1,
+    "FP": 1,
+    "FN": 0,
+    "TN": 6,
+    "targets": 1,
+    "foils": 7,
+    "target_trials_with_outside_spikes": 0,
+    "accuracy": 0.875,
+    "target_hit_rate": 1.0,
+    "foil_response_rate": 0.14285714285714285
+  },
+  "actual_timing": [
+    {
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "begin": 0,
+      "end": 2,
+      "declared_stimulus_onset": 0.01,
+      "actual_stimulus_times": [
+        0.01,
+        0.09,
+        0.25,
+        0.49
+      ],
+      "actual_spike_times": [
+        0.4935
+      ],
+      "spike_count": 1,
+      "samples": 4001,
+      "first_sample_time": 0,
+      "last_sample_time": 2
+    },
+    {
+      "sample_id": "phasea-row-1",
+      "label": "foil",
+      "begin": 2.0005,
+      "end": 4.000500000000001,
+      "declared_stimulus_onset": 2.0105,
+      "actual_stimulus_times": [
+        2.0105,
+        2.2505,
+        2.4105,
+        2.4905
+      ],
+      "actual_spike_times": [],
+      "spike_count": 0,
+      "samples": 4001,
+      "first_sample_time": 2.0005,
+      "last_sample_time": 4.0005
+    },
+    {
+      "sample_id": "phasea-row-2",
+      "label": "foil",
+      "begin": 4.001,
+      "end": 6.001,
+      "declared_stimulus_onset": 4.011,
+      "actual_stimulus_times": [
+        4.011,
+        4.171,
+        4.251,
+        4.491
+      ],
+      "actual_spike_times": [],
+      "spike_count": 0,
+      "samples": 4001,
+      "first_sample_time": 4.001,
+      "last_sample_time": 6.001
+    },
+    {
+      "sample_id": "phasea-row-3",
+      "label": "foil",
+      "begin": 6.0015,
+      "end": 8.0015,
+      "declared_stimulus_onset": 6.0115,
+      "actual_stimulus_times": [
+        6.0115,
+        6.1715,
+        6.3315,
+        6.4915
+      ],
+      "actual_spike_times": [],
+      "spike_count": 0,
+      "samples": 4001,
+      "first_sample_time": 6.0015,
+      "last_sample_time": 8.0015
+    },
+    {
+      "sample_id": "phasea-row-4",
+      "label": "foil",
+      "begin": 8.002,
+      "end": 10.002,
+      "declared_stimulus_onset": 8.012,
+      "actual_stimulus_times": [
+        8.012,
+        8.032,
+        8.252,
+        8.492
+      ],
+      "actual_spike_times": [
+        8.495
+      ],
+      "spike_count": 1,
+      "samples": 4001,
+      "first_sample_time": 8.002,
+      "last_sample_time": 10.002
+    },
+    {
+      "sample_id": "phasea-row-5",
+      "label": "foil",
+      "begin": 10.0025,
+      "end": 12.0025,
+      "declared_stimulus_onset": 10.0125,
+      "actual_stimulus_times": [
+        10.0125,
+        10.2525,
+        10.4725,
+        10.4925
+      ],
+      "actual_spike_times": [],
+      "spike_count": 0,
+      "samples": 4001,
+      "first_sample_time": 10.0025,
+      "last_sample_time": 12.0025
+    },
+    {
+      "sample_id": "phasea-row-6",
+      "label": "foil",
+      "begin": 12.003,
+      "end": 14.003,
+      "declared_stimulus_onset": 12.013,
+      "actual_stimulus_times": [
+        12.013,
+        12.053,
+        12.093,
+        12.493
+      ],
+      "actual_spike_times": [],
+      "spike_count": 0,
+      "samples": 4001,
+      "first_sample_time": 12.003,
+      "last_sample_time": 14.003
+    },
+    {
+      "sample_id": "phasea-row-7",
+      "label": "foil",
+      "begin": 14.0035,
+      "end": 16.494,
+      "declared_stimulus_onset": 14.0135,
+      "actual_stimulus_times": [
+        14.0135,
+        14.4135,
+        14.4535,
+        14.4935
+      ],
+      "actual_spike_times": [],
+      "spike_count": 0,
+      "samples": 4982,
+      "first_sample_time": 14.0035,
+      "last_sample_time": 16.494
+    }
+  ],
+  "manifest": {
+    "path": "/media/user/Data/TimeLearnerRefactor/readbacks/large-Branch-DATA3-order-cadence-reset-dh10/r0-long-reset/run-manifest.json",
+    "sha256": "b7204402b8cf6932b582e0dc53228a448a448f2b7ec6bbfecc9c1e52e2949125",
+    "size": 53661
+  },
+  "full_primary_archive": false,
+  "scientific_verdict": null,
+  "kind": "timelearner_Branch_ITI_source_replay_control",
+  "schema_version": 1,
+  "first_seven_complete_responses_preserved": true,
+  "maximum_absolute_signal_difference": 0.0,
+  "last_trial_extended_window": true,
+  "last_trial_common_prefix_samples": 4001,
+  "last_trial_common_prefix_signal_delta": 0.0,
+  "last_trial_common_prefix_relative_time_delta": 0.0,
+  "full_matrix_complete": false,
+  "new_training": false,
+  "new_calibration": false
+}

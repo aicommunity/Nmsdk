@@ -1,0 +1,212 @@
+{
+  "kind": "timelearner_closed_calibration_collection_admission_correction",
+  "schema_version": 1,
+  "previous_execution": {
+    "kind": "timelearner_windows_process_result",
+    "schema_version": 1,
+    "execution": "process_error",
+    "validity": "valid",
+    "reason": "nonzero_exit",
+    "returncode": 1,
+    "scientific_verdict": null,
+    "thread_limit_enforced": false,
+    "memory_limit_semantics": "job_committed_virtual_memory",
+    "wall_budget_scope": "whole_attempt_including_preparation",
+    "descendants_at_main_exit": [],
+    "all_processes_closed": true,
+    "cooperative_capture": "not_requested",
+    "runtime_provenance": "loaded_files_captured",
+    "observed_module_files": 31,
+    "wall_seconds": 3.7419072999618948,
+    "child_resumed": true,
+    "job_name": "Local\\TimeLearner-9bdc8ed9-049b-440b-ba62-5555abd662d1"
+  },
+  "failure_reason": "collection_total_bound",
+  "actual_source_inventory": {
+    "roots": {
+      "baseline-job": {
+        "files": 43,
+        "bytes": 3400492133,
+        "largest": [
+          {
+            "path": "native\\trial-5.json",
+            "bytes": 1297810
+          },
+          {
+            "path": "native\\trial-7.json",
+            "bytes": 1297823
+          },
+          {
+            "path": "native\\job.json",
+            "bytes": 1122242136
+          },
+          {
+            "path": "native\\model-after.json",
+            "bytes": 1133895325
+          },
+          {
+            "path": "native\\model.json",
+            "bytes": 1133895325
+          }
+        ]
+      },
+      "baseline-controls": {
+        "files": 44,
+        "bytes": 955243,
+        "largest": [
+          {
+            "path": "audit-process\\request.json",
+            "bytes": 8724
+          },
+          {
+            "path": "worker.py",
+            "bytes": 9114
+          },
+          {
+            "path": "runtime.json",
+            "bytes": 21726
+          },
+          {
+            "path": "independent-audit.json",
+            "bytes": 361985
+          },
+          {
+            "path": "specification.json",
+            "bytes": 494233
+          }
+        ]
+      },
+      "calibrated-job": {
+        "files": 43,
+        "bytes": 3541867194,
+        "largest": [
+          {
+            "path": "native\\trial-0.json",
+            "bytes": 1360001
+          },
+          {
+            "path": "native\\trial-6.json",
+            "bytes": 1367194
+          },
+          {
+            "path": "native\\job.json",
+            "bytes": 1122242193
+          },
+          {
+            "path": "native\\model-after.json",
+            "bytes": 1204482989
+          },
+          {
+            "path": "native\\model.json",
+            "bytes": 1204482989
+          }
+        ]
+      },
+      "calibrated-controls": {
+        "files": 46,
+        "bytes": 982319,
+        "largest": [
+          {
+            "path": "audit-process\\request.json",
+            "bytes": 8728
+          },
+          {
+            "path": "worker.py",
+            "bytes": 9114
+          },
+          {
+            "path": "runtime.json",
+            "bytes": 21726
+          },
+          {
+            "path": "independent-audit.json",
+            "bytes": 379239
+          },
+          {
+            "path": "specification.json",
+            "bytes": 494355
+          }
+        ]
+      },
+      "baseline-inputs": {
+        "files": 3009,
+        "bytes": 2884015337,
+        "largest": [
+          {
+            "path": "source\\composite-measurements\\group-000118.json",
+            "bytes": 6745218
+          },
+          {
+            "path": "source\\composite-measurements\\group-000117.json",
+            "bytes": 6745266
+          },
+          {
+            "path": "source\\train_stopped_summary.json",
+            "bytes": 28999225
+          },
+          {
+            "path": "source\\composite-measurements\\index.json",
+            "bytes": 901842632
+          },
+          {
+            "path": "source\\train_stopped_state.json",
+            "bytes": 1063940308
+          }
+        ]
+      },
+      "calibrated-inputs": {
+        "files": 3009,
+        "bytes": 2884015394,
+        "largest": [
+          {
+            "path": "source\\composite-measurements\\group-000118.json",
+            "bytes": 6745218
+          },
+          {
+            "path": "source\\composite-measurements\\group-000117.json",
+            "bytes": 6745266
+          },
+          {
+            "path": "source\\train_stopped_summary.json",
+            "bytes": 28999225
+          },
+          {
+            "path": "source\\composite-measurements\\index.json",
+            "bytes": 901842632
+          },
+          {
+            "path": "source\\train_stopped_state.json",
+            "bytes": 1063940308
+          }
+        ]
+      }
+    },
+    "total_bytes": 12712327620
+  },
+  "declared_source_bytes": 12712327620,
+  "new_upper_bound_bytes": 13958643712,
+  "source_file_upper_bound_bytes": 2147483648,
+  "replacement_dispatch": {
+    "dispatched": true,
+    "job": "windows-measured-count-calibration-primary-collection-v2",
+    "controls_commit": "0ffd70432a28745a20d08d2972849bebc55b8c63",
+    "source_root": "cc6f271ec37a631994e22b6bf2973afe1e9ce4ea",
+    "task": {
+      "scientific_verdict": null,
+      "instance": "{D23F16BE-1B8B-4454-A80C-130F689183DE}",
+      "execution_time_limit": "PT2H",
+      "task": "TimeLearner-windows-measured-count-calibration-primary-collection-v2",
+      "engine_pid": 20092
+    },
+    "memory_bytes": 2147483648,
+    "maximum_wall_seconds": 3600,
+    "low_priority_streaming_collection": true,
+    "no_native_model_run": true,
+    "original_source_files_not_removed": true,
+    "scientific_verdict": null
+  },
+  "source_originals_unchanged": true,
+  "native_experiment_not_repeated": true,
+  "central_archive_transfer_not_yet_complete": true,
+  "scientific_verdict": null
+}

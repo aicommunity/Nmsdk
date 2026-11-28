@@ -1,0 +1,61 @@
+{
+  "via_jump": "10.245.1.12",
+  "host": "10.245.1.14",
+  "operator_sha256": "7ff7382bd2fc57d7c088ae51496183481daedd68ab4c97a365ce2cb6869ba8ec",
+  "returncode": 0,
+  "stderr": "",
+  "observation": {
+    "passed": true,
+    "controls": "9a07113b8c7336433757ad8c0edea129328eb7cb",
+    "tests": {
+      "tests_run": 11,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "fixture_before": {
+        "recognition-class-definitions.json": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-elder-recognition-images-diff-a2\\recognition-class-definitions.json",
+          "sha256": "a518f81ff01ca8c0848b68036a537de27cd5936d1da00717fa43a939fc579752",
+          "size": 512770
+        },
+        "source-class-definitions.json": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-elder-recognition-images-diff-a2\\source-class-definitions.json",
+          "sha256": "4a21c001602f71b6a70592274668198922552660b98a05c285e71cb9d2e80042",
+          "size": 498714
+        }
+      },
+      "fixture_after": {
+        "recognition-class-definitions.json": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-elder-recognition-images-diff-a2\\recognition-class-definitions.json",
+          "sha256": "a518f81ff01ca8c0848b68036a537de27cd5936d1da00717fa43a939fc579752",
+          "size": 512770
+        },
+        "source-class-definitions.json": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-elder-recognition-images-diff-a2\\source-class-definitions.json",
+          "sha256": "4a21c001602f71b6a70592274668198922552660b98a05c285e71cb9d2e80042",
+          "size": 498714
+        }
+      }
+    },
+    "process": {
+      "kind": "timelearner_windows_process_result",
+      "schema_version": 1,
+      "execution": "completed",
+      "validity": "valid",
+      "reason": "exit_zero",
+      "returncode": 0,
+      "scientific_verdict": null,
+      "thread_limit_enforced": false,
+      "memory_limit_semantics": "job_committed_virtual_memory",
+      "wall_budget_scope": "whole_attempt_including_preparation",
+      "descendants_at_main_exit": [],
+      "all_processes_closed": true,
+      "cooperative_capture": "not_requested",
+      "runtime_provenance": "loaded_files_captured",
+      "observed_module_files": 32,
+      "wall_seconds": 2.491980400052853,
+      "child_resumed": true,
+      "job_name": "Local\\TimeLearner-1e9bf395-f9eb-4a8f-974a-fe44ef8cf6c4"
+    }
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "observed_utc": "2026-11-23T19:51:35.002401+00:00",
+  "actual_native": {
+    "execution": "running",
+    "all_processes_closed": false,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "25a0f26d3387252760fb3ea14bc7cb9aee36c33a7a8a196af84791ecb603d8d2",
+      "unit": "timelearner-7a061d31-ad66-4886-9a29-2d8250c54c1d.service",
+      "invocation_id": "52237d6a949b4028a998cfe11c4b4cf0",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-7a061d31-ad66-4886-9a29-2d8250c54c1d.service",
+      "initial_main_pid": 1423053,
+      "initial_start_ticks": "450583490",
+      "sha256": "0582602e51c99dbd686fe7edbcca36a72691a108f7f06c10828839fab9e4687f"
+    }
+  },
+  "raw_trial_json": 0,
+  "stopped_trial_json": 637,
+  "stopped_trial_csv": 637,
+  "original_native_process_present": true,
+  "native_process_resources": {
+    "State": "R (running)",
+    "VmPeak": "9477240 kB",
+    "VmRSS": "6233300 kB",
+    "Threads": "7"
+  },
+  "native_process_io": "rchar: 254294704\nwchar: 1453691628\nsyscr: 20211\nsyscw: 16009\nread_bytes: 0\nwrite_bytes: 1459593216\ncancelled_write_bytes: 0\n",
+  "new_native_nontrial_files": [
+    {
+      "name": "job.json",
+      "bytes": 940946
+    },
+    {
+      "name": "initial-state.json",
+      "bytes": 223854
+    },
+    {
+      "name": "train_stopped_state.json",
+      "bytes": 1203258866
+    }
+  ],
+  "classic-n0-proposal-full-primary-audit-m40-ac6": {
+    "queue_kernel_live": true,
+    "queue-state.json": {
+      "reason": "waiting_for_original_native_and_controller_closure",
+      "observed_utc": "2026-11-23T19:51:29.784341+00:00",
+      "native_closed": false,
+      "controller_closed": false,
+      "elapsed_wait_seconds": 29874.73661289178,
+      "no_Train_restarted": true,
+      "scientific_verdict": null
+    }
+  },
+  "fixed-classic-matched-duration-holdout-m40-as6": {
+    "queue_kernel_live": true,
+    "queue-state.json": {
+      "reason": "waiting_for_previously_queued_scientific_work",
+      "observed_utc": "2026-11-23T19:51:25.268499+00:00",
+      "prerequisite_owner_live": {
+        "primary": true,
+        "delay": true,
+        "recognition": true
+      },
+      "source_Train_all_processes_closed": false,
+      "recognition_supervisor_live": false,
+      "recognition_terminal_present": false,
+      "recognition_phases_closed": true,
+      "reserved_slots": 1,
+      "elapsed_wait_seconds": 425.71944572310895,
+      "new_native_started": false
+    }
+  }
+}

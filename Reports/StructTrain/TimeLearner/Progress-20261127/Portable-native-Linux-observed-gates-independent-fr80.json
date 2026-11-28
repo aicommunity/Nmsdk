@@ -1,0 +1,68 @@
+{
+  "kind": "timelearner_external_scientific_result_reference",
+  "schema_version": 1,
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/1a/1ae3d04cc34953008273ccb2f5de0a5d3214623f338e09e705cc2e9f1dc88224",
+      "sha256": "1ae3d04cc34953008273ccb2f5de0a5d3214623f338e09e705cc2e9f1dc88224",
+      "bytes": 113659
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/ae/aebd4064535948d0c3db9326b6c1803083316c4642226c2ff2723aa2e7304cad",
+      "sha256": "aebd4064535948d0c3db9326b6c1803083316c4642226c2ff2723aa2e7304cad",
+      "bytes": 56607180
+    },
+    "independent-reader.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/a3/a3453d3b80dc6a1a3c4681fb3f9bcff58ca14317615442f19618a902dfbaf42a",
+      "sha256": "a3453d3b80dc6a1a3c4681fb3f9bcff58ca14317615442f19618a902dfbaf42a",
+      "bytes": 1994
+    },
+    "restoration.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/3a/3a7e059ada652a8c8b27fb52743522bcdf7053c8aef53c6edc18fef28b75da5b",
+      "sha256": "3a7e059ada652a8c8b27fb52743522bcdf7053c8aef53c6edc18fef28b75da5b",
+      "bytes": 425
+    },
+    "reader.py": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/63/63701d8409100c77535c66daa0e23889e118fbf1d9f96da9d9c6ec19b8faf74f",
+      "sha256": "63701d8409100c77535c66daa0e23889e118fbf1d9f96da9d9c6ec19b8faf74f",
+      "bytes": 5643
+    }
+  },
+  "members": 570,
+  "all_members_independently_restored": true,
+  "all_actual_loaded_file_bytes_verified": true,
+  "positive_tests": {
+    "new": 10,
+    "archive_regressions": 23,
+    "additional_fresh_parent_cases": 14
+  },
+  "remaining_order_dependent_image_rest_failures": true,
+  "original_MSVC_DATA2_direct_import_still_failed": true,
+  "candidate_accepted": false,
+  "scientific_verdict": null,
+  "upstream_source_catalog": {
+    "relative_path": "experiments/2026-11-27/Portable-native-Linux-observed-gates-fr77.json",
+    "bytes": 10170,
+    "sha256": "f4630d0d290e3053a28f0157b1ed43592ff6cea5197dbce2af2860ca883a2b5f"
+  },
+  "source_catalog": {
+    "relative_path": "experiments/2026-11-27/Portable-native-Linux-observed-gates-independent-fr80.json",
+    "bytes": 2681,
+    "sha256": "a7c67d0e4db8bfa77d13ffb46031aa2de0375e081988d228d7cfc8b97c67c3b4"
+  }
+}

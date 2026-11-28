@@ -1,0 +1,54 @@
+{
+  "kind": "timelearner_external_scientific_result_reference",
+  "schema_version": 1,
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/f0/f0bc34fe4f19c1b13310e87d71fd5c20e5818eefe70f9ae2f3a8f21c82f57f9e",
+      "sha256": "f0bc34fe4f19c1b13310e87d71fd5c20e5818eefe70f9ae2f3a8f21c82f57f9e",
+      "bytes": 6208
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/f1/f1e6847ef094ae0b10aacb3241e8cf410e76b9aec08f7e690782d4371e4aab1a",
+      "sha256": "f1e6847ef094ae0b10aacb3241e8cf410e76b9aec08f7e690782d4371e4aab1a",
+      "bytes": 3618188
+    }
+  },
+  "acceptance": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/e3/e34e256530a8f9d17adf9b81d903685be28d5300f6bba7d1ed0da7559e101b04",
+    "sha256": "e34e256530a8f9d17adf9b81d903685be28d5300f6bba7d1ed0da7559e101b04",
+    "bytes": 800
+  },
+  "members": 36,
+  "all_reader_loaded_bytes_verified": true,
+  "reader_process_closed": true,
+  "full_production_history_audit_completed": true,
+  "projected_DATA_matches_actual_recognition_source_bytes": true,
+  "projected_DATA": {
+    "bytes": 15488124,
+    "sha256": "c90717fa45bf4bbb8d0ed5e399b34c1721f0f07d5e91cb081cab67bb353d8497"
+  },
+  "training_outcome": "budget_exhausted",
+  "completed_boundary": false,
+  "new_Train": false,
+  "scientific_verdict": null,
+  "upstream_source_catalog": {
+    "relative_path": "experiments/2026-11-27/Sequential-independent-fresh-reader-jump12-fr180.json",
+    "bytes": 1639,
+    "sha256": "d9c5a6ad3738f9c0a3e0c63e2d08573d37a3937263f096ac7ac9de40f66658bc"
+  },
+  "source_catalog": {
+    "relative_path": "experiments/2026-11-27/Sequential-fresh-reader-independent-fr198.json",
+    "bytes": 1961,
+    "sha256": "aeff50ea46f6315f32d6a82a397c319367f9747120a63e44f6c68d25f1f8ad9f"
+  },
+  "source_kind": "timelearner_Classic_sequential_full_history_reader_independent_acceptance"
+}

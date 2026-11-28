@@ -1,0 +1,73 @@
+{
+  "kind": "timelearner_external_windows_count_new_foil_primary",
+  "schema_version": 1,
+  "package": "/media/user/Data/Nmsdk-StructTrainExpArchive/incoming/20261122-windows-count-new-foil-primary-a1",
+  "objects": {
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/45/45582bf94b2d01b35e009bef0453d1943839848b24cea17c4851a3373f4ed7c5",
+      "sha256": "45582bf94b2d01b35e009bef0453d1943839848b24cea17c4851a3373f4ed7c5",
+      "bytes": 1076744
+    },
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/34/34c08de05c664e6882c48da6703b1cf2498dbe1a6e90ba1dcdddc47997056ff1",
+      "sha256": "34c08de05c664e6882c48da6703b1cf2498dbe1a6e90ba1dcdddc47997056ff1",
+      "bytes": 24412
+    },
+    "collection-metadata.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/4c/4cea58d8b2ce497beadf242334835b52de65a5b70b524ec1e69151ad611c9e4a",
+      "sha256": "4cea58d8b2ce497beadf242334835b52de65a5b70b524ec1e69151ad611c9e4a",
+      "bytes": 1954
+    }
+  },
+  "members": 148,
+  "expanded_bytes": 157799166,
+  "recognition_model_revision": "364de8215f2f818c7ecebf2c31f3650afa719f7c53b20901374dea6c8d68a5d4",
+  "actual_new_foil_counts": {
+    "TP": 1,
+    "FP": 1,
+    "FN": 0,
+    "TN": 25,
+    "targets": 1,
+    "foils": 26,
+    "target_trials_with_outside_spikes": 0,
+    "accuracy": 0.9629629629629629,
+    "target_hit_rate": 1.0,
+    "foil_response_rate": 0.038461538461538464
+  },
+  "condition_fingerprint": "3b4a2738118a98d77c20a048f85b843455fc991f72821d536e0475392cd6f919",
+  "all_transferred_files_verified": true,
+  "full_local_different_host_member_restoration_completed": true,
+  "full_native_experiment_reexecution_on_another_host": false,
+  "producer_primary_not_removed": true,
+  "large_incoming_duplicate_removed_after_verified_CAS_store": true,
+  "archive_or_model_added_to_Git": false,
+  "scientific_verdict": null,
+  "local_restoration": {
+    "purpose": "Restore exact archived primary bytes for scientific illustrations; no model or numerical test",
+    "restoration": {
+      "kind": "timelearner_native_bundle_restoration",
+      "schema_version": 1,
+      "archive_sha256": "45582bf94b2d01b35e009bef0453d1943839848b24cea17c4851a3373f4ed7c5",
+      "archive_members_verified": 148,
+      "retained_regular_files": 148,
+      "compatibility": "retain-regular-glog-aliases-v1",
+      "omitted_redundant_aliases": [],
+      "source_archive_modified": false,
+      "native_execution_attested": false,
+      "scientific_verdict": null
+    },
+    "archive_on_different_host_than_producer": true,
+    "original_producer_files_preserved": true,
+    "numerical_or_model_reexecution": false,
+    "scientific_verdict": null
+  }
+}

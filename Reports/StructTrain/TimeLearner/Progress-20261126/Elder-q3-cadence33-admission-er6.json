@@ -1,0 +1,76 @@
+{
+  "kind": "timelearner_actual_cadence33_admission_progress",
+  "schema_version": 1,
+  "independent_primary": {
+    "catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-26/Elder-q3-cadence33-admission-independent-eq32.json",
+      "sha256": "5d9d73f97ba2489bbb08168509938cf97a5eaecc99936ab962ad23372d8d596b",
+      "size": 2020
+    },
+    "members": 64,
+    "tests": 33,
+    "all_fixtures_and_source_fingerprints_verified": true
+  },
+  "tests": 33,
+  "failures": [],
+  "errors": [],
+  "skipped": [],
+  "metadata_only": true,
+  "scope_accepted": {
+    "result": {
+      "path": "/home/user/timelearner-refactor/readbacks/classic-q3-cadence32-elder-ep11-scope-gate/worker/validation/result.json",
+      "sha256": "f0d95b92c4cd1c176e758b2c061a29a3dc04afe1de1d9d75296973dde000886e",
+      "size": 7116
+    },
+    "executed_tests": 33,
+    "skipped": 0,
+    "all_processes_closed": true,
+    "metadata_only": true,
+    "native_response_preservation_not_yet_proven": true
+  },
+  "first_native_phase": "long-r0-reset",
+  "first_native_phase_observation": {
+    "trials": 2,
+    "native": {
+      "closed": false,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "76292d094817e64539108b867002b01943a81a8d7ca119522bf1cb0140524542",
+        "unit": "timelearner-56edc6e3-9a9f-4715-adbe-6bbb5fe52df1.service",
+        "invocation_id": "f7d7226788204bafa485c1805910547b",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-56edc6e3-9a9f-4715-adbe-6bbb5fe52df1.service",
+        "initial_main_pid": 4048631,
+        "initial_start_ticks": "522291957",
+        "sha256": "9fdbee04ecedc36e9f9a7296ba6ba5b59a6566aec5b22e07b6a8d193a9c9eba7"
+      }
+    },
+    "controller": {
+      "closed": false,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "be8d88013f2b69ddf42980c40530fb37bd7496b4418326022313c8d13aea31a0",
+        "unit": "timelearner-2e855979-e655-416c-9c75-fa94b1476187.service",
+        "invocation_id": "47545b1d3a1a497a81c712a6c1e81d92",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-2e855979-e655-416c-9c75-fa94b1476187.service",
+        "initial_main_pid": 4043933,
+        "initial_start_ticks": "522282746",
+        "sha256": "6a81a9d7cabf6de8ad9557d3b8ad8601d34ab87c4e26b65292815e87e5c5e8cf"
+      }
+    }
+  },
+  "observation_utc": "2026-11-26T00:54:26.923629+00:00",
+  "owner": {
+    "pid": 3918725,
+    "start_ticks": "522025356",
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "uid": 1000
+  },
+  "owner_live_at_observation": true,
+  "declared_cases": 32,
+  "declared_presentations": 256,
+  "final_scientific_counts_not_available": true,
+  "all_stages_1_through_12_not_closed": true,
+  "scientific_verdict": null
+}

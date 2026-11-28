@@ -8,6 +8,49 @@ from Scripts.StructTrain.TimeLearner.native_evidence import EvidenceError
 
 
 class PlotScaleTest(unittest.TestCase):
+    def test_positive_overviews_share_an_explicit_comparison_range(self):
+        import copy
+        from Scripts.StructTrain.TimeLearner.plotting import render_positive_lobe_views
+        def observation(peak):
+            return dict(sample_id="control", label="foil", trial_id="trial",
+                reset_policy="reset_per_trial", valid=True, complete=True,
+                begin=0., end=.002, closed_at=.002, frequency_hz=1000.,
+                spike_times=[], model_before="a"*64,
+                samples=[dict(time=i*.001, soma=[v], stimulus=float(i==1))
+                         for i,v in enumerate([-1.,peak,0.])])
+        observations=[observation(.1),observation(.2)]
+        originals=copy.deepcopy(observations)
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory); overviews=[]
+            for i,o in enumerate(observations):
+                folder=root/str(i);folder.mkdir()
+                views=render_positive_lobe_views(o,0,"soma",folder,
+                    shared_minimum=-1.,shared_maximum=.2)
+                overview=next(v for v in views if v['view']=='positive-lobe-detail-overview')
+                self.assertEqual(overview['positive_range_scope'],'shared')
+                self.assertLess(overview['y_limits'][0],0.)
+                self.assertGreater(overview['y_limits'][1],.2)
+                self.assertTrue((folder/overview['files'][0]).is_file())
+                overviews.append(overview)
+            self.assertEqual(overviews[0]['y_limits'],overviews[1]['y_limits'])
+            folder=root/'local';folder.mkdir()
+            views=render_positive_lobe_views(observations[0],0,"soma",folder)
+            self.assertTrue(all(v['positive_range_scope']=='per_observation' for v in views))
+            svg=(folder/views[0]['files'][1]).read_text()
+            self.assertIn('per_observation Y',svg)
+        self.assertEqual(observations,originals)
+
+    def test_invalid_shared_positive_maximum_is_rejected_before_rendering(self):
+        from Scripts.StructTrain.TimeLearner.plotting import render_positive_lobe_views
+        observation=dict(samples=[dict(soma=[-.1]),dict(soma=[.2])])
+        with tempfile.TemporaryDirectory() as directory:
+            for maximum in (True,.1,float('nan'),float('inf')):
+                with self.subTest(maximum=maximum):
+                    folder=Path(directory)/'never-created'
+                    with self.assertRaisesRegex(EvidenceError,'invalid_positive_lobe_shared_maximum'):
+                        render_positive_lobe_views(observation,0,'soma',folder,shared_maximum=maximum)
+                    self.assertFalse(folder.exists())
+
     def test_actual_long_trial_title_fits_fixed_page_and_preserves_identifiers(self):
         import matplotlib
         matplotlib.use('Agg')

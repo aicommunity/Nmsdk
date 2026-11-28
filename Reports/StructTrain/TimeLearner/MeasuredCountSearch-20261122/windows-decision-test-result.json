@@ -1,0 +1,78 @@
+{
+  "kind": "timelearner_compact_measured_count_decision_validation",
+  "schema_version": 1,
+  "host": "10.245.1.14",
+  "controls_job": "windows-measured-count-decision-build-a4",
+  "controls_commit": "c804e3869ca19b9195bed3529744868e5729ac8b",
+  "decision": {
+    "kind": "timelearner_measured_count_complete_decision_test_result",
+    "schema_version": 1,
+    "root_commit": "fd94014059f7ccea847007e5091108a164943084",
+    "pulse_commit": "649179dd978ef2f579b0c8c020f49643b0fccd3f",
+    "build": "C:\\Projects\\TimeLearnerWorker\\build-measured-count-decision-win-a4",
+    "executable": {
+      "path": "C:\\Projects\\TimeLearnerWorker\\build-measured-count-decision-win-a4\\runtime\\Test_PulseLib_TrainingAlgorithms.exe",
+      "sha256": "0eab4d0d16026ff48b522e4773c4dfee3d09d0d8e548c4f29a4d271d7e5139f4",
+      "size": 1233920
+    },
+    "tests": 146,
+    "new_tests": 10,
+    "all_discovered_tests_executed": true,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "source_trees_unchanged": true,
+    "seconds": 30.281445399974473,
+    "production_controller_compiled": true,
+    "controlled_observations_only": true,
+    "native_Rdk_storage_scheduler_not_verified": true,
+    "scientific_classification_not_assessed": true,
+    "scientific_verdict": null
+  },
+  "raw_kernel_outcome": {
+    "execution": "descendants_remaining",
+    "returncode": 0,
+    "all_processes_closed": true,
+    "reason": "descendants_remaining",
+    "wall_seconds": 32.53762860002462
+  },
+  "compiler_descendants_reaped_after_completed_test": true,
+  "previous_preparation_failures": [
+    {
+      "attempt": "a1",
+      "reason": "operator_embedded_worker_indentation_before_compile"
+    },
+    {
+      "attempt": "a2",
+      "reason": "missing_App_RuntimeCapture_header_in_sparse_source",
+      "configure_returncode": 0,
+      "build_returncode": 2
+    },
+    {
+      "attempt": "a3",
+      "reason": "unsupported_no_cone_option_to_sparse_checkout_add",
+      "native_or_test_dispatched": false
+    }
+  ],
+  "central_primary_publication_pending": false,
+  "native_physical_validation_pending": true,
+  "scientific_classification_not_assessed": true,
+  "scientific_verdict": null,
+  "central_primary_archive": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/43/43d3d9016b839bc8b9b560c3469e6a2ff3b04e47fc8fac5b7c461e19d737426d",
+    "sha256": "43d3d9016b839bc8b9b560c3469e6a2ff3b04e47fc8fac5b7c461e19d737426d",
+    "bytes": 69683268
+  },
+  "primary_bundle": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/39/395580b98f0d7a24c03edbe4718617c417ee5d8277287e9394244b1771278185",
+    "sha256": "395580b98f0d7a24c03edbe4718617c417ee5d8277287e9394244b1771278185",
+    "bytes": 36578
+  },
+  "full_archive_member_restoration_pending": true
+}

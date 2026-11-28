@@ -1,0 +1,134 @@
+{
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/Windows14-Classic-cap24-closed-training-primary-fr660.json",
+    "size": 5538,
+    "sha256": "c96968a5ac0c49d7f7c02ad53be1052cf2076e6d5cdf231190e95f5cabc4f568"
+  },
+  "catalog": {
+    "kind": "actual_Windows14_Classic_cap24_closed_training_complete_primary",
+    "schema_version": 1,
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/76/76a8cf0ef595dca0eae49eff6671291c926dd0c961c3a72038607d6301c86408",
+        "sha256": "76a8cf0ef595dca0eae49eff6671291c926dd0c961c3a72038607d6301c86408",
+        "bytes": 237142
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/c1/c1dbc06e98d005168538e641ecee60d82c34f790ed7d6c734ce1fc04d5425ed6",
+        "sha256": "c1dbc06e98d005168538e641ecee60d82c34f790ed7d6c734ce1fc04d5425ed6",
+        "bytes": 61126336
+      }
+    },
+    "members": 1274,
+    "expanded_bytes": 2315608902,
+    "analysis": {
+      "kind": "actual_closed_Windows14_Classic_cap24_full_training_and_audit",
+      "controls": [
+        {
+          "role": "training",
+          "commit": "bd6cafce50bf2099fc6ea4c01cf450c867b07493"
+        },
+        {
+          "role": "audit",
+          "commit": "b7129d17299626beecc886440a4e6d54e3363cc5"
+        },
+        {
+          "role": "publisher",
+          "commit": "1381a558fa35fe22b7ae6238c01df06674f7e951"
+        }
+      ],
+      "job_sha256": "88328040fb5b7be7192b8398d7c35b6af02214b66b32826d92e19f47b4b1297e",
+      "training_outcome": "budget_exhausted",
+      "completed_boundary": false,
+      "model_revision": "b1430c16b95da83567a01dcd314dbec36c92d2f6965308119ba66b0e14d0f2fc",
+      "source_package": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\classic-repaired-cap24-win14-fr395\\train\\native\\train_stopped_state.json",
+        "sha256": "e2c5e6cdadb2c869f7e7de90390d23e99062cc65771a1ab882bfb392bc838038",
+        "size": 801385236
+      },
+      "physical_projection": {
+        "kind": "timelearner_physical_DATA_projection",
+        "schema_version": 1,
+        "source": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\classic-repaired-cap24-win14-fr395\\train\\native\\train_stopped_state.json",
+          "sha256": "e2c5e6cdadb2c869f7e7de90390d23e99062cc65771a1ab882bfb392bc838038",
+          "size": 801385236
+        },
+        "output": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\classic-cap24-full-audit-fr629\\physical-model-DATA.json",
+          "sha256": "1e0336fff5ed2d05fe65e898cbd2bd011d8f04669e63698bb6017583ea12d175",
+          "size": 20163211
+        },
+        "source_boundary": {
+          "kind": "timelearner_stopped_state",
+          "schema_version": 8,
+          "state_kind": "diagnostic",
+          "sha256": "b74204c4d1c54bfdbdab5753c521a58a8b8bb785119ef59c3007f9ca71fcdd88",
+          "model_revision": "b1430c16b95da83567a01dcd314dbec36c92d2f6965308119ba66b0e14d0f2fc"
+        },
+        "model_revision": "b1430c16b95da83567a01dcd314dbec36c92d2f6965308119ba66b0e14d0f2fc",
+        "physical_model_data_sha256": "63853c379ee1764fb14f5abc96c2ecf55e143a3695312901ae5a94f4ccf56da2",
+        "source_unchanged": true,
+        "source_history_retained_separately": true,
+        "source_training_evidence_checked": false,
+        "native_import_verified": false,
+        "training_certificate_transferred": false,
+        "calibration_confirmed": false,
+        "scientific_verdict": null
+      },
+      "actual_native_and_audit_loaded_bytes_preserved": true,
+      "training_certificate_verified": false,
+      "native_import_verified": false,
+      "classification_performed": false,
+      "new_Train": false,
+      "independent_full_history_audit_pending": true,
+      "scientific_verdict": null
+    },
+    "publication_evidence": {
+      "worker.py": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/58/58b7821abdd6116a09ef6d275649c8f5828d80207839c4224af5b91e8323767f",
+        "sha256": "58b7821abdd6116a09ef6d275649c8f5828d80207839c4224af5b91e8323767f",
+        "bytes": 3865
+      },
+      "request.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/98/98c3beaa69a62ac239d382706ff48e1d774d9792c1a0147524638f79c94b3ef9",
+        "sha256": "98c3beaa69a62ac239d382706ff48e1d774d9792c1a0147524638f79c94b3ef9",
+        "bytes": 226
+      },
+      "controls.bundle": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/f4/f4cd95b2b8b25a87e973f40cccc38963ccff7148ddd1cc49995137dbcb92041b",
+        "sha256": "f4cd95b2b8b25a87e973f40cccc38963ccff7148ddd1cc49995137dbcb92041b",
+        "bytes": 2955
+      },
+      "previous-S4U-publication-failure.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/6f/6f08da13a1e3d5131fa9260c4eed77b9fd66651ddeacc210dad9ecfdcc6c23ed",
+        "sha256": "6f08da13a1e3d5131fa9260c4eed77b9fd66651ddeacc210dad9ecfdcc6c23ed",
+        "bytes": 2158
+      }
+    },
+    "publication_controls_commit": "bb2ffc950d0b20374a3c853b30646277d30c7bf7",
+    "cached_primary_reused_without_new_Train_or_repacking": true,
+    "original_publisher_closed": true,
+    "auxiliary_final_publisher_loaded_map": "unknown",
+    "independent_readback_pending": true,
+    "scientific_verdict": null
+  }
+}

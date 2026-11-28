@@ -1,0 +1,71 @@
+{
+  "via_jump": "10.245.1.12",
+  "host": "10.245.1.14",
+  "operator_sha256": "4dba6dc392f77aca64a1cf6e701639f1a2a6a34d78c1e2b746fcee3cd0907ae7",
+  "returncode": 0,
+  "stderr": "",
+  "observation": {
+    "audit-process/stdout.log": {
+      "bytes": 0,
+      "tail": ""
+    },
+    "audit-process/stderr.log": {
+      "bytes": 1979,
+      "tail": "Traceback (most recent call last):\r\n  File \"C:\\Projects\\TimeLearnerWorker\\controls\\elder-single-sweep-baseline8-a1\\producer.py\", line 24, in <module>\r\n    source_case=_load_source_case('diagnostic-evaluate',source);envelope=load(envelope_path);job={**envelope['job'],'source_stopped':source_case[0]};audit=audit_execution('diagnostic-evaluate',out/'native',job,source_case);write(out/'native-audit.json',audit)\r\n                                                                                                                                                           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Projects\\TimeLearnerWorker\\source-retained-alias-recovery-a1\\Scripts\\StructTrain\\TimeLearner\\native_calibration_worker.py\", line 39, in checked\r\n    return function(*args, **kwargs)\r\n  File \"C:\\Projects\\TimeLearnerWorker\\source-retained-alias-recovery-a1\\Scripts\\StructTrain\\TimeLearner\\native_pipeline_worker.py\", line 363, in audit_execution\r\n    diagnostic_audit = audit_diagnostic_recognition(model, source_case)\r\n  File \"C:\\Projects\\TimeLearnerWorker\\source-retained-alias-recovery-a1\\Scripts\\StructTrain\\TimeLearner\\diagnostic_recognition_evidence.py\", line 13, in audit_diagnostic_recognition\r\n    result = _audit_derivation(package, source_case, diagnostic=True)\r\n  File \"C:\\Projects\\TimeLearnerWorker\\source-retained-alias-recovery-a1\\Scripts\\StructTrain\\TimeLearner\\recognition_evidence.py\", line 123, in _audit_derivation\r\n    require(archive[\"class_definitions\"] == source[\"neuron\"][\"class_definitions\"], \"recognition_images_changed\")\r\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Projects\\TimeLearnerWorker\\source-retained-alias-recovery-a1\\Scripts\\StructTrain\\TimeLearner\\native_evidence.py\", line 28, in require\r\n    raise EvidenceError(reason)\r\nScripts.StructTrain.TimeLearner.native_evidence.EvidenceError: recognition_images_changed\r\n"
+    },
+    "native_files": [
+      {
+        "name": "evaluation.json",
+        "bytes": 4283
+      },
+      {
+        "name": "execution.json",
+        "bytes": 3111
+      },
+      {
+        "name": "job.json",
+        "bytes": 1012793942
+      },
+      {
+        "name": "model-after.json",
+        "bytes": 1024210756
+      },
+      {
+        "name": "model.json",
+        "bytes": 1024210756
+      },
+      {
+        "name": "trial-0.json",
+        "bytes": 1293469
+      },
+      {
+        "name": "trial-1.json",
+        "bytes": 1293694
+      },
+      {
+        "name": "trial-2.json",
+        "bytes": 1293594
+      },
+      {
+        "name": "trial-3.json",
+        "bytes": 1293570
+      },
+      {
+        "name": "trial-4.json",
+        "bytes": 1293567
+      },
+      {
+        "name": "trial-5.json",
+        "bytes": 1297715
+      },
+      {
+        "name": "trial-6.json",
+        "bytes": 1297607
+      },
+      {
+        "name": "trial-7.json",
+        "bytes": 1297744
+      }
+    ]
+  }
+}

@@ -1,0 +1,202 @@
+{
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/Elder-Branch-Count24-closed-primary-fr440.json",
+    "sha256": "620aba9fc7e79cdb5e4f6cb60a635c77333afa7bea201b1d6474a20b8f3cb2b5",
+    "size": 6952
+  },
+  "catalog": {
+    "kind": "timelearner_actual_Branch_Count24_closed_training_primary",
+    "schema_version": 1,
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/ae/aef88438c6cdff5a4f9d47aa7e2947c291a1f1afcb5b05fc6b9216d8ab31b825",
+        "sha256": "aef88438c6cdff5a4f9d47aa7e2947c291a1f1afcb5b05fc6b9216d8ab31b825",
+        "bytes": 262467
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/13/13ffd4c2c0ad91ccdc5115e993e9be2ef4522003c1570e4d0938b26365cc1843",
+        "sha256": "13ffd4c2c0ad91ccdc5115e993e9be2ef4522003c1570e4d0938b26365cc1843",
+        "bytes": 53845496
+      }
+    },
+    "members": 1442,
+    "expanded_bytes": 535589439,
+    "actual_native_loaded_files": 28,
+    "terminal": {
+      "execution": "completed",
+      "validity": "pending_full_primary_audit",
+      "job_sha256": "0580c8ff38767eb1233182f9faff5eb8c47442d8c1a524cf329ecb27fa32f54c",
+      "native_execution_sha256": "445dbfce3571cc07078738d4c52557dd2e98c4e09e802a76f749056cd08856e9",
+      "training_outcome": "invalid_observation",
+      "completed_boundary": false,
+      "package_path": "train_stopped_state.json",
+      "full_primary_audit_complete": false,
+      "training_certificate_verified": false,
+      "evaluation_verdict": null,
+      "scientific_verdict": null
+    },
+    "full_audit_terminal": {
+      "execution": "completed",
+      "validity": "valid",
+      "full_primary_audit": {
+        "path": "/home/user/timelearner-refactor/readbacks/branch-count24-full-audit-fr429/full-primary-audit.json",
+        "sha256": "8b5d3e6c694595210dda6eea3511c93a22dc2fcfff435253426edc230249b843",
+        "size": 62685
+      },
+      "compact": {
+        "path": "/home/user/timelearner-refactor/readbacks/branch-count24-full-audit-fr429/compact-training-readback.json",
+        "sha256": "555c5c9859c4be52625d11cb60c09d13820d3b82b15b4ccc7fe6c06e48474108",
+        "size": 2874
+      },
+      "physical_projection": {
+        "kind": "timelearner_physical_DATA_projection",
+        "schema_version": 1,
+        "source": {
+          "path": "/home/user/timelearner-refactor/readbacks/branch-current-count24-elder-fr372/train/native/train_stopped_state.json",
+          "sha256": "3ccb01aa626c6f9b9c4894fff0d2b0f0d9de546130d56f64d2dfed5cacc18cfd",
+          "size": 140800688
+        },
+        "output": {
+          "path": "/home/user/timelearner-refactor/readbacks/branch-count24-full-audit-fr429/physical-model-DATA.json",
+          "sha256": "cd95945d7a07fdd759f9244e893dc396a3ec628b6279b241784881f94638fc02",
+          "size": 3099982
+        },
+        "source_boundary": {
+          "kind": "timelearner_stopped_state",
+          "schema_version": 7,
+          "state_kind": "diagnostic",
+          "sha256": "c396c0cf5dd7338d6ec5141f3f3cd50fec28d886215c08bb77a793762f7676eb",
+          "model_revision": "e4f8ed1c32287f77d8770d96423728f02cc983d29c2e84177db35f51823f28b9"
+        },
+        "model_revision": "e4f8ed1c32287f77d8770d96423728f02cc983d29c2e84177db35f51823f28b9",
+        "physical_model_data_sha256": "4f4b22415b4805c65d808a025b057429677985309ea82ede7c78ec9f9a64bbba",
+        "source_unchanged": true,
+        "source_history_retained_separately": true,
+        "source_training_evidence_checked": false,
+        "native_import_verified": false,
+        "training_certificate_transferred": false,
+        "calibration_confirmed": false,
+        "scientific_verdict": null
+      },
+      "training_outcome": "invalid_observation",
+      "completed_boundary": false,
+      "native_import_verified": false,
+      "classification_performed": false,
+      "scientific_verdict": null
+    },
+    "compact": {
+      "kind": "timelearner_actual_Branch_Count24_closed_training_readback",
+      "schema_version": 1,
+      "source_package": {
+        "path": "/home/user/timelearner-refactor/readbacks/branch-current-count24-elder-fr372/train/native/train_stopped_state.json",
+        "sha256": "3ccb01aa626c6f9b9c4894fff0d2b0f0d9de546130d56f64d2dfed5cacc18cfd",
+        "size": 140800688
+      },
+      "source_summary": {
+        "path": "/home/user/timelearner-refactor/readbacks/branch-current-count24-elder-fr372/train/native/train_stopped_summary.json",
+        "sha256": "ebd2601d606e57496879e3b4587d17db97a93c8a7696180a9e5071bc1d92b06e",
+        "size": 117052
+      },
+      "training_outcome": "invalid_observation",
+      "completed_boundary": false,
+      "terminal": {
+        "actual_model_epoch": null,
+        "search_terminal_epoch": null,
+        "actual_parameters": null,
+        "search_terminal_parameters": null,
+        "fresh_all_input_verification": null,
+        "status": null,
+        "stopped_outcome": null,
+        "stopped_reason": null,
+        "reason": null,
+        "wall_seconds": null
+      },
+      "historical": {
+        "accepted_parameters": [
+          {
+            "length": 82,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 82,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 27,
+            "resistance": 86000000,
+            "synapses": 4
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "actual_parameters": [
+          {
+            "length": 82,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 82,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 27,
+            "resistance": 86000000,
+            "synapses": 4
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "applied_edits": 28,
+        "search_probes": 60,
+        "composite_counters": {
+          "archive": {
+            "groups": 64,
+            "native_probes": 384,
+            "primary_bytes": 56822436,
+            "sampled_frames": 1382784
+          },
+          "attempt": {
+            "logical_groups": 64,
+            "native_probes": 384,
+            "sampled_frames": 1382784
+          }
+        },
+        "final_group_ids": [],
+        "reference_group_ids": [
+          "branch-current-count24-elder-fr372/session/1/capture/1/1/composite/1",
+          "branch-current-count24-elder-fr372/session/1/capture/1/2/composite/2",
+          "branch-current-count24-elder-fr372/session/1/capture/1/3/composite/3",
+          "branch-current-count24-elder-fr372/session/1/capture/1/4/composite/4"
+        ],
+        "outcome": "invalid_observation",
+        "reason": "rejected_candidate_window:ambiguous",
+        "tolerances": {
+          "amplitude_absolute": 1e-05,
+          "amplitude_relative": 0,
+          "sync": 0.02
+        }
+      },
+      "candidate_count": 25,
+      "classification_performed": false,
+      "scientific_verdict": null
+    },
+    "complete_primary_independent_readback_pending": true,
+    "scientific_verdict": null
+  }
+}

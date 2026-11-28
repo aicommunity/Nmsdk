@@ -1,0 +1,87 @@
+{
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/Native-matrix436-lifecycle-counters-primary-fr590.json",
+    "size": 2494,
+    "sha256": "3661436d2df656ad3baef093243860658b9590e282fbd811822d43af8b82112c"
+  },
+  "catalog": {
+    "kind": "timelearner_actual_relative_lifecycle_counter_matrix436_primary",
+    "schema_version": 1,
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/70/70209aa1ad551546ff0d6b7d4ac404569c3099e329f40d27057bf6fde3ba5756",
+        "sha256": "70209aa1ad551546ff0d6b7d4ac404569c3099e329f40d27057bf6fde3ba5756",
+        "bytes": 1099369
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/36/36c57e452676fc7cb9c5260b004e9bb3c8892542097e1d61bd492ab82b9b1d0b",
+        "sha256": "36c57e452676fc7cb9c5260b004e9bb3c8892542097e1d61bd492ab82b9b1d0b",
+        "bytes": 58062560
+      }
+    },
+    "members": 4805,
+    "expanded_bytes": 2491362140,
+    "tests": 436,
+    "passed": 436,
+    "failed": 0,
+    "rows": [
+      {
+        "name": "search",
+        "inventory": {
+          "expected": 169,
+          "observed": 169,
+          "failed_test_ids": [],
+          "assertion_status": "passed",
+          "sha256": "1993f64cdc452493a915ae492339e00c881a15f6b48e19e348e7ada96a77c21b"
+        },
+        "loaded_files": 28
+      },
+      {
+        "name": "lifecycle",
+        "inventory": {
+          "expected": 191,
+          "observed": 191,
+          "failed_test_ids": [],
+          "assertion_status": "passed",
+          "sha256": "eeddbe226f80c2d0caf6058f58334967d88033ab10e124f3811dc02a69854d4f"
+        },
+        "loaded_files": 28
+      },
+      {
+        "name": "recognition",
+        "inventory": {
+          "expected": 72,
+          "observed": 72,
+          "failed_test_ids": [],
+          "assertion_status": "passed",
+          "sha256": "9c2ea1bdf7a254d024816858175ed0e37d55285f0fb70478de24f8973b0d4e54"
+        },
+        "loaded_files": 28
+      },
+      {
+        "name": "legacy-negative",
+        "inventory": {
+          "expected": 4,
+          "observed": 4,
+          "failed_test_ids": [],
+          "assertion_status": "passed",
+          "sha256": "64797b494e986049b39f9de02b833432e71e152f96bd0f5ab33662443a305141"
+        },
+        "loaded_files": 28
+      }
+    ],
+    "root_commit": "cc081c8c3a9f8524fdb462153a13b016bdaee8a8",
+    "source_unchanged": true,
+    "existing_runtime_unchanged": true,
+    "actual_native_loaded_bytes_verified": true,
+    "all_native_groups_closed": true,
+    "independent_primary_readback_pending": true,
+    "scientific_verdict": null
+  }
+}

@@ -1,0 +1,239 @@
+{
+  "kind": "timelearner_Branch_DATA3_closed_primary_and_visual_evidence",
+  "schema_version": 1,
+  "observed_utc": "2026-11-24T10:10:03.403611+00:00",
+  "archive_catalogs": {
+    "large-Branch-DATA3-eight-and-N0-SDK-de20.json": {
+      "sha256": "74338f0b85384361620dbaf1905f3a584dda09b20d00dda82b9a3233f3ddbd45",
+      "bytes": 2417,
+      "record": {
+        "kind": "timelearner_large_Branch_DATA3_and_N0_controls_catalog",
+        "schema_version": 1,
+        "objects": {
+          "primary": {
+            "kind": "nmsdk_structtrain_external_object",
+            "schema_version": 1,
+            "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+            "object": "objects/sha256/38/385f5f6016c9eecdab2a9f05e54863a502b2b4b8797ff6f2074709096f3ccd68",
+            "sha256": "385f5f6016c9eecdab2a9f05e54863a502b2b4b8797ff6f2074709096f3ccd68",
+            "bytes": 67568064
+          },
+          "bundle": {
+            "kind": "nmsdk_structtrain_external_object",
+            "schema_version": 1,
+            "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+            "object": "objects/sha256/d7/d782f23f8f1329edb9be321114da2d467139b04ece5ba6158b4759e9bab7d245",
+            "sha256": "d782f23f8f1329edb9be321114da2d467139b04ece5ba6158b4759e9bab7d245",
+            "bytes": 469680
+          }
+        },
+        "members": 1954,
+        "restored_members": 1954,
+        "expanded_bytes": 1255622501,
+        "archive_bytes": 67568064,
+        "packaged_pipeline_closure": {
+          "run_snapshots_verified": 1,
+          "artifact_entries_verified": 40,
+          "scientific_verdict": null
+        },
+        "canonical_inventory_alias_projection": [
+          {
+            "omitted_alias": "science/threshold-eight/native.events-log/EventsLog/NeuroModeler.INFO",
+            "retained_target": "science/threshold-eight/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261124-111713.1874478",
+            "bytes": 291,
+            "sha256": "26a49ec717c8dbc5cfcf9e889a6b27050aa0b7ea7fdfe39bcfe562fa71fea111",
+            "owner_pid": 1874478,
+            "original_symlink_target_attested": false
+          }
+        ],
+        "raw_alias_files_retained": true,
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "threshold": 0.09864679711103091,
+        "model_revision": "a71ae5270f9c8fe9c03bc479e473b3d08ea9e798bf134c32ad8aa559a2e34d8a",
+        "trials": 8,
+        "protocol": "Historical Same-Matrix",
+        "completed_Train": false,
+        "training_certificate_transferred": false,
+        "full_4791_source_history_included": false,
+        "independent_restore": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/large-Branch-DATA3-eight-and-N0-SDK-de20/independent-restored",
+        "observed_utc": "2026-11-24T09:22:35.002115+00:00",
+        "whole_plan_complete": false
+      }
+    },
+    "Windows-original-Branch-g2-full-primary-df13.json": {
+      "sha256": "d6bae67f59564290d76b00e343782bba4b9e8a6283b59bf04486608096bef7c9",
+      "bytes": 2532,
+      "record": {
+        "kind": "timelearner_original_Windows_Branch_full_primary_catalog",
+        "schema_version": 1,
+        "observed_utc": "2026-11-24T09:49:51.603640+00:00",
+        "objects": {
+          "primary": {
+            "kind": "nmsdk_structtrain_external_object",
+            "schema_version": 1,
+            "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+            "object": "objects/sha256/4f/4f0dfa246c62e0dc9e76a4d835cd20cb019936019dc23ffc365ac4e72c8737bc",
+            "sha256": "4f0dfa246c62e0dc9e76a4d835cd20cb019936019dc23ffc365ac4e72c8737bc",
+            "bytes": 79506100
+          },
+          "bundle": {
+            "kind": "nmsdk_structtrain_external_object",
+            "schema_version": 1,
+            "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+            "object": "objects/sha256/57/57b39bd4a8ff634f3c35575b3a267a1a349fdc87d372d5c4f1ed451c17b26a5f",
+            "sha256": "57b39bd4a8ff634f3c35575b3a267a1a349fdc87d372d5c4f1ed451c17b26a5f",
+            "bytes": 909092
+          },
+          "archive_producer_controls": {
+            "kind": "nmsdk_structtrain_external_object",
+            "schema_version": 1,
+            "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+            "object": "objects/sha256/fc/fc34eadad2b5d56d54db7819bd475aee028c31dc3a71bcca3a89f1b370614314",
+            "sha256": "fc34eadad2b5d56d54db7819bd475aee028c31dc3a71bcca3a89f1b370614314",
+            "bytes": 4203
+          },
+          "restoration_proof": {
+            "kind": "nmsdk_structtrain_external_object",
+            "schema_version": 1,
+            "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+            "object": "objects/sha256/95/956612131b8099494a002ff3f0334a2f05cb42e8c29412e44f732d971ef11dbe",
+            "sha256": "956612131b8099494a002ff3f0334a2f05cb42e8c29412e44f732d971ef11dbe",
+            "bytes": 1381
+          }
+        },
+        "source_original_root": "C:/Projects/TimeLearnerWorker/jobs/windows-branch-count-two-sweeps-g2",
+        "members": 4863,
+        "native_members": 4791,
+        "expanded_bytes": 5504512132,
+        "archive_bytes": 79506100,
+        "independent_restoration": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/Windows-original-Branch-g2-full-primary-df13/independent-restored",
+        "all4863_members_independently_verified": true,
+        "full_original_run_files_archived": true,
+        "source_execution": "completed",
+        "source_training_outcome": "budget_exhausted",
+        "training_convergence_certified": false,
+        "source_actual_model_revision": "61db0dff81019d4368e2918d59e05e0badf2b2157f25470c1fec3d8b59244235",
+        "source_original_files_deleted": false,
+        "scientific_reclassification_performed": false,
+        "whole_plan_complete": false
+      }
+    },
+    "DATA3-N0-source-targeted43-proof-df12.json": {
+      "sha256": "f163a31256e287510899d55f6869680d595cdf78d359633ae352f2d0888b94b8",
+      "bytes": 595,
+      "record": {
+        "kind": "timelearner_DATA3_and_N0_source_targeted43_acceptance",
+        "schema_version": 1,
+        "object": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/ba/ba14fd229d9912dadf2a6b9441a3d4144f959a3ed0f8b502c0727e319ffb5112",
+          "sha256": "ba14fd229d9912dadf2a6b9441a3d4144f959a3ed0f8b502c0727e319ffb5112",
+          "bytes": 18221
+        },
+        "passed": 43,
+        "failed": 0,
+        "skipped": 0,
+        "source_root": "891a75b39b2b020025aedc7e6158f89fd2f25ed2",
+        "whole_plan_complete": false
+      }
+    }
+  },
+  "waveform_review": {
+    "kind": "timelearner_selected_waveform_review_publication",
+    "observed_utc": "2026-11-24T10:08:55.227702+00:00",
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/large-Branch-DATA3-eight-and-N0-SDK-de20/selected-waveform-review.json",
+    "bytes": 30196,
+    "sha256": "8c8afd5aa0eed29baf7597de7374add519c2df8829a1eeaf04ef04e3ba350dc6",
+    "all48_remote_PNG_hashes_matched": true,
+    "entire2080_cache_reviewed": false,
+    "publication_ready": false
+  },
+  "reviewed_PNG_count": 48,
+  "all_patterns_covered": true,
+  "all2080_reviewed": false,
+  "publication_ready": false,
+  "source_train_execution": "completed",
+  "source_training_outcome": "budget_exhausted",
+  "independent_holdout": {
+    "job": "large-Branch-DATA3-matched-duration-holdout-df4",
+    "protocol_sha256": "510c96b0d61f5e42e8f6cc599c706fe994cebf7cd3d0eaa0f4b26e702672ef0e",
+    "status": "running as observed 2026-11-24T10:12:17Z",
+    "constructor_tests_passed": 9,
+    "target_is_repeated_control": true,
+    "new_negative_patterns": 7,
+    "threshold_fixed": true,
+    "scientific_verdict": null,
+    "observed_utc": "2026-11-24T10:18:13.700803+00:00",
+    "completed_trial_files": 4,
+    "owner_live": true
+  },
+  "whole_plan_complete": false,
+  "original_training_runtime": {
+    "schema_version": 2,
+    "source_closure": {
+      "Bin": {
+        "head": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+        "recorded_gitlink": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+        "status": ""
+      },
+      "Libraries/Nmsdk-MotionControlLib": {
+        "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+        "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+        "status": ""
+      },
+      "Libraries/Nmsdk-PulseLib": {
+        "head": "b03e13857cd7656a8ff1ff3162d28b25e90bb5a4",
+        "recorded_gitlink": "b03e13857cd7656a8ff1ff3162d28b25e90bb5a4",
+        "status": ""
+      },
+      "Libraries/Rdk-BasicLib": {
+        "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+        "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+        "status": ""
+      },
+      "Libraries/Rdk-CvBasicLib": {
+        "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+        "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+        "status": ""
+      },
+      "Libraries/Rdk-HardwareLib": {
+        "head": "de40b008e990105856726e01230dde19f42a90a9",
+        "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+        "status": ""
+      },
+      "Rdk": {
+        "head": "561986e9f336ee5914e2d119de90b005e06f3639",
+        "recorded_gitlink": "561986e9f336ee5914e2d119de90b005e06f3639",
+        "status": ""
+      },
+      "root": {
+        "head": "80330fc51c4713c7bd1936be98e43ec0217b2337",
+        "status": ""
+      }
+    },
+    "executable": {
+      "path": "C:\\Projects\\TimeLearnerWorker\\runtime-measured-count-native-win-a3\\NeuroModelerConsole.exe",
+      "sha256": "cf8cc3470e2fccc2b5095fd490901257896264004805d21acd16d7cde9bfd7ab",
+      "size": 12506112
+    },
+    "runtime_fingerprint": "09bff57ff10faa264e483a191810bd3c4048153408f9420f3f1b63d3239bdf3f"
+  },
+  "physical_import_and_evaluation_source": {
+    "root": "4a87682c301a8f9db5f7021af956274518ccf919",
+    "PulseLib": "f2ea795b5a9c4166b1c6b5329bf61b0fff298b3f",
+    "source_train_repeated": false
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "dispatched": true,
+  "job": "classic-measured-count-m4-elder-i2",
+  "supervisor_pid": 2582067,
+  "controller": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-i2-controller",
+  "output": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-i2",
+  "original_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+  "job_sha256": "e18fab02beca207c3eb14696e5c8f50f03f3c2fe286c052d02d21480a7709f8e",
+  "scientific_verdict": null,
+  "actual_admission": {
+    "execution": "completed",
+    "validity": "valid",
+    "initial_nodes": 44,
+    "factor_nodes": 45,
+    "initial_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+    "initial_reference_comparisons": [
+      {
+        "input_index": 0,
+        "old_trace": {
+          "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-admission-elder-i2/reference-0-old/native/probe_trial_1.csv",
+          "sha256": "d20bd5e0289aaa708a5a64b53951d439bb48c942cbd18630186bf2f1303d6d4d",
+          "size": 392571
+        },
+        "new_trace": {
+          "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-admission-elder-i2/reference-0-new/native/probe_trial_1.csv",
+          "sha256": "d20bd5e0289aaa708a5a64b53951d439bb48c942cbd18630186bf2f1303d6d4d",
+          "size": 392571
+        },
+        "samples": 3601,
+        "maximum_absolute_sample_difference": 0.0,
+        "actual_stimuli_preserved": true
+      },
+      {
+        "input_index": 1,
+        "old_trace": {
+          "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-admission-elder-i2/reference-1-old/native/probe_trial_1.csv",
+          "sha256": "d20bd5e0289aaa708a5a64b53951d439bb48c942cbd18630186bf2f1303d6d4d",
+          "size": 392571
+        },
+        "new_trace": {
+          "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-admission-elder-i2/reference-1-new/native/probe_trial_1.csv",
+          "sha256": "d20bd5e0289aaa708a5a64b53951d439bb48c942cbd18630186bf2f1303d6d4d",
+          "size": 392571
+        },
+        "samples": 3601,
+        "maximum_absolute_sample_difference": 0.0,
+        "actual_stimuli_preserved": true
+      },
+      {
+        "input_index": 2,
+        "old_trace": {
+          "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-admission-elder-i2/reference-2-old/native/probe_trial_1.csv",
+          "sha256": "d20bd5e0289aaa708a5a64b53951d439bb48c942cbd18630186bf2f1303d6d4d",
+          "size": 392571
+        },
+        "new_trace": {
+          "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-admission-elder-i2/reference-2-new/native/probe_trial_1.csv",
+          "sha256": "d20bd5e0289aaa708a5a64b53951d439bb48c942cbd18630186bf2f1303d6d4d",
+          "size": 392571
+        },
+        "samples": 3601,
+        "maximum_absolute_sample_difference": 0.0,
+        "actual_stimuli_preserved": true
+      },
+      {
+        "input_index": 3,
+        "old_trace": {
+          "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-admission-elder-i2/reference-3-old/native/probe_trial_1.csv",
+          "sha256": "d20bd5e0289aaa708a5a64b53951d439bb48c942cbd18630186bf2f1303d6d4d",
+          "size": 392571
+        },
+        "new_trace": {
+          "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-admission-elder-i2/reference-3-new/native/probe_trial_1.csv",
+          "sha256": "d20bd5e0289aaa708a5a64b53951d439bb48c942cbd18630186bf2f1303d6d4d",
+          "size": 392571
+        },
+        "samples": 3601,
+        "maximum_absolute_sample_difference": 0.0,
+        "actual_stimuli_preserved": true
+      }
+    ],
+    "training_reference_not_replaced": true,
+    "mathematical_case_and_budget_unchanged": true,
+    "scientific_verdict": null
+  },
+  "recovery_source_commit": "d43d4aef1e4d859a444d35d9555720a48724c257",
+  "rejected_recovery_controls": [
+    {
+      "case": "duplicate",
+      "reason": "external_controller_recovery_duplicate_directory"
+    },
+    {
+      "case": "foreign_launcher",
+      "reason": "external_controller_recovery_ancestry_changed"
+    }
+  ],
+  "original_finalization_failure_preserved": true
+}

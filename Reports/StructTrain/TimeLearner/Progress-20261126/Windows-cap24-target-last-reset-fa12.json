@@ -1,0 +1,103 @@
+{
+  "kind": "timelearner_cap24_target_last_reset_scientific_readback",
+  "schema_version": 1,
+  "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+  "primary_catalog": {
+    "relative_path": "experiments/2026-11-26/Windows-cap24-target-last-reset-independent-fa6.json",
+    "sha256": "fa49aed3b0639030712fb7cace9736ac0fca629bc956e230c83f4749695739dc",
+    "bytes": 25738
+  },
+  "gallery_catalog": {
+    "relative_path": "experiments/2026-11-26/Windows-cap24-target-last-reset-scientific-figures-independent-fa11.json",
+    "sha256": "88730d9c0ff6804c76c5dd19bb8c16ebd10f30bc99b6d50a1028b6454f62ae4f",
+    "bytes": 2504
+  },
+  "primary_objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/fb/fb68e5879fe2f221bc7ac74940544249482c88f2659cccafdaa6c7b9e49fee1c",
+      "sha256": "fb68e5879fe2f221bc7ac74940544249482c88f2659cccafdaa6c7b9e49fee1c",
+      "bytes": 8920
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/05/051747ac2ec08ce1f06c28e9c4440d5e530d4f0de1709cc20f04e310780b6ab8",
+      "sha256": "051747ac2ec08ce1f06c28e9c4440d5e530d4f0de1709cc20f04e310780b6ab8",
+      "bytes": 1040408
+    },
+    "source-result.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/d7/d7c22a3ebaeda5ed3c7d6a9c7f5e0d339c72dd7834c72b7fdd7e5313b36ff516",
+      "sha256": "d7c22a3ebaeda5ed3c7d6a9c7f5e0d339c72dd7834c72b7fdd7e5313b36ff516",
+      "bytes": 18114
+    }
+  },
+  "gallery_objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/80/80080d338b864395523614806842df0fbeb7eb70cc6632a3105ce2743e221098",
+      "sha256": "80080d338b864395523614806842df0fbeb7eb70cc6632a3105ce2743e221098",
+      "bytes": 8754
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/04/04d3eb2ba3c39a15846d9ac606ade9c7b76c2f398457fae620f9856266c844f5",
+      "sha256": "04d3eb2ba3c39a15846d9ac606ade9c7b76c2f398457fae620f9856266c844f5",
+      "bytes": 2752784
+    },
+    "source-result.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/8d/8d897b6d7596442c5203341068e2a46abb226f04c649ea162c20bd5b3451c881",
+      "sha256": "8d897b6d7596442c5203341068e2a46abb226f04c649ea162c20bd5b3451c881",
+      "bytes": 853
+    }
+  },
+  "primary_members": 55,
+  "gallery_members": 48,
+  "reviewed_PNG": 16,
+  "observations": 8,
+  "model_revision": "cefb18c0cdf799e782bc973ecdfcb13e5089eb323235115d83a56a61062ef02d",
+  "threshold": 0.026094309839601246,
+  "counts": {
+    "TP": 1,
+    "FP": 1,
+    "FN": 0,
+    "TN": 6,
+    "targets": 1,
+    "foils": 7,
+    "target_trials_with_outside_spikes": 0,
+    "accuracy": 0.875,
+    "target_hit_rate": 1,
+    "foil_response_rate": 0.14285714285714285
+  },
+  "target_position": 7,
+  "actual_first_input_interval_seconds": 2.0005,
+  "last_quiet_tail_seconds": 2.0005000000000006,
+  "complete_same_duration_comparisons": 7,
+  "maximum_full_signal_difference": 0,
+  "different_window_samples_not_clipped": [
+    "phasea-row-0"
+  ],
+  "loaded_module_bindings_equal_original47_verified_byte_objects": true,
+  "source_training_outcome": "budget_exhausted",
+  "source_training_certificate_Exact": false,
+  "new_Train": false,
+  "new_threshold": false,
+  "independently_heldout_positive_class": false,
+  "all_order_or_ITI_robustness_verified": false,
+  "paired_preserve_study_still_pending": true,
+  "full_plan_complete": false,
+  "scientific_verdict": null
+}

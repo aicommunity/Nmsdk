@@ -1,0 +1,197 @@
+{
+  "kind": "timelearner_measured_count_actual_native_validation_and_M4_admission",
+  "schema_version": 1,
+  "observed_utc": "2026-11-22T08:18:28.110726+00:00",
+  "job": "windows-branch-measured-count-M4-a3",
+  "native114": {
+    "terminal": {
+      "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-native114-a3\\terminal.json",
+      "sha256": "6cb3ed3ea787aedef2ef0d2c8f3eb936d3d39309feab15859cde96aed4e1610d",
+      "size": 131
+    },
+    "process": {
+      "kind": "timelearner_windows_process_result",
+      "schema_version": 1,
+      "execution": "completed",
+      "validity": "valid",
+      "reason": "exit_zero",
+      "returncode": 0,
+      "scientific_verdict": null,
+      "thread_limit_enforced": false,
+      "memory_limit_semantics": "job_committed_virtual_memory",
+      "wall_budget_scope": "whole_attempt_including_preparation",
+      "descendants_at_main_exit": [],
+      "all_processes_closed": true,
+      "cooperative_capture": "completed",
+      "runtime_provenance": "loaded_files_captured",
+      "observed_module_files": 47,
+      "wall_seconds": 4386.119330200017,
+      "child_resumed": true,
+      "job_name": "Local\\TimeLearner-b29bf65c-ba40-40b5-9905-f560ffe7ed2f"
+    },
+    "JUnit": {
+      "expected": 114,
+      "observed": 114,
+      "failed_test_ids": [],
+      "assertion_status": "passed",
+      "sha256": "9766b00dea7b2c79f457c4f6ff93e0a9c114038b15fce5d4fb58cf0458d92174"
+    },
+    "kernel": {
+      "original_named_job_absent": true,
+      "original_main_absent": true,
+      "pid_reused": false
+    },
+    "task": {
+      "last_result": 0,
+      "instances": 0,
+      "state": 3
+    },
+    "original_build_accepted": false,
+    "separate_artifact_audit_passed": true,
+    "scientific_verdict": null
+  },
+  "physical_initial_admission": {
+    "initial_model_revision": "ab751ba723852917588b694d156f1d8c9033b8b0a0ec7b8e93faacec0d747dc4",
+    "initial_nodes": 14,
+    "factor_control_nodes": 15,
+    "factor_control_input_indices": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "initial_reference_comparisons": [
+      {
+        "input_index": 0,
+        "old_trace": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3-admission\\reference-0-old\\native\\probe_trial_1.csv",
+          "sha256": "d0ff70751cbb60bde2ad49e08000f4b363507c034076045b184d03dd1d57d306",
+          "size": 146154
+        },
+        "new_trace": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3-admission\\reference-0-new\\native\\probe_trial_1.csv",
+          "sha256": "d0ff70751cbb60bde2ad49e08000f4b363507c034076045b184d03dd1d57d306",
+          "size": 146154
+        },
+        "samples": 3601,
+        "maximum_absolute_sample_difference": 0.0,
+        "actual_stimuli_preserved": true,
+        "initial_graph_and_parameters_preserved": true,
+        "scientific_training_or_measurement_certificate": false
+      },
+      {
+        "input_index": 1,
+        "old_trace": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3-admission\\reference-1-old\\native\\probe_trial_1.csv",
+          "sha256": "d0ff70751cbb60bde2ad49e08000f4b363507c034076045b184d03dd1d57d306",
+          "size": 146154
+        },
+        "new_trace": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3-admission\\reference-1-new\\native\\probe_trial_1.csv",
+          "sha256": "d0ff70751cbb60bde2ad49e08000f4b363507c034076045b184d03dd1d57d306",
+          "size": 146154
+        },
+        "samples": 3601,
+        "maximum_absolute_sample_difference": 0.0,
+        "actual_stimuli_preserved": true,
+        "initial_graph_and_parameters_preserved": true,
+        "scientific_training_or_measurement_certificate": false
+      },
+      {
+        "input_index": 2,
+        "old_trace": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3-admission\\reference-2-old\\native\\probe_trial_1.csv",
+          "sha256": "d0ff70751cbb60bde2ad49e08000f4b363507c034076045b184d03dd1d57d306",
+          "size": 146154
+        },
+        "new_trace": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3-admission\\reference-2-new\\native\\probe_trial_1.csv",
+          "sha256": "d0ff70751cbb60bde2ad49e08000f4b363507c034076045b184d03dd1d57d306",
+          "size": 146154
+        },
+        "samples": 3601,
+        "maximum_absolute_sample_difference": 0.0,
+        "actual_stimuli_preserved": true,
+        "initial_graph_and_parameters_preserved": true,
+        "scientific_training_or_measurement_certificate": false
+      },
+      {
+        "input_index": 3,
+        "old_trace": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3-admission\\reference-3-old\\native\\probe_trial_1.csv",
+          "sha256": "d0ff70751cbb60bde2ad49e08000f4b363507c034076045b184d03dd1d57d306",
+          "size": 146154
+        },
+        "new_trace": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3-admission\\reference-3-new\\native\\probe_trial_1.csv",
+          "sha256": "d0ff70751cbb60bde2ad49e08000f4b363507c034076045b184d03dd1d57d306",
+          "size": 146154
+        },
+        "samples": 3601,
+        "maximum_absolute_sample_difference": 0.0,
+        "actual_stimuli_preserved": true,
+        "initial_graph_and_parameters_preserved": true,
+        "scientific_training_or_measurement_certificate": false
+      }
+    ],
+    "training_reference_capture_not_replaced": true,
+    "mathematical_case_and_budget_unchanged": true,
+    "condition_fingerprint": "02924dbd3ff77236c4bc9670667221e1569732d952f83d84d7020791941c894e",
+    "scientific_verdict": null
+  },
+  "training_preflight": {
+    "job_sha256": "28d1099129bc04dd0cabb2dc3a95eb4de396c8889ea5ffed5154e2d961d9d0d5",
+    "normalization": "N0",
+    "initial_model_revision": "ab751ba723852917588b694d156f1d8c9033b8b0a0ec7b8e93faacec0d747dc4",
+    "effective_initial_model_checked": true,
+    "factor_control_synapses": 2,
+    "initial_nodes": 14,
+    "factor_control_nodes": 15,
+    "factor_control_input_indices": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "factor_control_is_a_separate_initial_state": true,
+    "full_training_audit_pending": true,
+    "scientific_verdict": null
+  },
+  "actual_native": {
+    "pid": 19744,
+    "running": true,
+    "matching": true,
+    "identity": {
+      "executable": "C:\\Projects\\TimeLearnerWorker\\runtime-measured-count-native-win-a3\\NeuroModelerConsole.exe",
+      "creation_filetime": "134398085140384159"
+    }
+  },
+  "actual_supervisor": {
+    "pid": 21956,
+    "running": true,
+    "matching": true,
+    "identity": {
+      "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+      "creation_filetime": "134398084548184232"
+    }
+  },
+  "raw_training_trials": 127,
+  "source_root": "80330fc51c4713c7bd1936be98e43ec0217b2337",
+  "Pulse": "b03e13857cd7656a8ff1ff3162d28b25e90bb5a4",
+  "original_A2_failed_before_Train": {
+    "reason": "windows_backend_changed",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Projects\\TimeLearnerWorker\\controls\\windows-branch-measured-count-M4-a2\\supervisor.py\", line 83, in <module>\n    folder=out/('reference-'+str(index)+'-'+label);native_initial=run_native(r,'probe',job,folder,900)\n                                                                  ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Projects\\TimeLearnerWorker\\controls\\windows-branch-measured-count-M4-a2\\supervisor.py\", line 29, in run_native\n    result=execute(runtime,['--app-ini',runtime['app_ini']['path'],'--timelearner-'+mode,str(job),\n        '--timelearner-output',str(output/'native')],Path(runtime['executable']['path']).parent,output/'process',\n        memory_bytes=8*1024**3,maximum_processes=64,maximum_wall_seconds=seconds,\n        lock_file=b/'locks/worker.lock',cooperative_capture=True)\n  File \"C:\\Projects\\TimeLearnerWorker\\source-measured-count-native-win-a3\\Scripts\\StructTrain\\TimeLearner\\windows_process.py\", line 168, in execute\n    require(manifest.get('windows_backend') == backend and\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n            manifest['build_flags'].get('windows_backend_sha256') == backend['sha256'],\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n            'windows_backend_changed')\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Projects\\TimeLearnerWorker\\source-measured-count-native-win-a3\\Scripts\\StructTrain\\TimeLearner\\native_evidence.py\", line 28, in require\n    raise EvidenceError(reason)\nScripts.StructTrain.TimeLearner.native_evidence.EvidenceError: windows_backend_changed\n",
+    "original_Train_not_restarted": true,
+    "scientific_verdict": null
+  },
+  "A3_runtime_backend_fix": "fresh operational manifest binds actual Python backend; original executable, App.ini, libraries, compiler and SDK source closure retained",
+  "guard_weakened": false,
+  "original_build_accepted": false,
+  "training_completed": false,
+  "scientific_verdict": null,
+  "evidence": {
+    "local_receipt": "C:\\Users\\Bakhshiev\\AppData\\Local\\Temp\\timelearner-windows-measured-count-M4-a3-queue-observed-20261122-a2.json",
+    "sha256": "a9a41966c794547938cdd489bdadac94654d200150890578834752cc27bd3345",
+    "bytes": 8062
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "kind": "timelearner_archive_IO_regressions",
+  "schema_version": 1,
+  "expected": 14,
+  "observed": 14,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "passed": true,
+  "native_execution": false,
+  "diagnostic_child_errors": [],
+  "log_sha256": "9e125adaf70abbdd4fd7066287e949658b34dc52615fa65034dbafaf5b7b6cf3",
+  "finished_utc": "2026-11-23T13:22:34.430973+00:00",
+  "prior_attempts_retained": [
+    "af6/result.json",
+    "af7/result.json"
+  ],
+  "fix": "Fixture restores only its archive-root key, preserving inherited native empty Git config values"
+}

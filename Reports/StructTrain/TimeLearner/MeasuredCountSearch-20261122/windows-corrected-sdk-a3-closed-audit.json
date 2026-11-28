@@ -1,0 +1,100 @@
+{
+  "kind": "timelearner_windows_corrected_fixture_sdk_closed_artifact_audit",
+  "schema_version": 1,
+  "observed_utc": "2026-11-22T06:26:29.695405+00:00",
+  "job": "windows-measured-count-native-closed-build-audit-a2",
+  "audit": {
+    "compiled_tests_executed": false,
+    "dependency_files": 17287,
+    "original_build_accepted": false,
+    "original_execution": "descendants_remaining",
+    "runtime_files": 62,
+    "scientific_verdict": null,
+    "scientific_worker_admitted": false,
+    "source_closure": {
+      "Bin": {
+        "head": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+        "recorded_gitlink": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+        "status": ""
+      },
+      "Libraries/Nmsdk-MotionControlLib": {
+        "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+        "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+        "status": ""
+      },
+      "Libraries/Nmsdk-PulseLib": {
+        "head": "b03e13857cd7656a8ff1ff3162d28b25e90bb5a4",
+        "recorded_gitlink": "b03e13857cd7656a8ff1ff3162d28b25e90bb5a4",
+        "status": ""
+      },
+      "Libraries/Rdk-BasicLib": {
+        "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+        "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+        "status": ""
+      },
+      "Libraries/Rdk-CvBasicLib": {
+        "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+        "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+        "status": ""
+      },
+      "Libraries/Rdk-HardwareLib": {
+        "head": "de40b008e990105856726e01230dde19f42a90a9",
+        "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+        "status": ""
+      },
+      "Rdk": {
+        "head": "561986e9f336ee5914e2d119de90b005e06f3639",
+        "recorded_gitlink": "561986e9f336ee5914e2d119de90b005e06f3639",
+        "status": ""
+      },
+      "root": {
+        "head": "80330fc51c4713c7bd1936be98e43ec0217b2337",
+        "status": ""
+      }
+    },
+    "source_commit": "80330fc51c4713c7bd1936be98e43ec0217b2337",
+    "targets": {
+      "NeuroModelerConsole.exe": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\runtime-measured-count-native-win-a3\\NeuroModelerConsole.exe",
+        "sha256": "cf8cc3470e2fccc2b5095fd490901257896264004805d21acd16d7cde9bfd7ab",
+        "size": 12506112
+      },
+      "Test_PulseLib_StorageComponents.exe": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\runtime-measured-count-native-win-a3\\Test_PulseLib_StorageComponents.exe",
+        "sha256": "d5c30ba9d4737514ac359c64da1c8828382e1e7a4293c3f398fc6d5241b5877d",
+        "size": 27162112
+      }
+    },
+    "verified_source_files": 5138
+  },
+  "terminal": {
+    "audit_passed": true,
+    "compiled_tests_executed": false,
+    "original_build_outcome_unchanged": true,
+    "scientific_verdict": null,
+    "scientific_worker_admitted": false,
+    "wall_seconds": 63.704469899996184
+  },
+  "kernel_before": {
+    "original_main_absent": true,
+    "original_named_job_absent": true,
+    "pid_reused": false
+  },
+  "kernel_after": {
+    "original_main_absent": true,
+    "original_named_job_absent": true,
+    "pid_reused": false
+  },
+  "scheduled_task": {
+    "last_result": 0,
+    "instances": [],
+    "state": 3
+  },
+  "source_readback": {
+    "path": "C:\\Users\\BAKHSH~1\\AppData\\Local\\Temp\\timelearner-windows-corrected-build-audit-observed-20261122-resume-a1.json",
+    "bytes": 11872,
+    "sha256": "b3c800c84ca5b370450e3704432d8a910e85d77eed7fc67d2e50cfba3f0709b7"
+  },
+  "original_build_outcome_preserved": true,
+  "scientific_verdict": null
+}

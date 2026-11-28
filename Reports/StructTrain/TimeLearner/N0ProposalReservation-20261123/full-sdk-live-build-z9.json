@@ -1,0 +1,71 @@
+{
+  "kind": "timelearner_n0_proposal_full_sdk_live_progress",
+  "schema_version": 1,
+  "observed_utc": "2026-11-23T09:32:23.250277+00:00",
+  "job": "n0-proposal-full-sdk-m40-w14",
+  "source_root": "b2c3cb65ab572c680a56f28b86d40445b9392b0c",
+  "source_PulseLib": "3f5a2205a4e6c02de545cdc214172482ac53c4b2",
+  "canonical_preparation_completed": true,
+  "native_console_build_completed": true,
+  "native_controller": {
+    "controller": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n0-proposal-full-sdk-m40-w14-controller",
+    "supervisor_identity": {
+      "pid": 1116894,
+      "start_ticks": "449991626",
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "uid": 1000
+    },
+    "supervisor_identity_known": true,
+    "supervisor_live": true,
+    "outer": {
+      "execution": "running",
+      "all_processes_closed": false,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "28857e4f22ba7ce4d98f2bb97bc75d778793c66482ec37ed37de24842956299a",
+        "unit": "timelearner-c9f89672-899b-4f92-a08b-d748240ef8bf.service",
+        "invocation_id": "a42c67a9d34d410ba7ab10848fba3730",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-c9f89672-899b-4f92-a08b-d748240ef8bf.service",
+        "initial_main_pid": 1124899,
+        "initial_start_ticks": "449995142",
+        "sha256": "f112459aa43c2d938ad3ff56009e7016d7dc7f8de3c6908989e7fdc853978308"
+      },
+      "state": {
+        "Type": "exec",
+        "Restart": "no",
+        "RemainAfterExit": "yes",
+        "MainPID": "1124899",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-c9f89672-899b-4f92-a08b-d748240ef8bf.service",
+        "MemoryMax": "12884901888",
+        "TasksMax": "128",
+        "KillMode": "control-group",
+        "Description": "TimeLearner contained attempt c9f89672-899b-4f92-a08b-d748240ef8bf",
+        "LoadState": "loaded",
+        "ActiveState": "active",
+        "SubState": "running",
+        "InvocationID": "a42c67a9d34d410ba7ab10848fba3730"
+      },
+      "memory_max": 12884901888,
+      "tasks_max": 128,
+      "scientific_verdict": null
+    },
+    "unbound_outer_intent": false,
+    "result": null,
+    "scientific_verdict": null
+  },
+  "supervisor_identity": {
+    "pid": 1048198,
+    "start_ticks": "449970651",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000
+  },
+  "terminal_present": false,
+  "native_sdk_admitted": false,
+  "all_mandatory_modes_accepted": false,
+  "scientific_verdict": null
+}

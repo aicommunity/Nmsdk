@@ -1,0 +1,17 @@
+digraph Classic {
+ graph [rankdir=TB,bgcolor="white",pad=0.10,nodesep=0.18,ranksep=0.28,
+   fontname="Times New Roman",fontsize=22,label="Распознавание в исследованной модели при M = 4",labelloc=t];
+ node [shape=box,fontname="Times New Roman",fontsize=20,margin="0.08,0.07"];
+ edge [fontname="Times New Roman",fontsize=17,arrowsize=0.75];
+ stream [label="Один внешний поток\nПолная пачка из четырёх импульсов"];
+ s1 [label="Синапсы\nn₁, R₁"];s2 [label="Синапсы\nn₂, R₂"];
+ s3 [label="Синапсы\nn₃, R₃"];s4 [label="Синапсы\nn₄, R₄"];
+ p1 [label="Путь L₁"];p2 [label="Путь L₂"];p3 [label="Путь L₃"];p4 [label="Путь L₄"];
+ u1 [label="Участок сомы 1\nu₁(t)"];u2 [label="Участок сомы 2\nu₂(t)"];
+ u3 [label="Участок сомы 3\nu₃(t)"];u4 [label="Участок сомы 4\nu₄(t)"];
+ mean [label="Одновременное среднее\nū(t) = (u₁(t)+u₂(t)+u₃(t)+u₄(t))/4"];
+ lt [label="Низкопороговая зона\nВыходные события и обратная связь"];
+ stream -> {s1 s2 s3 s4};s1->p1->u1;s2->p2->u2;s3->p3->u3;s4->p4->u4;
+ {u1 u2 u3 u4}->mean;mean->lt;
+ {rank=same;s1;s2;s3;s4;}{rank=same;p1;p2;p3;p4;}{rank=same;u1;u2;u3;u4;}
+}

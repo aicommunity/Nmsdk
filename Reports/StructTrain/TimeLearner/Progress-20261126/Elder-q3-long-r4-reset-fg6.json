@@ -1,0 +1,79 @@
+{
+  "kind": "timelearner_q3_long_r4_reset_independent_primary_reference",
+  "schema_version": 1,
+  "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+  "catalog": {
+    "relative_path": "experiments/2026-11-26/Elder-q3-long-r4-reset-independent-fg5.json",
+    "bytes": 23038,
+    "sha256": "5bbea0c1ad0a312757718ee8111ac92cfa27f06466be21d8bd18359bff15ff38"
+  },
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/bf/bfaa458206500c8f754cf9f12474f1b98c60ae4a276434ca75bbc2778e00f141",
+      "sha256": "bfaa458206500c8f754cf9f12474f1b98c60ae4a276434ca75bbc2778e00f141",
+      "bytes": 12248
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/c7/c77bd23badf4025acab10d043121db352a88aa5e3561ebf836c57917183859d0",
+      "sha256": "c77bd23badf4025acab10d043121db352a88aa5e3561ebf836c57917183859d0",
+      "bytes": 1200800
+    }
+  },
+  "members": 77,
+  "observations": 8,
+  "counts": {
+    "TP": 1,
+    "FP": 2,
+    "FN": 0,
+    "TN": 5,
+    "targets": 1,
+    "foils": 7,
+    "target_trials_with_outside_spikes": 0,
+    "accuracy": 0.75,
+    "target_hit_rate": 1.0,
+    "foil_response_rate": 0.2857142857142857
+  },
+  "target_position": 4,
+  "model_revision": "2783e83684eef31e0a258e271e0c2c3acf30a9a9ab175fc20632577b5b9028a6",
+  "threshold": 0.023252703356543683,
+  "actual_first_input_interval_seconds": 2.0005,
+  "last_quiet_tail_seconds": 2.0005000000000006,
+  "classification_by_sample_id": {
+    "phasea-row-4": "FP",
+    "phasea-row-5": "TN",
+    "phasea-row-6": "FP",
+    "phasea-row-7": "TN",
+    "phasea-row-0": "TP",
+    "phasea-row-1": "TN",
+    "phasea-row-2": "TN",
+    "phasea-row-3": "TN"
+  },
+  "classifications_by_sample_id_preserved": true,
+  "compared_full_windows": 6,
+  "different_window_samples_not_clipped": [
+    "phasea-row-7",
+    "phasea-row-3"
+  ],
+  "comparison_policy": "changed_order_same_reset_policy",
+  "maximum_absolute_signal_difference": 0.0,
+  "all_compared_events_equal": true,
+  "gallery_review_pending": false,
+  "paired_preserve_comparison_pending": false,
+  "new_Train": false,
+  "new_threshold": false,
+  "independently_accepted_primary_cases_total": 9,
+  "full32_case_matrix_complete": false,
+  "scientific_verdict": null,
+  "followup_references": {
+    "gallery": "Elder-q3-rotation4-reset-figures-fh7.json",
+    "paired_preserve_primary": "Elder-q3-long-r4-preserve-fi12.json",
+    "paired_preserve_gallery": "Elder-q3-rotation4-preserve-figures-fi13.json"
+  },
+  "followup_date": "2026-11-26"
+}

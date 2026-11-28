@@ -1,0 +1,126 @@
+{
+  "kind": "timelearner_scientific_algorithm_documents_publication",
+  "schema_version": 1,
+  "edition": "2026-11-25-v5",
+  "primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/33/33f3304655df669118e139ba09ef4efbf226a8b8f746311452f1ceafac9b4e32",
+    "sha256": "33f3304655df669118e139ba09ef4efbf226a8b8f746311452f1ceafac9b4e32",
+    "bytes": 72781444
+  },
+  "inventory": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/f1/f16e186edb0572fb78f8d787429513e7c87ea63cbc05ad191822a9a3d8d90dbc",
+    "sha256": "f16e186edb0572fb78f8d787429513e7c87ea63cbc05ad191822a9a3d8d90dbc",
+    "bytes": 46447
+  },
+  "source_root": "3bf70891f1e22ae3103b2360dc5109ce98768d3d",
+  "documents": [
+    {
+      "topology": "Classic",
+      "format": "docx",
+      "file": "TimeLearnerClassicAlgorithms.ru.docx",
+      "bytes": 9552694,
+      "sha256": "8973714c546ff9b3897d73b88b3542d11ba7f94a98914d61fc6ece180d82b4f9",
+      "pages": 81
+    },
+    {
+      "topology": "Classic",
+      "format": "pdf",
+      "file": "TimeLearnerClassicAlgorithms.ru.pdf",
+      "bytes": 8383333,
+      "sha256": "0ad9c17dcdd2bfdd2452970fb4d2bcf75a0e10be225a71ad9d9269fb7f7a7584",
+      "pages": 81
+    },
+    {
+      "topology": "Branch",
+      "format": "docx",
+      "file": "TimeLearnerBranchAlgorithms.ru.docx",
+      "bytes": 7584185,
+      "sha256": "1d9db25eaa38f0e15505b6a24a881f5fcfd749dfdad2ab2ef978d52b97b97d8b",
+      "pages": 74
+    },
+    {
+      "topology": "Branch",
+      "format": "pdf",
+      "file": "TimeLearnerBranchAlgorithms.ru.pdf",
+      "bytes": 6259131,
+      "sha256": "5aada1393f82ad2cd3f15648ce5acb6784d917e618a64c1d4577b650dd00effc",
+      "pages": 74
+    }
+  ],
+  "pages_with_individually_reviewed_pixels": 155,
+  "review_method": "dy12 all155 individually opened; ef13 all18 changed individually opened and other137 full PNG byte-identical; eg1 both changed individually opened and other153 full PNG byte-identical",
+  "comments_processed": 8,
+  "both_documents_reworked": true,
+  "all_Word_figures_reviewed": true,
+  "all_trial_gallery_images_manually_reviewed": false,
+  "applicable_format_requirements_accepted": true,
+  "standards_scope": {
+    "report_part": true,
+    "parent_report_administrative_metadata_deferred_by_explicit_scope": true,
+    "standards": [
+      "ГОСТ 7.32-2017",
+      "ГОСТ Р 7.0.100-2018 — применимые библиографические записи"
+    ],
+    "applicable_corrections": "GostCorrectionReview-20261122.json",
+    "bibliography_review": "BibliographyReview-20261122.json",
+    "profile": "gost-next-edition-profile.json",
+    "page_and_body_profile_verified": true,
+    "each_figure_caption_source_and_readability_reviewed": true,
+    "all_tables_whole_on_page": true,
+    "numbered_editable_equations_per_document": 11,
+    "all_symbols_explained": true,
+    "math_index_range_native_editable": true
+  },
+  "catalog_relative": "documents/TimeLearner/2026-11-25-algorithm-descriptions-v5.json",
+  "catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/documents/TimeLearner/2026-11-25-algorithm-descriptions-v5.json",
+    "sha256": "5f47b9166acf4d3547f14e837efc70e517176ce7405fe276f46514196a1d0dcc",
+    "size": 3822
+  },
+  "independent_restoration": {
+    "kind": "timelearner_native_bundle_restoration",
+    "schema_version": 1,
+    "archive_sha256": "33f3304655df669118e139ba09ef4efbf226a8b8f746311452f1ceafac9b4e32",
+    "archive_members_verified": 288,
+    "retained_regular_files": 288,
+    "compatibility": null,
+    "omitted_redundant_aliases": [],
+    "source_archive_modified": false,
+    "native_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "cache_relative": "operations/timelearner/DOCX-v5-eg9/restored",
+  "cache_entrypoints": [
+    "docx/TimeLearnerClassicAlgorithms.ru.docx",
+    "docx/TimeLearnerBranchAlgorithms.ru.docx"
+  ],
+  "original_v4_unchanged": true,
+  "new_native_experiment_claimed": false,
+  "whole_plan_complete": false,
+  "generated_binary_in_root_git": false,
+  "scientific_verdict": null,
+  "source_closure_remote_refs_verified": {
+    "root": {
+      "commit": "3bf70891f1e22ae3103b2360dc5109ce98768d3d",
+      "ref": "refs/heads/codex/timelearner-classic-round-robin-20261125"
+    },
+    "PulseLib": {
+      "commit": "e36996cd53a545782b54c76d610162c602567399",
+      "ref": "refs/heads/codex/timelearner-classic-round-robin-20261125"
+    },
+    "Rdk": {
+      "commit": "561986e9f336ee5914e2d119de90b005e06f3639",
+      "ref": "refs/heads/codex/timelearner-integral-xml"
+    },
+    "Bin": {
+      "commit": "2c285cb472134fc92394153c089603a830a03f70",
+      "ref": "refs/heads/codex/timelearner-script-retirement"
+    }
+  }
+}

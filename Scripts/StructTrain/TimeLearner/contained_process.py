@@ -14,6 +14,7 @@ import time
 import uuid
 
 from .native_evidence import load, require
+from .native_test_environment import ARTIFACT_ENVIRONMENT
 from .process_runner import verify_runtime, _start_identity, _write
 from .process_limits import validate_limits
 from .runtime import digest_json
@@ -165,7 +166,8 @@ def _start(manifest, arguments, working_directory, output, *, memory_bytes, task
     require(type(arguments) is list and all(type(a) is str and '\0' not in a for a in arguments), 'contained_arguments_invalid')
     environment = {} if environment is None else environment
     require(type(environment) is dict and all(type(k) is str and type(v) is str and '\0' not in v and
-            (k == 'ASAN_OPTIONS' or re.fullmatch('TIMELEARNER_[A-Z0-9_]+', k)) for k, v in environment.items()),
+            (k == 'ASAN_OPTIONS' or k in ARTIFACT_ENVIRONMENT or
+             re.fullmatch('TIMELEARNER_[A-Z0-9_]+', k)) for k, v in environment.items()),
             'contained_environment_invalid')
     executable = verify_runtime(manifest)
     cwd = Path(working_directory).resolve(strict=True);require(cwd.is_dir(), 'contained_cwd_invalid')

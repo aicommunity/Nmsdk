@@ -1,0 +1,42 @@
+{
+  "kind": "timelearner_native_terminal_portable_gate_status",
+  "schema_version": 1,
+  "source_root": "fb30b8be92bcfc006b94f1476d615dc8ab2ac03a",
+  "source_pulse": "19545036eecb884e2682c53b1a031a82abc82560",
+  "worker": "M40",
+  "job": "s07-terminal-portable-sdk-m40-a1",
+  "controls_commit": "aa236d76b0fb8877652fa1db37160ae2e3ae11b2",
+  "cases_declared": 56,
+  "execution": "running",
+  "completed_cases": null,
+  "native_acceptance": false,
+  "scientific_verdict": null,
+  "canonical_preparation_passed": true,
+  "source": "/media/user/Data/TimeLearnerRefactor/source-terminal-portable-sdk-a1",
+  "build": "/media/user/Data/TimeLearnerRefactor/build-terminal-portable-sdk-a1",
+  "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-terminal-portable-sdk-a1",
+  "controller": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-terminal-portable-sdk-m40-a1-controller",
+  "supervisor_identity": {
+    "pid": 4104184,
+    "start_ticks": "412501038",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000
+  },
+  "kernel_binding": {
+    "kind": "timelearner_contained_binding",
+    "schema_version": 1,
+    "request_sha256": "24560a885a12eb120a2b4eb85440064b74c71be5def749586c3c134fba6cc8a8",
+    "unit": "timelearner-7c732e30-bc8c-4918-b8c9-33b9f937d27a.service",
+    "invocation_id": "f0d5b6db9257494c845fec2a219cc70d",
+    "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-7c732e30-bc8c-4918-b8c9-33b9f937d27a.service",
+    "initial_main_pid": 4111704,
+    "initial_start_ticks": "412504166",
+    "sha256": "95e48225a593f1da0acc43c430d5454ae9f229c9bd18ff4b32ef39c2e323026a"
+  },
+  "limitations": [
+    "Fresh build in progress; no new C++ result yet.",
+    "Previous44/14 gates do not cover this code.",
+    "Cold/runtime/Python evidence integration remains open.",
+    "No new scientific Train/Test."
+  ]
+}

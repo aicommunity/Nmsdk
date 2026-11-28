@@ -1,0 +1,30 @@
+digraph G {
+  graph [rankdir=TB, bgcolor="white", pad=0.08, nodesep=0.25, ranksep=0.30];
+  node [fontname="Times New Roman", fontsize=22, shape=box, margin="0.18,0.08"];
+  edge [fontname="Times New Roman", fontsize=18, arrowsize=0.8];
+  initial [label="Геометрия и цель Aᵢ⁽⁰⁾", shape=ellipse];
+  candidate [label="Допустимое целое Nₛ,ᵢ\nПостроить и проверить граф"];
+  measure [label="Штатное измерение\nвремени и амплитуды"];
+  valid [label="Достоверный\nотклик?", shape=diamond];
+  record [label="Сохранить измерения\nи версию модели"];
+  tolerance [label="Оба допуска\nвыполнены?", shape=diamond];
+  local [label="Локальные допуски\nподтверждены"];
+  more [label="Есть кандидат\nи остался бюджет?", shape=diamond];
+  limited [label="Ограничение поиска\nСходимость не доказана"];
+  recovery [label="Восстановление\nразрешено?", shape=diamond];
+  invalid [label="Недостоверное измерение\nЗаписать причину"];
+  result [label="Локальный исход\nдля контроллера", shape=ellipse];
+  initial -> candidate -> measure -> valid;
+  valid -> record [label="да"];
+  valid -> recovery [label="нет"];
+  record -> tolerance;
+  tolerance -> local [label="да"];
+  tolerance -> more [label="нет"];
+  more -> candidate [label="да", constraint=false];
+  more -> limited [label="нет"];
+  recovery -> measure [label="да", constraint=false];
+  recovery -> invalid [label="нет"];
+  local -> result;
+  limited -> result;
+  invalid -> result;
+}

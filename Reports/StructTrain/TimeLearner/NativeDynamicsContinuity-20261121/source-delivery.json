@@ -1,0 +1,99 @@
+{
+  "kind": "timelearner_native_continuity_sdk_source_delivery",
+  "schema_version": 1,
+  "source": "/media/user/Data/TimeLearnerRefactor/source-native-dynamics-continuity-sdk-a1",
+  "records": [
+    {
+      "role": "Rdk",
+      "commit": "561986e9f336ee5914e2d119de90b005e06f3639",
+      "transport": "standalone verified Git object projection",
+      "files": 1781,
+      "pack_sha256": "447ba59ccf1fa4b8121f22ec285f66c06c25335b8d86a95576094e5fab51799c"
+    },
+    {
+      "role": "Bin",
+      "commit": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "transport": "standalone verified Git object projection",
+      "files": 269,
+      "pack_sha256": "81737400a9e98c765b6bfbc137f3e88c09d665e8a18d8810047510d59ec53e9a"
+    },
+    {
+      "role": "Libraries/Rdk-BasicLib",
+      "commit": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "transport": "standalone verified Git object projection",
+      "files": 43,
+      "pack_sha256": "f9a22719d17d462be054950514ad0497f6a0b115d04c9c68c7cfe672cb9e3eb7"
+    },
+    {
+      "role": "Libraries/Rdk-CvBasicLib",
+      "commit": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "transport": "standalone verified Git object projection",
+      "files": 132,
+      "pack_sha256": "81391cf38827dcf2bd03b05be42185ee729c000791b2b4787c45a7236a147ab9"
+    },
+    {
+      "role": "Libraries/Rdk-HardwareLib",
+      "commit": "de40b008e990105856726e01230dde19f42a90a9",
+      "transport": "standalone verified Git object projection",
+      "files": 356,
+      "pack_sha256": "d873adb6caa1fe40e26193a07a6d28efdf8857eb38091feabd3b93965dc2d8ec"
+    },
+    {
+      "role": "Libraries/Nmsdk-MotionControlLib",
+      "commit": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "transport": "standalone verified Git object projection",
+      "files": 93,
+      "pack_sha256": "175582d813c389e2530d08dc6ccf40e4c9ea48354f1eb82ea8f173412f4c3098"
+    },
+    {
+      "role": "Libraries/Nmsdk-PulseLib",
+      "commit": "1c8d0112061cb9025ef9205b0d8d735d62fcbe39",
+      "transport": "fresh shallow filtered Git clone"
+    }
+  ],
+  "source_closure": {
+    "root": {
+      "head": "5b6cb11ee46ae196ecbf81003eec45654b4c3fad",
+      "status": ""
+    },
+    "Bin": {
+      "recorded_gitlink": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "head": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "status": ""
+    },
+    "Libraries/Nmsdk-MotionControlLib": {
+      "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "status": ""
+    },
+    "Libraries/Nmsdk-PulseLib": {
+      "recorded_gitlink": "1c8d0112061cb9025ef9205b0d8d735d62fcbe39",
+      "head": "1c8d0112061cb9025ef9205b0d8d735d62fcbe39",
+      "status": ""
+    },
+    "Libraries/Rdk-BasicLib": {
+      "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "status": ""
+    },
+    "Libraries/Rdk-CvBasicLib": {
+      "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "status": ""
+    },
+    "Libraries/Rdk-HardwareLib": {
+      "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+      "head": "de40b008e990105856726e01230dde19f42a90a9",
+      "status": ""
+    },
+    "Rdk": {
+      "recorded_gitlink": "561986e9f336ee5914e2d119de90b005e06f3639",
+      "head": "561986e9f336ee5914e2d119de90b005e06f3639",
+      "status": ""
+    }
+  },
+  "donor_code_not_modified": true,
+  "existing_runtime_untouched": true,
+  "build_started": false,
+  "scientific_verdict": null
+}

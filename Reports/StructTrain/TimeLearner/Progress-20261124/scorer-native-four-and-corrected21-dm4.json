@@ -1,0 +1,175 @@
+{
+  "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-24/scorer-actual-four-and-corrected21-dm4.json",
+  "catalog_record": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-24/scorer-actual-four-and-corrected21-dm4.json",
+    "sha256": "187ab2642f01d025740ef5283137b04f746dec655ffc48224f82320bdaeb3068",
+    "size": 7024
+  },
+  "kind": "timelearner_actual_native_profiles_and_current_scorer_external_evidence",
+  "schema_version": 1,
+  "observed_utc": "2026-11-24T17:08:53.172265+00:00",
+  "objects": {
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/e7/e7b6528c6d83d014e008565444ad12615801bbb4ae71d2a8ac89b9d3ca299b45",
+      "sha256": "e7b6528c6d83d014e008565444ad12615801bbb4ae71d2a8ac89b9d3ca299b45",
+      "bytes": 1838100
+    },
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/b1/b149df0fc1afa9356c987a486d8016b9af953b9ade3303e25c7e02195b38e152",
+      "sha256": "b149df0fc1afa9356c987a486d8016b9af953b9ade3303e25c7e02195b38e152",
+      "bytes": 541138
+    },
+    "proof.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/fa/faa2484f4629369c3e7d0e787b4fbb85f10cc0dcddb6507d383765da4bcdd807",
+      "sha256": "faa2484f4629369c3e7d0e787b4fbb85f10cc0dcddb6507d383765da4bcdd807",
+      "bytes": 4508
+    },
+    "terminal.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/00/00d01c97f83aee665de629308b30ba6ced1d2d16e06665d769c33d070dd2aa32",
+      "sha256": "00d01c97f83aee665de629308b30ba6ced1d2d16e06665d769c33d070dd2aa32",
+      "bytes": 1127
+    }
+  },
+  "restoration": {
+    "kind": "timelearner_native_bundle_restoration",
+    "schema_version": 1,
+    "archive_sha256": "e7b6528c6d83d014e008565444ad12615801bbb4ae71d2a8ac89b9d3ca299b45",
+    "archive_members_verified": 2190,
+    "retained_regular_files": 2190,
+    "compatibility": null,
+    "omitted_redundant_aliases": [],
+    "source_archive_modified": false,
+    "native_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "proof": {
+    "kind": "timelearner_real_native_four_profiles_and_corrected_scorer21_evidence",
+    "schema_version": 1,
+    "observed_host_utc": "2026-11-24T17:03:42.630722+00:00",
+    "native_gate": {
+      "assertion_status": "passed",
+      "execution": "completed",
+      "inventory": {
+        "assertion_status": "passed",
+        "expected": 4,
+        "failed_test_ids": [],
+        "observed": 4,
+        "sha256": "858ea3a600c933ebdbd10369b19ef232406d3d20286ebd402f58a8f7beee32c9"
+      },
+      "kind": "timelearner_native_test_gate_result",
+      "reason": "complete_declared_test_inventory",
+      "schema_version": 1,
+      "scientific_verdict": null,
+      "validity": "valid"
+    },
+    "native_sdk_root": "891a75b39b2b020025aedc7e6158f89fd2f25ed2",
+    "pulse": "f2ea795b5a9c4166b1c6b5329bf61b0fff298b3f",
+    "source_snapshots": [
+      {
+        "root_commit": "0ebd633781b891f0d6c14918c734438b32b74d05",
+        "files": 865,
+        "verified": true
+      },
+      {
+        "root_commit": "b41e9f9f1cd0222ebeb3b5a77041868afbc4f940",
+        "files": 865,
+        "verified": true
+      }
+    ],
+    "profiles": [
+      "Branch_2000_N1_learned_boundary_configured_recognition_8_owner_burst_003_owner_recognition_state.json",
+      "Branch_2000_N1_learned_boundary_configured_recognition_8_owner_burst_003_spiking_owner_recognition_state.json",
+      "Classic_2000_N0_learned_boundary_configured_recognition_7_owner_burst_003_owner_recognition_state.json",
+      "Classic_2000_N0_learned_boundary_configured_recognition_7_owner_burst_003_spiking_owner_recognition_state.json"
+    ],
+    "first_attempt": {
+      "testsRun": 20,
+      "failures": 1,
+      "errors": 6,
+      "skipped": 0,
+      "successful": false
+    },
+    "corrected_attempt": {
+      "testsRun": 21,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "successful": true
+    },
+    "production_scorer_tolerances_unchanged": true,
+    "native_checks_not_repeated": true,
+    "all_owned_processes_closed": [
+      {
+        "path": "C:\\Projects\\TimeLearnerWorker\\controls\\scorer-negative-actual-profiles-dl5\\owner.json",
+        "owner": {
+          "pid": 14912,
+          "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+          "creation_filetime": "134400113395305918"
+        },
+        "live": false
+      },
+      {
+        "path": "C:\\Projects\\TimeLearnerWorker\\controls\\scorer-negative-actual-profiles-dl5\\metadata-process\\owned-process.json",
+        "owner": {
+          "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+          "creation_filetime": "134400115141024039",
+          "pid": 6716,
+          "job_name": "Local\\TimeLearner-95d43884-7e99-49f4-9ba3-49a6f8c6a086",
+          "runtime_fingerprint": "35afa7e6b41265d09a37bd6310f5e23325eebe3655e9de2db7857794735b403a",
+          "suspended_until_limits_applied": true
+        },
+        "live": false
+      },
+      {
+        "path": "C:\\Projects\\TimeLearnerWorker\\controls\\scorer-duration-corrected-dl11\\owner.json",
+        "owner": {
+          "pid": 12256,
+          "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+          "creation_filetime": "134400121919182815"
+        },
+        "live": false
+      },
+      {
+        "path": "C:\\Projects\\TimeLearnerWorker\\controls\\scorer-duration-corrected-dl11\\metadata-process\\owned-process.json",
+        "owner": {
+          "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+          "creation_filetime": "134400121940278158",
+          "pid": 21120,
+          "job_name": "Local\\TimeLearner-cd046a0d-934b-441a-98e9-5f265567f555",
+          "runtime_fingerprint": "09af8b55de78a8bd33e98b0d02bf7427e2947db5d7a4c85195e68c3b32e922f2",
+          "suspended_until_limits_applied": true
+        },
+        "live": false
+      },
+      {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\native-four-owner-profiles-dl5\\native-gate\\process\\owned-process.json",
+        "owner": {
+          "executable": "C:\\Projects\\TimeLearnerWorker\\runtime-physical-threshold-DATA3-sdk43-win-dg21\\Test_PulseLib_StorageComponents.exe",
+          "creation_filetime": "134400113671692397",
+          "pid": 12840,
+          "job_name": "Local\\TimeLearner-2ba478fe-0ed8-43e6-96ea-df378f5f9a1d",
+          "runtime_fingerprint": "da8bf834bc1387734bc71cbc5de9522cfc1a8be7c297e18477418cbab331c906",
+          "suspended_until_limits_applied": true
+        },
+        "live": false
+      }
+    ],
+    "all_stage3_adapters_accepted": false,
+    "scientific_verdict": null
+  },
+  "all_stage3_adapters_accepted": false,
+  "original_failed_attempt_preserved": true,
+  "scientific_verdict": null
+}

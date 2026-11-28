@@ -11,10 +11,18 @@ from .native_evidence import EvidenceError, load, number, require
 from .process_runner import execute, verify_runtime
 from .runtime import source_closure
 from . import native_gate_inputs
+from . import gtest_full_names
+from .native_test_environment import ARTIFACT_ENVIRONMENT
 
 
 FIELDS = {"kind", "schema_version", "runtime_manifest", "source_root", "expected_test_ids",
           "maximum_wall_seconds", "asan_options"}
+
+
+def artifact_directories_valid(values):
+    return (type(values) is dict and set(values) <= ARTIFACT_ENVIRONMENT and
+            all(type(v) is str and re.fullmatch(r'[A-Za-z][A-Za-z0-9_-]*', v) for v in values.values()) and
+            len(set(values.values())) == len(values))
 
 
 def supported_specification(spec):
@@ -27,9 +35,20 @@ def supported_specification(spec):
         return False
     if spec["schema_version"] == 1:
         return set(spec) == FIELDS
-    if spec['schema_version'] == 4:
+    if spec['schema_version'] == 6:
+        limits, inputs = spec.get('process_limits'), spec.get('data_inputs')
+        return (set(spec) == FIELDS | {'cooperative_runtime_capture', 'process_limits', 'data_inputs', 'artifact_directories'} and
+                spec['cooperative_runtime_capture'] is True and type(inputs) is list and
+                (not inputs or native_gate_inputs.valid_declarations(inputs)) and
+                artifact_directories_valid(spec['artifact_directories']) and
+                type(limits) is dict and set(limits) == {'memory_bytes', 'tasks'} and
+                type(limits['memory_bytes']) is int and 0 < limits['memory_bytes'] <= 2**63-1 and
+                type(limits['tasks']) is int and 0 < limits['tasks'] <= 2**31-1)
+    if spec['schema_version'] in (4, 7):
         limits = spec.get('process_limits')
-        return (set(spec) == FIELDS | {'cooperative_runtime_capture', 'process_limits', 'worker_lock'} and
+        extra = {'artifact_directories'} if spec['schema_version'] == 7 else set()
+        return (set(spec) == FIELDS | {'cooperative_runtime_capture', 'process_limits', 'worker_lock'} | extra and
+                (spec['schema_version'] != 7 or artifact_directories_valid(spec['artifact_directories'])) and
                 spec['cooperative_runtime_capture'] is True and type(limits) is dict and
                 set(limits) == {'memory_bytes', 'maximum_processes'} and
                 type(limits['memory_bytes']) is int and 32*1024**2 <= limits['memory_bytes'] <= 64*1024**3 and
@@ -68,11 +87,16 @@ def _environment(values):
                 os.environ[key] = value
 
 
-def audit_junit(path, expected):
+def audit_junit(path, expected, *, full_names=False):
     """An assertion failure is recorded data; missing/skipped cases are not PASS."""
     root = ET.parse(path).getroot()
     cases = list(root.iter("testcase"))
-    identities = [c.get("classname", "")+"/"+c.get("name", "") for c in cases]
+    require(type(full_names) is bool, 'native_gate_junit_name_format')
+    if full_names:
+        gtest_full_names.validate_names(expected)
+        identities = [gtest_full_names.full_name(c.get('classname', ''), c.get('name', '')) for c in cases]
+    else:
+        identities = [c.get("classname", "")+"/"+c.get("name", "") for c in cases]
     require(len(identities) == len(set(identities)) and set(identities) == set(expected),
             "native_gate_junit_expected_set_mismatch")
     require(all(c.get("status") == "run" and c.get("result") == "completed"
@@ -88,22 +112,45 @@ def audit_junit(path, expected):
             "sha256": hashlib.sha256(Path(path).read_bytes()).hexdigest()}
 
 
+def _filter_argument(spec):
+    expected = spec['expected_test_ids']
+    if spec['schema_version'] in (6, 7):
+        argument = gtest_full_names.filter_argument(expected)
+        # CreateProcessW limits the complete command to 32767 UTF-16 units.
+        # Reserve space for executable, XML and cooperative capture paths.
+        if spec['schema_version'] == 7:
+            require(len(argument.encode('utf-16-le')) <= 2*24*1024,
+                    'windows_native_gate_filter_budget')
+        return argument
+    require(type(expected) is list and bool(expected)
+            and all(type(x) is str and re.fullmatch(r'[A-Za-z_][A-Za-z0-9_]*/[A-Za-z_][A-Za-z0-9_]*', x)
+                    for x in expected) and len(expected) == len(set(expected)), 'invalid_native_gate_test_ids')
+    return '--gtest_filter='+':'.join(x.replace('/', '.') for x in expected)
+
+
+def _loader_environment(spec, runtime):
+    names = (('PATH', 'QT_PLUGIN_PATH', 'QT_QPA_PLATFORM')
+             if spec['schema_version'] in (4, 7)
+             else ('LD_LIBRARY_PATH', 'QT_PLUGIN_PATH', 'QT_QPA_PLATFORM'))
+    return {name: runtime['loader_environment'].get(name) for name in names}
+
+
 def run_native_gate(specification, output):
     specification = Path(specification).resolve(strict=True)
     spec = load(specification)
     require(supported_specification(spec), "unknown_native_gate_specification")
-    require(spec['schema_version'] != 4 or (os.name == 'nt' and spec['asan_options'] == ''),
+    require(spec['schema_version'] not in (4, 7) or (os.name == 'nt' and spec['asan_options'] == ''),
             'windows_native_gate_platform_or_asan_mismatch')
     expected = spec["expected_test_ids"]
-    require(type(expected) is list and bool(expected)
-            and all(type(x) is str and re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*/[A-Za-z_][A-Za-z0-9_]*", x)
-                    for x in expected) and len(expected) == len(set(expected)), "invalid_native_gate_test_ids")
+    full_names = spec['schema_version'] in (6, 7)
+    test_filter = _filter_argument(spec)
     require(type(spec["asan_options"]) is str and "\x00" not in spec["asan_options"], "invalid_native_gate_asan_options")
     wall = number(spec["maximum_wall_seconds"])
     require(wall > 0, "invalid_native_gate_wall_budget")
-    if spec['schema_version'] in (3, 5):
+    if spec['schema_version'] in (3, 5, 6):
         require(1 <= wall <= 86400, 'invalid_contained_wall_budget')
     require(spec['schema_version'] != 5 or os.name == 'posix', 'native_gate_data_inputs_require_posix')
+    require(spec['schema_version'] != 6 or os.name == 'posix', 'parameterized_native_gate_requires_posix')
 
     def resolve(key):
         value = spec[key]
@@ -120,7 +167,7 @@ def run_native_gate(specification, output):
             "native_gate_output_overlaps_sources_or_runtime")
     require(source_closure(source) == runtime["source_closure"], "native_gate_source_context_changed")
     captured_inputs = (native_gate_inputs.capture_inputs(spec['data_inputs'], output)
-                       if spec['schema_version'] == 5 else None)
+                       if spec['schema_version'] in (5, 6) and spec['data_inputs'] else None)
     output.mkdir(parents=True, exist_ok=False)
     # The runner owns the supplied destination. An isolated fixture must not
     # depend on an earlier test having created its result directory.
@@ -130,18 +177,25 @@ def run_native_gate(specification, output):
     if captured_inputs is not None:
         native_gate_inputs.stage_inputs(captured_inputs, output)
         _write(output/"data-inputs-before.json", native_gate_inputs.verify_inputs(captured_inputs, output))
-    environment = {key: runtime["loader_environment"].get(key)
-                   for key in (("PATH", "QT_PLUGIN_PATH", "QT_QPA_PLATFORM") if spec['schema_version'] == 4
-                               else ("LD_LIBRARY_PATH", "QT_PLUGIN_PATH", "QT_QPA_PLATFORM"))}
+    environment = _loader_environment(spec, runtime)
     environment.update(ASAN_OPTIONS=spec["asan_options"],
                        TIMELEARNER_EXECUTION_OUTPUT=str(output/"native"),
                        TIMELEARNER_COMPOSITE_OUTPUT=str(output/"native-composite"))
+    if full_names:
+        # Never inherit fixture selectors/baselines from the operator shell.
+        environment.update({name: None for name in ARTIFACT_ENVIRONMENT})
+        environment.update(TIMELEARNER_COMPAT_BASELINE=None, TIMELEARNER_COMPAT_CHILD=None,
+                           TIMELEARNER_ARCHIVE_CHILD_INPUT=None, TIMELEARNER_ARCHIVE_CHILD_OUTPUT=None)
+        for name, directory in spec['artifact_directories'].items():
+            path = output/'test-artifacts'/directory
+            path.mkdir(parents=True, exist_ok=False)
+            environment[name] = str(path)
     with _environment(environment):
         runner, limits = execute, {}
-        if spec['schema_version'] in (3, 5):
+        if spec['schema_version'] in (3, 5, 6):
             from .contained_runner import execute as contained_execute
             runner, limits = contained_execute, spec['process_limits']
-        if spec['schema_version'] == 4:
+        if spec['schema_version'] in (4, 7):
             from .windows_process import execute as windows_execute
             lock = Path(spec['worker_lock'])
             lock = (lock if lock.is_absolute() else specification.parent/lock).resolve()
@@ -151,7 +205,7 @@ def run_native_gate(specification, output):
                 return windows_execute(manifest, arguments, cwd, destination, maximum_wall_seconds=wall,
                                        lock_file=lock, **options)
             limits = spec['process_limits']
-        result = runner(runtime, ["--gtest_filter="+":".join(x.replace("/", ".") for x in expected),
+        result = runner(runtime, [test_filter,
                                   "--gtest_output=xml:"+str(output/"native.xml")],
                          executable.parent, output/"process", wall,
                          cooperative_capture=spec.get("cooperative_runtime_capture", False), **limits)
@@ -163,15 +217,15 @@ def run_native_gate(specification, output):
     if captured_inputs is not None:
         record.update(schema_version=2, data_inputs=None)
     try:
-        if spec['schema_version'] in (3, 5):
+        if spec['schema_version'] in (3, 5, 6):
             require(result.get('schema_version') == 2 and result.get('ownership_scope') == 'bound_cgroup' and
                     result.get('all_processes_closed') is True, 'native_gate_whole_group_closure_missing')
-        if spec['schema_version'] == 4:
+        if spec['schema_version'] in (4, 7):
             require(result.get('kind') == 'timelearner_windows_process_result' and
                     result.get('all_processes_closed') is True and result.get('validity') == 'valid' and
                     result.get('cooperative_capture') == 'completed', 'windows_native_gate_closure_or_capture_missing')
         require(result["runtime_provenance"] == "loaded_files_captured", "native_gate_loaded_runtime_missing")
-        inventory = audit_junit(output/"native.xml", expected)
+        inventory = audit_junit(output/"native.xml", expected, full_names=full_names)
         require((inventory["assertion_status"] == "passed" and result["execution"] == "completed"
                  and result["returncode"] == 0) or
                 (inventory["assertion_status"] == "failed" and result["execution"] == "process_error"

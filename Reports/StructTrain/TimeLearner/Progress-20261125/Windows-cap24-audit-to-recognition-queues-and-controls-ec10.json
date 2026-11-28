@@ -1,0 +1,152 @@
+{
+  "kind": "timelearner_cap24_actual_audit_to_recognition_queued_and_external_controls_verified",
+  "schema_version": 1,
+  "projection_and_conversion_dispatch": {
+    "dispatched": true,
+    "job": "Classic-cap24-primary-DATA-and-conversion-after-cap8-ec3",
+    "controls_commit": "e2ce53120db9f64b9daa099556423bfc087b1200",
+    "controls_bundle": {
+      "path": "C:\\Projects\\TimeLearnerWorker\\controls\\Classic-cap24-primary-DATA-and-conversion-after-cap8-ec3\\controls.bundle",
+      "sha256": "f83164a9146550ea01e0937c6ca237c9801c990933cb850056fed946c6a8968d",
+      "size": 6148
+    },
+    "task": {
+      "instance": "{73F25BCE-13C9-45F4-9BC7-2995CC61D538}",
+      "registered": true,
+      "task": "TimeLearner-Classic-cap24-DATA-conversion-ec3"
+    },
+    "actor_root": "75110fa16336416f15adf7f2ea2cd8b17051b521",
+    "actual_case_job_sha256": "632aa8a3f1823351e94dab93a3b6c1dbd4042079c4d5ba2a3601b87fde5b3713",
+    "exact_training_owner": {
+      "pid": 14936,
+      "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+      "creation_filetime": "134400625073052967"
+    },
+    "exact_cap8_owner": {
+      "pid": 22716,
+      "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+      "creation_filetime": "134400711894710814"
+    },
+    "actual_native_conversion_not_yet_started": true,
+    "no_new_Train": true,
+    "no_new_threshold_selection": true,
+    "scientific_verdict": null
+  },
+  "recognition_dispatch": {
+    "dispatched": true,
+    "job": "Classic-cap24-baseline-midgap-confirmation-ec5",
+    "controls_commit": "276ef179a79a82362235f8b4c8cdf1f27d9719f9",
+    "controls_bundle": {
+      "path": "C:\\Projects\\TimeLearnerWorker\\controls\\Classic-cap24-baseline-midgap-confirmation-ec5\\controls.bundle",
+      "sha256": "3d30d8cbe9e6178e6ccf0ebfad5cfedd6ed8760435be7b9bc44ad860ed71526b",
+      "size": 48118
+    },
+    "task": {
+      "instance": "{F5E610BA-1160-4FF4-84D8-439E2D03EE0E}",
+      "registered": true,
+      "task": "TimeLearner-Classic-cap24-baseline-midgap-confirmation-ec5"
+    },
+    "parent_training_condition": "2792ed60890930bb0e46ca418cd62beeb81e442381b97c8c93a2bcc73960c01d",
+    "producer_owner": {
+      "pid": 14440,
+      "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+      "creation_filetime": "134400731008902234"
+    },
+    "phases": [
+      "native_nonspiking_baseline8",
+      "full_primary_threshold_proposal",
+      "one_native_threshold_candidate",
+      "actual_native_confirmation8"
+    ],
+    "same_matrix_diagnostic": true,
+    "no_new_Train": true,
+    "scientific_verdict": null
+  },
+  "last_observation_utc": "2026-11-25T09:44:37.237912+00:00",
+  "queued_job_observations": {
+    "Classic-cap24-primary-DATA-and-conversion-after-cap8-ec3": {
+      "files": {
+        "owner.json": {
+          "pid": 14440,
+          "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+          "creation_filetime": "134400731008902234"
+        },
+        "waiting.json": {
+          "utc": "2026-11-25T09:44:32.364356+00:00",
+          "cap24_exact_owner_live": true,
+          "cap8_frozen_followup_exact_owner_live": true,
+          "projection_or_native_conversion_started": false
+        }
+      },
+      "owners": [],
+      "owner_live": true
+    },
+    "Classic-cap24-baseline-midgap-confirmation-ec5": {
+      "files": {
+        "owner.json": {
+          "pid": 12580,
+          "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+          "creation_filetime": "134400732660704183"
+        },
+        "waiting.json": {
+          "utc": "2026-11-25T09:44:16.811352+00:00",
+          "phase": "waiting_for_actual_native_conversion",
+          "exact_producer_owner": {
+            "pid": 14440,
+            "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+            "creation_filetime": "134400731008902234"
+          },
+          "producer_live": true,
+          "native_evaluation_started": false
+        }
+      },
+      "owners": [],
+      "owner_live": true
+    }
+  },
+  "external_controls_archive": {
+    "catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-25/Windows-cap24-projection-conversion-and-recognition-controls-ec9.json",
+      "sha256": "d5adf75fa73f82ad6925234ccc3f4f87df9156c584bf8a6eec048ec98c08279a",
+      "size": 1677
+    },
+    "kind": "timelearner_cap24_predeclared_actual_primary_projection_conversion_and_recognition_controls_archive",
+    "schema_version": 1,
+    "objects": {
+      "projection-conversion.bundle": {
+        "controls_commit": "e2ce53120db9f64b9daa099556423bfc087b1200",
+        "object": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/f8/f83164a9146550ea01e0937c6ca237c9801c990933cb850056fed946c6a8968d",
+          "sha256": "f83164a9146550ea01e0937c6ca237c9801c990933cb850056fed946c6a8968d",
+          "bytes": 6148
+        },
+        "self_contained_bundle_verified": true
+      },
+      "recognition.bundle": {
+        "controls_commit": "276ef179a79a82362235f8b4c8cdf1f27d9719f9",
+        "object": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/3d/3d30d8cbe9e6178e6ccf0ebfad5cfedd6ed8760435be7b9bc44ad860ed71526b",
+          "sha256": "3d30d8cbe9e6178e6ccf0ebfad5cfedd6ed8760435be7b9bc44ad860ed71526b",
+          "bytes": 48118
+        },
+        "self_contained_bundle_verified": true
+      }
+    },
+    "protocol_root_commit": "10a803116a307aef5316dbc4cbb80f8b73051362",
+    "actor_root_commit": "75110fa16336416f15adf7f2ea2cd8b17051b521",
+    "native_sdk_root_commit": "891a75b39b2b020025aedc7e6158f89fd2f25ed2",
+    "source_training_outcome_and_model_resolved_only_from_actual_full_audit": true,
+    "source_Train_not_restarted": true,
+    "actual_native_conversion_or_classification_completed": false,
+    "scientific_verdict": null
+  },
+  "source_Train_not_modified_or_restarted": true,
+  "actual_native_preparation_and_evaluation_not_yet_executed": true,
+  "scientific_verdict": null
+}

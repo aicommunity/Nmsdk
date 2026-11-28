@@ -1,0 +1,113 @@
+{
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-28/Classic-third-pulse16-independent-fr678.json",
+    "size": 3520,
+    "sha256": "cd34ef41981f123d17b8fc227f6556de4f4638c440287400bf9f0646191ffbf1"
+  },
+  "catalog": {
+    "kind": "Classic_third_pulse16_full_independent_reader_evidence",
+    "schema_version": 1,
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/7c/7c77669c22b872ff2436b52473d50ccf307d9a634146429f673730229f03423c",
+        "sha256": "7c77669c22b872ff2436b52473d50ccf307d9a634146429f673730229f03423c",
+        "bytes": 6416
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/de/dea68c3b07319700b552b607957c7502c86aea7fa3f46e3682d1250e520e67a8",
+        "sha256": "dea68c3b07319700b552b607957c7502c86aea7fa3f46e3682d1250e520e67a8",
+        "bytes": 6052928
+      }
+    },
+    "members": 33,
+    "analysis": {
+      "kind": "Classic_third_pulse16_complete_independent_readback",
+      "schema_version": 1,
+      "source_catalogs": {
+        "primary": {
+          "relative_path": "experiments/2026-11-27/Worker4-Classic-Count8-third-pulse16-primary-fr648.json",
+          "bytes": 8052,
+          "sha256": "feea35c9e875e124b7ce7452912949bc979dabb9c95e3de8a10600871d860a96"
+        },
+        "gallery": {
+          "relative_path": "experiments/2026-11-28/Worker4-Classic-Count8-third-pulse16-gallery-fr671.json",
+          "bytes": 7554,
+          "sha256": "f0004fa53099be416a4655dc28b2fc0956f5829648e7f9b63a86f05311172fb9"
+        }
+      },
+      "primary_members": 187,
+      "gallery_members": 139,
+      "all_declared_members_restored": true,
+      "native_observations": 16,
+      "rows": [
+        {
+          "case": "control",
+          "counts": {
+            "TP": 1,
+            "FP": 1,
+            "FN": 0,
+            "TN": 6,
+            "targets": 1,
+            "foils": 7,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 0.875,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.14285714285714285
+          }
+        },
+        {
+          "case": "third-pulse",
+          "counts": {
+            "TP": 1,
+            "FP": 0,
+            "FN": 0,
+            "TN": 7,
+            "targets": 1,
+            "foils": 7,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 1.0,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.0
+          }
+        }
+      ],
+      "all_actual_input_times_checked": true,
+      "no_output_before_fourth": true,
+      "actual_native_loaded_files_per_case": 28,
+      "actual_native_and_both_readers_loaded_bytes_verified": true,
+      "controls_Git_verified": [
+        {
+          "role": "producer",
+          "commit": "763cdee940b029d16f3dcea3bb9e97bba0701636",
+          "files": 5,
+          "all_bytes_verified": true
+        },
+        {
+          "role": "publisher",
+          "commit": "9d22836d0135b23ed513c122c8bacc3e62cffbc8",
+          "files": 3,
+          "all_bytes_verified": true
+        }
+      ],
+      "source_before_after_equal": true,
+      "PNG_bytes_verified": 32,
+      "SVG_bytes_verified": 32,
+      "original_control_comparison_records_verified": true,
+      "original_control_reference_waveforms_not_rechecked_beyond_reported_comparison": true,
+      "new_Train": false,
+      "new_calibration": false,
+      "original_closed_process_ownership_not_reattested": true,
+      "scientific_verdict": null
+    },
+    "reader_controls_commit": "4711d72969e0b49095e53de3c406ed944c2a8570",
+    "reader_loaded_maps_and_bytes_retained": true,
+    "acceptance_pending": true,
+    "scientific_verdict": null
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-24/Delay-native132-queue-controls-av28.json",
+  "record": {
+    "kind": "timelearner_Delay_actual132_queue_controls_independent_recovery",
+    "schema_version": 1,
+    "observed_utc": "2026-11-23T23:19:28.320248+00:00",
+    "controls_commit": "ce2cdc64af7383eed359180ce7c4432a7728f202",
+    "bundle": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/22/22c6c9e089e1ed51a8bfbfca40a9c043f120037dd6850ed287a75740361c816c",
+      "sha256": "22c6c9e089e1ed51a8bfbfca40a9c043f120037dd6850ed287a75740361c816c",
+      "bytes": 9984
+    },
+    "files": {
+      ".gitattributes": {
+        "bytes": 8,
+        "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da"
+      },
+      ".gitignore": {
+        "bytes": 139,
+        "sha256": "11436e477e976900050ead5e2030b08aaf87c644e4320138fe972ce0bd48d6b6"
+      },
+      "cohort.json": {
+        "bytes": 9595,
+        "sha256": "6a28a79730c5d8d9c274267a3c4f272c444205d710da425b8df6fa31c17f48eb"
+      },
+      "declaration.json": {
+        "bytes": 841,
+        "sha256": "ebff21c6feeb14f774f46bcc3c59a20b56814fe5d050cab7a82d17e9057bace1"
+      },
+      "launch.cmd": {
+        "bytes": 521,
+        "sha256": "8a334d6d1684eedb83830a0a6595fa4f53a609bd324daddf52bf9683efde33e6"
+      },
+      "prepare.py": {
+        "bytes": 16377,
+        "sha256": "f7fab0e4460cce70e7b48e513c5b3da32f8bd6ecb0b98b1abdd3140bb26b3a2e"
+      },
+      "register.ps1": {
+        "bytes": 1197,
+        "sha256": "a3106db2c744f710424833d7809c15e73e9fec05980928755fce3bd2c22886d1"
+      },
+      "supervisor.py": {
+        "bytes": 9199,
+        "sha256": "932abffec4c971db52671ff62f0ad89e269af7fdb54fe98c5f97156593dc7df0"
+      },
+      "task.xml": {
+        "bytes": 1241,
+        "sha256": "14022bd5ad52740d9d0d865c522ce4a0a98627975df914f0101668cffecfdd40"
+      }
+    },
+    "all_git_blobs_recovered": true,
+    "owner_at_dispatch": {
+      "pid": 11800,
+      "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+      "creation_filetime": "134399491895389353"
+    },
+    "kernel_live_at_dispatch": true,
+    "expected_cpp_cases": 132,
+    "Delay_cases": 18,
+    "prior_cases": 114,
+    "persistent_task": "TimeLearnerQueue-delay-native132-av26",
+    "prior_unstarted_queue_verified_absent": true,
+    "waits_for_frozen_Branch_whole_closure": true,
+    "production_workers_unmodified": true,
+    "original_build_accepted": false,
+    "original_build_outcome_unchanged": true,
+    "native_tests_executed_by_this_operation": 0,
+    "scientific_verdict": null
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "kind": "timelearner_two_sweep_budget_headroom_evidence",
+  "schema_version": 1,
+  "source_archive_sha256": "3012c1aba5cabcccc5e19b4ca569a12d18906fe214e532ebecc04ec47a77c77e",
+  "source_member": "original-job/train/native/train_stopped_summary.json",
+  "source_member_bytes": 28999225,
+  "source_member_sha256": "9656a50156b7c456e3cec859f3337858b57f24322bc7b7904c0d7ed5216638b3",
+  "source_counter": {
+    "archive": {
+      "groups": 158,
+      "native_probes": 948,
+      "primary_bytes": 136836199,
+      "sampled_frames": 3413748
+    },
+    "attempt": {
+      "logical_groups": 158,
+      "native_probes": 948,
+      "sampled_frames": 3413748
+    }
+  },
+  "declared_unchanged_limits": {
+    "groups": 512,
+    "native_probes": 3072,
+    "sampled_frames": 11074560,
+    "primary_bytes": 536870912
+  },
+  "twice_previous_volume_is_only_an_estimate": true,
+  "future_limits_still_enforced": true,
+  "model_recalculated": false,
+  "scientific_verdict": null
+}

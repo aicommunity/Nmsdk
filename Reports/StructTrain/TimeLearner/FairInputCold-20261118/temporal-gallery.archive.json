@@ -1,0 +1,83 @@
+{
+  "kind": "timelearner_fair_input_threshold_temporal_gallery_publication",
+  "schema_version": 1,
+  "renderer_job": "s11-fair-input-threshold-report-m40-a1",
+  "collector_job": "s11-fair-threshold-gallery-primary-m40-a1",
+  "source_root": "ea0b039f3bd4f7784ff76e32d90fb99a50032ac2",
+  "renderer_controls": "a7974c08821902a00b114b142aac3d8ef9f5d1b7",
+  "collector_controls": "9bff0705af6d75b67baf268e1e201e71056c1e1d",
+  "primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/5a/5a1b0a1d01c4901996c1e403caede032257f3075cc43dde1778275f4f79b7418",
+    "sha256": "5a1b0a1d01c4901996c1e403caede032257f3075cc43dde1778275f4f79b7418",
+    "bytes": 402477644
+  },
+  "bundle_manifest": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/7d/7d02a6851c0866fc6bbb2d9a0d91d9098974c763be1e5f39ffe55c99057739da",
+    "sha256": "7d02a6851c0866fc6bbb2d9a0d91d9098974c763be1e5f39ffe55c99057739da",
+    "bytes": 3592612
+  },
+  "provenance_primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/d5/d56ea3056234e8027d36d9bf1e88a4db1a08812341d8dc209f194505bb1eb3ec",
+    "sha256": "d56ea3056234e8027d36d9bf1e88a4db1a08812341d8dc209f194505bb1eb3ec",
+    "bytes": 2817607
+  },
+  "visual_review": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/18/1831e08d457a11e65bf2387b9fb26beff3a7e8762333de829be5fe014a3e1bcf",
+    "sha256": "1831e08d457a11e65bf2387b9fb26beff3a7e8762333de829be5fe014a3e1bcf",
+    "bytes": 60738
+  },
+  "control_bundles": [
+    {
+      "role": "renderer-controls",
+      "commit": "a7974c08821902a00b114b142aac3d8ef9f5d1b7"
+    },
+    {
+      "role": "collector-controls",
+      "commit": "9bff0705af6d75b67baf268e1e201e71056c1e1d"
+    }
+  ],
+  "bundle_members": 13861,
+  "expanded_bytes": 2533887282,
+  "gallery_files": 13819,
+  "gallery_bytes": 2531444382,
+  "gallery_pngs": 4591,
+  "cache_relative": "report-cache/2026-11-18/fair-input-threshold-a1",
+  "cache_entrypoint": "index.html",
+  "trials": 16,
+  "trial_soma_pairs": 40,
+  "per_topology_counts": {
+    "TP": 1,
+    "FP": 2,
+    "FN": 0,
+    "TN": 5
+  },
+  "false_positive_sample_ids": [
+    "phasea-row-4",
+    "phasea-row-6"
+  ],
+  "reset_policy": "reset_per_trial",
+  "execution": "completed",
+  "validity": "valid",
+  "python_passed": 2,
+  "all_processes_closed": true,
+  "representative_review_count": 40,
+  "all_figures_manually_reviewed": false,
+  "training_completed": false,
+  "independent_evaluation": false,
+  "scientific_verdict": null,
+  "native_primary_dependency": "17457e13cecdefa838614d97c1f73e6d772bc1fc8a94976bf001bcfbefd51868",
+  "generated_binary_in_root_git": false,
+  "catalog_relative": "experiments/2026-11-18/fair-input-cold/threshold-temporal-gallery-a1.json"
+}

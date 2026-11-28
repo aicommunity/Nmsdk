@@ -1,3 +1,101 @@
+28.11: [актуальная сводка](../../../Docs/StructTrain/TimeLearner/CurrentStatus-20261128.ru.md),
+[принятые третья и четвёртая серии Classic](Progress-20261128/Classic-third-fourth-independent-accepted-fr682.json).
+Первичные файлы и все рисунки находятся во внешнем архиве; этот раздел
+содержит проверенные компактные каталоги.
+[Все1274 исходных файла cap24 приняты](Progress-20261128/Classic-cap24-complete-primary-accepted-fr707.json).
+[Разбор измеренной истории](../../../Docs/StructTrain/TimeLearner/ClassicCap24SearchHistory-20261128.ru.md)
+не меняет исход budget_exhausted и не приписывает модели сертификат.
+
+27.11: [Classic: ранний ответ при изменении четвёртого импульса](../../../Docs/StructTrain/TimeLearner/ClassicFourthPulseHistoryResults-20261127.ru.md).
+Все64 наблюдения .12/.4 независимо приняты:
+[280 мс](Progress-20261127/Classic-fourth280-independent-fr153.json),
+[320 мс](Progress-20261127/Classic-fourth320-independent-fr159.json).
+Изменённый паттерн отклоняется после сброса, но вызывает выход через240,5 мс
+при сохранении динамики, до четвёртого импульса. Галерея280 мс независимо
+восстановлена; полный визуальный просмотр ещё не завершён.
+
+27.11: [Фактическая конечная модель эпохи22 с .14](Progress-20261127/Windows14-epoch22-recognition-accepted-fr58.json):
+все251 первичный файл и16 наблюдений независимо приняты. Реальный выбранный
+порог дал TP1 / FP2 / FN0 / TN5; исходное обучение сохраняет остановку
+по бюджету. Новые графики подготовлены, полный просмотр ещё впереди.
+
+27.11: [Следующие десять случаев Classic независимо приняты](Progress-20261127/Elder-cadence-closed10-native-accepted-gallery-prepared-fr29.json),
+все80 наблюдений и762 первичных файла. [40 сравнений полных реакций](Progress-20261127/Elder-cadence-closed10-full-response-comparison-fr50.json)
+показывают изменение времени ответа при сохранении динамики в коротких
+сериях, хотя TP1 / FP2 / TN5 остаются прежними. Полный визуальный просмотр
+новой галереи ещё не завершён.
+
+27.11: [Реальная классификация конечной модели исправленного циклического Classic](Progress-20261127/Classic-repaired-q3-recognition-accepted-fq67.json):
+TP1 / FP4 / FN0 / TN3, полный независимый аудит210 членов; исходное
+обучение сохраняет `budget_exhausted`. [Все32 PNG просмотрены](Progress-20261127/Classic-repaired-q3-figures-accepted-fq74.json).
+[Branch: полная направленная серия](../../../Docs/StructTrain/TimeLearner/BranchFourthPulseFullResults-20261127.ru.md)
+независимо принята по всем128 наблюдениям. В Git только компактные ссылки;
+данные и рисунки во внешнем архиве M40.
+
+26.11: [Полный повтор cap24: все восемь реакций сохранены](Progress-20261126/Windows-cap24-complete-frozen-repeat-er30.json).
+63 первичных члена независимо восстановлены; максимальная разность сигналов0.
+Модель и порог фиксированы, после допуска выполняется направленная восьмёрка.
+
+26.11: [Classic cap24: TP1/FP1/FN0/TN6 и полный независимый архив](Progress-20261126/Windows-cap24-recognition-and-temporal-report-er5.json).
+Все 265 первичных членов распознавания и 89 членов галереи восстановлены;
+32 PNG, все просмотрены; [полная визуальная приёмка](Progress-20261126/Windows-cap24-complete-visual-review-er28.json). [Научный разбор](../../../Docs/StructTrain/TimeLearner/ClassicCandidateCap24RecognitionResults-20261126.ru.md).
+
+26.11: [Подготовка матрицы порядка/пауз Elder: 33/33, 64 первичных члена](Progress-20261126/Elder-q3-cadence33-admission-er6.json).
+Допуск метаданных принят, первый физический случай начат; итог 256 предъявлений ещё не получен.
+[Очередь распознавания закрытой модели M40](Progress-20261126/M40-sequential-recognition-preregistration-er7.json)
+допущена 6/6 проверками исходных метаданных и ждёт прежнюю пару.
+
+26.11: [Полные первичные байты Train cap24 независимо восстановлены](Progress-20261126/Windows-cap24-training-primary-bytes-ep31.json).
+1891 файл, включая исходный пакет1,12GB и47 загруженных модулей;
+архив68,3MB находится на M40. Это проверка доступности байтов,
+не повторный разбор истории обучения или итог распознавания.
+
+26.11: [Постановка матрицы Classic q3:32 случая порядка/периода/сброса](Progress-20261126/Classic-q3-cadence32-preregistration-ep24.json).
+Восемь объектов постановки независимо проверены на M40; физический
+результат пока не присваивается. Модель и порог сохранены.
+
+26.11: [Новые научные сетки cap8/q3, первичные данные и полные галереи](Progress-20261126/Frozen-new-foil-grids-scientific-eo54.json).
+Cap8: TP1/FP0/FN0/TN26; q3: TP1/FP2/FN0/TN24. Все данные находятся
+во внешнем архиве, в Git только квитанция. Построены 108 PNG;
+просмотрены 16, остальные ещё требуют визуальной приёмки.
+
+26.11: [Итог 135 компонентных случаев и полный независимый архив](Progress-20261126/Parameterized-components135-independent-eo35.json).
+858 членов первичного комплекта восстановлены, 26 групп закрыты;
+в Git только краткая квитанция. Начальные отказы сохранены,
+производственные библиотеки не менялись.
+
+26.11: [Формат полных GoogleTest-имён и фактическая матрица компонентов](Progress-20261126/Parameterized-native-format-and-matrix-eo14.json).
+Приняты 30/30 проверок формата и восстановлены 70 первичных файлов.
+Научные данные и бинарники в Git не добавлялись; 133 случая компонентов
+выполняются отдельно от прежних научных задач.
+
+26.11: [26/26 случаев Delay на реальных компонентах](Progress-20261126/Active-Delay26-independent-en14.json).
+Все 118 файлов, включая executable, JUnit, полные кривые и 28 реально
+загруженных файлов runtime, независимо восстановлены во внешнем архиве.
+Код обучения и работающие научные runtime не менялись.
+
+25.11: [полный повтор cap8, сдвиги третьего импульса и очередь cap24](Progress-20261125/Windows-cap8-repeat-third-and-cap24-queue-em17.json).
+Новая направленная восьмёрка — TP1/FP0/FN0/TN7 при прежних модели и
+пороге; исходная матрица остаётся TP1/FP1/TN6. Все 124 первичных,
+48 файлов рисунков и 44 файла допуска/декларации независимо восстановлены.
+В Git только краткая текстовая квитанция; [научное описание](../../../Docs/StructTrain/TimeLearner/ClassicCap8ThirdPulseSensitivityResults-20261125.ru.md).
+
+25.11, новое подтверждение чувствительности: [Classic q3 отклонил все семь сдвигов третьего импульса](../../../Docs/StructTrain/TimeLearner/ClassicQ3ThirdPulseSensitivityResults-20261125.ru.md).
+TP1/FP0/FN0/TN7 при прежних модели и пороге, полный независимый аудит
+и 16 просмотренных русских PNG. На исходной матрице остаются два FP.
+
+25.11: [Classic cap8, полный первичный архив и графики](Progress-20261125/Windows-cap8-recognition-and-complete-temporal-report-el8.json):
+TP1/FP1/FN0/TN6; 306 первичных и 666 файлов отчётности независимо
+восстановлены во внешнем архиве M40. В Git только эта текстовая квитанция.
+[Научный разбор](../../../Docs/StructTrain/TimeLearner/ClassicCandidateCap8RecognitionResults-20261125.ru.md),
+[текущая сводка](../../../Docs/StructTrain/TimeLearner/CurrentStatus-20261125.ru.md).
+
+23.11: [актуальная сводка](../../../Docs/StructTrain/TimeLearner/CurrentStatus-20261123.ru.md).
+[Действительные8 ответов нового Branch](CountFrozenEvaluation-20261123/windows-new-count-actual-eight-results.json),
+[16 наблюдений короткого потока Classic](CountFrozenEvaluation-20261123/m40-short-pair-actual-events.json),
+[полный новый Train и независимое восстановление3135 файлов](CountFrozenEvaluation-20261123/windows-complete-Train-primary-index.json).
+Первичные архивы остаются вне Git; здесь только компактные текстовые квитанции.
+
 > Storage policy superseded on 14 November 2026: experiment payloads and full galleries belong in the shared M40 archive; Git contains metadata and checked `*.archive.json` references. Dated paragraphs below preserve earlier publication history, including former “in Git” wording. [Current archive/access/restore contract](../../../Docs/StructTrain/TimeLearner/ExternalExperimentArchive.ru.md). History replacement is still in progress; it is not scientific acceptance.
 
 Preserved14.11: [actual Classic N0 order64 whole primary](ClassicN0OrderMatrix-20261114/primary/bundle.json),55,527,604B literal XZ/396 logical members. [Production1/1 accepted](../../../Docs/StructTrain/TimeLearner/ValidationPlans/M40ClassicN0OrderMatrixA3-20261114/RESULT.ru.md): TP8/FP32/FN0/TN24, same classifications for every sample in every position, target13ms after the last input. First8 waveforms and frozen model bytes exactly match the original baseline; stopped-model Same-Matrix scope, no completed Train/independent Test. [Own scientific report is ready](../../../Docs/StructTrain/TimeLearner/ClassicN0OrderScientificReport-20261114.ru.md),13 selected originals reviewed including target in every position and native-scale peaks; independent semantic restore of this archive remains pending.
@@ -621,7 +719,7 @@ Stock fixed-geometry resistance gate: two real Elder zero-tick cold preflights h
 - 04.11: s03-native-probe-phases-elder-a1 и s03-native-probe-phases-m40-a1 — imported baseline/main interruption,12 jobs и7 readers на worker,2 cold regressions, compact reuse7362 primary files. См. Docs/StructTrain/TimeLearner/NativeProbePhases.ru.md.
 
 
-04.11: [исправленный временной preview stock stopped Train](s11-stock-stopped-title-preview-a4/preview.png)
+04.11: [архив исправленного временного preview stock stopped Train](s11-stock-stopped-title-preview-a4/preview.png.archive.json)
 и [его provenance](s11-stock-stopped-title-preview-a4/preview.json). Полный trial ID
 больше не обрезан;1920×960, фактический soma potential и входные импульсы.
 Визуально проверено только это изображение. Полный новый80-pair кэш A4 ещё

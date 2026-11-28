@@ -1,0 +1,30 @@
+{
+  "dispatched": true,
+  "job": "classic-traversal-same-runtime-pair-coordinator-m40-dy7",
+  "owner": {
+    "pid": 605404,
+    "start_ticks": "466581073",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000
+  },
+  "controls_commit": "1acc6565b5d4b0209fc84aed721c899649728193",
+  "controls_bundle": {
+    "path": "/media/user/Data/TimeLearnerRefactor/requests/classic-traversal-same-runtime-pair-coordinator-m40-dy7/controls.bundle",
+    "sha256": "b837350d823a3d9f654ea15512aa599c60a87f3bd51c5d9caf58a3e1133ea6f0",
+    "size": 6809
+  },
+  "waits_for_exact_sdk_owner": {
+    "pid": 495153,
+    "start_ticks": "466439859",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000
+  },
+  "required_passed_SDK_cases": 213,
+  "ordered_cases": [
+    "sequential",
+    "round-robin-q3"
+  ],
+  "same_runtime_for_both_required": true,
+  "native_Train_started_not_yet_observed": true,
+  "scientific_verdict": null
+}

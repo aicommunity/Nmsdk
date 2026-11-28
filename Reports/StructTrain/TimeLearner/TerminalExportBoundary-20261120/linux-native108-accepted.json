@@ -1,0 +1,449 @@
+{
+  "kind": "timelearner_terminal_export_native108_acceptance",
+  "schema_version": 1,
+  "job": "s05-terminal-export-linux-elder-a1",
+  "host": "10.245.1.11",
+  "via_jump": "10.245.1.12",
+  "source_closure": {
+    "root": {
+      "head": "bd9ea23aedd3520c2695fc6cb1d083921053f888",
+      "status": ""
+    },
+    "Bin": {
+      "recorded_gitlink": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "head": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "status": ""
+    },
+    "Libraries/Nmsdk-MotionControlLib": {
+      "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "status": ""
+    },
+    "Libraries/Nmsdk-PulseLib": {
+      "recorded_gitlink": "1c8d0112061cb9025ef9205b0d8d735d62fcbe39",
+      "head": "1c8d0112061cb9025ef9205b0d8d735d62fcbe39",
+      "status": ""
+    },
+    "Libraries/Rdk-BasicLib": {
+      "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "status": ""
+    },
+    "Libraries/Rdk-CvBasicLib": {
+      "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "status": ""
+    },
+    "Libraries/Rdk-HardwareLib": {
+      "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+      "head": "de40b008e990105856726e01230dde19f42a90a9",
+      "status": ""
+    },
+    "Rdk": {
+      "recorded_gitlink": "561986e9f336ee5914e2d119de90b005e06f3639",
+      "head": "561986e9f336ee5914e2d119de90b005e06f3639",
+      "status": ""
+    }
+  },
+  "source_closure_after": {
+    "root": {
+      "head": "bd9ea23aedd3520c2695fc6cb1d083921053f888",
+      "status": ""
+    },
+    "Bin": {
+      "recorded_gitlink": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "head": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "status": ""
+    },
+    "Libraries/Nmsdk-MotionControlLib": {
+      "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "status": ""
+    },
+    "Libraries/Nmsdk-PulseLib": {
+      "recorded_gitlink": "1c8d0112061cb9025ef9205b0d8d735d62fcbe39",
+      "head": "1c8d0112061cb9025ef9205b0d8d735d62fcbe39",
+      "status": ""
+    },
+    "Libraries/Rdk-BasicLib": {
+      "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "status": ""
+    },
+    "Libraries/Rdk-CvBasicLib": {
+      "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "status": ""
+    },
+    "Libraries/Rdk-HardwareLib": {
+      "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+      "head": "de40b008e990105856726e01230dde19f42a90a9",
+      "status": ""
+    },
+    "Rdk": {
+      "recorded_gitlink": "561986e9f336ee5914e2d119de90b005e06f3639",
+      "head": "561986e9f336ee5914e2d119de90b005e06f3639",
+      "status": ""
+    }
+  },
+  "native_gate": {
+    "kind": "timelearner_native_test_gate_result",
+    "schema_version": 1,
+    "execution": "completed",
+    "validity": "valid",
+    "assertion_status": "passed",
+    "reason": "complete_declared_test_inventory",
+    "inventory": {
+      "expected": 108,
+      "observed": 108,
+      "failed_test_ids": [],
+      "assertion_status": "passed",
+      "sha256": "db4421aca760279f24ec67015f4e615ed7002e34170df1c0ef02a7b5c9c29110"
+    },
+    "scientific_verdict": null
+  },
+  "terminal": {
+    "job_validation_passed": true,
+    "cohort_assertions_passed": true,
+    "built": true,
+    "expected_cpp_cases": 108,
+    "audited_completed_cpp_cases": 108,
+    "actual_audited_assertion_passed_cpp_cases": 108,
+    "actual_audited_failed_cpp_ids": [],
+    "completed_leaf_gates": 1,
+    "heartbeat_errors": [],
+    "final_capture_errors": [],
+    "scientific_verdict": null,
+    "whole_plan_complete": false,
+    "lease_release_policy": "external owner only after exact outer and all recorded leaf kernel groups are closed"
+  },
+  "process": {
+    "kind": "timelearner_process_result",
+    "schema_version": 2,
+    "execution": "completed",
+    "reason": "exit_zero_and_whole_group_closed",
+    "returncode": 0,
+    "wall_seconds": 5200.392167855054,
+    "model_time": null,
+    "runtime_provenance": "loaded_files_captured",
+    "mapping_error": null,
+    "runtime_fingerprint": "1e680e2f01b550979ec440f57a1e1ee7c0aa7c503d260b7712bdaba098e76632",
+    "ownership_scope": "bound_cgroup",
+    "all_processes_closed": true,
+    "scientific_verdict": null,
+    "operational_diagnostics": {
+      "kind": "timelearner_operational_diagnostics",
+      "schema_version": 1,
+      "policy": "owned-streams-v1",
+      "status": "error",
+      "error_records": 2,
+      "warning_records": 0,
+      "unclassified_stderr_chunks": 2,
+      "reasons": [],
+      "examples": [
+        {
+          "stream": "stderr.log",
+          "chunk": 1,
+          "severity": "unclassified",
+          "excerpt": "PulseLibTestRuntime executable=/home/user/timelearner-refactor/runtime-terminal-export-linux-a1/Test_PulseLib_StorageComponents ini=/home/user/timelearner-refactor/runtime-terminal-export-linux-a1/NeuroModelerConsole.ini"
+        },
+        {
+          "stream": "stderr.log",
+          "chunk": 2,
+          "severity": "unclassified",
+          "excerpt": "PulseLibTestRuntime work_directory=/home/user/timelearner-refactor/readbacks/s05-terminal-export-linux-elder-a1/terminal-export-recovery-native108/native.test-events-log"
+        },
+        {
+          "stream": "stderr.log",
+          "chunk": 3,
+          "severity": "error",
+          "excerpt": "E1120 17:42:33.385362 2433762 rdk_logging.h:164] [0] Reset>  Model.Learner.Neuron throws exception: injected_joint_capacitance_live_reset"
+        },
+        {
+          "stream": "stderr.log",
+          "chunk": 4,
+          "severity": "error",
+          "excerpt": "E1120 17:42:55.860051 2433762 rdk_logging.h:164] [0] Reset>  Model.Learner.Neuron throws exception: injected_joint_capacitance_live_reset"
+        }
+      ],
+      "streams": [
+        {
+          "path": "stdout.log",
+          "bytes": 26395,
+          "sha256": "506c50fe5108611020333c796e91e5df3200aea7a0912c5ed5435cb7b07ee9c8"
+        },
+        {
+          "path": "stderr.log",
+          "bytes": 667,
+          "sha256": "a9bcb8f1b214dbf95ea40e96a745c8d8d07e1b4bd24f29fee09eb9d34cf5f662"
+        }
+      ],
+      "contained_streams_match": true,
+      "scientific_verdict": null
+    }
+  },
+  "junit": {
+    "bytes": 38253,
+    "sha256": "db4421aca760279f24ec67015f4e615ed7002e34170df1c0ef02a7b5c9c29110",
+    "expected": 108,
+    "completed": 108,
+    "failed": 0,
+    "skipped": 0,
+    "disabled": 0,
+    "seconds": "5197.81",
+    "case_ids": [
+      "RdkIntegralXml.FullWidthValuesSurviveSaveLoad",
+      "RdkIntegralXml.LegacyDecimalPrefixesRemainReadable",
+      "RdkIntegralXml.NativeNeuronCopyAndClassImagePreserveUnsignedMasks",
+      "RdkIntegralXml.NamedIndexedAndPositionalUnsignedReadsPreserveFullWidth",
+      "RdkXmlStorage.DirectMutationsAreVisibleAfterCachedReads",
+      "RdkXmlStorage.CreateLoadAndDestroyDiscardPreviousCursorValues",
+      "RdkXmlStorage.SameNamedNodesKeepIndependentCursorValues",
+      "RdkXmlStorage.LoadingFieldsPreservesSourceCursorAndCopiesActualValues",
+      "NativePhysicalModelData.ClassicCompleteGraphAndAsymmetricInputsRoundtripWithoutProofAuthority",
+      "NativePhysicalModelData.BranchCompleteGraphAndAsymmetricInputsRoundtripWithoutProofAuthority",
+      "NativePhysicalModelData.ResignedParameterOrClassContradictionsCannotReplaceTheNativeGraph",
+      "NativePhysicalModelData.DataCannotAcquireCertificateCheckpointOrDifferentTrainingTargetByResigning",
+      "NativePhysicalModelData.ClassicFrozenDataMatchesFullSourceTargetAndFoilWithoutProofAuthority",
+      "NativePhysicalModelData.BranchFrozenDataMatchesFullSourceTargetAndFoilWithoutProofAuthority",
+      "NativePhysicalModelData.FrozenDataRejectsSoloAndResignedThresholdMetadata",
+      "BoundedTrainingMeasuredBoundary.CompletedSelectionSurvivesAdvanceToFreshFinalVerification",
+      "BoundedTrainingMeasuredBoundary.UnmeasuredEditAndBudgetStopCannotReplaceTheMeasuredSelection",
+      "BoundedTrainingMeasuredBoundary.IncompleteN0RepeatsDoNotPublishARestoreSelection",
+      "BoundedTrainingN1TimingNeighbourhood.TimingReadyAmplitudeMissProposesFreshNearbyGeometryInBothTopologies",
+      "BoundedTrainingN1TimingNeighbourhood.N0KeepsItsExistingLengthAndNormalizerPolicy",
+      "BoundedTrainingBudgetBoundary.ExhaustedProbesCannotStageAnotherUnmeasurableCandidate",
+      "BoundedTrainingBudgetBoundary.OddProbeRemainderCannotFundANewCandidatePairOrItsEdit",
+      "NativeRecoveryPackage7.ClassicN0StoppedRoundtripKeepsResponse",
+      "NativeRecoveryPackage7.BranchN0StoppedRoundtripKeepsResponse",
+      "NativeRecoveryPackage7.ClassicN1StoppedRoundtripKeepsResponse",
+      "NativeRecoveryPackage7.BranchN1StoppedRoundtripKeepsResponse",
+      "NativeRecoveryPackage7.ClassicCompletedEmptyLedgerIsExplicitRecovery",
+      "NativeRecoveryPackage7.BranchCompletedEmptyLedgerIsExplicitRecovery",
+      "NativeRecoveryPackage7.ClassicAsymmetricC0KeepsChildPhysicsAndResponse",
+      "NativeRecoveryPackage7.BranchAsymmetricC0KeepsChildPhysicsAndResponse",
+      "NativeRecoveryPackage7.ClassicImportedWarmRetryRetainsEarlierRecovery",
+      "NativeRecoveryPackage7.BranchImportedWarmRetryRetainsEarlierRecovery",
+      "NativeRecoveryPackage7.ClassicMissingForeignOrDuplicateLedgerCannotMutateOwner",
+      "NativeRecoveryPackage7.BranchMissingForeignOrDuplicateLedgerCannotMutateOwner",
+      "NativeRecoveryPackage7.ClassicLegacy6CannotMasqueradeAsRecovery7",
+      "NativeRecoveryPackage7.BranchLegacy6CannotMasqueradeAsRecovery7",
+      "NativeTerminalCompositePackage.ClassicFixedN0Stopped",
+      "NativeTerminalCompositePackage.BranchFixedN0Stopped",
+      "NativeTerminalCompositePackage.ClassicFixedN1Stopped",
+      "NativeTerminalCompositePackage.BranchFixedN1Stopped",
+      "NativeTerminalCompositePackage.ClassicWindowN0Stopped",
+      "NativeTerminalCompositePackage.BranchWindowN0Stopped",
+      "NativeTerminalCompositePackage.ClassicWindowN1Stopped",
+      "NativeTerminalCompositePackage.BranchWindowN1Stopped",
+      "NativeTerminalCompositePackage.ClassicFixedCompletedWithoutTransition",
+      "NativeTerminalCompositePackage.BranchFixedCompletedWithoutTransition",
+      "NativeTerminalCompositePackage.ClassicWindowCompletedWithoutTransition",
+      "NativeTerminalCompositePackage.BranchWindowCompletedWithoutTransition",
+      "NativeActualCompositeTerminalRestore.ClassicFixedN0",
+      "NativeActualCompositeTerminalRestore.BranchFixedN0",
+      "NativeActualCompositeTerminalRestore.ClassicFixedN1",
+      "NativeActualCompositeTerminalRestore.BranchFixedN1",
+      "NativeActualCompositeTerminalRestore.ClassicWindowN0",
+      "NativeActualCompositeTerminalRestore.BranchWindowN0",
+      "NativeActualCompositeTerminalRestore.ClassicWindowN1",
+      "NativeActualCompositeTerminalRestore.BranchWindowN1",
+      "NativeTerminalConfiguration.ClassicAllBaseSchemasAreExplicitAndLossless",
+      "NativeTerminalConfiguration.BranchAllBaseSchemasAreExplicitAndLossless",
+      "NativeTerminalConfiguredEntry.ClassicFixedN0",
+      "NativeTerminalConfiguredEntry.BranchFixedN0",
+      "NativeTerminalConfiguredEntry.ClassicFixedN1",
+      "NativeTerminalConfiguredEntry.BranchFixedN1",
+      "NativeTerminalConfiguredEntry.ClassicWindowN0",
+      "NativeTerminalConfiguredEntry.BranchWindowN0",
+      "NativeTerminalConfiguredEntry.ClassicWindowN1",
+      "NativeTerminalConfiguredEntry.BranchWindowN1",
+      "NativeTerminalRecoveryExport.ClassicN0Stopped",
+      "NativeTerminalRecoveryExport.BranchN0Stopped",
+      "NativeTerminalRecoveryExport.ClassicN1Stopped",
+      "NativeTerminalRecoveryExport.BranchN1Stopped",
+      "NativeTerminalRecoveryExport.ClassicN0Completed",
+      "NativeTerminalRecoveryExport.BranchN0Completed",
+      "NativeTerminalRecoveryExport.ClassicN1Completed",
+      "NativeTerminalRecoveryExport.BranchN1Completed",
+      "NativeJointCapacitance.ClassicN0",
+      "NativeJointCapacitance.BranchN0",
+      "NativeJointCapacitance.ClassicN1",
+      "NativeJointCapacitance.BranchN1",
+      "NativeJointCapacitance.ClassicRollback",
+      "NativeJointCapacitance.BranchRollback",
+      "NativeMeasuredBoundary.ClassicN1CompletedPhysicalSnapshot",
+      "NativeMeasuredBoundary.BranchN1CompletedPhysicalSnapshot",
+      "NativeMeasuredBoundary.ClassicN0SnapshotIsNotOverwrittenBySubsequentEdits",
+      "NativeMeasuredBoundary.BranchN0SnapshotIsNotOverwrittenBySubsequentEdits",
+      "NativeMeasuredBoundary.ClassicOwnedHeterogeneousAndDormantCapacitanceSnapshot",
+      "NativeMeasuredBoundary.BranchOwnedHeterogeneousAndDormantCapacitanceSnapshot",
+      "NativePostTuneBoundaryGuards.OwnerResetInvalidatesCheckpoint",
+      "NativePostTuneBoundaryGuards.DifferentOwnerCannotRestore",
+      "NativePostTuneBoundaryGuards.OwnerMembershipChangeIsRejected",
+      "NativePostTuneBoundaryGuards.ExternalListenerIsPreserved",
+      "NativeTerminalSelection.ClassicN0DeadlineRestoresFullMeasuredModel",
+      "NativeTerminalSelection.BranchN0DeadlineRestoresFullMeasuredModel",
+      "NativeTerminalSelection.ClassicN1DeadlineRestoresFullMeasuredModel",
+      "NativeTerminalSelection.BranchN1DeadlineRestoresFullMeasuredModel",
+      "NativeTerminalSelection.ClassicExternalStopDoesNotRestore",
+      "NativeTerminalSelection.BranchExternalStopDoesNotRestore",
+      "NativeTerminalSelection.ClassicResetRevokesPendingSelection",
+      "NativeTerminalSelection.BranchResetRevokesPendingSelection",
+      "NativeTerminalSelection.ClassicCapacitanceStateAndWaveformAreRestored",
+      "NativeTerminalSelection.BranchCapacitanceStateAndWaveformAreRestored",
+      "NativeTerminalSelection.ClassicInsufficientEditReservationDoesNotMutate",
+      "NativeTerminalSelection.BranchInsufficientEditReservationDoesNotMutate",
+      "NativeTerminalSelection.ClassicFailedAttachmentRetainsOriginalModel",
+      "NativeTerminalSelection.BranchFailedAttachmentRetainsOriginalModel",
+      "NativeTerminalPlainPackage.ClassicCompletedN0WithoutTransition",
+      "NativeTerminalPlainPackage.BranchCompletedN0WithoutTransition",
+      "NativeTerminalPlainPackage.ClassicCompletedN1WithoutTransition",
+      "NativeTerminalPlainPackage.BranchCompletedN1WithoutTransition"
+    ]
+  },
+  "owned_process": {
+    "pid": 2433762,
+    "start_ticks": "475154721",
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "executable": "/home/user/timelearner-refactor/runtime-terminal-export-linux-a1/Test_PulseLib_StorageComponents",
+    "executable_sha256": "7379ae04e5387b549fc800e150d4a9f9a83aee51dfe03983fbe84f6a1438531f",
+    "runtime_fingerprint": "1e680e2f01b550979ec440f57a1e1ee7c0aa7c503d260b7712bdaba098e76632",
+    "unit": "timelearner-7e23d7ab-48b0-49cd-84d1-3103816bb3e4.service",
+    "invocation_id": "12add02affa549e19408b1b77cb26755",
+    "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-7e23d7ab-48b0-49cd-84d1-3103816bb3e4.service"
+  },
+  "outer_binding": {
+    "kind": "timelearner_contained_binding",
+    "schema_version": 1,
+    "request_sha256": "1ae03710011e6ad922544b4480519b549b70b0622c23377adc7df498a0948bc6",
+    "unit": "timelearner-c3fa88a6-e730-415b-9e96-876d995fba3f.service",
+    "invocation_id": "a2579740890e41299d5fdab9ad2e5c24",
+    "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-c3fa88a6-e730-415b-9e96-876d995fba3f.service",
+    "initial_main_pid": 2414653,
+    "initial_start_ticks": "475028354",
+    "sha256": "e3595cf90afbb084c5fa30404e7684098db9507b58932e6226fbb5a6efa7f096"
+  },
+  "whole_group_closure": {
+    "reason": null,
+    "record_errors": [],
+    "last_before_cleanup": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "1ae03710011e6ad922544b4480519b549b70b0622c23377adc7df498a0948bc6",
+        "unit": "timelearner-c3fa88a6-e730-415b-9e96-876d995fba3f.service",
+        "invocation_id": "a2579740890e41299d5fdab9ad2e5c24",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-c3fa88a6-e730-415b-9e96-876d995fba3f.service",
+        "initial_main_pid": 2414653,
+        "initial_start_ticks": "475028354",
+        "sha256": "e3595cf90afbb084c5fa30404e7684098db9507b58932e6226fbb5a6efa7f096"
+      },
+      "state": {
+        "Type": "exec",
+        "Restart": "no",
+        "RemainAfterExit": "yes",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "1",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "8589934592",
+        "TasksMax": "128",
+        "KillMode": "control-group",
+        "Description": "TimeLearner contained attempt c3fa88a6-e730-415b-9e96-876d995fba3f",
+        "LoadState": "loaded",
+        "ActiveState": "active",
+        "SubState": "exited",
+        "InvocationID": "a2579740890e41299d5fdab9ad2e5c24"
+      },
+      "memory_max": 8589934592,
+      "tasks_max": 128,
+      "scientific_verdict": null
+    },
+    "outer_binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "1ae03710011e6ad922544b4480519b549b70b0622c23377adc7df498a0948bc6",
+      "unit": "timelearner-c3fa88a6-e730-415b-9e96-876d995fba3f.service",
+      "invocation_id": "a2579740890e41299d5fdab9ad2e5c24",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-c3fa88a6-e730-415b-9e96-876d995fba3f.service",
+      "initial_main_pid": 2414653,
+      "initial_start_ticks": "475028354",
+      "sha256": "e3595cf90afbb084c5fa30404e7684098db9507b58932e6226fbb5a6efa7f096"
+    },
+    "outer_closed": true,
+    "children_closed": [
+      {
+        "directory": "/home/user/timelearner-refactor/readbacks/s05-terminal-export-linux-elder-a1/terminal-export-recovery-native108/process/contained",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "3ddb80890c8bcd1d68a7ba8dc7d74a8f0fe120d088a83d3ccd7ff48b99afcb56",
+          "unit": "timelearner-7e23d7ab-48b0-49cd-84d1-3103816bb3e4.service",
+          "invocation_id": "12add02affa549e19408b1b77cb26755",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-7e23d7ab-48b0-49cd-84d1-3103816bb3e4.service",
+          "initial_main_pid": 2433762,
+          "initial_start_ticks": "475154721",
+          "sha256": "74e9b212a5d08fedb6c19ea138e1b5a9f2e959528c1f4ccc4f59b3812c0203bb"
+        },
+        "closure": {
+          "execution": "unknown",
+          "all_processes_closed": true,
+          "reason": "bound_unit_and_group_absent",
+          "scientific_verdict": null,
+          "binding": {
+            "kind": "timelearner_contained_binding",
+            "schema_version": 1,
+            "request_sha256": "3ddb80890c8bcd1d68a7ba8dc7d74a8f0fe120d088a83d3ccd7ff48b99afcb56",
+            "unit": "timelearner-7e23d7ab-48b0-49cd-84d1-3103816bb3e4.service",
+            "invocation_id": "12add02affa549e19408b1b77cb26755",
+            "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-7e23d7ab-48b0-49cd-84d1-3103816bb3e4.service",
+            "initial_main_pid": 2433762,
+            "initial_start_ticks": "475154721",
+            "sha256": "74e9b212a5d08fedb6c19ea138e1b5a9f2e959528c1f4ccc4f59b3812c0203bb"
+          },
+          "state": {
+            "Type": "",
+            "Restart": "no",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "Result": "success",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "MemoryMax": "infinity",
+            "TasksMax": "38260",
+            "KillMode": "control-group",
+            "Description": "timelearner-7e23d7ab-48b0-49cd-84d1-3103816bb3e4.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "InvocationID": ""
+          }
+        }
+      }
+    ],
+    "disk_peak_increment": 1726107648,
+    "minimum_free": 12792459264,
+    "execution_success_not_inferred_from_cleanup": true,
+    "scientific_verdict": null
+  },
+  "public_readback": {
+    "public_receipt": "timelearner-terminal-export-linux-accepted-20261120-a1.json",
+    "sha256": "ce6100266c06b637d2f08b09569300e58e5e6501c1d2a731ab1cbaa393cd31a9",
+    "bytes": 647626
+  },
+  "compiled_source_root": "bd9ea23aedd3520c2695fc6cb1d083921053f888",
+  "scope": "108 real production native cases, including all86 earlier DATA/XML cases,14 recovery7 and8 terminal exports over that actual history. Console Train sink/writer requires its separately launched16-case gate. N2 engineering scope does not establish N4 convergence/selectivity.",
+  "expected_error_injection": "Two injected_joint_capacitance_live_reset records belong to explicit rollback tests. Original process diagnostic remains error with both entries preserved; positive JUnit does not erase them.",
+  "primary_archive_published": false,
+  "primary_retained_on_worker": true,
+  "full_Console16_acceptance": false,
+  "develop_merged": false,
+  "whole_plan_complete": false,
+  "scientific_verdict": null
+}

@@ -1,0 +1,69 @@
+{
+  "observed_utc": "2026-11-22T20:15:30.815963+00:00",
+  "windows-measured-count-stopped-baseline-k1": {
+    "owner.json": {
+      "pid": 18600,
+      "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+      "creation_filetime": "134398501280325107"
+    },
+    "state.json": {
+      "stage": "audit",
+      "observed_utc": "2026-11-22T20:09:37.502365+00:00",
+      "scientific_verdict": null
+    },
+    "output/terminal.json": {
+      "native_process_completed": true,
+      "original_preparation_failure_preserved": true,
+      "source_bytes_unchanged": true,
+      "observations_independently_audited": false,
+      "training_completed": false,
+      "scientific_verdict": null
+    },
+    "output/process-result.json": {
+      "kind": "timelearner_windows_process_result",
+      "schema_version": 1,
+      "execution": "completed",
+      "validity": "valid",
+      "reason": "exit_zero",
+      "returncode": 0,
+      "scientific_verdict": null,
+      "thread_limit_enforced": false,
+      "memory_limit_semantics": "job_committed_virtual_memory",
+      "wall_budget_scope": "whole_attempt_including_preparation",
+      "descendants_at_main_exit": [],
+      "all_processes_closed": true,
+      "cooperative_capture": "completed",
+      "runtime_provenance": "loaded_files_captured",
+      "observed_module_files": 47,
+      "wall_seconds": 1595.7567971999524,
+      "child_resumed": true,
+      "job_name": "Local\\TimeLearner-2f08df2b-e78c-4085-9d03-1cf627597609"
+    },
+    "native_owner": {
+      "executable": "C:\\Projects\\TimeLearnerWorker\\runtime-measured-count-native-win-a3\\NeuroModelerConsole.exe",
+      "creation_filetime": "134398501734068001",
+      "pid": 19012,
+      "job_name": "Local\\TimeLearner-2f08df2b-e78c-4085-9d03-1cf627597609",
+      "runtime_fingerprint": "09bff57ff10faa264e483a191810bd3c4048153408f9420f3f1b63d3239bdf3f",
+      "suspended_until_limits_applied": true
+    },
+    "event_files": [
+      {
+        "name": "EventsLog\\NeuroModeler.RYZEN7-5825U.User.log.INFO.20261122-224253.19012",
+        "bytes": 299
+      }
+    ]
+  },
+  "windows-measured-count-stopped-threshold-k1": {
+    "owner.json": {
+      "pid": 17128,
+      "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+      "creation_filetime": "134398506750536296"
+    },
+    "state.json": {
+      "stage": "waiting-for-baseline-task-and-full-independent-audit",
+      "observed_utc": "2026-11-22T19:51:15.255323+00:00",
+      "scientific_verdict": null
+    }
+  }
+}

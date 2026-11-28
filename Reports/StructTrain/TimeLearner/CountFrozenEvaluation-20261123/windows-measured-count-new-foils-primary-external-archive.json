@@ -1,0 +1,74 @@
+{
+  "kind": "timelearner_external_windows_count_new_foil_primary",
+  "schema_version": 1,
+  "package": "/media/user/Data/Nmsdk-StructTrainExpArchive/incoming/20261123-windows-measured-count-new-foil-primary-f1",
+  "objects": {
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/21/214f432a3bc965f97b6a122681a30b53a396731998f8426f0accae056d69660f",
+      "sha256": "214f432a3bc965f97b6a122681a30b53a396731998f8426f0accae056d69660f",
+      "bytes": 1128820
+    },
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/35/35dc308c969e2da8e9a68ee9a592745e55a3889e42695fa19e13cff59619487d",
+      "sha256": "35dc308c969e2da8e9a68ee9a592745e55a3889e42695fa19e13cff59619487d",
+      "bytes": 24408
+    },
+    "collection-metadata.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/a8/a805dd18361e5f069066fb2b401bdb864bb22feffe88018ab052748dce9e2064",
+      "sha256": "a805dd18361e5f069066fb2b401bdb864bb22feffe88018ab052748dce9e2064",
+      "bytes": 1989
+    }
+  },
+  "members": 148,
+  "expanded_bytes": 159211039,
+  "recognition_model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+  "actual_new_foil_counts": {
+    "TP": 1,
+    "FP": 1,
+    "FN": 0,
+    "TN": 25,
+    "targets": 1,
+    "foils": 26,
+    "target_trials_with_outside_spikes": 0,
+    "accuracy": 0.9629629629629629,
+    "target_hit_rate": 1.0,
+    "foil_response_rate": 0.038461538461538464
+  },
+  "condition_fingerprint": "6e71296f0a61217665d20b1cefafcb6732087f7699da5e8437c866d808cf5ffc",
+  "all_transferred_files_verified": true,
+  "full_local_different_host_member_restoration_completed": true,
+  "full_native_experiment_reexecution_on_another_host": false,
+  "producer_primary_not_removed": true,
+  "large_incoming_duplicate_removed_after_verified_CAS_store": true,
+  "archive_or_model_added_to_Git": false,
+  "scientific_verdict": null,
+  "local_restoration": {
+    "purpose": "Restore exact archived primary bytes for scientific illustrations; no model or numerical test",
+    "restoration": {
+      "kind": "timelearner_native_bundle_restoration",
+      "schema_version": 1,
+      "archive_sha256": "214f432a3bc965f97b6a122681a30b53a396731998f8426f0accae056d69660f",
+      "archive_members_verified": 148,
+      "retained_regular_files": 148,
+      "compatibility": "retain-regular-glog-aliases-v1",
+      "omitted_redundant_aliases": [],
+      "source_archive_modified": false,
+      "native_execution_attested": false,
+      "scientific_verdict": null
+    },
+    "archive_on_different_host_than_producer": true,
+    "original_producer_files_preserved": true,
+    "numerical_or_model_reexecution": false,
+    "scientific_verdict": null
+  },
+  "canonical_catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-23/branch-measured-count-M4-windows/new-foil-complete-primary-f1.json"
+}

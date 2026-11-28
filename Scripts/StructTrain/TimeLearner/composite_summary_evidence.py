@@ -6,6 +6,7 @@ from .composite_source_evidence import keys
 from .domain_evidence import audit_resistance_domain
 from .native_evidence import count, number, require
 from .response_domain_evidence import _finite_json, _same
+from .candidate_measurement_purpose import FIELD as PURPOSE_FIELD, measurement_purpose_inventory
 
 FIELDS = set(('kind schema_version state outcome reason model_state_kind actual_model_revision model_epoch '
     'actual_parameters tolerances runtime_plan measurement_method source_origin owner_family_binding '
@@ -84,8 +85,10 @@ def _audit_summary(document, package, archive_audit, *, schema_version, recovery
     records = {record['group_id']: record for record in archive['records']}
     target = {record['logical_request']['input_id']: record['measurement']['raw_potential'] for record in references}
     tolerances = summary['tolerances']; cap_candidates = 0
+    purposes = measurement_purpose_inventory(summary['candidates'])
     for candidate in summary['candidates']:
-        allowed = CANDIDATE_FIELDS | ({'capacitance'} if 'capacitance' in candidate else set())
+        allowed = CANDIDATE_FIELDS | ({'capacitance'} if 'capacitance' in candidate else set()) | (
+            {PURPOSE_FIELD} if PURPOSE_FIELD in candidate else set())
         keys(candidate, allowed, 'composite_summary_candidate_fields')
         current = _measurement(records, candidate['measurement_group_id'], candidate['semantic_proof_id'])
         anchor = _measurement(records, candidate['anchor_group_id'], candidate['anchor_semantic_proof_id'])
@@ -122,10 +125,13 @@ def _audit_summary(document, package, archive_audit, *, schema_version, recovery
         require(type(rejection['trial_id']) is str and type(rejection['reason']) is str and rejection['reason'],
                 'composite_summary_rejection_identity')
     domains = [audit_resistance_domain(record) for record in summary['resistance_domains']]
-    return dict(summary_consistent=True, search_history_retained=True, candidates_recomputed=len(summary['candidates']),
+    result = dict(summary_consistent=True, search_history_retained=True, candidates_recomputed=len(summary['candidates']),
                 capacitance_candidates=cap_candidates, resistance_domains=domains, native_execution_verified=False,
                 search_decisions_replayed=False, parameter_change_cost_recomputed=False,
                 rejection_reasons_recomputed=False, evaluation_verdict=None)
+    if purposes is not None:
+        result['candidate_measurement_purpose_inventory'] = purposes
+    return result
 
 
 def audit_composite_summary(document, package, archive_audit):

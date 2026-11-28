@@ -1,0 +1,46 @@
+{
+  "kind": "timelearner_external_scientific_result_reference",
+  "schema_version": 1,
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/f0/f0bc34fe4f19c1b13310e87d71fd5c20e5818eefe70f9ae2f3a8f21c82f57f9e",
+      "sha256": "f0bc34fe4f19c1b13310e87d71fd5c20e5818eefe70f9ae2f3a8f21c82f57f9e",
+      "bytes": 6208
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/f1/f1e6847ef094ae0b10aacb3241e8cf410e76b9aec08f7e690782d4371e4aab1a",
+      "sha256": "f1e6847ef094ae0b10aacb3241e8cf410e76b9aec08f7e690782d4371e4aab1a",
+      "bytes": 3618188
+    }
+  },
+  "members": 36,
+  "expanded_bytes": 25280622,
+  "full_production_history_audit_completed": true,
+  "actual_DATA_projection_completed": true,
+  "all_actual_reader_loaded_bytes_preserved": true,
+  "reader_process_closed": true,
+  "model_revision": "8a8b447f4ecb17f7e9140aa5504f5dedea523ce4e6d802b4a032dc7cd3d44412",
+  "training_outcome": "budget_exhausted",
+  "completed_boundary": false,
+  "new_Train": false,
+  "recognition_result_not_claimed": true,
+  "second_reader_restoration_pending": true,
+  "scientific_verdict": null,
+  "upstream_source_catalog": {
+    "relative_path": "experiments/2026-11-27/M40-sequential-Train-independent-bytes-fr140.json",
+    "bytes": 2060,
+    "sha256": "c3f5d3659d317abf189c4d368b359cd0dc2a269dd24e39b8f5b1e49d9cc86a8e"
+  },
+  "source_catalog": {
+    "relative_path": "experiments/2026-11-27/Sequential-independent-fresh-reader-jump12-fr180.json",
+    "bytes": 1639,
+    "sha256": "d9c5a6ad3738f9c0a3e0c63e2d08573d37a3937263f096ac7ac9de40f66658bc"
+  },
+  "source_kind": "timelearner_independent_full_sequential_Train_primary_audit"
+}

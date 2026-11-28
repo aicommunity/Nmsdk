@@ -336,6 +336,12 @@ def validate_configured_repeat_policy(configuration: dict[str, Any], summary: di
     require(type(summary.get("schema_version")) is int and summary["schema_version"] == schema,
             "configuration_summary_repeat_schema_mismatch")
     search, measured = configuration["search"], summary["configuration"]
+    from .n0_length_policy import bind_n0_length_policy
+    bind_n0_length_policy(dict(search, normalization=configuration['model']['normalization']), measured)
+    from .input_traversal import bind_input_traversal
+    bind_input_traversal(search, measured, branch=configuration['model']['branch'],
+        normalization=configuration['model']['normalization'],
+        capacitance_search=configuration.get('capacitance_search'))
     if schema == 4:
         from .capacitance_policy import audit_capacitance_search_policy
         policy = configuration.get('capacitance_search')
@@ -492,6 +498,12 @@ def _audit_training_summary(summary: dict[str, Any], packets: dict[str, dict[str
     bounds = configuration["bounds"]
     require(len(bounds) == len(summary["actual_parameters"]) == len(refs), "parameter_dimension_mismatch")
     require(configuration["normalization"] in {"synapse_count", "tip_resistance"}, "unknown_normalization")
+    from .n0_length_policy import audit_n0_length_policy
+    audit_n0_length_policy(configuration)
+    from .input_traversal import FIELD as INPUT_TRAVERSAL_FIELD, audit_input_traversal
+    if INPUT_TRAVERSAL_FIELD in configuration:
+        routes={packets[ref['trial_id']]['prepared']['routing'] for ref in refs}
+        audit_input_traversal(configuration,branch=routes!={'classic_burst'})
 
     def parameters_legal(parameters: dict[str, Any], index: int) -> None:
         bound = bounds[index]
@@ -506,6 +518,8 @@ def _audit_training_summary(summary: dict[str, Any], packets: dict[str, dict[str
 
     for index, parameters in enumerate(summary["actual_parameters"]):
         parameters_legal(parameters, index)
+    from .candidate_measurement_purpose import measurement_purpose_inventory
+    purposes = measurement_purpose_inventory(summary["candidates"])
     for candidate in summary["candidates"]:
         index = count(candidate["input_index"])
         require(index in indices and index + 1 < len(refs), "unknown_or_fixed_candidate_input")
@@ -564,10 +578,13 @@ def _audit_training_summary(summary: dict[str, Any], packets: dict[str, dict[str
         require(covered == set(candidates), "candidate_repeat_coverage_incomplete")
     repeat_validation = ({"training_summary_schema": 2, "candidate_repeat_groups_checked": len(summary["candidate_repeat_groups"])}
                          if schema == 2 else {})
-    return {"auditor_version": AUDITOR_VERSION, "certificate_consistent": certificate is not None, "exact": exact, **repeat_validation,
+    result = {"auditor_version": AUDITOR_VERSION, "certificate_consistent": certificate is not None, "exact": exact, **repeat_validation,
             "search_history_retained": history_retained,
             "model_revision": certificate["model_revision"] if certificate is not None else summary["actual_model_revision"], "reference_count": len(refs),
             "candidate_count": len(summary["candidates"]), "evaluation_verdict": None}
+    if purposes is not None:
+        result['candidate_measurement_purpose_inventory'] = purposes
+    return result
 
 
 def audit_training_summary(summary: dict[str, Any], packets: dict[str, dict[str, Any]],

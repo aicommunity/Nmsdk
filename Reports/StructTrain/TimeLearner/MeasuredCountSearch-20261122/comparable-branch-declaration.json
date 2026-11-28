@@ -1,0 +1,33 @@
+{
+  "kind": "timelearner_comparable_measured_count_training_declaration",
+  "schema_version": 1,
+  "declaration": {
+    "prepared": true,
+    "started": false,
+    "native_worker_admitted": false,
+    "controls": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-branch-measured-count-comparison-a1",
+    "controls_commit": "af7080a53cfa0a5efedeadd94da978629922143d",
+    "job_sha256": "28d1099129bc04dd0cabb2dc3a95eb4de396c8889ea5ffed5154e2d961d9d0d5",
+    "baseline_job_sha256": "dc22a25360fe7e27fecde104c61c5f727d59c4fcaf2db5a58dc130d8786cc55d",
+    "initial_model_revision_expected": "ab751ba723852917588b694d156f1d8c9033b8b0a0ec7b8e93faacec0d747dc4",
+    "expected_initial_nodes": 14,
+    "mathematical_configuration_unchanged": true,
+    "full_native_reference_comparison_required": true,
+    "effective_new_preflight_pending": true,
+    "native_gate_pending": true,
+    "condition_pending_runtime_seal": true,
+    "scientific_verdict": null
+  },
+  "native_gate_failures_block_admission": true,
+  "started": false,
+  "condition_not_yet_sealed": true,
+  "production_code_diff_from_baseline": [
+    "Core/TimeLearner/BoundedTraining.cpp",
+    "Core/TimeLearner/MeasuredSynapseCountSearch.cpp",
+    "Core/TimeLearner/MeasuredSynapseCountSearch.h"
+  ],
+  "App_cpp_changes_from_compiled_baseline": false,
+  "mathematical_goal_tolerances_and_budgets_unchanged": true,
+  "effective_new_preflight_and_native_reference_waveform_comparison_pending": true,
+  "scientific_verdict": null
+}

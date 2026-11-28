@@ -1,0 +1,70 @@
+{
+  "kind": "timelearner_migration361_production_cli_verification",
+  "schema_version": 1,
+  "host": "Elder-1",
+  "worker": "elder",
+  "started_utc": "2026-11-23T18:06:51.801006+00:00",
+  "ended_utc": "2026-11-23T18:06:56.755113+00:00",
+  "elapsed_seconds": 4.954107,
+  "source_sdk_root": "b2c3cb65ab572c680a56f28b86d40445b9392b0c",
+  "target_revisions": {
+    "root": "3d5decb2b8bda7b8952752c0664ce55a7936fb4a",
+    "Bin": "2c285cb472134fc92394153c089603a830a03f70",
+    "PulseLib": "3f5a2205a4e6c02de545cdc214172482ac53c4b2"
+  },
+  "restored_path_negative_revision": "dac485a36b583df0bbb2c0f6e68ce1fb69fc537e",
+  "production_files": {
+    "Scripts/StructTrain/TimeLearner/migration.py": "65f6f7359edf0c47e1cec165245110c8fef7a0fff98552fb2710154e59b49e9e",
+    "Scripts/StructTrain/TimeLearner/history.py": "396f77c80cf6dd2843a5bf13b94c1e61ea9de6a369f592c58fdf944f73861fdc"
+  },
+  "source_records_verified": 361,
+  "retired_records": 357,
+  "moved_records": 4,
+  "all_old_paths_absent": true,
+  "restored_last_Bin_path_rejected": true,
+  "negative_reason": "migration_old_path_still_present:Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/verify_pattern_span.py",
+  "exact_Bin_scope": {
+    "deleted": [
+      "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/compare_l_target.py",
+      "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/done_fingerprint.py",
+      "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/verify_element_params.py",
+      "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/verify_pattern_span.py"
+    ],
+    "modified": [
+      "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/NEXT_LEVER_PACKC.md",
+      "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/PILOT_REPORT.md",
+      "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/SCALE_DEFERRED.md",
+      "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/SELECTIVITY_REPORT.md",
+      "Configs/SpikeSamples/StructTrain/scripts/README.md"
+    ]
+  },
+  "git_metadata_unchanged": true,
+  "archived_scripts_materialized_or_executed": false,
+  "native_models_executed": 0,
+  "SDK_source_or_build_attested": false,
+  "whole_migration_attested": false,
+  "manifest_declares_complete": false,
+  "scientific_verdict": null,
+  "positive": {
+    "bytes": 203143,
+    "sha256": "7cf377e5e77358d99e21eebdbe045206b800e9187337f2437c0ef21233ca26d3"
+  },
+  "packs": {
+    "root": {
+      "bytes": 3330062,
+      "sha256": "b5ac0849a69ce373440dda9f38e5e341fce21a6449d1d376db7278270d7c979c",
+      "objects": 6305
+    },
+    "Bin": {
+      "bytes": 200909,
+      "sha256": "1f4d2c7fe5cf27b81b827da9b9ba0c253b9fc0b308bf7306871a9864d92abb69",
+      "objects": 266
+    },
+    "PulseLib": {
+      "bytes": 21426,
+      "sha256": "f643a51ad52a404d235d4ae25c609e2fe42690071ed5cbec59af6ce2af977534",
+      "objects": 16
+    }
+  },
+  "output": "/home/user/timelearner-refactor/readbacks/migration361-production-elder-ap9"
+}

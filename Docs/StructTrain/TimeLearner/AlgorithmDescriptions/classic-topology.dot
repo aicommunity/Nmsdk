@@ -1,0 +1,16 @@
+digraph G {
+graph [rankdir=TB, bgcolor="white", pad=0.08, nodesep=0.18, ranksep=0.24, label="Независимые пути при M=4", labelloc=t, fontname="Times New Roman", fontsize=22];
+node [fontname="Times New Roman", fontsize=20, shape=box, margin="0.08,0.05"];
+edge [arrowsize=0.75];
+pattern [label="Общая пачка\nчетыре импульса"];
+t0 [label="Вход 0\nNₛ,₀ и Rₛ,₀"]; t1 [label="Вход 1\nNₛ,₁ и Rₛ,₁"];
+t2 [label="Вход 2\nNₛ,₂ и Rₛ,₂"]; t3 [label="Вход 3\nNₛ,₃ и Rₛ,₃"];
+d0 [label="Путь L₀"]; d1 [label="Путь L₁"]; d2 [label="Путь L₂"]; d3 [label="Путь L₃"];
+s0 [label="Сома 1"]; s1 [label="Сома 2"]; s2 [label="Сома 3"]; s3 [label="Сома 4"];
+sum [label="Суммарный отклик"];
+lt [label="Низкопороговая зона\nи выходные события"];
+{rank=same;t0;t1;t2;t3} {rank=same;d0;d1;d2;d3} {rank=same;s0;s1;s2;s3}
+pattern -> {t0 t1 t2 t3}; t0->d0->s0; t1->d1->s1; t2->d2->s2; t3->d3->s3;
+{s0 s1 s2 s3}->sum; sum->lt;
+lt->sum [style=dashed,constraint=false];
+}

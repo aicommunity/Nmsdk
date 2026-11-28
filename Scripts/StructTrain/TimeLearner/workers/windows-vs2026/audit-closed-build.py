@@ -21,9 +21,32 @@ sys.dont_write_bytecode = True
 BASE = Path('C:/Projects/TimeLearnerWorker')
 
 
+def read_specification(value, requested=None):
+    global BASE
+    module_spec = importlib.util.spec_from_file_location('audit_worker_workspace',
+        Path(__file__).with_name('worker-workspace.py'))
+    helper = importlib.util.module_from_spec(module_spec);module_spec.loader.exec_module(helper)
+    path, specification, BASE = helper.load_specification(value, requested)
+    return path, specification
+
+
 def require(condition, reason):
     if not condition:
         raise RuntimeError(reason)
+
+
+def audit_dependencies(spec):
+    """Use the producer's explicit dependency boundary, never an output boundary."""
+    version = spec.get('schema_version')
+    require(type(version) is int and version in (1, 2), 'unknown_audit_specification')
+    require((version == 2) == ('dependency_layout' in spec),
+            'audit_dependency_layout_version_mismatch')
+    helper_spec = importlib.util.spec_from_file_location('audit_dependency_producer',
+        Path(__file__).with_name('sdk-build.py'))
+    helper = importlib.util.module_from_spec(helper_spec);helper_spec.loader.exec_module(helper)
+    helper.BASE = BASE
+    return helper.installed_dependencies(spec['installed_dependencies'],
+                                        spec.get('dependency_layout', 'worker_private'))
 
 
 def private_path(value):
@@ -86,19 +109,40 @@ def verify_original_kernel(owned):
     return {'original_named_job_absent': True, 'original_main_absent': True, 'pid_reused': reused}
 
 
+def original_build_outcome(terminal, result):
+    """Admit a healthy build or the original narrowly supported recovery case.
+
+    Kernel absence and immutable source/runtime checks are still mandatory in
+    main(). A recovered build keeps its original negative acceptance result.
+    """
+    require(type(terminal) is dict and terminal.get('kind') == 'timelearner_windows_sdk_build' and
+            type(terminal.get('build_accepted')) is bool and type(result) is dict and
+            result.get('kind') == 'timelearner_windows_process_result' and
+            type(result.get('schema_version')) is int and result['schema_version'] == 1 and
+            type(result.get('returncode')) is int and result['returncode'] == 0 and
+            result.get('validity') == 'valid' and result.get('all_processes_closed') is True,
+            'unexpected_original_build_outcome')
+    accepted = terminal['build_accepted']
+    execution = result.get('execution')
+    require((accepted and execution == 'completed') or
+            (not accepted and execution == 'descendants_remaining'),
+            'unexpected_original_build_outcome')
+    return {'original_execution': execution, 'original_build_accepted': accepted}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--specification', required=True, type=Path)
+    parser.add_argument('--worker-root', type=Path)
     args = parser.parse_args()
     require(os.name == 'nt' and __debug__, 'normal_windows_python_required')
     import msvcrt
-    specification = private_path(args.specification)
-    spec = json.loads(specification.read_bytes())
-    require(spec['kind'] == 'timelearner_closed_windows_build_audit' and
-            type(spec['schema_version']) is int and spec['schema_version'] == 1, 'unknown_audit_specification')
+    specification, spec = read_specification(args.specification, args.worker_root)
+    require(spec['kind'] == 'timelearner_closed_windows_build_audit', 'unknown_audit_specification')
     require(digest(Path(__file__)) == spec['worker_sha256'], 'audit_worker_bytes_differ')
-    source, original, runtime, dependencies, output = [private_path(spec[key]) for key in
-        ('source_root', 'original_build_output', 'runtime_root', 'installed_dependencies', 'output_root')]
+    dependencies = audit_dependencies(spec)
+    source, original, runtime, output = [private_path(spec[key]) for key in
+        ('source_root', 'original_build_output', 'runtime_root', 'output_root')]
     paths = [source, original, runtime, dependencies, output]
     require(len(set(paths)) == 5 and all(a == b or not a.is_relative_to(b) for a in paths for b in paths), 'overlapping_audit_paths')
     require(not output.exists(), 'fresh_audit_output_required')
@@ -126,12 +170,12 @@ def main():
         original_spec = json.loads((original/'specification.json').read_bytes())
         require(private_path(original_spec['source_root']) == source and
                 private_path(original_spec['runtime_root']) == runtime and
-                private_path(original_spec['installed_dependencies']) == dependencies and
+                audit_dependencies(original_spec) == dependencies and
+                original_spec.get('dependency_layout', 'worker_private') ==
+                    spec.get('dependency_layout', 'worker_private') and
                 original_spec['source_commit'] == spec['source_commit'] and
                 original_spec['namespace_git_blob'] == spec['namespace_git_blob'], 'original_build_binding_changed')
-        require(terminal['build_accepted'] is False and result['returncode'] == 0 and
-                result['validity'] == 'valid' and result['all_processes_closed'] is True and
-                result['execution'] == 'descendants_remaining', 'unexpected_original_build_outcome')
+        original_outcome = original_build_outcome(terminal, result)
         emit(output, 'kernel-before.json', verify_original_kernel(json.loads((original/'build-process/owned-process.json').read_bytes())))
         require(git(source, 'rev-parse', 'HEAD') == spec['source_commit'], 'source_head_changed')
         namespace = json.loads(git(source, 'cat-file', 'blob', spec['namespace_git_blob']))
@@ -179,7 +223,7 @@ def main():
         emit(output, 'audit.json', {'source_commit': spec['source_commit'], 'source_closure': closure_before,
             'verified_source_files': len(namespace), 'dependency_files': len(dependency_after), 'runtime_files': len(runtime_before),
             'targets': {name:file_record(runtime/name) for name in spec['expected_targets']},
-            'original_execution': result['execution'], 'original_build_accepted': False,
+            **original_outcome,
             'compiled_tests_executed': False, 'scientific_worker_admitted': False, 'scientific_verdict': None})
         guard();passed = True
     except BaseException as error:

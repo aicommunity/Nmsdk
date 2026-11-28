@@ -1,0 +1,124 @@
+{
+  "kind": "timelearner_two_exact_Classic_recognition_followup_queue_observations",
+  "schema_version": 1,
+  "observations": {
+    "m40": {
+      "host": "M40",
+      "observed_utc": "2026-11-23T17:23:48.203921+00:00",
+      "job": "classic-proposal-stopped-recognition-m40-ao3",
+      "queue-dispatch.json": {
+        "queued": true,
+        "job": "classic-proposal-stopped-recognition-m40-ao3",
+        "host": "M40",
+        "source_root": "b2c3cb65ab572c680a56f28b86d40445b9392b0c",
+        "controls_commit": "5b02db8577909d086c70fdddcf4cefdefb846cc3",
+        "request": {
+          "path": "/media/user/Data/TimeLearnerRefactor/requests/classic-proposal-stopped-recognition-m40-ao3/request.json",
+          "sha256": "fb554ea0f39562279a2ae8c31ff124f16fb94a56a487cb49e0ac0a7b6210dafd",
+          "size": 1005
+        },
+        "template": {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-prepared-long-model-threshold-m40-a1-inputs/native-job-source.json",
+          "sha256": "810cd728d2001432d1c89d6413bebd518fbeeb54812da13e8f73c075c83e00cc",
+          "size": 5948
+        },
+        "queue_owner": {
+          "pid": 2732375,
+          "start_ticks": "452977035",
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "uid": 1000
+        },
+        "original_Train": "classic-n0-proposal-cold-m40-aa21",
+        "original_primary_audit": "classic-n0-proposal-full-primary-audit-m40-ac6",
+        "dependency": {
+          "controls": "/media/user/Data/TimeLearnerRefactor/requests/delay-ownership-baseline-after-science-m40-al1",
+          "owner": {
+            "pid": 2599552,
+            "start_ticks": "452740562",
+            "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+            "uid": 1000
+          }
+        },
+        "new_native_execution_started": false,
+        "conditional_outcome": "only audited budget_exhausted with no completed boundary; different outcome is explicitly not dispatched",
+        "calibration_protocol": "historical_same_matrix",
+        "actual_selected_threshold_replay_required": true,
+        "original_Train_not_restarted": true,
+        "scientific_verdict": null
+      },
+      "queue-owner.json": {
+        "pid": 2732375,
+        "start_ticks": "452977035",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "uid": 1000
+      },
+      "queue-state.json": {
+        "reason": "waiting_for_exact_Train_full_primary_audit_and_declared_dependency",
+        "observed_utc": "2026-11-23T17:23:38.132562+00:00",
+        "Train_closed": false,
+        "primary_queue_live": true,
+        "dependency_live": true,
+        "available_slots": 0,
+        "elapsed_wait_seconds": 45.33362178504467,
+        "new_native_execution_started": false
+      },
+      "queue_kernel_live": true
+    },
+    "elder": {
+      "host": "Elder-1",
+      "observed_utc": "2026-11-23T17:23:48.602617+00:00",
+      "job": "classic-proposal-stopped-recognition-elder-ao3",
+      "queue-dispatch.json": {
+        "queued": true,
+        "job": "classic-proposal-stopped-recognition-elder-ao3",
+        "host": "Elder-1",
+        "source_root": "b2c3cb65ab572c680a56f28b86d40445b9392b0c",
+        "controls_commit": "78cbdb091f7926f0be60412e789b3f144cf9eb1b",
+        "request": {
+          "path": "/home/user/timelearner-refactor/requests/classic-proposal-stopped-recognition-elder-ao3/request.json",
+          "sha256": "6f74ec448d40e27d79810071ed8f0f1ecdae951bcaf459380ca3a8c1ca3ac026",
+          "size": 992
+        },
+        "template": {
+          "path": "/home/user/timelearner-refactor/readbacks/s11-prepared-long-model-threshold-elder-a1-inputs/native-job-source.json",
+          "sha256": "458835c52d6b80e03846e33f8bb6c04b4a6323d5b053a932acb61f734585db2d",
+          "size": 5970
+        },
+        "queue_owner": {
+          "pid": 2088016,
+          "start_ticks": "502431803",
+          "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+          "uid": 1000
+        },
+        "original_Train": "classic-n0-proposal-cold-elder-ab3",
+        "original_primary_audit": "classic-n0-proposal-full-primary-audit-elder-ae4",
+        "dependency": null,
+        "new_native_execution_started": false,
+        "conditional_outcome": "only audited budget_exhausted with no completed boundary; different outcome is explicitly not dispatched",
+        "calibration_protocol": "historical_same_matrix",
+        "actual_selected_threshold_replay_required": true,
+        "original_Train_not_restarted": true,
+        "scientific_verdict": null
+      },
+      "queue-owner.json": {
+        "pid": 2088016,
+        "start_ticks": "502431803",
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "uid": 1000
+      },
+      "queue-state.json": {
+        "reason": "waiting_for_exact_Train_full_primary_audit_and_declared_dependency",
+        "observed_utc": "2026-11-23T17:23:43.038653+00:00",
+        "Train_closed": false,
+        "primary_queue_live": true,
+        "dependency_live": false,
+        "available_slots": 0,
+        "elapsed_wait_seconds": 75.71443651337177,
+        "new_native_execution_started": false
+      },
+      "queue_kernel_live": true
+    }
+  },
+  "new_native_execution_started": false,
+  "new_classification_results": null
+}

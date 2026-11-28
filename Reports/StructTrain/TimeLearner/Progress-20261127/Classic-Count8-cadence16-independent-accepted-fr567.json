@@ -1,0 +1,107 @@
+{
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/Classic-Count8-cadence16-independent-accepted-fr567.json",
+    "size": 3390,
+    "sha256": "ff585efe8d3850d9f5d384448c07e99b6060924b2f19c568ab8280ac2699b5c0"
+  },
+  "catalog": {
+    "kind": "Classic_Count8_two_short_cadence_cases_primary_gallery_visual_independently_accepted",
+    "schema_version": 1,
+    "peer_catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/Classic-Count8-cadence16-independent-fr565.json",
+      "size": 3010,
+      "sha256": "26a6f8f29dd352ff81022c8c32b36e08625258b7aecb81f794f54989fc89c460"
+    },
+    "peer_reader_evidence": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/7a/7a96ddbbd1f2233ee3971db94b95b11a7a68ad2406dffab4d18fb0a2dd4b351e",
+        "sha256": "7a96ddbbd1f2233ee3971db94b95b11a7a68ad2406dffab4d18fb0a2dd4b351e",
+        "bytes": 6155
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/aa/aa5dae3bbdbef7372e652e5069c5cd56735ac591f71b044c10bf38ff9b3e0ef2",
+        "sha256": "aa5dae3bbdbef7372e652e5069c5cd56735ac591f71b044c10bf38ff9b3e0ef2",
+        "bytes": 6050736
+      }
+    },
+    "peer_controls_bundle": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/37/37c766f89e7298c9e26f614c0e1dafb4f6ae472ee55de9d23e59a80985de9078",
+      "sha256": "37c766f89e7298c9e26f614c0e1dafb4f6ae472ee55de9d23e59a80985de9078",
+      "bytes": 3400
+    },
+    "peer_controls_commit": "cbad207dacccf3d18adb3fe2e8df09849d2e03f6",
+    "peer_reader_members": 31,
+    "primary_members": 185,
+    "gallery_members": 142,
+    "observations": 16,
+    "rows": [
+      {
+        "case": "r0-short-reset",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "observations": 8
+      },
+      {
+        "case": "r0-short-continuous",
+        "counts": {
+          "TP": 1,
+          "FP": 3,
+          "FN": 0,
+          "TN": 4,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.625,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.42857142857142855
+        },
+        "observations": 8
+      }
+    ],
+    "actual_peer_reader_loaded_maps": [
+      {
+        "phase": "before",
+        "files": 18,
+        "all_bytes_verified": true
+      },
+      {
+        "phase": "after",
+        "files": 18,
+        "all_bytes_verified": true
+      }
+    ],
+    "actual_native_loaded_byte_sets_verified_by_peer": 2,
+    "PNG_visually_reviewed": 32,
+    "SVG_bytes_verified": 32,
+    "source_gallery_visual_review": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/M40-Classic-Count8-cadence16-all-PNG-reviewed-fr566.json",
+      "size": 576,
+      "sha256": "f5bcbe8636751322f53937392c415b6a5ed57c28513e694f1c123894dcce430c"
+    },
+    "remaining_full_64_series_not_complete": true,
+    "source_pending_flags_preserved_and_superseded_for_this_16_observation_scope": true,
+    "auxiliary_acceptor_loaded_map": "unknown",
+    "original_process_ownership_not_reattested": true,
+    "new_model_calculation": false,
+    "scientific_verdict": null
+  }
+}

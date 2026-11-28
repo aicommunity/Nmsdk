@@ -1,0 +1,243 @@
+{
+  "kind": "timelearner_closed_windows_matched_count_primary_audit",
+  "schema_version": 1,
+  "worker": "10.245.1.14 via 10.245.1.12",
+  "source_training_job": "windows-branch-count-m4-a3",
+  "training_outcome": "budget_exhausted",
+  "completed_boundary": false,
+  "model_revision": "53a459de5082d318f1737d09b478cf574327cb4bc0a88dc51d438ee69cf2daa9",
+  "native_closure": {
+    "observed_utc": "2026-11-21T22:03:09.765388+00:00",
+    "task": {
+      "last_result": 0,
+      "instances": 0,
+      "state": 3
+    },
+    "process_record": {
+      "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-m4-a3\\train\\process\\result.json",
+      "sha256": "0227bccedea486edf97e06c15e8b4610cf9eafa878e4cfb1859402473fd85730",
+      "size": 675
+    },
+    "pending_terminal": {
+      "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-m4-a3\\terminal.json",
+      "sha256": "f341c358e794254213bbd1e78c7e01f4b8e124b3127db0571a32e31e08958f7c",
+      "size": 487
+    },
+    "native_owner_record": {
+      "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-m4-a3\\train\\process\\owned-process.json",
+      "sha256": "e3cf15cb74e068503098e5135aa7da0b9b36fa5122fec393780d0d483ceee60f",
+      "size": 388
+    },
+    "all_source_groups_closed": true,
+    "available_physical_bytes": 20757954560
+  },
+  "primary_audit": {
+    "execution": "completed",
+    "validity": "valid",
+    "full_primary_audit_complete": true,
+    "validation": {
+      "kind": "timelearner_python_validation_result",
+      "schema_version": 1,
+      "suite_id": "windows-closed-count-primary-audit-a2",
+      "package_fingerprint": "4b4d5e0e37e5f41250cab2d92564550661e646c4cc32c853d97945fd2261a111",
+      "execution": "completed",
+      "assertion_status": "passed",
+      "expected_test_ids": [
+        "Scripts.StructTrain.TimeLearner.tests.test_closed_matched_count_training.ClosedMatchedCountTrainingTest.test_actual_complete_primary_and_single_package_decode"
+      ],
+      "executed_tests": 1,
+      "failures": [],
+      "errors": [],
+      "skipped": [],
+      "fixtures": {
+        "TIMELEARNER_MATCHED_COUNT_NATIVE": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-m4-a3\\train\\native",
+          "files": 3008,
+          "fingerprint": "3d8ca33a74f45f9a18480e0dc3226d47a13f0301b2311a884d0b36db75d59616"
+        },
+        "TIMELEARNER_MATCHED_COUNT_ORIGINAL": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-closed-count-primary-audit-a2\\original-fixture",
+          "files": 1,
+          "fingerprint": "40cc6caca2f85f1237ba86a1e263ac9ecc3f7ca08c3a61a09d08d9970ed296cc"
+        }
+      },
+      "scientific_verdict": null
+    },
+    "actual_training_outcome": "budget_exhausted",
+    "completed_boundary": false,
+    "next_operation": "diagnostic_evaluation_of_actual_stopped_model",
+    "source_package_full_decodes": 1,
+    "source_root": "122dcb772be19a6bb1ff58813ef745fc6aecd37e",
+    "new_model_executed": false,
+    "classification_performed": false,
+    "scientific_verdict": null
+  },
+  "source_package_sha256": "75b369ac99295dafd8fa2bbc37f01e840e20b8e536fb3633884b805cce6fa17a",
+  "source_package_bytes": 1057238523,
+  "full_source_files": 3008,
+  "source_trials": 948,
+  "composite_groups": 158,
+  "source_proof": {
+    "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-closed-count-primary-audit-a2\\tmp\\matched-count-training-audit.json",
+    "sha256": "0c5bdef6f6d259e7e2a245b2a4ab82e4833f3c15e133944e0f2ee958e7b7d6aa",
+    "size": 170306
+  },
+  "source_audit": {
+    "path": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-closed-count-primary-audit-a2\\source-audit.json",
+    "sha256": "5d7f2678fa23be7fcee5a9d54755c08eea66d5a2200a5ef4dfd52ad0a9b01a5a"
+  },
+  "actual_baseline_dispatch": {
+    "dispatched": true,
+    "job": "windows-count-stopped-baseline-a1",
+    "source_root": "fb2616a9193ca48c2be645b32496c77ed14b753c",
+    "controls_commit": "bc5637b64550acf403cb3edda9eecc50807d9483",
+    "task": {
+      "scientific_verdict": null,
+      "instance": "{99AACCD1-25F3-48EF-8995-27F9CD54E260}",
+      "execution_time_limit": "PT8H",
+      "task": "TimeLearner-windows-count-stopped-baseline-a1",
+      "engine_pid": 17888
+    },
+    "source_model_revision": "53a459de5082d318f1737d09b478cf574327cb4bc0a88dc51d438ee69cf2daa9",
+    "source_Train_not_restarted": true,
+    "stages": [
+      "complete-source-preparation",
+      "native-eight-pattern-baseline",
+      "full-independent-evaluation-audit"
+    ],
+    "scientific_verdict": null
+  },
+  "actual_baseline_preparation": {
+    "kind": "timelearner_stopped_baseline_preparation_result",
+    "schema_version": 1,
+    "source_model_revision": "53a459de5082d318f1737d09b478cf574327cb4bc0a88dc51d438ee69cf2daa9",
+    "source_package_sha256": "75b369ac99295dafd8fa2bbc37f01e840e20b8e536fb3633884b805cce6fa17a",
+    "source_proof": {
+      "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-closed-count-primary-audit-a2\\tmp\\matched-count-training-audit.json",
+      "sha256": "0c5bdef6f6d259e7e2a245b2a4ab82e4833f3c15e133944e0f2ee958e7b7d6aa",
+      "size": 170306
+    },
+    "source_audit": {
+      "path": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-closed-count-primary-audit-a2\\source-audit.json",
+      "sha256": "5d7f2678fa23be7fcee5a9d54755c08eea66d5a2200a5ef4dfd52ad0a9b01a5a"
+    },
+    "resolved_job_sha256": "0ef7e53c94defb2740bee46c89582dea7d8286afd5991b1150e212cdb0bad0b4",
+    "staged_files": 3009,
+    "complete_source_namespace_preserved": true,
+    "source_decoded_once_without_history_copy": true,
+    "original_outcome": "budget_exhausted",
+    "initial_threshold": 100,
+    "trials": 8,
+    "inputs": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-count-stopped-baseline-a1-inputs",
+    "output": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-count-stopped-baseline-a1",
+    "native_execution_started": false,
+    "scientific_verdict": null
+  },
+  "baseline_last_state": {
+    "stage": "native-eight-pattern-baseline",
+    "observed_utc": "2026-11-21T22:30:16.647862+00:00",
+    "scientific_verdict": null
+  },
+  "baseline_preparation_process": {
+    "kind": "timelearner_windows_process_result",
+    "schema_version": 1,
+    "execution": "completed",
+    "validity": "valid",
+    "reason": "exit_zero",
+    "returncode": 0,
+    "scientific_verdict": null,
+    "thread_limit_enforced": false,
+    "memory_limit_semantics": "job_committed_virtual_memory",
+    "wall_budget_scope": "whole_attempt_including_preparation",
+    "descendants_at_main_exit": [],
+    "all_processes_closed": true,
+    "cooperative_capture": "not_requested",
+    "runtime_provenance": "loaded_files_captured",
+    "observed_module_files": 26,
+    "wall_seconds": 34.582552399951965,
+    "child_resumed": true,
+    "job_name": "Local\\TimeLearner-8d839d28-865c-4982-8217-f6cdb65b7dd2"
+  },
+  "linux_Train": {
+    "Elder": {
+      "observed_utc": "2026-11-21T22:30:46.847111+00:00",
+      "job": "s11-classic-count-training-elder-a1",
+      "disk_free_bytes": 57602187264,
+      "raw_trial_files_present": 324,
+      "train_elapsed_wall_seconds": 8899.75,
+      "train-kernel": {
+        "execution": "running",
+        "all_processes_closed": false,
+        "reason": "kernel_cgroup_observed",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "ea0282ed856e07dc6d0c5be485c3fe45bafbebcaa56039819f36ecf20dd92c2f",
+          "unit": "timelearner-90278466-d2c8-4061-8c1c-dca1d8570ab4.service",
+          "invocation_id": "b4c947258b63437aa89702d34f6c1834",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-90278466-d2c8-4061-8c1c-dca1d8570ab4.service",
+          "initial_main_pid": 2836090,
+          "initial_start_ticks": "486111793",
+          "sha256": "22eba6ed2a2fe6c9792c1ec9c53b946d4a2c89b6564d77139c563433b8ef7e89"
+        }
+      }
+    },
+    "M40": {
+      "observed_utc": "2026-11-21T22:33:19.375998+00:00",
+      "job": "s11-classic-count-training-m40-a1",
+      "disk_free_bytes": 325713604608,
+      "raw_trial_files_present": 395,
+      "train_elapsed_wall_seconds": 13081.580000000075,
+      "train-kernel": {
+        "execution": "running",
+        "all_processes_closed": false,
+        "reason": "kernel_cgroup_observed",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "ef7ad78868de3e9515ab94aecf175effaf94b7245a4e1496d59a3b1e7171a222",
+          "unit": "timelearner-9e252d01-3d18-4e1e-9d3d-30fff8134130.service",
+          "invocation_id": "07a94cfc2631458f988f19e653f65489",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-9e252d01-3d18-4e1e-9d3d-30fff8134130.service",
+          "initial_main_pid": 173265,
+          "initial_start_ticks": "436251545",
+          "sha256": "dc90ba704f52ae142c785daf02d83f337574c2aa32924bcbf41404056a5f3a81"
+        }
+      }
+    }
+  },
+  "original_pending_terminal_preserved": true,
+  "negative_queue_a1_preserved": true,
+  "full_search_decision_replay_not_claimed": true,
+  "new_classification_not_yet_accepted": true,
+  "central_archive_of_this_new_training_pending": true,
+  "large_primary_remains_in_worker_until_verified_external_copy": true,
+  "evidence_receipts": [
+    {
+      "name": "timelearner-windows-closed-count-audit-queue-observed-20261122-a5.json",
+      "bytes": 5061,
+      "sha256": "a4326985c8eb6f916b4597861f98df4d61595f714c9bb0e566cdcd324cacd3d0"
+    },
+    {
+      "name": "timelearner-windows-count-stopped-baseline-dispatched-20261122-a1.json",
+      "bytes": 986,
+      "sha256": "a2d28a4d1c7be942b036ea9fcfee4c14e9eb6f8eae488a9fff4e87e1f6ef8b96"
+    },
+    {
+      "name": "timelearner-windows-count-stopped-baseline-observed-20261122-a1.json",
+      "bytes": 4282,
+      "sha256": "b573fd775e494cd1029401de9f5a717603b670fba4b46261c3b04fa57c71c433"
+    },
+    {
+      "name": "timelearner-classic-count-training-elder-observed-20261122-resume-a1.json",
+      "bytes": 5529,
+      "sha256": "9a38ad1e30c0c631ac66dc7088bdea50c6162e776a0c8f07d18c6efd2f805340"
+    },
+    {
+      "name": "timelearner-classic-count-training-m40-observed-20261122-resume-a1.json",
+      "bytes": 5525,
+      "sha256": "7b52d14c814645e373798c9c46799e371dbbeb17e3fbaf7db133c67a6bc60204"
+    }
+  ],
+  "scientific_verdict": null
+}

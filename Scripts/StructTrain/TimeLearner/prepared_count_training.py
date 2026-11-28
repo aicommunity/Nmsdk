@@ -1,0 +1,308 @@
+"""Matched cold count-normalization Train on the owned Windows backend.
+
+The native SDK, initial physics, target, tolerances and search budgets stay
+fixed. The permitted normalization variable changes from Rs to integer Ns.
+An explicitly separate budget experiment can extend a completed cold N0
+declaration to two sweeps; it does not resume the stopped model or change physics.
+Another explicit intervention changes only the local candidate cap while
+preserving global budgets and requiring the declared initial graph to match.
+Preflight is audited before Train. A closed Train still requires the separate
+full primary-history audit; this worker never equates process exit with Exact.
+"""
+import argparse
+from copy import deepcopy
+import json
+import os
+from pathlib import Path
+import shutil
+import threading
+
+from .model_identity import canonical_model_sha256 as sha
+from .native_evidence import load, number, require
+
+
+def matched_count_job(original, run_id, *, maximum_synapses=128):
+    require(type(run_id) is str and bool(run_id) and type(maximum_synapses) is int and
+            2 <= maximum_synapses <= 128, 'count_train_case_declaration')
+    require(original['sha256'] == sha({k:v for k,v in original.items() if k != 'sha256'}),
+            'count_train_original_job_digest')
+    job = deepcopy(original)
+    c = job['configuration']; model = c['model']; inputs = model['inputs']
+    bounds = c['search']['bounds']
+    require(model['normalization'] == 'N1' and len(inputs) >= 2 and len(bounds) == len(inputs) and
+            all(i['synapses'] == 1 and number(i['resistance']) > 0 for i in inputs) and
+            all(b['minimum_synapses'] == b['maximum_synapses'] == 1 for b in bounds),
+            'count_train_requires_fixed_single_synapse_resistance_source')
+    anchor = bounds[-1]
+    require(anchor['minimum_length'] == anchor['maximum_length'] == inputs[-1]['attachment'] and
+            anchor['minimum_resistance'] == anchor['maximum_resistance'] == inputs[-1]['resistance'],
+            'count_train_source_anchor_is_not_fixed')
+    c['run_id'] = run_id; model['normalization'] = 'N0'
+    for i,bound in enumerate(bounds[:-1]):
+        require(bound['minimum_resistance'] <= inputs[i]['resistance'] <= bound['maximum_resistance'],
+                'count_train_initial_resistance_outside_source_bounds')
+        bound.update(minimum_synapses=1, maximum_synapses=maximum_synapses,
+                     minimum_resistance=inputs[i]['resistance'], maximum_resistance=inputs[i]['resistance'])
+    job['sha256'] = sha({k:v for k,v in job.items() if k != 'sha256'})
+    return job
+
+
+def doubled_sweep_count_job(original, run_id):
+    """Declare two cold N0 sweeps with twice the logical-probe/wall allowance.
+
+    Keep each input's candidate allowance, numerical tolerances, references,
+    physical model and every other limit unchanged. This is a different search
+    effort, not a repeat at identical conditions or a learned-state continuation.
+    """
+    require(type(run_id) is str and bool(run_id.strip()), 'count_extension_run_id')
+    require(type(original) is dict and original.get('sha256') == sha(
+            {k:v for k,v in original.items() if k != 'sha256'}), 'count_extension_source_digest')
+    from .native_pipeline_worker import validate_job
+    validate_job('train', original)
+    c = original['configuration']; search = c['search']; model = c['model']
+    require(model['normalization'] == 'N0' and search['maximum_sweeps'] == 1 and
+            type(search['maximum_sweeps']) is int and
+            type(search['maximum_probes']) is int and search['maximum_probes'] > 0 and
+            0 < number(c['maximum_wall_seconds']) <= 86400,
+            'count_extension_requires_one_sweep_count_source')
+    require(all(item['synapses'] == 1 for item in model['inputs']) and
+            all(bound['minimum_resistance'] == bound['maximum_resistance'] == item['resistance']
+                for item,bound in zip(model['inputs'], search['bounds'])),
+            'count_extension_requires_original_cold_count_physics')
+    job = deepcopy(original); c = job['configuration']
+    c['run_id'] = run_id
+    c['search']['maximum_sweeps'] = 2
+    c['search']['maximum_probes'] *= 2
+    c['maximum_wall_seconds'] *= 2
+    job['sha256'] = sha({k:v for k,v in job.items() if k != 'sha256'})
+    validate_job('train', job)
+    return job
+
+
+def _write(path, value):
+    with Path(path).open('x', encoding='utf-8', newline='\n') as f:
+        json.dump(value, f, ensure_ascii=False, indent=2, allow_nan=False);f.write('\n')
+
+
+def factor_control_job(job):
+    """An explicitly separate graph-construction control, never a cold Train."""
+    control = deepcopy(job)
+    control['configuration']['run_id'] += '/positive-control-ns2'
+    model = control['configuration']['model']
+    point = model['inputs'][0]['attachment']
+    # Coincident Branch inputs address one physical bank. A control with Ns2
+    # on only one alias and Ns1 on another is an invalid model declaration.
+    for index, item in enumerate(model['inputs']):
+        if index == 0 or model['branch'] and item['attachment'] == point:
+            item['synapses'] = 2
+            if index == len(model['inputs'])-1:
+                control['configuration']['search']['bounds'][index].update(
+                    minimum_synapses=2,maximum_synapses=2)
+    control['sha256'] = sha({k:v for k,v in control.items() if k != 'sha256'})
+    return control
+
+
+def worker_resource_limits(spec):
+    """Validate explicit process limits while leaving the model job unchanged.
+
+    Version1 retains fixed8/16 GiB limits. Version2 declares both phase
+    limits; the Windows backend still checks available memory and applies
+    Job limits before resuming any child process.
+    """
+    kinds = ('timelearner_matched_count_training', 'timelearner_count_two_sweep_training',
+             'timelearner_count_candidate_limit_training')
+    require(type(spec) is dict and spec.get('kind') in kinds and
+            type(spec.get('schema_version')) is int and spec['schema_version'] in (1, 2),
+            'count_train_worker_scope')
+    fields = {'kind','schema_version','python_source','python_root','sdk_source','original_job',
+              'job_file','factor_job_file','run_id','maximum_synapses','output','worker_sha256',
+              'native_memory_bytes','native_wall_seconds','preflight_wall_seconds',
+              'minimum_free_bytes','maximum_output_bytes'}
+    if spec['kind'] in kinds[1:]: fields.add('source_initial_state')
+    if spec['kind'] == kinds[2]: fields.add('maximum_candidates_per_input')
+    if spec['schema_version'] == 2: fields.add('preflight_memory_bytes')
+    require(set(spec) == fields, 'count_train_worker_scope')
+    multiplier = 2 if spec['kind'] == kinds[1] else 1
+    require(type(spec['native_wall_seconds']) in (int, float) and
+            spec['native_wall_seconds'] == 39600*multiplier and
+            type(spec['preflight_wall_seconds']) in (int, float) and
+            spec['preflight_wall_seconds'] == 900, 'count_train_declared_finite_budgets')
+    native = spec['native_memory_bytes']
+    preflight = 8*1024**3 if spec['schema_version'] == 1 else spec['preflight_memory_bytes']
+    require(all(type(value) is int and 32*1024**2 <= value <= 64*1024**3
+                for value in (preflight, native)), 'count_train_declared_memory_limits')
+    if spec['schema_version'] == 1:
+        require(native == 16*1024**3, 'count_train_legacy_memory_limits')
+    return {'preflight_memory_bytes': preflight, 'native_memory_bytes': native}
+
+
+def run(controls):
+    from .native_cli import inspect_native_cli
+    from .native_pipeline_worker import audit_execution, validate_job
+    from .native_gate import _environment
+    from .runtime import file_record, source_closure
+    from .windows_process import execute
+    from .owned_python_job import _source_snapshot
+    controls = Path(controls).resolve(strict=True)
+    spec = load(controls/'specification.json')
+    limits = worker_resource_limits(spec)
+    require(os.name == 'nt', 'count_train_worker_scope')
+    base = Path('C:/Projects/TimeLearnerWorker').resolve(strict=True)
+    output = Path(spec['output']).absolute()
+    require(controls.is_relative_to(base/'controls') and output.is_relative_to(base/'jobs') and
+            not output.exists(), 'count_train_fresh_owned_paths')
+    output.mkdir()
+    stop = threading.Event(); failures = []
+    try:
+        require(file_record(Path(__file__))['sha256'] == spec['worker_sha256'], 'count_train_worker_changed')
+        _source_snapshot(Path(spec['python_source']), spec['python_root'])
+        original_path = Path(spec['original_job']['path'])
+        require(file_record(original_path) == spec['original_job'], 'count_train_original_job_changed')
+        original = load(original_path); job_path = controls/'job.json'
+        require(file_record(job_path) == spec['job_file'], 'count_train_job_file_changed')
+        job = load(job_path)
+        extension = spec['kind'] == 'timelearner_count_two_sweep_training'
+        candidate_limit = spec['kind'] == 'timelearner_count_candidate_limit_training'
+        if candidate_limit:
+            from .cold_budget import declare_candidate_limit
+            require(original['configuration']['model']['normalization']=='N0' and
+                    type(spec['maximum_synapses']) is int and 2<=spec['maximum_synapses']<=128,
+                    'count_candidate_limit_requires_count_source')
+            expected=declare_candidate_limit(original,run_id=spec['run_id'],
+                candidates_per_input=spec['maximum_candidates_per_input'])
+        else:
+            expected = doubled_sweep_count_job(original, spec['run_id']) if extension else \
+                matched_count_job(original, spec['run_id'], maximum_synapses=spec['maximum_synapses'])
+        require(job == expected and (not (extension or candidate_limit) or all(
+                    bound['maximum_synapses'] <= spec['maximum_synapses']
+                    for bound in job['configuration']['search']['bounds'])),
+                'count_train_matched_case_changed')
+        validate_job('train', job)
+        factor_path = controls/'factor-job.json'
+        require(file_record(factor_path) == spec['factor_job_file'] and
+                load(factor_path) == factor_control_job(job), 'count_train_factor_control_changed')
+        factor = load(factor_path);validate_job('preflight', factor)
+        runtime_path = controls/'runtime.json'; runtime = load(runtime_path)
+        runtime_before = file_record(runtime_path); sdk = Path(spec['sdk_source'])
+        require(source_closure(sdk) == runtime['source_closure'], 'count_train_sdk_changed')
+        multiplier = 2 if extension else 1
+        require(original['configuration']['maximum_wall_seconds'] == 32400 and
+                job['configuration']['maximum_wall_seconds'] == 32400*multiplier,
+                'count_train_declared_finite_budgets')
+        require(type(spec['minimum_free_bytes']) is int and spec['minimum_free_bytes'] >= 10*1024**3 and
+                type(spec['maximum_output_bytes']) is int and 0 < spec['maximum_output_bytes'] <= 8*1024**3*multiplier,
+                'count_train_disk_limits')
+        require(shutil.disk_usage(output).free >= spec['minimum_free_bytes']+spec['maximum_output_bytes'],
+                'count_train_capacity_preflight')
+        def check_disk():
+            while not stop.is_set():
+                try:
+                    require(shutil.disk_usage(output).free >= spec['minimum_free_bytes'], 'count_train_disk_floor')
+                    total = 0
+                    def walk_error(error):
+                        if not isinstance(error, FileNotFoundError):raise error
+                    for directory, _, files in os.walk(output, onerror=walk_error):
+                        for name in files:
+                            try:total += (Path(directory)/name).stat().st_size
+                            except FileNotFoundError:pass
+                    require(total <= spec['maximum_output_bytes'], 'count_train_output_budget')
+                except BaseException as error:
+                    failures.append(str(error));return
+                stop.wait(5)
+        thread = threading.Thread(target=check_disk, daemon=True);thread.start()
+        def monitor(state):
+            # Never walk large output trees on the native capture/ack path.
+            require(not failures, failures[0] if failures else 'count_train_disk_guard')
+        with _environment({k:runtime['loader_environment'].get(k)
+                           for k in ('PATH','QT_PLUGIN_PATH','QT_QPA_PLATFORM')}):
+            _write(output/'cli.json', inspect_native_cli(runtime, ['preflight','train'], evidence_output=output))
+            for phase,mode,path,case,wall,memory in [
+                    ('preflight','preflight',job_path,job,spec['preflight_wall_seconds'],limits['preflight_memory_bytes']),
+                    ('factor-preflight','preflight',factor_path,factor,spec['preflight_wall_seconds'],limits['preflight_memory_bytes']),
+                    ('train','train',job_path,job,spec['native_wall_seconds'],limits['native_memory_bytes'])]:
+                require(not failures and file_record(job_path) == spec['job_file'], 'count_train_input_or_guard_changed')
+                destination = output/phase;destination.mkdir()
+                result = execute(runtime, ['--app-ini',runtime['app_ini']['path'],'--timelearner-'+mode,
+                    str(path),'--timelearner-output',str(destination/'native')],
+                    Path(runtime['executable']['path']).parent,destination/'process',memory_bytes=memory,
+                    maximum_processes=64,maximum_wall_seconds=wall,lock_file=base/'locks/worker.lock',
+                    cooperative_capture=True,monitor=monitor)
+                _write(destination/'process-result.json',result)
+                require(result['execution'] == 'completed' and result['all_processes_closed'] and
+                        result['runtime_provenance'] == 'loaded_files_captured', 'count_train_'+mode+'_native_incomplete')
+                execution = load(destination/'native/execution.json')
+                if mode == 'preflight':
+                    audited = audit_execution(mode,destination/'native',case)
+                    _write(destination/'audit.json',audited)
+                    initial = load(destination/'native/initial-state.json')
+                    if phase == 'preflight':
+                        baseline_initial = initial
+                        if extension or candidate_limit:
+                            source_record = spec['source_initial_state']
+                            source_path = Path(source_record['path'])
+                            require(file_record(source_path) == source_record,
+                                    'count_extension_initial_source_changed')
+                            previous = load(source_path)
+                            require(previous['training_started'] is False and
+                                    previous['dynamics_checkpoint'] is False and
+                                    previous['identity']['valid'] is True and
+                                    previous['sha256']==sha({k:v for k,v in previous.items() if k!='sha256'}) and
+                                    initial['identity'] == previous['identity'] and
+                                    initial['parameters'] == previous['parameters'],
+                                    'count_extension_cold_graph_changed')
+                            _write(output/'cold-start-comparison.json', dict(
+                                source=source_record,
+                                observed=file_record(destination/'native/initial-state.json'),
+                                physical_graph_and_parameters_preserved=True,
+                                controller_budget_changed=(extension or
+                                    spec['maximum_candidates_per_input']!=original['configuration']['search']['maximum_candidates_per_input']),
+                                training_started=False,
+                                scientific_verdict=None))
+                    else:
+                        require(initial['parameters'][0]['synapses'] == 2 and
+                                len(initial['identity']['model']['nodes']) >
+                                len(baseline_initial['identity']['model']['nodes']),
+                                'count_train_factor_did_not_create_additional_physical_nodes')
+                        _write(output/'preflight-accepted.json',dict(job_sha256=job['sha256'],
+                            normalization='N0',initial_model_revision=baseline_initial['identity']['sha256'],
+                            effective_initial_model_checked=True,factor_control_synapses=2,
+                            initial_nodes=len(baseline_initial['identity']['model']['nodes']),
+                            factor_control_nodes=len(initial['identity']['model']['nodes']),
+                            factor_control_input_indices=[i for i,item in enumerate(factor['configuration']['model']['inputs'])
+                                                          if item['synapses'] == 2],
+                            factor_control_is_a_separate_initial_state=True,
+                            full_training_audit_pending=True,scientific_verdict=None))
+                else:
+                    require(execution['sha256'] == sha({k:v for k,v in execution.items() if k != 'sha256'}) and
+                            execution['job_sha256'] == job['sha256'], 'count_train_native_execution_binding')
+                    # Full model/history parsing belongs to a separate finite
+                    # audited process after native closure, not this launcher.
+                    terminal = dict(execution='completed',validity='pending_full_primary_audit',
+                        job_sha256=job['sha256'],native_execution_sha256=execution['sha256'],
+                        training_outcome=execution.get('training_outcome'),
+                        completed_boundary=execution.get('completed_boundary'),package_path=execution.get('package_path'),
+                        full_primary_audit_complete=False,training_certificate_verified=False,scientific_verdict=None)
+        require(file_record(original_path) == spec['original_job'] and file_record(job_path) == spec['job_file'] and
+                file_record(factor_path) == spec['factor_job_file'] and not failures and
+                file_record(runtime_path) == runtime_before and source_closure(sdk) == runtime['source_closure'],
+                'count_train_source_changed_after_execution')
+        _source_snapshot(Path(spec['python_source']), spec['python_root'])
+        if extension or candidate_limit:
+            require(file_record(Path(spec['source_initial_state']['path'])) == spec['source_initial_state'],
+                    'count_extension_initial_source_changed')
+        _write(output/'terminal.json',terminal)
+    except BaseException as error:
+        import traceback
+        _write(output/'exception.json',dict(reason=str(error),traceback=traceback.format_exc(),scientific_verdict=None))
+        raise
+    finally:
+        stop.set()
+        if 'thread' in locals():thread.join(10)
+
+
+def main():
+    p=argparse.ArgumentParser();p.add_argument('--controls',required=True)
+    run(p.parse_args().controls)
+
+
+if __name__ == '__main__':main()

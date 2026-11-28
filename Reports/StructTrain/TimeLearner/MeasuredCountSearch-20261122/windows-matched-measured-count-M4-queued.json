@@ -1,0 +1,58 @@
+{
+  "kind": "timelearner_same_budget_measured_count_branch_M4_queued_after_gates",
+  "schema_version": 1,
+  "dispatch": {
+    "queued": true,
+    "job": "windows-branch-measured-count-M4-a2",
+    "controls": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-branch-measured-count-M4-a2",
+    "controls_commit": "3194b2ff6481968d89fb293b20db0e8941b51ef8",
+    "task": {
+      "scientific_verdict": null,
+      "instance": "{ACA98309-0134-4A07-9AC6-28ECE8E7BC11}",
+      "execution_time_limit": "PT18H",
+      "task": "TimeLearner-windows-branch-measured-count-M4-a2",
+      "engine_pid": 17100
+    },
+    "source_root": "80330fc51c4713c7bd1936be98e43ec0217b2337",
+    "new_job_sha256": "28d1099129bc04dd0cabb2dc3a95eb4de396c8889ea5ffed5154e2d961d9d0d5",
+    "condition_fingerprint": "02924dbd3ff77236c4bc9670667221e1569732d952f83d84d7020791941c894e",
+    "reference_probe_jobs": 4,
+    "gate_native114_required": true,
+    "graph_and_Ns2_required": true,
+    "old_new_initial_reference_traces_required": true,
+    "initial_revision_expected": "ab751ba723852917588b694d156f1d8c9033b8b0a0ec7b8e93faacec0d747dc4",
+    "mathematical_configuration_unchanged": true,
+    "original_jobs_not_restarted": true,
+    "training_started": false,
+    "training_only_after_all_admission_checks": true,
+    "scientific_verdict": null
+  },
+  "actual_observation": {
+    "job": "windows-branch-measured-count-M4-a2",
+    "observed_utc": "2026-11-22T07:43:41.329993+00:00",
+    "owner.json": {
+      "pid": 13372,
+      "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+      "creation_filetime": "134398057220169575"
+    },
+    "state.json": {
+      "stage": "waiting_for_same_full_native114_to_close",
+      "observed_utc": "2026-11-22T07:22:02.289992+00:00",
+      "scientific_verdict": null
+    },
+    "actual_supervisor": {
+      "pid": 13372,
+      "running": true,
+      "matching": true,
+      "identity": {
+        "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+        "creation_filetime": "134398057220169575"
+      }
+    },
+    "raw_training_trials": 0
+  },
+  "condition_uses_production_ConditionSpec_serializer": true,
+  "old_new_reference_traces_are_cold_characterization_not_replacement_for_Train_captures": true,
+  "scientific_Train_started": false,
+  "scientific_verdict": null
+}

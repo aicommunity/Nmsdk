@@ -1,0 +1,141 @@
+{
+  "kind": "timelearner_full_primary_recovery_preparation_with_preserved_refusal",
+  "schema_version": 1,
+  "failed_attempt": "classic-full-primary-restore-m40-ac1",
+  "closed_failed_process": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "kernel_cgroup_observed",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "e04e4faaee4383d92f8ce6a18726a879bcc262b56fd36bcd1bf4d2fdd10a3382",
+      "unit": "timelearner-3f5a82cf-4a76-47f1-858a-4aaffe60c8df.service",
+      "invocation_id": "cebfca37893e408db9930f8e5ff9b707",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-3f5a82cf-4a76-47f1-858a-4aaffe60c8df.service",
+      "initial_main_pid": 1551467,
+      "initial_start_ticks": "450812598",
+      "sha256": "87f3fcb0f31af357d3b1902583d5bef6e8507b4df6e2e8f91cb656d88378ba10"
+    },
+    "state": {
+      "Type": "exec",
+      "Restart": "no",
+      "RemainAfterExit": "yes",
+      "MainPID": "0",
+      "Result": "exit-code",
+      "ExecMainCode": "1",
+      "ExecMainStatus": "1",
+      "ControlGroup": "",
+      "MemoryMax": "2147483648",
+      "TasksMax": "64",
+      "KillMode": "control-group",
+      "Description": "TimeLearner contained attempt 3f5a82cf-4a76-47f1-858a-4aaffe60c8df",
+      "LoadState": "loaded",
+      "ActiveState": "failed",
+      "SubState": "failed",
+      "InvocationID": "cebfca37893e408db9930f8e5ff9b707"
+    },
+    "memory_max": 2147483648,
+    "tasks_max": 64,
+    "scientific_verdict": null
+  },
+  "controller": {
+    "kind": "timelearner_process_result",
+    "schema_version": 2,
+    "execution": "process_error",
+    "reason": "nonzero_exit_or_missing_terminal_status",
+    "returncode": 1,
+    "wall_seconds": 0.34214569721370935,
+    "model_time": null,
+    "runtime_provenance": "loaded_files_captured",
+    "mapping_error": null,
+    "runtime_fingerprint": "bb94f0153a2e98c4b5edc3261d6a36ab31c8bd48a2c10929076b75b63db549a5",
+    "ownership_scope": "bound_cgroup",
+    "all_processes_closed": true,
+    "scientific_verdict": null,
+    "operational_diagnostics": {
+      "kind": "timelearner_operational_diagnostics",
+      "schema_version": 1,
+      "policy": "owned-streams-v1",
+      "status": "clear",
+      "error_records": 0,
+      "warning_records": 0,
+      "unclassified_stderr_chunks": 0,
+      "reasons": [],
+      "examples": [],
+      "streams": [
+        {
+          "path": "stdout.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "contained_streams_match": true,
+      "scientific_verdict": null
+    }
+  },
+  "worker_terminal": {
+    "operation_passed": false,
+    "operation": "python-controller-validation",
+    "heartbeat_errors": [],
+    "lease_release": "controller only after whole cgroup closure",
+    "selected_validation_scope_requires_source_review": true,
+    "scientific_verdict": null
+  },
+  "exception": {
+    "reason": "reservation_capacity_exhausted",
+    "traceback": "Traceback (most recent call last):\n  File \"/media/user/Data/TimeLearnerRefactor/source-classic-full-primary-restore-m40-ac1/Scripts/StructTrain/TimeLearner/owned_python_job.py\", line 239, in _worker\n    lease = registry.reserve(request['job_id'], resources, ttl_seconds=120,\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/media/user/Data/TimeLearnerRefactor/source-classic-full-primary-restore-m40-ac1/Scripts/StructTrain/TimeLearner/resource_reservations.py\", line 310, in reserve\n    _require(all(used[key]+demands[key] <= self.capacity[key] for key in used),\n  File \"/media/user/Data/TimeLearnerRefactor/source-classic-full-primary-restore-m40-ac1/Scripts/StructTrain/TimeLearner/resource_reservations.py\", line 25, in _require\n    raise ReservationError(reason)\nScripts.StructTrain.TimeLearner.resource_reservations.ReservationError: reservation_capacity_exhausted\n"
+  },
+  "tests_executed": 0,
+  "independent_recovery_passed": false,
+  "prepared": {
+    "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-23/classic-measured-count-M4-elder/full-primary-recovery-prepared-ac4.json",
+    "record": {
+      "kind": "timelearner_prepared_full_primary_recovery",
+      "schema_version": 1,
+      "prepared_utc": "2026-11-23T11:24:27.362869+00:00",
+      "request": {
+        "path": "/media/user/Data/TimeLearnerRefactor/requests/classic-full-primary-restore-m40-ac4/request.json",
+        "sha256": "81e47d46e0711f15000d30b3d4ff17abc9b4abb876bf48264f73e2250c28356d",
+        "size": 1199
+      },
+      "previous_attempt": "classic-full-primary-restore-m40-ac1",
+      "previous_reason": "reservation_capacity_exhausted",
+      "previous_tests_executed": 0,
+      "previous_processes_closed": true,
+      "source": "/media/user/Data/TimeLearnerRefactor/source-classic-full-primary-restore-m40-ac1",
+      "source_commit": "051390eaf8975b38fa945fc514fd94b74ae042dc",
+      "wait_for": {
+        "job": "classic-n0-proposal-cold-m40-aa21",
+        "actual_controller": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-n0-proposal-cold-m40-aa21-controller",
+        "all_owned_groups_closed_required": true,
+        "registry_reserved_slots_must_be": 0
+      },
+      "registry_capacity": {
+        "disk_bytes": 34359738368,
+        "memory_bytes": 34359738368,
+        "slots": 1
+      },
+      "prepared_only": true,
+      "new_worker_started": false,
+      "scientific_verdict": null,
+      "controls_commit": "6d5643b2637b334f241cbc2b3d2f517fe3f9cf88",
+      "controls_bundle": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/4f/4f52a1a0220f8e3b13fe2d8247bd8531f2c3a2673d99e8bdd814b6a15322d8b9",
+        "sha256": "4f52a1a0220f8e3b13fe2d8247bd8531f2c3a2673d99e8bdd814b6a15322d8b9",
+        "bytes": 243783
+      }
+    }
+  },
+  "no_pool_capacity_policy_changed": true,
+  "no_Train_restarted": true,
+  "scientific_verdict": null
+}

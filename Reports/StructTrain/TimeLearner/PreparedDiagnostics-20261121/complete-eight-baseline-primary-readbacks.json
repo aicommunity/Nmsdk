@@ -1,0 +1,679 @@
+{
+  "kind": "timelearner_complete_eight_baseline_readbacks",
+  "schema_version": 1,
+  "workers": {
+    "elder": {
+      "kind": "timelearner_complete_native_primary_readback",
+      "schema_version": 1,
+      "job": "s11-prepared-long-model-baseline-elder-a2",
+      "model_revision": "483b379cfd982a26330714e469cb36d665f2661f7e22b08b02030d1a58672d61",
+      "execution_kind": "timelearner_native_diagnostic_evaluation_execution",
+      "evaluation_spec_keys": [
+        "coverage_policy",
+        "criterion",
+        "diagnostic_only",
+        "kind",
+        "model_revision",
+        "run_id",
+        "schema_version",
+        "source_stopped_sha256",
+        "training_outcome",
+        "trials"
+      ],
+      "rows": [
+        {
+          "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/0",
+          "sample_id": "phasea-row-0",
+          "label": "target",
+          "pattern_hash": "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451",
+          "begin": 0,
+          "end": 2,
+          "samples": 4001,
+          "spike_count": 0,
+          "spike_times": [],
+          "lt_maximum": 0.025976868664180974,
+          "maximum_time": 0.4935,
+          "soma_maxima": [
+            0.024565243591820773,
+            0.02677621381340556,
+            0.02677621381340556,
+            0.02677621381340556
+          ],
+          "threshold_potential_source": {
+            "class": "TLNativeFast3F2000_LTZone",
+            "path": "$.LTZone.Potential",
+            "sample_phase": "native_after_children",
+            "units": "model_units_SI_unverified"
+          }
+        },
+        {
+          "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/1",
+          "sample_id": "phasea-row-1",
+          "label": "foil",
+          "pattern_hash": "36041ec22b63d8d8bb408206a2271702dc7d9240d9052da27d23c78ea55f959d",
+          "begin": 2.0005,
+          "end": 4.000500000000001,
+          "samples": 4001,
+          "spike_count": 0,
+          "spike_times": [],
+          "lt_maximum": 0.025459292990778953,
+          "maximum_time": 2.494,
+          "soma_maxima": [
+            0.0245652397351529,
+            0.02677621381340556,
+            0.02677621381340556,
+            0.02677621381340556
+          ],
+          "threshold_potential_source": {
+            "class": "TLNativeFast3F2000_LTZone",
+            "path": "$.LTZone.Potential",
+            "sample_phase": "native_after_children",
+            "units": "model_units_SI_unverified"
+          }
+        },
+        {
+          "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/2",
+          "sample_id": "phasea-row-2",
+          "label": "foil",
+          "pattern_hash": "9c7cb4b0313fb5d1d3d87e903c3d4a500f2226bf6962d2f55b895e875e7c7a85",
+          "begin": 4.001,
+          "end": 6.001,
+          "samples": 4001,
+          "spike_count": 0,
+          "spike_times": [],
+          "lt_maximum": 0.02545932586406524,
+          "maximum_time": 4.4945,
+          "soma_maxima": [
+            0.0245652397351529,
+            0.02677621381340556,
+            0.02677621381340556,
+            0.02677621381340556
+          ],
+          "threshold_potential_source": {
+            "class": "TLNativeFast3F2000_LTZone",
+            "path": "$.LTZone.Potential",
+            "sample_phase": "native_after_children",
+            "units": "model_units_SI_unverified"
+          }
+        },
+        {
+          "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/3",
+          "sample_id": "phasea-row-3",
+          "label": "foil",
+          "pattern_hash": "ce915da00aa267d665ddd1c360b4803d115b13ec3eac683b0f8ba90a52a57413",
+          "begin": 6.0015,
+          "end": 8.0015,
+          "samples": 4001,
+          "spike_count": 0,
+          "spike_times": [],
+          "lt_maximum": 0.025459325864065185,
+          "maximum_time": 6.495,
+          "soma_maxima": [
+            0.022162035340112296,
+            0.026776213813405003,
+            0.026776213813405003,
+            0.026776213813405003
+          ],
+          "threshold_potential_source": {
+            "class": "TLNativeFast3F2000_LTZone",
+            "path": "$.LTZone.Potential",
+            "sample_phase": "native_after_children",
+            "units": "model_units_SI_unverified"
+          }
+        },
+        {
+          "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/4",
+          "sample_id": "phasea-row-4",
+          "label": "foil",
+          "pattern_hash": "4047791f09257b779ecdc2a373bcf9b1c84c323f5af6b1a9ec5df55479601243",
+          "begin": 8.002,
+          "end": 10.002,
+          "samples": 4001,
+          "spike_count": 0,
+          "spike_times": [],
+          "lt_maximum": 0.030690673969420296,
+          "maximum_time": 8.4955,
+          "soma_maxima": [
+            0.04248267547683815,
+            0.026840060407207322,
+            0.026840060407207322,
+            0.026840060407207322
+          ],
+          "threshold_potential_source": {
+            "class": "TLNativeFast3F2000_LTZone",
+            "path": "$.LTZone.Potential",
+            "sample_phase": "native_after_children",
+            "units": "model_units_SI_unverified"
+          }
+        },
+        {
+          "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/5",
+          "sample_id": "phasea-row-5",
+          "label": "foil",
+          "pattern_hash": "6f76812a27c0b273529753e181fa2cc7a0b8d4f0b3c42fba2e436dbb2d0b9934",
+          "begin": 10.0025,
+          "end": 12.0025,
+          "samples": 4001,
+          "spike_count": 0,
+          "spike_times": [],
+          "lt_maximum": 0.025507177936130276,
+          "maximum_time": 10.496,
+          "soma_maxima": [
+            0.042482676112220785,
+            0.026840060407207322,
+            0.026840060407207322,
+            0.026840060407207322
+          ],
+          "threshold_potential_source": {
+            "class": "TLNativeFast3F2000_LTZone",
+            "path": "$.LTZone.Potential",
+            "sample_phase": "native_after_children",
+            "units": "model_units_SI_unverified"
+          }
+        },
+        {
+          "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/6",
+          "sample_id": "phasea-row-6",
+          "label": "foil",
+          "pattern_hash": "a9c1310975c490708e44be19a7efe99502884491009f8efd1672789731f90e28",
+          "begin": 12.003,
+          "end": 14.003,
+          "samples": 4001,
+          "spike_count": 0,
+          "spike_times": [],
+          "lt_maximum": 0.029558770154978597,
+          "maximum_time": 12.4965,
+          "soma_maxima": [
+            0.044773092018859706,
+            0.02677623266862439,
+            0.02677623266862439,
+            0.02677623266862439
+          ],
+          "threshold_potential_source": {
+            "class": "TLNativeFast3F2000_LTZone",
+            "path": "$.LTZone.Potential",
+            "sample_phase": "native_after_children",
+            "units": "model_units_SI_unverified"
+          }
+        },
+        {
+          "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/7",
+          "sample_id": "phasea-row-7",
+          "label": "foil",
+          "pattern_hash": "55d26999e0e39704e925a7eb6fb22734aad6e1d9aba1cc6a623e86e3f3c614e6",
+          "begin": 14.0035,
+          "end": 16.003500000000003,
+          "samples": 4001,
+          "spike_count": 0,
+          "spike_times": [],
+          "lt_maximum": 0.025459307132192965,
+          "maximum_time": 14.497,
+          "soma_maxima": [
+            0.04477309201886015,
+            0.02677623266862439,
+            0.02677623266862439,
+            0.02677623266862439
+          ],
+          "threshold_potential_source": {
+            "class": "TLNativeFast3F2000_LTZone",
+            "path": "$.LTZone.Potential",
+            "sample_phase": "native_after_children",
+            "units": "model_units_SI_unverified"
+          }
+        }
+      ],
+      "proposal": {
+        "threshold": 0.025742023300155625,
+        "target_maximum": 0.025976868664180974,
+        "lower_foil_maximum": 0.025507177936130276,
+        "full_matrix_margin": -0.004713805305239321,
+        "nonspiking_proxy": {
+          "TP": 1,
+          "FN": 0,
+          "FP": 2,
+          "TN": 5
+        },
+        "actual_threshold_confirmation_required": true
+      },
+      "primary_sha256_checked": true,
+      "full_model_source_analysis_still_pending": true,
+      "classification_verdict": null,
+      "training_completed": false,
+      "scientific_verdict": null
+    },
+    "m40": {
+      "kind": "timelearner_complete_native_primary_readback",
+      "schema_version": 1,
+      "job": "s11-prepared-long-model-baseline-m40-a3",
+      "model_revision": "ac29284570efcb7e733f4364daa245d35e6665cd249010962da465b32177040a",
+      "execution_kind": "timelearner_native_diagnostic_evaluation_execution",
+      "evaluation_spec_keys": [
+        "coverage_policy",
+        "criterion",
+        "diagnostic_only",
+        "kind",
+        "model_revision",
+        "run_id",
+        "schema_version",
+        "source_stopped_sha256",
+        "training_outcome",
+        "trials"
+      ],
+      "rows": [
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/0",
+          "sample_id": "phasea-row-0",
+          "label": "target",
+          "pattern_hash": "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451",
+          "begin": 0,
+          "end": 2,
+          "samples": 4001,
+          "spike_count": 0,
+          "spike_times": [],
+          "lt_maximum": 0.10124429345441299,
+          "maximum_time": 0.4935,
+          "soma_maxima": [
+            0.10124429345441299
+          ],
+          "threshold_potential_source": {
+            "class": "TLNativeFast3F2000_LTZone",
+            "path": "$.LTZone.Potential",
+            "sample_phase": "native_after_children",
+            "units": "model_units_SI_unverified"
+          }
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/1",
+          "sample_id": "phasea-row-1",
+          "label": "foil",
+          "pattern_hash": "36041ec22b63d8d8bb408206a2271702dc7d9240d9052da27d23c78ea55f959d",
+          "begin": 2.0005,
+          "end": 4.000500000000001,
+          "samples": 4001,
+          "spike_count": 0,
+          "spike_times": [],
+          "lt_maximum": 0.07744171266563815,
+          "maximum_time": 2.494,
+          "soma_maxima": [
+            0.07744171266563815
+          ],
+          "threshold_potential_source": {
+            "class": "TLNativeFast3F2000_LTZone",
+            "path": "$.LTZone.Potential",
+            "sample_phase": "native_after_children",
+            "units": "model_units_SI_unverified"
+          }
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/2",
+          "sample_id": "phasea-row-2",
+          "label": "foil",
+          "pattern_hash": "9c7cb4b0313fb5d1d3d87e903c3d4a500f2226bf6962d2f55b895e875e7c7a85",
+          "begin": 4.001,
+          "end": 6.001,
+          "samples": 4001,
+          "spike_count": 0,
+          "spike_times": [],
+          "lt_maximum": 0.07856659683693601,
+          "maximum_time": 4.4945,
+          "soma_maxima": [
+            0.07856659683693601
+          ],
+          "threshold_potential_source": {
+            "class": "TLNativeFast3F2000_LTZone",
+            "path": "$.LTZone.Potential",
+            "sample_phase": "native_after_children",
+            "units": "model_units_SI_unverified"
+          }
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/3",
+          "sample_id": "phasea-row-3",
+          "label": "foil",
+          "pattern_hash": "ce915da00aa267d665ddd1c360b4803d115b13ec3eac683b0f8ba90a52a57413",
+          "begin": 6.0015,
+          "end": 8.0015,
+          "samples": 4001,
+          "spike_count": 0,
+          "spike_times": [],
+          "lt_maximum": 0.057349213502528196,
+          "maximum_time": 6.7355,
+          "soma_maxima": [
+            0.057349213502528196
+          ],
+          "threshold_potential_source": {
+            "class": "TLNativeFast3F2000_LTZone",
+            "path": "$.LTZone.Potential",
+            "sample_phase": "native_after_children",
+            "units": "model_units_SI_unverified"
+          }
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/4",
+          "sample_id": "phasea-row-4",
+          "label": "foil",
+          "pattern_hash": "4047791f09257b779ecdc2a373bcf9b1c84c323f5af6b1a9ec5df55479601243",
+          "begin": 8.002,
+          "end": 10.002,
+          "samples": 4001,
+          "spike_count": 0,
+          "spike_times": [],
+          "lt_maximum": 0.10160157478959986,
+          "maximum_time": 8.4955,
+          "soma_maxima": [
+            0.10160157478959986
+          ],
+          "threshold_potential_source": {
+            "class": "TLNativeFast3F2000_LTZone",
+            "path": "$.LTZone.Potential",
+            "sample_phase": "native_after_children",
+            "units": "model_units_SI_unverified"
+          }
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/5",
+          "sample_id": "phasea-row-5",
+          "label": "foil",
+          "pattern_hash": "6f76812a27c0b273529753e181fa2cc7a0b8d4f0b3c42fba2e436dbb2d0b9934",
+          "begin": 10.0025,
+          "end": 12.0025,
+          "samples": 4001,
+          "spike_count": 0,
+          "spike_times": [],
+          "lt_maximum": 0.08000093447616519,
+          "maximum_time": 10.724,
+          "soma_maxima": [
+            0.08000093447616519
+          ],
+          "threshold_potential_source": {
+            "class": "TLNativeFast3F2000_LTZone",
+            "path": "$.LTZone.Potential",
+            "sample_phase": "native_after_children",
+            "units": "model_units_SI_unverified"
+          }
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/6",
+          "sample_id": "phasea-row-6",
+          "label": "foil",
+          "pattern_hash": "a9c1310975c490708e44be19a7efe99502884491009f8efd1672789731f90e28",
+          "begin": 12.003,
+          "end": 14.003,
+          "samples": 4001,
+          "spike_count": 0,
+          "spike_times": [],
+          "lt_maximum": 0.09864974702793361,
+          "maximum_time": 12.4965,
+          "soma_maxima": [
+            0.09864974702793361
+          ],
+          "threshold_potential_source": {
+            "class": "TLNativeFast3F2000_LTZone",
+            "path": "$.LTZone.Potential",
+            "sample_phase": "native_after_children",
+            "units": "model_units_SI_unverified"
+          }
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/7",
+          "sample_id": "phasea-row-7",
+          "label": "foil",
+          "pattern_hash": "55d26999e0e39704e925a7eb6fb22734aad6e1d9aba1cc6a623e86e3f3c614e6",
+          "begin": 14.0035,
+          "end": 16.003500000000003,
+          "samples": 4001,
+          "spike_count": 0,
+          "spike_times": [],
+          "lt_maximum": 0.07459538421080303,
+          "maximum_time": 14.889,
+          "soma_maxima": [
+            0.07459538421080303
+          ],
+          "threshold_potential_source": {
+            "class": "TLNativeFast3F2000_LTZone",
+            "path": "$.LTZone.Potential",
+            "sample_phase": "native_after_children",
+            "units": "model_units_SI_unverified"
+          }
+        }
+      ],
+      "proposal": {
+        "threshold": 0.0999470202411733,
+        "target_maximum": 0.10124429345441299,
+        "lower_foil_maximum": 0.09864974702793361,
+        "full_matrix_margin": -0.00035728133518686533,
+        "nonspiking_proxy": {
+          "TP": 1,
+          "FN": 0,
+          "FP": 1,
+          "TN": 6
+        },
+        "actual_threshold_confirmation_required": true
+      },
+      "primary_sha256_checked": true,
+      "full_model_source_analysis_still_pending": true,
+      "classification_verdict": null,
+      "training_completed": false,
+      "scientific_verdict": null
+    },
+    "windows": {
+      "kind": "timelearner_complete_native_primary_readback",
+      "schema_version": 1,
+      "job": "windows-prepared-long-model-baseline-a5",
+      "model_revision": "01ff5ebf50a45cfd3a354de5902ae7702d9d7e5590945eca399f38674ed9c488",
+      "execution_kind": "timelearner_native_diagnostic_evaluation_execution",
+      "evaluation_spec_keys": [
+        "coverage_policy",
+        "criterion",
+        "diagnostic_only",
+        "kind",
+        "model_revision",
+        "run_id",
+        "schema_version",
+        "source_stopped_sha256",
+        "training_outcome",
+        "trials"
+      ],
+      "rows": [
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/0",
+          "sample_id": "phasea-row-0",
+          "label": "target",
+          "pattern_hash": "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451",
+          "begin": 0,
+          "end": 2,
+          "samples": 4001,
+          "spike_count": 0,
+          "spike_times": [],
+          "lt_maximum": 0.10112859892319448,
+          "maximum_time": 0.4935,
+          "soma_maxima": [
+            0.10112859892319448
+          ],
+          "threshold_potential_source": {
+            "class": "TLNativeFast3F2000_LTZone",
+            "path": "$.LTZone.Potential",
+            "sample_phase": "native_after_children",
+            "units": "model_units_SI_unverified"
+          }
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/1",
+          "sample_id": "phasea-row-1",
+          "label": "foil",
+          "pattern_hash": "36041ec22b63d8d8bb408206a2271702dc7d9240d9052da27d23c78ea55f959d",
+          "begin": 2.0005,
+          "end": 4.000500000000001,
+          "samples": 4001,
+          "spike_count": 0,
+          "spike_times": [],
+          "lt_maximum": 0.07803748703589608,
+          "maximum_time": 2.494,
+          "soma_maxima": [
+            0.07803748703589608
+          ],
+          "threshold_potential_source": {
+            "class": "TLNativeFast3F2000_LTZone",
+            "path": "$.LTZone.Potential",
+            "sample_phase": "native_after_children",
+            "units": "model_units_SI_unverified"
+          }
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/2",
+          "sample_id": "phasea-row-2",
+          "label": "foil",
+          "pattern_hash": "9c7cb4b0313fb5d1d3d87e903c3d4a500f2226bf6962d2f55b895e875e7c7a85",
+          "begin": 4.001,
+          "end": 6.001,
+          "samples": 4001,
+          "spike_count": 0,
+          "spike_times": [],
+          "lt_maximum": 0.07916229640277728,
+          "maximum_time": 4.4945,
+          "soma_maxima": [
+            0.07916229640277728
+          ],
+          "threshold_potential_source": {
+            "class": "TLNativeFast3F2000_LTZone",
+            "path": "$.LTZone.Potential",
+            "sample_phase": "native_after_children",
+            "units": "model_units_SI_unverified"
+          }
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/3",
+          "sample_id": "phasea-row-3",
+          "label": "foil",
+          "pattern_hash": "ce915da00aa267d665ddd1c360b4803d115b13ec3eac683b0f8ba90a52a57413",
+          "begin": 6.0015,
+          "end": 8.0015,
+          "samples": 4001,
+          "spike_count": 0,
+          "spike_times": [],
+          "lt_maximum": 0.05701810604111557,
+          "maximum_time": 6.735,
+          "soma_maxima": [
+            0.05701810604111557
+          ],
+          "threshold_potential_source": {
+            "class": "TLNativeFast3F2000_LTZone",
+            "path": "$.LTZone.Potential",
+            "sample_phase": "native_after_children",
+            "units": "model_units_SI_unverified"
+          }
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/4",
+          "sample_id": "phasea-row-4",
+          "label": "foil",
+          "pattern_hash": "4047791f09257b779ecdc2a373bcf9b1c84c323f5af6b1a9ec5df55479601243",
+          "begin": 8.002,
+          "end": 10.002,
+          "samples": 4001,
+          "spike_count": 0,
+          "spike_times": [],
+          "lt_maximum": 0.10151667394081676,
+          "maximum_time": 8.4955,
+          "soma_maxima": [
+            0.10151667394081676
+          ],
+          "threshold_potential_source": {
+            "class": "TLNativeFast3F2000_LTZone",
+            "path": "$.LTZone.Potential",
+            "sample_phase": "native_after_children",
+            "units": "model_units_SI_unverified"
+          }
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/5",
+          "sample_id": "phasea-row-5",
+          "label": "foil",
+          "pattern_hash": "6f76812a27c0b273529753e181fa2cc7a0b8d4f0b3c42fba2e436dbb2d0b9934",
+          "begin": 10.0025,
+          "end": 12.0025,
+          "samples": 4001,
+          "spike_count": 0,
+          "spike_times": [],
+          "lt_maximum": 0.07984227200415395,
+          "maximum_time": 10.7245,
+          "soma_maxima": [
+            0.07984227200415395
+          ],
+          "threshold_potential_source": {
+            "class": "TLNativeFast3F2000_LTZone",
+            "path": "$.LTZone.Potential",
+            "sample_phase": "native_after_children",
+            "units": "model_units_SI_unverified"
+          }
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/6",
+          "sample_id": "phasea-row-6",
+          "label": "foil",
+          "pattern_hash": "a9c1310975c490708e44be19a7efe99502884491009f8efd1672789731f90e28",
+          "begin": 12.003,
+          "end": 14.003,
+          "samples": 4001,
+          "spike_count": 0,
+          "spike_times": [],
+          "lt_maximum": 0.09702647037105083,
+          "maximum_time": 12.4965,
+          "soma_maxima": [
+            0.09702647037105083
+          ],
+          "threshold_potential_source": {
+            "class": "TLNativeFast3F2000_LTZone",
+            "path": "$.LTZone.Potential",
+            "sample_phase": "native_after_children",
+            "units": "model_units_SI_unverified"
+          }
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/7",
+          "sample_id": "phasea-row-7",
+          "label": "foil",
+          "pattern_hash": "55d26999e0e39704e925a7eb6fb22734aad6e1d9aba1cc6a623e86e3f3c614e6",
+          "begin": 14.0035,
+          "end": 16.003500000000003,
+          "samples": 4001,
+          "spike_count": 0,
+          "spike_times": [],
+          "lt_maximum": 0.0726300395803855,
+          "maximum_time": 14.891,
+          "soma_maxima": [
+            0.0726300395803855
+          ],
+          "threshold_potential_source": {
+            "class": "TLNativeFast3F2000_LTZone",
+            "path": "$.LTZone.Potential",
+            "sample_phase": "native_after_children",
+            "units": "model_units_SI_unverified"
+          }
+        }
+      ],
+      "proposal": {
+        "threshold": 0.09907753464712266,
+        "target_maximum": 0.10112859892319448,
+        "lower_foil_maximum": 0.09702647037105083,
+        "full_matrix_margin": -0.00038807501762228025,
+        "nonspiking_proxy": {
+          "TP": 1,
+          "FN": 0,
+          "FP": 1,
+          "TN": 6
+        },
+        "actual_threshold_confirmation_required": true
+      },
+      "primary_sha256_checked": true,
+      "full_model_source_analysis_still_pending": true,
+      "classification_verdict": null,
+      "training_completed": false,
+      "scientific_verdict": null
+    }
+  },
+  "all_native_trials": 24,
+  "full_model_source_analysis_still_pending": true,
+  "actual_threshold_confirmation_required": true,
+  "scientific_verdict": null
+}

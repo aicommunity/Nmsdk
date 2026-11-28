@@ -37,13 +37,17 @@ function Invoke-CheckedGit {
 
 function Get-PrivateSdkPath {
     param([string]$Path)
-    $workspace = [IO.Path]::GetFullPath('C:/Projects/TimeLearnerWorker').TrimEnd('\','/')
     $actual = [IO.Path]::GetFullPath($Path).TrimEnd('\','/')
-    if (-not $actual.StartsWith($workspace+'\',[StringComparison]::OrdinalIgnoreCase)) {
+    $workspace = $null
+    foreach ($candidate in @('C:/Projects/TimeLearnerWorker','D:/Projects/TimeLearnerWorker')) {
+        $allowed = [IO.Path]::GetFullPath($candidate).TrimEnd('\','/')
+        if ($actual.StartsWith($allowed+'\',[StringComparison]::OrdinalIgnoreCase)) {$workspace=$allowed;break}
+    }
+    if ($null -eq $workspace) {
         throw 'SDK path must be inside the private TimeLearnerWorker workspace'
     }
     $cursor = $actual
-    while ($cursor.Length -ge $workspace.Length) {
+    while (-not [String]::IsNullOrEmpty($cursor)) {
         if ([IO.Directory]::Exists($cursor) -and
             (([IO.File]::GetAttributes($cursor) -band [IO.FileAttributes]::ReparsePoint) -ne 0)) {
             throw 'SDK path contains a reparse directory'
@@ -166,4 +170,4 @@ function Test-PreparedSdk {
         closure=$closure;compiled_or_models_or_tests=$false;scientific_verdict=$null}
 }
 
-Export-ModuleMember -Function Assert-NativeExitCode,Invoke-CheckedGit,Complete-PreparedGitClone,Test-PreparedSdk
+Export-ModuleMember -Function Assert-NativeExitCode,Invoke-CheckedGit,Get-PrivateSdkPath,Complete-PreparedGitClone,Test-PreparedSdk

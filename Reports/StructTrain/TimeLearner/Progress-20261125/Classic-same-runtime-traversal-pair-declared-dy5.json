@@ -1,0 +1,68 @@
+{
+  "catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-25/Classic-traversal-pair-declarations-dy5.json",
+    "sha256": "337057844e5d5ed5d3207e25edcb4e98cb5319664c0c67858ef996b546cb5a6a",
+    "size": 2704
+  },
+  "kind": "timelearner_Classic_traversal_pair_prepared_declarations",
+  "schema_version": 1,
+  "protocol": {
+    "path": "/media/user/Data/TimeLearnerRefactor/requests/classic-traversal-same-runtime-pair-m40-dy5/protocol.json",
+    "sha256": "1b1a7767771cad95ccc81888f6c427ea828bffa5944d296c195b4cfc1d36a121",
+    "size": 4979
+  },
+  "controls_commit": "677cbc51085492a8906f330ff393a70bf7f8fa8b",
+  "objects": {
+    "original-inputs.bundle": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/20/2015ec6c4db6ce4af2daa2e07d6aa6a91eb7d1c2c88cff5278ffd901bfe4b402",
+      "sha256": "2015ec6c4db6ce4af2daa2e07d6aa6a91eb7d1c2c88cff5278ffd901bfe4b402",
+      "bytes": 42535
+    },
+    "pair-declarations.bundle": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/68/68c62094603c2cdc917456031b4dfa4f3c7f2af43b01c02ede67784b98898b96",
+      "sha256": "68c62094603c2cdc917456031b4dfa4f3c7f2af43b01c02ede67784b98898b96",
+      "bytes": 37610
+    }
+  },
+  "cases": {
+    "sequential": {
+      "run_id": "classic-traversal-sequential-m40-dy5",
+      "request_schema_version": 2,
+      "job": {
+        "path": "/media/user/Data/TimeLearnerRefactor/requests/classic-traversal-same-runtime-pair-m40-dy5/sequential-job.json",
+        "sha256": "31ea4a606ab280000788155ce591cc3d9f31c952398529eb85eeffb885fff25a",
+        "size": 674055
+      },
+      "job_sha256": "97d97ebcd30671a704ffe20bb136cb84fc31c6a9a7aee9f17ca89d336b74cea8",
+      "input_traversal": null
+    },
+    "round-robin-q3": {
+      "run_id": "classic-traversal-round-robin-q3-m40-dy5",
+      "request_schema_version": 3,
+      "job": {
+        "path": "/media/user/Data/TimeLearnerRefactor/requests/classic-traversal-same-runtime-pair-m40-dy5/round-robin-q3-job.json",
+        "sha256": "aedc275a5e9fdd5c6b43b997e48cb9f836dad885626065685499249fa2a084ed",
+        "size": 674297
+      },
+      "job_sha256": "2ca1c5f6557f8b834dfcf5eb7d7c74c1b176d2b7d4426a817bf3ae38ec2cf522",
+      "input_traversal": {
+        "kind": "timelearner_input_traversal",
+        "schema_version": 1,
+        "policy": "classic_candidate_round_robin",
+        "candidates_per_visit": 3,
+        "maximum_seed_elements": 131072
+      }
+    }
+  },
+  "common_configuration_sha256": "671ef8e85e46daf8fca581aa20f18f7d97a962b62c36561d25b13965c943c3ba",
+  "same_all_fields_except_run_id_and_traversal": true,
+  "native_runtime_not_yet_bound": true,
+  "scientific_Train_started": false,
+  "scientific_verdict": null
+}

@@ -10,7 +10,7 @@ from unittest.mock import patch
 
 from ..native_data_checks import validate_request
 from .test_native_data_checks import declaration
-from ..recorded_diagnostic_matrix import audit_matrix, report_matrix, read_summary
+from ..recorded_diagnostic_matrix import audit_matrix, report_matrix, read_summary, validate_declaration
 from ..native_evidence import EvidenceError, load
 
 
@@ -142,6 +142,45 @@ class RecordedDiagnosticMatrixPrimaryTest(unittest.TestCase):
 
 
 class RecordedDiagnosticMatrixDeclarationTest(unittest.TestCase):
+    def test_actual_large_summary_requires_an_explicit_bounded_profile_and_owner_memory(self):
+        value=self.repeated_model()
+        for row in value['cases']:
+            row.update(summary_raw_bytes=167249672,summary_raw_sha256='e'*64,
+                       maximum_summary_raw_bytes=256*1024**2)
+        value['limits'].update(memory_bytes=16*1024**3,leaf_memory_bytes=16*1024**3,
+                               reservation_memory_bytes=32*1024**3)
+        self.assertEqual(validate_request(value),value)
+        for maximum in (None,True,0,128*1024**2,1024*1024**2+1):
+            invalid=deepcopy(value)
+            if maximum is None:invalid['cases'][0].pop('maximum_summary_raw_bytes')
+            else:invalid['cases'][0]['maximum_summary_raw_bytes']=maximum
+            with self.subTest(maximum=maximum),self.assertRaises(EvidenceError):validate_request(invalid)
+        invalid=deepcopy(value);invalid['limits']['memory_bytes']=8*1024**3
+        with self.assertRaisesRegex(EvidenceError,'large_summary_resource_declaration'):validate_request(invalid)
+        invalid=diagnostic_request();invalid['cases'][0]['maximum_summary_raw_bytes']=256*1024**2
+        with self.assertRaisesRegex(EvidenceError,'summary_limit'):validate_request(invalid)
+
+    def test_large_model_requires_explicit_file_transport_and_separate_native_and_owner_budgets(self):
+        value=diagnostic_request()
+        for row in value['cases']:
+            row.update(source_raw_bytes=761851830,maximum_source_raw_bytes=1024*1024**2,
+                       job_source_transport='checked-file-source-v1')
+        value['limits'].update(memory_bytes=16*1024**3,leaf_memory_bytes=16*1024**3,
+                               reservation_memory_bytes=32*1024**3)
+        self.assertIsNone(validate_declaration(value))
+        for changed in ('transport','owner','native','ceiling'):
+            invalid=deepcopy(value)
+            if changed=='transport':invalid['cases'][0].pop('job_source_transport')
+            elif changed=='owner':invalid['limits']['memory_bytes']=8*1024**3
+            elif changed=='native':invalid['limits']['leaf_memory_bytes']=8*1024**3
+            else:invalid['cases'][0]['maximum_source_raw_bytes']=1024*1024**2+1
+            with self.subTest(changed=changed),self.assertRaises(EvidenceError):validate_declaration(invalid)
+
+    def test_unknown_or_noop_transport_factor_is_rejected(self):
+        for mode in (None,True,'auto','checked-file-source-v2'):
+            value=diagnostic_request();value['cases'][0]['job_source_transport']=mode
+            with self.subTest(mode=mode),self.assertRaises(EvidenceError):validate_declaration(value)
+
     def test_compressed_summary_requires_complete_consistent_bounded_raw_identity(self):
         value=self.repeated_model()
         for row in value['cases']:
@@ -165,6 +204,9 @@ class RecordedDiagnosticMatrixDeclarationTest(unittest.TestCase):
             folder=Path(temporary);path=folder/row['summary_name']
             packed=len(raw).to_bytes(4,'big')+zlib.compress(raw);path.write_bytes(packed)
             self.assertEqual(read_summary(folder,row),raw)
+            self.assertEqual(read_summary(folder,{**row,'maximum_summary_raw_bytes':len(raw)}),raw)
+            with self.assertRaises(EvidenceError):
+                read_summary(folder,{**row,'maximum_summary_raw_bytes':len(raw)-1})
             for invalid in (packed[:-1],packed+b'garbage',(len(raw)+1).to_bytes(4,'big')+packed[4:]):
                 path.write_bytes(invalid)
                 with self.subTest(packed_bytes=len(invalid)),self.assertRaises(EvidenceError):read_summary(folder,row)

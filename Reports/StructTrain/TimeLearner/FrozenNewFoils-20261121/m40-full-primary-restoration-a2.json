@@ -1,0 +1,186 @@
+{
+  "name": "s11-frozen-data-primary-restore-m40-a2",
+  "controller-result.json": {
+    "kind": "timelearner_process_result",
+    "execution": "completed",
+    "reason": "exit_zero_and_whole_group_closed",
+    "returncode": 0,
+    "wall_seconds": 67.01667866762727,
+    "runtime_provenance": "loaded_files_captured",
+    "all_processes_closed": true
+  },
+  "worker/validation/result.json": {
+    "kind": "timelearner_python_validation_result",
+    "execution": "completed",
+    "assertion_status": "passed",
+    "executed_tests": 1,
+    "failures": [],
+    "errors": [],
+    "skipped": []
+  },
+  "monitor-final.json": {
+    "guard_triggered": false,
+    "peak_allocated_bytes": 318959616,
+    "minimum_free_bytes": 326420180992
+  },
+  "kernel": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "9c8b06c848847add84b2e6c0ee4fcd92376938791f1740edf62b2dd09c48cf61",
+      "unit": "timelearner-d8f65bbf-b542-4d5b-8d9e-b8d44e58b7e9.service",
+      "invocation_id": "ec2e9cdcc4cf4f4db15a6eae2e7a72a0",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-d8f65bbf-b542-4d5b-8d9e-b8d44e58b7e9.service",
+      "initial_main_pid": 3954966,
+      "initial_start_ticks": "435273879",
+      "sha256": "61bd775a8358029f6e44ea1a56b0c680bda3b50a66ec6854759badd99afb4ed1"
+    }
+  },
+  "restoration_proof": {
+    "kind": "timelearner_frozen_data_primary_restoration_proof",
+    "schema_version": 1,
+    "archive_reference": {
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "bytes": 2383552,
+      "kind": "nmsdk_structtrain_external_object",
+      "object": "objects/sha256/be/be73dea9fd14ddc88caa2514f632e4c4f8d8d5c6149aec6254738e20aabb7838",
+      "schema_version": 1,
+      "sha256": "be73dea9fd14ddc88caa2514f632e4c4f8d8d5c6149aec6254738e20aabb7838"
+    },
+    "source_archive": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/objects/sha256/be/be73dea9fd14ddc88caa2514f632e4c4f8d8d5c6149aec6254738e20aabb7838",
+      "sha256": "be73dea9fd14ddc88caa2514f632e4c4f8d8d5c6149aec6254738e20aabb7838",
+      "size": 2383552
+    },
+    "restoration": {
+      "kind": "timelearner_native_bundle_restoration",
+      "schema_version": 1,
+      "archive_sha256": "be73dea9fd14ddc88caa2514f632e4c4f8d8d5c6149aec6254738e20aabb7838",
+      "archive_members_verified": 199,
+      "retained_regular_files": 196,
+      "compatibility": "dereferenced-glog-aliases-v1",
+      "omitted_redundant_aliases": [
+        {
+          "omitted_alias": "s11-branch-DATA-frozen-order-m40-a1/run/native.events-log/EventsLog/NeuroModeler.INFO",
+          "retained_target": "s11-branch-DATA-frozen-order-m40-a1/run/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261121-133307.2907875",
+          "bytes": 291,
+          "sha256": "612f2f7cab3be9c9425f047110b61ee6c2dd07ba13ae69279be342e7b4ccb0c1",
+          "owner_pid": 2907875,
+          "original_symlink_target_attested": false
+        },
+        {
+          "omitted_alias": "s11-branch-frozen-new-foils-m40-a1/run/native.events-log/EventsLog/NeuroModeler.INFO",
+          "retained_target": "s11-branch-frozen-new-foils-m40-a1/run/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261121-164001.3544164",
+          "bytes": 291,
+          "sha256": "ca4ebed97f91851ee041ac01a57cc88289fb9138337012ad39a272cf89e0cbee",
+          "owner_pid": 3544164,
+          "original_symlink_target_attested": false
+        },
+        {
+          "omitted_alias": "s11-branch-recognition-data-replay-m40-a1/native.events-log/EventsLog/NeuroModeler.INFO",
+          "retained_target": "s11-branch-recognition-data-replay-m40-a1/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261121-131753.2837112",
+          "bytes": 291,
+          "sha256": "746f3987330b4f98776d0084e6a7315c589504873e7fa7e4166052ff29d74aa5",
+          "owner_pid": 2837112,
+          "original_symlink_target_attested": false
+        }
+      ],
+      "source_archive_modified": false,
+      "native_execution_attested": false,
+      "scientific_verdict": null
+    },
+    "evaluations": [
+      {
+        "relative": "s11-branch-recognition-data-replay-m40-a1",
+        "trials": 8,
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "production_manifest_audited": true,
+        "complete_observations_checked": true,
+        "unsupported_reset_preflight_rejected": true
+      },
+      {
+        "relative": "s11-branch-DATA-frozen-order-m40-a1/run",
+        "trials": 56,
+        "counts": {
+          "TP": 7,
+          "FP": 7,
+          "FN": 0,
+          "TN": 42,
+          "targets": 7,
+          "foils": 49,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "production_manifest_audited": true,
+        "complete_observations_checked": true,
+        "unsupported_reset_preflight_rejected": true
+      },
+      {
+        "relative": "s11-branch-frozen-new-foils-m40-a1/run",
+        "trials": 27,
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 25,
+          "targets": 1,
+          "foils": 26,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.9629629629629629,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.038461538461538464
+        },
+        "production_manifest_audited": true,
+        "complete_observations_checked": true,
+        "unsupported_reset_preflight_rejected": true
+      }
+    ],
+    "all_original_member_bytes_verified": true,
+    "disposable_recovery_cache_removed": true,
+    "new_native_execution": false,
+    "scientific_verdict": null
+  },
+  "storage": {
+    "kind": "timelearner_current_frozen_primary_restoration_storage",
+    "schema_version": 1,
+    "job": "s11-frozen-data-primary-restore-m40-a2",
+    "root_commit": "a804c546485984723062b5527a05fb04ea5bbf09",
+    "controls_commit": "fa1ae2ab13814b91912796ff0b513c9adb22d5f5",
+    "restoration_proof": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/22/22e17ec758b6dd792723992109c9f12529c556577a8743d57b58f4dfee1d6b85",
+      "sha256": "22e17ec758b6dd792723992109c9f12529c556577a8743d57b58f4dfee1d6b85",
+      "bytes": 4397
+    },
+    "full_restore_passed": true,
+    "all_original_member_bytes_verified": 199,
+    "production_evaluations_audited": [
+      8,
+      56,
+      27
+    ],
+    "unsupported_reset_preflight_regression_passed": true,
+    "all_processes_closed": true,
+    "temporary_cache_removed": true,
+    "source_originals_retained": true,
+    "scientific_verdict": null
+  }
+}

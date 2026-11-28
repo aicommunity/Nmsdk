@@ -592,12 +592,9 @@ class Worker:
             runtime_before = self.inventory(self.runtime)
             self.write("current-runtime-before.json", runtime_before)
             self.command([self.runtime/"Test_PulseLib_StorageComponents","--gtest_list_tests"], "compiled-test-inventory.log", 120)
-            compiled, suite = [], None
-            for line in (self.out/"compiled-test-inventory.log").read_text().splitlines():
-                if line and not line.startswith(" ") and line.rstrip().endswith("."):
-                    suite = line.strip()[:-1]
-                elif suite and line.startswith("  ") and line.strip() and not line.strip().startswith("#"):
-                    compiled.append(suite+"/"+line.strip().split(" #",1)[0])
+            from .gtest_full_names import parse_listing
+            compiled = [name.replace('.', '/', 1) for name in parse_listing(
+                (self.out/"compiled-test-inventory.log").read_text())]
             _require(len(compiled)==len(set(compiled)) and set(self.expected)<=set(compiled), "compiled_selected_cohort_missing")
             self.write("compiled-inventory-crosscheck.json", {"compiled":compiled, "expected":self.expected,
                 "expected_total":len(self.expected), "accepted":True, "scope":"selected subset, not every binary case"})

@@ -106,6 +106,8 @@ def validate_policy(policy, inputs, maximum_samples):
 
 def configuration_view(configuration):
     """Private common-field view; retain the exact cold7/8 record for execution."""
+    from .terminal_configuration import split_terminal_configuration
+    configuration,_=split_terminal_configuration(configuration)
     require(type(configuration) is dict and bounded_count(configuration.get('schema_version')) in (7,8),
             'candidate_window_requires_cold7_declaration')
     recovery=configuration['schema_version']==8

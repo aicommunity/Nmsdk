@@ -1,0 +1,164 @@
+{
+  "kind": "timelearner_actual_native_source_transport_publication",
+  "schema_version": 1,
+  "catalog_relative": "experiments/2026-11-17/source-transport-native-ab/complete-a1.json",
+  "primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/29/29fb0c81577c367307d4822ac96191c6d9ba8354d3b34d1dff5536c5afdd229b",
+    "sha256": "29fb0c81577c367307d4822ac96191c6d9ba8354d3b34d1dff5536c5afdd229b",
+    "bytes": 14172684
+  },
+  "bundle_manifest": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/49/49363321e5dbf65d326b8fca0bcc97b28d24ae9012cc58d75012692b3f61d349",
+    "sha256": "49363321e5dbf65d326b8fca0bcc97b28d24ae9012cc58d75012692b3f61d349",
+    "bytes": 176779
+  },
+  "provenance_primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/4d/4d0dcf9d72d93b46886883ef9397c73f7c4ddfb20eb57750bd594aa3eef06005",
+    "sha256": "4d0dcf9d72d93b46886883ef9397c73f7c4ddfb20eb57750bd594aa3eef06005",
+    "bytes": 134364
+  },
+  "provenance_manifest": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/fa/fa576ff6d8b8a099c559f64e50cc2f34adcea9de4f37b9c08e0111b18b1682f9",
+    "sha256": "fa576ff6d8b8a099c559f64e50cc2f34adcea9de4f37b9c08e0111b18b1682f9",
+    "bytes": 35843
+  },
+  "provenance_files": 175,
+  "primary_verification": {
+    "run_snapshots_verified": 4,
+    "artifact_entries_verified": 430,
+    "scientific_verdict": null,
+    "archive_members_verified": 813,
+    "primary_bytes_verified": 1098311229,
+    "archive_sha256": "29fb0c81577c367307d4822ac96191c6d9ba8354d3b34d1dff5536c5afdd229b",
+    "compatibility": "dereferenced-glog-aliases-v1",
+    "verified_redundant_aliases": [
+      {
+        "omitted_alias": "s05-file-source-ab-native-elder-a1/classic-inline/native.events-log/EventsLog/NeuroModeler.INFO",
+        "retained_target": "s05-file-source-ab-native-elder-a1/classic-inline/native.events-log/EventsLog/NeuroModeler.Elder-1.user.log.INFO.20261117-175210.1855773",
+        "bytes": 251,
+        "sha256": "55f0ac607031e1834c188f7b082689e12c3c812ac6c34d98c926d5526d7f46e0",
+        "owner_pid": 1855773,
+        "original_symlink_target_attested": false
+      },
+      {
+        "omitted_alias": "s05-file-source-ab-native-elder-a2/branch-file/native.events-log/EventsLog/NeuroModeler.INFO",
+        "retained_target": "s05-file-source-ab-native-elder-a2/branch-file/native.events-log/EventsLog/NeuroModeler.Elder-1.user.log.INFO.20261117-182022.1916332",
+        "bytes": 251,
+        "sha256": "407cf28b261385eaada987860dfdada0683fdfe973017eab5774548444816815",
+        "owner_pid": 1916332,
+        "original_symlink_target_attested": false
+      },
+      {
+        "omitted_alias": "s05-file-source-ab-native-elder-a2/branch-inline/native.events-log/EventsLog/NeuroModeler.INFO",
+        "retained_target": "s05-file-source-ab-native-elder-a2/branch-inline/native.events-log/EventsLog/NeuroModeler.Elder-1.user.log.INFO.20261117-181711.1911300",
+        "bytes": 251,
+        "sha256": "73b319d931bc124e2e0d4c54fc723ee1936bad0ca6642e3b9981c4218c252a0e",
+        "owner_pid": 1911300,
+        "original_symlink_target_attested": false
+      },
+      {
+        "omitted_alias": "s05-file-source-ab-native-elder-a2/classic-file/native.events-log/EventsLog/NeuroModeler.INFO",
+        "retained_target": "s05-file-source-ab-native-elder-a2/classic-file/native.events-log/EventsLog/NeuroModeler.Elder-1.user.log.INFO.20261117-181237.1903679",
+        "bytes": 251,
+        "sha256": "9de67add599c9e65de3334f6406fbef93134f20466578f1a8422d0ab47c1537e",
+        "owner_pid": 1903679,
+        "original_symlink_target_attested": false
+      }
+    ]
+  },
+  "comparisons": {
+    "classic": {
+      "model_revision": "e1b6d00cb013f186efd0bb5a84e1244365d3ea10e925941fbdf2d7789c56725a",
+      "threshold": 0.02277503092148453,
+      "full_window_counts": {
+        "inline": {
+          "TP": 1,
+          "FP": 6,
+          "FN": 0,
+          "TN": 1,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.25,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.8571428571428571
+        },
+        "file": {
+          "TP": 1,
+          "FP": 6,
+          "FN": 0,
+          "TN": 1,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.25,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.8571428571428571
+        }
+      },
+      "trials": 8,
+      "samples_each": 4001,
+      "maximum_numeric_difference": 0.0,
+      "stimulus_ticks_equal": true,
+      "spike_ticks_equal": true
+    },
+    "branch": {
+      "model_revision": "b8c5e247416b248519d67823d314f8edba1a6222bf4cff89c92f60a38125debe",
+      "threshold": 0.03939337360819445,
+      "full_window_counts": {
+        "inline": {
+          "TP": 1,
+          "FP": 6,
+          "FN": 0,
+          "TN": 1,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.25,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.8571428571428571
+        },
+        "file": {
+          "TP": 1,
+          "FP": 6,
+          "FN": 0,
+          "TN": 1,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.25,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.8571428571428571
+        }
+      },
+      "trials": 8,
+      "samples_each": 4001,
+      "maximum_numeric_difference": 0.0,
+      "stimulus_ticks_equal": true,
+      "spike_ticks_equal": true
+    }
+  },
+  "analysis_tests": 2,
+  "archive_and_contract_tests": 17,
+  "native_observations": 32,
+  "native_root": "0efbf25b074ca4dcf8439dde8160fa9e70697376",
+  "native_pulse": "5dabcb1b0c627d1de52bf2dccec35f33cb755e92",
+  "runtime_fingerprint": "d480a889fa70dd9511ed86667884b453af89a7571ebc6385f27b7f48592e7d83",
+  "all_processes_closed": true,
+  "training_convergence_verified": false,
+  "working_algorithm_criterion_met": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}

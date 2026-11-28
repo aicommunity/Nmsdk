@@ -1,0 +1,239 @@
+{
+  "kind": "timelearner_current_followups_after_all_original_Trains_closed",
+  "schema_version": 1,
+  "observations": {
+    "M40": {
+      "observed_utc": "2026-11-23T21:36:20.914547+00:00",
+      "recognition": {
+        "supervisor-identity.json": {
+          "pid": 590476,
+          "start_ticks": "454142587",
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "uid": 1000
+        },
+        "supervisor_live": true,
+        "baseline_native": {
+          "execution": "unknown",
+          "all_processes_closed": true,
+          "binding": {
+            "kind": "timelearner_contained_binding",
+            "schema_version": 1,
+            "request_sha256": "ef31573a604c7df2a23310febfd05aab1e12ba61a486aebd174af913cd347c67",
+            "unit": "timelearner-2450fbb0-11b9-4f24-9306-709447470cb2.service",
+            "invocation_id": "6e78153d0f28415288b64ce33c21ae9b",
+            "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-2450fbb0-11b9-4f24-9306-709447470cb2.service",
+            "initial_main_pid": 607060,
+            "initial_start_ticks": "454156259",
+            "sha256": "83c57bc7f463a8ea926538306c6133621b16799111038dc023ed07c44521964f"
+          }
+        },
+        "baseline_phase": {
+          "execution": "unknown",
+          "all_processes_closed": true,
+          "binding": {
+            "kind": "timelearner_contained_binding",
+            "schema_version": 1,
+            "request_sha256": "4f6431f4f14c99ac27ba6d2b47f79e0d2f04a8e8b309e41052c6c3b0cdee1019",
+            "unit": "timelearner-f31a817a-2744-49e8-9210-d8e12c31f00e.service",
+            "invocation_id": "e01ec24a08464f1b9cf908e426a961c9",
+            "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-f31a817a-2744-49e8-9210-d8e12c31f00e.service",
+            "initial_main_pid": 603086,
+            "initial_start_ticks": "454154369",
+            "sha256": "ed5db06339184f25a71ccfc9031e4dbaf4559d2c0a2cf8458ea8fd71d8ecddca"
+          }
+        },
+        "baseline_audit": {
+          "execution": "running",
+          "all_processes_closed": false,
+          "binding": {
+            "kind": "timelearner_contained_binding",
+            "schema_version": 1,
+            "request_sha256": "d56051b41370ec5bef6ddf114830b9501dd17bb6e4a4de3256293d73207f1409",
+            "unit": "timelearner-627df737-2e04-4ae8-a086-85ad8eb04cd4.service",
+            "invocation_id": "be6090ed90db4c2da4f512170af54846",
+            "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-627df737-2e04-4ae8-a086-85ad8eb04cd4.service",
+            "initial_main_pid": 773364,
+            "initial_start_ticks": "454471385",
+            "sha256": "38a223dcc6227ff998e0615aa4f77f57f6a1661ba3fce3e2dbb89bf937111455"
+          }
+        },
+        "actual_baseline_observations": 8
+      }
+    },
+    "Elder": {
+      "kind": "timelearner_actual_closed_Elder_Classic_complete_primary_audit",
+      "schema_version": 1,
+      "observed_utc": "2026-11-23T21:41:01.843645+00:00",
+      "validation": {
+        "kind": "timelearner_python_validation_result",
+        "schema_version": 1,
+        "suite_id": "classic-n0-proposal-full-primary-audit-elder-ae4",
+        "package_fingerprint": "e4417dacab98451d47661f5c91b91437ee7e0fe782a9626f28a0deb31a18ab64",
+        "execution": "completed",
+        "assertion_status": "passed",
+        "expected_test_ids": [
+          "Scripts.StructTrain.TimeLearner.tests.test_closed_matched_count_training.ClosedMatchedCountTrainingTest.test_actual_complete_primary_and_single_package_decode"
+        ],
+        "executed_tests": 1,
+        "failures": [],
+        "errors": [],
+        "skipped": [],
+        "fixtures": {
+          "TIMELEARNER_MATCHED_COUNT_NATIVE": {
+            "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native",
+            "files": 1618,
+            "fingerprint": "2b044dcfb1bcdefc3fb99fd18c7a519911bf8af61b117dbae53eeb8c0501a735"
+          },
+          "TIMELEARNER_MATCHED_COUNT_ORIGINAL": {
+            "path": "/home/user/timelearner-refactor/requests/classic-n0-proposal-full-primary-audit-elder-ae4/original-fixture",
+            "files": 1,
+            "fingerprint": "539d7d27813e4fdcba54d5d14a6d8e787a101326f3f30b2933d52239081fc5be"
+          }
+        },
+        "scientific_verdict": null
+      },
+      "source_audit": {
+        "file": {
+          "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-full-primary-audit-elder-ae4/worker/tmp/matched-count-training-audit.json",
+          "sha256": "9c2d73aa0adef236efb13bacf29b7c77050c9d1c574061928d531ea558c7bf15",
+          "size": 98076
+        },
+        "kind": "timelearner_closed_matched_count_training_audit",
+        "keys": [
+          "kind",
+          "schema_version",
+          "native",
+          "consumed_job_sha256",
+          "original_resistance_normalization_job",
+          "original_physics_target_tolerances_and_budgets_preserved",
+          "consumed_job_file",
+          "execution_file",
+          "original_pending_terminal",
+          "source_package",
+          "process_record",
+          "source_package_full_decodes",
+          "full_primary_audit",
+          "next_operation",
+          "original_outcome_unchanged",
+          "native_execution_attested_by_portable_reader",
+          "classification_performed",
+          "scientific_verdict"
+        ],
+        "full_primary": {
+          "training_outcome": "budget_exhausted",
+          "completed_boundary": false
+        },
+        "training_audit_keys": [
+          "auditor_version",
+          "package_schema_version",
+          "package_digest_verified",
+          "model_revision",
+          "model_epoch",
+          "transcript_model_epoch",
+          "training_outcome",
+          "certificate_consistent",
+          "exact",
+          "terminal_events",
+          "source_audit",
+          "capacitance_state",
+          "native_import_verified",
+          "native_execution_verified",
+          "live_authority_restored",
+          "evaluation_verdict"
+        ]
+      },
+      "native_source_package": {
+        "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/train_stopped_state.json",
+        "sha256": "e33315ed8a691fe1c8e395278f729d47c2ce21162abbfe1bb86e7f5bd302cc31",
+        "size": 870516115
+      },
+      "selected_model_revision": "86fd93bacae6608714149002a324874111cd6e861466c107d91c289c32d81d58",
+      "history_model_revision": "f4ef7e061dcc38b54918bcfff325a4a28350a90fc2868379748b04fd274ae659",
+      "training_outcome": "budget_exhausted",
+      "completed_boundary": false,
+      "source_package_full_decodes": 1,
+      "recognition": {
+        "baseline": {
+          "execution": "running",
+          "all_processes_closed": false,
+          "binding": {
+            "kind": "timelearner_contained_binding",
+            "schema_version": 1,
+            "request_sha256": "2bb5b81f66235b6838bd5bce8fd375b100f302c9a219cfc3794fb95e21ad6d95",
+            "unit": "timelearner-1d6d8b42-48ac-4eb5-963a-b159077d44f7.service",
+            "invocation_id": "00ad1b27450842f8ba8305c2231df521",
+            "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-1d6d8b42-48ac-4eb5-963a-b159077d44f7.service",
+            "initial_main_pid": 3455914,
+            "initial_start_ticks": "503940890",
+            "sha256": "7c6d2aec6a5c8d44db599ec08cf2d14d506bfbde565be08037ae93d5375c4a69"
+          },
+          "actual_observations": 0
+        }
+      },
+      "full_primary_external_publication_complete": false,
+      "classification_performed": false,
+      "scientific_verdict": null
+    },
+    "Windows": {
+      "kind": "timelearner_actual_Windows_doubled_state_evaluation_memory_failure",
+      "schema_version": 1,
+      "observed_utc": "2026-11-23T21:34:32.432339+00:00",
+      "task": {
+        "last_result": 1,
+        "instances": 0,
+        "state": 3
+      },
+      "all_four_owned_handles_absent": {
+        "jobs/windows-two-sweep-recognition-at29/baseline-prepare/process/owned-process.json": false,
+        "jobs/windows-two-sweep-recognition-at29-baseline/cli-process/owned-process.json": false,
+        "jobs/windows-two-sweep-recognition-at29-baseline/process/owned-process.json": false,
+        "controls/windows-two-sweep-recognition-at29/queue-owner.json": false
+      },
+      "native_result": {
+        "kind": "timelearner_windows_process_result",
+        "schema_version": 1,
+        "execution": "process_error",
+        "validity": "valid",
+        "reason": "nonzero_exit",
+        "returncode": 2,
+        "scientific_verdict": null,
+        "thread_limit_enforced": false,
+        "memory_limit_semantics": "job_committed_virtual_memory",
+        "wall_budget_scope": "whole_attempt_including_preparation",
+        "descendants_at_main_exit": [],
+        "all_processes_closed": true,
+        "cooperative_capture": "completed",
+        "runtime_provenance": "loaded_files_captured",
+        "observed_module_files": 47,
+        "wall_seconds": 1215.3958604999352,
+        "child_resumed": true,
+        "job_name": "Local\\TimeLearner-d5fb2b46-3002-4d60-9113-220825de89a7"
+      },
+      "native_stderr": "TimeLearner diagnostic evaluation job: bad allocation\n",
+      "supervisor_error": {
+        "reason": "windows_recognition_native_incomplete",
+        "traceback": "Traceback (most recent call last):\n  File \"C:\\Projects\\TimeLearnerWorker\\source-two-sweep-recognition-worker-win-aq6\\Scripts\\StructTrain\\TimeLearner\\windows_stopped_recognition_study.py\", line 269, in supervise\n    if phase.endswith('native'):native_controller(plan,phase,directory)\n                                ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Projects\\TimeLearnerWorker\\source-two-sweep-recognition-worker-win-aq6\\Scripts\\StructTrain\\TimeLearner\\windows_stopped_recognition_study.py\", line 218, in native_controller\n    require(p.returncode==0 and result['execution']=='completed' and result['all_processes_closed'] and\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        result['runtime_provenance']=='loaded_files_captured' and\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        load(output/'terminal.json')['native_process_completed'], 'windows_recognition_native_incomplete')\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Projects\\TimeLearnerWorker\\source-two-sweep-recognition-worker-win-aq6\\Scripts\\StructTrain\\TimeLearner\\native_evidence.py\", line 28, in require\n    raise EvidenceError(reason)\nScripts.StructTrain.TimeLearner.native_evidence.EvidenceError: windows_recognition_native_incomplete\n",
+        "original_Train_not_restarted": true,
+        "scientific_verdict": null
+      },
+      "memory_observation": {
+        "TotalVisibleMemoryKiB": 31355344,
+        "FreePhysicalMemoryKiB": 20445008,
+        "TotalVirtualMemoryKiB": 36073936,
+        "FreeVirtualMemoryKiB": 23659216
+      },
+      "declared_memory_bytes": 17179869184,
+      "observations_completed": 0,
+      "source_stopped_state_raw_bytes": 2030868597,
+      "source_stopped_state_raw_sha256": "87a69986520a1c8c9be0af82f512909c4d339c683d306317fa64a292686dd989",
+      "original_Train_not_restarted": true,
+      "automatic_retry_not_dispatched": true,
+      "memory_failure_not_a_classification_result": true,
+      "peak_committed_memory_not_measured": true,
+      "root_cause_inside_import_not_yet_localized": true,
+      "scientific_verdict": null
+    }
+  },
+  "no_original_Train_restarted": true,
+  "scientific_verdict": null
+}

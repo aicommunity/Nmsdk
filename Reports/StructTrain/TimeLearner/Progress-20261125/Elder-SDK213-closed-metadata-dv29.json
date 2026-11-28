@@ -1,0 +1,76 @@
+{
+  "catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/checks/2026-11-25/Elder-SDK213-closed-metadata-dv29.json",
+    "sha256": "c39aeee8f1477b3aee73524a00057d566cf35c23aec47ff4f9c95d2660521bb9",
+    "size": 2532
+  },
+  "result": {
+    "kind": "timelearner_Elder_SDK213_closed_test_metadata_restored",
+    "schema_version": 1,
+    "source_root": "d2c7487a88a5c1c372f825dc708a543c03234fcb",
+    "source_pulse": "e36996cd53a545782b54c76d610162c602567399",
+    "gates": {
+      "traversal-native-DTO3": {
+        "expected": 3,
+        "observed": 3,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "a9e5f50ccec493d42b2f2ea6305b86956499d7bb936c0a188bf2bf7f5cf82b00"
+      },
+      "traversal-default-decision160": {
+        "expected": 160,
+        "observed": 160,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "370f9a7962b78047b0fa41e38c90052b9b4bee1c8ff1d5607afbd9e07a46eb27"
+      },
+      "traversal-native-model50": {
+        "expected": 50,
+        "observed": 50,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "c38f890a59cf32a8fec63a72f5508329916edd2d2f00f12b05a8eccb85db0bcf"
+      }
+    },
+    "passed_cpp_cases": 213,
+    "failed_cpp_cases": 0,
+    "metadata_files": 37,
+    "metadata_expanded_bytes": 348493,
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/ed/ed03b9bf90a051e1598016cdf7b22f916dbfda6edf28bcc6a66c63775291ba65",
+        "sha256": "ed03b9bf90a051e1598016cdf7b22f916dbfda6edf28bcc6a66c63775291ba65",
+        "bytes": 8121
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/47/47eb8c2997e3450f9be111aa017dacbefe35a761317f9418d54b36245de9b423",
+        "sha256": "47eb8c2997e3450f9be111aa017dacbefe35a761317f9418d54b36245de9b423",
+        "bytes": 30140
+      }
+    },
+    "restoration": {
+      "kind": "timelearner_native_bundle_restoration",
+      "schema_version": 1,
+      "archive_sha256": "47eb8c2997e3450f9be111aa017dacbefe35a761317f9418d54b36245de9b423",
+      "archive_members_verified": 37,
+      "retained_regular_files": 37,
+      "compatibility": null,
+      "omitted_redundant_aliases": [],
+      "source_archive_modified": false,
+      "native_execution_attested": false,
+      "scientific_verdict": null
+    },
+    "all_original_kernel_groups_closed": true,
+    "executable_archive_pending_until_current_runtime_retirement": true,
+    "full_SDK_binary_archive_claimed": false,
+    "original_checks_not_repeated": true,
+    "whole_plan_complete": false,
+    "scientific_verdict": null
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "kind": "timelearner_frozen_duration_holdout_protocol",
+  "schema_version": 1,
+  "protocol_id": "frozen_M4_matched_duration_negative_holdout_v1",
+  "sampler": "sha256_counter_pair_rejection_v1",
+  "sampling_seed": 20261123,
+  "draw_limit": 10000,
+  "draws_used": 9,
+  "frequency_hz": 2000,
+  "pulse_count": 4,
+  "target_pattern_hash": "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451",
+  "onset_ticks": 20,
+  "total_interval_ticks": 960,
+  "interval_tick_bounds": [
+    60,
+    600
+  ],
+  "excluded_pattern_hashes": [
+    "0204ea664cfd81d4b704507ed10d716d4beaeda45c1fde69d47cb6fc16aa78c8",
+    "0a199ee324968c048809f3c88415deb856ab9fe19f27970e173da7b4b7c2101d",
+    "0d4dc5c79f119c8eabb3d7d57cb97ecdc0af7b36ce7ca3bd8d3a14d149415f7c",
+    "2290c6361fd896c6c8a678cedd0a17fb2ea615ea4dbcc5bf5a03a7f69617fd8b",
+    "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451",
+    "3141dedb31d9116a5795d86827a641391cdf8d10a92d96b01a70578d81364ca1",
+    "36041ec22b63d8d8bb408206a2271702dc7d9240d9052da27d23c78ea55f959d",
+    "3f39c2e3dcedaf6aa0c1d8d9204b7e6db9dd6a12c85cf8e314fd4f323d724df7",
+    "4047791f09257b779ecdc2a373bcf9b1c84c323f5af6b1a9ec5df55479601243",
+    "4811b0b9423d72f162f0aaa92b6fc712a2e505a6f5c98ebb93d64650db446e14",
+    "4ec3a461f142a196892a952ddf2d7145f812fc82ca8bfd04e8d9b639c91190f3",
+    "516451ffca4090f04eb4b1818132ec28c7c9f3b81b7ad016c5cedd0467ea4d7a",
+    "55aa551db11e8865220e7882fa53861694ad6a8174986697d9273f6fb0d66791",
+    "55d26999e0e39704e925a7eb6fb22734aad6e1d9aba1cc6a623e86e3f3c614e6",
+    "62eeec5935be01ad24869c7d65d37a0c0532b556e1ab39f887d29ccfd0d54b89",
+    "65137a4f01ca29e6d950b73405dadb0cbfe1e0f502f0b9e5a6f925bd1cc05308",
+    "6f76812a27c0b273529753e181fa2cc7a0b8d4f0b3c42fba2e436dbb2d0b9934",
+    "76414cf0919216a739721487b05060f27aa3dcf0e546d9f093bc0ae14ddbe207",
+    "8f1fbbb002017f6638135f01daa643dbb28c8c6739d74e923b8f907d85e8c947",
+    "9c7cb4b0313fb5d1d3d87e903c3d4a500f2226bf6962d2f55b895e875e7c7a85",
+    "a2554fb1c3181a878c725624967ebec0ba0b55461e94dc96c6b81da63a59b91e",
+    "a9c1310975c490708e44be19a7efe99502884491009f8efd1672789731f90e28",
+    "acfb8d39e464920c40346f5254cdb830281da8619ba50e9985d6fdd3f12d6f2a",
+    "ba3fc9d64f2d538a2776144b41ce689f933f881a706331c40e01e38fab13ffc9",
+    "ca1f860bcffe76800ab775898ec4f4c7360bca0d3ad9c39f07cf263414b22141",
+    "ce915da00aa267d665ddd1c360b4803d115b13ec3eac683b0f8ba90a52a57413",
+    "d456b15f332cebb84c398e1af0bb98fb7b49bbca91abb65abed335446fc6503f",
+    "deafc6fb239d73f36e3edf8a3baf1afdb1ade9efc7e660a0eb6a9854369a5cd3",
+    "e31faa93d73fda6547a1357ab171ccfce1d3a9fa063aafe94adcadea1297027b",
+    "e5a7a5e3e10a68ae9fbd96838293e612bda118365645f793ad8044aa118b9fb5",
+    "ebb4608e7c950d5d92db2773abad2c67f9d2d949e3e18fadd97f8928865262db",
+    "ecf332d3d5da0cf09a1a7a01f4d00ba5a8476481cc346bd7222e8084d67ebf8c",
+    "f19b971714d4e1d72119290f0e5f3c66d509d6965201397e31472c7f54155283",
+    "f64c8c5a08317b49fa7d12505695ee4fdea68f05d484de9466da4cc6a00a7186"
+  ],
+  "foil_interval_ticks": [
+    [
+      447,
+      311,
+      202
+    ],
+    [
+      347,
+      255,
+      358
+    ],
+    [
+      461,
+      379,
+      120
+    ],
+    [
+      137,
+      413,
+      410
+    ],
+    [
+      562,
+      127,
+      271
+    ],
+    [
+      385,
+      176,
+      399
+    ],
+    [
+      454,
+      328,
+      178
+    ]
+  ],
+  "target_position": 5,
+  "sha256": "510c96b0d61f5e42e8f6cc599c706fe994cebf7cd3d0eaa0f4b26e702672ef0e"
+}

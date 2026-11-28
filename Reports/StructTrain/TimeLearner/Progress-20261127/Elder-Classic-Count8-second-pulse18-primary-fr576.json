@@ -1,0 +1,348 @@
+{
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/Elder-Classic-Count8-second-pulse18-primary-fr576.json",
+    "size": 9011,
+    "sha256": "6fb06ae4b12f2d94df3f27cddb3d64884489b6771ec54dbffa46e06385172955"
+  },
+  "catalog": {
+    "kind": "actual_Classic_Count8_second_pulse18_complete_primary",
+    "schema_version": 1,
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/11/11897afcb87863c91efa71e024415fe77df0133fb24c6fa303426720511d4f24",
+        "sha256": "11897afcb87863c91efa71e024415fe77df0133fb24c6fa303426720511d4f24",
+        "bytes": 33372
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/b2/b2a4b6e2b6bede114f6aff1f81197c79e521333fc66f158f25cecebef61063b8",
+        "sha256": "b2a4b6e2b6bede114f6aff1f81197c79e521333fc66f158f25cecebef61063b8",
+        "bytes": 28005904
+      }
+    },
+    "members": 185,
+    "expanded_bytes": 809250993,
+    "observations": 18,
+    "rows": [
+      {
+        "phase": "control",
+        "observations": 8,
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        }
+      },
+      {
+        "phase": "second-pulse",
+        "observations": 10,
+        "counts": {
+          "TP": 1,
+          "FP": 6,
+          "FN": 0,
+          "TN": 3,
+          "targets": 1,
+          "foils": 9,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.4,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.6666666666666666
+        }
+      }
+    ],
+    "timing": [
+      {
+        "phase": "control",
+        "index": 0,
+        "label": "target",
+        "sample_id": "phasea-row-0",
+        "relative_stimuli": [
+          0,
+          0.08,
+          0.24,
+          0.48
+        ],
+        "relative_spikes": [
+          0.4835
+        ],
+        "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+      },
+      {
+        "phase": "control",
+        "index": 1,
+        "label": "foil",
+        "sample_id": "phasea-row-1",
+        "relative_stimuli": [
+          0,
+          0.2400000000000002,
+          0.3999999999999999,
+          0.48
+        ],
+        "relative_spikes": [],
+        "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+      },
+      {
+        "phase": "control",
+        "index": 2,
+        "label": "foil",
+        "sample_id": "phasea-row-2",
+        "relative_stimuli": [
+          0,
+          0.16000000000000014,
+          0.2400000000000002,
+          0.47999999999999954
+        ],
+        "relative_spikes": [],
+        "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+      },
+      {
+        "phase": "control",
+        "index": 3,
+        "label": "foil",
+        "sample_id": "phasea-row-3",
+        "relative_stimuli": [
+          0,
+          0.16000000000000014,
+          0.3200000000000003,
+          0.4800000000000004
+        ],
+        "relative_spikes": [],
+        "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+      },
+      {
+        "phase": "control",
+        "index": 4,
+        "label": "foil",
+        "sample_id": "phasea-row-4",
+        "relative_stimuli": [
+          0,
+          0.019999999999999574,
+          0.2400000000000002,
+          0.4800000000000004
+        ],
+        "relative_spikes": [
+          0.4814999999999987
+        ],
+        "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+      },
+      {
+        "phase": "control",
+        "index": 5,
+        "label": "foil",
+        "sample_id": "phasea-row-5",
+        "relative_stimuli": [
+          0,
+          0.2400000000000002,
+          0.46000000000000085,
+          0.4800000000000004
+        ],
+        "relative_spikes": [],
+        "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+      },
+      {
+        "phase": "control",
+        "index": 6,
+        "label": "foil",
+        "sample_id": "phasea-row-6",
+        "relative_stimuli": [
+          0,
+          0.040000000000000924,
+          0.08000000000000007,
+          0.4800000000000004
+        ],
+        "relative_spikes": [],
+        "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+      },
+      {
+        "phase": "control",
+        "index": 7,
+        "label": "foil",
+        "sample_id": "phasea-row-7",
+        "relative_stimuli": [
+          0,
+          0.40000000000000036,
+          0.4399999999999995,
+          0.47999999999999865
+        ],
+        "relative_spikes": [],
+        "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+      },
+      {
+        "phase": "second-pulse",
+        "index": 0,
+        "label": "foil",
+        "sample_id": "second-pulse-10ms",
+        "relative_stimuli": [
+          0,
+          0.01,
+          0.24,
+          0.48
+        ],
+        "relative_spikes": [
+          0.4815
+        ],
+        "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+      },
+      {
+        "phase": "second-pulse",
+        "index": 1,
+        "label": "foil",
+        "sample_id": "second-pulse-20ms",
+        "relative_stimuli": [
+          0,
+          0.020000000000000018,
+          0.2400000000000002,
+          0.48
+        ],
+        "relative_spikes": [
+          0.48150000000000004
+        ],
+        "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+      },
+      {
+        "phase": "second-pulse",
+        "index": 2,
+        "label": "foil",
+        "sample_id": "second-pulse-40ms",
+        "relative_stimuli": [
+          0,
+          0.040000000000000036,
+          0.2400000000000002,
+          0.47999999999999954
+        ],
+        "relative_spikes": [
+          0.4820000000000002
+        ],
+        "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+      },
+      {
+        "phase": "second-pulse",
+        "index": 3,
+        "label": "foil",
+        "sample_id": "second-pulse-60ms",
+        "relative_stimuli": [
+          0,
+          0.0600000000000005,
+          0.2400000000000002,
+          0.4800000000000004
+        ],
+        "relative_spikes": [
+          0.48249999999999993
+        ],
+        "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+      },
+      {
+        "phase": "second-pulse",
+        "index": 4,
+        "label": "target",
+        "sample_id": "second-pulse-80ms",
+        "relative_stimuli": [
+          0,
+          0.08000000000000007,
+          0.2400000000000002,
+          0.4800000000000004
+        ],
+        "relative_spikes": [
+          0.4834999999999994
+        ],
+        "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+      },
+      {
+        "phase": "second-pulse",
+        "index": 5,
+        "label": "foil",
+        "sample_id": "second-pulse-100ms",
+        "relative_stimuli": [
+          0,
+          0.10000000000000142,
+          0.2400000000000002,
+          0.4800000000000004
+        ],
+        "relative_spikes": [],
+        "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+      },
+      {
+        "phase": "second-pulse",
+        "index": 6,
+        "label": "foil",
+        "sample_id": "second-pulse-120ms",
+        "relative_stimuli": [
+          0,
+          0.11999999999999922,
+          0.2400000000000002,
+          0.4800000000000004
+        ],
+        "relative_spikes": [],
+        "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+      },
+      {
+        "phase": "second-pulse",
+        "index": 7,
+        "label": "foil",
+        "sample_id": "second-pulse-160ms",
+        "relative_stimuli": [
+          0,
+          0.16000000000000014,
+          0.2400000000000002,
+          0.47999999999999865
+        ],
+        "relative_spikes": [],
+        "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+      },
+      {
+        "phase": "second-pulse",
+        "index": 8,
+        "label": "foil",
+        "sample_id": "second-pulse-200ms",
+        "relative_stimuli": [
+          0,
+          0.1999999999999993,
+          0.240000000000002,
+          0.4800000000000004
+        ],
+        "relative_spikes": [
+          0.4825000000000017
+        ],
+        "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+      },
+      {
+        "phase": "second-pulse",
+        "index": 9,
+        "label": "foil",
+        "sample_id": "second-pulse-220ms",
+        "relative_stimuli": [
+          0,
+          0.21999999999999886,
+          0.23999999999999844,
+          0.4799999999999969
+        ],
+        "relative_spikes": [
+          0.48149999999999693
+        ],
+        "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+      }
+    ],
+    "original_control_eight_all_waveforms_and_events_preserved_1e12": true,
+    "new_negative_patterns": 7,
+    "known_negative_controls": 2,
+    "positive_previously_seen": true,
+    "new_Train": false,
+    "new_calibration": false,
+    "all_figures_pending": true,
+    "independent_readback_pending": true,
+    "original_process_ownership_not_reattested_beyond_current_closed_group_readback": true,
+    "scientific_verdict": null
+  }
+}

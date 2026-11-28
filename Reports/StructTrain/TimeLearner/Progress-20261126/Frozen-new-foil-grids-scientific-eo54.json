@@ -1,0 +1,234 @@
+{
+  "kind": "timelearner_complete_new_foil_grid_scientific_results",
+  "schema_version": 1,
+  "metadata_source_root": "01f314577b4430964aa626474c50e5e8e2916d40",
+  "Classic_q3": {
+    "catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-25/Elder-q3-new-foils27-independent-eo40.json",
+      "size": 24642,
+      "sha256": "43e0a2ebcef6d3fc734f495f197eec0c13694063a4f7179478330b89322b8f53"
+    },
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/24/2487f9f144967ddcc02470b0e60a01aacb36879b52dceadbe475b5e4a5a3f40b",
+        "sha256": "2487f9f144967ddcc02470b0e60a01aacb36879b52dceadbe475b5e4a5a3f40b",
+        "bytes": 14479
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/ef/ef33a2f9378883c5f85f4d5bcde79cd1c5215b928f91ed09ad01152cb529a1e8",
+        "sha256": "ef33a2f9378883c5f85f4d5bcde79cd1c5215b928f91ed09ad01152cb529a1e8",
+        "bytes": 2373140
+      }
+    },
+    "restored_members": 92,
+    "counts": {
+      "TP": 1,
+      "FP": 2,
+      "FN": 0,
+      "TN": 24,
+      "targets": 1,
+      "foils": 26,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.9259259259259259,
+      "target_hit_rate": 1,
+      "foil_response_rate": 0.07692307692307693
+    },
+    "original_counts": {
+      "TP": 1,
+      "FP": 2,
+      "FN": 0,
+      "TN": 5,
+      "targets": 1,
+      "foils": 7,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.75,
+      "target_hit_rate": 1,
+      "foil_response_rate": 0.2857142857142857
+    },
+    "distinct_pattern_union_counts": {
+      "TP": 1,
+      "FP": 4,
+      "FN": 0,
+      "TN": 29
+    },
+    "distinct_pattern_union_size": 34,
+    "threshold": 0.023252703356543683,
+    "model_revision": "2783e83684eef31e0a258e271e0c2c3acf30a9a9ab175fc20632577b5b9028a6",
+    "control_comparisons": [
+      {
+        "sample_id": "phasea-row-0",
+        "response_preserved": true,
+        "source_samples": 4001,
+        "observed_samples": 4001,
+        "maximum_absolute_signal_difference": 0
+      }
+    ],
+    "target_times_after_last_ms": [
+      [
+        1.5000000000000568
+      ]
+    ],
+    "source_training_outcome": "budget_exhausted",
+    "source_completed_boundary": false,
+    "independent_positive_class": false
+  },
+  "Classic_cap8": {
+    "catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-25/Windows-cap8-new-foils27-independent-eo47.json",
+      "size": 39597,
+      "sha256": "2261f814b62ccbc964612f5db697eb2349f40afe5073507d86b7449d91ec6fa8"
+    },
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/3c/3c3f67d97c82acf45ff23c529a165f9f2f8e1b22351fcf81bdfea2f458633229",
+        "sha256": "3c3f67d97c82acf45ff23c529a165f9f2f8e1b22351fcf81bdfea2f458633229",
+        "bytes": 13659
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/7c/7c2d4473e9908f06ca85581fd761fad1e1c23a636a4afc9e0255d5597c376b98",
+        "sha256": "7c2d4473e9908f06ca85581fd761fad1e1c23a636a4afc9e0255d5597c376b98",
+        "bytes": 2332252
+      },
+      "source-result.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/6b/6b987123df46b607d1af550502b8f39d03030e7e3b6266d7b9a075efd5b657f6",
+        "sha256": "6b987123df46b607d1af550502b8f39d03030e7e3b6266d7b9a075efd5b657f6",
+        "bytes": 3824
+      }
+    },
+    "restored_members": 85,
+    "counts": {
+      "TP": 1,
+      "FP": 0,
+      "FN": 0,
+      "TN": 26,
+      "targets": 1,
+      "foils": 26,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 1,
+      "target_hit_rate": 1,
+      "foil_response_rate": 0
+    },
+    "original_counts": {
+      "TP": 1,
+      "FP": 1,
+      "FN": 0,
+      "TN": 6,
+      "targets": 1,
+      "foils": 7,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.875,
+      "target_hit_rate": 1,
+      "foil_response_rate": 0.14285714285714285
+    },
+    "distinct_pattern_union_counts": {
+      "TP": 1,
+      "FP": 1,
+      "FN": 0,
+      "TN": 32
+    },
+    "distinct_pattern_union_size": 34,
+    "threshold": 0.026339412714535534,
+    "model_revision": "1549d396c21dd14034263084f867066655292fa2de17590973c4be16779176dc",
+    "control_comparisons": [
+      {
+        "sample_id": "phasea-row-0",
+        "response_preserved": true,
+        "source_samples": 4001,
+        "observed_samples": 4001,
+        "maximum_absolute_signal_difference": 0
+      }
+    ],
+    "target_times_after_last_ms": [
+      [
+        3.0000000000001137
+      ]
+    ],
+    "source_training_outcome": "budget_exhausted",
+    "source_completed_boundary": false,
+    "independent_positive_class": false
+  },
+  "same_27_pattern_hashes_compared": true,
+  "q3_scientific_gallery": {
+    "catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-25/Elder-q3-new-foils27-scientific-figures-independent-eo47.json",
+      "sha256": "70adf2d25271283db3d170aeeff581586373eaf54faa21149ffb1df058df6183",
+      "size": 1772
+    },
+    "members": 144,
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/38/38bf81fe9001ee2c373f94ce1bb2e0199c229e8d706ec2b9b48a41e07822e8e0",
+        "sha256": "38bf81fe9001ee2c373f94ce1bb2e0199c229e8d706ec2b9b48a41e07822e8e0",
+        "bytes": 25406
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/c7/c7a0393147439c1688f5343c5fbfc118be5a684e5b233a33b14486417671ddda",
+        "sha256": "c7a0393147439c1688f5343c5fbfc118be5a684e5b233a33b14486417671ddda",
+        "bytes": 9152276
+      }
+    },
+    "reviewed_PNG": 8,
+    "remaining_PNG_review": 46,
+    "restored": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/Elder-q3-new-foils27-scientific-figures-eo47/restored"
+  },
+  "cap8_scientific_gallery": {
+    "catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-25/Windows-cap8-new-foils27-scientific-figures-independent-eo53.json",
+      "sha256": "1414e3241f800d3a98814e506c832d15b97a64a713477f6a6f1590bdc5c5fd5c",
+      "size": 1774
+    },
+    "members": 144,
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/e3/e3332cb83a9cc160637be4b0c5b7a7fb398e6eb42389ef08561fa9d0c794a30c",
+        "sha256": "e3332cb83a9cc160637be4b0c5b7a7fb398e6eb42389ef08561fa9d0c794a30c",
+        "bytes": 25622
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/a5/a5d09b9f18176692500ffeb8c4f2847321b5ca730355938c98a1d134e8bbaba1",
+        "sha256": "a5d09b9f18176692500ffeb8c4f2847321b5ca730355938c98a1d134e8bbaba1",
+        "bytes": 9197344
+      }
+    },
+    "reviewed_PNG": 8,
+    "remaining_PNG_review": 46,
+    "restored": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/Windows-cap8-new-foils27-scientific-figures-eo53/restored"
+  },
+  "full_PNG_count": 108,
+  "reviewed_PNG": 16,
+  "remaining_PNG_visual_review": 92,
+  "new_Train": false,
+  "threshold_selected": false,
+  "fully_accepted_stages": [
+    0
+  ],
+  "full_stage_acceptance": false,
+  "scientific_verdict": null
+}

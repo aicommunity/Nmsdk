@@ -1,0 +1,115 @@
+{
+  "kind": "timelearner_windows_DATA3_sdk43_closed_artifact_audit",
+  "schema_version": 1,
+  "source_commit": "891a75b39b2b020025aedc7e6158f89fd2f25ed2",
+  "source_closure": {
+    "Bin": {
+      "head": "2c285cb472134fc92394153c089603a830a03f70",
+      "recorded_gitlink": "2c285cb472134fc92394153c089603a830a03f70",
+      "status": ""
+    },
+    "Libraries/Nmsdk-MotionControlLib": {
+      "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "status": ""
+    },
+    "Libraries/Nmsdk-PulseLib": {
+      "head": "f2ea795b5a9c4166b1c6b5329bf61b0fff298b3f",
+      "recorded_gitlink": "f2ea795b5a9c4166b1c6b5329bf61b0fff298b3f",
+      "status": ""
+    },
+    "Libraries/Rdk-BasicLib": {
+      "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "status": ""
+    },
+    "Libraries/Rdk-CvBasicLib": {
+      "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "status": ""
+    },
+    "Libraries/Rdk-HardwareLib": {
+      "head": "de40b008e990105856726e01230dde19f42a90a9",
+      "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+      "status": ""
+    },
+    "Rdk": {
+      "head": "561986e9f336ee5914e2d119de90b005e06f3639",
+      "recorded_gitlink": "561986e9f336ee5914e2d119de90b005e06f3639",
+      "status": ""
+    },
+    "root": {
+      "head": "891a75b39b2b020025aedc7e6158f89fd2f25ed2",
+      "status": ""
+    }
+  },
+  "verified_source_files": 5180,
+  "dependency_files": 17287,
+  "runtime_files": 62,
+  "targets": {
+    "NeuroModelerConsole.exe": {
+      "path": "C:\\Projects\\TimeLearnerWorker\\runtime-physical-threshold-DATA3-sdk43-win-dg21\\NeuroModelerConsole.exe",
+      "sha256": "4718804b91b715c06732a0c9110f94314caffcb98595b62eab6ec16eaca4a517",
+      "size": 12556800
+    },
+    "Test_PulseLib_StorageComponents.exe": {
+      "path": "C:\\Projects\\TimeLearnerWorker\\runtime-physical-threshold-DATA3-sdk43-win-dg21\\Test_PulseLib_StorageComponents.exe",
+      "sha256": "7f43f487ae69525bcb8161a8f746377d5db314bdeb29bae15a9bc4367feafc2e",
+      "size": 27411968
+    }
+  },
+  "terminal": {
+    "audit_passed": true,
+    "compiled_tests_executed": false,
+    "original_build_outcome_unchanged": true,
+    "scientific_verdict": null,
+    "scientific_worker_admitted": false,
+    "wall_seconds": 86.28301099990495
+  },
+  "task": {
+    "last_result": 0,
+    "instances": 0,
+    "state": 3
+  },
+  "kernel_before": {
+    "original_main_absent": true,
+    "original_named_job_absent": true,
+    "pid_reused": false
+  },
+  "kernel_after": {
+    "original_main_absent": true,
+    "original_named_job_absent": true,
+    "pid_reused": false
+  },
+  "native43_dispatch": {
+    "dispatched": true,
+    "attempt": "windows-DATA3-sdk43-native-dh15",
+    "controls_commit": "e9fcfcdb8ceaccb7a5bf74e00ebdd2403ee4b7e4",
+    "specification_blob": "6be6a8756228e5e0de560c353106927cd0ef09de",
+    "dispatch": {
+      "scientific_verdict": null,
+      "tool_commit": "891a75b39b2b020025aedc7e6158f89fd2f25ed2",
+      "task": "TimeLearner-windows-DATA3-sdk43-native-dh15",
+      "specification_git_blob": "6be6a8756228e5e0de560c353106927cd0ef09de",
+      "instance": "{0A12C82B-DC61-467B-8752-2A5F98258D19}",
+      "kind": "windows_native_validation_dispatch",
+      "output": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-DATA3-sdk43-native-dh15",
+      "worker_sha256": "cf6ca9fbbccda7e688ed94291b509656fe53339351ed7c92521eb426228d336c"
+    },
+    "source_commit": "891a75b39b2b020025aedc7e6158f89fd2f25ed2",
+    "PulseLib": "f2ea795b5a9c4166b1c6b5329bf61b0fff298b3f",
+    "expected_cpp_tests": 43,
+    "same_selection_as_M40": true,
+    "kernel": {
+      "original_named_job_absent": true,
+      "original_main_absent": true,
+      "pid_reused": false
+    },
+    "original_build_accepted": false,
+    "scientific_worker_admitted": false,
+    "scientific_verdict": null
+  },
+  "native43_results_verified": false,
+  "scientific_worker_admitted": false,
+  "scientific_verdict": null
+}

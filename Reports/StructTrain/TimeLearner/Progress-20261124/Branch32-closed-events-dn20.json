@@ -1,0 +1,78 @@
+{
+  "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-24/Branch32-closed-events-dn19.json",
+  "catalog_record": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-24/Branch32-closed-events-dn19.json",
+    "sha256": "e2157a7604d0e5e6c094904b7ee02966f90b9dfa47c92662a13714a913975f5d",
+    "size": 2484
+  },
+  "kind": "timelearner_Branch32_closed_metadata_catalog",
+  "schema_version": 1,
+  "summary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/d2/d2eae497c0e7eefd3439b29c1e46f3e1310c33bf46ec6a8df6f5cef9dbf3c866",
+    "sha256": "d2eae497c0e7eefd3439b29c1e46f3e1310c33bf46ec6a8df6f5cef9dbf3c866",
+    "bytes": 64150
+  },
+  "cases_completed": 32,
+  "observations_completed": 256,
+  "FP_sample_ids": [
+    "phasea-row-4"
+  ],
+  "target_cases_with_before_last_output": [
+    "r1-short-preserve",
+    "r2-short-preserve",
+    "r3-short-preserve",
+    "r4-short-preserve",
+    "r5-short-preserve",
+    "r6-short-preserve",
+    "r7-short-preserve"
+  ],
+  "source_control_objects": {
+    "terminal.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/87/87714c52891678b43d0cf33ff6d710764fa183bf77d64ca489c695671a6712d3",
+      "sha256": "87714c52891678b43d0cf33ff6d710764fa183bf77d64ca489c695671a6712d3",
+      "bytes": 590
+    },
+    "matrix-declaration.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/d3/d32209161367f19952a8a91112744d6832a27e98dfa35683fe200d2e93e690b5",
+      "sha256": "d32209161367f19952a8a91112744d6832a27e98dfa35683fe200d2e93e690b5",
+      "bytes": 661733
+    },
+    "declared-controls.bundle": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/15/1565e7dbcee86bc772f4f3d994d0c51bcfae7f93d9dd6acbc8f1bddfd7c74eb2",
+      "sha256": "1565e7dbcee86bc772f4f3d994d0c51bcfae7f93d9dd6acbc8f1bddfd7c74eb2",
+      "bytes": 28181
+    },
+    "pilot-source-replay-control.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/68/680524d8f9aa535db164c703b6ef7ff9acc11e520abba0d71f7aac7c3d4a0bce",
+      "sha256": "680524d8f9aa535db164c703b6ef7ff9acc11e520abba0d71f7aac7c3d4a0bce",
+      "bytes": 10279
+    }
+  },
+  "full_primary_archive": false,
+  "complete_visual_review": false,
+  "scientific_verdict": null,
+  "actual_counts_per_condition": {
+    "TP": 1,
+    "FP": 1,
+    "FN": 0,
+    "TN": 6
+  },
+  "main_target_delay_from_last_input_seconds": 0.0035,
+  "additional_target_delay_in_nonfirst_short_preserve_seconds": -0.238,
+  "time_summary_scope": "derived from stored actual event lists; original classification unchanged"
+}

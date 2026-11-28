@@ -96,9 +96,11 @@ const QCommandLineOption runtimeCaptureOption(QStringList() << "timelearner-capt
 const QCommandLineOption timeLearnerPreflightOption(QStringList() << "timelearner-preflight", "Build and validate a cold native training job without calculating or starting Train.", "json-path");
 const QCommandLineOption timeLearnerProbeOption(QStringList() << "timelearner-probe", "Measure one native input on an explicit cold model without training or certification.", "json-path");
 const QCommandLineOption timeLearnerTrainOption(QStringList() << "timelearner-train", "Execute a declared cold native training job.", "json-path");
-const QCommandLineOption timeLearnerExportOption(QStringList() << "timelearner-export", "Export a completed solo model to recognition state.", "json-path");
-const QCommandLineOption timeLearnerEvaluateOption(QStringList() << "timelearner-evaluate", "Execute a declared frozen evaluation job.", "json-path");
-const QCommandLineOption timeLearnerDiagnosticEvaluateOption(QStringList() << "timelearner-diagnostic-evaluate", "Measure an explicitly diagnostic frozen model from stopped Train; never a completed-training result.", "json-path");
+const QCommandLineOption timeLearnerExportOption(QStringList() << "timelearner-export", "Export a completed solo model to recognition state. Accepts checked-file-source-v1 envelopes.", "json-path");
+const QCommandLineOption timeLearnerPhysicalModelExportOption(QStringList() << "timelearner-physical-model-export", "Export complete physical DATA, explicitly convert solo DATA or create a physical-data-threshold-v1 candidate; no training/calibration proof or checkpoint authority. Accepts checked-file-source-v1 envelopes.", "json-path");
+const QCommandLineOption timeLearnerPhysicalModelEvaluateOption(QStringList() << "timelearner-physical-model-evaluate", "Evaluate complete frozen physical recognition DATA; no training/calibration proof. Accepts checked-file-source-v1 envelopes.", "json-path");
+const QCommandLineOption timeLearnerEvaluateOption(QStringList() << "timelearner-evaluate", "Execute a declared frozen evaluation job. Accepts checked-file-source-v1 envelopes.", "json-path");
+const QCommandLineOption timeLearnerDiagnosticEvaluateOption(QStringList() << "timelearner-diagnostic-evaluate", "Measure an explicitly diagnostic frozen model from stopped Train; never a completed-training result. Accepts checked-file-source-v1 envelopes.", "json-path");
 parser.addOption(configOption);
 parser.addOption(startCalcOption);
 parser.addOption(calcTimeOption);
@@ -121,6 +123,8 @@ parser.addOption(timeLearnerProbeOption);
 parser.addOption(timeLearnerPreflightOption);
 parser.addOption(runtimeCaptureOption);
 parser.addOption(timeLearnerExportOption);
+parser.addOption(timeLearnerPhysicalModelExportOption);
+parser.addOption(timeLearnerPhysicalModelEvaluateOption);
 parser.addOption(timeLearnerEvaluateOption);
 parser.addOption(timeLearnerDiagnosticEvaluateOption);
  parser.process(a);
@@ -145,7 +149,7 @@ parser.addOption(timeLearnerDiagnosticEvaluateOption);
          option == "--cldesc-lexicon" || option == "-l" ||
          option == "--cldesc-library" || option == "-C" ||
          option == "--cldesc-class" || option == "-K" ||
-         option == "--check-config" || option == "--validate-config" || option == "--app-ini" || option == "--inspect-model" || option == "--model-identity" || option == "--timelearner-calibrate" || option == "--timelearner-posttune" || option == "--timelearner-output" || option == "--timelearner-capture-directory" || option == "--timelearner-preflight" || option == "--timelearner-train" || option == "--timelearner-export" || option == "--timelearner-evaluate" || option == "--timelearner-probe" || option == "--timelearner-diagnostic-evaluate";
+         option == "--check-config" || option == "--validate-config" || option == "--app-ini" || option == "--inspect-model" || option == "--model-identity" || option == "--timelearner-calibrate" || option == "--timelearner-posttune" || option == "--timelearner-output" || option == "--timelearner-capture-directory" || option == "--timelearner-preflight" || option == "--timelearner-train" || option == "--timelearner-export" || option == "--timelearner-physical-model-export" || option == "--timelearner-physical-model-evaluate" || option == "--timelearner-evaluate" || option == "--timelearner-probe" || option == "--timelearner-diagnostic-evaluate";
   };
 
   for(int i=1; i<original.size(); ++i)
@@ -161,7 +165,7 @@ parser.addOption(timeLearnerDiagnosticEvaluateOption);
       option == "--cldesc-lexicon" || option == "-l" ||
       option == "--cldesc-library" || option == "-C" ||
       option == "--cldesc-class" || option == "-K" ||
-      option == "--check-config" || option == "--validate-config" || option == "--app-ini" || option == "--inspect-model" || option == "--model-identity" || option == "--timelearner-calibrate" || option == "--timelearner-posttune" || option == "--timelearner-output" || option == "--timelearner-capture-directory" || option == "--timelearner-preflight" || option == "--timelearner-train" || option == "--timelearner-export" || option == "--timelearner-evaluate" || option == "--timelearner-probe" || option == "--timelearner-diagnostic-evaluate")
+      option == "--check-config" || option == "--validate-config" || option == "--app-ini" || option == "--inspect-model" || option == "--model-identity" || option == "--timelearner-calibrate" || option == "--timelearner-posttune" || option == "--timelearner-output" || option == "--timelearner-capture-directory" || option == "--timelearner-preflight" || option == "--timelearner-train" || option == "--timelearner-export" || option == "--timelearner-physical-model-export" || option == "--timelearner-physical-model-evaluate" || option == "--timelearner-evaluate" || option == "--timelearner-probe" || option == "--timelearner-diagnostic-evaluate")
    {
     if(shouldSkipValue(option) && !token.contains('=') && i + 1 < original.size())
      ++i;
@@ -187,9 +191,9 @@ const QString cliLexiconPath = parser.value(lexiconOption).trimmed();
 const bool wantIdentity = parser.isSet(identityModelOption);
 const QString inspectionPath = parser.value(wantIdentity ? identityModelOption : inspectModelOption).trimmed();
 const int nativeOperations = int(parser.isSet(timeLearnerProbeOption))+int(parser.isSet(timeLearnerPreflightOption))+int(parser.isSet(timeLearnerJobOption))+int(parser.isSet(timeLearnerTrainOption))+
-    int(parser.isSet(timeLearnerExportOption))+int(parser.isSet(timeLearnerDiagnosticEvaluateOption))+int(parser.isSet(timeLearnerEvaluateOption))+int(parser.isSet(timeLearnerPostTuneOption));
+    int(parser.isSet(timeLearnerExportOption))+int(parser.isSet(timeLearnerPhysicalModelExportOption))+int(parser.isSet(timeLearnerPhysicalModelEvaluateOption))+int(parser.isSet(timeLearnerDiagnosticEvaluateOption))+int(parser.isSet(timeLearnerEvaluateOption))+int(parser.isSet(timeLearnerPostTuneOption));
 const bool nativeJob = nativeOperations>0 || parser.isSet(timeLearnerOutputOption) || parser.isSet(runtimeCaptureOption);
-const auto& nativeOption = parser.isSet(timeLearnerProbeOption)?timeLearnerProbeOption:parser.isSet(timeLearnerPreflightOption)?timeLearnerPreflightOption:parser.isSet(timeLearnerTrainOption)?timeLearnerTrainOption:parser.isSet(timeLearnerExportOption)?
+const auto& nativeOption = parser.isSet(timeLearnerProbeOption)?timeLearnerProbeOption:parser.isSet(timeLearnerPreflightOption)?timeLearnerPreflightOption:parser.isSet(timeLearnerTrainOption)?timeLearnerTrainOption:parser.isSet(timeLearnerPhysicalModelEvaluateOption)?timeLearnerPhysicalModelEvaluateOption:parser.isSet(timeLearnerPhysicalModelExportOption)?timeLearnerPhysicalModelExportOption:parser.isSet(timeLearnerExportOption)?
     timeLearnerExportOption:parser.isSet(timeLearnerEvaluateOption)?timeLearnerEvaluateOption:parser.isSet(timeLearnerDiagnosticEvaluateOption)?timeLearnerDiagnosticEvaluateOption:
     parser.isSet(timeLearnerPostTuneOption)?timeLearnerPostTuneOption:timeLearnerJobOption;
 if(nativeJob && (nativeOperations!=1 || !parser.isSet(timeLearnerOutputOption) ||
@@ -298,6 +302,8 @@ const QStringList cliClassFilters = parser.values(clDescClassOption);
   else if(parser.isSet(timeLearnerPreflightOption))result=RunTimeLearnerPreflightJob(input,output);
   else if(parser.isSet(timeLearnerTrainOption))result=RunTimeLearnerTrainingJob(input,output);
   else if(parser.isSet(timeLearnerExportOption))result=RunTimeLearnerExportJob(input,output);
+  else if(parser.isSet(timeLearnerPhysicalModelExportOption))result=RunTimeLearnerPhysicalModelExportJob(input,output);
+  else if(parser.isSet(timeLearnerPhysicalModelEvaluateOption))result=RunTimeLearnerPhysicalModelEvaluationJob(input,output);
   else if(parser.isSet(timeLearnerDiagnosticEvaluateOption))result=RunTimeLearnerDiagnosticEvaluationJob(input,output);
   else if(parser.isSet(timeLearnerEvaluateOption))result=RunTimeLearnerEvaluationJob(input,output);
   else if(parser.isSet(timeLearnerPostTuneOption))result=RunTimeLearnerPostTuneJob(input,output);

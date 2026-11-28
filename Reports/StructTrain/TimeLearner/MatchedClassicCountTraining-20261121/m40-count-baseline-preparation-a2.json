@@ -1,0 +1,173 @@
+{
+  "kind": "timelearner_m40_count_baseline_preparation_complete",
+  "schema_version": 1,
+  "source_commit": "324e320cec81462bded544daacc03d08e3605042",
+  "controls_commit": "18410f49bb1f5012aa221cdbd5d862d4b09d5e27",
+  "proposal": {
+    "kind": "timelearner_stopped_baseline_preparation_result",
+    "schema_version": 1,
+    "source_model_revision": "b803678f5e47c7a393658d8847aba0a7b7f1237ece576043a6feb044473214d8",
+    "source_package_sha256": "c8441210415478595f72cd258d29909767fac37c32a2ca11b63184df172738f1",
+    "source_proof": {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-count-full-primary-audit-m40-a3/worker/tmp/matched-count-training-audit.json",
+      "sha256": "5e8b1874eaee84aaa474078f1cd62906457798297851b7339d3b0f6384c8a578",
+      "size": 112193
+    },
+    "source_audit": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/s11-classic-count-recognition-m40-a2/baseline/source-audit.json",
+      "sha256": "f14e0d7529d2577d6689f5afa562e9805720dc699a86e1c06072ed4807d90bad"
+    },
+    "resolved_job_sha256": "67914d76e2562e9402b5efbf16b84f05e9f260982d17a3a8a42a651bb44d08d3",
+    "staged_files": 1993,
+    "complete_source_namespace_preserved": true,
+    "original_source_package": {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-classic-count-training-m40-a1/train/native/train_stopped_state.json",
+      "sha256": "11ca2ca242a93f107e7252c3dfad90b330932f2c95231a86c5131e14b0f9cc2f",
+      "size": 1173768677
+    },
+    "source_transport": {
+      "kind": "timelearner_lossless_json_transport",
+      "schema_version": 1,
+      "source": {
+        "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-classic-count-training-m40-a1/train/native/train_stopped_state.json",
+        "bytes": 1173768677,
+        "sha256": "11ca2ca242a93f107e7252c3dfad90b330932f2c95231a86c5131e14b0f9cc2f"
+      },
+      "transport": {
+        "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-classic-count-recognition-m40-a2-baseline-inputs/source/train_stopped_state.json",
+        "bytes": 518819231,
+        "sha256": "26a0fd6f4c84c10b04873d211caff656c7762250d7dd388daf28a44a50798862"
+      },
+      "transformation": "remove_JSON_whitespace_outside_strings_only",
+      "number_tokens_parsed": false,
+      "model_fields_removed": false,
+      "source_modified": false,
+      "semantic_package_verified": false,
+      "strict_package_readback_required": true,
+      "scientific_verdict": null
+    },
+    "transport_carrier_byte_identical_to_original": false,
+    "complete_source_fields_and_history_retained": true,
+    "source_decoded_once_without_history_copy": true,
+    "original_outcome": "budget_exhausted",
+    "initial_threshold": 100,
+    "trials": 8,
+    "inputs": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-classic-count-recognition-m40-a2-baseline-inputs",
+    "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-classic-count-recognition-m40-a2-baseline",
+    "native_execution_started": false,
+    "scientific_verdict": null
+  },
+  "actual_prepare_phase": {
+    "worker-terminal.json": {
+      "phase": "baseline-prepare",
+      "completed": true,
+      "original_Train_unchanged": true,
+      "training_convergence_inferred": false,
+      "scientific_verdict": null
+    },
+    "supervisor-result.json": {
+      "reason": null,
+      "record_errors": [],
+      "last_before_cleanup": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "kernel_cgroup_observed",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "47818011e5806452db80617a6085cbabf1e3b3c16f4e71c889a749efb26465b0",
+          "unit": "timelearner-e68ba012-7b23-4c3c-a69a-2f7681697863.service",
+          "invocation_id": "05be196f28ae4925bb404773482add51",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-e68ba012-7b23-4c3c-a69a-2f7681697863.service",
+          "initial_main_pid": 2070645,
+          "initial_start_ticks": "439731797",
+          "sha256": "b38a793d309c9e9585b2a0db29956d59d55b28ad23033ba40085a951137277d5"
+        },
+        "state": {
+          "Type": "exec",
+          "Restart": "no",
+          "RemainAfterExit": "yes",
+          "MainPID": "0",
+          "Result": "success",
+          "ExecMainCode": "1",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "MemoryMax": "17179869184",
+          "TasksMax": "128",
+          "KillMode": "control-group",
+          "Description": "TimeLearner contained attempt e68ba012-7b23-4c3c-a69a-2f7681697863",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "exited",
+          "InvocationID": "05be196f28ae4925bb404773482add51"
+        },
+        "memory_max": 17179869184,
+        "tasks_max": 128,
+        "scientific_verdict": null
+      },
+      "outer_binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "47818011e5806452db80617a6085cbabf1e3b3c16f4e71c889a749efb26465b0",
+        "unit": "timelearner-e68ba012-7b23-4c3c-a69a-2f7681697863.service",
+        "invocation_id": "05be196f28ae4925bb404773482add51",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-e68ba012-7b23-4c3c-a69a-2f7681697863.service",
+        "initial_main_pid": 2070645,
+        "initial_start_ticks": "439731797",
+        "sha256": "b38a793d309c9e9585b2a0db29956d59d55b28ad23033ba40085a951137277d5"
+      },
+      "outer_closed": true,
+      "children_closed": [],
+      "disk_peak_increment": 2602307584,
+      "minimum_free": 321595576320,
+      "execution_success_not_inferred_from_cleanup": true,
+      "scientific_verdict": null
+    },
+    "outer-kernel": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "47818011e5806452db80617a6085cbabf1e3b3c16f4e71c889a749efb26465b0",
+        "unit": "timelearner-e68ba012-7b23-4c3c-a69a-2f7681697863.service",
+        "invocation_id": "05be196f28ae4925bb404773482add51",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-e68ba012-7b23-4c3c-a69a-2f7681697863.service",
+        "initial_main_pid": 2070645,
+        "initial_start_ticks": "439731797",
+        "sha256": "b38a793d309c9e9585b2a0db29956d59d55b28ad23033ba40085a951137277d5"
+      }
+    }
+  },
+  "actual_native_child_observation": {
+    "observed_utc": "2026-11-22T04:39:46.886597+00:00",
+    "output_exists": true,
+    "actual_native_kernel": {
+      "execution": "running",
+      "all_processes_closed": false,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "f4ef9bcc1980f4478540c38559dd30fbf7fce601cdb42aa8d7ed4c768a6c4f61",
+        "unit": "timelearner-f89dee69-fac4-4672-acd0-2271812dabe7.service",
+        "invocation_id": "e40940fc5d8b4f1e87505e9841e63680",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-f89dee69-fac4-4672-acd0-2271812dabe7.service",
+        "initial_main_pid": 2083561,
+        "initial_start_ticks": "439742181",
+        "sha256": "7a9083cef5c7a4fee5b3f9417e8563a4e920d504fe31a3bfb3b71dcee21cada6"
+      }
+    },
+    "memory.current": "3489148928\n",
+    "memory.max": "17179869184\n",
+    "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0\n",
+    "complete_observation_files_present": 0
+  },
+  "scientific_classification_not_yet_available": true,
+  "source_namespace_preserved_with_explicit_lossless_carrier": true,
+  "original_SDK_and_model_parameters_unchanged": true,
+  "source_limit_bytes": 1073741824,
+  "original_rejected_attempt_preserved": true,
+  "scientific_verdict": null
+}

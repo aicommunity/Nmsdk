@@ -74,6 +74,29 @@ class PipelineConditionTest(unittest.TestCase):
         spec = self.spec();new = self.binding(spec);spec["schema_version"] = 1
         self.assertEqual(new["condition_fingerprint"], self.binding(spec)["condition_fingerprint"])
 
+    def test_input_traversal_and_quantum_are_bound_by_the_production_serializer(self):
+        from ..input_traversal import FIELD, KIND, POLICY
+        for name in ('Classic-v1','Classic-v2'):
+            spec=self.spec(name);search=spec['phases'][0]['job']['configuration']['search']
+            search['maximum_candidates_per_input']=max(3,search['maximum_candidates_per_input'])
+            baseline=self.binding(self.sign_train(spec))['condition_fingerprint']
+            fingerprints=[]
+            for quantum in (1,3):
+                search[FIELD]=dict(kind=KIND,schema_version=1,policy=POLICY,
+                    candidates_per_visit=quantum,maximum_seed_elements=131072)
+                self.sign_train(spec);binding=self.binding(spec)
+                fingerprints.append(binding['condition_fingerprint'])
+                self.assertNotEqual(fingerprints[-1],baseline)
+                self.assertEqual(audit_binding(binding,spec,self.runtime()),fingerprints[-1])
+                reordered=deepcopy(spec)
+                reordered['phases'][0]['job']['configuration']['search'][FIELD]=dict(reversed(list(search[FIELD].items())))
+                self.assertEqual(self.binding(self.sign_train(reordered))['condition_fingerprint'],fingerprints[-1])
+            self.assertNotEqual(*fingerprints)
+        branch=self.spec('Branch-v1')
+        branch['phases'][0]['job']['configuration']['search'][FIELD]=dict(kind=KIND,schema_version=1,
+            policy=POLICY,candidates_per_visit=1,maximum_seed_elements=131072)
+        with self.assertRaises(EvidenceError):self.binding(self.sign_train(branch))
+
     def test_relocating_identical_runtime_preserves_condition(self):
         original = self.binding();runtime = self.runtime()
         for record in [runtime["executable"], runtime["app_ini"], runtime["compiler"], *runtime["resolved_libraries"]]:
@@ -145,6 +168,22 @@ class PipelineConditionTest(unittest.TestCase):
                 trials.append(trials.pop(0))
             else: spec["phases"][0]["wall_seconds"] -= 1
             self.assertNotEqual(baseline, self.binding(spec)["condition_fingerprint"], mode)
+
+    def test_explicit_terminal_policy_is_an_operative_factor_not_omitted_metadata(self):
+        for name in ('Classic-v1','Branch-v1'):
+            original=self.spec(name);baseline=self.binding(original)['condition_fingerprint']
+            spec=deepcopy(original);config=spec['phases'][0]['job']['configuration']
+            config.update(terminal_base_schema_version=config['schema_version'],schema_version=9,
+                terminal_selection=dict(schema_version=1,maximum_wall_seconds=30.))
+            self.sign_train(spec);before=deepcopy(spec);bound=self.binding(spec)
+            self.assertEqual(spec,before)
+            self.assertNotEqual(bound['condition_fingerprint'],baseline)
+            changed=deepcopy(spec);changed['phases'][0]['job']['configuration']['terminal_selection']['maximum_wall_seconds']=31.
+            self.assertNotEqual(self.binding(self.sign_train(changed))['condition_fingerprint'],bound['condition_fingerprint'])
+            renamed=deepcopy(spec);renamed['attempt_id']='another-terminal-attempt'
+            renamed['phases'][0]['job']['configuration']['run_id']='another-terminal-run'
+            self.assertEqual(self.binding(self.sign_train(renamed))['condition_fingerprint'],bound['condition_fingerprint'])
+            self.assertTrue(bound['declaration_only']);self.assertFalse(bound['native_execution_verified'])
 
     def test_rehashed_arbitrary_condition_artifact_cannot_replace_declaration(self):
         spec = self.spec();runtime = self.runtime();binding = self.binding(spec, runtime)

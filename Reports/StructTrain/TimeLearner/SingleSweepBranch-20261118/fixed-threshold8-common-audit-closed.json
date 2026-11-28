@@ -1,0 +1,552 @@
+{
+  "observed_at_utc": "2026-11-18T18:48:08.939035+00:00",
+  "via_jump": "10.245.1.12",
+  "host": "10.245.1.14",
+  "observation_sha256": "dc83652d4fcfcab5cc6ad3be36a2e987b6fac1135c6c26ee8a07001a74ed0dfb",
+  "observation": {
+    "controls.json": {
+      "commit": "793af9201fdffc32f9bef9a2bc74479b9bf8fd62",
+      "directory": "C:\\Projects\\TimeLearnerWorker\\controls\\elder-fixed-threshold8-a1"
+    },
+    "declaration.json": {
+      "ready_for_launch_after_baseline_audit": true,
+      "native_started": false,
+      "threshold": 0.09874840158355691,
+      "scientific_verdict": null
+    },
+    "launch-intent.json": {
+      "controls": "793af9201fdffc32f9bef9a2bc74479b9bf8fd62",
+      "threshold": 0.09874840158355691,
+      "scientific_verdict": null
+    },
+    "prepared.json": {
+      "source_file": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-elder-retained-physical-export-a2\\restored\\s10-single-complete-sweep-branch-elder-a3\\branch\\native\\train_stopped_state.json",
+        "sha256": "57a8934db33b34ec819440f677a4cd1af6109df2813068356cec3ea55357cccd",
+        "size": 958170225
+      },
+      "job_sha256": "991835f40afd7a5301824c7cb172b7715498383119f46b215079aa387cffa8d7",
+      "envelope": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\windows-elder-fixed-threshold8-a1-source-job.json",
+        "sha256": "e631ee5128fc2ec9747439b600f4c7d888519ec2874cda14887a17bdc0e9363f",
+        "size": 6126
+      },
+      "threshold": 0.09874840158355691,
+      "trials": [
+        {
+          "run_id": "windows-elder-fixed-threshold8-a1/stopped-phasea-diagnostic",
+          "trial_id": "windows-elder-fixed-threshold8-a1/stopped-phasea-diagnostic/rotation-0/0",
+          "sample_id": "phasea-row-0",
+          "label": "target",
+          "pattern_hash": "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451",
+          "pattern_isi": [
+            0.01,
+            0.08,
+            0.16,
+            0.24
+          ],
+          "duration": 2.0,
+          "maximum_samples": 4005,
+          "reset_policy": "reset_per_trial",
+          "record_threshold_potential": true
+        },
+        {
+          "run_id": "windows-elder-fixed-threshold8-a1/stopped-phasea-diagnostic",
+          "trial_id": "windows-elder-fixed-threshold8-a1/stopped-phasea-diagnostic/rotation-0/1",
+          "sample_id": "phasea-row-1",
+          "label": "foil",
+          "pattern_hash": "36041ec22b63d8d8bb408206a2271702dc7d9240d9052da27d23c78ea55f959d",
+          "pattern_isi": [
+            0.01,
+            0.24,
+            0.16,
+            0.08
+          ],
+          "duration": 2.0,
+          "maximum_samples": 4005,
+          "reset_policy": "reset_per_trial",
+          "record_threshold_potential": true
+        },
+        {
+          "run_id": "windows-elder-fixed-threshold8-a1/stopped-phasea-diagnostic",
+          "trial_id": "windows-elder-fixed-threshold8-a1/stopped-phasea-diagnostic/rotation-0/2",
+          "sample_id": "phasea-row-2",
+          "label": "foil",
+          "pattern_hash": "9c7cb4b0313fb5d1d3d87e903c3d4a500f2226bf6962d2f55b895e875e7c7a85",
+          "pattern_isi": [
+            0.01,
+            0.16,
+            0.08,
+            0.24
+          ],
+          "duration": 2.0,
+          "maximum_samples": 4005,
+          "reset_policy": "reset_per_trial",
+          "record_threshold_potential": true
+        },
+        {
+          "run_id": "windows-elder-fixed-threshold8-a1/stopped-phasea-diagnostic",
+          "trial_id": "windows-elder-fixed-threshold8-a1/stopped-phasea-diagnostic/rotation-0/3",
+          "sample_id": "phasea-row-3",
+          "label": "foil",
+          "pattern_hash": "ce915da00aa267d665ddd1c360b4803d115b13ec3eac683b0f8ba90a52a57413",
+          "pattern_isi": [
+            0.01,
+            0.16,
+            0.16,
+            0.16
+          ],
+          "duration": 2.0,
+          "maximum_samples": 4005,
+          "reset_policy": "reset_per_trial",
+          "record_threshold_potential": true
+        },
+        {
+          "run_id": "windows-elder-fixed-threshold8-a1/stopped-phasea-diagnostic",
+          "trial_id": "windows-elder-fixed-threshold8-a1/stopped-phasea-diagnostic/rotation-0/4",
+          "sample_id": "phasea-row-4",
+          "label": "foil",
+          "pattern_hash": "4047791f09257b779ecdc2a373bcf9b1c84c323f5af6b1a9ec5df55479601243",
+          "pattern_isi": [
+            0.01,
+            0.02,
+            0.22,
+            0.24
+          ],
+          "duration": 2.0,
+          "maximum_samples": 4005,
+          "reset_policy": "reset_per_trial",
+          "record_threshold_potential": true
+        },
+        {
+          "run_id": "windows-elder-fixed-threshold8-a1/stopped-phasea-diagnostic",
+          "trial_id": "windows-elder-fixed-threshold8-a1/stopped-phasea-diagnostic/rotation-0/5",
+          "sample_id": "phasea-row-5",
+          "label": "foil",
+          "pattern_hash": "6f76812a27c0b273529753e181fa2cc7a0b8d4f0b3c42fba2e436dbb2d0b9934",
+          "pattern_isi": [
+            0.01,
+            0.24,
+            0.22,
+            0.02
+          ],
+          "duration": 2.0,
+          "maximum_samples": 4005,
+          "reset_policy": "reset_per_trial",
+          "record_threshold_potential": true
+        },
+        {
+          "run_id": "windows-elder-fixed-threshold8-a1/stopped-phasea-diagnostic",
+          "trial_id": "windows-elder-fixed-threshold8-a1/stopped-phasea-diagnostic/rotation-0/6",
+          "sample_id": "phasea-row-6",
+          "label": "foil",
+          "pattern_hash": "a9c1310975c490708e44be19a7efe99502884491009f8efd1672789731f90e28",
+          "pattern_isi": [
+            0.01,
+            0.04,
+            0.04,
+            0.4
+          ],
+          "duration": 2.0,
+          "maximum_samples": 4005,
+          "reset_policy": "reset_per_trial",
+          "record_threshold_potential": true
+        },
+        {
+          "run_id": "windows-elder-fixed-threshold8-a1/stopped-phasea-diagnostic",
+          "trial_id": "windows-elder-fixed-threshold8-a1/stopped-phasea-diagnostic/rotation-0/7",
+          "sample_id": "phasea-row-7",
+          "label": "foil",
+          "pattern_hash": "55d26999e0e39704e925a7eb6fb22734aad6e1d9aba1cc6a623e86e3f3c614e6",
+          "pattern_isi": [
+            0.01,
+            0.4,
+            0.04,
+            0.04
+          ],
+          "duration": 2.0,
+          "maximum_samples": 4005,
+          "reset_policy": "reset_per_trial",
+          "record_threshold_potential": true
+        }
+      ],
+      "scientific_verdict": null
+    },
+    "terminal.json": {
+      "actual_fixed_threshold8_passed": true,
+      "training_completed": false,
+      "independent_evaluation": false,
+      "original_failures_preserved": true,
+      "scientific_worker_admitted": false,
+      "scientific_verdict": null
+    },
+    "observations-readback.json": {
+      "model_revision": "3e7234958d0539f9ee022580ab6149ea4255cb5536a6c9123e75f226ba9d7985",
+      "trials": [
+        {
+          "sample_id": "phasea-row-0",
+          "label": "target",
+          "spike_count": 1,
+          "spike_times": [
+            0.4925
+          ],
+          "model_before": "3e7234958d0539f9ee022580ab6149ea4255cb5536a6c9123e75f226ba9d7985",
+          "model_after": "3e7234958d0539f9ee022580ab6149ea4255cb5536a6c9123e75f226ba9d7985",
+          "complete": true,
+          "valid": true
+        },
+        {
+          "sample_id": "phasea-row-1",
+          "label": "foil",
+          "spike_count": 0,
+          "spike_times": [],
+          "model_before": "3e7234958d0539f9ee022580ab6149ea4255cb5536a6c9123e75f226ba9d7985",
+          "model_after": "3e7234958d0539f9ee022580ab6149ea4255cb5536a6c9123e75f226ba9d7985",
+          "complete": true,
+          "valid": true
+        },
+        {
+          "sample_id": "phasea-row-2",
+          "label": "foil",
+          "spike_count": 0,
+          "spike_times": [],
+          "model_before": "3e7234958d0539f9ee022580ab6149ea4255cb5536a6c9123e75f226ba9d7985",
+          "model_after": "3e7234958d0539f9ee022580ab6149ea4255cb5536a6c9123e75f226ba9d7985",
+          "complete": true,
+          "valid": true
+        },
+        {
+          "sample_id": "phasea-row-3",
+          "label": "foil",
+          "spike_count": 0,
+          "spike_times": [],
+          "model_before": "3e7234958d0539f9ee022580ab6149ea4255cb5536a6c9123e75f226ba9d7985",
+          "model_after": "3e7234958d0539f9ee022580ab6149ea4255cb5536a6c9123e75f226ba9d7985",
+          "complete": true,
+          "valid": true
+        },
+        {
+          "sample_id": "phasea-row-4",
+          "label": "foil",
+          "spike_count": 1,
+          "spike_times": [
+            8.4945
+          ],
+          "model_before": "3e7234958d0539f9ee022580ab6149ea4255cb5536a6c9123e75f226ba9d7985",
+          "model_after": "3e7234958d0539f9ee022580ab6149ea4255cb5536a6c9123e75f226ba9d7985",
+          "complete": true,
+          "valid": true
+        },
+        {
+          "sample_id": "phasea-row-5",
+          "label": "foil",
+          "spike_count": 0,
+          "spike_times": [],
+          "model_before": "3e7234958d0539f9ee022580ab6149ea4255cb5536a6c9123e75f226ba9d7985",
+          "model_after": "3e7234958d0539f9ee022580ab6149ea4255cb5536a6c9123e75f226ba9d7985",
+          "complete": true,
+          "valid": true
+        },
+        {
+          "sample_id": "phasea-row-6",
+          "label": "foil",
+          "spike_count": 0,
+          "spike_times": [],
+          "model_before": "3e7234958d0539f9ee022580ab6149ea4255cb5536a6c9123e75f226ba9d7985",
+          "model_after": "3e7234958d0539f9ee022580ab6149ea4255cb5536a6c9123e75f226ba9d7985",
+          "complete": true,
+          "valid": true
+        },
+        {
+          "sample_id": "phasea-row-7",
+          "label": "foil",
+          "spike_count": 0,
+          "spike_times": [],
+          "model_before": "3e7234958d0539f9ee022580ab6149ea4255cb5536a6c9123e75f226ba9d7985",
+          "model_after": "3e7234958d0539f9ee022580ab6149ea4255cb5536a6c9123e75f226ba9d7985",
+          "complete": true,
+          "valid": true
+        }
+      ],
+      "training_completed": false,
+      "scientific_verdict": null
+    },
+    "metrics.json": {
+      "validity": "valid",
+      "reason": "complete_declared_evaluation",
+      "pooled_counts": {
+        "TP": 1,
+        "FP": 1,
+        "FN": 0,
+        "TN": 6,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.14285714285714285
+      },
+      "effective_threshold": 0.09874840158355691,
+      "model_revision": "3e7234958d0539f9ee022580ab6149ea4255cb5536a6c9123e75f226ba9d7985",
+      "training_completed": false,
+      "criterion": {
+        "anchor": "onset",
+        "begin_offset": 0,
+        "end_offset": null,
+        "id": "post_anchor_target_whole_window_foil_v1",
+        "reject_target_outside_window": true
+      },
+      "trials": [
+        {
+          "trial_id": "windows-elder-fixed-threshold8-a1/stopped-phasea-diagnostic/rotation-0/0",
+          "sample_id": "phasea-row-0",
+          "label": "target",
+          "presentation_index": 0,
+          "reset_policy": "reset_per_trial",
+          "response_begin": 0.01,
+          "response_end": 2.0,
+          "spike_count": 1,
+          "window_spikes": [
+            0.4925
+          ],
+          "early_spikes": [],
+          "late_spikes": [],
+          "classification": "TP"
+        },
+        {
+          "trial_id": "windows-elder-fixed-threshold8-a1/stopped-phasea-diagnostic/rotation-0/1",
+          "sample_id": "phasea-row-1",
+          "label": "foil",
+          "presentation_index": 1,
+          "reset_policy": "reset_per_trial",
+          "response_begin": 2.0105,
+          "response_end": 4.000500000000001,
+          "spike_count": 0,
+          "window_spikes": [],
+          "early_spikes": [],
+          "late_spikes": [],
+          "classification": "TN"
+        },
+        {
+          "trial_id": "windows-elder-fixed-threshold8-a1/stopped-phasea-diagnostic/rotation-0/2",
+          "sample_id": "phasea-row-2",
+          "label": "foil",
+          "presentation_index": 2,
+          "reset_policy": "reset_per_trial",
+          "response_begin": 4.011,
+          "response_end": 6.001,
+          "spike_count": 0,
+          "window_spikes": [],
+          "early_spikes": [],
+          "late_spikes": [],
+          "classification": "TN"
+        },
+        {
+          "trial_id": "windows-elder-fixed-threshold8-a1/stopped-phasea-diagnostic/rotation-0/3",
+          "sample_id": "phasea-row-3",
+          "label": "foil",
+          "presentation_index": 3,
+          "reset_policy": "reset_per_trial",
+          "response_begin": 6.0115,
+          "response_end": 8.0015,
+          "spike_count": 0,
+          "window_spikes": [],
+          "early_spikes": [],
+          "late_spikes": [],
+          "classification": "TN"
+        },
+        {
+          "trial_id": "windows-elder-fixed-threshold8-a1/stopped-phasea-diagnostic/rotation-0/4",
+          "sample_id": "phasea-row-4",
+          "label": "foil",
+          "presentation_index": 4,
+          "reset_policy": "reset_per_trial",
+          "response_begin": 8.012,
+          "response_end": 10.002,
+          "spike_count": 1,
+          "window_spikes": [
+            8.4945
+          ],
+          "early_spikes": [],
+          "late_spikes": [],
+          "classification": "FP"
+        },
+        {
+          "trial_id": "windows-elder-fixed-threshold8-a1/stopped-phasea-diagnostic/rotation-0/5",
+          "sample_id": "phasea-row-5",
+          "label": "foil",
+          "presentation_index": 5,
+          "reset_policy": "reset_per_trial",
+          "response_begin": 10.0125,
+          "response_end": 12.0025,
+          "spike_count": 0,
+          "window_spikes": [],
+          "early_spikes": [],
+          "late_spikes": [],
+          "classification": "TN"
+        },
+        {
+          "trial_id": "windows-elder-fixed-threshold8-a1/stopped-phasea-diagnostic/rotation-0/6",
+          "sample_id": "phasea-row-6",
+          "label": "foil",
+          "presentation_index": 6,
+          "reset_policy": "reset_per_trial",
+          "response_begin": 12.013,
+          "response_end": 14.003,
+          "spike_count": 0,
+          "window_spikes": [],
+          "early_spikes": [],
+          "late_spikes": [],
+          "classification": "TN"
+        },
+        {
+          "trial_id": "windows-elder-fixed-threshold8-a1/stopped-phasea-diagnostic/rotation-0/7",
+          "sample_id": "phasea-row-7",
+          "label": "foil",
+          "presentation_index": 7,
+          "reset_policy": "reset_per_trial",
+          "response_begin": 14.0135,
+          "response_end": 16.003500000000003,
+          "spike_count": 0,
+          "window_spikes": [],
+          "early_spikes": [],
+          "late_spikes": [],
+          "classification": "TN"
+        }
+      ]
+    },
+    "prepare": {
+      "binding": {
+        "pid": 16144,
+        "creation_filetime": "134394969802379457",
+        "job_name": "Local\\TimeLearner-9c162121-1375-472d-8e03-a4896a4775c0"
+      },
+      "result.json": {
+        "kind": "timelearner_windows_process_result",
+        "schema_version": 1,
+        "execution": "completed",
+        "validity": "valid",
+        "reason": "exit_zero",
+        "returncode": 0,
+        "scientific_verdict": null,
+        "thread_limit_enforced": false,
+        "memory_limit_semantics": "job_committed_virtual_memory",
+        "wall_budget_scope": "whole_attempt_including_preparation",
+        "descendants_at_main_exit": [],
+        "all_processes_closed": true,
+        "cooperative_capture": "not_requested",
+        "runtime_provenance": "loaded_files_captured",
+        "observed_module_files": 35,
+        "wall_seconds": 453.07643929996993,
+        "child_resumed": true,
+        "job_name": "Local\\TimeLearner-9c162121-1375-472d-8e03-a4896a4775c0"
+      },
+      "stdout.log": {
+        "bytes": 0,
+        "tail": ""
+      },
+      "stderr.log": {
+        "bytes": 0,
+        "tail": ""
+      },
+      "kernel_job": {
+        "absent": true,
+        "error": 2
+      },
+      "kernel_process": {
+        "absent": true,
+        "error": 87
+      }
+    },
+    "native": {
+      "binding": {
+        "pid": 12440,
+        "creation_filetime": "134394974366004162",
+        "job_name": "Local\\TimeLearner-1c08540e-f900-40e1-b0fe-a70df9158f3a"
+      },
+      "result.json": {
+        "kind": "timelearner_windows_process_result",
+        "schema_version": 1,
+        "execution": "completed",
+        "validity": "valid",
+        "reason": "exit_zero",
+        "returncode": 0,
+        "scientific_verdict": null,
+        "thread_limit_enforced": false,
+        "memory_limit_semantics": "job_committed_virtual_memory",
+        "wall_budget_scope": "whole_attempt_including_preparation",
+        "descendants_at_main_exit": [],
+        "all_processes_closed": true,
+        "cooperative_capture": "completed",
+        "runtime_provenance": "loaded_files_captured",
+        "observed_module_files": 47,
+        "wall_seconds": 1866.833959700074,
+        "child_resumed": true,
+        "job_name": "Local\\TimeLearner-1c08540e-f900-40e1-b0fe-a70df9158f3a"
+      },
+      "stdout.log": {
+        "bytes": 0,
+        "tail": ""
+      },
+      "stderr.log": {
+        "bytes": 0,
+        "tail": ""
+      },
+      "kernel_job": {
+        "absent": true,
+        "error": 2
+      },
+      "kernel_process": {
+        "absent": true,
+        "error": 87
+      }
+    },
+    "audit": {
+      "binding": {
+        "pid": 14404,
+        "creation_filetime": "134394993034044420",
+        "job_name": "Local\\TimeLearner-6b944518-9edf-4637-9ce3-6de6e5a64d62"
+      },
+      "result.json": {
+        "kind": "timelearner_windows_process_result",
+        "schema_version": 1,
+        "execution": "completed",
+        "validity": "valid",
+        "reason": "exit_zero",
+        "returncode": 0,
+        "scientific_verdict": null,
+        "thread_limit_enforced": false,
+        "memory_limit_semantics": "job_committed_virtual_memory",
+        "wall_budget_scope": "whole_attempt_including_preparation",
+        "descendants_at_main_exit": [],
+        "all_processes_closed": true,
+        "cooperative_capture": "not_requested",
+        "runtime_provenance": "loaded_files_captured",
+        "observed_module_files": 35,
+        "wall_seconds": 1436.792509400053,
+        "child_resumed": true,
+        "job_name": "Local\\TimeLearner-6b944518-9edf-4637-9ce3-6de6e5a64d62"
+      },
+      "stdout.log": {
+        "bytes": 0,
+        "tail": ""
+      },
+      "stderr.log": {
+        "bytes": 0,
+        "tail": ""
+      },
+      "kernel_job": {
+        "absent": true,
+        "error": 2
+      },
+      "kernel_process": {
+        "absent": true,
+        "error": 87
+      }
+    }
+  },
+  "publication_complete": false,
+  "temporal_gallery_complete": false,
+  "independent_evaluation": false,
+  "whole_plan_complete": false
+}

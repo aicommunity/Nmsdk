@@ -1,0 +1,297 @@
+{
+  "kind": "timelearner_actual_recorded_positive_event_latency_projection",
+  "schema_version": 1,
+  "cohorts": [
+    {
+      "cohort": "classic-original-eight",
+      "model_revision": "dda7e4f787a4654d4b5b4f7d74e9d45d771aa0047f3a101fa403c77c0d06cf3b",
+      "threshold": 0.02612267090554031,
+      "counts": {
+        "TP": 1,
+        "FP": 1,
+        "FN": 0,
+        "TN": 6
+      },
+      "rows": [
+        {
+          "trial_id": "classic-measured-count-recognition-elder-s1/baseline/trial-0",
+          "sample_id": "phasea-row-0",
+          "classification": "TP",
+          "pattern_isi": [
+            0.01,
+            0.08,
+            0.16,
+            0.24
+          ],
+          "samples": 4001,
+          "soma_channels": 4,
+          "frequency_hz": 2000.0,
+          "stimulus_times_from_first": [
+            0.0,
+            0.08,
+            0.24,
+            0.48
+          ],
+          "spike_times_from_first": [
+            0.4835
+          ],
+          "spike_times_from_last": [
+            0.003500000000000003
+          ],
+          "recorded_lt_maximum": 0.0262352134585693,
+          "recorded_lt_maximum_time_from_last": 0.003500000000000003,
+          "source_observation": {
+            "path": "inputs/classic-original-eight/trial-0.json",
+            "bytes": 1816825,
+            "sha256": "0a923f2c73b7b99182347829cd52fcac2e9967d6d5d47c31a92faa8e73771ba0"
+          }
+        },
+        {
+          "trial_id": "classic-measured-count-recognition-elder-s1/baseline/trial-6",
+          "sample_id": "phasea-row-6",
+          "classification": "FP",
+          "pattern_isi": [
+            0.01,
+            0.04,
+            0.04,
+            0.4
+          ],
+          "samples": 4001,
+          "soma_channels": 4,
+          "frequency_hz": 2000.0,
+          "stimulus_times_from_first": [
+            0.0,
+            0.040000000000000924,
+            0.08000000000000007,
+            0.4800000000000004
+          ],
+          "spike_times_from_first": [
+            0.4815000000000005
+          ],
+          "spike_times_from_last": [
+            0.0015000000000000568
+          ],
+          "recorded_lt_maximum": 0.029829611677835488,
+          "recorded_lt_maximum_time_from_last": 0.0019999999999988916,
+          "source_observation": {
+            "path": "inputs/classic-original-eight/trial-6.json",
+            "bytes": 1825040,
+            "sha256": "7ff4a1f41582442801978b2a7a96797f1e93ee0b7256e5c0906530fa1c4745ca"
+          }
+        }
+      ]
+    },
+    {
+      "cohort": "branch-original-eight",
+      "model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+      "threshold": 0.0858575482028458,
+      "counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "rows": [
+        {
+          "trial_id": "branch-measured-count-M4/physical-DATA-replay/windows-q1/trial-0",
+          "sample_id": "phasea-row-0",
+          "classification": "TP",
+          "pattern_isi": [
+            0.01,
+            0.08,
+            0.16,
+            0.24
+          ],
+          "samples": 4001,
+          "soma_channels": 1,
+          "frequency_hz": 2000.0,
+          "stimulus_times_from_first": [
+            0.0,
+            0.08,
+            0.24,
+            0.48
+          ],
+          "spike_times_from_first": [
+            0.4815
+          ],
+          "spike_times_from_last": [
+            0.0015000000000000013
+          ],
+          "recorded_lt_maximum": 0.09210266169459858,
+          "recorded_lt_maximum_time_from_last": 0.0020000000000000018,
+          "source_observation": {
+            "path": "inputs/branch-original-eight/trial-0.json",
+            "bytes": 1360008,
+            "sha256": "bfd780c2ebd1ed794cd53ac5695a894bf2f106f1b2e3a78cd13748764490c163"
+          }
+        },
+        {
+          "trial_id": "branch-measured-count-M4/physical-DATA-replay/windows-q1/trial-4",
+          "sample_id": "phasea-row-4",
+          "classification": "FP",
+          "pattern_isi": [
+            0.01,
+            0.02,
+            0.22,
+            0.24
+          ],
+          "samples": 4001,
+          "soma_channels": 1,
+          "frequency_hz": 2000.0,
+          "stimulus_times_from_first": [
+            0.0,
+            0.019999999999999574,
+            0.2400000000000002,
+            0.4800000000000004
+          ],
+          "spike_times_from_first": [
+            0.48099999999999987
+          ],
+          "spike_times_from_last": [
+            0.0009999999999994458
+          ],
+          "recorded_lt_maximum": 0.09149287540096596,
+          "recorded_lt_maximum_time_from_last": 0.0014999999999982805,
+          "source_observation": {
+            "path": "inputs/branch-original-eight/trial-4.json",
+            "bytes": 1357194,
+            "sha256": "aca3467d1a68870155a79e45c378874d741952b708f78e1a2d640893f24fdba9"
+          }
+        },
+        {
+          "trial_id": "branch-measured-count-M4/physical-DATA-replay/windows-q1/trial-6",
+          "sample_id": "phasea-row-6",
+          "classification": "FP",
+          "pattern_isi": [
+            0.01,
+            0.04,
+            0.04,
+            0.4
+          ],
+          "samples": 4001,
+          "soma_channels": 1,
+          "frequency_hz": 2000.0,
+          "stimulus_times_from_first": [
+            0.0,
+            0.040000000000000924,
+            0.08000000000000007,
+            0.4800000000000004
+          ],
+          "spike_times_from_first": [
+            0.4815000000000005
+          ],
+          "spike_times_from_last": [
+            0.0015000000000000568
+          ],
+          "recorded_lt_maximum": 0.09363268951447112,
+          "recorded_lt_maximum_time_from_last": 0.0019999999999988916,
+          "source_observation": {
+            "path": "inputs/branch-original-eight/trial-6.json",
+            "bytes": 1367201,
+            "sha256": "cc2c6f44da12cad3ce7c61cdfe548e6e85cb90feef6dd2726c80f57ffff20335"
+          }
+        }
+      ]
+    },
+    {
+      "cohort": "branch-new-grid",
+      "model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+      "threshold": 0.0858575482028458,
+      "counts": {
+        "TP": 1,
+        "FP": 1,
+        "FN": 0,
+        "TN": 25
+      },
+      "rows": [
+        {
+          "trial_id": "branch-measured-count-M4/frozen-new-foils/windows-s1/grid-1-2-2",
+          "sample_id": "unseen-isi-grid-v1-1-2-2",
+          "classification": "FP",
+          "pattern_isi": [
+            0.01,
+            0.04,
+            0.16,
+            0.24
+          ],
+          "samples": 4001,
+          "soma_channels": 1,
+          "frequency_hz": 2000.0,
+          "stimulus_times_from_first": [
+            0.0,
+            0.03999999999999915,
+            0.1999999999999993,
+            0.4399999999999995
+          ],
+          "spike_times_from_first": [
+            0.44149999999999956
+          ],
+          "spike_times_from_last": [
+            0.0015000000000000568
+          ],
+          "recorded_lt_maximum": 0.09288291735437404,
+          "recorded_lt_maximum_time_from_last": 0.002000000000000668,
+          "source_observation": {
+            "path": "inputs/branch-new-grid/trial-4.json",
+            "bytes": 1362067,
+            "sha256": "3bd495cbb1bca6f8d9278094579c36a1e2f01dc621e4961d72c7e101a0a32874"
+          }
+        },
+        {
+          "trial_id": "branch-measured-count-M4/frozen-new-foils/windows-s1/grid-2-2-2",
+          "sample_id": "phasea-row-0",
+          "classification": "TP",
+          "pattern_isi": [
+            0.01,
+            0.08,
+            0.16,
+            0.24
+          ],
+          "samples": 4001,
+          "soma_channels": 1,
+          "frequency_hz": 2000.0,
+          "stimulus_times_from_first": [
+            0.0,
+            0.0799999999999983,
+            0.23999999999999844,
+            0.4800000000000004
+          ],
+          "spike_times_from_first": [
+            0.4815000000000005
+          ],
+          "spike_times_from_last": [
+            0.0015000000000000568
+          ],
+          "recorded_lt_maximum": 0.09210266169459858,
+          "recorded_lt_maximum_time_from_last": 0.0019999999999988916,
+          "source_observation": {
+            "path": "inputs/branch-new-grid/trial-13.json",
+            "bytes": 1364121,
+            "sha256": "d990412bfdd743df05e330b98ad18b01cca654f70c801fee4ce50ef434311507"
+          }
+        }
+      ]
+    }
+  ],
+  "source_archive": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/5b/5ba6bc2de032211e53b666c76799ea0eea551ecbd62d654842fe899479e35e3c",
+    "sha256": "5ba6bc2de032211e53b666c76799ea0eea551ecbd62d654842fe899479e35e3c",
+    "bytes": 3164676
+  },
+  "source_summary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/14/14a6934fe2d2c266a3089e4ff5a23d19a0a1d631ca069649c7142f672dc1ffa0",
+    "sha256": "14a6934fe2d2c266a3089e4ff5a23d19a0a1d631ca069649c7142f672dc1ffa0",
+    "bytes": 50492
+  },
+  "definition": "all actual output events minus actual last input timestamp; seconds",
+  "frequency_hz": 2000,
+  "changed_threshold": false,
+  "new_native_execution": false,
+  "scientific_verdict": null
+}

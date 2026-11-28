@@ -1,0 +1,120 @@
+{
+  "kind": "timelearner_closed_large_Branch_DATA2_primary_and_graphs",
+  "schema_version": 1,
+  "observed_utc": "2026-11-24T06:57:56.402745+00:00",
+  "primary": {
+    "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-24/large-Branch-DATA2-and-SDK17-cc28.json",
+    "record": {
+      "kind": "timelearner_large_Branch_DATA2_and_native_SDK17_catalog",
+      "schema_version": 1,
+      "objects": {
+        "primary": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/9e/9e8b10082ecd960d948b9788a43d0e9260a671ee20db7d1185b76bab107eab31",
+          "sha256": "9e8b10082ecd960d948b9788a43d0e9260a671ee20db7d1185b76bab107eab31",
+          "bytes": 52447708
+        },
+        "bundle": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/4b/4bd3c97f01767a7ef8cf64744deaffc8e03f04ce7dc26aeabadd3efba78d2561",
+          "sha256": "4bd3c97f01767a7ef8cf64744deaffc8e03f04ce7dc26aeabadd3efba78d2561",
+          "bytes": 69447
+        }
+      },
+      "members": 384,
+      "restored_members": 384,
+      "expanded_bytes": 664356766,
+      "archive_bytes": 52447708,
+      "packaged_pipeline_closure": {
+        "production_check": {
+          "run_snapshots_verified": 1,
+          "artifact_entries_verified": 40,
+          "scientific_verdict": null
+        },
+        "canonical_inventory_projection_only": true,
+        "raw_archive_and_restoration_retain_all_alias_files": true,
+        "verified_redundant_alias_projection": [
+          {
+            "omitted_alias": "science/baseline-eight/native.events-log/EventsLog/NeuroModeler.INFO",
+            "retained_target": "science/baseline-eight/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261124-084646.1504848",
+            "bytes": 291,
+            "sha256": "bc837fa860b10992c8660b27a29372367746183b8486c88e3095c9ba08066641",
+            "owner_pid": 1504848,
+            "original_symlink_target_attested": false
+          }
+        ]
+      },
+      "native_cpp_passed": 17,
+      "Python_passed": 14,
+      "baseline": {
+        "model_revision": "61db0dff81019d4368e2918d59e05e0badf2b2157f25470c1fec3d8b59244235",
+        "threshold": 100.0,
+        "counts": {
+          "TP": 0,
+          "FP": 0,
+          "FN": 1,
+          "TN": 7
+        },
+        "trials": 8,
+        "source_Train_restarted": false
+      },
+      "restoration_adapter": "retain-regular-glog-aliases-v1",
+      "original_archive_restore_failure_preserved": true,
+      "original_failed17_preserved": true,
+      "original_python_storage_rejection_preserved": true,
+      "full_4791_source_history_included": false,
+      "independent_restore": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/large-Branch-DATA2-and-SDK17-cc28/independent-restored-retain-aliases-cc40",
+      "observed_utc": "2026-11-24T06:44:49.301133+00:00"
+    }
+  },
+  "archive_checker_regression": {
+    "testsRun": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "successful": true
+  },
+  "technical_graphs": {
+    "kind": "timelearner_physical_data_visual_report",
+    "model_revision": "61db0dff81019d4368e2918d59e05e0badf2b2157f25470c1fec3d8b59244235",
+    "counts": {
+      "TP": 0,
+      "FP": 0,
+      "FN": 1,
+      "TN": 7,
+      "targets": 1,
+      "foils": 7,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.875,
+      "target_hit_rate": 0.0,
+      "foil_response_rate": 0.0
+    },
+    "threshold": 100.0,
+    "trial_count": 8,
+    "soma_count": 1,
+    "all_patterns_and_somas_rendered": true,
+    "native_input_overlay": true,
+    "downsampling": false,
+    "visual_acceptance_complete": false
+  },
+  "terminal": {
+    "execution": "completed",
+    "primary_archive": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-24/large-Branch-DATA2-and-SDK17-cc28.json",
+    "full_primary_independent_restore": true,
+    "visual_report": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/large-Branch-DATA2-and-SDK17-cc28/visual-report/index.html",
+    "all_eight_patterns_plotted": true,
+    "PNG_files": 1064,
+    "visual_acceptance_complete": false,
+    "full_4791_source_history_archived": false,
+    "scientific_verdict": null
+  },
+  "all_groups_closed": true,
+  "visual_acceptance_complete": false,
+  "PNG_generated": 1064,
+  "heavy_payloads_in_git": false,
+  "whole_plan_complete": false
+}

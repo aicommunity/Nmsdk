@@ -1,0 +1,56 @@
+{
+  "kind": "timelearner_fourth_impulse_history_preparation_gate_reference",
+  "schema_version": 1,
+  "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+  "catalog": {
+    "relative_path": "experiments/2026-11-26/Branch-fourth-history-preparation16-fl12.json",
+    "sha256": "06728ccf6dc7dd011f2ef8336856e7cf89a4451bdd6b131936472ec31847d9b8",
+    "bytes": 7157
+  },
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/a0/a000eb81d2725c3993f0da78fb90e54e6561d769e4dfd5e778e9aa929601fe21",
+      "sha256": "a000eb81d2725c3993f0da78fb90e54e6561d769e4dfd5e778e9aa929601fe21",
+      "bytes": 5932
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/63/63652b97b91cdee6338c426d46dde063de58d19d96da626d6345a17abb635e90",
+      "sha256": "63652b97b91cdee6338c426d46dde063de58d19d96da626d6345a17abb635e90",
+      "bytes": 131496
+    }
+  },
+  "members": 37,
+  "tested_source_root": "49bbf80dca5b7fa9b2212cf0984e5d0c7fb8ab04",
+  "actual_tests": 16,
+  "new_protocol_tests": 8,
+  "existing_predecessor_regressions": 8,
+  "declared_conditions": 16,
+  "all_tests_passed": true,
+  "skipped": 0,
+  "all_processes_closed": true,
+  "independent_reader_catalog": {
+    "relative_path": "experiments/2026-11-26/fourth-history-and-Branch6194-readers-independent-fl29.json",
+    "sha256": "97244c0d5975e954a3134372c0d64286a1502494bd255a60dff2d88ce56a4f48",
+    "bytes": 4589
+  },
+  "independent_reader_source": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/0a/0ad6efb011557833b0374eee26220954f96821c9e440c0b3ce4e033d53b8b411",
+    "sha256": "0ad6efb011557833b0374eee26220954f96821c9e440c0b3ce4e033d53b8b411",
+    "bytes": 4365
+  },
+  "original2_fixture_files_match_source_primary": true,
+  "first_partial_clone_failure_preserved": true,
+  "explicit_file_source_transport_added_after_this_gate": true,
+  "native_integration_of_new_run_case_pending": true,
+  "new_native_experiment": false,
+  "scientific_verdict": null
+}

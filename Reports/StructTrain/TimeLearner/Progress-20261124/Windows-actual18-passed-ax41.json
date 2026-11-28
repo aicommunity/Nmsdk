@@ -1,0 +1,81 @@
+{
+  "kind": "timelearner_actual_Delay18_component_checks",
+  "schema_version": 1,
+  "observed_utc": "2026-11-24T01:45:25.843274+00:00",
+  "terminal": {
+    "kind": "timelearner_Delay_candidate_closed_build_and_actual18",
+    "schema_version": 1,
+    "native_checks_passed": true,
+    "task": {
+      "last_result": 0,
+      "instances": 0,
+      "state": 3
+    },
+    "JUnit": {
+      "expected": 18,
+      "observed": 18,
+      "failed_test_ids": [],
+      "assertion_status": "passed",
+      "sha256": "62a46ac7f68b64d4b5ea309badae702a66cdf702ca2a50164c72d58a99d4a024"
+    },
+    "native_process": {
+      "kind": "timelearner_windows_process_result",
+      "schema_version": 1,
+      "execution": "completed",
+      "validity": "valid",
+      "reason": "exit_zero",
+      "returncode": 0,
+      "scientific_verdict": null,
+      "thread_limit_enforced": false,
+      "memory_limit_semantics": "job_committed_virtual_memory",
+      "wall_budget_scope": "whole_attempt_including_preparation",
+      "descendants_at_main_exit": [],
+      "all_processes_closed": true,
+      "cooperative_capture": "completed",
+      "runtime_provenance": "loaded_files_captured",
+      "observed_module_files": 48,
+      "wall_seconds": 4.312712599989027,
+      "child_resumed": true,
+      "job_name": "Local\\TimeLearner-975126d7-d39b-4794-86ed-9616278e8186"
+    },
+    "kernel": {
+      "original_named_job_absent": true,
+      "original_main_absent": true,
+      "pid_reused": false
+    },
+    "closed_artifact_audit_passed": true,
+    "original_build_accepted": false,
+    "original_build_outcome_unchanged": true,
+    "source_root": "ada301b74b2b8cad1a43ca6add8c31d01a76ecfd",
+    "PulseLib": "01eed43124e6dbb424c192d7a5b2045c1d4a22cf",
+    "declared_cpp_cases": 18,
+    "scientific_models_executed": false,
+    "scientific_worker_admitted": false,
+    "scientific_verdict": null
+  },
+  "tasks": {
+    "TimeLearnerQueue-delay-fixture-native18-ax40": {
+      "last_result": 0,
+      "instances": 0,
+      "state": 3
+    },
+    "TimeLearner-windows-delay-fixture-closed-build-audit-ax40": {
+      "last_result": 0,
+      "instances": 0,
+      "state": 3
+    },
+    "TimeLearner-windows-delay-fixture-native18-ax40": {
+      "last_result": 0,
+      "instances": 0,
+      "state": 3
+    }
+  },
+  "kernel": {
+    "controls\\windows-delay-fixture-closed-audit-native18-queue-ax40\\owner.json": false,
+    "jobs\\windows-delay-fixture-native18-ax40\\native-gate\\process\\owned-process.json": false
+  },
+  "previous132_outcome_preserved": true,
+  "all_native_primary_archiving_task": "TimeLearnerArchive-Delay-proof-ax44",
+  "complete_primary_publication_pending": true,
+  "scientific_verdict": null
+}

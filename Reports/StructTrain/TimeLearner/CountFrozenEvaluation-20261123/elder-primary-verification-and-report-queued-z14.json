@@ -1,0 +1,144 @@
+{
+  "kind": "timelearner_stopped_classic_primary_and_visual_followup",
+  "schema_version": 1,
+  "pack_first_attempt": {
+    "job": "classic-measured-count-closed-primary-elder-z3",
+    "owner": {
+      "pid": 686653,
+      "start_ticks": "499591073",
+      "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+      "uid": 1000
+    },
+    "controls_commit": "dfe589befcd354aee0c1a04887626919ad9f247e",
+    "controls_bundle": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/58/58e538aa3f01587e99c1d27b793729f4edf30a91479179864e8caec0278f37a0",
+      "sha256": "58e538aa3f01587e99c1d27b793729f4edf30a91479179864e8caec0278f37a0",
+      "bytes": 102081
+    },
+    "controls_catalog": "/mnt/nmsdk-structtrain-archive/operations/timelearner/prepared-controls/20261123-classic-measured-count-closed-primary-elder-z3.json",
+    "source_Train_outcome_unchanged": true,
+    "roots": 11,
+    "closed_units": 12,
+    "scientific_verdict": null
+  },
+  "pack_failure": {
+    "classic-measured-count-closed-primary-elder-z3": {
+      "terminal.json": {
+        "execution": "process_error",
+        "returncode": 2,
+        "collection_result_present": false,
+        "scientific_verdict": null
+      },
+      "readbacks/classic-measured-count-closed-primary-elder-z3/process/contained/stderr.log": "Traceback (most recent call last):\n  File \"/home/user/timelearner-refactor/requests/classic-measured-count-closed-primary-elder-z3/worker.py\", line 42, in <module>\n    with stream.extractfile(member)as f:assert hashlib.file_digest(f,'sha256').hexdigest()==expected['sha256']\nAttributeError: module 'hashlib' has no attribute 'file_digest'\n",
+      "requests/classic-measured-count-closed-primary-elder-z3/supervisor.stderr": "",
+      "kernel": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "kernel_cgroup_observed",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "ae9ba8ff0093b6264fc8d96cecc6f24b155925037cbe15559001837b2f84964a",
+          "unit": "timelearner-3e831369-2f75-4725-bb36-322d01265a35.service",
+          "invocation_id": "ae012b637ffe4473b162e8f2682edd29",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-3e831369-2f75-4725-bb36-322d01265a35.service",
+          "initial_main_pid": 686665,
+          "initial_start_ticks": "499591096",
+          "sha256": "5cef48bbc916cc7f10148b0ecdfe4b8b33e98a67478936a74506b270ff2c0e8c"
+        },
+        "state": {
+          "Type": "exec",
+          "Restart": "no",
+          "RemainAfterExit": "yes",
+          "MainPID": "0",
+          "Result": "exit-code",
+          "ExecMainCode": "1",
+          "ExecMainStatus": "1",
+          "ControlGroup": "",
+          "MemoryMax": "2147483648",
+          "TasksMax": "64",
+          "KillMode": "control-group",
+          "Description": "TimeLearner contained attempt 3e831369-2f75-4725-bb36-322d01265a35",
+          "LoadState": "loaded",
+          "ActiveState": "failed",
+          "SubState": "failed",
+          "InvocationID": "ae012b637ffe4473b162e8f2682edd29"
+        },
+        "memory_max": 2147483648,
+        "tasks_max": 64,
+        "scientific_verdict": null
+      },
+      "packed_files": [
+        {
+          "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-closed-primary-elder-z3/packed/bundle.json",
+          "bytes": 928140
+        },
+        {
+          "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-closed-primary-elder-z3/packed/primary.tar.xz",
+          "bytes": 125624684
+        }
+      ]
+    },
+    "classic-measured-count-visuals-elder-z10": {
+      "exception.json": {
+        "reason": "",
+        "traceback": "Traceback (most recent call last):\n  File \"/home/user/timelearner-refactor/requests/classic-measured-count-visuals-elder-z10/supervisor.py\", line 23, in <module>\n    done=json.loads(terminal.read_bytes());assert done['returncode']==0 and done['collection_result_present']\nAssertionError\n",
+        "scientific_verdict": null
+      },
+      "requests/classic-measured-count-visuals-elder-z10/supervisor.stderr": "Traceback (most recent call last):\n  File \"/home/user/timelearner-refactor/requests/classic-measured-count-visuals-elder-z10/supervisor.py\", line 23, in <module>\n    done=json.loads(terminal.read_bytes());assert done['returncode']==0 and done['collection_result_present']\nAssertionError\n",
+      "packed_files": []
+    }
+  },
+  "closed_pack_reused_verifier": {
+    "job": "classic-measured-count-closed-primary-verify-elder-z13",
+    "owner": {
+      "pid": 692911,
+      "start_ticks": "499642089",
+      "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+      "uid": 1000
+    },
+    "controls_commit": "d3c9d8bcdcf13015e5dbf2c4f59242868c8c35d9",
+    "controls_bundle": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/2a/2aa5c9d2fae8891fb4607642f3e088f1fad8bdf52dd6d38a29ab73a9f58f5912",
+      "sha256": "2aa5c9d2fae8891fb4607642f3e088f1fad8bdf52dd6d38a29ab73a9f58f5912",
+      "bytes": 102673
+    },
+    "controls_catalog": "/mnt/nmsdk-structtrain-archive/operations/timelearner/prepared-controls/20261123-classic-measured-count-closed-primary-verify-elder-z13.json",
+    "source_Train_outcome_unchanged": true,
+    "roots": 11,
+    "closed_units": 12,
+    "scientific_verdict": null
+  },
+  "full_visual_report_queued": {
+    "job": "classic-measured-count-visuals-elder-z14",
+    "owner": {
+      "pid": 693203,
+      "start_ticks": "499643325",
+      "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+      "uid": 1000
+    },
+    "controls_commit": "694269a4df4fd7f92af0e1a203d242521cce9615",
+    "controls_bundle": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/61/61fe11fc37dc97bfb5e36e155bf7ddac0a663a5b9a6d316e022d2c8c5ef8988b",
+      "sha256": "61fe11fc37dc97bfb5e36e155bf7ddac0a663a5b9a6d316e022d2c8c5ef8988b",
+      "bytes": 101650
+    },
+    "controls_catalog": "/mnt/nmsdk-structtrain-archive/operations/timelearner/prepared-controls/20261123-classic-measured-count-visuals-elder-z14.json",
+    "wait_for_closed_primary": "classic-measured-count-closed-primary-verify-elder-z13",
+    "all16observations_and4somas": true,
+    "scientific_verdict": null
+  },
+  "reason": "Elder Python lacks hashlib.file_digest; verify the existing completed pack with ordinary SHA256 streaming; no repack or physical rerun",
+  "primary_published": false,
+  "visual_acceptance_complete": false,
+  "scientific_verdict": null
+}

@@ -1,0 +1,53 @@
+{
+  "catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-25/Windows-physical-repeat-metadata-and-recognition-queues-ea18.json",
+    "sha256": "4288a968c736db2c98a8ed37d118a3c6a8ff5aa8de04ad5d707cc70ee076888d",
+    "size": 2097
+  },
+  "kind": "timelearner_physical_repeat_actual_metadata_tests_and_scientific_queue_external_archive",
+  "schema_version": 1,
+  "source_actor_commit": "75110fa16336416f15adf7f2ea2cd8b17051b521",
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/e6/e6763b0e843c53ad11152a2a437edb40c7c2ff3c7d217f27ece695c3cba67470",
+      "sha256": "e6763b0e843c53ad11152a2a437edb40c7c2ff3c7d217f27ece695c3cba67470",
+      "bytes": 6273
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/40/402ffa7180eaf4e36b01d003d49e33ce564aa7c10f81a4c552553782aff9ecdd",
+      "sha256": "402ffa7180eaf4e36b01d003d49e33ce564aa7c10f81a4c552553782aff9ecdd",
+      "bytes": 5004688
+    }
+  },
+  "restoration": {
+    "kind": "timelearner_native_bundle_restoration",
+    "schema_version": 1,
+    "archive_sha256": "402ffa7180eaf4e36b01d003d49e33ce564aa7c10f81a4c552553782aff9ecdd",
+    "archive_members_verified": 35,
+    "retained_regular_files": 35,
+    "compatibility": null,
+    "omitted_redundant_aliases": [],
+    "source_archive_modified": false,
+    "native_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "actual_tests_run": 6,
+  "actual_tests_passed": 6,
+  "actual_source_controls": "C:\\Projects\\TimeLearnerWorker\\controls\\classic-policy4-data3-midgap-eight-dk10",
+  "all_metadata_processes_closed": true,
+  "actual_prepared_model": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/Windows-physical-repeat-evidence-ea18/independent-restored/actual-prepared-repeat-inputs/model.json",
+    "sha256": "1cd523b508664a3447574ada46e5e0ad09ac0669eb80f562f88d95fcdc8d2059",
+    "size": 66274617
+  },
+  "native_repeat_verified": false,
+  "scientific_queue_controls_archived": true,
+  "source_projection_archived": true,
+  "scientific_verdict": null
+}

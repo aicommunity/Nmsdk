@@ -1,0 +1,96 @@
+{
+  "kind": "new_source_twelve_private_membrane_image_and_recorded_input_native_controls_evidence",
+  "schema_version": 1,
+  "members": 110,
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/26/263f72a4ba7550637d1a2f33dfa170487f99c0aad4fd4379658001935c118fce",
+      "sha256": "263f72a4ba7550637d1a2f33dfa170487f99c0aad4fd4379658001935c118fce",
+      "bytes": 20371
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/d8/d8f37d55c311f36be47fc91fff55c02315d5c5a0303658ec40ad4138bd93db7e",
+      "sha256": "d8f37d55c311f36be47fc91fff55c02315d5c5a0303658ec40ad4138bd93db7e",
+      "bytes": 31954524
+    }
+  },
+  "analysis": {
+    "kind": "new_source_twelve_private_membrane_image_and_recorded_input_native_controls",
+    "schema_version": 1,
+    "source_commit": "15e0a347b4c732725c8ef31500a2c33303c7815b",
+    "runtime_fingerprint": "ba547dd1b1b65665afdf7e672e57cab449c305b90aa5c3baaefa20504086f87c",
+    "expected_test_ids": [
+      "NativeArchiveOwnership.MoveRetainsDecodedPrimaryStorageAndCopyIsIndependent",
+      "NativeClassImageReplay.ActualMembraneCopyAndLoadStages",
+      "NativeClassImageReplay.ClassicActualSavedModelAcrossNativeGraphRelease",
+      "TimeLearnerObservations.Schema4WriterRoundtripFixture",
+      "NativeImageRestSnapshot.RepeatedArchiveAndPoolReuseAt2000",
+      "NativeImageRestSnapshot.RepeatedArchiveAndPoolReuseAt20000",
+      "NativePhysicalPortableData.ResignedData1ScalarDeclarationsMustMatchTypedIdentityBeforeLoad",
+      "NativeCompositeService.ClassicWarmResetPreservesInitialFamilyAndC0",
+      "NativeCompositeService.BranchWarmResetPreservesInitialFamilyAndC0",
+      "NativeImageRestSnapshot.LegacyNeutralPrivateFeedbackCacheHasCanonicalDefinition",
+      "NativeImageRestSnapshot.NonNeutralAndWiderPrivateFeedbackBuffersRemainDistinct",
+      "NativeImageRestSnapshot.GraphInputStateIsNotAClassImageCache"
+    ],
+    "gate_result": {
+      "kind": "timelearner_native_test_gate_result",
+      "schema_version": 2,
+      "execution": "process_error",
+      "validity": "valid",
+      "assertion_status": "failed",
+      "reason": "complete_declared_test_inventory",
+      "inventory": {
+        "expected": 12,
+        "observed": 12,
+        "failed_test_ids": [
+          "NativeImageRestSnapshot.RepeatedArchiveAndPoolReuseAt20000"
+        ],
+        "assertion_status": "failed",
+        "sha256": "eb3512235a370054d4062406924c94aecdab11c7357fbff576a8914c64b1f3ee"
+      },
+      "scientific_verdict": null,
+      "data_inputs": {
+        "descriptor": {
+          "kind": "timelearner_collector_required_files",
+          "schema_version": 1,
+          "roles": {
+            "input0": {
+              "root": "/home/user/Nmsdk-experiments/private-image-native12-fr764/data-source",
+              "relative_path": "classic-package6.qz",
+              "source_path": "/home/user/Nmsdk-experiments/private-image-native12-fr764/data-source/classic-package6.qz",
+              "staged_name": "classic-package6.qz",
+              "bytes": 323020,
+              "sha256": "d58ce13f3759a9e7c38f65c2cdb3059bb7ddccbd152d7e4144564c1efa36b234",
+              "maximum_bytes": 67108864
+            }
+          },
+          "kernel_closure_attested": false,
+          "test_success_attested": false,
+          "scientific_verdict": null
+        },
+        "source_bytes_unchanged": true,
+        "staged_bytes_unchanged": true,
+        "native_execution_attested": false,
+        "scientific_verdict": null
+      }
+    },
+    "source_before_after_equal": true,
+    "actual_native_loaded_bytes_preserved": true,
+    "staged_and_source_input_bytes_unchanged": true,
+    "assertions_not_promoted_on_failure": true,
+    "Windows_CSV_handle_behavior_not_proved_by_Linux": true,
+    "new_Train": false,
+    "scientific_verdict": null,
+    "whole_plan_or_stage_accepted": false
+  },
+  "controls_commit": "e0b446c857dbf8d2311917be5b9e71ff8818f62f",
+  "independent_readback_pending": true,
+  "scientific_verdict": null
+}

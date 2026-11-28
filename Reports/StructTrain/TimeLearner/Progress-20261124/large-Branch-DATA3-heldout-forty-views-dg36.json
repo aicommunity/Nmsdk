@@ -1,0 +1,112 @@
+{
+  "kind": "timelearner_Branch_DATA3_heldout_selected_visual_review",
+  "schema_version": 1,
+  "review": {
+    "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-24/large-Branch-DATA3-heldout-forty-views-dg36.json",
+    "record": {
+      "kind": "timelearner_selected_waveform_review_catalog",
+      "schema_version": 1,
+      "object": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/01/0165ab0b3e95c965eb8ab948769df1d2ab6d9da65b224f23bf7acc6a612d34ff",
+        "sha256": "0165ab0b3e95c965eb8ab948769df1d2ab6d9da65b224f23bf7acc6a612d34ff",
+        "bytes": 24206
+      },
+      "all8_patterns_reviewed": true,
+      "selected_actual_PNG_files": 40,
+      "all2132_reviewed": false,
+      "publication_ready": false,
+      "source_report_sha256": "32bf480fb77950b32f384885fdc1451c0776065648a0d7ff1c062652edc60856",
+      "source_manifest_sha256": "42a6dc27e0b132eb6d04394bf2d492f69011ec9c9a2f7a7b8211b17205941c11"
+    }
+  },
+  "technical_report_completed": {
+    "execution": "completed",
+    "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-24/large-Branch-DATA3-holdout-primary-dg16.json",
+    "record": {
+      "kind": "timelearner_frozen_DATA3_holdout_primary_catalog",
+      "schema_version": 1,
+      "objects": {
+        "primary": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/d5/d58dcb0cfb52fa815091b8448f632d9930ab7a0fcf05f76245aeccfb8e5bf790",
+          "sha256": "d58dcb0cfb52fa815091b8448f632d9930ab7a0fcf05f76245aeccfb8e5bf790",
+          "bytes": 595288
+        },
+        "bundle": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/40/4066eb5477c3bb15e169244f2fc71bf8ab5c81b0121e9aa743ec41385c113f2e",
+          "sha256": "4066eb5477c3bb15e169244f2fc71bf8ab5c81b0121e9aa743ec41385c113f2e",
+          "bytes": 14314
+        }
+      },
+      "members": 84,
+      "expanded_bytes": 214528513,
+      "archive_bytes": 595288,
+      "all_members_independently_verified": true,
+      "packaged_pipeline_closure": {
+        "run_snapshots_verified": 1,
+        "artifact_entries_verified": 40,
+        "scientific_verdict": null
+      },
+      "canonical_alias_projection": [
+        {
+          "omitted_alias": "science/holdout/native.events-log/EventsLog/NeuroModeler.INFO",
+          "retained_target": "science/holdout/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261124-130944.2144759",
+          "bytes": 291,
+          "sha256": "39a453595474df6d90d8ab586d61f66d819cda34531d1c4299cc1df1adb66898",
+          "owner_pid": 2144759,
+          "original_symlink_target_attested": false
+        }
+      ],
+      "source_train_execution": "completed",
+      "training_outcome": "budget_exhausted",
+      "threshold_fixed": true,
+      "new_training_performed": false,
+      "counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "TN": 7,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 1.0,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.0
+      },
+      "model_revision": "a71ae5270f9c8fe9c03bc479e473b3d08ea9e798bf134c32ad8aa559a2e34d8a",
+      "threshold": 0.09864679711103091,
+      "target_is_repeated_control": true,
+      "target_control_preserved": true,
+      "independent_negatives": 7,
+      "original_foil4_FP_retained": true,
+      "plot_code_root": "5216549eb887c7ac6fd38f4e6fbbb1bf4afdf52e",
+      "plotting_tests": 11,
+      "whole_plan_complete": false
+    },
+    "plotting_tests": 11,
+    "all_positive_soma_overviews_have_identical_Y": true,
+    "all_positive_LT_overviews_have_identical_Y": true,
+    "visual_report": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/shared-positive-report-and-DATA3-holdout-dg22/visual-report/index.html",
+    "PNG_files": 2132,
+    "visual_review_complete": false,
+    "publication_ready": false,
+    "original_native_result_unchanged": true,
+    "whole_plan_complete": false,
+    "observed_utc": "2026-11-24T10:43:49.950319+00:00"
+  },
+  "report_sha256": "32bf480fb77950b32f384885fdc1451c0776065648a0d7ff1c062652edc60856",
+  "source_manifest_sha256": "42a6dc27e0b132eb6d04394bf2d492f69011ec9c9a2f7a7b8211b17205941c11",
+  "selected40_reviewed": true,
+  "all2132_reviewed": false,
+  "publication_ready": false,
+  "PNG_files_not_stored_in_Git": true,
+  "whole_plan_complete": false
+}

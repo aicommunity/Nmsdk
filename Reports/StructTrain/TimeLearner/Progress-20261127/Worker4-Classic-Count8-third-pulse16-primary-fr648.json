@@ -1,0 +1,308 @@
+{
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/Worker4-Classic-Count8-third-pulse16-primary-fr648.json",
+    "size": 8052,
+    "sha256": "feea35c9e875e124b7ce7452912949bc979dabb9c95e3de8a10600871d860a96"
+  },
+  "catalog": {
+    "kind": "actual_Classic_Count8_third_pulse16_complete_primary",
+    "schema_version": 1,
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/5b/5b55645b23a0f275580ce77142149a197ecbd795cf3f797a3054b6e03828b4a9",
+        "sha256": "5b55645b23a0f275580ce77142149a197ecbd795cf3f797a3054b6e03828b4a9",
+        "bytes": 33604
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/d8/d8bd2e9559bf9a2750ae13e94d1c68e22d09dd353901c2823153db5b779f69ed",
+        "sha256": "d8bd2e9559bf9a2750ae13e94d1c68e22d09dd353901c2823153db5b779f69ed",
+        "bytes": 27904668
+      }
+    },
+    "members": 187,
+    "expanded_bytes": 805995993,
+    "observations": 16,
+    "rows": [
+      {
+        "phase": "control",
+        "observations": 8,
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        }
+      },
+      {
+        "phase": "third-pulse",
+        "observations": 8,
+        "counts": {
+          "TP": 1,
+          "FP": 0,
+          "FN": 0,
+          "TN": 7,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 1.0,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.0
+        }
+      }
+    ],
+    "timing": [
+      {
+        "phase": "control",
+        "index": 0,
+        "label": "target",
+        "sample_id": "phasea-row-0",
+        "relative_stimuli": [
+          0,
+          0.08,
+          0.24,
+          0.48
+        ],
+        "relative_spikes": [
+          0.4835
+        ],
+        "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+      },
+      {
+        "phase": "control",
+        "index": 1,
+        "label": "foil",
+        "sample_id": "phasea-row-1",
+        "relative_stimuli": [
+          0,
+          0.2400000000000002,
+          0.3999999999999999,
+          0.48
+        ],
+        "relative_spikes": [],
+        "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+      },
+      {
+        "phase": "control",
+        "index": 2,
+        "label": "foil",
+        "sample_id": "phasea-row-2",
+        "relative_stimuli": [
+          0,
+          0.16000000000000014,
+          0.2400000000000002,
+          0.47999999999999954
+        ],
+        "relative_spikes": [],
+        "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+      },
+      {
+        "phase": "control",
+        "index": 3,
+        "label": "foil",
+        "sample_id": "phasea-row-3",
+        "relative_stimuli": [
+          0,
+          0.16000000000000014,
+          0.3200000000000003,
+          0.4800000000000004
+        ],
+        "relative_spikes": [],
+        "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+      },
+      {
+        "phase": "control",
+        "index": 4,
+        "label": "foil",
+        "sample_id": "phasea-row-4",
+        "relative_stimuli": [
+          0,
+          0.019999999999999574,
+          0.2400000000000002,
+          0.4800000000000004
+        ],
+        "relative_spikes": [
+          0.4814999999999987
+        ],
+        "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+      },
+      {
+        "phase": "control",
+        "index": 5,
+        "label": "foil",
+        "sample_id": "phasea-row-5",
+        "relative_stimuli": [
+          0,
+          0.2400000000000002,
+          0.46000000000000085,
+          0.4800000000000004
+        ],
+        "relative_spikes": [],
+        "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+      },
+      {
+        "phase": "control",
+        "index": 6,
+        "label": "foil",
+        "sample_id": "phasea-row-6",
+        "relative_stimuli": [
+          0,
+          0.040000000000000924,
+          0.08000000000000007,
+          0.4800000000000004
+        ],
+        "relative_spikes": [],
+        "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+      },
+      {
+        "phase": "control",
+        "index": 7,
+        "label": "foil",
+        "sample_id": "phasea-row-7",
+        "relative_stimuli": [
+          0,
+          0.40000000000000036,
+          0.4399999999999995,
+          0.47999999999999865
+        ],
+        "relative_spikes": [],
+        "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+      },
+      {
+        "phase": "third-pulse",
+        "index": 0,
+        "label": "foil",
+        "sample_id": "third-pulse-120ms",
+        "relative_stimuli": [
+          0,
+          0.08,
+          0.12000000000000001,
+          0.48
+        ],
+        "relative_spikes": [],
+        "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+      },
+      {
+        "phase": "third-pulse",
+        "index": 1,
+        "label": "foil",
+        "sample_id": "third-pulse-160ms",
+        "relative_stimuli": [
+          0,
+          0.08000000000000007,
+          0.16000000000000014,
+          0.48
+        ],
+        "relative_spikes": [],
+        "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+      },
+      {
+        "phase": "third-pulse",
+        "index": 2,
+        "label": "foil",
+        "sample_id": "third-pulse-200ms",
+        "relative_stimuli": [
+          0,
+          0.08000000000000007,
+          0.20000000000000018,
+          0.47999999999999954
+        ],
+        "relative_spikes": [],
+        "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+      },
+      {
+        "phase": "third-pulse",
+        "index": 3,
+        "label": "target",
+        "sample_id": "third-pulse-240ms",
+        "relative_stimuli": [
+          0,
+          0.08000000000000007,
+          0.2400000000000002,
+          0.4800000000000004
+        ],
+        "relative_spikes": [
+          0.48350000000000026
+        ],
+        "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+      },
+      {
+        "phase": "third-pulse",
+        "index": 4,
+        "label": "foil",
+        "sample_id": "third-pulse-280ms",
+        "relative_stimuli": [
+          0,
+          0.08000000000000007,
+          0.27999999999999936,
+          0.4800000000000004
+        ],
+        "relative_spikes": [],
+        "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+      },
+      {
+        "phase": "third-pulse",
+        "index": 5,
+        "label": "foil",
+        "sample_id": "third-pulse-320ms",
+        "relative_stimuli": [
+          0,
+          0.08000000000000007,
+          0.3200000000000003,
+          0.4800000000000004
+        ],
+        "relative_spikes": [],
+        "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+      },
+      {
+        "phase": "third-pulse",
+        "index": 6,
+        "label": "foil",
+        "sample_id": "third-pulse-360ms",
+        "relative_stimuli": [
+          0,
+          0.08000000000000007,
+          0.35999999999999943,
+          0.4800000000000004
+        ],
+        "relative_spikes": [],
+        "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+      },
+      {
+        "phase": "third-pulse",
+        "index": 7,
+        "label": "foil",
+        "sample_id": "third-pulse-400ms",
+        "relative_stimuli": [
+          0,
+          0.08000000000000007,
+          0.40000000000000036,
+          0.47999999999999865
+        ],
+        "relative_spikes": [],
+        "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+      }
+    ],
+    "original_control_eight_all_waveforms_and_events_preserved_1e12": true,
+    "new_negative_patterns": 7,
+    "known_negative_controls": 0,
+    "positive_previously_seen": true,
+    "new_Train": false,
+    "new_calibration": false,
+    "all_figures_pending": true,
+    "independent_readback_pending": true,
+    "original_process_ownership_not_reattested_beyond_current_closed_group_readback": true,
+    "scientific_verdict": null
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "source_bootstrap": {
+    "source_ready": true,
+    "source": "C:\\Projects\\TimeLearnerWorker\\source-windows-physical-replay-a1",
+    "root_commit": "3a17f9e9cfa10f2dec70951aaa434435a7ceb334",
+    "status": "",
+    "source_method": "Git sparse clone of exact published root; no submodule checkout or update",
+    "selected_files": {
+      "prepared_physical_replay.py": {
+        "bytes": 9758,
+        "sha256": "56db76ea1e8089ad1dadbd1ea161383a540ab99e440c27143c2fb5d3988e88ef"
+      },
+      "native_cli.py": {
+        "bytes": 6579,
+        "sha256": "67981086b5c63a30feaea06b095d317ad4645378d05f55fd5b127604915938bb"
+      },
+      "windows_process.py": {
+        "bytes": 21831,
+        "sha256": "807617af18ed91483cf905c87716bb89eebb708ae1cb6f290a29ac6f82524d9e"
+      },
+      "tests/test_windows_process.py": {
+        "bytes": 14653,
+        "sha256": "f08098b51a18f71fc3f0860012fabcafe29394c69e1c4e79673975f53279644c"
+      },
+      "tests/test_windows_native_cli.py": {
+        "bytes": 3136,
+        "sha256": "fd81763d7a03dcbdc92dd1539d128eabdeda0e99b4cde60ffa106ae5b238dcd3"
+      }
+    },
+    "seconds": 5.473457699990831,
+    "existing_workers_and_user_checkouts_unchanged": true,
+    "scientific_verdict": null
+  },
+  "dispatch": {
+    "started": true,
+    "name": "windows-recognition-physical-replay-a1",
+    "controls_commit": "7b11d5c14ee637443db86b9949d119892e513d20",
+    "task": {
+      "scientific_verdict": null,
+      "instance": "{82F585B2-C260-4D0F-9131-9016A967224D}",
+      "execution_time_limit": "PT2H",
+      "task": "TimeLearner-windows-recognition-physical-replay-a1",
+      "engine_pid": 22068
+    },
+    "worker_root": "3a17f9e9cfa10f2dec70951aaa434435a7ceb334",
+    "source_model_revision": "e3149bcebad4b9655060834c1f63e4730b2704ca27e6d92650209f66bb74e0d6",
+    "source_model_data_sha256": "924c8f689ce84eecec1d4f0deb21ca34148703dd9e204f7bc5a80717afcc5c18",
+    "native_trials": 8,
+    "memory_bytes": 2147483648,
+    "maximum_wall_seconds": 3600,
+    "runtime_content_fingerprint_preserved": "3497994ce9d222d9eaeeb1e47075d731bb9bc2cb8344ec8a540440ad467e0f46",
+    "model_or_threshold_changed": false,
+    "scientific_verdict": null
+  },
+  "kernel": {
+    "controls": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-recognition-physical-replay-a1",
+    "owned_process": {
+      "pid": 14876,
+      "same_creation": true,
+      "same_executable": true,
+      "running": true
+    },
+    "test_log_tail": "",
+    "task": {
+      "last_result": 267009,
+      "instances": [
+        {
+          "instance": "{82F585B2-C260-4D0F-9131-9016A967224D}",
+          "engine_pid": 22068,
+          "state": 4
+        }
+      ],
+      "state": 4
+    },
+    "native_files": [
+      {
+        "name": "job.json",
+        "bytes": 11957021
+      },
+      {
+        "name": "model.json",
+        "bytes": 11334968
+      }
+    ]
+  },
+  "complete": false,
+  "scientific_verdict": null
+}

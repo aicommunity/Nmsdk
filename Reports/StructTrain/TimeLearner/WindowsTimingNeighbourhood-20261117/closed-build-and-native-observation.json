@@ -1,0 +1,287 @@
+{
+  "kind": "timelearner_windows_timing_neighbourhood_execution_observations",
+  "schema_version": 1,
+  "root": "ddb2dcadd33ddd683cf73662f306c2bc6383e325",
+  "pulse": "eb5c07b0bd56897e4b67d2e644d066ee6340fe11",
+  "build": {
+    "kind": "timelearner_windows_process_result",
+    "schema_version": 1,
+    "execution": "descendants_remaining",
+    "validity": "valid",
+    "reason": "descendants_remaining",
+    "returncode": 0,
+    "scientific_verdict": null,
+    "thread_limit_enforced": false,
+    "memory_limit_semantics": "job_committed_virtual_memory",
+    "wall_budget_scope": "whole_attempt_including_preparation",
+    "descendants_at_main_exit": [
+      13768
+    ],
+    "all_processes_closed": true,
+    "cooperative_capture": "not_requested",
+    "runtime_provenance": "loaded_files_captured",
+    "observed_module_files": 12,
+    "wall_seconds": 2477.580860099988,
+    "child_resumed": true,
+    "job_name": "Local\\TimeLearner-54e18cee-4633-4fa6-b25a-f3266deacedf"
+  },
+  "build_terminal": {
+    "kind": "timelearner_windows_sdk_build",
+    "build_accepted": false,
+    "scientific_models_executed": false,
+    "scientific_worker_admitted": false,
+    "scientific_verdict": null
+  },
+  "closed_build_audit": {
+    "kernel-after.json": {
+      "original_main_absent": true,
+      "original_named_job_absent": true,
+      "pid_reused": false
+    },
+    "kernel-before.json": {
+      "original_main_absent": true,
+      "original_named_job_absent": true,
+      "pid_reused": false
+    },
+    "terminal.json": {
+      "audit_passed": true,
+      "compiled_tests_executed": false,
+      "original_build_outcome_unchanged": true,
+      "scientific_verdict": null,
+      "scientific_worker_admitted": false,
+      "wall_seconds": 109.72726670000702
+    },
+    "audit.json": {
+      "compiled_tests_executed": false,
+      "dependency_files": 17287,
+      "original_build_accepted": false,
+      "original_execution": "descendants_remaining",
+      "runtime_files": 62,
+      "scientific_verdict": null,
+      "scientific_worker_admitted": false,
+      "source_closure": {
+        "Bin": {
+          "head": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+          "recorded_gitlink": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+          "status": ""
+        },
+        "Libraries/Nmsdk-MotionControlLib": {
+          "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+          "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+          "status": ""
+        },
+        "Libraries/Nmsdk-PulseLib": {
+          "head": "eb5c07b0bd56897e4b67d2e644d066ee6340fe11",
+          "recorded_gitlink": "eb5c07b0bd56897e4b67d2e644d066ee6340fe11",
+          "status": ""
+        },
+        "Libraries/Rdk-BasicLib": {
+          "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+          "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+          "status": ""
+        },
+        "Libraries/Rdk-CvBasicLib": {
+          "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+          "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+          "status": ""
+        },
+        "Libraries/Rdk-HardwareLib": {
+          "head": "de40b008e990105856726e01230dde19f42a90a9",
+          "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+          "status": ""
+        },
+        "Rdk": {
+          "head": "de4134235c0dcb8b91fd9a43b267348ad1a163ca",
+          "recorded_gitlink": "de4134235c0dcb8b91fd9a43b267348ad1a163ca",
+          "status": ""
+        },
+        "root": {
+          "head": "ddb2dcadd33ddd683cf73662f306c2bc6383e325",
+          "status": ""
+        }
+      },
+      "source_commit": "ddb2dcadd33ddd683cf73662f306c2bc6383e325",
+      "targets": {
+        "NeuroModelerConsole.exe": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\runtime-timing-neighbourhood-win-a1\\NeuroModelerConsole.exe",
+          "sha256": "be45b8861e19b1634431f9f047a6e1152e96bf6864ec6967f140a19b215a435e",
+          "size": 12195840
+        },
+        "Test_PulseLib_StorageComponents.exe": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\runtime-timing-neighbourhood-win-a1\\Test_PulseLib_StorageComponents.exe",
+          "sha256": "c30af33d9b191f926610cb2cc3337ae267c35a13a74c641da775957fb54ed5ae",
+          "size": 25794048
+        }
+      },
+      "verified_source_files": 4635
+    }
+  },
+  "native_attempt_a1": {
+    "execution": "not_started",
+    "reason": "insufficient_windows_available_memory",
+    "cpp_tests_executed": false,
+    "own_stale_observer_stopped": true
+  },
+  "native_attempt_a2": {
+    "process": {
+      "kind": "timelearner_windows_process_result",
+      "schema_version": 1,
+      "execution": "process_error",
+      "validity": "valid",
+      "reason": "nonzero_exit",
+      "returncode": 1,
+      "scientific_verdict": null,
+      "thread_limit_enforced": false,
+      "memory_limit_semantics": "job_committed_virtual_memory",
+      "wall_budget_scope": "whole_attempt_including_preparation",
+      "descendants_at_main_exit": [],
+      "all_processes_closed": true,
+      "cooperative_capture": "completed",
+      "runtime_provenance": "loaded_files_captured",
+      "observed_module_files": 47,
+      "wall_seconds": 2.585417599999346,
+      "child_resumed": true,
+      "job_name": "Local\\TimeLearner-f948a041-713f-491f-a0e0-7359d23c405a"
+    },
+    "gate": {
+      "assertion_status": "not_assessed",
+      "execution": "process_error",
+      "inventory": null,
+      "kind": "timelearner_native_test_gate_result",
+      "reason": "native_gate_junit_expected_set_mismatch",
+      "schema_version": 1,
+      "scientific_verdict": null,
+      "validity": "incomplete_test_observation"
+    },
+    "terminal": {
+      "native_checks_passed": false,
+      "original_build_outcome_unchanged": true,
+      "scientific_verdict": null,
+      "scientific_worker_admitted": false
+    },
+    "junit_sha256": "ef9f32d61b6303ff0d372d99a19fb4c1e82867893738f047066903bab7e8df79",
+    "junit_observations": {
+      "expected": 217,
+      "observed": 216,
+      "missing": [
+        "NativeJobSourceTransport/SymlinkSourceCannotReplaceTheOwnedSnapshot"
+      ],
+      "unexpected": [],
+      "root": {
+        "tests": "216",
+        "failures": "1",
+        "disabled": "0",
+        "errors": "0",
+        "time": "0.311",
+        "timestamp": "2026-11-18T00:20:27.202",
+        "name": "AllTests"
+      },
+      "failed": [
+        {
+          "id": "CapacitanceContexts/EmptyBranchIntervalsDoNotCreateRedundantDomainContexts",
+          "attributes": {
+            "name": "EmptyBranchIntervalsDoNotCreateRedundantDomainContexts",
+            "file": "C:\\Projects\\TimeLearnerWorker\\source-timing-neighbourhood-win-a1\\Tests\\Integration\\Libraries\\Test_PulseLib_CapacitanceContexts.cpp",
+            "line": "328",
+            "status": "run",
+            "result": "completed",
+            "time": "0.",
+            "timestamp": "2026-11-18T00:20:27.513",
+            "classname": "CapacitanceContexts"
+          },
+          "failures": [
+            "C:\\Projects\\TimeLearnerWorker\\source-timing-neighbourhood-win-a1\\Tests\\Integration\\Libraries\\Test_PulseLib_CapacitanceContexts.cpp:340\nExpected equality of these values:\n  domains\n    Which is: 2\n  1u\n    Which is: 1\n"
+          ]
+        }
+      ],
+      "new_cases": [
+        {
+          "id": "BoundedTrainingN1TimingNeighbourhood/TimingReadyAmplitudeMissProposesFreshNearbyGeometryInBothTopologies",
+          "attributes": {
+            "name": "TimingReadyAmplitudeMissProposesFreshNearbyGeometryInBothTopologies",
+            "file": "C:\\Projects\\TimeLearnerWorker\\source-timing-neighbourhood-win-a1\\Tests\\Integration\\Libraries\\Test_PulseLib_BoundedTraining.cpp",
+            "line": "20",
+            "status": "run",
+            "result": "completed",
+            "time": "0.002",
+            "timestamp": "2026-11-18T00:20:27.335",
+            "classname": "BoundedTrainingN1TimingNeighbourhood"
+          },
+          "passed": true
+        },
+        {
+          "id": "BoundedTrainingN1TimingNeighbourhood/N0KeepsItsExistingLengthAndNormalizerPolicy",
+          "attributes": {
+            "name": "N0KeepsItsExistingLengthAndNormalizerPolicy",
+            "file": "C:\\Projects\\TimeLearnerWorker\\source-timing-neighbourhood-win-a1\\Tests\\Integration\\Libraries\\Test_PulseLib_BoundedTraining.cpp",
+            "line": "60",
+            "status": "run",
+            "result": "completed",
+            "time": "0.002",
+            "timestamp": "2026-11-18T00:20:27.337",
+            "classname": "BoundedTrainingN1TimingNeighbourhood"
+          },
+          "passed": true
+        },
+        {
+          "id": "BoundedTrainingBudgetBoundary/OddProbeRemainderCannotFundANewCandidatePairOrItsEdit",
+          "attributes": {
+            "name": "OddProbeRemainderCannotFundANewCandidatePairOrItsEdit",
+            "file": "C:\\Projects\\TimeLearnerWorker\\source-timing-neighbourhood-win-a1\\Tests\\Integration\\Libraries\\Test_PulseLib_BoundedTraining.cpp",
+            "line": "123",
+            "status": "run",
+            "result": "completed",
+            "time": "0.001",
+            "timestamp": "2026-11-18T00:20:27.341",
+            "classname": "BoundedTrainingBudgetBoundary"
+          },
+          "passed": true
+        },
+        {
+          "id": "NearestUnvisitedLengthSearch/ExploresBothSidesWithSmallerLengthTieAndNoDomainEnumeration",
+          "attributes": {
+            "name": "ExploresBothSidesWithSmallerLengthTieAndNoDomainEnumeration",
+            "file": "C:\\Projects\\TimeLearnerWorker\\source-timing-neighbourhood-win-a1\\Tests\\Integration\\Libraries\\Test_PulseLib_MeasuredLengthSearch.cpp",
+            "line": "8",
+            "status": "run",
+            "result": "completed",
+            "time": "0.",
+            "timestamp": "2026-11-18T00:20:27.490",
+            "classname": "NearestUnvisitedLengthSearch"
+          },
+          "passed": true
+        }
+      ]
+    }
+  },
+  "raw_bundle": {
+    "bytes": 35707,
+    "sha256": "3953c11c9da571ba1c93b1e7af00b0a3956dde7f4146b9c4db4571047a20d28c",
+    "uncompressed_bytes": 213498,
+    "publication": {
+      "archive_catalog": "experiments/2026-11-17/windows-timing-neighbourhood/a1.json",
+      "record": {
+        "kind": "timelearner_windows_sdk_and_native_raw_readbacks",
+        "schema_version": 1,
+        "root": "ddb2dcadd33ddd683cf73662f306c2bc6383e325",
+        "pulse": "eb5c07b0bd56897e4b67d2e644d066ee6340fe11",
+        "raw_readbacks": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/39/3953c11c9da571ba1c93b1e7af00b0a3956dde7f4146b9c4db4571047a20d28c",
+          "sha256": "3953c11c9da571ba1c93b1e7af00b0a3956dde7f4146b9c4db4571047a20d28c",
+          "bytes": 35707
+        },
+        "records": 7,
+        "build_accepted": false,
+        "closed_build_audit_passed": true,
+        "native_gate_passed": false,
+        "scientific_verdict": null
+      },
+      "bytes_verified": true
+    }
+  },
+  "scientific_worker_admitted": false,
+  "scientific_verdict": null
+}

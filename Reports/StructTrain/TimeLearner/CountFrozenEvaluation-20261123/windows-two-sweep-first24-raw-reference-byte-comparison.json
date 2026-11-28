@@ -1,0 +1,710 @@
+{
+  "kind": "timelearner_two_sweep_initial_raw_prefix_readback",
+  "schema_version": 1,
+  "observed_utc": "2026-11-23T02:09:52.465547+00:00",
+  "completed_raw_probe_pairs": 24,
+  "csv_identical_pairs": 24,
+  "model_revision_equal_pairs": 24,
+  "rows": [
+    {
+      "ordinal": 1,
+      "source_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_1.json",
+        "bytes": 5242,
+        "sha256": "f7203af17771b8e600006fac3f40dd5e09965c2a225b960af261331a7a29c16a"
+      },
+      "observed_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-1.json",
+        "bytes": 5262,
+        "sha256": "e08fa3082b593e552d50877ae1fbe99ca1db70081dd80f37b63ed18376faf145"
+      },
+      "source_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_1.csv",
+        "bytes": 146159,
+        "sha256": "c5a01576bee533dc49bda109e9e469be25617568827c5a22a70646e7b80acd85"
+      },
+      "observed_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-1.csv",
+        "bytes": 146159,
+        "sha256": "c5a01576bee533dc49bda109e9e469be25617568827c5a22a70646e7b80acd85"
+      },
+      "csv_bytes_identical": true,
+      "model_revision_equal": true,
+      "source_trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/capture/1/1/composite/1/native/0",
+      "observed_trial_id": "measured-count-proposal/20261123/branch/M4/two-sweeps-g2/session/1/capture/1/1/composite/1/native/0",
+      "subset_equal": true,
+      "pattern_hash_equal": true
+    },
+    {
+      "ordinal": 2,
+      "source_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_2.json",
+        "bytes": 5034,
+        "sha256": "23b7d2b9ac34536899ece543dd63f48fb05fadc272dfeb42a0af8e3adc0951de"
+      },
+      "observed_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-2.json",
+        "bytes": 5054,
+        "sha256": "3b6d7456df0cc0a853157781cb5d57def17af818c4d000a59a5bd23eb109eed4"
+      },
+      "source_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_2.csv",
+        "bytes": 142899,
+        "sha256": "09fea98b1064accbb1d84736bba0181c0f0447da7cc2ecbdcba027aba979c821"
+      },
+      "observed_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-2.csv",
+        "bytes": 142899,
+        "sha256": "09fea98b1064accbb1d84736bba0181c0f0447da7cc2ecbdcba027aba979c821"
+      },
+      "csv_bytes_identical": true,
+      "model_revision_equal": true,
+      "source_trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/capture/1/1/composite/1/native/1",
+      "observed_trial_id": "measured-count-proposal/20261123/branch/M4/two-sweeps-g2/session/1/capture/1/1/composite/1/native/1",
+      "subset_equal": true,
+      "pattern_hash_equal": true
+    },
+    {
+      "ordinal": 3,
+      "source_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_3.json",
+        "bytes": 5042,
+        "sha256": "2b96f8b598d7ec51aca5c0e46e3e347b984ede729c499f3038a6722cc235fd20"
+      },
+      "observed_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-3.json",
+        "bytes": 5062,
+        "sha256": "96ad9f6e7a3533431cb4b5b03043efedc3af9d1fa37b5016245a1215bf60907d"
+      },
+      "source_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_3.csv",
+        "bytes": 151297,
+        "sha256": "1446ca2b4da45a431a10e14759e8a524cd17283d2b0831d1a8811bb8367e85ec"
+      },
+      "observed_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-3.csv",
+        "bytes": 151297,
+        "sha256": "1446ca2b4da45a431a10e14759e8a524cd17283d2b0831d1a8811bb8367e85ec"
+      },
+      "csv_bytes_identical": true,
+      "model_revision_equal": true,
+      "source_trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/capture/1/1/composite/1/native/2",
+      "observed_trial_id": "measured-count-proposal/20261123/branch/M4/two-sweeps-g2/session/1/capture/1/1/composite/1/native/2",
+      "subset_equal": true,
+      "pattern_hash_equal": true
+    },
+    {
+      "ordinal": 4,
+      "source_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_4.json",
+        "bytes": 5050,
+        "sha256": "3e2b2c75233f7926e10cdefc3b6a4aa7fa08db0f22961e06f80116483b63e589"
+      },
+      "observed_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-4.json",
+        "bytes": 5070,
+        "sha256": "efd86547fbdb9d959d4cc8a9b3acdf9162b021e62ba53f8959b3e5ff52c8ce84"
+      },
+      "source_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_4.csv",
+        "bytes": 152413,
+        "sha256": "a0951f8a1845094c6e4f11a608deb618003919166493aded74da22b4b978e88c"
+      },
+      "observed_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-4.csv",
+        "bytes": 152413,
+        "sha256": "a0951f8a1845094c6e4f11a608deb618003919166493aded74da22b4b978e88c"
+      },
+      "csv_bytes_identical": true,
+      "model_revision_equal": true,
+      "source_trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/capture/1/1/composite/1/native/3",
+      "observed_trial_id": "measured-count-proposal/20261123/branch/M4/two-sweeps-g2/session/1/capture/1/1/composite/1/native/3",
+      "subset_equal": true,
+      "pattern_hash_equal": true
+    },
+    {
+      "ordinal": 5,
+      "source_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_5.json",
+        "bytes": 5042,
+        "sha256": "39adc797e3a029bd259d9abd9f9306f7b855178430873a677e075a20f662b36c"
+      },
+      "observed_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-5.json",
+        "bytes": 5062,
+        "sha256": "578d974cd3682b8e4f80f0071239960f1af885138a696971fe509b62feb93685"
+      },
+      "source_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_5.csv",
+        "bytes": 154019,
+        "sha256": "8c92768a509066e48fd1f8e03e2c7c9442dc3cb745e6a7c952742d23a7c44125"
+      },
+      "observed_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-5.csv",
+        "bytes": 154019,
+        "sha256": "8c92768a509066e48fd1f8e03e2c7c9442dc3cb745e6a7c952742d23a7c44125"
+      },
+      "csv_bytes_identical": true,
+      "model_revision_equal": true,
+      "source_trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/capture/1/1/composite/1/native/4",
+      "observed_trial_id": "measured-count-proposal/20261123/branch/M4/two-sweeps-g2/session/1/capture/1/1/composite/1/native/4",
+      "subset_equal": true,
+      "pattern_hash_equal": true
+    },
+    {
+      "ordinal": 6,
+      "source_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_6.json",
+        "bytes": 5281,
+        "sha256": "afa9f1c3986818824e29b2b069aeab4e52d221e2a1b6f3188b64113fd7420ad6"
+      },
+      "observed_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-6.json",
+        "bytes": 5301,
+        "sha256": "9217800b7c40963a23f11957411534e257d1c45f1684d92cf72022bdba0bf818"
+      },
+      "source_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_6.csv",
+        "bytes": 145840,
+        "sha256": "b9fe1a22ebf114340a3d98fe5a0a9f075c56d6657240b9e8ef18a527f5fa13a5"
+      },
+      "observed_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-6.csv",
+        "bytes": 145840,
+        "sha256": "b9fe1a22ebf114340a3d98fe5a0a9f075c56d6657240b9e8ef18a527f5fa13a5"
+      },
+      "csv_bytes_identical": true,
+      "model_revision_equal": true,
+      "source_trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/capture/1/1/composite/1/native/5",
+      "observed_trial_id": "measured-count-proposal/20261123/branch/M4/two-sweeps-g2/session/1/capture/1/1/composite/1/native/5",
+      "subset_equal": true,
+      "pattern_hash_equal": true
+    },
+    {
+      "ordinal": 7,
+      "source_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_7.json",
+        "bytes": 5299,
+        "sha256": "f5a354ca1190fd125a68c00e71015ace9a1288e54a3b006d617f23e54821bc5a"
+      },
+      "observed_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-7.json",
+        "bytes": 5319,
+        "sha256": "f139a31a112a95db3758cad4f25a54429e0cb7bc1fd8cbbb7af20e11136707d1"
+      },
+      "source_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_7.csv",
+        "bytes": 134118,
+        "sha256": "e666728e6c373e207dfad21e7328364e9701c596701ea828c9b0c6208254c824"
+      },
+      "observed_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-7.csv",
+        "bytes": 134118,
+        "sha256": "e666728e6c373e207dfad21e7328364e9701c596701ea828c9b0c6208254c824"
+      },
+      "csv_bytes_identical": true,
+      "model_revision_equal": true,
+      "source_trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/capture/1/2/composite/2/native/0",
+      "observed_trial_id": "measured-count-proposal/20261123/branch/M4/two-sweeps-g2/session/1/capture/1/2/composite/2/native/0",
+      "subset_equal": true,
+      "pattern_hash_equal": true
+    },
+    {
+      "ordinal": 8,
+      "source_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_8.json",
+        "bytes": 5046,
+        "sha256": "5b8df2f62ed22c8ed751125d2c31f03adbc768186b940e7613ad237196df2d76"
+      },
+      "observed_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-8.json",
+        "bytes": 5066,
+        "sha256": "eba6ebd47806f744198b5dbea047c4963992ab1888dc972c16ade64aa9b66063"
+      },
+      "source_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_8.csv",
+        "bytes": 130832,
+        "sha256": "f381786574aca79661943fd86e22d60d9d51e8fd2432e47f378d9c80fb1f10c5"
+      },
+      "observed_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-8.csv",
+        "bytes": 130832,
+        "sha256": "f381786574aca79661943fd86e22d60d9d51e8fd2432e47f378d9c80fb1f10c5"
+      },
+      "csv_bytes_identical": true,
+      "model_revision_equal": true,
+      "source_trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/capture/1/2/composite/2/native/1",
+      "observed_trial_id": "measured-count-proposal/20261123/branch/M4/two-sweeps-g2/session/1/capture/1/2/composite/2/native/1",
+      "subset_equal": true,
+      "pattern_hash_equal": true
+    },
+    {
+      "ordinal": 9,
+      "source_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_9.json",
+        "bytes": 5041,
+        "sha256": "bfda10f3aba9e09bfe41d3bf1c6bb84b67f315eac573f31410f6311aef8f4c21"
+      },
+      "observed_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-9.json",
+        "bytes": 5061,
+        "sha256": "fd63aaa789280becfebbc570cbc137358522540001668ea97297de725acee9cd"
+      },
+      "source_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_9.csv",
+        "bytes": 135588,
+        "sha256": "10739fe0618c9f59e312cae7d14198ca56e5fbb09370308930625399d5d48613"
+      },
+      "observed_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-9.csv",
+        "bytes": 135588,
+        "sha256": "10739fe0618c9f59e312cae7d14198ca56e5fbb09370308930625399d5d48613"
+      },
+      "csv_bytes_identical": true,
+      "model_revision_equal": true,
+      "source_trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/capture/1/2/composite/2/native/2",
+      "observed_trial_id": "measured-count-proposal/20261123/branch/M4/two-sweeps-g2/session/1/capture/1/2/composite/2/native/2",
+      "subset_equal": true,
+      "pattern_hash_equal": true
+    },
+    {
+      "ordinal": 10,
+      "source_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_10.json",
+        "bytes": 5062,
+        "sha256": "e305504ba99f6477e798ebb2b58e895f84e2e9a533084a80a9dc3bbd55a9a409"
+      },
+      "observed_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-10.json",
+        "bytes": 5082,
+        "sha256": "c2b951cbc7f1a6c7e684b291bc2ad96e2b78e6fa9a762e7e62ff5ee9e7126a58"
+      },
+      "source_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_10.csv",
+        "bytes": 146168,
+        "sha256": "084c604332e5676e4f5ba2b994b0b1309ef65660504cf35fe6192cf6a5635356"
+      },
+      "observed_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-10.csv",
+        "bytes": 146168,
+        "sha256": "084c604332e5676e4f5ba2b994b0b1309ef65660504cf35fe6192cf6a5635356"
+      },
+      "csv_bytes_identical": true,
+      "model_revision_equal": true,
+      "source_trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/capture/1/2/composite/2/native/3",
+      "observed_trial_id": "measured-count-proposal/20261123/branch/M4/two-sweeps-g2/session/1/capture/1/2/composite/2/native/3",
+      "subset_equal": true,
+      "pattern_hash_equal": true
+    },
+    {
+      "ordinal": 11,
+      "source_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_11.json",
+        "bytes": 5041,
+        "sha256": "cc192ec391da8097cfe6d1118c93d28d23eefcc1200f07e4cf0294eb026712da"
+      },
+      "observed_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-11.json",
+        "bytes": 5061,
+        "sha256": "fb86c71ba387dadd25785768350066dcf9855259cb220f0201fe6d1f67c0dc1d"
+      },
+      "source_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_11.csv",
+        "bytes": 146206,
+        "sha256": "cf66c587e6d77f9761606ffbe28948efd477d38806a885f55fc83e0a2b1b8188"
+      },
+      "observed_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-11.csv",
+        "bytes": 146206,
+        "sha256": "cf66c587e6d77f9761606ffbe28948efd477d38806a885f55fc83e0a2b1b8188"
+      },
+      "csv_bytes_identical": true,
+      "model_revision_equal": true,
+      "source_trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/capture/1/2/composite/2/native/4",
+      "observed_trial_id": "measured-count-proposal/20261123/branch/M4/two-sweeps-g2/session/1/capture/1/2/composite/2/native/4",
+      "subset_equal": true,
+      "pattern_hash_equal": true
+    },
+    {
+      "ordinal": 12,
+      "source_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_12.json",
+        "bytes": 5293,
+        "sha256": "a79eb76847ff2516eeae467ceadd2cd9540f626fe69f5b9399628c0d6d3d6d7d"
+      },
+      "observed_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-12.json",
+        "bytes": 5313,
+        "sha256": "5b5cd9253ae1b896054416d782c01748728913a7b4f8f330237295db202238de"
+      },
+      "source_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_12.csv",
+        "bytes": 146089,
+        "sha256": "67d2a1dd03762badece7ebe8b9d04cd80ca2329b1dc1f75ae541770507b3d022"
+      },
+      "observed_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-12.csv",
+        "bytes": 146089,
+        "sha256": "67d2a1dd03762badece7ebe8b9d04cd80ca2329b1dc1f75ae541770507b3d022"
+      },
+      "csv_bytes_identical": true,
+      "model_revision_equal": true,
+      "source_trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/capture/1/2/composite/2/native/5",
+      "observed_trial_id": "measured-count-proposal/20261123/branch/M4/two-sweeps-g2/session/1/capture/1/2/composite/2/native/5",
+      "subset_equal": true,
+      "pattern_hash_equal": true
+    },
+    {
+      "ordinal": 13,
+      "source_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_13.json",
+        "bytes": 5305,
+        "sha256": "b2476890fdda75ae32155880448901d242a27c942c0a0a64f3e797d3bf0171ac"
+      },
+      "observed_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-13.json",
+        "bytes": 5325,
+        "sha256": "29c31413afe22d1a957654628bab391fe761fa8b55531a24fa68d8f25cae6176"
+      },
+      "source_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_13.csv",
+        "bytes": 146137,
+        "sha256": "9d50d9978de00beafb2ced797d17861a9301de7e9f39d0fac396123061f958a7"
+      },
+      "observed_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-13.csv",
+        "bytes": 146137,
+        "sha256": "9d50d9978de00beafb2ced797d17861a9301de7e9f39d0fac396123061f958a7"
+      },
+      "csv_bytes_identical": true,
+      "model_revision_equal": true,
+      "source_trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/capture/1/3/composite/3/native/0",
+      "observed_trial_id": "measured-count-proposal/20261123/branch/M4/two-sweeps-g2/session/1/capture/1/3/composite/3/native/0",
+      "subset_equal": true,
+      "pattern_hash_equal": true
+    },
+    {
+      "ordinal": 14,
+      "source_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_14.json",
+        "bytes": 5053,
+        "sha256": "a3dbac2d515e0100dc25688a9a705bd401f88db77ccec8aa8601ecc187382cd1"
+      },
+      "observed_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-14.json",
+        "bytes": 5073,
+        "sha256": "91734de6a6a3aa31aa8c519fe7ee83e12f3ad96723c9bcb2197481accc8a8564"
+      },
+      "source_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_14.csv",
+        "bytes": 142842,
+        "sha256": "8b7c0f16ec3ee71e3868a08cdc4445563f535b76a04ce3fa929ab3bf0c430f83"
+      },
+      "observed_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-14.csv",
+        "bytes": 142842,
+        "sha256": "8b7c0f16ec3ee71e3868a08cdc4445563f535b76a04ce3fa929ab3bf0c430f83"
+      },
+      "csv_bytes_identical": true,
+      "model_revision_equal": true,
+      "source_trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/capture/1/3/composite/3/native/1",
+      "observed_trial_id": "measured-count-proposal/20261123/branch/M4/two-sweeps-g2/session/1/capture/1/3/composite/3/native/1",
+      "subset_equal": true,
+      "pattern_hash_equal": true
+    },
+    {
+      "ordinal": 15,
+      "source_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_15.json",
+        "bytes": 5047,
+        "sha256": "4afe4c8c2881a8f6c1f2449f99409c205d43d02162f85f5c5e16b6f1316f7b85"
+      },
+      "observed_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-15.json",
+        "bytes": 5067,
+        "sha256": "6607e6fd7f523c2a2fce72a517b88f476baf089fb38d960fb45426aaaa1d334f"
+      },
+      "source_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_15.csv",
+        "bytes": 146167,
+        "sha256": "0061a3dfba1b032252af2bdb61187534465d1aba3ab2de103fe78b5f678f3920"
+      },
+      "observed_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-15.csv",
+        "bytes": 146167,
+        "sha256": "0061a3dfba1b032252af2bdb61187534465d1aba3ab2de103fe78b5f678f3920"
+      },
+      "csv_bytes_identical": true,
+      "model_revision_equal": true,
+      "source_trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/capture/1/3/composite/3/native/2",
+      "observed_trial_id": "measured-count-proposal/20261123/branch/M4/two-sweeps-g2/session/1/capture/1/3/composite/3/native/2",
+      "subset_equal": true,
+      "pattern_hash_equal": true
+    },
+    {
+      "ordinal": 16,
+      "source_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_16.json",
+        "bytes": 5056,
+        "sha256": "23e5e319913f5e45cf20f06ad281039ec675b70090c6ade8e48e97aa4b720bf7"
+      },
+      "observed_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-16.json",
+        "bytes": 5076,
+        "sha256": "eeac6c11249d52dbd2e2aba3a3af4abe427eec216464e453209620411d7d6102"
+      },
+      "source_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_16.csv",
+        "bytes": 146206,
+        "sha256": "819b262204ede21463f4a4652801658c44459cf455fba7db792dad526a965b4b"
+      },
+      "observed_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-16.csv",
+        "bytes": 146206,
+        "sha256": "819b262204ede21463f4a4652801658c44459cf455fba7db792dad526a965b4b"
+      },
+      "csv_bytes_identical": true,
+      "model_revision_equal": true,
+      "source_trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/capture/1/3/composite/3/native/3",
+      "observed_trial_id": "measured-count-proposal/20261123/branch/M4/two-sweeps-g2/session/1/capture/1/3/composite/3/native/3",
+      "subset_equal": true,
+      "pattern_hash_equal": true
+    },
+    {
+      "ordinal": 17,
+      "source_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_17.json",
+        "bytes": 5048,
+        "sha256": "fda0beae95ab4caa558b4e4fc1845e895f6d2756b883ca68bcf67228cac2b626"
+      },
+      "observed_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-17.json",
+        "bytes": 5068,
+        "sha256": "23f9188e17122cade8b584f7e45bb9b9f7278bb0f7e0742f8020f68f11bae750"
+      },
+      "source_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_17.csv",
+        "bytes": 146180,
+        "sha256": "1f98681e81fc44dd29426d6da4996e944e1f48cd4e2a48f755bf02aa54029b18"
+      },
+      "observed_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-17.csv",
+        "bytes": 146180,
+        "sha256": "1f98681e81fc44dd29426d6da4996e944e1f48cd4e2a48f755bf02aa54029b18"
+      },
+      "csv_bytes_identical": true,
+      "model_revision_equal": true,
+      "source_trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/capture/1/3/composite/3/native/4",
+      "observed_trial_id": "measured-count-proposal/20261123/branch/M4/two-sweeps-g2/session/1/capture/1/3/composite/3/native/4",
+      "subset_equal": true,
+      "pattern_hash_equal": true
+    },
+    {
+      "ordinal": 18,
+      "source_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_18.json",
+        "bytes": 5277,
+        "sha256": "d0755b930f1d26725fe9aa1f92e45e808e15b40c33dc3ad7a892a2edce25763b"
+      },
+      "observed_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-18.json",
+        "bytes": 5297,
+        "sha256": "2436dafebe6728cec6f57a8b2c37267d1cc5734e89d38e4f8e86d0ba47185936"
+      },
+      "source_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_18.csv",
+        "bytes": 147500,
+        "sha256": "f2031bd493e6ada888e68c986c8f35e07bfb3e082b5df36ba12951ed59427c93"
+      },
+      "observed_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-18.csv",
+        "bytes": 147500,
+        "sha256": "f2031bd493e6ada888e68c986c8f35e07bfb3e082b5df36ba12951ed59427c93"
+      },
+      "csv_bytes_identical": true,
+      "model_revision_equal": true,
+      "source_trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/capture/1/3/composite/3/native/5",
+      "observed_trial_id": "measured-count-proposal/20261123/branch/M4/two-sweeps-g2/session/1/capture/1/3/composite/3/native/5",
+      "subset_equal": true,
+      "pattern_hash_equal": true
+    },
+    {
+      "ordinal": 19,
+      "source_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_19.json",
+        "bytes": 5284,
+        "sha256": "b41948c554da17f48e1979f3fa5e0a4356939fc0a264f4ae85a029dcbffaeb3b"
+      },
+      "observed_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-19.json",
+        "bytes": 5304,
+        "sha256": "5af2c9e7c1607537a2c611ca3c15e8b674a90d75ba596ddc4e0749cbd08e3f32"
+      },
+      "source_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_19.csv",
+        "bytes": 152075,
+        "sha256": "c78d48edb423a66bccd3b8e4bc65937458de1a9ae4a6491881325cd5ef35d93e"
+      },
+      "observed_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-19.csv",
+        "bytes": 152075,
+        "sha256": "c78d48edb423a66bccd3b8e4bc65937458de1a9ae4a6491881325cd5ef35d93e"
+      },
+      "csv_bytes_identical": true,
+      "model_revision_equal": true,
+      "source_trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/capture/1/4/composite/4/native/0",
+      "observed_trial_id": "measured-count-proposal/20261123/branch/M4/two-sweeps-g2/session/1/capture/1/4/composite/4/native/0",
+      "subset_equal": true,
+      "pattern_hash_equal": true
+    },
+    {
+      "ordinal": 20,
+      "source_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_20.json",
+        "bytes": 5044,
+        "sha256": "9209e2055e550ffaaebf53f4ffdbd5e16d08a3f41b2092924a94c2317d47dc3a"
+      },
+      "observed_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-20.json",
+        "bytes": 5064,
+        "sha256": "3615ec692317607804c1aa26d0397fb410b50281b39c47005b58fcdb0e17dc68"
+      },
+      "source_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_20.csv",
+        "bytes": 148793,
+        "sha256": "7eb3b4baaaade7773af18b938d73b19e5ba2153ef1eb54f1267de5da4595a898"
+      },
+      "observed_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-20.csv",
+        "bytes": 148793,
+        "sha256": "7eb3b4baaaade7773af18b938d73b19e5ba2153ef1eb54f1267de5da4595a898"
+      },
+      "csv_bytes_identical": true,
+      "model_revision_equal": true,
+      "source_trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/capture/1/4/composite/4/native/1",
+      "observed_trial_id": "measured-count-proposal/20261123/branch/M4/two-sweeps-g2/session/1/capture/1/4/composite/4/native/1",
+      "subset_equal": true,
+      "pattern_hash_equal": true
+    },
+    {
+      "ordinal": 21,
+      "source_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_21.json",
+        "bytes": 5039,
+        "sha256": "3515c1bea4cd8dc0ea7c75607a34875047ea320be77494386ecef2b9ccf71d34"
+      },
+      "observed_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-21.json",
+        "bytes": 5059,
+        "sha256": "382945451df855a1012eb6011b1cd7e8f7c143bacbc55be592d95b0408fd2de3"
+      },
+      "source_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_21.csv",
+        "bytes": 152237,
+        "sha256": "b7a47c3a50284ecb5df4c8e292c9fd7a7c4ef3d1584e2523a1dc7c1f63d0c043"
+      },
+      "observed_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-21.csv",
+        "bytes": 152237,
+        "sha256": "b7a47c3a50284ecb5df4c8e292c9fd7a7c4ef3d1584e2523a1dc7c1f63d0c043"
+      },
+      "csv_bytes_identical": true,
+      "model_revision_equal": true,
+      "source_trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/capture/1/4/composite/4/native/2",
+      "observed_trial_id": "measured-count-proposal/20261123/branch/M4/two-sweeps-g2/session/1/capture/1/4/composite/4/native/2",
+      "subset_equal": true,
+      "pattern_hash_equal": true
+    },
+    {
+      "ordinal": 22,
+      "source_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_22.json",
+        "bytes": 5060,
+        "sha256": "06c46816c26b3a18ff0fad921b7a5d2b2656bc13e67a455ab77114ba99ad93ba"
+      },
+      "observed_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-22.json",
+        "bytes": 5080,
+        "sha256": "107de05a75c822b73121302939b421025b66f41dcd3081cb95720a0858f9760a"
+      },
+      "source_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_22.csv",
+        "bytes": 152235,
+        "sha256": "1ca2f59c3519154264ecc5531c5c3297dfee21fd5040b190fea9cec5c3b457a0"
+      },
+      "observed_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-22.csv",
+        "bytes": 152235,
+        "sha256": "1ca2f59c3519154264ecc5531c5c3297dfee21fd5040b190fea9cec5c3b457a0"
+      },
+      "csv_bytes_identical": true,
+      "model_revision_equal": true,
+      "source_trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/capture/1/4/composite/4/native/3",
+      "observed_trial_id": "measured-count-proposal/20261123/branch/M4/two-sweeps-g2/session/1/capture/1/4/composite/4/native/3",
+      "subset_equal": true,
+      "pattern_hash_equal": true
+    },
+    {
+      "ordinal": 23,
+      "source_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_23.json",
+        "bytes": 5041,
+        "sha256": "38a066b087013c6904b8f883cf0c0afb72842c0f36b7e5399ee9c1096400f80b"
+      },
+      "observed_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-23.json",
+        "bytes": 5061,
+        "sha256": "8db2f7cb6d7ae12ace153df6918f040e82dd9b86e6d2b41c09782b7de2a5e595"
+      },
+      "source_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_23.csv",
+        "bytes": 152144,
+        "sha256": "8f3e7a777fc0eab97b1aed727fd86d70d0dc897db313430290030919c223ca82"
+      },
+      "observed_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-23.csv",
+        "bytes": 152144,
+        "sha256": "8f3e7a777fc0eab97b1aed727fd86d70d0dc897db313430290030919c223ca82"
+      },
+      "csv_bytes_identical": true,
+      "model_revision_equal": true,
+      "source_trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/capture/1/4/composite/4/native/4",
+      "observed_trial_id": "measured-count-proposal/20261123/branch/M4/two-sweeps-g2/session/1/capture/1/4/composite/4/native/4",
+      "subset_equal": true,
+      "pattern_hash_equal": true
+    },
+    {
+      "ordinal": 24,
+      "source_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_24.json",
+        "bytes": 5303,
+        "sha256": "7c73eda70f3625b9170f31c703fc0bb7ad9367fc7b86c86483f2b51ca11161d9"
+      },
+      "observed_packet": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-24.json",
+        "bytes": 5323,
+        "sha256": "17f3c6ef8192eb343c461466a818dbd35755063dc94308dc3f0958c0664b5838"
+      },
+      "source_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_trial_24.csv",
+        "bytes": 152075,
+        "sha256": "ad8e08c51cfced770e4137a1bf8276c279af3127452f4e4c6cc53aa980c57e3a"
+      },
+      "observed_csv": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\raw-trial-24.csv",
+        "bytes": 152075,
+        "sha256": "ad8e08c51cfced770e4137a1bf8276c279af3127452f4e4c6cc53aa980c57e3a"
+      },
+      "csv_bytes_identical": true,
+      "model_revision_equal": true,
+      "source_trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/capture/1/4/composite/4/native/5",
+      "observed_trial_id": "measured-count-proposal/20261123/branch/M4/two-sweeps-g2/session/1/capture/1/4/composite/4/native/5",
+      "subset_equal": true,
+      "pattern_hash_equal": true
+    }
+  ],
+  "full_new_training_audit_complete": false,
+  "originals_unchanged": true,
+  "new_model_execution": false,
+  "scientific_verdict": null
+}

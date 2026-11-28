@@ -1,0 +1,49 @@
+{
+  "observed_utc": "2026-11-23T19:44:52.373428+00:00",
+  "job": "fixed-classic-matched-duration-holdout-m40-as6",
+  "queue_kernel_live": true,
+  "queue-owner.json": {
+    "pid": 3197579,
+    "start_ticks": "453825710",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000
+  },
+  "queue-state.json": {
+    "reason": "waiting_for_previously_queued_scientific_work",
+    "observed_utc": "2026-11-23T19:44:44.602749+00:00",
+    "prerequisite_owner_live": {
+      "primary": true,
+      "delay": true,
+      "recognition": true
+    },
+    "source_Train_all_processes_closed": false,
+    "recognition_supervisor_live": false,
+    "recognition_terminal_present": false,
+    "recognition_phases_closed": true,
+    "reserved_slots": 1,
+    "elapsed_wait_seconds": 25.05369543749839,
+    "new_native_started": false
+  },
+  "independent_controls_recovery": {
+    "controls_commit": "dea704e3d96c15bd0d6ac7de71828eeb5ee7f27e",
+    "all_files_verified": [
+      ".gitattributes",
+      "orchestration.json",
+      "predeclared-condition.json",
+      "predeclared-protocol.json",
+      "queue-spec.json",
+      "queue.py",
+      "runtime.json",
+      "supervisor.py",
+      "worker.py"
+    ],
+    "files": 9,
+    "bundle_record": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/objects/sha256/e4/e4791debbeda349641ff2abcd88c23aa438e47450781209e9961778a8a8b6f1a",
+      "sha256": "e4791debbeda349641ff2abcd88c23aa438e47450781209e9961778a8a8b6f1a",
+      "size": 22184
+    },
+    "source_root": "6574ae49e7286c0ee437eaa1146d11e3ac32bfcc",
+    "new_native_results": null
+  }
+}

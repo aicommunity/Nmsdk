@@ -1,0 +1,322 @@
+{
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-28/Worker4-Classic-Count8-third-pulse16-gallery-fr671.json",
+    "size": 7554,
+    "sha256": "f0004fa53099be416a4655dc28b2fc0956f5829648e7f9b63a86f05311172fb9"
+  },
+  "catalog": {
+    "kind": "Worker4_Classic_Count8_third_pulse16_complete_gallery",
+    "schema_version": 1,
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/af/af0fe6a41363881d7158107796d01f59d73378d3c224ca6fbba29abb9b81f661",
+        "sha256": "af0fe6a41363881d7158107796d01f59d73378d3c224ca6fbba29abb9b81f661",
+        "bytes": 24159
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/92/9295cc746d8d687a87e99b2b9988c077abaaa707d4c3955f08c545cf3588e48f",
+        "sha256": "9295cc746d8d687a87e99b2b9988c077abaaa707d4c3955f08c545cf3588e48f",
+        "bytes": 25247756
+      }
+    },
+    "members": 139,
+    "source_primary": {
+      "relative_path": "experiments/2026-11-27/Worker4-Classic-Count8-third-pulse16-primary-fr648.json",
+      "bytes": 8052,
+      "sha256": "feea35c9e875e124b7ce7452912949bc979dabb9c95e3de8a10600871d860a96"
+    },
+    "rows": [
+      {
+        "case": "control",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        }
+      },
+      {
+        "case": "third-pulse",
+        "counts": {
+          "TP": 1,
+          "FP": 0,
+          "FN": 0,
+          "TN": 7,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 1.0,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.0
+        }
+      }
+    ],
+    "events": [
+      {
+        "case": "control",
+        "index": 0,
+        "label": "target",
+        "sample_id": "phasea-row-0",
+        "classification": "TP",
+        "actual_stimuli": [
+          0,
+          0.08,
+          0.24,
+          0.48
+        ],
+        "actual_spikes": [
+          0.4835
+        ],
+        "early_spike_before_fourth": false
+      },
+      {
+        "case": "control",
+        "index": 1,
+        "label": "foil",
+        "sample_id": "phasea-row-1",
+        "classification": "TN",
+        "actual_stimuli": [
+          0,
+          0.2400000000000002,
+          0.3999999999999999,
+          0.48
+        ],
+        "actual_spikes": [],
+        "early_spike_before_fourth": false
+      },
+      {
+        "case": "control",
+        "index": 2,
+        "label": "foil",
+        "sample_id": "phasea-row-2",
+        "classification": "TN",
+        "actual_stimuli": [
+          0,
+          0.16000000000000014,
+          0.2400000000000002,
+          0.47999999999999954
+        ],
+        "actual_spikes": [],
+        "early_spike_before_fourth": false
+      },
+      {
+        "case": "control",
+        "index": 3,
+        "label": "foil",
+        "sample_id": "phasea-row-3",
+        "classification": "TN",
+        "actual_stimuli": [
+          0,
+          0.16000000000000014,
+          0.3200000000000003,
+          0.4800000000000004
+        ],
+        "actual_spikes": [],
+        "early_spike_before_fourth": false
+      },
+      {
+        "case": "control",
+        "index": 4,
+        "label": "foil",
+        "sample_id": "phasea-row-4",
+        "classification": "FP",
+        "actual_stimuli": [
+          0,
+          0.019999999999999574,
+          0.2400000000000002,
+          0.4800000000000004
+        ],
+        "actual_spikes": [
+          0.4814999999999987
+        ],
+        "early_spike_before_fourth": false
+      },
+      {
+        "case": "control",
+        "index": 5,
+        "label": "foil",
+        "sample_id": "phasea-row-5",
+        "classification": "TN",
+        "actual_stimuli": [
+          0,
+          0.2400000000000002,
+          0.46000000000000085,
+          0.4800000000000004
+        ],
+        "actual_spikes": [],
+        "early_spike_before_fourth": false
+      },
+      {
+        "case": "control",
+        "index": 6,
+        "label": "foil",
+        "sample_id": "phasea-row-6",
+        "classification": "TN",
+        "actual_stimuli": [
+          0,
+          0.040000000000000924,
+          0.08000000000000007,
+          0.4800000000000004
+        ],
+        "actual_spikes": [],
+        "early_spike_before_fourth": false
+      },
+      {
+        "case": "control",
+        "index": 7,
+        "label": "foil",
+        "sample_id": "phasea-row-7",
+        "classification": "TN",
+        "actual_stimuli": [
+          0,
+          0.40000000000000036,
+          0.4399999999999995,
+          0.47999999999999865
+        ],
+        "actual_spikes": [],
+        "early_spike_before_fourth": false
+      },
+      {
+        "case": "third-pulse",
+        "index": 0,
+        "label": "foil",
+        "sample_id": "third-pulse-120ms",
+        "classification": "TN",
+        "actual_stimuli": [
+          0,
+          0.08,
+          0.12000000000000001,
+          0.48
+        ],
+        "actual_spikes": [],
+        "early_spike_before_fourth": false
+      },
+      {
+        "case": "third-pulse",
+        "index": 1,
+        "label": "foil",
+        "sample_id": "third-pulse-160ms",
+        "classification": "TN",
+        "actual_stimuli": [
+          0,
+          0.08000000000000007,
+          0.16000000000000014,
+          0.48
+        ],
+        "actual_spikes": [],
+        "early_spike_before_fourth": false
+      },
+      {
+        "case": "third-pulse",
+        "index": 2,
+        "label": "foil",
+        "sample_id": "third-pulse-200ms",
+        "classification": "TN",
+        "actual_stimuli": [
+          0,
+          0.08000000000000007,
+          0.20000000000000018,
+          0.47999999999999954
+        ],
+        "actual_spikes": [],
+        "early_spike_before_fourth": false
+      },
+      {
+        "case": "third-pulse",
+        "index": 3,
+        "label": "target",
+        "sample_id": "third-pulse-240ms",
+        "classification": "TP",
+        "actual_stimuli": [
+          0,
+          0.08000000000000007,
+          0.2400000000000002,
+          0.4800000000000004
+        ],
+        "actual_spikes": [
+          0.48350000000000026
+        ],
+        "early_spike_before_fourth": false
+      },
+      {
+        "case": "third-pulse",
+        "index": 4,
+        "label": "foil",
+        "sample_id": "third-pulse-280ms",
+        "classification": "TN",
+        "actual_stimuli": [
+          0,
+          0.08000000000000007,
+          0.27999999999999936,
+          0.4800000000000004
+        ],
+        "actual_spikes": [],
+        "early_spike_before_fourth": false
+      },
+      {
+        "case": "third-pulse",
+        "index": 5,
+        "label": "foil",
+        "sample_id": "third-pulse-320ms",
+        "classification": "TN",
+        "actual_stimuli": [
+          0,
+          0.08000000000000007,
+          0.3200000000000003,
+          0.4800000000000004
+        ],
+        "actual_spikes": [],
+        "early_spike_before_fourth": false
+      },
+      {
+        "case": "third-pulse",
+        "index": 6,
+        "label": "foil",
+        "sample_id": "third-pulse-360ms",
+        "classification": "TN",
+        "actual_stimuli": [
+          0,
+          0.08000000000000007,
+          0.35999999999999943,
+          0.4800000000000004
+        ],
+        "actual_spikes": [],
+        "early_spike_before_fourth": false
+      },
+      {
+        "case": "third-pulse",
+        "index": 7,
+        "label": "foil",
+        "sample_id": "third-pulse-400ms",
+        "classification": "TN",
+        "actual_stimuli": [
+          0,
+          0.08000000000000007,
+          0.40000000000000036,
+          0.47999999999999865
+        ],
+        "actual_spikes": [],
+        "early_spike_before_fourth": false
+      }
+    ],
+    "PNG": 32,
+    "SVG": 32,
+    "visual_review_complete": false,
+    "independent_primary_readback_pending": true,
+    "new_Train": false,
+    "new_calibration": false,
+    "scientific_verdict": null
+  }
+}

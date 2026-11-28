@@ -1,0 +1,247 @@
+{
+  "kind": "timelearner_actual_N0_recorded_search_profile",
+  "schema_version": 1,
+  "host": "M40",
+  "observed_utc": "2026-11-22T07:05:37.909857+00:00",
+  "source_summary": {
+    "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-classic-count-training-m40-a1/train/native/train_stopped_summary.json",
+    "sha256": "2bae5938d9a956d74b4afb9bb0d005cefe33da2a2f3747adfc234ca54c444a4b",
+    "size": 52795350
+  },
+  "source_prior_full_audit": {
+    "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-count-full-primary-audit-m40-a3/worker/tmp/matched-count-training-audit.json",
+    "sha256": "5e8b1874eaee84aaa474078f1cd62906457798297851b7339d3b0f6384c8a578",
+    "size": 112193
+  },
+  "source_consumed_job": {
+    "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-classic-count-training-m40-a1/train/native/job.json",
+    "sha256": "bee1fb79956b8bd2460c27c763b3957a311b7bbf90f64269c81f6ca989a1f7a6",
+    "size": 940928
+  },
+  "topology": "Classic",
+  "normalization": "N0",
+  "outcome": "budget_exhausted",
+  "reason": "native_training_time_budget_exhausted",
+  "actual_terminal_model_revision": "b803678f5e47c7a393658d8847aba0a7b7f1237ece576043a6feb044473214d8",
+  "actual_terminal_parameters": [
+    {
+      "length": 241,
+      "resistance": 86000000,
+      "synapses": 6
+    },
+    {
+      "length": 201,
+      "resistance": 86000000,
+      "synapses": 6
+    },
+    {
+      "length": 1,
+      "resistance": 86000000,
+      "synapses": 1
+    },
+    {
+      "length": 1,
+      "resistance": 86000000,
+      "synapses": 1
+    }
+  ],
+  "historical_model_revision": "b803678f5e47c7a393658d8847aba0a7b7f1237ece576043a6feb044473214d8",
+  "historical_parameters": [
+    {
+      "length": 241,
+      "resistance": 86000000,
+      "synapses": 6
+    },
+    {
+      "length": 201,
+      "resistance": 86000000,
+      "synapses": 6
+    },
+    {
+      "length": 1,
+      "resistance": 86000000,
+      "synapses": 1
+    },
+    {
+      "length": 1,
+      "resistance": 86000000,
+      "synapses": 1
+    }
+  ],
+  "reference_complete": true,
+  "tolerances": {
+    "amplitude_absolute": 1e-05,
+    "amplitude_relative": 0,
+    "sync": 0.02
+  },
+  "recorded_candidates": 50,
+  "producer_search_probes": 101,
+  "producer_applied_edits": 48,
+  "by_input": [
+    {
+      "input_index": 0,
+      "measured_candidates": 25,
+      "timing_ready": 7,
+      "amplitude_ready": 1,
+      "jointly_ready": 0,
+      "distinct_commanded_vectors": 24,
+      "repeated_commanded_vector_presentations": 1,
+      "recorded_lengths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        241
+      ],
+      "recorded_counts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "amplitude_residual_range": [
+        -0.024270498304848176,
+        0
+      ]
+    },
+    {
+      "input_index": 1,
+      "measured_candidates": 25,
+      "timing_ready": 7,
+      "amplitude_ready": 1,
+      "jointly_ready": 0,
+      "distinct_commanded_vectors": 24,
+      "repeated_commanded_vector_presentations": 1,
+      "recorded_lengths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        201
+      ],
+      "recorded_counts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "amplitude_residual_range": [
+        -0.024033458249806294,
+        0
+      ]
+    },
+    {
+      "input_index": 2,
+      "measured_candidates": 0,
+      "timing_ready": 0,
+      "amplitude_ready": 0,
+      "jointly_ready": 0,
+      "distinct_commanded_vectors": 0,
+      "repeated_commanded_vector_presentations": 0,
+      "recorded_lengths": [],
+      "recorded_counts": [],
+      "amplitude_residual_range": null
+    },
+    {
+      "input_index": 3,
+      "measured_candidates": 0,
+      "timing_ready": 0,
+      "amplitude_ready": 0,
+      "jointly_ready": 0,
+      "distinct_commanded_vectors": 0,
+      "repeated_commanded_vector_presentations": 0,
+      "recorded_lengths": [],
+      "recorded_counts": [],
+      "amplitude_residual_range": null
+    }
+  ],
+  "terminal_fresh_all_input_verification": false,
+  "consumed_search_configuration": {
+    "bounds": [
+      {
+        "maximum_length": 256,
+        "maximum_resistance": 86000000,
+        "maximum_synapses": 128,
+        "minimum_length": 1,
+        "minimum_resistance": 86000000,
+        "minimum_synapses": 1
+      },
+      {
+        "maximum_length": 256,
+        "maximum_resistance": 86000000,
+        "maximum_synapses": 128,
+        "minimum_length": 1,
+        "minimum_resistance": 86000000,
+        "minimum_synapses": 1
+      },
+      {
+        "maximum_length": 256,
+        "maximum_resistance": 86000000,
+        "maximum_synapses": 128,
+        "minimum_length": 1,
+        "minimum_resistance": 86000000,
+        "minimum_synapses": 1
+      },
+      {
+        "maximum_length": 1,
+        "maximum_resistance": 86000000,
+        "maximum_synapses": 1,
+        "minimum_length": 1,
+        "minimum_resistance": 86000000,
+        "minimum_synapses": 1
+      }
+    ],
+    "maximum_candidates_per_input": 24,
+    "maximum_edits": 1280,
+    "maximum_invalid_observations": 4,
+    "maximum_probes": 160,
+    "maximum_sweeps": 1,
+    "resistance_subdivision_depth": 8,
+    "tolerances": {
+      "amplitude_absolute": 1e-05,
+      "amplitude_relative": 0,
+      "sync": 0.02
+    }
+  },
+  "command_vector_repetition_is_not_full_model_or_protocol_equivalence": true,
+  "full_primary_audit_not_repeated": true,
+  "classification_assessed": false,
+  "scientific_verdict": null,
+  "full_projection": {
+    "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-count-recorded-search-profile-m40-a1/recorded-search-profile.json",
+    "sha256": "27d28f88e89c9bd4e354c21c78310a7edca9b8eac39c7bf858693585fa23de8f",
+    "size": 67108
+  }
+}

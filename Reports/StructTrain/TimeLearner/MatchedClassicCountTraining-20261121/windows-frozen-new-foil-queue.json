@@ -1,0 +1,56 @@
+{
+  "kind": "timelearner_compact_fixed_count_new_foil_queue",
+  "schema_version": 1,
+  "dispatch": {
+    "dispatched": true,
+    "job": "windows-count-frozen-new-foils-a1",
+    "controls_commit": "40c6f5f77f0fb89b40189d8ee8e1aacbe797b5cc",
+    "source_root": "30e07bb4a0e753e1b88fb72bd8009e270ffdf973",
+    "task": {
+      "scientific_verdict": null,
+      "instance": "{1A80FB84-9B62-4CEB-8130-A42F575B4450}",
+      "execution_time_limit": "PT6H",
+      "task": "TimeLearner-windows-count-frozen-new-foils-a1",
+      "engine_pid": 12756
+    },
+    "expected_trials": 27,
+    "source_DATA_preserved": true,
+    "no_new_Train": true,
+    "threshold_frozen": 0.06760345444849075,
+    "model_revision": "364de8215f2f818c7ecebf2c31f3650afa719f7c53b20901374dea6c8d68a5d4",
+    "waits_only_for_resource_build_closure": true,
+    "failed_closed_build_does_not_invalidate_old_scientific_runtime": true,
+    "scientific_verdict": null
+  },
+  "state": {
+    "stage": "waiting-for-owned-SDK-build-closure-before-scientific-evaluation",
+    "observed_utc": "2026-11-22T01:05:07.381144+00:00",
+    "scientific_verdict": null
+  },
+  "prepared": {
+    "study": {
+      "protocol": "new_foils"
+    },
+    "expected_trials": 27,
+    "model_revision": "364de8215f2f818c7ecebf2c31f3650afa719f7c53b20901374dea6c8d68a5d4",
+    "threshold": 0.06760345444849075,
+    "condition_fingerprint": "3b4a2738118a98d77c20a048f85b843455fc991f72821d536e0475392cd6f919",
+    "memory_bytes": 4294967296,
+    "maximum_wall_seconds": 7200
+  },
+  "declaration_commit": {
+    "commit": "74529191c946f8c8f633b20d796e17fdcbf638a6"
+  },
+  "actual_owner": {
+    "pid": 21344,
+    "matching": true,
+    "running": true,
+    "identity": {
+      "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+      "creation_filetime": "134397830988720307"
+    }
+  },
+  "native_execution_started": false,
+  "actual_counts": null,
+  "scientific_verdict": null
+}

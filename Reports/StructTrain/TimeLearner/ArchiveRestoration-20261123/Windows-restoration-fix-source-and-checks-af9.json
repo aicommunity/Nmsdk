@@ -1,0 +1,74 @@
+{
+  "kind": "timelearner_Windows_primary_restoration_fix_and_complete_external_recovery",
+  "schema_version": 1,
+  "observed_failure": {
+    "path_characters": 264,
+    "error": "FileNotFoundError at path.open(xb), ordinary root with long descendant",
+    "original_log": "original-long-path-failure-af3.log"
+  },
+  "production_source_contents": {
+    "Scripts/StructTrain/TimeLearner/external_archive.py": {
+      "bytes": 12942,
+      "sha256": "75420d9788c367284ec32789fa8c88f74406bd85f78a665b70555ccdf435606e"
+    },
+    "Scripts/StructTrain/TimeLearner/portable_primary.py": {
+      "bytes": 16861,
+      "sha256": "a856700f7b02d4aad60906ba7f9282a881ebf39f166490cfb222b0359e47b63c"
+    },
+    "Scripts/StructTrain/TimeLearner/source_envelope_bundle.py": {
+      "bytes": 10418,
+      "sha256": "8dda0b2d2c52a40c57ae1b49617c51c177db1974d4376bb5b6db327c4f5f93ab"
+    },
+    "Scripts/StructTrain/TimeLearner/tests/test_classic_count_primary_restoration.py": {
+      "bytes": 6710,
+      "sha256": "a05389c750f08d55152d184d71739d0a17aa0d062f472960ec4f8f3df14adb54"
+    },
+    "Scripts/StructTrain/TimeLearner/tests/test_external_archive.py": {
+      "bytes": 12270,
+      "sha256": "fd246a063a126150a40231cbae1fec9a0574d7e5b9ca970dccff17a4354fd3ff"
+    },
+    "Scripts/StructTrain/TimeLearner/tests/test_primary_long_descendants.py": {
+      "bytes": 4722,
+      "sha256": "7ba273489deb249541491c458e6413b8eb54a99407388eccdfe3b5f2440d100c"
+    }
+  },
+  "recovery": "full5129-independent-recovery-af4.json",
+  "recovered_members": 5129,
+  "recovered_expanded_bytes": 12970896542,
+  "recognition_trials_read": 16,
+  "samples_per_trial": 4001,
+  "archive_IO_regressions": {
+    "kind": "timelearner_archive_IO_regressions",
+    "schema_version": 1,
+    "expected": 14,
+    "observed": 14,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": true,
+    "native_execution": false,
+    "diagnostic_child_errors": [],
+    "log_sha256": "9e125adaf70abbdd4fd7066287e949658b34dc52615fa65034dbafaf5b7b6cf3",
+    "finished_utc": "2026-11-23T13:22:34.430973+00:00",
+    "prior_attempts_retained": [
+      "af6/result.json",
+      "af7/result.json"
+    ],
+    "fix": "Fixture restores only its archive-root key, preserving inherited native empty Git config values"
+  },
+  "extra_defect": {
+    "owner": "test fixture environment scope",
+    "diagnosed_child_error": "missing config value GIT_CONFIG_VALUE_0",
+    "fix": "restore only archive root key; do not clear/repopulate unrelated inherited variables",
+    "production_history_changed": false
+  },
+  "new_native_execution": false,
+  "new_scientific_result": false,
+  "model_runtime_changed": false,
+  "whole_stage2_accepted": false,
+  "remaining_scope": [
+    "POSIX data-IO regression confirmation",
+    "other pending primary corpora",
+    "live SMB/UNC path I/O was not exercised"
+  ]
+}

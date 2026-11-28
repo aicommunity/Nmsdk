@@ -8,6 +8,7 @@
 #include "../../../Libraries/Nmsdk-PulseLib/Core/TimeLearner/NativeCompositeTrainingEvidence.h"
 #include "../Support/ConsoleLikeInit.h"
 #include "../Support/PhysicalArchiveComparison.h"
+#include "../Support/RecordedClassicModelFixture.h"
 #include "../../../Rdk/Core/Engine/UComponentFactory.h"
 #include <QFile>
 #include <QFileInfo>
@@ -164,10 +165,7 @@ TEST(NativeLoadHistory, DetachedChildAt20000) { RunLoadHistory(20000, PreviousGr
 TEST(NativeArchiveOwnership, MoveRetainsDecodedPrimaryStorageAndCopyIsIndependent)
 {
     using namespace NMSDK::TimeLearner;
-    QFile fixture(QFileInfo(QString::fromLocal8Bit(__FILE__)).dir().absoluteFilePath(
-        "../Data/NativeWindowPackage6Classic/learned-state.json.qz"));
-    ASSERT_TRUE(fixture.open(QIODevice::ReadOnly));
-    const auto raw = qUncompress(fixture.readAll());
+    const auto raw = NmsdkTests::ReadRecordedClassicModelFixture();
     ASSERT_EQ(QCryptographicHash::hash(raw, QCryptographicHash::Sha256).toHex(),
         QByteArray("1c8d50628e7eea87c2bad230428526000802ec73e9627bd5d7d7f414bb69e05c"));
     QJsonParseError error;
@@ -209,10 +207,7 @@ TEST(NativeClassImageReplay, ActualMembraneCopyAndLoadStages)
     auto clock = dynamic_pointer_cast<UNet>(core.environment->GetModel());
     ASSERT_TRUE(clock);
     clock->SetGlobalTimeStep(2000);
-    QFile fixture(QFileInfo(QString::fromLocal8Bit(__FILE__)).dir().absoluteFilePath(
-        "../Data/NativeWindowPackage6Classic/learned-state.json.qz"));
-    ASSERT_TRUE(fixture.open(QIODevice::ReadOnly));
-    const auto raw = qUncompress(fixture.readAll());
+    const auto raw = NmsdkTests::ReadRecordedClassicModelFixture();
     ASSERT_EQ(QCryptographicHash::hash(raw, QCryptographicHash::Sha256).toHex(),
         QByteArray("1c8d50628e7eea87c2bad230428526000802ec73e9627bd5d7d7f414bb69e05c"));
     QJsonParseError error;
@@ -299,11 +294,7 @@ TEST(NativeClassImageReplay, ClassicActualSavedModelAcrossNativeGraphRelease)
     auto clock = dynamic_pointer_cast<UNet>(core.environment->GetModel());
     ASSERT_TRUE(clock);
     clock->SetGlobalTimeStep(2000);
-    const auto filename = QFileInfo(QString::fromLocal8Bit(__FILE__)).dir().absoluteFilePath(
-        "../Data/NativeWindowPackage6Classic/learned-state.json.qz");
-    QFile fixture(filename);
-    ASSERT_TRUE(fixture.open(QIODevice::ReadOnly)) << filename.toStdString();
-    const auto raw = qUncompress(fixture.readAll());
+    const auto raw = NmsdkTests::ReadRecordedClassicModelFixture();
     ASSERT_EQ(raw.size(), 4812359);
     ASSERT_EQ(QCryptographicHash::hash(raw, QCryptographicHash::Sha256).toHex(),
         QByteArray("1c8d50628e7eea87c2bad230428526000802ec73e9627bd5d7d7f414bb69e05c"));

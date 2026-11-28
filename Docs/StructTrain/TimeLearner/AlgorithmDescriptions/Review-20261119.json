@@ -1,0 +1,196 @@
+{
+  "kind": "timelearner_algorithm_document_user_review",
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "source_document_sha256": "8d015a5e68098278e1be465268cf28e309a23424622ef5d3b18027d4350015a7",
+  "source_document_preserved": true,
+  "source_snapshot": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-19-revision4-review\\inputs\\TimeLearnerClassicAlgorithms.user-comments.ru.docx",
+  "previously_accepted_classic_sha256": "9e02302d90532053c2e17c3e7c0415243e6608bbe2b8c89c89e9c6449e854612",
+  "comments": [
+    {
+      "id": "0",
+      "comment": "Все термины и слова по русски",
+      "anchor": "storage physics ",
+      "topic": "Русский язык всего научного изложения",
+      "accepted_action": "Переписать основной текст, подписи, легенды и схемы по-русски; точные программные имена вынести в техническое соответствие.",
+      "applies_to": [
+        "Classic",
+        "Branch"
+      ],
+      "status": "implemented_and_visually_verified",
+      "implemented_rules": "Docs/StructTrain/TimeLearner/ScientificReportRules.ru.md",
+      "document_verification": {
+        "action": "Русский основной текст, подписи, оси, схемы и пояснения; точные программные имена явно отделены в таблице реализации.",
+        "pages": "Classic1–32; Branch1–29",
+        "publication": "Reports/StructTrain/TimeLearner/AlgorithmDescriptions-20261120/publication.json",
+        "both_documents": true
+      }
+    },
+    {
+      "id": "1",
+      "comment": "В условных единицах, приведенных к рабочим значениям модели (так можно сказать?)",
+      "anchor": "Потенциалы здесь в native model units; соответствие СИ не подтверждено.",
+      "topic": "Условные единицы потенциала",
+      "accepted_action": "Использовать условные единицы потенциала модели; не заявлять выполненное приведение шкалы, если значения не пересчитывались.",
+      "applies_to": [
+        "Classic",
+        "Branch"
+      ],
+      "status": "implemented_and_visually_verified",
+      "implemented_rules": "Docs/StructTrain/TimeLearner/ScientificReportRules.ru.md",
+      "document_verification": {
+        "action": "Условные единицы потенциала модели без выдуманного пересчёта кривых; время в секундах, параметры физического профиля обозначены отдельно.",
+        "pages": "Classic2–3; Branch2–3; все временные рисунки",
+        "publication": "Reports/StructTrain/TimeLearner/AlgorithmDescriptions-20261120/publication.json",
+        "both_documents": true
+      }
+    },
+    {
+      "id": "2",
+      "comment": "Эти понятия нужно иллюстриррвать рисунками полученными на данных, с пояснениями. Замечание относится и к другим понятиям которые были выше и будут далее. Больше иллюстраций из экспериментов с доработками и пояснениями.",
+      "anchor": "Отдельная ранняя вершина допустима при хвостовом влиянии позднего ответа. Истинное слияние, отсутствие вершины, неполное окно или неверная привязка к модели ",
+      "topic": "Иллюстрации понятий на данных",
+      "accepted_action": "Показать закреплённую вершину, отдельную раннюю вершину и влияние хвостов, неоднозначность, отсутствие вершины и неполное окно на реальных наблюдениях с пояснениями.",
+      "applies_to": [
+        "Classic",
+        "Branch"
+      ],
+      "status": "implemented_and_visually_verified",
+      "implemented_rules": "Docs/StructTrain/TimeLearner/ScientificReportRules.ru.md",
+      "document_verification": {
+        "action": "Измеренные иллюстрации закреплённого и общего максимумов, раздельной ранней вершины, пика с плечом и отказа старого назначения; намеренно скрытая часть полной записи прямо названа методическим пояснением.",
+        "pages": "Classic3–7; Branch3–7",
+        "publication": "Reports/StructTrain/TimeLearner/AlgorithmDescriptions-20261120/publication.json",
+        "both_documents": true
+      }
+    },
+    {
+      "id": "3",
+      "comment": "Все схемы пока плохо объясняют специфику алгоритмов обучения. возьми за основу наши публикации, и используемую терминологию. \n«E:\\OneDrive\\Science\\AI\\AIMI\\Proceeding\\2015-04 АИСТ\\neurons\\Mathematical model of the impulses transformation processes in natural neurons for biologically inspired control systems development.pdf»\nМодель нейрона.\n\n“E:\\OneDrive\\Science\\AI\\AIMI\\Proceeding\\2022-Информатика и Автоматизация (СПИИ РАН)\\Корсаков\\1_прошла_лит_редактирование.pdf”\n\nСтруктурное обучение",
+      "anchor": "обучения",
+      "topic": "Научный стиль и терминология авторов",
+      "accepted_action": "Публикации служат образцом стиля и терминологии; объяснение текущего алгоритма строится самостоятельно по коду и данным, с развитыми иллюстрациями.",
+      "applies_to": [
+        "Classic",
+        "Branch"
+      ],
+      "status": "implemented_and_visually_verified",
+      "implemented_rules": "Docs/StructTrain/TimeLearner/ScientificReportRules.ru.md",
+      "document_verification": {
+        "action": "Оба предоставленных источника изучены как образец стиля и терминологии. Описаны реальные правила действующего контроллера, включая логарифмическую сетку и измеренное уточнение; историческая блок-схема не выдана за текущую.",
+        "pages": "Classic1–16; Branch1–16",
+        "publication": "Reports/StructTrain/TimeLearner/AlgorithmDescriptions-20261120/publication.json",
+        "both_documents": true
+      }
+    },
+    {
+      "id": "4",
+      "comment": "Рисунки формируй с помощью специальных инструментов.",
+      "anchor": "",
+      "topic": "Специализированные средства рисунков",
+      "accepted_action": "Использовать Graphviz для блок-схем и UML и Matplotlib для измеренных графиков; сохранять текстовые исходники и происхождение данных.",
+      "applies_to": [
+        "Classic",
+        "Branch"
+      ],
+      "status": "implemented_and_visually_verified",
+      "implemented_rules": "Docs/StructTrain/TimeLearner/ScientificReportRules.ru.md",
+      "document_verification": {
+        "action": "Graphviz строит топологии, блок-схемы и UML; Matplotlib строит реальные волны и измеренные кандидаты. Сохранены DOT, SVG, первичные выборки, источники и контрольные суммы.",
+        "pages": "Все рисунки двух документов и пакет публикации",
+        "publication": "Reports/StructTrain/TimeLearner/AlgorithmDescriptions-20261120/publication.json",
+        "both_documents": true
+      }
+    },
+    {
+      "id": "5",
+      "comment": "Слетел шрифт",
+      "anchor": "Построить ModelSpec штатными механизмами storage и RdkЗахватить валидные собственные A_i⁽⁰⁾ на исходной структуреПока имеются объявленные бюджеты и допустимые действия  Выбрать кандидат с учётом топологии и измеренных точек  На границе применить edit и проверить эффективный граф  Через штатный scheduler завершить требуемую пробу  При invalid выполнить ограниченное recovery либо остановку  Вычислить амплитудный и временные signed residuals  Сохранить реально измеренную лучшую точку и следующий шагПри готовности провести свежую проверку всех входовВыдать Exact только при выполнении исходных допусковЭкспортировать solo или честно помеченное stopped состояниеВыполнить объявленные conversion и calibration отдельноЗаморозить модель и порог перед полным native Test",
+      "topic": "Шрифт псевдокода",
+      "accepted_action": "Явно задать кириллический шрифт и оформление; проверить псевдокод и математические символы после отрисовки каждого документа.",
+      "applies_to": [
+        "Classic",
+        "Branch"
+      ],
+      "status": "implemented_and_visually_verified",
+      "implemented_rules": "Docs/StructTrain/TimeLearner/ScientificReportRules.ru.md",
+      "document_verification": {
+        "action": "Псевдокод в Consolas10.5 с явными четырьмя наборами шрифтов и проверенной кириллицей. Формулы —11 редактируемых OMML на документ; исправлен разбор математических литералов при отрисовке.",
+        "pages": "Classic9; Branch9; формулы Classic2–3,12 и Branch3,12",
+        "publication": "Reports/StructTrain/TimeLearner/AlgorithmDescriptions-20261120/publication.json",
+        "both_documents": true
+      }
+    },
+    {
+      "id": "6",
+      "comment": "Такого рода утрвеждения тоже требую иллюстраций",
+      "anchor": "N1 использует индивидуальные положительные границы Rs. Измеренный bracket может предложить уточнение, но не доказывает глобальную монотонность. Непоследовательные или немонотонные точки оставляют в силе ограниченный просмотр кандидатов. Предсказанная задержка определяет порядок поиска, а измеренный пик подтверждает остаток.",
+      "topic": "Измеренные примеры поиска",
+      "accepted_action": "Иллюстрировать ограниченный поиск сопротивления и целочисленную нормализацию реальными измеренными кандидатами; разделять изменение одного параметра и хронологию разных моделей.",
+      "applies_to": [
+        "Classic",
+        "Branch"
+      ],
+      "status": "implemented_and_visually_verified",
+      "implemented_rules": "Docs/StructTrain/TimeLearner/ScientificReportRules.ru.md",
+      "document_verification": {
+        "action": "Измеренные последовательности N0 и N1 показывают все изменяемые параметры, амплитудную и временную ошибки и увеличенный исходный допуск. Последовательность разных кандидатов не выдаётся за однофакторную зависимость.",
+        "pages": "Classic10–14; Branch10–14",
+        "publication": "Reports/StructTrain/TimeLearner/AlgorithmDescriptions-20261120/publication.json",
+        "both_documents": true
+      }
+    },
+    {
+      "id": "7",
+      "comment": "Для подтвержденных примеров нужно приводить графики успешных и ложных срабатываний  на предъявляемый паттерн. Для характерных неудачных примеров обучения - тоже иллюстрации того что получилось.",
+      "anchor": "работы",
+      "topic": "Графики успехов и ошибок",
+      "accepted_action": "Для подтверждённых примеров привести реальные правильные и ложные срабатывания и правильное отклонение, а для характерных неудачных обучений показать фактически полученный отклик.",
+      "applies_to": [
+        "Classic",
+        "Branch"
+      ],
+      "status": "implemented_and_visually_verified",
+      "implemented_rules": "Docs/StructTrain/TimeLearner/ScientificReportRules.ru.md",
+      "document_verification": {
+        "action": "Включены реальные TP, TN и имеющиеся FP девяти примеров; остановки и неудачные измерения явно отделены от распознавания. В сопроводительной галерее64 предъявления всех паттернов;25 характерных графиков включены в Word.",
+        "pages": "Classic16–28; Branch16–26",
+        "publication": "Reports/StructTrain/TimeLearner/AlgorithmDescriptions-20261120/publication.json",
+        "both_documents": true
+      }
+    }
+  ],
+  "followup_clarification": "Не брать объяснения алгоритмов из публикаций; объяснять текущие алгоритмы в том же стиле и терминологии, с более развитыми иллюстрациями.",
+  "literature": [
+    {
+      "id": "neuron-model-2015",
+      "path": "E:\\OneDrive\\Science\\AI\\AIMI\\Proceeding\\2015-04 АИСТ\\neurons\\Mathematical model of the impulses transformation processes in natural neurons for biologically inspired control systems development.pdf",
+      "sha256": "54f4d446d04453ced45de6bad11a3085e52a4f86eea94b5066fea21bb9f1e7ab",
+      "bytes": 587174
+    },
+    {
+      "id": "structural-learning-2022",
+      "path": "E:\\OneDrive\\Science\\AI\\AIMI\\Proceeding\\2022-Информатика и Автоматизация (СПИИ РАН)\\Корсаков\\1_прошла_лит_редактирование.pdf",
+      "sha256": "81770730bc1334ed1a2fec59739e458f78bf1d60c45304ae52426ac42a8616bc",
+      "bytes": 1851345
+    }
+  ],
+  "style_reference_only": true,
+  "current_implementation_and_measurements_are_algorithm_sources": true,
+  "both_documents_reworked": true,
+  "all_pages_visually_reviewed": true,
+  "all_comments_closed": true,
+  "generated_binary_in_root_git": false,
+  "review_completion_date": "2026-11-20",
+  "closure_role": "Agent implementation and page review; does not claim user editorial approval",
+  "publication": "Reports/StructTrain/TimeLearner/AlgorithmDescriptions-20261120/publication.json",
+  "v5_verification": {
+    "review": "CurrentScienceReleaseReview-20261125.json",
+    "all_eight_comments_applied_to_both": true,
+    "Classic_pages": 81,
+    "Branch_pages": 74,
+    "all_current_page_pixels_viewed": true,
+    "user_commented_source_preserved": true,
+    "published_v4_unchanged": true
+  }
+}

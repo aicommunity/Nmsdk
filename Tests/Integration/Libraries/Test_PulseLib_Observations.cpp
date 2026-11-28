@@ -157,6 +157,8 @@ TEST(TimeLearnerObservations, Schema4WriterRoundtripFixture)
         EXPECT_NE(line.find("fnv1a64:"), std::string::npos);
     }
     EXPECT_EQ(count, 8);
+    // Windows cannot delete the fixture while this reader still owns the CSV.
+    csv.close();
     // A caller may retain this clearly labelled unit fixture for the production
     // Python scorer roundtrip. It is never a scientific model evaluation.
     if(!configured)

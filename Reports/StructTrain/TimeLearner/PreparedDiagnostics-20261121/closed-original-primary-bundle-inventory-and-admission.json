@@ -1,0 +1,171 @@
+{
+  "roots": [
+    {
+      "name": "s11-terminal-n4-branch-on-m40-a2",
+      "files": 3046,
+      "total_bytes": 3509537970,
+      "largest": [
+        {
+          "path": "branch-on/native/train_stopped_state.json",
+          "bytes": 1164781893
+        },
+        {
+          "path": "branch-on/native/composite-measurements/index.json",
+          "bytes": 991351183
+        },
+        {
+          "path": "branch-on/native/train_stopped_summary.json",
+          "bytes": 384127334
+        },
+        {
+          "path": "branch-on/native/composite-measurements/group-000115.json",
+          "bytes": 6582822
+        },
+        {
+          "path": "branch-on/native/composite-measurements/group-000123.json",
+          "bytes": 6582819
+        }
+      ]
+    },
+    {
+      "name": "s11-terminal-n4-branch-on-m40-a2-controller",
+      "files": 26,
+      "total_bytes": 394590,
+      "largest": [
+        {
+          "path": "tool-source.json",
+          "bytes": 359675
+        },
+        {
+          "path": "lease-recovery.json",
+          "bytes": 4521
+        },
+        {
+          "path": "supervisor-result.json",
+          "bytes": 4474
+        },
+        {
+          "path": "runtime.json",
+          "bytes": 4455
+        },
+        {
+          "path": "process/contained/runtime.json",
+          "bytes": 4455
+        }
+      ]
+    },
+    {
+      "name": "s11-prepared-long-model-baseline-m40-a3",
+      "files": 39,
+      "total_bytes": 3722050089,
+      "largest": [
+        {
+          "path": "native/model.json",
+          "bytes": 1240846731
+        },
+        {
+          "path": "native/model-after.json",
+          "bytes": 1240846731
+        },
+        {
+          "path": "native/job.json",
+          "bytes": 1229798525
+        },
+        {
+          "path": "native/trial-7.json",
+          "bytes": 1294878
+        },
+        {
+          "path": "native/trial-5.json",
+          "bytes": 1294855
+        }
+      ]
+    },
+    {
+      "name": "s11-long-model-baseline-m40-a2",
+      "files": 1931,
+      "total_bytes": 5415067441,
+      "largest": [
+        {
+          "path": "branch/native/model.json",
+          "bytes": 1240846731
+        },
+        {
+          "path": "branch/native/job.json",
+          "bytes": 1229798525
+        },
+        {
+          "path": "branch/input/job.json",
+          "bytes": 817885174
+        },
+        {
+          "path": "branch-diagnostic-job.json",
+          "bytes": 817885174
+        },
+        {
+          "path": "branch/input/source/train_stopped_state.json",
+          "bytes": 400189937
+        }
+      ]
+    }
+  ],
+  "control_files": [
+    "launch.log",
+    ".gitattributes",
+    "manifest.json",
+    "request.json"
+  ],
+  "output_exists": true,
+  "controller-result.json": {
+    "kind": "timelearner_process_result",
+    "schema_version": 2,
+    "execution": "process_error",
+    "reason": "nonzero_exit_or_missing_terminal_status",
+    "returncode": 1,
+    "wall_seconds": 0.45990442391484976,
+    "model_time": null,
+    "runtime_provenance": "loaded_files_captured",
+    "mapping_error": null,
+    "runtime_fingerprint": "437c67aeb54c0932820ba71ecba5f55ef8351e2f78fcdbca8300012c097065a0",
+    "ownership_scope": "bound_cgroup",
+    "all_processes_closed": true,
+    "scientific_verdict": null,
+    "operational_diagnostics": {
+      "kind": "timelearner_operational_diagnostics",
+      "schema_version": 1,
+      "policy": "owned-streams-v1",
+      "status": "clear",
+      "error_records": 0,
+      "warning_records": 0,
+      "unclassified_stderr_chunks": 0,
+      "reasons": [],
+      "examples": [],
+      "streams": [
+        {
+          "path": "stdout.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "contained_streams_match": true,
+      "scientific_verdict": null
+    }
+  },
+  "worker/terminal.json": {
+    "operation_passed": false,
+    "operation": "closed-primary-bundle",
+    "heartbeat_errors": [],
+    "lease_release": "controller only after whole cgroup closure",
+    "selected_validation_scope_requires_source_review": true,
+    "scientific_verdict": null
+  },
+  "worker/exception.json": {
+    "reason": "reservation_capacity_exhausted",
+    "traceback": "Traceback (most recent call last):\n  File \"/media/user/Data/TimeLearnerRefactor/source-diagnostic-memory-a1/Scripts/StructTrain/TimeLearner/owned_python_job.py\", line 239, in _worker\n    lease = registry.reserve(request['job_id'], resources, ttl_seconds=120,\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/media/user/Data/TimeLearnerRefactor/source-diagnostic-memory-a1/Scripts/StructTrain/TimeLearner/resource_reservations.py\", line 310, in reserve\n    _require(all(used[key]+demands[key] <= self.capacity[key] for key in used),\n  File \"/media/user/Data/TimeLearnerRefactor/source-diagnostic-memory-a1/Scripts/StructTrain/TimeLearner/resource_reservations.py\", line 25, in _require\n    raise ReservationError(reason)\nScripts.StructTrain.TimeLearner.resource_reservations.ReservationError: reservation_capacity_exhausted\n"
+  }
+}

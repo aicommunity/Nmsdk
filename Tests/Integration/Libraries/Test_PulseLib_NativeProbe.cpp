@@ -392,7 +392,7 @@ INSTANTIATE_TEST_SUITE_P(TopologiesAndRates,NativeProbeRestart,::testing::Values
     std::make_pair(false,20000u),std::make_pair(true,20000u)));
 
 class NativeDatasetEvents : public ::testing::TestWithParam<unsigned> {};
-TEST_P(NativeDatasetEvents, NoSyntheticZeroTimestampBeforeFirstEmission)
+void DatasetEmissionHistory(unsigned frequency,double interval,unsigned expectedEdges,const char* tag)
 {
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();
     core.environment->DestroyModel();core.environment->SetUseIndTimeStepFlag(false);
@@ -400,17 +400,18 @@ TEST_P(NativeDatasetEvents, NoSyntheticZeroTimestampBeforeFirstEmission)
     core.environment->GetTime().SetTime(0);
     auto dataset=dynamic_pointer_cast<NDatasetMatrix>(core.storage->TakeObject("NDatasetMatrix"));ASSERT_TRUE(dataset);
     dataset->Name="Dataset";dataset->NumSamples=1;dataset->NumFeatures=1;dataset->MaxSpikesPerFeature=4;
-    MDMatrix<double> pattern;pattern.Assign(4,1,.001);pattern(0,0)=.01;dataset->MatrixData=pattern;
+    MDMatrix<double> pattern;pattern.Assign(4,1,interval);pattern(0,0)=.01;dataset->MatrixData=pattern;
     dataset->Delay=1.;dataset->StateGeneration=2;
     UEPtr<UContainer> component=dataset;ASSERT_NE(model->AddComponent(component),ForbiddenId);
-    model->SetGlobalTimeStep(GetParam());model->Init();model->Reset();
+    model->SetGlobalTimeStep(frequency);model->Init();model->Reset();
     auto generator=dataset->GetComponentL<NPulseGeneratorTransit>("Generator1",true);ASSERT_TRUE(generator);
     generator->PulseLength=.001;
-    unsigned edges=0;double previous=0.,lastEmission=-1.;QJsonArray events;
-    for(unsigned tick=0;tick<GetParam()/25;++tick)
+    unsigned edges=0;double previous=0.,lastEmission=-1.;QJsonArray events,times,outputs;
+    for(unsigned tick=0;tick<frequency/25;++tick)
     {
         model->Calculate();
         const auto output=generator->Output(0,0);if(output>0. && previous<=0.)++edges;previous=output;
+        times.append(core.environment->GetTime().GetDoubleTime());outputs.append(output);
         for(int i=0;i<generator->OutputPulseTimes.GetCols();++i)
         {
             const auto time=generator->OutputPulseTimes(0,i);
@@ -418,21 +419,35 @@ TEST_P(NativeDatasetEvents, NoSyntheticZeroTimestampBeforeFirstEmission)
         }
         core.environment->IncreaseModelTimeByStep();
     }
-    EXPECT_EQ(events.size(),4);EXPECT_EQ(edges,4u);
+    EXPECT_EQ(events.size(),4);EXPECT_EQ(edges,expectedEdges);
     if(!events.isEmpty())EXPECT_GT(events[0].toDouble(),0.);
-    std::cout<<"native_dataset_events frequency="<<GetParam()<<" edges="<<edges
+    for(int i=0;i<events.size();++i)EXPECT_NEAR(events[i].toDouble(),.01+i*interval,1e-12);
+    std::cout<<"native_dataset_events case="<<tag<<" frequency="<<frequency<<" edges="<<edges
              <<" events="<<QJsonDocument(events).toJson(QJsonDocument::Compact).constData()<<std::endl;
     for(int i=1;i<events.size();++i)EXPECT_GT(events[i].toDouble(),events[i-1].toDouble());
     if(const char* output=std::getenv("TIMELEARNER_PROBE_OUTPUT"))
     {
         const auto directory=QString::fromLocal8Bit(output);ASSERT_TRUE(QDir().mkpath(directory));
-        QFile file(directory+"/DatasetEvents_"+QString::number(GetParam())+".json");ASSERT_TRUE(file.open(QIODevice::WriteOnly|QIODevice::NewOnly));
+        QFile file(directory+"/DatasetEvents_"+QString::fromLatin1(tag)+"_"+QString::number(frequency)+".json");ASSERT_TRUE(file.open(QIODevice::WriteOnly|QIODevice::NewOnly));
         const auto bytes=QJsonDocument(QJsonObject{{"kind","native_dataset_stimulus_events"},
-            {"frequency_hz",int(GetParam())},{"rising_edges",int(edges)},
+            {"frequency_hz",int(frequency)},{"rising_edges",int(edges)},
+            {"interval_s",interval},{"pulse_length_s",.001},
+            {"sample_times_s",times},{"actual_generator_output",outputs},
             {"actual_stimuli",events},{"scientific_training_result",false}}).toJson();
         ASSERT_EQ(file.write(bytes),bytes.size());
     }
     core.environment->DestroyModel();
+}
+TEST_P(NativeDatasetEvents, NoSyntheticZeroTimestampBeforeFirstEmission)
+{
+    // Four separated rectangular pulses must have four rising edges.
+    DatasetEmissionHistory(GetParam(),.003,4u,"separated");
+}
+TEST_P(NativeDatasetEvents, ContiguousRectangularPulsesRetainFourEventsWithOneRisingEdge)
+{
+    // With width equal to spacing the output never falls between emissions.
+    // Event history still records each actual emission, not just the one edge.
+    DatasetEmissionHistory(GetParam(),.001,1u,"contiguous");
 }
 INSTANTIATE_TEST_SUITE_P(Rates,NativeDatasetEvents,::testing::Values(2000u,20000u));
 

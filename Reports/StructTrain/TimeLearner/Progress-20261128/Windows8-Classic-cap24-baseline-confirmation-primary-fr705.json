@@ -1,0 +1,151 @@
+{
+  "kind": "actual_Classic_cap24_stopped_model_original_matrix_real_threshold_confirmation_complete_primary",
+  "schema_version": 1,
+  "members": 644,
+  "expanded_bytes": 858785237,
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/d7/d7e432399a0f04ac35d0e43251e2e71d831629bed9b7a919c7a8b12f2fd95938",
+      "sha256": "d7e432399a0f04ac35d0e43251e2e71d831629bed9b7a919c7a8b12f2fd95938",
+      "bytes": 110007
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/93/93ad6471a412bad4c9286024abbedd364b6d1153704e082cecb75454c90efc6f",
+      "sha256": "93ad6471a412bad4c9286024abbedd364b6d1153704e082cecb75454c90efc6f",
+      "bytes": 30313692
+    }
+  },
+  "analysis": {
+    "kind": "actual_Classic_cap24_stopped_model_original_matrix_real_threshold_confirmation",
+    "schema_version": 1,
+    "source_primary": {
+      "relative_path": "experiments/2026-11-27/Windows14-Classic-cap24-closed-training-primary-fr660.json",
+      "bytes": 5538,
+      "sha256": "c96968a5ac0c49d7f7c02ad53be1052cf2076e6d5cdf231190e95f5cabc4f568"
+    },
+    "controls": [
+      {
+        "role": "conversion",
+        "commit": "72f7f266100884d7355703b1bd4a9201bc7644f8"
+      },
+      {
+        "role": "baseline_owner",
+        "commit": "0620797890123433bc3fe8f67b8f20b31a6a8468"
+      },
+      {
+        "role": "baseline",
+        "commit": "8287a4abde3ca2158cc58d86e39c4102ca6b246a"
+      },
+      {
+        "role": "calibration_owner",
+        "commit": "0704b15cc1c6c19198b396352feb98a96803c180"
+      },
+      {
+        "role": "threshold",
+        "commit": "d80f79f12ecb942666edca735da978a63a68076e"
+      },
+      {
+        "role": "confirmation",
+        "commit": "a3556ebfd41a672772858e57ce2be56abde8ae95"
+      },
+      {
+        "role": "previous_failed_publisher705",
+        "commit": "88b5e360002ecbf175926f02c4fa1a10f1d1d200"
+      },
+      {
+        "role": "previous_failed_publisher719",
+        "commit": "244480346cb2343b3d58da47d422d34f71da20d0"
+      },
+      {
+        "role": "publisher",
+        "commit": "e24a70a190b79deab1d020dfff0aecf67982acb0"
+      }
+    ],
+    "source_training_outcome": "budget_exhausted",
+    "completed_boundary": false,
+    "certificate_transferred": false,
+    "actual_native_threshold_confirmation": true,
+    "protocol": "historical_same_matrix",
+    "rows": [
+      {
+        "role": "baseline",
+        "counts": {
+          "TP": 0,
+          "FP": 0,
+          "FN": 1,
+          "TN": 7,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 0.0,
+          "foil_response_rate": 0.0
+        },
+        "threshold": 100.0,
+        "model_revision": "b1430c16b95da83567a01dcd314dbec36c92d2f6965308119ba66b0e14d0f2fc",
+        "model_document_sha256": "e6aec545e9ab0e16395490ff420ae67cf2600d0da4083db87afd6da1e9ce5086",
+        "complete_observations": 8
+      },
+      {
+        "role": "confirmation",
+        "counts": {
+          "TP": 1,
+          "FP": 2,
+          "FN": 0,
+          "TN": 5,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.75,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.2857142857142857
+        },
+        "threshold": 0.023252703356543683,
+        "model_revision": "2783e83684eef31e0a258e271e0c2c3acf30a9a9ab175fc20632577b5b9028a6",
+        "model_document_sha256": "540ee653dabace4104e6a6c0c001689d01925251f2fbf6f9c5424f3fba00b90c",
+        "complete_observations": 8
+      }
+    ],
+    "loaded_sets": [
+      {
+        "role": "conversion",
+        "records": 48,
+        "all_actual_bytes_preserved": true
+      },
+      {
+        "role": "baseline",
+        "records": 48,
+        "all_actual_bytes_preserved": true
+      },
+      {
+        "role": "threshold",
+        "records": 48,
+        "all_actual_bytes_preserved": true
+      },
+      {
+        "role": "confirmation",
+        "records": 48,
+        "all_actual_bytes_preserved": true
+      }
+    ],
+    "model_revision": "2783e83684eef31e0a258e271e0c2c3acf30a9a9ab175fc20632577b5b9028a6",
+    "same_threshold_eight_complete_frozen_trials": true,
+    "new_Train": false,
+    "new_threshold_search": false,
+    "independent_readback_pending": true,
+    "all_temporal_figures_pending": true,
+    "scientific_verdict": null,
+    "thresholds_from_production_versioned_DATA_auditor": true,
+    "previous_publication_failures_preserved": true
+  },
+  "main_native_loaded_maps_and_actual_bytes_preserved": true,
+  "auxiliary_publisher_loaded_map_captured": true,
+  "independent_readback_pending": true,
+  "scientific_verdict": null
+}

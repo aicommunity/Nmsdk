@@ -1,0 +1,143 @@
+{
+  "kind": "timelearner_native_gate_interim_failure_observation",
+  "schema_version": 1,
+  "prepared": {
+    "prepared": true,
+    "started": false,
+    "action": "native",
+    "attempt": "windows-measured-count-native114-a2",
+    "source": "C:\\Projects\\TimeLearnerWorker\\source-measured-count-native-win-a2",
+    "source_commit": "17ea413eeca88c695d70d4fa900caa1b988abbb4",
+    "specification_blob": "6ae183ef3e1227d6c0c88c57526659643597c898",
+    "controls": "C:\\Projects\\TimeLearnerWorker\\controls\\measured-count-native114-win-a2",
+    "controls_commit": "c35efa1809428a9d08ebdea3d6450e0625d5f6bb",
+    "worker_name": "validate-native.py",
+    "launch_script": "C:\\Projects\\TimeLearnerWorker\\source-measured-count-native-win-a2\\Scripts\\StructTrain\\TimeLearner\\workers\\windows-vs2026\\launch-sdk-build.ps1",
+    "kernel": {
+      "original_named_job_absent": true,
+      "original_main_absent": true,
+      "pid_reused": false
+    },
+    "original_build_accepted": false,
+    "original_execution": "descendants_remaining",
+    "independent_closed_build_audit": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-native-closed-build-audit-a1",
+    "scientific_worker_admitted": false,
+    "expected_cpp_tests": 114
+  },
+  "dispatch": {
+    "dispatched": true,
+    "controls": "C:\\Projects\\TimeLearnerWorker\\controls\\measured-count-native114-win-a2",
+    "controls_commit": "c35efa1809428a9d08ebdea3d6450e0625d5f6bb",
+    "receipt": {
+      "scientific_verdict": null,
+      "tool_commit": "17ea413eeca88c695d70d4fa900caa1b988abbb4",
+      "task": "TimeLearner-windows-measured-count-native114-a2",
+      "specification_git_blob": "6ae183ef3e1227d6c0c88c57526659643597c898",
+      "instance": "{F379D35A-8DC1-4219-A8F0-D949FEC33BDD}",
+      "kind": "windows_native_validation_dispatch",
+      "output": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-native114-a2",
+      "worker_sha256": "cf6ca9fbbccda7e688ed94291b509656fe53339351ed7c92521eb426228d336c"
+    },
+    "expected_cpp_tests": 114,
+    "original_build_accepted": false,
+    "original_execution": "descendants_remaining",
+    "scientific_worker_admitted": false,
+    "scientific_verdict": null
+  },
+  "actual_observation": {
+    "observed_utc": "2026-11-22T03:27:30.652613+00:00",
+    "job": "windows-measured-count-native114-a2",
+    "actual_native": {
+      "pid": 19268,
+      "running": true,
+      "matching": true,
+      "identity": {
+        "executable": "C:\\Projects\\TimeLearnerWorker\\runtime-measured-count-native-win-a2\\Test_PulseLib_StorageComponents.exe",
+        "creation_filetime": "134397910921013266"
+      },
+      "job_name": "Local\\TimeLearner-e3893f88-c41b-457a-b4fd-67782f2ff591"
+    },
+    "test_progress": {
+      "run_lines": 35,
+      "ok_lines": 30,
+      "failed_lines": [
+        "[  FAILED  ] NativeMeasuredCount.ClassicActualSameGeometry2000 (426 ms)",
+        "[  FAILED  ] NativeMeasuredCount.BranchActualSameGeometry2000 (382 ms)",
+        "[  FAILED  ] NativeMeasuredCount.ClassicActualSameGeometry20000 (425 ms)",
+        "[  FAILED  ] NativeMeasuredCount.BranchActualSameGeometry20000 (427 ms)"
+      ],
+      "selected_tail": [
+        "[       OK ] NativeRecoveryPackage7.ClassicN0StoppedRoundtripKeepsResponse (89102 ms)",
+        "[ RUN      ] NativeRecoveryPackage7.BranchN0StoppedRoundtripKeepsResponse",
+        "[       OK ] NativeRecoveryPackage7.BranchN0StoppedRoundtripKeepsResponse (71216 ms)",
+        "[ RUN      ] NativeRecoveryPackage7.ClassicN1StoppedRoundtripKeepsResponse",
+        "[       OK ] NativeRecoveryPackage7.ClassicN1StoppedRoundtripKeepsResponse (89420 ms)",
+        "[ RUN      ] NativeRecoveryPackage7.BranchN1StoppedRoundtripKeepsResponse",
+        "[       OK ] NativeRecoveryPackage7.BranchN1StoppedRoundtripKeepsResponse (71917 ms)",
+        "[ RUN      ] NativeRecoveryPackage7.ClassicCompletedEmptyLedgerIsExplicitRecovery",
+        "[       OK ] NativeRecoveryPackage7.ClassicCompletedEmptyLedgerIsExplicitRecovery (48518 ms)",
+        "[ RUN      ] NativeRecoveryPackage7.BranchCompletedEmptyLedgerIsExplicitRecovery",
+        "[       OK ] NativeRecoveryPackage7.BranchCompletedEmptyLedgerIsExplicitRecovery (38049 ms)",
+        "[ RUN      ] NativeRecoveryPackage7.ClassicAsymmetricC0KeepsChildPhysicsAndResponse"
+      ]
+    }
+  },
+  "failure_context": {
+    "context": [
+      [
+        "[ RUN      ] NativeMeasuredCount.ClassicActualSameGeometry2000",
+        "C:\\Projects\\TimeLearnerWorker\\source-measured-count-native-win-a2\\Tests\\Integration\\Libraries\\Test_PulseLib_CompositeTraining.cpp(474): error: Expected equality of these values:",
+        "  edit.status",
+        "    Which is: 4-byte object <01-00 00-00>",
+        "  NativeEditStatus::Applied",
+        "    Which is: 4-byte object <00-00 00-00>",
+        "native_edit_requires_consumed_probe_boundary",
+        "",
+        "[  FAILED  ] NativeMeasuredCount.ClassicActualSameGeometry2000 (426 ms)"
+      ],
+      [
+        "[ RUN      ] NativeMeasuredCount.BranchActualSameGeometry2000",
+        "C:\\Projects\\TimeLearnerWorker\\source-measured-count-native-win-a2\\Tests\\Integration\\Libraries\\Test_PulseLib_CompositeTraining.cpp(474): error: Expected equality of these values:",
+        "  edit.status",
+        "    Which is: 4-byte object <01-00 00-00>",
+        "  NativeEditStatus::Applied",
+        "    Which is: 4-byte object <00-00 00-00>",
+        "native_edit_requires_consumed_probe_boundary",
+        "",
+        "[  FAILED  ] NativeMeasuredCount.BranchActualSameGeometry2000 (382 ms)"
+      ],
+      [
+        "[ RUN      ] NativeMeasuredCount.ClassicActualSameGeometry20000",
+        "C:\\Projects\\TimeLearnerWorker\\source-measured-count-native-win-a2\\Tests\\Integration\\Libraries\\Test_PulseLib_CompositeTraining.cpp(474): error: Expected equality of these values:",
+        "  edit.status",
+        "    Which is: 4-byte object <01-00 00-00>",
+        "  NativeEditStatus::Applied",
+        "    Which is: 4-byte object <00-00 00-00>",
+        "native_edit_requires_consumed_probe_boundary",
+        "",
+        "[  FAILED  ] NativeMeasuredCount.ClassicActualSameGeometry20000 (425 ms)"
+      ],
+      [
+        "[ RUN      ] NativeMeasuredCount.BranchActualSameGeometry20000",
+        "C:\\Projects\\TimeLearnerWorker\\source-measured-count-native-win-a2\\Tests\\Integration\\Libraries\\Test_PulseLib_CompositeTraining.cpp(474): error: Expected equality of these values:",
+        "  edit.status",
+        "    Which is: 4-byte object <01-00 00-00>",
+        "  NativeEditStatus::Applied",
+        "    Which is: 4-byte object <00-00 00-00>",
+        "native_edit_requires_consumed_probe_boundary",
+        "",
+        "[  FAILED  ] NativeMeasuredCount.BranchActualSameGeometry20000 (427 ms)"
+      ]
+    ],
+    "measured_count_output_exists": false,
+    "stdout_size": 15833,
+    "stdout_observation_sha256": "b294d671b6ec3e256195a8d8a8d5e24acb50b81ff6c43c79d3cdbc6c65794e8d"
+  },
+  "final_JUnit_not_observed": true,
+  "remaining_native_checks_not_cancelled": true,
+  "root_cause": "New fixture edits an unprobed actor before a consumed probe boundary; production editor correctly rejects this.",
+  "fix": "Declare initial input0 Ns8 in NativeModelSpec before ConstructNativeModel; preserve edit guard and probe assertions; set topology-specific Branch search flag.",
+  "algorithm_measurements_reached": false,
+  "scientific_worker_admitted": false,
+  "scientific_verdict": null
+}

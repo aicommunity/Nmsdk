@@ -1,0 +1,103 @@
+{
+  "kind": "timelearner_corrected_count_fixture_sdk_build_queue",
+  "schema_version": 1,
+  "prepared": {
+    "root": "80330fc51c4713c7bd1936be98e43ec0217b2337",
+    "pulse": "b03e13857cd7656a8ff1ff3162d28b25e90bb5a4",
+    "rdk": "561986e9f336ee5914e2d119de90b005e06f3639",
+    "source": "C:\\Projects\\TimeLearnerWorker\\source-measured-count-native-win-a3",
+    "namespace_files": 5138,
+    "namespace_blob": "81927604c521d9be4b81e84f8905851de4bda76f",
+    "specification_blob": "979380fdd3067460489ffad0231ccddace2ebd52",
+    "controls": "C:\\Projects\\TimeLearnerWorker\\controls\\measured-count-native-win-a3",
+    "controls_commit": "15fddf7c1e692899cf102e2204a595a938e534a7",
+    "attempt": "windows-measured-count-native-sdk-build-a3",
+    "expected_cpp_tests": 114
+  },
+  "dispatch": {
+    "queued": true,
+    "controls": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-measured-count-sdk-build-queue-a3",
+    "controls_commit": "8ec02bcc3096f84a81e269b2f11aac935677d1cc",
+    "dispatch": {
+      "instance": "{816A0775-A7D8-4838-BEB9-3C3121761250}",
+      "task": "TimeLearner-windows-measured-count-sdk-build-queue-a3",
+      "engine_pid": 19988,
+      "state": 4
+    },
+    "root": "80330fc51c4713c7bd1936be98e43ec0217b2337",
+    "source_files": 5138,
+    "build_specification_blob": "979380fdd3067460489ffad0231ccddace2ebd52",
+    "build_controls_commit": "15fddf7c1e692899cf102e2204a595a938e534a7",
+    "wait_for_original_native114_and_task_closure": true,
+    "require_exact_original_four_fixture_failures": true,
+    "compilation_not_yet_started": true,
+    "native_tests_not_automatically_restarted": true,
+    "scientific_Train_started": false,
+    "scientific_worker_admitted": false,
+    "scientific_verdict": null
+  },
+  "actual_observation": {
+    "observed_utc": "2026-11-22T03:36:21.511122+00:00",
+    "job": "windows-measured-count-native114-a2",
+    "actual_native": {
+      "pid": 19268,
+      "running": true,
+      "matching": true,
+      "identity": {
+        "executable": "C:\\Projects\\TimeLearnerWorker\\runtime-measured-count-native-win-a2\\Test_PulseLib_StorageComponents.exe",
+        "creation_filetime": "134397910921013266"
+      },
+      "job_name": "Local\\TimeLearner-e3893f88-c41b-457a-b4fd-67782f2ff591"
+    },
+    "test_progress": {
+      "run_lines": 37,
+      "ok_lines": 32,
+      "failed_lines": [
+        "[  FAILED  ] NativeMeasuredCount.ClassicActualSameGeometry2000 (426 ms)",
+        "[  FAILED  ] NativeMeasuredCount.BranchActualSameGeometry2000 (382 ms)",
+        "[  FAILED  ] NativeMeasuredCount.ClassicActualSameGeometry20000 (425 ms)",
+        "[  FAILED  ] NativeMeasuredCount.BranchActualSameGeometry20000 (427 ms)"
+      ],
+      "selected_tail": [
+        "[       OK ] NativeRecoveryPackage7.ClassicN1StoppedRoundtripKeepsResponse (89420 ms)",
+        "[ RUN      ] NativeRecoveryPackage7.BranchN1StoppedRoundtripKeepsResponse",
+        "[       OK ] NativeRecoveryPackage7.BranchN1StoppedRoundtripKeepsResponse (71917 ms)",
+        "[ RUN      ] NativeRecoveryPackage7.ClassicCompletedEmptyLedgerIsExplicitRecovery",
+        "[       OK ] NativeRecoveryPackage7.ClassicCompletedEmptyLedgerIsExplicitRecovery (48518 ms)",
+        "[ RUN      ] NativeRecoveryPackage7.BranchCompletedEmptyLedgerIsExplicitRecovery",
+        "[       OK ] NativeRecoveryPackage7.BranchCompletedEmptyLedgerIsExplicitRecovery (38049 ms)",
+        "[ RUN      ] NativeRecoveryPackage7.ClassicAsymmetricC0KeepsChildPhysicsAndResponse",
+        "[       OK ] NativeRecoveryPackage7.ClassicAsymmetricC0KeepsChildPhysicsAndResponse (298377 ms)",
+        "[ RUN      ] NativeRecoveryPackage7.BranchAsymmetricC0KeepsChildPhysicsAndResponse",
+        "[       OK ] NativeRecoveryPackage7.BranchAsymmetricC0KeepsChildPhysicsAndResponse (278841 ms)",
+        "[ RUN      ] NativeRecoveryPackage7.ClassicImportedWarmRetryRetainsEarlierRecovery"
+      ]
+    },
+    "corrected_sdk_queue": {
+      "queue-state.json": {
+        "stage": "waiting-for-original-native114-kernel-and-task-closure",
+        "observed_utc": "2026-11-22T03:35:51.127981+00:00",
+        "scientific_verdict": null
+      },
+      "owner.json": {
+        "pid": 13496,
+        "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+        "creation_filetime": "134397921509193709"
+      },
+      "actual_owner": {
+        "pid": 13496,
+        "running": true,
+        "matching": true,
+        "identity": {
+          "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+          "creation_filetime": "134397921509193709"
+        }
+      }
+    }
+  },
+  "corrected_fixture_not_runtime_verified": true,
+  "original_groups_not_restarted": true,
+  "compilation_waits_for_original_JUnit_and_kernel_closure": true,
+  "scientific_Train_started": false,
+  "scientific_verdict": null
+}

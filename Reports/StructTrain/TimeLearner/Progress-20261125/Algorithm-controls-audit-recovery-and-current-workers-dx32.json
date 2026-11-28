@@ -1,0 +1,346 @@
+{
+  "kind": "timelearner_current_algorithm_experiment_progress",
+  "schema_version": 1,
+  "utc": "2026-11-25T06:47:55.428Z",
+  "Windows_cap8_complete_audit": {
+    "via_jump": "10.245.1.12",
+    "host": "10.245.1.14",
+    "operator_sha256": "4516688596c5a0c7a33e1fa3819aa4a44950b45c6a75370658309c0149246da8",
+    "returncode": 0,
+    "stderr": "",
+    "observation": {
+      "utc": "2026-11-25T06:36:49.832754+00:00",
+      "control": "C:\\Projects\\TimeLearnerWorker\\controls\\cap8-readonly-audit16-dx11",
+      "files": {
+        "owner.json": {
+          "pid": 20028,
+          "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+          "creation_filetime": "134400615230232475"
+        },
+        "terminal.json": {
+          "execution": "completed",
+          "validity": "valid",
+          "full_primary_audit": {
+            "path": "C:\\Projects\\TimeLearnerWorker\\controls\\cap8-readonly-audit16-dx11\\original-case\\full-primary-audit.json",
+            "sha256": "481375f24acd839215deceb4cbc8fa479a9ac00580e7c1e92eb3313ab2aeeb0f",
+            "size": 63352
+          },
+          "training_outcome": "budget_exhausted",
+          "completed_boundary": false,
+          "original_failure_preserved": true,
+          "no_native_Train_or_Test": true,
+          "all_processes_closed": true,
+          "scientific_verdict": null
+        },
+        "audit-process-result.json": {
+          "kind": "timelearner_windows_process_result",
+          "schema_version": 1,
+          "execution": "completed",
+          "validity": "valid",
+          "reason": "exit_zero",
+          "returncode": 0,
+          "scientific_verdict": null,
+          "thread_limit_enforced": false,
+          "memory_limit_semantics": "job_committed_virtual_memory",
+          "wall_budget_scope": "whole_attempt_including_preparation",
+          "descendants_at_main_exit": [],
+          "all_processes_closed": true,
+          "cooperative_capture": "not_requested",
+          "runtime_provenance": "loaded_files_captured",
+          "observed_module_files": 25,
+          "wall_seconds": 381.721552999923,
+          "child_resumed": true,
+          "job_name": "Local\\TimeLearner-af495237-464b-4d3c-be89-05c8c291408d"
+        },
+        "audit-process/resource-preflight.json": {
+          "available_physical_bytes": 19881857024,
+          "total_physical_bytes": 32107872256,
+          "memory_budget_bytes": 17179869184
+        },
+        "audit-process/limits-after.json": {
+          "flags": 8712,
+          "memory_bytes": 17179869184,
+          "maximum_processes": 32,
+          "peak_job_memory_bytes": 4792901632
+        }
+      },
+      "owners": [
+        {
+          "owner": {
+            "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+            "creation_filetime": "134400615251579018",
+            "pid": 18024,
+            "job_name": "Local\\TimeLearner-af495237-464b-4d3c-be89-05c8c291408d",
+            "runtime_fingerprint": "6f1910031f133fe17f5c1e9df3342ebc6dcfe284847c1e7ceea0459927441524",
+            "suspended_until_limits_applied": true
+          },
+          "live": false
+        }
+      ],
+      "cap24_started": false,
+      "supervisor_live": false
+    }
+  },
+  "Windows_cap24_pre_Train_failure": {
+    "via_jump": "10.245.1.12",
+    "host": "10.245.1.14",
+    "operator_sha256": "f2e3b777e62c0234a58a5d710f12dbbbf529a4162a9540fd1c3c2fb4e3b6bb06",
+    "returncode": 0,
+    "stderr": "",
+    "observation": {
+      "utc": "2026-11-25T06:41:00.597878+00:00",
+      "control_files": {
+        "owner.json": {
+          "pid": 8132,
+          "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+          "creation_filetime": "134400622997894952"
+        },
+        "exception.json": {
+          "reason": "'str' object has no attribute 'is_file'",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Projects\\TimeLearnerWorker\\controls\\Classic-cap24-after-cap8-audit-dx26\\worker.py\", line 20, in <module>\n    assert not live(api,k,load(original/'owner.json'));before=load(q['cap8_audit_terminal']['path']);assert before['execution']=='completed'and before['all_processes_closed'];assert load(q['cap8_full_audit_process']['path'])['all_processes_closed']and load(q['cap8_full_audit_process']['path'])['runtime_provenance']=='loaded_files_captured'\n                                                              ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Projects\\TimeLearnerWorker\\source-candidate-cap-tools-win-dp6\\Scripts\\StructTrain\\TimeLearner\\native_evidence.py\", line 99, in load\n    result = load_json(path)\n  File \"C:\\Projects\\TimeLearnerWorker\\source-candidate-cap-tools-win-dp6\\Scripts\\StructTrain\\TimeLearner\\native_evidence.py\", line 86, in load_json\n    if not path.is_file() and path.with_name(path.name+'.archive.json').is_file():\n           ^^^^^^^^^^^^\nAttributeError: 'str' object has no attribute 'is_file'\n",
+          "cap8_not_repeated": true,
+          "no_automatic_native_restart": true,
+          "scientific_verdict": null
+        }
+      },
+      "job_exists": false,
+      "owners": [],
+      "job_files": {},
+      "supervisor_live": false
+    }
+  },
+  "Windows_cap24_corrected_dispatch": {
+    "via_jump": "10.245.1.12",
+    "host": "10.245.1.14",
+    "operator_sha256": "c7a5b024943390ef7b504ea6fdcd384f13a03625c4d94c784fca7ee37013e3e0",
+    "returncode": 0,
+    "stderr": "",
+    "observation": {
+      "dispatched": true,
+      "task": {
+        "instance": "{E7974A70-3B88-44B4-83AE-9E709AA2F894}",
+        "registered": true,
+        "task": "TimeLearner-Classic-cap24-dx29",
+        "principal_run_level": 0,
+        "principal_logon_type": 2
+      },
+      "control": "C:\\Projects\\TimeLearnerWorker\\controls\\Classic-cap24-after-cap8-audit-dx29",
+      "controls_commit": "6216de13539341954d6d5276e4e3aa4eaca9eefc",
+      "controls_bundle": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\controls\\Classic-cap24-after-cap8-audit-dx29\\controls.bundle",
+        "sha256": "6cdef71bcf874abb57a5703903cb13e39f7283af4367e49c8beeafb762079414",
+        "size": 45029
+      },
+      "original_case24_job_sha256": "632aa8a3f1823351e94dab93a3b6c1dbd4042079c4d5ba2a3601b87fde5b3713",
+      "condition_fingerprint": "2792ed60890930bb0e46ca418cd62beeb81e442381b97c8c93a2bcc73960c01d",
+      "cap8_full_audit_verified": true,
+      "cap8_Train_not_repeated": true,
+      "native_training_started_not_yet_observed": true,
+      "scientific_verdict": null
+    }
+  },
+  "Windows_cap24_latest": {
+    "via_jump": "10.245.1.12",
+    "host": "10.245.1.14",
+    "operator_sha256": "8530e8c920a69558f7d74cabf18a58b22fe029912aa27d763ba7410d07092c97",
+    "returncode": 0,
+    "stderr": "",
+    "observation": {
+      "utc": "2026-11-25T06:43:10.627545+00:00",
+      "control_files": {
+        "owner.json": {
+          "pid": 14936,
+          "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+          "creation_filetime": "134400625073052967"
+        }
+      },
+      "job_exists": false,
+      "owners": [],
+      "job_files": {},
+      "supervisor_live": true
+    }
+  },
+  "M40_initial_prebuild_failure": {
+    "terminal.json": {
+      "job_validation_passed": false,
+      "cohort_assertions_passed": false,
+      "built": false,
+      "expected_cpp_cases": 213,
+      "audited_completed_cpp_cases": 0,
+      "actual_audited_assertion_passed_cpp_cases": 0,
+      "actual_audited_failed_cpp_ids": [],
+      "completed_leaf_gates": 0,
+      "heartbeat_errors": [],
+      "final_capture_errors": [],
+      "scientific_verdict": null,
+      "whole_plan_complete": false,
+      "lease_release_policy": "external owner only after exact outer and all recorded leaf kernel groups are closed"
+    },
+    "exception.json": {
+      "reason": "unexpected_source_omission:/media/user/Data/TimeLearnerRefactor/source-traversal-native-sdk-m40-dx23/Libraries/Nmsdk-PulseLib/Core/TimeLearner/InputTraversalJson.h",
+      "traceback": "Traceback (most recent call last):\n  File \"/media/user/Data/TimeLearnerRefactor/source-traversal-native-sdk-m40-dx23/Scripts/StructTrain/TimeLearner/native_acceptance_worker.py\", line 549, in run\n    before_source, omitted = self.source_files()\n                             ^^^^^^^^^^^^^^^^^^^\n  File \"/media/user/Data/TimeLearnerRefactor/source-traversal-native-sdk-m40-dx23/Scripts/StructTrain/TimeLearner/native_acceptance_worker.py\", line 349, in source_files\n    _require(name == \"Bin\" or os.fsdecode(path).split(\"/\")[0] in (\"Docs\", \"Reports\"),\n  File \"/media/user/Data/TimeLearnerRefactor/source-traversal-native-sdk-m40-dx23/Scripts/StructTrain/TimeLearner/native_acceptance_worker.py\", line 26, in _require\n    raise ValueError(reason)\nValueError: unexpected_source_omission:/media/user/Data/TimeLearnerRefactor/source-traversal-native-sdk-m40-dx23/Libraries/Nmsdk-PulseLib/Core/TimeLearner/InputTraversalJson.h\n"
+    }
+  },
+  "M40_corrected_dispatch": {
+    "dispatched": true,
+    "job": "traversal-native213-m40-dx30",
+    "source_root": "d2c7487a88a5c1c372f825dc708a543c03234fcb",
+    "PulseLib": "e36996cd53a545782b54c76d610162c602567399",
+    "source_files": 4626,
+    "controls_commit": "a5c306da2d87fca290c42e5fa67bb54e59a48a97",
+    "controls_bundle": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/traversal-native213-m40-dx30/controls.bundle",
+      "sha256": "6d1cd21af928e36e99aeeeed860ef1f827192a01deb9e7de20c6a1ba9d963fc2",
+      "size": 381035
+    },
+    "supervisor": {
+      "pid": 495153,
+      "start_ticks": "466439859",
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "uid": 1000
+    },
+    "cohort": {
+      "native_DTO": 3,
+      "decision": 160,
+      "native_model": 50,
+      "total": 213
+    },
+    "fresh_build_and_tests_pending": true,
+    "matched_scientific_Train_not_yet_started": true,
+    "scientific_verdict": null
+  },
+  "M40_latest": {
+    "utc": "2026-11-25T06:47:55.580926+00:00",
+    "files": {},
+    "build_supervisor_live": true,
+    "supervisor_log_tail": "STARTED {\"kind\": \"timelearner_contained_binding\", \"schema_version\": 1, \"request_sha256\": \"711534f3cad6e0322817a69f2334201ec0ec7fc7f16ccbc29bf8e3d4b29fb56c\", \"unit\": \"timelearner-0a365541-bd5b-43ea-8270-e01c2887f998.service\", \"invocation_id\": \"34b0f0ef58f6414e8325e3765dc68de4\", \"control_group\": \"/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-0a365541-bd5b-43ea-8270-e01c2887f998.service\", \"initial_main_pid\": 503374, \"initial_start_ticks\": \"466443468\", \"sha256\": \"2e4160c5aa71a7f4958c4e0d8c7d6bedf085f361fa2d47f6ab7d8d66c8526b8e\"}\n"
+  },
+  "Elder_latest": {
+    "utc": "2026-11-25T06:29:49.957268+00:00",
+    "job": "classic-candidate-round-robin-q3-cold-elder-dv31",
+    "files": {
+      "readbacks/classic-candidate-round-robin-q3-cold-elder-dv31/preflight-accepted.json": {
+        "initial_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+        "same_actual_cold_graph_as_resistance_control": true,
+        "job_sha256": "c990d360d49d8d73fc5fb2f620f750d671d3c305796bc94e4921aae238a56b5c",
+        "factor_model_revision": "e23cda6cb58312d2e51a92df035baf9fb8629efc42aecbad4da1e39a47d7864e",
+        "factor_synapses": 2,
+        "initial_nodes": 44,
+        "factor_nodes": 45,
+        "training_started": false,
+        "scientific_verdict": null
+      },
+      "readbacks/classic-candidate-round-robin-q3-cold-elder-dv31-controller/supervisor-identity.json": {
+        "pid": 297325,
+        "start_ticks": "514618148",
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "uid": 1000
+      }
+    },
+    "units": {
+      "controller": {
+        "closed": false,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "a33184fba39c58f9d60e3a367b960a89a95c50e6b493944f4415ead6a6511543",
+          "unit": "timelearner-7ea0f92b-a9b7-42df-b19e-16cfc2cd7b7b.service",
+          "invocation_id": "fb1fe7e7e2ec44439556200e7f2cfe53",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-7ea0f92b-a9b7-42df-b19e-16cfc2cd7b7b.service",
+          "initial_main_pid": 301026,
+          "initial_start_ticks": "514618917",
+          "sha256": "9359694e550eb081df73cfeb4fd713683272823835b63d428ce0399a12ff71d1"
+        }
+      },
+      "preflight": {
+        "closed": true,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "cdb0211a87dae28849fdcaaa2cf5fe9b7031affa6418c6a02d3bfc7ab51be613",
+          "unit": "timelearner-6f8478ca-bc34-4b9c-9b40-c429e6eeed75.service",
+          "invocation_id": "8f859ab80ebe46babc8ddc4e37e54463",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-6f8478ca-bc34-4b9c-9b40-c429e6eeed75.service",
+          "initial_main_pid": 304863,
+          "initial_start_ticks": "514619860",
+          "sha256": "a846c2b70e7680533429a30c2d1f6ac950a3c2b18834dbe73be84036c1d455f6"
+        }
+      },
+      "factor-preflight": {
+        "closed": true,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "73f5147f1fbdce505ef147d16c8c433a129432a1088efa24566aa1d79d451c9d",
+          "unit": "timelearner-9fc17c0e-51e1-4904-95a6-d74d340e9e92.service",
+          "invocation_id": "578827bfe74040a6816b22dc46b62b53",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-9fc17c0e-51e1-4904-95a6-d74d340e9e92.service",
+          "initial_main_pid": 304967,
+          "initial_start_ticks": "514620184",
+          "sha256": "98be1811870deb5e5395d11c76c14b9edbe394932b4709bb6ed5c42a5c0a0592"
+        }
+      },
+      "train": {
+        "closed": false,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "7de0f62c288551d381be7895137ee59ff540551915afc68bfc21d5aefd152cc7",
+          "unit": "timelearner-c5f09dc1-9957-408a-93b8-e5a5fd1c6be3.service",
+          "invocation_id": "d79a51bc575941bc829cb16b70ed0949",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-c5f09dc1-9957-408a-93b8-e5a5fd1c6be3.service",
+          "initial_main_pid": 305068,
+          "initial_start_ticks": "514620464",
+          "sha256": "2e2b3f7ccff0e722d2ec3ed923090f1e31f4a8777b1ec4e129e3cc6cbea39c8d"
+        }
+      }
+    },
+    "disk_free": 21441867776,
+    "supervisor_live": true,
+    "readbacks/classic-candidate-round-robin-q3-cold-elder-dv31-controller/supervisor.log": "{\"kind\": \"STARTED\", \"binding\": {\"kind\": \"timelearner_contained_binding\", \"schema_version\": 1, \"request_sha256\": \"a33184fba39c58f9d60e3a367b960a89a95c50e6b493944f4415ead6a6511543\", \"unit\": \"timelearner-7ea0f92b-a9b7-42df-b19e-16cfc2cd7b7b.service\", \"invocation_id\": \"fb1fe7e7e2ec44439556200e7f2cfe53\", \"control_group\": \"/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-7ea0f92b-a9b7-42df-b19e-16cfc2cd7b7b.service\", \"initial_main_pid\": 301026, \"initial_start_ticks\": \"514618917\", \"sha256\": \"9359694e550eb081df73cfeb4fd713683272823835b63d428ce0399a12ff71d1\"}}\n",
+    "readbacks/classic-candidate-round-robin-q3-cold-elder-dv31-controller/process/contained/stderr.log": "",
+    "queued_primary_audit": {
+      "files": {
+        "owner.json": {
+          "pid": 480763,
+          "start_ticks": "514951540",
+          "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+          "uid": 1000
+        },
+        "dispatch.json": {
+          "dispatched": true,
+          "job": "classic-q3-full-primary-audit-and-DATA-elder-dw16",
+          "owner": {
+            "pid": 480763,
+            "start_ticks": "514951540",
+            "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+            "uid": 1000
+          },
+          "controls_commit": "4a1a0dec77b6f7d5269e0c3ea89fadb5da8481b4",
+          "controls_bundle": {
+            "path": "/home/user/timelearner-refactor/requests/classic-q3-full-primary-audit-and-DATA-elder-dw16/controls.bundle",
+            "sha256": "7b628d6b989e50f60c5d12a143f0f40f9ac4c512060008a513bbe54cd6192467",
+            "size": 4734
+          },
+          "same_original_Train": true,
+          "waits_for_exact_supervisor_and_four_closed_bindings": true,
+          "audit_memory_bytes": 25769803776,
+          "classification_performed": false,
+          "physical_projection_native_import_not_yet_verified": true,
+          "no_native_Train_started_or_restarted": true,
+          "scientific_verdict": null
+        },
+        "waiting.json": {
+          "utc": "2026-11-25T06:29:42.560670+00:00",
+          "predecessor_live": true,
+          "waiting_for": "exact_Train_supervisor_and_all_children_closed_then_free_slot"
+        }
+      },
+      "live": true
+    }
+  },
+  "full_plan_accepted_stages": [
+    0
+  ],
+  "native_Train_cap8_repeated": false
+}

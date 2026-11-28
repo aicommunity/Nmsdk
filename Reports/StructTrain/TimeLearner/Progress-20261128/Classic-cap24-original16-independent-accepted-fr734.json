@@ -1,0 +1,97 @@
+{
+  "kind": "Classic_cap24_original16_independent_and_visual_acceptance_evidence",
+  "schema_version": 1,
+  "members": 25,
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/35/35948bbc1d6defa0552e57cb6e3a284fff7142194b00b08d7ddb59b4cb5c6e57",
+      "sha256": "35948bbc1d6defa0552e57cb6e3a284fff7142194b00b08d7ddb59b4cb5c6e57",
+      "bytes": 4954
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/84/8459f7166221e455e5487dcd81c4a661418575685b284f3db6201c8c6b013a93",
+      "sha256": "8459f7166221e455e5487dcd81c4a661418575685b284f3db6201c8c6b013a93",
+      "bytes": 6312256
+    }
+  },
+  "analysis": {
+    "kind": "Classic_cap24_original16_independent_and_visual_acceptance",
+    "schema_version": 1,
+    "peer": {
+      "relative_path": "experiments/2026-11-28/Classic-cap24-original16-independent-fr725.json",
+      "bytes": 10433,
+      "sha256": "c3c9fe418e074b0fa22fa1bc85734e53a677e01404178850a9bee64ec2b0dfad"
+    },
+    "visual_review": {
+      "relative_path": "experiments/2026-11-28/Classic-cap24-complete-visual-review-fr733.json",
+      "bytes": 1020,
+      "sha256": "752ad559b1b40271d3ec22eacaa9cb32e9c6ca82ec2bca60034ce871a1b576af"
+    },
+    "peer_members": 30,
+    "primary_members": 644,
+    "gallery_members": 145,
+    "native_observations": 16,
+    "PNG_reviewed": 32,
+    "SVG_bytes_verified": 32,
+    "contact_sheets_seen": 8,
+    "selected_full_resolution_originals": 5,
+    "all_originals_individually_full_resolution": false,
+    "all_peer_Git_and_loaded_bytes_verified": true,
+    "all_source_catalog_hashes_checked": true,
+    "rows": [
+      {
+        "role": "baseline",
+        "counts": {
+          "TP": 0,
+          "FP": 0,
+          "FN": 1,
+          "TN": 7,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 0.0,
+          "foil_response_rate": 0.0
+        },
+        "model_revision": "b1430c16b95da83567a01dcd314dbec36c92d2f6965308119ba66b0e14d0f2fc",
+        "threshold": 100.0
+      },
+      {
+        "role": "confirmation",
+        "counts": {
+          "TP": 1,
+          "FP": 2,
+          "FN": 0,
+          "TN": 5,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.75,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.2857142857142857
+        },
+        "model_revision": "2783e83684eef31e0a258e271e0c2c3acf30a9a9ab175fc20632577b5b9028a6",
+        "threshold": 0.023252703356543683
+      }
+    ],
+    "training_outcome": "budget_exhausted",
+    "completed_boundary": false,
+    "calibration_protocol": "historical_same_matrix",
+    "original_closed_native_ownership_not_reattested": true,
+    "new_Train": false,
+    "new_calibration": false,
+    "new_native_calculation": false,
+    "whole_plan_or_stage_accepted": false,
+    "scientific_verdict": null
+  },
+  "source_before_after_equal": true,
+  "original_pending_flags_preserved_but_superseded_by_this_acceptance": true,
+  "controls_commit": "176d4736b44e19bd76a955e5e84b15cc9d28d85f",
+  "scientific_verdict": null
+}

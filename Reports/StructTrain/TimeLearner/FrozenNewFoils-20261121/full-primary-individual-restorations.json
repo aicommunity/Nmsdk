@@ -1,0 +1,32 @@
+{
+  "kind": "timelearner_frozen_reader_individual_case_proofs",
+  "schema_version": 1,
+  "root_commit": "31f5e401e5e60958a0b8720e66304fd97d7984ec",
+  "controls_commit": "0a8c3bfdb5c54e56c10493a4ce7d9ce7f22a743e",
+  "job": "s11-frozen-data-historical-readers-m40-a2",
+  "individual_classic_and_branch_restoration_passed": true,
+  "cohort_assertion_status": "failed",
+  "failed_case": "historical reset reader: pipeline_run_analysis_changed",
+  "cohort_not_accepted": true,
+  "proofs": {
+    "classic-frozen-data-primary-restoration-proof.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/a5/a53452892f1002a7d3222d70cd81a2c25679f8d23ef130faf32e6be5d4699fdd",
+      "sha256": "a53452892f1002a7d3222d70cd81a2c25679f8d23ef130faf32e6be5d4699fdd",
+      "bytes": 4432
+    },
+    "frozen-data-primary-restoration-proof.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/22/22e17ec758b6dd792723992109c9f12529c556577a8743d57b58f4dfee1d6b85",
+      "sha256": "22e17ec758b6dd792723992109c9f12529c556577a8743d57b58f4dfee1d6b85",
+      "bytes": 4397
+    }
+  },
+  "all_processes_closed": true,
+  "source_originals_retained": true,
+  "scientific_verdict": null
+}

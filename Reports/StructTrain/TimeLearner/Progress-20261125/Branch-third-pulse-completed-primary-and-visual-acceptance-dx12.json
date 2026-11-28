@@ -1,0 +1,249 @@
+{
+  "kind": "timelearner_Branch_third_pulse_individual_visual_acceptance",
+  "schema_version": 1,
+  "utc": "2026-11-25T06:25:33.167Z",
+  "experiment": "large-Branch-third-pulse-frozen-m40-dw39",
+  "source_model_revision": "a71ae5270f9c8fe9c03bc479e473b3d08ea9e798bf134c32ad8aa559a2e34d8a",
+  "counts": {
+    "TP": 1,
+    "FP": 0,
+    "FN": 0,
+    "TN": 7,
+    "targets": 1,
+    "foils": 7,
+    "target_trials_with_outside_spikes": 0,
+    "accuracy": 1,
+    "target_hit_rate": 1,
+    "foil_response_rate": 0
+  },
+  "local_cache": "E:/Science-Repo/TimeLearner-Documents/2026-11-25-Branch-third-pulse-dx12",
+  "source_catalog": {
+    "path": "experiments/2026-11-25/Branch-third-pulse-primary-and-Russian-figures-dx6.json",
+    "sha256": "d6bb3947b2184c998151f316a3f6007f8dcf497d9cfd220438581835ea99bc37"
+  },
+  "primary": {
+    "kind": "timelearner_Branch_third_pulse_full_primary",
+    "schema_version": 1,
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/8b/8b5f85e6bc1d5a4fce83568272a55f2664fee0df2649a59438856df74bbcc812",
+        "sha256": "8b5f85e6bc1d5a4fce83568272a55f2664fee0df2649a59438856df74bbcc812",
+        "bytes": 11422
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/2e/2e386e0d34d15e4990be88893921d4ce2aa37f70aacff26edf62e55ef01de0c0",
+        "sha256": "2e386e0d34d15e4990be88893921d4ce2aa37f70aacff26edf62e55ef01de0c0",
+        "bytes": 542140
+      },
+      "native-controls.bundle": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/8e/8e00003df8979906e352e9efdf28d77b48d05d4c61f3cd56c5a8a5e675a8a794",
+        "sha256": "8e00003df8979906e352e9efdf28d77b48d05d4c61f3cd56c5a8a5e675a8a794",
+        "bytes": 509842
+      },
+      "publication-controls.bundle": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/30/30806260462814bff309b012671f942e68ad29078bc2d0d920f0d12a1ca9e7af",
+        "sha256": "30806260462814bff309b012671f942e68ad29078bc2d0d920f0d12a1ca9e7af",
+        "bytes": 5130
+      }
+    },
+    "logical_members": 68,
+    "expanded_bytes": 186334741,
+    "source_returncode": 0,
+    "original_failure_preserved": true,
+    "scientific_verdict": null
+  },
+  "figure_objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/a2/a285c8427c67ee4c7cc270835434c33fe57f0e300a7cc020bef345fc8ea3386e",
+      "sha256": "a285c8427c67ee4c7cc270835434c33fe57f0e300a7cc020bef345fc8ea3386e",
+      "bytes": 8807
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/c9/c9978449ceffebc60d3c97c4eb476031029b4c01949d208c1fa9b474ae0e98d4",
+      "sha256": "c9978449ceffebc60d3c97c4eb476031029b4c01949d208c1fa9b474ae0e98d4",
+      "bytes": 1747456
+    }
+  },
+  "primary_members_independently_restored": 68,
+  "figure_bundle_members_locally_restored": 54,
+  "all_metric_fields_equal_original": true,
+  "target_control_preserved": true,
+  "target_signal_maximum_absolute_difference": 0,
+  "target_samples": 4001,
+  "target_output_delay_from_last_input_seconds": 0.0035,
+  "visual_review": {
+    "reviewed": 16,
+    "accepted": 16,
+    "all_eight_patterns": true,
+    "figures": [
+      {
+        "name": "branch-third-pulse-0.png",
+        "bytes": 99562,
+        "sha256": "1417d0114ad2dcdec023ff25ae50c856b12aeaabbe2edb5f161d95c950c5612f",
+        "trial_id": "large-Branch-third-pulse-frozen-m40-dw39/tick-240",
+        "response": "TN",
+        "accepted": true,
+        "review": "Individual full-size image viewed; Russian heading and axes readable; actual input overlay and shared scales retained."
+      },
+      {
+        "name": "branch-third-pulse-0-positive-full.png",
+        "bytes": 96949,
+        "sha256": "3d888b8e57d756fa050d8c1591fed2834c8eefd4d327f7f9d3738da433671ce8",
+        "trial_id": "large-Branch-third-pulse-frozen-m40-dw39/tick-240",
+        "response": "TN",
+        "accepted": true,
+        "review": "Individual full-size image viewed; Russian heading and axes readable; actual input overlay and shared scales retained."
+      },
+      {
+        "name": "branch-third-pulse-1.png",
+        "bytes": 96365,
+        "sha256": "9cc97e8e089af5e8672a5c5505904bfee7b79170028f8f51ff304801471dde38",
+        "trial_id": "large-Branch-third-pulse-frozen-m40-dw39/tick-320",
+        "response": "TN",
+        "accepted": true,
+        "review": "Individual full-size image viewed; Russian heading and axes readable; actual input overlay and shared scales retained."
+      },
+      {
+        "name": "branch-third-pulse-1-positive-full.png",
+        "bytes": 93876,
+        "sha256": "45907f3850fa56579d9710c42461593000f41fae133814ac791c18422ee9f42f",
+        "trial_id": "large-Branch-third-pulse-frozen-m40-dw39/tick-320",
+        "response": "TN",
+        "accepted": true,
+        "review": "Individual full-size image viewed; Russian heading and axes readable; actual input overlay and shared scales retained."
+      },
+      {
+        "name": "branch-third-pulse-2.png",
+        "bytes": 97765,
+        "sha256": "fdb790fe67574b92575c899a34f4f495bf313656f105f8e5adaf352e382b1cf4",
+        "trial_id": "large-Branch-third-pulse-frozen-m40-dw39/tick-400",
+        "response": "TN",
+        "accepted": true,
+        "review": "Individual full-size image viewed; Russian heading and axes readable; actual input overlay and shared scales retained."
+      },
+      {
+        "name": "branch-third-pulse-2-positive-full.png",
+        "bytes": 95210,
+        "sha256": "7ba9952778d00daf40f037f13c772a27a301f286158492d97b5f4e71c31b22e3",
+        "trial_id": "large-Branch-third-pulse-frozen-m40-dw39/tick-400",
+        "response": "TN",
+        "accepted": true,
+        "review": "Individual full-size image viewed; Russian heading and axes readable; actual input overlay and shared scales retained."
+      },
+      {
+        "name": "branch-third-pulse-3.png",
+        "bytes": 103160,
+        "sha256": "2492f8f2ecdeee01524534259006d67ef15697564c2211abe7db1f0d06cbb7c9",
+        "trial_id": "large-Branch-third-pulse-frozen-m40-dw39/tick-480",
+        "response": "TP",
+        "accepted": true,
+        "review": "Individual full-size image viewed; Russian heading and axes readable; actual input overlay and shared scales retained."
+      },
+      {
+        "name": "branch-third-pulse-3-positive-full.png",
+        "bytes": 99048,
+        "sha256": "ae1fda0d8e0eaa4c4fd2bb39a793813500fb3d1d4da7d07f9f21ec0d2a712956",
+        "trial_id": "large-Branch-third-pulse-frozen-m40-dw39/tick-480",
+        "response": "TP",
+        "accepted": true,
+        "review": "Individual full-size image viewed; Russian heading and axes readable; actual input overlay and shared scales retained."
+      },
+      {
+        "name": "branch-third-pulse-4.png",
+        "bytes": 97537,
+        "sha256": "7b0d95bdf4cb7d8a6145ea67a3cbfaaa948918429104da908d1cb6e85e8fcf1a",
+        "trial_id": "large-Branch-third-pulse-frozen-m40-dw39/tick-560",
+        "response": "TN",
+        "accepted": true,
+        "review": "Individual full-size image viewed; Russian heading and axes readable; actual input overlay and shared scales retained."
+      },
+      {
+        "name": "branch-third-pulse-4-positive-full.png",
+        "bytes": 95846,
+        "sha256": "d04678f2525a5e4e8ce6d8000b2cc8df9bf8433d6a608f9ce3d37505799f945f",
+        "trial_id": "large-Branch-third-pulse-frozen-m40-dw39/tick-560",
+        "response": "TN",
+        "accepted": true,
+        "review": "Individual full-size image viewed; Russian heading and axes readable; actual input overlay and shared scales retained."
+      },
+      {
+        "name": "branch-third-pulse-5.png",
+        "bytes": 97422,
+        "sha256": "bede52021e04bc5f75589799a400a9d73ea2898b3a4ad9cc9f8609d50cb7810c",
+        "trial_id": "large-Branch-third-pulse-frozen-m40-dw39/tick-640",
+        "response": "TN",
+        "accepted": true,
+        "review": "Individual full-size image viewed; Russian heading and axes readable; actual input overlay and shared scales retained."
+      },
+      {
+        "name": "branch-third-pulse-5-positive-full.png",
+        "bytes": 95895,
+        "sha256": "1802278afb371db5e056d6f1ea2989fed9ec3196f709ac092d800974f8879159",
+        "trial_id": "large-Branch-third-pulse-frozen-m40-dw39/tick-640",
+        "response": "TN",
+        "accepted": true,
+        "review": "Individual full-size image viewed; Russian heading and axes readable; actual input overlay and shared scales retained."
+      },
+      {
+        "name": "branch-third-pulse-6.png",
+        "bytes": 97018,
+        "sha256": "ed8456282900a48a09f96e2e88168165648d94b6efb74b3823f38716e34fd6b5",
+        "trial_id": "large-Branch-third-pulse-frozen-m40-dw39/tick-720",
+        "response": "TN",
+        "accepted": true,
+        "review": "Individual full-size image viewed; Russian heading and axes readable; actual input overlay and shared scales retained."
+      },
+      {
+        "name": "branch-third-pulse-6-positive-full.png",
+        "bytes": 95314,
+        "sha256": "1dc85b46e62cbf91110ebf4880666682af38eb53918c979e9df32707d3202fce",
+        "trial_id": "large-Branch-third-pulse-frozen-m40-dw39/tick-720",
+        "response": "TN",
+        "accepted": true,
+        "review": "Individual full-size image viewed; Russian heading and axes readable; actual input overlay and shared scales retained."
+      },
+      {
+        "name": "branch-third-pulse-7.png",
+        "bytes": 97363,
+        "sha256": "203233ff4beb433c5583e839445bde2ce3fcf67f90902045e28ecbf0ccd3c8cd",
+        "trial_id": "large-Branch-third-pulse-frozen-m40-dw39/tick-800",
+        "response": "TN",
+        "accepted": true,
+        "review": "Individual full-size image viewed; Russian heading and axes readable; actual input overlay and shared scales retained."
+      },
+      {
+        "name": "branch-third-pulse-7-positive-full.png",
+        "bytes": 94817,
+        "sha256": "9fbea90a50de20c732ad33918b34dfba8bcc6f63008ba7211b45e171e26e16c5",
+        "trial_id": "large-Branch-third-pulse-frozen-m40-dw39/tick-800",
+        "response": "TN",
+        "accepted": true,
+        "review": "Individual full-size image viewed; Russian heading and axes readable; actual input overlay and shared scales retained."
+      }
+    ]
+  },
+  "full_goal_completed": false,
+  "training_outcome": "budget_exhausted",
+  "training_certificate_created": false,
+  "independent_blind_holdout": false,
+  "original_publication_failure_retained": true,
+  "no_native_model_rerun_for_visual_correction": true
+}

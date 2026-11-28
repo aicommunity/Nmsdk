@@ -1,0 +1,25 @@
+digraph G {
+ graph [rankdir=TB, bgcolor=white, pad="0.12", ranksep="0.34", nodesep="0.4"];
+ node [shape=box, fontname=Arial, fontsize=18, margin="0.14,0.09"];
+ edge [fontname=Arial, fontsize=15, arrowsize=0.8];
+ initial [shape=oval, label="Цель Aᵢ⁽⁰⁾ и текущая геометрия"];
+ bounds [label="Проверить положительные границы Rₛ,ᵢ\nи допустимость общего физического банка"];
+ candidate [label="Предложить ещё не измеренное Rₛ,ᵢ\nпо фактическим точкам поиска"];
+ measure [label="Применить кандидат между пробами\nПовторно измерить и Aᵢ, и время вершины"];
+ valid [shape=diamond, label="Измерение\nдостоверно?"];
+ compare [label="Сравнить ошибки времени и амплитуды\nСохранить лучшую измеренную точку"];
+ ready [shape=diamond, label="Оба допуска\nвыполнены?"];
+ next [label="Ограниченное уточнение Rₛ,ᵢ\nили следующий кандидат длины"];
+ invalid [shape=diamond, label="Политика допускает\nновую пробу?"];
+ end [shape=oval, label="Локальный результат\nЗатем общая свежая проверка"];
+ initial -> bounds -> candidate -> measure -> valid;
+ valid -> compare [label="да"];
+ valid -> invalid [label="нет"];
+ compare -> ready;
+ ready -> end [label="да"];
+ ready -> next [label="нет"];
+ next -> candidate [constraint=false, label="есть бюджет"];
+ next -> end [label="бюджет исчерпан"];
+ invalid -> candidate [label="да", constraint=false];
+ invalid -> end [label="нет"];
+}

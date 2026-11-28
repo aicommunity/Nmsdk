@@ -1,0 +1,253 @@
+{
+  "classic-count-predecessor-m40-j1": {
+    "supervisor_live": true,
+    "state": {
+      "observed_utc": "2026-11-23T03:41:57.358583+00:00",
+      "case": "phasea-row-2-preserve",
+      "stage": "running_native_predecessor_control",
+      "native_trials": 2,
+      "scientific_verdict": null
+    },
+    "completed_cases": [
+      {
+        "id": "phasea-row-1-reset",
+        "counts": {
+          "TP": 1,
+          "FP": 0,
+          "FN": 0,
+          "TN": 1,
+          "targets": 1,
+          "foils": 1,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 1.0,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.0
+        },
+        "actual_events": [
+          {
+            "trial_id": "classic-count-predecessor-m40-j1/phasea-row-1-reset/position-0",
+            "sample_id": "phasea-row-1",
+            "reset_policy": "reset_per_trial",
+            "stimulus_times": [
+              0.01,
+              0.25,
+              0.41,
+              0.49
+            ],
+            "spike_times": [],
+            "events_before_current_first_input": [],
+            "first_input_interval_from_previous": null
+          },
+          {
+            "trial_id": "classic-count-predecessor-m40-j1/phasea-row-1-reset/position-1",
+            "sample_id": "phasea-row-0",
+            "reset_policy": "reset_per_trial",
+            "stimulus_times": [
+              0.7005,
+              0.7805,
+              0.9405,
+              1.1805
+            ],
+            "spike_times": [
+              1.184
+            ],
+            "events_before_current_first_input": [],
+            "first_input_interval_from_previous": 0.6905
+          }
+        ],
+        "validity": "valid",
+        "condition_fingerprint": "25f857e1629d5e95d208197771781aa0b5aaa64041ae88b038d35fab1de45096"
+      },
+      {
+        "id": "phasea-row-1-preserve",
+        "counts": {
+          "TP": 1,
+          "FP": 0,
+          "FN": 0,
+          "TN": 1,
+          "targets": 1,
+          "foils": 1,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 1.0,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.0
+        },
+        "actual_events": [
+          {
+            "trial_id": "classic-count-predecessor-m40-j1/phasea-row-1-preserve/position-0",
+            "sample_id": "phasea-row-1",
+            "reset_policy": "reset_per_trial",
+            "stimulus_times": [
+              0.01,
+              0.25,
+              0.41,
+              0.49
+            ],
+            "spike_times": [],
+            "events_before_current_first_input": [],
+            "first_input_interval_from_previous": null
+          },
+          {
+            "trial_id": "classic-count-predecessor-m40-j1/phasea-row-1-preserve/position-1",
+            "sample_id": "phasea-row-0",
+            "reset_policy": "preserve_neuron_dynamics",
+            "stimulus_times": [
+              0.7005,
+              0.7805,
+              0.9405,
+              1.1805
+            ],
+            "spike_times": [
+              1.184
+            ],
+            "events_before_current_first_input": [],
+            "first_input_interval_from_previous": 0.6905
+          }
+        ],
+        "validity": "valid",
+        "condition_fingerprint": "faf4d4fdbd1a33cd33cf35f98b895886f445339bf2126c6523ba809ace5cdfe0"
+      },
+      {
+        "id": "phasea-row-2-reset",
+        "counts": {
+          "TP": 1,
+          "FP": 0,
+          "FN": 0,
+          "TN": 1,
+          "targets": 1,
+          "foils": 1,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 1.0,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.0
+        },
+        "actual_events": [
+          {
+            "trial_id": "classic-count-predecessor-m40-j1/phasea-row-2-reset/position-0",
+            "sample_id": "phasea-row-2",
+            "reset_policy": "reset_per_trial",
+            "stimulus_times": [
+              0.01,
+              0.17,
+              0.25,
+              0.49
+            ],
+            "spike_times": [],
+            "events_before_current_first_input": [],
+            "first_input_interval_from_previous": null
+          },
+          {
+            "trial_id": "classic-count-predecessor-m40-j1/phasea-row-2-reset/position-1",
+            "sample_id": "phasea-row-0",
+            "reset_policy": "reset_per_trial",
+            "stimulus_times": [
+              0.7005,
+              0.7805,
+              0.9405,
+              1.1805
+            ],
+            "spike_times": [
+              1.184
+            ],
+            "events_before_current_first_input": [],
+            "first_input_interval_from_previous": 0.6905
+          }
+        ],
+        "validity": "valid",
+        "condition_fingerprint": "7526b52f2c39d64206ab6ad77293ce3c1468f137921b7120c59dc2409fe8c493"
+      }
+    ],
+    "declaration_tests": {
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "actual_count_model_fixture": true
+    },
+    "actual_native": {
+      "execution": "running",
+      "all_processes_closed": false,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "cebf973e3ffcb1c81a70b497169a32974603b91481627bf0c465790ef444b2c6",
+        "unit": "timelearner-67ba80a6-c3ea-4f3e-b549-5afec12f9cc9.service",
+        "invocation_id": "dc7c0df6dc444b0c814717cf6ba631c1",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-67ba80a6-c3ea-4f3e-b549-5afec12f9cc9.service",
+        "initial_main_pid": 2784465,
+        "initial_start_ticks": "448053960",
+        "sha256": "60302a546a82d38cb447494878223a3a4768f88ab7814bd426d59d548d59d301"
+      },
+      "state": {
+        "Type": "exec",
+        "Restart": "no",
+        "RemainAfterExit": "yes",
+        "MainPID": "2784465",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-67ba80a6-c3ea-4f3e-b549-5afec12f9cc9.service",
+        "MemoryMax": "2147483648",
+        "TasksMax": "64",
+        "KillMode": "control-group",
+        "Description": "TimeLearner contained attempt 67ba80a6-c3ea-4f3e-b549-5afec12f9cc9",
+        "LoadState": "loaded",
+        "ActiveState": "active",
+        "SubState": "running",
+        "InvocationID": "dc7c0df6dc444b0c814717cf6ba631c1"
+      },
+      "memory_max": 2147483648,
+      "tasks_max": 64,
+      "scientific_verdict": null
+    },
+    "native_case": "phasea-row-2-preserve",
+    "closed_trial_files": 1,
+    "actual_controller": {
+      "execution": "running",
+      "all_processes_closed": false,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "cd7bd7a747a2641ee52699fca0f3e8a021a0bff99054529fa38c067cee9b6360",
+        "unit": "timelearner-32b28773-42ef-471b-95de-b006c7f3986f.service",
+        "invocation_id": "b8f1dc7c14034959945f9d97ada16ce8",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-32b28773-42ef-471b-95de-b006c7f3986f.service",
+        "initial_main_pid": 2772648,
+        "initial_start_ticks": "448052249",
+        "sha256": "f951ab8210fb9b9f5ce7322fe25ded517ac2ec42b9ce78b0153935a66747d1bf"
+      },
+      "state": {
+        "Type": "exec",
+        "Restart": "no",
+        "RemainAfterExit": "yes",
+        "MainPID": "2772648",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-32b28773-42ef-471b-95de-b006c7f3986f.service",
+        "MemoryMax": "2147483648",
+        "TasksMax": "128",
+        "KillMode": "control-group",
+        "Description": "TimeLearner contained attempt 32b28773-42ef-471b-95de-b006c7f3986f",
+        "LoadState": "loaded",
+        "ActiveState": "active",
+        "SubState": "running",
+        "InvocationID": "b8f1dc7c14034959945f9d97ada16ce8"
+      },
+      "memory_max": 2147483648,
+      "tasks_max": 128,
+      "scientific_verdict": null
+    }
+  },
+  "classic-count-long-predecessor-m40-k2": {
+    "supervisor_live": true,
+    "state": {
+      "observed_utc": "2026-11-23T03:46:06.384980+00:00",
+      "stage": "waiting_for_closed_Classic_short_predecessor_series",
+      "scientific_verdict": null
+    },
+    "completed_cases": []
+  }
+}

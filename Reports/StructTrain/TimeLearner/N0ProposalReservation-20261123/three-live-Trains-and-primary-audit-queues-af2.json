@@ -1,0 +1,119 @@
+{
+  "kind": "timelearner_three_actual_Trains_and_exact_owner_followup_queues",
+  "schema_version": 1,
+  "observations": {
+    "M40": {
+      "observed_utc": "2026-11-23T12:54:45.174926+00:00",
+      "job": "classic-n0-proposal-full-primary-audit-m40-ac6",
+      "queue-owner.json": {
+        "pid": 1588883,
+        "start_ticks": "450881253",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "uid": 1000
+      },
+      "queue-state.json": {
+        "reason": "waiting_for_original_native_and_controller_closure",
+        "observed_utc": "2026-11-23T12:54:39.058159+00:00",
+        "native_closed": false,
+        "controller_closed": false,
+        "elapsed_wait_seconds": 4864.010430958122,
+        "no_Train_restarted": true,
+        "scientific_verdict": null
+      },
+      "queue_kernel_live": true,
+      "actual_Train": {
+        "execution": "running",
+        "all_processes_closed": false,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "25a0f26d3387252760fb3ea14bc7cb9aee36c33a7a8a196af84791ecb603d8d2",
+          "unit": "timelearner-7a061d31-ad66-4886-9a29-2d8250c54c1d.service",
+          "invocation_id": "52237d6a949b4028a998cfe11c4b4cf0",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-7a061d31-ad66-4886-9a29-2d8250c54c1d.service",
+          "initial_main_pid": 1423053,
+          "initial_start_ticks": "450583490",
+          "sha256": "0582602e51c99dbd686fe7edbcca36a72691a108f7f06c10828839fab9e4687f"
+        },
+        "raw_trials": 353
+      }
+    },
+    "Elder": {
+      "observed_utc": "2026-11-23T12:54:52.223945+00:00",
+      "job": "classic-n0-proposal-full-primary-audit-elder-ae4",
+      "queue-owner.json": {
+        "pid": 1155342,
+        "start_ticks": "500649504",
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "uid": 1000
+      },
+      "queue-state.json": {
+        "reason": "waiting_for_original_native_and_controller_closure",
+        "observed_utc": "2026-11-23T12:54:42.580621+00:00",
+        "native_closed": false,
+        "controller_closed": false,
+        "elapsed_wait_seconds": 1758.181956389919,
+        "no_Train_restarted": true,
+        "scientific_verdict": null
+      },
+      "queue_kernel_live": true,
+      "actual_Train": {
+        "execution": "running",
+        "all_processes_closed": false,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "51ab07298f83fea6489c8e57a7dc07b1daea65c7a19c40ca4bb583af28637d04",
+          "unit": "timelearner-3ce6b441-441b-42d3-8a42-95425e253ff1.service",
+          "invocation_id": "073a475bf9a14f248abe51e6c761f50f",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-3ce6b441-441b-42d3-8a42-95425e253ff1.service",
+          "initial_main_pid": 1112225,
+          "initial_start_ticks": "500567073",
+          "sha256": "5c8793dc2df9d411e8a3e0d02c1dfef908850c990dddaa74decaba7e1d51ae5f"
+        },
+        "raw_trials": 86
+      }
+    },
+    "Windows": {
+      "observed_utc": "2026-11-23T12:51:23.179829+00:00",
+      "job": "windows-two-sweep-primary-audit-ad4",
+      "restart_performed": false,
+      "queue-owner.json": {
+        "pid": 17604,
+        "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+        "creation_filetime": "134399078813119744"
+      },
+      "queue-state.json": {
+        "reason": "waiting_for_exact_native_Train",
+        "source_native_running": true,
+        "elapsed_wait_seconds": 4000.493500599987,
+        "observed_utc": "2026-11-23T12:51:22.024520+00:00",
+        "no_Train_restarted": true,
+        "scientific_verdict": null
+      },
+      "queue_kernel": {
+        "pid": 17604,
+        "identity": {
+          "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+          "creation_filetime": "134399078813119744"
+        },
+        "identity_matches": true,
+        "running": true
+      },
+      "Train_kernel": {
+        "pid": 21328,
+        "identity": {
+          "executable": "C:\\Projects\\TimeLearnerWorker\\runtime-measured-count-native-win-a3\\NeuroModelerConsole.exe",
+          "creation_filetime": "134398728342403660"
+        },
+        "identity_matches": true,
+        "running": true
+      },
+      "raw_trials": 1100
+    }
+  },
+  "native_jobs_restarted": false,
+  "runtime_modified": false,
+  "new_scientific_result": null,
+  "full_plan_completed": false
+}

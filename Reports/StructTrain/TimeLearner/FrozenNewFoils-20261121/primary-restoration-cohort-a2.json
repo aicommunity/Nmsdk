@@ -1,0 +1,290 @@
+{
+  "name": "s11-frozen-data-historical-readers-m40-a2",
+  "controls_exist": true,
+  "output_exists": true,
+  "controller-result.json": {
+    "kind": "timelearner_process_result",
+    "execution": "process_error",
+    "reason": "nonzero_exit_or_missing_terminal_status",
+    "returncode": 1,
+    "wall_seconds": 949.1357597112656,
+    "runtime_provenance": "loaded_files_captured",
+    "all_processes_closed": true
+  },
+  "worker/terminal.json": {
+    "operation_passed": false
+  },
+  "worker/validation/result.json": {
+    "kind": "timelearner_python_validation_result",
+    "execution": "completed",
+    "assertion_status": "failed",
+    "executed_tests": 3,
+    "failures": [],
+    "errors": [
+      "Scripts.StructTrain.TimeLearner.tests.test_historical_evaluation_reset_analysis.HistoricalEvaluationResetAnalysisTest.test_actual_preserve_results_are_readable_but_cannot_admit_a_new_execution"
+    ],
+    "skipped": []
+  },
+  "worker/exception.json": {
+    "reason": "owned_job_validation_failed",
+    "traceback": "Traceback (most recent call last):\n  File \"/media/user/Data/TimeLearnerRefactor/source-frozen-data-historical-readers-a2/Scripts/StructTrain/TimeLearner/owned_python_job.py\", line 286, in _worker\n    require(returncode == 0 and record['assertion_status'] == 'passed' and\n  File \"/media/user/Data/TimeLearnerRefactor/source-frozen-data-historical-readers-a2/Scripts/StructTrain/TimeLearner/native_evidence.py\", line 28, in require\n    raise EvidenceError(reason)\nScripts.StructTrain.TimeLearner.native_evidence.EvidenceError: owned_job_validation_failed\n"
+  },
+  "monitor-final.json": {
+    "guard_triggered": false,
+    "peak_allocated_bytes": 8042221568,
+    "minimum_free_bytes": 318005006336
+  },
+  "kernel": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "kernel_cgroup_observed",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "3923cc2fcebca2eb0bf43f12799dbecd1274a847eafdc551cce0aa850f58ce1d",
+      "unit": "timelearner-3f70697e-f8d7-4e74-a2a6-c70b0512a67a.service",
+      "invocation_id": "a1f55308c7a0420a8f1619ffc4b49568",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-3f70697e-f8d7-4e74-a2a6-c70b0512a67a.service",
+      "initial_main_pid": 4112406,
+      "initial_start_ticks": "435723950",
+      "sha256": "53ddd5891d155ee88f8a9c8928c3bdfdda01319dfd8b1ed7cfb9ae0ef869d029"
+    }
+  },
+  "frozen-data-primary-restoration-proof.json": {
+    "kind": "timelearner_frozen_data_primary_restoration_proof",
+    "schema_version": 1,
+    "archive_reference": {
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "bytes": 2383552,
+      "kind": "nmsdk_structtrain_external_object",
+      "object": "objects/sha256/be/be73dea9fd14ddc88caa2514f632e4c4f8d8d5c6149aec6254738e20aabb7838",
+      "schema_version": 1,
+      "sha256": "be73dea9fd14ddc88caa2514f632e4c4f8d8d5c6149aec6254738e20aabb7838"
+    },
+    "source_archive": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/objects/sha256/be/be73dea9fd14ddc88caa2514f632e4c4f8d8d5c6149aec6254738e20aabb7838",
+      "sha256": "be73dea9fd14ddc88caa2514f632e4c4f8d8d5c6149aec6254738e20aabb7838",
+      "size": 2383552
+    },
+    "restoration": {
+      "kind": "timelearner_native_bundle_restoration",
+      "schema_version": 1,
+      "archive_sha256": "be73dea9fd14ddc88caa2514f632e4c4f8d8d5c6149aec6254738e20aabb7838",
+      "archive_members_verified": 199,
+      "retained_regular_files": 196,
+      "compatibility": "dereferenced-glog-aliases-v1",
+      "omitted_redundant_aliases": [
+        {
+          "omitted_alias": "s11-branch-DATA-frozen-order-m40-a1/run/native.events-log/EventsLog/NeuroModeler.INFO",
+          "retained_target": "s11-branch-DATA-frozen-order-m40-a1/run/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261121-133307.2907875",
+          "bytes": 291,
+          "sha256": "612f2f7cab3be9c9425f047110b61ee6c2dd07ba13ae69279be342e7b4ccb0c1",
+          "owner_pid": 2907875,
+          "original_symlink_target_attested": false
+        },
+        {
+          "omitted_alias": "s11-branch-frozen-new-foils-m40-a1/run/native.events-log/EventsLog/NeuroModeler.INFO",
+          "retained_target": "s11-branch-frozen-new-foils-m40-a1/run/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261121-164001.3544164",
+          "bytes": 291,
+          "sha256": "ca4ebed97f91851ee041ac01a57cc88289fb9138337012ad39a272cf89e0cbee",
+          "owner_pid": 3544164,
+          "original_symlink_target_attested": false
+        },
+        {
+          "omitted_alias": "s11-branch-recognition-data-replay-m40-a1/native.events-log/EventsLog/NeuroModeler.INFO",
+          "retained_target": "s11-branch-recognition-data-replay-m40-a1/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261121-131753.2837112",
+          "bytes": 291,
+          "sha256": "746f3987330b4f98776d0084e6a7315c589504873e7fa7e4166052ff29d74aa5",
+          "owner_pid": 2837112,
+          "original_symlink_target_attested": false
+        }
+      ],
+      "source_archive_modified": false,
+      "native_execution_attested": false,
+      "scientific_verdict": null
+    },
+    "evaluations": [
+      {
+        "relative": "s11-branch-recognition-data-replay-m40-a1",
+        "trials": 8,
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "production_manifest_audited": true,
+        "complete_observations_checked": true,
+        "unsupported_reset_preflight_rejected": true
+      },
+      {
+        "relative": "s11-branch-DATA-frozen-order-m40-a1/run",
+        "trials": 56,
+        "counts": {
+          "TP": 7,
+          "FP": 7,
+          "FN": 0,
+          "TN": 42,
+          "targets": 7,
+          "foils": 49,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "production_manifest_audited": true,
+        "complete_observations_checked": true,
+        "unsupported_reset_preflight_rejected": true
+      },
+      {
+        "relative": "s11-branch-frozen-new-foils-m40-a1/run",
+        "trials": 27,
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 25,
+          "targets": 1,
+          "foils": 26,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.9629629629629629,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.038461538461538464
+        },
+        "production_manifest_audited": true,
+        "complete_observations_checked": true,
+        "unsupported_reset_preflight_rejected": true
+      }
+    ],
+    "all_original_member_bytes_verified": true,
+    "disposable_recovery_cache_removed": true,
+    "new_native_execution": false,
+    "scientific_verdict": null
+  },
+  "classic-frozen-data-primary-restoration-proof.json": {
+    "kind": "timelearner_frozen_data_primary_restoration_proof",
+    "schema_version": 1,
+    "archive_reference": {
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "bytes": 2698140,
+      "kind": "nmsdk_structtrain_external_object",
+      "object": "objects/sha256/5c/5cfcd21f366ada7badd247a19a9d4b86e20b66c11f329018aa8f2634294239ca",
+      "schema_version": 1,
+      "sha256": "5cfcd21f366ada7badd247a19a9d4b86e20b66c11f329018aa8f2634294239ca"
+    },
+    "source_archive": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/objects/sha256/5c/5cfcd21f366ada7badd247a19a9d4b86e20b66c11f329018aa8f2634294239ca",
+      "sha256": "5cfcd21f366ada7badd247a19a9d4b86e20b66c11f329018aa8f2634294239ca",
+      "size": 2698140
+    },
+    "restoration": {
+      "kind": "timelearner_native_bundle_restoration",
+      "schema_version": 1,
+      "archive_sha256": "5cfcd21f366ada7badd247a19a9d4b86e20b66c11f329018aa8f2634294239ca",
+      "archive_members_verified": 199,
+      "retained_regular_files": 196,
+      "compatibility": "dereferenced-glog-aliases-v1",
+      "omitted_redundant_aliases": [
+        {
+          "omitted_alias": "s11-classic-DATA-frozen-order-elder-a1/run/native.events-log/EventsLog/NeuroModeler.INFO",
+          "retained_target": "s11-classic-DATA-frozen-order-elder-a1/run/native.events-log/EventsLog/NeuroModeler.Elder-1.user.log.INFO.20261121-133035.1192624",
+          "bytes": 251,
+          "sha256": "fddf8c8117f03ad48fc1d9156fa15835f812c222a2bd9ef6e39a2e4477320712",
+          "owner_pid": 1192624,
+          "original_symlink_target_attested": false
+        },
+        {
+          "omitted_alias": "s11-classic-frozen-new-foils-elder-a1/run/native.events-log/EventsLog/NeuroModeler.INFO",
+          "retained_target": "s11-classic-frozen-new-foils-elder-a1/run/native.events-log/EventsLog/NeuroModeler.Elder-1.user.log.INFO.20261121-181456.2169814",
+          "bytes": 251,
+          "sha256": "4e44e23a269fd86b5356bb462375cd8a60948561ffd0f2b5847717af9e056529",
+          "owner_pid": 2169814,
+          "original_symlink_target_attested": false
+        },
+        {
+          "omitted_alias": "s11-classic-recognition-data-replay-elder-a2/native.events-log/EventsLog/NeuroModeler.INFO",
+          "retained_target": "s11-classic-recognition-data-replay-elder-a2/native.events-log/EventsLog/NeuroModeler.Elder-1.user.log.INFO.20261121-125436.1058968",
+          "bytes": 251,
+          "sha256": "e43b9f8382aa643969d801592116f49d59c7062fe15738692737d8d1061db396",
+          "owner_pid": 1058968,
+          "original_symlink_target_attested": false
+        }
+      ],
+      "source_archive_modified": false,
+      "native_execution_attested": false,
+      "scientific_verdict": null
+    },
+    "evaluations": [
+      {
+        "relative": "s11-classic-recognition-data-replay-elder-a2",
+        "trials": 8,
+        "counts": {
+          "TP": 1,
+          "FP": 2,
+          "FN": 0,
+          "TN": 5,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.75,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.2857142857142857
+        },
+        "production_manifest_audited": true,
+        "complete_observations_checked": true,
+        "unsupported_reset_preflight_rejected": true
+      },
+      {
+        "relative": "s11-classic-DATA-frozen-order-elder-a1/run",
+        "trials": 56,
+        "counts": {
+          "TP": 7,
+          "FP": 14,
+          "FN": 0,
+          "TN": 35,
+          "targets": 7,
+          "foils": 49,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.75,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.2857142857142857
+        },
+        "production_manifest_audited": true,
+        "complete_observations_checked": true,
+        "unsupported_reset_preflight_rejected": true
+      },
+      {
+        "relative": "s11-classic-frozen-new-foils-elder-a1/run",
+        "trials": 27,
+        "counts": {
+          "TP": 1,
+          "FP": 4,
+          "FN": 0,
+          "TN": 22,
+          "targets": 1,
+          "foils": 26,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.8518518518518519,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.15384615384615385
+        },
+        "production_manifest_audited": true,
+        "complete_observations_checked": true,
+        "unsupported_reset_preflight_rejected": true
+      }
+    ],
+    "all_original_member_bytes_verified": true,
+    "disposable_recovery_cache_removed": true,
+    "new_native_execution": false,
+    "scientific_verdict": null
+  },
+  "requests/s11-frozen-data-historical-readers-m40-a2/dispatcher.log": "STARTED {\"kind\": \"timelearner_contained_binding\", \"schema_version\": 1, \"request_sha256\": \"3923cc2fcebca2eb0bf43f12799dbecd1274a847eafdc551cce0aa850f58ce1d\", \"unit\": \"timelearner-3f70697e-f8d7-4e74-a2a6-c70b0512a67a.service\", \"invocation_id\": \"a1f55308c7a0420a8f1619ffc4b49568\", \"control_group\": \"/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-3f70697e-f8d7-4e74-a2a6-c70b0512a67a.service\", \"initial_main_pid\": 4112406, \"initial_start_ticks\": \"435723950\", \"sha256\": \"53ddd5891d155ee88f8a9c8928c3bdfdda01319dfd8b1ed7cfb9ae0ef869d029\"}\n{\"controller\": {\"kind\": \"timelearner_process_result\", \"schema_version\": 2, \"execution\": \"process_error\", \"reason\": \"nonzero_exit_or_missing_terminal_status\", \"returncode\": 1, \"wall_seconds\": 949.1357597112656, \"model_time\": null, \"runtime_provenance\": \"loaded_files_captured\", \"mapping_error\": null, \"runtime_fingerprint\": \"56438a3de7b7fe6532a4b03083059b03059a2644f024e00ac88099856a9825b1\", \"ownership_scope\": \"bound_cgroup\", \"all_processes_closed\": true, \"scientific_verdict\": null, \"operational_diagnostics\": {\"kind\": \"timelearner_operational_diagnostics\", \"schema_version\": 1, \"policy\": \"owned-streams-v1\", \"status\": \"clear\", \"error_records\": 0, \"warning_records\": 0, \"unclassified_stderr_chunks\": 0, \"reasons\": [], \"examples\": [], \"streams\": [{\"path\": \"stdout.log\", \"bytes\": 0, \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"}, {\"path\": \"stderr.log\", \"bytes\": 0, \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"}], \"contained_streams_match\": true, \"scientific_verdict\": null}}, \"worker_terminal\": {\"operation_passed\": false, \"operation\": \"python-controller-validation\", \"heartbeat_errors\": [], \"lease_release\": \"controller only after whole cgroup closure\", \"selected_validation_scope_requires_source_review\": true, \"scientific_verdict\": null}, \"scientific_verdict\": null}\n",
+  "readbacks/s11-frozen-data-historical-readers-m40-a2/worker/validation/unittest.log": "storation.ClassicFrozenDataPrimaryRestorationTest.test_complete_bytes_and_all_three_production_evaluations_restore) ... ok\ntest_complete_bytes_and_all_three_production_evaluations_restore (Scripts.StructTrain.TimeLearner.tests.test_frozen_data_primary_restoration.FrozenDataPrimaryRestorationTest.test_complete_bytes_and_all_three_production_evaluations_restore) ... ok\ntest_actual_preserve_results_are_readable_but_cannot_admit_a_new_execution (Scripts.StructTrain.TimeLearner.tests.test_historical_evaluation_reset_analysis.HistoricalEvaluationResetAnalysisTest.test_actual_preserve_results_are_readable_but_cannot_admit_a_new_execution) ... ERROR\n\n======================================================================\nERROR: test_actual_preserve_results_are_readable_but_cannot_admit_a_new_execution (Scripts.StructTrain.TimeLearner.tests.test_historical_evaluation_reset_analysis.HistoricalEvaluationResetAnalysisTest.test_actual_preserve_results_are_readable_but_cannot_admit_a_new_execution)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/media/user/Data/TimeLearnerRefactor/source-frozen-data-historical-readers-a2/Scripts/StructTrain/TimeLearner/tests/test_historical_evaluation_reset_analysis.py\", line 41, in test_actual_preserve_results_are_readable_but_cannot_admit_a_new_execution\n    audit = audit_run_manifest(manifest,historical_analysis='evaluation-v1-native-reset-policy')\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/media/user/Data/TimeLearnerRefactor/source-frozen-data-historical-readers-a2/Scripts/StructTrain/TimeLearner/native_calibration_worker.py\", line 39, in checked\n    return function(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/media/user/Data/TimeLearnerRefactor/source-frozen-data-historical-readers-a2/Scripts/StructTrain/TimeLearner/native_pipeline_worker.py\", line 742, in audit_run_manifest\n    require(manifest[\"analysis\"] == comparison and manifest[\"validity\"] == (\"valid\" if audit else \"unverified_execution\"),\n  File \"/media/user/Data/TimeLearnerRefactor/source-frozen-data-historical-readers-a2/Scripts/StructTrain/TimeLearner/native_evidence.py\", line 28, in require\n    raise EvidenceError(reason)\nScripts.StructTrain.TimeLearner.native_evidence.EvidenceError: pipeline_run_analysis_changed\n\n----------------------------------------------------------------------\nRan 3 tests in 911.855s\n\nFAILED (errors=1)\n",
+  "readbacks/s11-frozen-data-historical-readers-m40-a2/process/contained/stderr.log": ""
+}

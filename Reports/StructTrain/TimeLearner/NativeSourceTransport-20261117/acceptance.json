@@ -1,0 +1,44 @@
+{
+  "kind": "timelearner_server_transport_addressed_acceptance",
+  "schema_version": 1,
+  "primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/20/2085e939de0e5314bb36b0fed594d951a2ffc5b1fefbd55d67f9d9840dd74753",
+    "sha256": "2085e939de0e5314bb36b0fed594d951a2ffc5b1fefbd55d67f9d9840dd74753",
+    "bytes": 862160
+  },
+  "bundle_manifest": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/ef/ef0132d1926280f772d3c64b12cffbaffd5fe983a8488d91f63abe0fec23a973",
+    "sha256": "ef0132d1926280f772d3c64b12cffbaffd5fe983a8488d91f63abe0fec23a973",
+    "bytes": 28087
+  },
+  "files": 133,
+  "expanded_bytes": 21962383,
+  "cpp": {
+    "job": "s05-large-state-transport-sdk-elder-a2",
+    "root": "0efbf25b074ca4dcf8439dde8160fa9e70697376",
+    "pulse": "5dabcb1b0c627d1de52bf2dccec35f33cb755e92",
+    "expected": 86,
+    "passed": 86,
+    "skipped": 0,
+    "failed": 0,
+    "closed": true
+  },
+  "python": {
+    "job": "s05-transport-science-python-elder-a2",
+    "root": "685f2d2e95bc039238bdf42b81649e2a022681af",
+    "expected": 39,
+    "passed": 39,
+    "skipped": 0,
+    "failed": 0,
+    "closed": true
+  },
+  "scope": "Selected production C++ controller/reader and integrated Python DATA/capability/archive contracts. Actual model A/B and large Test are separate, not accepted by this receipt.",
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}

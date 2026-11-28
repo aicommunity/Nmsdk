@@ -31,14 +31,19 @@ def _configured_root(root):
     return DEFAULT_ROOT if Path(DEFAULT_ROOT).is_dir() else SMB_LINUX_ROOT
 
 
-def _native_path(value):
-    """Use extended Windows paths for historical names beyond the Win32 limit."""
+def _native_path(value, *, long_descendants=False):
+    """Use extended Windows paths for long files or a tree with long members.
+
+    An archive destination can be short while a member exceeds MAX_PATH.
+    Qualify that root before appending members so containment comparisons and
+    filesystem operations use one consistent namespace throughout the tree.
+    """
     path = Path(value)
     if os.name == 'nt':
         absolute = str(path.absolute())
         slash = chr(92)
         prefix = slash*2+'?'+slash
-        if len(absolute) >= 240 and not absolute.startswith(prefix):
+        if (long_descendants or len(absolute) >= 240) and not absolute.startswith(prefix):
             return Path(prefix+'UNC'+slash+absolute[2:] if absolute.startswith(slash*2)
                         else prefix+absolute)
     return path
@@ -120,6 +125,12 @@ def store(source, root=None):
             os.link(temporary, target)
         except FileExistsError:
             pass
+        # The target now owns the complete, exclusively published inode (or
+        # was already present). Release our staging name before opening it:
+        # CIFS can reject that open while both names remain cached. Existing
+        # objects are still never replaced and must pass the full readback.
+        temporary.unlink()
+        temporary = None
         resolve(record, root)
         return record
     finally:

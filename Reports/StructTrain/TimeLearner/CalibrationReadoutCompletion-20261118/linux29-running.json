@@ -1,0 +1,113 @@
+{
+  "observed_at_utc": "2026-11-18T19:43:37.395589+00:00",
+  "root": "b14edffd8ba742260fde265cc9b5c9a95052520a",
+  "pulse": "5f8b281fc1d679ae7927f7ad7410d3ff675a522a",
+  "observation": {
+    "canonical": {
+      "worker/terminal.json": {
+        "operation_passed": true,
+        "operation": "native-canonical-preparation",
+        "heartbeat_errors": [],
+        "lease_release": "controller only after whole cgroup closure",
+        "selected_validation_scope_requires_source_review": true,
+        "scientific_verdict": null
+      },
+      "kernel_group": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent",
+        "scientific_verdict": null,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "115125fbd4b8d462e20ce73d0236bfaa7f2fba757d9e86f64e76fbb373d284b2",
+          "unit": "timelearner-9fa038df-b16f-4483-8ea4-2acaa91f2e83.service",
+          "invocation_id": "716a8629589541ffb34c626f5108da27",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-9fa038df-b16f-4483-8ea4-2acaa91f2e83.service",
+          "initial_main_pid": 3208343,
+          "initial_start_ticks": "410424336",
+          "sha256": "01588d99ec1ce72b61bb79f57c1e61245f493ff0d6cbf0a25131e419694d27f6"
+        },
+        "state": {
+          "Type": "",
+          "Restart": "no",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "MemoryMax": "infinity",
+          "TasksMax": "52862",
+          "KillMode": "control-group",
+          "Description": "timelearner-9fa038df-b16f-4483-8ea4-2acaa91f2e83.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "InvocationID": ""
+        }
+      },
+      "launch_log_tail": "STARTED {\"kind\": \"timelearner_contained_binding\", \"schema_version\": 1, \"request_sha256\": \"115125fbd4b8d462e20ce73d0236bfaa7f2fba757d9e86f64e76fbb373d284b2\", \"unit\": \"timelearner-9fa038df-b16f-4483-8ea4-2acaa91f2e83.service\", \"invocation_id\": \"716a8629589541ffb34c626f5108da27\", \"control_group\": \"/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-9fa038df-b16f-4483-8ea4-2acaa91f2e83.service\", \"initial_main_pid\": 3208343, \"initial_start_ticks\": \"410424336\", \"sha256\": \"01588d99ec1ce72b61bb79f57c1e61245f493ff0d6cbf0a25131e419694d27f6\"}\n{\"controller\": {\"kind\": \"timelearner_process_result\", \"schema_version\": 2, \"execution\": \"completed\", \"reason\": \"exit_zero_and_whole_group_closed\", \"returncode\": 0, \"wall_seconds\": 153.13001516414806, \"model_time\": null, \"runtime_provenance\": \"loaded_files_captured\", \"mapping_error\": null, \"runtime_fingerprint\": \"f8ddff2a117272ce7c174437b04732905eab00a81395eada994efeeab2ccdc2e\", \"ownership_scope\": \"bound_cgroup\", \"all_processes_closed\": true, \"scientific_verdict\": null, \"operational_diagnostics\": {\"kind\": \"timelearner_operational_diagnostics\", \"schema_version\": 1, \"policy\": \"owned-streams-v1\", \"status\": \"clear\", \"error_records\": 0, \"warning_records\": 0, \"unclassified_stderr_chunks\": 0, \"reasons\": [], \"examples\": [], \"streams\": [{\"path\": \"stdout.log\", \"bytes\": 0, \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"}, {\"path\": \"stderr.log\", \"bytes\": 0, \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"}], \"contained_streams_match\": true, \"scientific_verdict\": null}}, \"worker_terminal\": {\"operation_passed\": true, \"operation\": \"native-canonical-preparation\", \"heartbeat_errors\": [], \"lease_release\": \"controller only after whole cgroup closure\", \"selected_validation_scope_requires_source_review\": true, \"scientific_verdict\": null}, \"scientific_verdict\": null}\n"
+    },
+    "native": {
+      "owned_native": {
+        "controller": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-calibration-persistence-sdk-m40-a1-controller",
+        "supervisor_identity": {
+          "pid": 3268949,
+          "start_ticks": "410453420",
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "uid": 1000
+        },
+        "supervisor_identity_known": true,
+        "supervisor_live": true,
+        "outer": {
+          "execution": "running",
+          "all_processes_closed": false,
+          "reason": "kernel_cgroup_observed",
+          "binding": {
+            "kind": "timelearner_contained_binding",
+            "schema_version": 1,
+            "request_sha256": "72ffde3d6c513d2ca5fa296025cdb884fa8815ecbbc4491e910562869c8b1963",
+            "unit": "timelearner-8355b7a9-485e-4af7-bf7f-1be573373a76.service",
+            "invocation_id": "5ec8d6ec0f7145e3848e5d3cc1785907",
+            "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-8355b7a9-485e-4af7-bf7f-1be573373a76.service",
+            "initial_main_pid": 3276410,
+            "initial_start_ticks": "410456109",
+            "sha256": "61a0953009516b22218ed510a6d9982658f0828a1dcdec278a5f7c6b13d37515"
+          },
+          "state": {
+            "Type": "exec",
+            "Restart": "no",
+            "RemainAfterExit": "yes",
+            "MainPID": "3276410",
+            "Result": "success",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-8355b7a9-485e-4af7-bf7f-1be573373a76.service",
+            "MemoryMax": "8589934592",
+            "TasksMax": "128",
+            "KillMode": "control-group",
+            "Description": "TimeLearner contained attempt 8355b7a9-485e-4af7-bf7f-1be573373a76",
+            "LoadState": "loaded",
+            "ActiveState": "active",
+            "SubState": "running",
+            "InvocationID": "5ec8d6ec0f7145e3848e5d3cc1785907"
+          },
+          "memory_max": 8589934592,
+          "tasks_max": 128,
+          "scientific_verdict": null
+        },
+        "unbound_outer_intent": false,
+        "result": null,
+        "scientific_verdict": null
+      },
+      "launch_log_tail": "{\"controller\": \"/media/user/Data/TimeLearnerRefactor/readbacks/s08-calibration-persistence-sdk-m40-a1-controller\", \"supervisor\": {\"pid\": 3268949, \"start_ticks\": \"410453420\", \"boot_id\": \"0340843f-8a05-4b7e-bd66-afeefecdbe55\", \"uid\": 1000}, \"scientific_verdict\": null}\n"
+    },
+    "prepared_request_exists": true
+  },
+  "preliminary_failures": {
+    "NativeThresholdCandidate/ClassicN0_2000": "source precondition: no certificate, maximum_sweeps_exhausted",
+    "NativeThresholdCandidate/BranchN0_2000": "source precondition: no certificate, maximum_sweeps_exhausted"
+  },
+  "terminal": false
+}

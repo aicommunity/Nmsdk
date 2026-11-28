@@ -1,0 +1,119 @@
+{
+  "kind": "timelearner_full_primary_finalized_names_reconciled_before_recovery",
+  "schema_version": 1,
+  "inventory_observation": {
+    "archive_sha256": "615cf8153358500a0646bc8ddbecbd91097ed32d7a76e478167a5a0298194ad0",
+    "bundle_sha256": "7c5de03b2ded81fbe1f8beefe63b8f6a138ccc802e3b78cd25e8537fe7c2f6fb",
+    "finalized_files": {
+      "raw-trial-": {
+        "counts": {
+          ".json": 0,
+          ".csv": 0
+        },
+        "json_and_csv_indices_equal": true,
+        "consecutive_from_one": true,
+        "examples": []
+      },
+      "train_stopped_trial_": {
+        "counts": {
+          ".json": 496,
+          ".csv": 496
+        },
+        "json_and_csv_indices_equal": true,
+        "consecutive_from_one": true,
+        "examples": [
+          "original-Train/train/native/train_stopped_trial_193.json",
+          "original-Train/train/native/train_stopped_trial_73.csv"
+        ]
+      },
+      "train_state_trial_": {
+        "counts": {
+          ".json": 0,
+          ".csv": 0
+        },
+        "json_and_csv_indices_equal": true,
+        "consecutive_from_one": true,
+        "examples": []
+      }
+    },
+    "restoration_executed": false,
+    "source_archive_changed": false
+  },
+  "writer_source": {
+    "path": "App/NeuroModelerConsole/TimeLearnerProbeEvidenceWriter.h",
+    "original_Train_root": "e1c97ac2042e155ffe907ad695975304d69664a2",
+    "current_root": "c81582e40023510d23af1cefe9f6920e406cf39e",
+    "source_identical": true,
+    "sha256": "7b68788ab95c491a22cada7ea4ae8e235cbf98f9ef0f4a3fcb5bd0a0493e9a16"
+  },
+  "corrected_preparation": {
+    "new_catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-23/classic-measured-count-M4-elder/full-primary-recovery-corrected-prepared-ad10.json",
+    "prepared": {
+      "kind": "timelearner_corrected_full_primary_recovery_preparation",
+      "schema_version": 1,
+      "prepared_utc": "2026-11-23T11:59:37.189575+00:00",
+      "job": "classic-full-primary-restore-m40-ad10",
+      "request": {
+        "path": "/media/user/Data/TimeLearnerRefactor/requests/classic-full-primary-restore-m40-ad10/request.json",
+        "sha256": "77c0eff9c8e23647997b110c1347bceeee57a9a506c3178aa034dbdd0a782e72",
+        "size": 1203
+      },
+      "source": "/media/user/Data/TimeLearnerRefactor/source-classic-full-primary-restore-m40-ad10",
+      "source_root": "c81582e40023510d23af1cefe9f6920e406cf39e",
+      "fixture_source": {
+        "path": "/media/user/Data/TimeLearnerRefactor/source-classic-full-primary-restore-m40-ad10/Scripts/StructTrain/TimeLearner/tests/test_classic_count_primary_restoration.py",
+        "sha256": "c19a226df05e6d21069ff01426142144cd0c4bd4787794ed9c1ecac0b25945ba",
+        "size": 6496
+      },
+      "supersedes": "classic-full-primary-restore-m40-ac4",
+      "correction": "Actual finalized496 JSON/CSV trial pairs, no transient raw-trial files; confirmed by original archived bundle inventory",
+      "prepared_only": true,
+      "worker_started": false,
+      "independent_full_recovery_performed": false,
+      "scientific_stages_have_priority": true,
+      "registry_reserved_slots_must_be_zero": true,
+      "scientific_verdict": null,
+      "controls_commit": "cf5e72bd181b0d7b89fba4e6dd3114517ee17fb8",
+      "controls_bundle": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/2d/2d15f1a36bf32cf9aacf3b8051205fa312e18a70192472485fb172cb9d38d96e",
+        "sha256": "2d15f1a36bf32cf9aacf3b8051205fa312e18a70192472485fb172cb9d38d96e",
+        "bytes": 243848
+      }
+    },
+    "retired_catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-23/classic-measured-count-M4-elder/full-primary-recovery-ac4-superseded-ad10.json",
+    "retired": {
+      "kind": "timelearner_prepared_request_superseded",
+      "schema_version": 1,
+      "old_job": "classic-full-primary-restore-m40-ac4",
+      "old_controls_commit": "6d5643b2637b334f241cbc2b3d2f517fe3f9cf88",
+      "request_never_started": true,
+      "reason": "Actual finalized496 JSON/CSV trial pairs, no transient raw-trial files; confirmed by original archived bundle inventory",
+      "replacement_request": {
+        "path": "/media/user/Data/TimeLearnerRefactor/requests/classic-full-primary-restore-m40-ad10/request.json",
+        "sha256": "77c0eff9c8e23647997b110c1347bceeee57a9a506c3178aa034dbdd0a782e72",
+        "size": 1203
+      },
+      "replacement_catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-23/classic-measured-count-M4-elder/full-primary-recovery-corrected-prepared-ad10.json",
+      "old_default_request_filename_removed_to_prevent_accidental_launch": true,
+      "other_actors_using_old_source_not_changed": true,
+      "scientific_verdict": null,
+      "retirement_commit": "aba643c1cef2ceb5834189ce705e3d1a5b131d25",
+      "controls_bundle": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/81/812a0baf93825bd1126cc4a31b2a9e34e8f2f7bda43ae2b3d6c1a620b9ba4678",
+        "sha256": "812a0baf93825bd1126cc4a31b2a9e34e8f2f7bda43ae2b3d6c1a620b9ba4678",
+        "bytes": 244600
+      }
+    },
+    "new_worker_started": false
+  },
+  "original_primary_archive_modified": false,
+  "independent_full_recovery_performed": false,
+  "old_incorrect_prepared_request_runnable": false,
+  "scientific_verdict": null
+}

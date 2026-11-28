@@ -172,7 +172,8 @@ def time_views(begin, end, frequency):
 
 def render_soma(observation, channel, label, limits, output: Path, *,
                 potential_axis_label="Soma SumPotential [model units; SI unverified]",
-                reference_level=None, context_label=None, include_native_tiles=True):
+                reference_level=None, context_label=None, include_native_tiles=True,
+                comparison_scope="shared"):
     # Lazy backend import: inventory/analyze and module import need no GUI/backend.
     import matplotlib
     matplotlib.use("Agg")
@@ -192,6 +193,7 @@ def render_soma(observation, channel, label, limits, output: Path, *,
         times.append(time);soma.append(sample["soma"][channel]);stimulus.append(sample["stimulus"])
         previous = time
     require(type(include_native_tiles) is bool, "invalid_native_tile_plot_flag")
+    require(comparison_scope in ("shared", "per_observation"), "invalid_plot_comparison_scope")
     rows = []
     with plt.rc_context({"font.size": 12, "axes.titlesize": 12, "svg.fonttype": "none"}):
         views = []
@@ -201,7 +203,7 @@ def render_soma(observation, channel, label, limits, output: Path, *,
             # The default still renders every native time window.
             windows = windows[:1]
         for name, left, right in windows:
-            views.append((name, left, right, limits, "shared", name))
+            views.append((name, left, right, limits, comparison_scope, name))
             detail = detail_limits(samples, channel, left, right, limits)
             if detail is not None:
                 views.append((name+"-detail", left, right, detail, "local_detail", name))
@@ -211,10 +213,11 @@ def render_soma(observation, channel, label, limits, output: Path, *,
             first, last = max(0,index-10), min(len(samples)-1,index+10)
             left, right = samples[first]["time"], samples[last]["time"]
             detail = detail_limits(samples, channel, left, right, limits)
+            scale = "local_detail" if detail is not None else comparison_scope
             if detail is None:
-                continue
+                detail = limits  # Time enlargement is useful even without a tighter Y range.
             name = f"measured-peak-{index:05d}-detail"
-            views.append((name,left,right,detail,"local_detail","measured_peak_detail"))
+            views.append((name,left,right,detail,scale,"measured_peak_detail"))
             peak_details[name] = {"peak_sample_index":index,"peak_sample_time":samples[index]["time"],
                                   "first_sample_index":first,"last_sample_index":last}
         for name, left, right, y_limits, scale, time_view in views:
@@ -301,29 +304,47 @@ def render_soma(observation, channel, label, limits, output: Path, *,
 
 def render_positive_lobe_views(observation, channel, label, output: Path, *,
                                reference_level=None, context_label=None,
-                               potential_axis_label="Soma SumPotential [model units; SI unverified]"):
+                               shared_minimum=None, shared_maximum=None,
+                               potential_axis_label="Soma SumPotential [model units; SI unverified]",
+                               include_native_tiles=True):
     """Companion display range; original recovery samples and views are retained."""
     values = [s["soma"][channel] for s in observation["samples"]]
     require(values and all(math.isfinite(v) for v in values), "invalid_positive_lobe_samples")
+    require(shared_minimum is None or
+            (type(shared_minimum) in (int, float) and math.isfinite(shared_minimum)
+             and shared_minimum <= min(values)), "invalid_positive_lobe_shared_minimum")
+    require(shared_maximum is None or
+            (type(shared_maximum) in (int, float) and math.isfinite(shared_maximum)
+             and shared_maximum >= max(values)), "invalid_positive_lobe_shared_maximum")
     positive = [v for v in values if v > 0.]
-    if min(values) >= 0. or not positive or (reference_level is not None and reference_level < 0.):
+    own_recovery = min(values) < 0.
+    shared_recovery = shared_minimum is not None and shared_minimum < 0.
+    if not (own_recovery or shared_recovery) or not positive or (reference_level is not None and reference_level < 0.):
         return []
     levels = [0., *positive]
+    if shared_maximum is not None:
+        levels.append(shared_maximum)
     if reference_level is not None:
         levels.append(reference_level)
     folder = output/"positive-lobe-detail"
     folder.mkdir()
     context = ((context_label+" | ") if context_label else "")+(
-        "Positive lobe display; negative recovery outside Y; full recovery retained in ordinary views")
+        "Positive response display; full shared recovery range retained in ordinary views")
     views = render_soma(observation, channel, label, padded_limits(levels), folder,
         potential_axis_label=potential_axis_label, reference_level=reference_level,
-        context_label=context)
+        context_label=context,
+        include_native_tiles=include_native_tiles,
+        comparison_scope="shared" if shared_maximum is not None else "per_observation")
     for view in views:
         view["files"] = [folder.name+"/"+name for name in view["files"]]
         view["view"] = "positive-lobe-detail-"+view["view"]
         view["y_scale"] = "positive_lobe_detail"
         view["display_range_only"] = True
         view["ordinary_full_recovery_views_retained"] = True
+        view["positive_detail_reason"] = "own_negative_recovery" if own_recovery else "shared_negative_recovery"
+        view["shared_recorded_minimum"] = shared_minimum
+        view["shared_recorded_maximum"] = shared_maximum
+        view["positive_range_scope"] = "shared" if shared_maximum is not None else "per_observation"
         lo, hi = view["y_limits"]
         view["samples_outside_display_y"] = sum(
             not lo <= s["soma"][channel] <= hi for s in observation["samples"]

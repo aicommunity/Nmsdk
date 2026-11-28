@@ -1,0 +1,465 @@
+{
+  "kind": "timelearner_offline_science_dispatch_and_engineering_evidence",
+  "schema_version": 1,
+  "source_native_root": "bd9ea23aedd3520c2695fc6cb1d083921053f888",
+  "source_native_pulse": "1c8d0112061cb9025ef9205b0d8d735d62fcbe39",
+  "source_native_rdk": "561986e9f336ee5914e2d119de90b005e06f3639",
+  "fixed_Python_actor": "22259e764749a8c38ea2c07e15fd260b6c67220a",
+  "user_requested_local_shutdown_hours": 12,
+  "new_search_wall_seconds": 32400,
+  "new_native_wall_seconds": 39600,
+  "physics_targets_bounds_and_tolerances_unchanged": true,
+  "new_budget_not_original_reproduction": true,
+  "Elder_dispatch": {
+    "prepared": true,
+    "dispatched": true,
+    "unit": "timelearner-offline-science-20261120-elder-a1",
+    "controls": "d71ca5f6518cfcb7048da860237b7f332e06dfd3",
+    "sequence": {
+      "base": "/home/user/timelearner-refactor",
+      "output": "/home/user/timelearner-refactor/readbacks/offline-science-20261120-elder-a1",
+      "console": {
+        "request": "/home/user/timelearner-refactor/requests/offline-science-20261120-elder-a1/Docs/StructTrain/TimeLearner/Experiments/OfflineScienceElderA1-20261120/console-request.json",
+        "source": "/home/user/timelearner-refactor/source-python-output-monitor-a1",
+        "output": "/home/user/timelearner-refactor/readbacks/s05-terminal-export-console16-elder-a2"
+      },
+      "science": {
+        "request": "/home/user/timelearner-refactor/requests/offline-science-20261120-elder-a1/Docs/StructTrain/TimeLearner/Experiments/OfflineScienceElderA1-20261120/science-request.json",
+        "source": "/home/user/timelearner-refactor/source-terminal-export-linux-a1",
+        "job": "s11-offline-n4-classic-on-elder-a1"
+      }
+    },
+    "search_wall_seconds": 32400,
+    "native_wall_seconds": 39600,
+    "actual_Train_started": false,
+    "Train_requires_Console16_pass": true,
+    "scientific_verdict": null
+  },
+  "Elder_observation": {
+    "workflow": "offline-science-20261120-elder-a1",
+    "exists": true,
+    "unit": "MainPID=2783592\nResult=success\nActiveState=active\nSubState=running\nInvocationID=621b5edcecf948a2ac71d98a1a956a68\n",
+    "console-started.json": {
+      "request": "/home/user/timelearner-refactor/requests/offline-science-20261120-elder-a1/Docs/StructTrain/TimeLearner/Experiments/OfflineScienceElderA1-20261120/console-request.json",
+      "source": "/home/user/timelearner-refactor/source-python-output-monitor-a1",
+      "output": "/home/user/timelearner-refactor/readbacks/s05-terminal-export-console16-elder-a2"
+    },
+    "Console_completed_cases": 9,
+    "Console_kernel": {
+      "execution": "running",
+      "all_processes_closed": false,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "617c184f46615346c0db8215d4cdbe4b190777593215e4a24d20ec1c4ec64c26",
+        "unit": "timelearner-9647e44c-99a9-4eed-a907-b4b56b83bc2a.service",
+        "invocation_id": "e08e44eecc5f4ecc87e415d43d2b23b4",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-9647e44c-99a9-4eed-a907-b4b56b83bc2a.service",
+        "initial_main_pid": 2787284,
+        "initial_start_ticks": "475892549",
+        "sha256": "c875fd4044cf5cc64b4aeb3886410ebf50b9fe1197a240ab45c19bed0b116e1e"
+      },
+      "state": {
+        "Type": "exec",
+        "Restart": "no",
+        "RemainAfterExit": "yes",
+        "MainPID": "2787284",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-9647e44c-99a9-4eed-a907-b4b56b83bc2a.service",
+        "MemoryMax": "8589934592",
+        "TasksMax": "128",
+        "KillMode": "control-group",
+        "Description": "TimeLearner contained attempt 9647e44c-99a9-4eed-a907-b4b56b83bc2a",
+        "LoadState": "loaded",
+        "ActiveState": "active",
+        "SubState": "running",
+        "InvocationID": "e08e44eecc5f4ecc87e415d43d2b23b4"
+      },
+      "memory_max": 8589934592,
+      "tasks_max": 128,
+      "scientific_verdict": null
+    }
+  },
+  "Elder_capacity": {
+    "capacity": {
+      "disk_bytes": 15032385536,
+      "memory_bytes": 25769803776,
+      "slots": 1
+    },
+    "reserved": {
+      "disk_bytes": 1073741824,
+      "memory_bytes": 8589934592,
+      "slots": 1
+    },
+    "physical_memory_available": 29421248512,
+    "free_disk": 12123635712,
+    "science_declared_memory": 25769803776,
+    "science_declared_disk_floor_and_output": 6442450944
+  },
+  "Windows_dispatch": {
+    "dispatched": true,
+    "controls": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-offline-n4-branch-on-a2",
+    "controls_commit": "82114bb8c06c5711f1a05cd10bce50d20fa7349d",
+    "task": {
+      "instance": "{36AC38A6-9656-40FF-82CF-0FCEB4B0A10D}",
+      "execution_time_limit": "PT16H",
+      "task": "TimeLearner-windows-offline-n4-branch-on-a2",
+      "engine_pid": 8608
+    },
+    "specification": {
+      "source": "C:\\Projects\\TimeLearnerWorker\\source-terminal-physical-data8-win-a5",
+      "source_root": "bd9ea23aedd3520c2695fc6cb1d083921053f888",
+      "runtime": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-offline-n4-branch-on-a1\\runtime.json",
+      "output": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-offline-n4-branch-on-a2",
+      "controls": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-offline-n4-branch-on-a2",
+      "job_id": "windows-offline-n4-branch-on-a2",
+      "smokes": [
+        {
+          "name": "configured9-classic-terminal-fixed4-N1-completed",
+          "file": "configured9-classic-terminal-fixed4-N1-completed.json",
+          "completed": true,
+          "sha256": "07a7c55ac39ec1d9ed9e9edd0d5f2f4089023211d12fb8ad15790e7b1360354c"
+        },
+        {
+          "name": "branch-terminal-actual-window5-N1",
+          "file": "branch-terminal-actual-window5-N1.json",
+          "completed": false,
+          "sha256": "50019531ecc57249f93a6bf2df1586d2f7c3a1ce92437f21541cd4e969bdff25"
+        }
+      ],
+      "search_wall_seconds": 32400,
+      "native_wall_seconds": 39600,
+      "native_memory_bytes": 17179869184,
+      "science_job_sha256": "b74a742e9c2b67edb298dd18d23ba9879f14f1c05b2e345b821fc16e599e1eb3",
+      "original_job_sha256": "86fe17bd51caa4b69a54be2e78ab67ad741fb466f69f5125a43d957999678d5b",
+      "physics_bounds_targets_and_tolerances_unchanged": true,
+      "scientific_verdict": null,
+      "native_maximum_processes": 64,
+      "prior_attempt_failed_before_native_launch": true
+    },
+    "prior_failure_preserved": true,
+    "scientific_verdict": null
+  },
+  "Windows_observation": {
+    "output_exists": true,
+    "records": {
+      "Console-smokes-accepted.json": {
+        "actual_Console_Train_cases": 2,
+        "completed_and_stopped": true,
+        "scientific_verdict": null
+      },
+      "science-started.json": {
+        "job_sha256": "b74a742e9c2b67edb298dd18d23ba9879f14f1c05b2e345b821fc16e599e1eb3",
+        "search_wall_seconds": 32400,
+        "native_wall_seconds": 39600,
+        "scientific_verdict": null
+      },
+      "science-train/process/owned-process.json": {
+        "executable": "C:\\Projects\\TimeLearnerWorker\\runtime-terminal-physical-data8-win-a5\\NeuroModelerConsole.exe",
+        "creation_filetime": "134396630016329722",
+        "pid": 4176,
+        "job_name": "Local\\TimeLearner-faf8da40-508b-4cc4-bf5c-d8d6ef9b2805",
+        "runtime_fingerprint": "c254e031e158860f1625ac55536e4d357a50182b7f6b5de20cdaff6038cda7e5",
+        "suspended_until_limits_applied": true
+      }
+    },
+    "kernel_job": {
+      "name": "Local\\TimeLearner-faf8da40-508b-4cc4-bf5c-d8d6ef9b2805",
+      "active_processes": 2,
+      "total_processes": 2
+    },
+    "smoke_results": [
+      "branch-terminal-actual-window5-N1\\train\\audit.json",
+      "configured9-classic-terminal-fixed4-N1-completed\\train\\audit.json"
+    ],
+    "task": {
+      "last_result": 267009,
+      "instances": [
+        {
+          "instance": "{36AC38A6-9656-40FF-82CF-0FCEB4B0A10D}",
+          "engine_pid": 8608,
+          "state": 4
+        }
+      ]
+    }
+  },
+  "Windows_native108": {
+    "records": {
+      "terminal.json": {
+        "native_checks_passed": true,
+        "original_build_outcome_unchanged": true,
+        "scientific_verdict": null,
+        "scientific_worker_admitted": false
+      },
+      "gate-result.json": {
+        "assertion_status": "passed",
+        "execution": "completed",
+        "inventory": {
+          "assertion_status": "passed",
+          "expected": 108,
+          "failed_test_ids": [],
+          "observed": 108,
+          "sha256": "d6727b5305cddde498f2e2e15997fdbf47d7ad886e846094348cdb8fbf917272"
+        },
+        "kind": "timelearner_native_test_gate_result",
+        "reason": "complete_declared_test_inventory",
+        "schema_version": 1,
+        "scientific_verdict": null,
+        "validity": "valid"
+      },
+      "native-gate/process/result.json": {
+        "kind": "timelearner_windows_process_result",
+        "schema_version": 1,
+        "execution": "completed",
+        "validity": "valid",
+        "reason": "exit_zero",
+        "returncode": 0,
+        "scientific_verdict": null,
+        "thread_limit_enforced": false,
+        "memory_limit_semantics": "job_committed_virtual_memory",
+        "wall_budget_scope": "whole_attempt_including_preparation",
+        "descendants_at_main_exit": [],
+        "all_processes_closed": true,
+        "cooperative_capture": "completed",
+        "runtime_provenance": "loaded_files_captured",
+        "observed_module_files": 48,
+        "wall_seconds": 4782.994035199983,
+        "child_resumed": true,
+        "job_name": "Local\\TimeLearner-0fd01d6b-18ef-43f3-b316-a2656ba2ba4c"
+      },
+      "native-gate/process/owned-process.json": {
+        "executable": "C:\\Projects\\TimeLearnerWorker\\runtime-terminal-physical-data8-win-a5\\Test_PulseLib_StorageComponents.exe",
+        "creation_filetime": "134396567705304458",
+        "pid": 19084,
+        "job_name": "Local\\TimeLearner-0fd01d6b-18ef-43f3-b316-a2656ba2ba4c",
+        "runtime_fingerprint": "b29507842678b5016052aee90e774b93da554e0555945f04169aed4c4e597234",
+        "suspended_until_limits_applied": true
+      }
+    },
+    "kernel_job": {
+      "name": "Local\\TimeLearner-0fd01d6b-18ef-43f3-b316-a2656ba2ba4c",
+      "open_error": 2
+    },
+    "task": {
+      "last_result": 0,
+      "name": "TimeLearner-windows-terminal-physical-data8-native108-a5",
+      "instances": []
+    }
+  },
+  "Windows_Python3": {
+    "job": "windows-terminal-physical-data8-python3-a5",
+    "python_checks_passed": true,
+    "controls": "085c772e6947c847e3f02498035b320eb3aba4ed",
+    "validation": {
+      "kind": "timelearner_python_validation_result",
+      "schema_version": 1,
+      "suite_id": "windows-terminal-physical-data8-python3-a5",
+      "package_fingerprint": "c0e13efe022fd800bf578740e8be93572fd139a6ae2c0191fe1d4a63674ba722",
+      "execution": "completed",
+      "assertion_status": "passed",
+      "expected_test_ids": [
+        "Scripts.StructTrain.TimeLearner.tests.test_terminal_physical_data_native.NativeTerminalPhysicalDataTest.test_actual_source8_graph_and_data_roles_are_preserved",
+        "Scripts.StructTrain.TimeLearner.tests.test_terminal_physical_data_native.NativeTerminalPhysicalDataTest.test_frozen_data_is_self_contained_and_unknown_references_stay_rejected",
+        "Scripts.StructTrain.TimeLearner.tests.test_terminal_physical_data_native.NativeTerminalPhysicalDataTest.test_recompute_native_waveform_residual_from_every_recorded_sample"
+      ],
+      "executed_tests": 3,
+      "failures": [],
+      "errors": [],
+      "skipped": [],
+      "fixtures": {
+        "TIMELEARNER_NATIVE_TERMINAL_CONFIGURATION9": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-terminal-physical-data8-native108-a5\\native-gate\\native-composite",
+          "files": 480,
+          "fingerprint": "1f56fe077726dccf78be941b8d304a5ad14050010a1dfbc7efaf0e999223e63b"
+        }
+      },
+      "scientific_verdict": null
+    },
+    "process_execution": "completed",
+    "all_processes_closed": true,
+    "runtime_provenance": "loaded_files_captured",
+    "scientific_verdict": null
+  },
+  "monitor_regression": {
+    "process": {
+      "kind": "timelearner_process_result",
+      "schema_version": 2,
+      "execution": "completed",
+      "reason": "exit_zero_and_whole_group_closed",
+      "returncode": 0,
+      "wall_seconds": 52.43954281788319,
+      "model_time": null,
+      "runtime_provenance": "loaded_files_captured",
+      "mapping_error": null,
+      "runtime_fingerprint": "0b3ffcf2a6d514f4bccc67d32482c5c6fa56420fd99a9fd5f4df355d82a64749",
+      "ownership_scope": "bound_cgroup",
+      "all_processes_closed": true,
+      "scientific_verdict": null,
+      "operational_diagnostics": {
+        "kind": "timelearner_operational_diagnostics",
+        "schema_version": 1,
+        "policy": "owned-streams-v1",
+        "status": "clear",
+        "error_records": 0,
+        "warning_records": 0,
+        "unclassified_stderr_chunks": 0,
+        "reasons": [],
+        "examples": [],
+        "streams": [
+          {
+            "path": "stdout.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "stderr.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        ],
+        "contained_streams_match": true,
+        "scientific_verdict": null
+      }
+    },
+    "terminal": {
+      "operation_passed": true,
+      "operation": "python-controller-validation",
+      "heartbeat_errors": [],
+      "lease_release": "controller only after whole cgroup closure",
+      "selected_validation_scope_requires_source_review": true,
+      "scientific_verdict": null
+    },
+    "validation": {
+      "kind": "timelearner_python_validation_result",
+      "schema_version": 1,
+      "suite_id": "s10-output-monitor-unit-elder-a2",
+      "package_fingerprint": "792f4723576c42a517d87bbd9a1508feab5a2544c7ecf5e25e84d1885b351430",
+      "execution": "completed",
+      "assertion_status": "passed",
+      "expected_test_ids": [
+        "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_callable_hook_failure_stops_only_the_bound_group_and_cannot_pass",
+        "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_callbacks_are_checked_before_any_runtime_or_output_side_effect",
+        "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_changed_source_or_wrong_epoch_cannot_keep_projection_identity",
+        "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_closed_observer_pipe_does_not_raise_into_execution_control",
+        "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_controller_validation_cannot_import_another_source_directory",
+        "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_controller_validation_requires_same_tool_and_validation_commit",
+        "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_invalid_limits_and_boolean_schema_never_clip_to_defaults",
+        "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_output_scan_does_not_follow_external_directory_symlink",
+        "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_output_scan_rejects_unexpected_traversal_errors",
+        "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_output_scan_requires_existing_job_root",
+        "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_output_scan_survives_actual_directory_removal_during_descent",
+        "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_readbacks_parent_alias_cannot_redirect_owned_output",
+        "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_retained_glog_alias_is_lstat_readlink_only_even_when_dangling",
+        "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_reviewed_typed_request_is_preserved_without_implicit_fields",
+        "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_source_and_input_bindings_require_full_digest_and_absolute_path",
+        "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_source_projection_is_verified_against_exact_git_blob_bytes",
+        "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_unknown_fields_native_actions_and_path_job_ids_refuse",
+        "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_validation_leases_suite_parent_as_real_directory_tree",
+        "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_worker_projects_actual_child_plotting_caches_inside_owned_TMPDIR"
+      ],
+      "executed_tests": 19,
+      "failures": [],
+      "errors": [],
+      "skipped": [],
+      "fixtures": {},
+      "scientific_verdict": null
+    },
+    "monitor": {
+      "guard_triggered": false,
+      "original_reason": null,
+      "peak_allocated_bytes": 1208320,
+      "minimum_free_bytes": 12677672960
+    },
+    "controls": "a58e1e4a2a63f14cd310e2a1d41392e2160bd707"
+  },
+  "earlier_Console16_A1": {
+    "process": {
+      "kind": "timelearner_process_result",
+      "schema_version": 2,
+      "execution": "process_error",
+      "reason": "[Errno 2] No such file or directory: '/home/user/timelearner-refactor/readbacks/s05-terminal-export-console16-elder-a1/worker/tmp/timelearner-cli-interface-tulm408r'",
+      "returncode": null,
+      "wall_seconds": 476.23475011345,
+      "model_time": null,
+      "runtime_provenance": "invalid_or_incomplete_runtime",
+      "mapping_error": null,
+      "runtime_fingerprint": "31ce7faf5ed2488caeb5789bebc91e41499d7bbbeeb50cc3e8b48d093f8fea1b",
+      "ownership_scope": "bound_cgroup",
+      "all_processes_closed": true,
+      "scientific_verdict": null,
+      "operational_diagnostics": {
+        "kind": "timelearner_operational_diagnostics",
+        "schema_version": 1,
+        "policy": "owned-streams-v1",
+        "status": "clear",
+        "error_records": 0,
+        "warning_records": 0,
+        "unclassified_stderr_chunks": 0,
+        "reasons": [],
+        "examples": [],
+        "streams": [
+          {
+            "path": "stdout.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "stderr.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        ],
+        "contained_streams_match": true,
+        "scientific_verdict": null
+      }
+    },
+    "completed_variants": 8,
+    "all_native_groups_closed": true,
+    "whole_suite_accepted": false,
+    "primary_retained": true
+  },
+  "Windows_A1": {
+    "failed_before_native_launch": true,
+    "reason": "invalid_windows_process_budget",
+    "requested_processes": 128,
+    "supported_maximum_processes": 64,
+    "negative_attempt_retained": true,
+    "correction_is_new_attempt_A2": true
+  },
+  "public_receipts": [
+    {
+      "public_receipt": "timelearner-offline-elder-dispatched-20261120-a1.json",
+      "bytes": 1139,
+      "sha256": "16226011ed8dd7258fcb97a6f9153afc4df85fcbc66ce2861b5720481e182a87"
+    },
+    {
+      "public_receipt": "timelearner-offline-elder-observed-20261120-a1-c2.json",
+      "bytes": 1918,
+      "sha256": "46cb74db555a0993be99786dc942cc8330d0324c100b6a050a5665d86ae9763a"
+    },
+    {
+      "public_receipt": "timelearner-offline-windows-dispatched-20261120-a2-r2.json",
+      "bytes": 2305,
+      "sha256": "9d3b9be2cfc19c58307af34ca0db429a5120030209830db7aa86beeb9c0add8e"
+    },
+    {
+      "public_receipt": "timelearner-offline-windows-kernel-observed-20261120-a2-c3.json",
+      "bytes": 1728,
+      "sha256": "b11e33ffd7ec8f5b89350d03c98e70ced968243fb603c5b1876c12885aeac52d"
+    },
+    {
+      "public_receipt": "timelearner-output-monitor-unit-observed-20261120-a2-c1.json",
+      "bytes": 11400,
+      "sha256": "f70a8f68b6b4bd65394b919ef4b90508d5750ab4047ac5a5b77514e3a497d92a"
+    }
+  ],
+  "full_new_primary_archives_published": false,
+  "primary_retained_on_workers": true,
+  "new_training_or_recognition_result_accepted": false,
+  "whole_plan_complete": false,
+  "develop_merged": false,
+  "scientific_verdict": null
+}

@@ -1,314 +1,407 @@
-"""Build maintained algorithm descriptions; generated DOCX/PNG stay outside Git.
+"""Build both Russian scientific reports from reviewed text and real figures.
 
-Run with the configured document runtime (python-docx, Pillow, lxml). Native
-OMML keeps equations editable. render_docx.py and page inspection are separate
-mandatory publication checks, not inferred from successful file creation.
+Use the configured document runtime. --draft permits missing illustrations for
+internal layout review only. A generated document is never a visual acceptance.
+The earlier v3 builder remains available in the published v3 package and Git.
 """
 import argparse
 import hashlib
 import json
 from pathlib import Path
+import re
+import sys
 
+def read(path):return json.loads(Path(path).read_bytes())
+def digest(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
-def build(source, output):
+def build(source,output,*,diagrams,figures=None,draft=False,release_candidate=False,
+          format_profile=None,content_file='revision4-content.ru.json'):
     from docx import Document
-    from docx.enum.table import WD_TABLE_ALIGNMENT, WD_CELL_VERTICAL_ALIGNMENT
-    from docx.enum.text import WD_ALIGN_PARAGRAPH
+    from docx.shared import Inches,Pt,RGBColor
     from docx.oxml import OxmlElement
     from docx.oxml.ns import qn
-    from docx.shared import Inches, Pt, RGBColor
-    from PIL import Image, ImageDraw, ImageFont
-
+    from docx.enum.text import WD_ALIGN_PARAGRAPH
+    from docx.enum.table import WD_TABLE_ALIGNMENT,WD_CELL_VERTICAL_ALIGNMENT
+    from PIL import Image
+    from .word_math import equation as native_equation,inline_math,sub,sup,scripts,absolute,group
+    if draft and release_candidate:
+        raise ValueError('Draft and release candidate are separate build modes')
+    if release_candidate and format_profile is None:
+        raise ValueError('A release candidate requires an explicit reviewed format profile')
+    profile=read(format_profile) if format_profile else None
+    if profile is not None:
+        if not isinstance(profile,dict) or profile.get('kind')!='timelearner_scientific_report_format_profile' or profile.get('schema_version')!=1:
+            raise ValueError('Known scientific report format profile required')
+        if not (draft or release_candidate):
+            raise ValueError('Select draft or unreleased candidate before format and page acceptance')
     source=Path(source).resolve(strict=True);output=Path(output).resolve()
-    if output.exists():raise ValueError('new output directory required')
-    content=json.loads((source/'content.json').read_text(encoding='utf-8'))
-    evidence=json.loads((source/'evidence-register.json').read_text(encoding='utf-8'))
-    output.mkdir(parents=True);figures=output/'figures';figures.mkdir()
-    common=content['common']
-    font_root=Path('C:/Windows/Fonts')
-    regular=font_root/'arial.ttf';bold=font_root/'arialbd.ttf'
-    if not regular.is_file() or not bold.is_file():raise ValueError('explicit Cyrillic-capable figure fonts required')
+    if output.exists():raise ValueError('Fresh output directory required')
+    if Path(content_file).name!=content_file:raise ValueError('Content filename must be local to the source directory')
+    content_path=source/content_file;content=read(content_path)
+    next_edition=content_file!='revision4-content.ru.json'
+    if next_edition and (not (draft or release_candidate) or profile is None):
+        raise ValueError('New content requires an explicit GOST profile and draft or unreleased candidate mode')
+    if release_candidate and not next_edition:
+        raise ValueError('The preserved fourth edition is not a new release candidate')
+    review_path=source/content['review'];review=read(review_path)
+    evidence_path=(source/content.get('evidence_review','../AlgorithmDescriptionEvidenceReview-20261118.json')).resolve(strict=True)
+    case_records=read(evidence_path)['qualifying_examples'];cases={c['id']:c for c in case_records}
+    if len(cases)!=len(case_records):raise ValueError('Duplicate evidence example ID')
+    selected=[identity for topology in ('classic','branch') for identity in content[topology]['example_order']]
+    if len(selected)!=len(set(selected)) or set(selected)!=set(cases):raise ValueError('Content and evidence examples must match exactly')
+    formula_path=(source/content['formula_definitions']).resolve(strict=True) if next_edition else None
+    formula_record=read(formula_path) if formula_path else None
+    if formula_record is not None and (formula_record.get('kind')!='timelearner_scientific_formula_definitions' or formula_record.get('schema_version')!=2):
+        raise ValueError('Known editable formula definitions required')
+    formula_definitions=formula_record['equations'] if formula_record else None
+    if content.get('schema_version')!=1 or len(review['comments'])!=8:
+        raise ValueError('Known reviewed scientific description required')
+    if any(c['counts']['TP']<1 or c['counts']['TN']<2 for c in cases.values()):
+        raise ValueError('Working example criterion not satisfied')
+    diagrams=Path(diagrams).resolve(strict=True);dm=read(diagrams);dr=diagrams.parent
+    if dm['kind']!='timelearner_scientific_diagram_render':raise ValueError('Graphviz sources required')
+    for d in dm['diagrams']:
+        if digest(dr/(d['id']+'.png'))!=d['png_sha256']:raise ValueError('Diagram bytes changed')
+    fc=read(figures) if figures else {};fr=Path(figures).resolve().parent if figures else None
+    if fc and (fc.get('kind')!='timelearner_algorithm_illustration_catalog' or fc.get('schema_version')!=1):
+        raise ValueError('Known illustration catalog required')
+    trial_figures=fc.get('trials',[]);concepts={c['id']:c for c in fc.get('concepts',[])}
+    supplementary_records=fc.get('supplementary',[])
+    supplementary={c['id']:c for c in supplementary_records}
+    if len(supplementary)!=len(supplementary_records):
+        raise ValueError('Duplicate supplementary illustration ID')
+    for topology in ('classic','branch'):
+        for section in content[topology].get('result_updates',[]):
+            for identity in section.get('figures',[]):
+                if identity not in supplementary:
+                    raise ValueError('Supplementary measured illustration missing: '+identity)
+    details=fc.get('case_details',{})
+    # Scientific prose belongs to the maintained content. The figure catalog
+    # continues to own measured values, source references and image identity.
+    explanations=content.get('example_explanations',{})
+    if (not isinstance(explanations,dict) or set(explanations)-set(cases)
+            or any(not isinstance(value,list) or not value
+                   or any(not isinstance(text,str) or not text.strip() for text in value)
+                   for value in explanations.values())):
+        raise ValueError('Known example IDs and nonempty explanation paragraphs required')
+    # Current scientific wording is maintained alongside the report text;
+    # immutable figure catalogs retain their original captions and provenance.
+    captions=content.get('illustration_captions',{}) if next_edition else {}
+    if (not isinstance(captions,dict)
+            or set(captions)-(set(concepts)|set(supplementary))
+            or any(not isinstance(text,str) or not text.strip()
+                   for text in captions.values())):
+        raise ValueError('Known illustration IDs and nonempty captions required')
+    concept_ids=('assigned-peak','separate-early-peak','merged-peaks','missing-peak',
+                 'incomplete-window','n0-measured-search','n1-measured-search')
+    missing=['concept:'+i for i in concept_ids if i not in concepts]
+    for identity,case in cases.items():
+        need={'TP','TN'}|({'FP'} if case['counts']['FP'] else set())
+        have={f['response'] for f in trial_figures if f['case_id']==identity}
+        missing.extend(identity+':'+v for v in sorted(need-have))
+        for key in ('title','explanation','threshold','train_configuration_ref',
+                    'test_configuration_ref','source_collection_ref','frequency_hz','measurement_version'):
+            if details.get(identity,{}).get(key) is None:missing.append(identity+':'+key)
+    if missing and not draft:raise ValueError('Measured figures/details missing: '+', '.join(missing))
+    for record in [*trial_figures,*concepts.values(),*supplementary.values()]:
+        rel=Path(record['png']['path']);path=(fr/rel).resolve(strict=True)
+        if rel.is_absolute() or '..' in rel.parts or not path.is_relative_to(fr):raise ValueError('Local figure required')
+        if path.stat().st_size!=record['png']['bytes'] or digest(path)!=record['png']['sha256']:
+            raise ValueError('Measured figure bytes changed')
+        if not record.get('source_ref'):raise ValueError('Measured figure provenance required')
+    output.mkdir(parents=True);results=[]
 
-    def canvas(width,height):
-        image=Image.new('RGB',(width,height),'white');return image,ImageDraw.Draw(image)
-    def label(draw,xy,text,size=30,strong=False,anchor='mm'):
-        font=ImageFont.truetype(str(bold if strong else regular),size)
-        draw.multiline_text(xy,text,font=font,fill='black',anchor=anchor,align='center',spacing=8)
-    def arrow(draw,a,b,*,dashed=False):
-        import math
-        if dashed:
-            distance=math.dist(a,b);segments=max(1,int(distance/18))
-            for i in range(0,segments,2):
-                f=i/segments;g=min(1.,(i+1)/segments)
-                draw.line((a[0]+f*(b[0]-a[0]),a[1]+f*(b[1]-a[1]),
-                           a[0]+g*(b[0]-a[0]),a[1]+g*(b[1]-a[1])),fill='#343434',width=3)
-        else:draw.line((a,b),fill='#343434',width=3)
-        angle=math.atan2(b[1]-a[1],b[0]-a[0]);n=16
-        draw.polygon([b,(b[0]-n*math.cos(angle-.45),b[1]-n*math.sin(angle-.45)),
-                      (b[0]-n*math.cos(angle+.45),b[1]-n*math.sin(angle+.45))],fill='#343434')
-    def box(draw,rect,text,*,strong=False):
-        draw.rounded_rectangle(rect,12,fill='#f4f6f8',outline='#555555',width=3)
-        label(draw,((rect[0]+rect[2])/2,(rect[1]+rect[3])/2),text,strong=strong)
+    def style_font(style,name,size):
+        style.font.name=name;style.font.size=Pt(size);style.font.color.rgb=RGBColor(0,0,0)
+        style.font.underline=False;rpr=style.element.get_or_add_rPr()
+        fonts=rpr.find(qn('w:rFonts'))
+        if fonts is None:fonts=OxmlElement('w:rFonts');rpr.insert(0,fonts)
+        for key in ('ascii','hAnsi','eastAsia','cs'):fonts.set(qn('w:'+key),name)
+        for key in ('asciiTheme','hAnsiTheme','eastAsiaTheme','cstheme'):fonts.attrib.pop(qn('w:'+key),None)
 
-    def flow():
-        im,d=canvas(1400,1560)
-        stages=[('Storage и ModelSpec\nШтатное построение и частота',100),
-                ('CapturedPerInput\nСобственная исходная амплитуда входа',280),
-                ('BoundedTrainingSession\nСледующее допустимое действие',460),
-                ('Native probe\nПолная проба и закрытие окна',640),
-                ('Проверка данных и revision\nИзмерение либо ограниченное recovery',820),
-                ('Обновить поиск\nПри готовности проверить все входы',1000)]
-        for text,y in stages:box(d,(210,y,1190,y+120),text)
-        for (_,a),(_,b) in zip(stages,stages[1:]):arrow(d,(700,a+120),(700,b))
-        arrow(d,(700,1120),(700,1135))
-        d.polygon([(700,1135),(890,1215),(700,1295),(510,1215)],fill='#e8eef4',outline='#555555',width=3)
-        label(d,(700,1215),'Завершено',28,True)
-        arrow(d,(890,1215),(1310,1215));arrow(d,(1310,1215),(1310,520));arrow(d,(1310,520),(1190,520))
-        label(d,(1110,1185),'нет',27);label(d,(1280,770),'ещё\nдействия',26)
-        arrow(d,(700,1295),(700,1350));label(d,(750,1320),'да',27)
-        box(d,(150,1350,1250,1475),'Finished и отдельный результат\nExact   SearchUnresolved   BudgetExhausted   Invalid',strong=True)
-        label(d,(700,1520),'Edit и оценка домена выполняются до очередной пробы',27)
-        path=figures/'training-flow.png';im.save(path);return path
-
-    def classes(component):
-        im,d=canvas(1400,1130)
-        nodes=[((50,55,650,325),component,'NativeTrainingControl\nABeforeCalculate   ACalculate'),
-               ((750,55,1350,325),'NativeTrainingService','state   search\nStart   BeforeTick   AfterTick'),
-               ((50,445,650,715),'NativeTrainingAdapter','readParameters   apply\nqueue   takeResult'),
-               ((750,445,1350,715),'BoundedTrainingSession','current   epoch\nNextAction   Consume'),
-               ((50,835,650,1075),'NPulseNeuron','Эффективный физический граф\nBuild   Reset   Calculate'),
-               ((750,835,1350,1075),'FinalVerificationSession','Свежие измерения всех входов\nСертификат конкретной revision')]
-        for rect,title,body in nodes:
-            d.rectangle(rect,fill='#f7f8fa',outline='#555555',width=3)
-            y=rect[1]+78;d.line((rect[0],y,rect[2],y),fill='#555555',width=2)
-            label(d,((rect[0]+rect[2])/2,rect[1]+38),title,29,True)
-            label(d,((rect[0]+rect[2])/2,(y+rect[3])/2),body,28)
-        # Composition: learner owns the service value. Shared aggregation:
-        # service holds a shared_ptr to search. Search owns final verification.
-        for y,fill in ((190,'black'),):
-            d.polygon([(650,y),(670,y-12),(690,y),(670,y+12)],fill=fill,outline='black')
-            arrow(d,(690,y),(750,y))
-        d.polygon([(1050,325),(1038,345),(1050,365),(1062,345)],fill='white',outline='black')
-        arrow(d,(1050,365),(1050,445))
-        d.polygon([(1050,715),(1038,735),(1050,755),(1062,735)],fill='black',outline='black')
-        arrow(d,(1050,755),(1050,835))
-        arrow(d,(850,325),(600,445),dashed=True)
-        arrow(d,(350,715),(350,835),dashed=True)
-        path=figures/(component+'-classes.png');im.save(path);return path
-
-    def sequence():
-        im,d=canvas(1400,1120);xs=[140,420,700,980,1260]
-        names=['Rdk\nscheduler','learner','training\nservice','native\nprobe','native\nchildren']
-        for x,name in zip(xs,names):
-            box(d,(x-115,35,x+115,155),name)
-            for y in range(175,1060,24):d.line((x,y,x,min(y+12,1060)),fill='#777777',width=2)
-        messages=[(0,1,'ABeforeCalculate',230),(1,2,'BeforeTick',330),
-                  (1,3,'BeforeChildren',430),(0,4,'Calculate once',550),
-                  (0,1,'ACalculate',680),(1,3,'AfterChildren',790),
-                  (1,2,'AfterTick',900)]
-        for a,b,text,y in messages:
-            arrow(d,(xs[a],y),(xs[b],y));label(d,((xs[a]+xs[b])/2,y-28),text,29)
-        label(d,(700,1090),'Один native tick   Служба не вызывает Calculate модели',28,True)
-        path=figures/'native-tick-sequence.png';im.save(path);return path
-
-    shared_flow=flow();shared_sequence=sequence()
-
-    def mathnode(value):
-        if isinstance(value,str):
-            r=OxmlElement('m:r');t=OxmlElement('m:t');t.set(qn('xml:space'),'preserve');t.text=value;r.append(t);return r
-        kind=value[0]
-        if kind=='delimited':
-            node=OxmlElement('m:d');props=OxmlElement('m:dPr')
-            for name,text in [('begChr',value[1]),('endChr',value[2])]:
-                char=OxmlElement('m:'+name);char.set(qn('m:val'),text);props.append(char)
-            node.append(props);body=OxmlElement('m:e')
-            for child in value[3:]:body.append(mathnode(child))
-            node.append(body);return node
-        if kind=='subsup':
-            node=OxmlElement('m:sSubSup')
-            for name,item in [('e',value[1]),('sub',value[2]),('sup',value[3])]:
-                child=OxmlElement('m:'+name);child.append(mathnode(item));node.append(child)
-            return node
-        if kind=='row':
-            e=OxmlElement('m:e')
-            for child in value[1:]:e.append(mathnode(child))
-            return e
-        if kind in ('sub','sup'):
-            node=OxmlElement('m:sSub' if kind=='sub' else 'm:sSup')
-            base=OxmlElement('m:e');base.append(mathnode(value[1]));node.append(base)
-            script=OxmlElement('m:sub' if kind=='sub' else 'm:sup');script.append(mathnode(value[2]));node.append(script)
-            return node
-        raise ValueError('unknown native equation node')
-    def equation(doc,*nodes):
-        p=doc.add_paragraph();p.alignment=WD_ALIGN_PARAGRAPH.CENTER
-        m=OxmlElement('m:oMath')
-        for item in nodes:m.append(mathnode(item))
-        p._p.append(m);p.paragraph_format.space_after=Pt(9)
-    def sub(a,b):return ['sub',a,b]
-    def sup(a,b):return ['subsup',a[1],a[2],b] if isinstance(a,list) and a[0]=='sub' else ['sup',a,b]
-    def absolute(a):return ['delimited','|','|',a]
-    def parentheses(*nodes):return ['delimited','(',')',*nodes]
-
-    def para(doc,text,style=None):return doc.add_paragraph(text,style=style)
-    def heading(doc,text):doc.add_heading(text,level=1)
-    def page(doc,title):doc.add_page_break();heading(doc,title)
-    def figure(doc,path,caption,width=6.35):
-        p=doc.add_paragraph();p.alignment=WD_ALIGN_PARAGRAPH.CENTER
-        p.add_run().add_picture(str(path),width=Inches(width))
-        p.paragraph_format.keep_with_next=True
-        p=doc.add_paragraph(caption,style='Caption');p.paragraph_format.keep_together=True
-    def table(doc,headers,rows,widths):
+    def table(doc,headers,rows,widths,title=None):
+        if layout:
+            if not title:raise ValueError('Named table required for the GOST draft')
+            reference=para('Сведения представлены в таблице '+str(layout.tables+1)+'.')
+            reference.paragraph_format.keep_with_next=True
+            layout.table_caption(title)
+            widths=[w*float(layout.width)/914400/sum(widths) for w in widths]
         t=doc.add_table(rows=1,cols=len(headers));t.alignment=WD_TABLE_ALIGNMENT.CENTER;t.autofit=False
-        for cell,w in zip(t.columns,widths):cell.width=Inches(w)
+        for c,w in zip(t.columns,widths):c.width=Inches(w)
         for c,text in zip(t.rows[0].cells,headers):c.text=str(text)
-        repeat=OxmlElement('w:tblHeader');t.rows[0]._tr.get_or_add_trPr().append(repeat)
+        t.rows[0]._tr.get_or_add_trPr().append(OxmlElement('w:tblHeader'))
         for row in rows:
             for c,text in zip(t.add_row().cells,row):c.text=str(text)
         borders=OxmlElement('w:tblBorders')
         for name in ('top','left','bottom','right','insideH','insideV'):
-            edge=OxmlElement('w:'+name);edge.set(qn('w:val'),'single');edge.set(qn('w:sz'),'4');edge.set(qn('w:color'),'D9D9D9');borders.append(edge)
+            edge=OxmlElement('w:'+name);edge.set(qn('w:val'),'single');edge.set(qn('w:sz'),'4')
+            edge.set(qn('w:color'),'D9D9D9' if layout else 'D0D0D0');borders.append(edge)
         t._tbl.tblPr.append(borders)
-        for ri,row in enumerate(t.rows):
-            for ci,cell in enumerate(row.cells):
-                cell.vertical_alignment=WD_CELL_VERTICAL_ALIGNMENT.CENTER
-                tc=cell._tc.get_or_add_tcPr();margins=OxmlElement('w:tcMar')
-                for side in ('top','left','bottom','right'):
-                    el=OxmlElement('w:'+side);el.set(qn('w:w'),'100');el.set(qn('w:type'),'dxa');margins.append(el)
-                tc.append(margins)
-                if ri==0 or ri%2==0:
-                    shade=OxmlElement('w:shd');shade.set(qn('w:fill'),'E8EEF4' if ri==0 else 'F7F8FA');tc.append(shade)
-                for p in cell.paragraphs:
-                    p.alignment=WD_ALIGN_PARAGRAPH.LEFT if ci==0 else WD_ALIGN_PARAGRAPH.CENTER
-                    p.paragraph_format.space_after=Pt(3)
-                    for r in p.runs:r.font.size=Pt(10);r.bold=(ri==0)
-        doc.add_paragraph().paragraph_format.space_after=Pt(3)
-        return t
+        for i,row in enumerate(t.rows):
+            row._tr.get_or_add_trPr().append(OxmlElement('w:cantSplit'))
+            for j,c in enumerate(row.cells):
+                if layout:c.width=Inches(widths[j])
+                c.vertical_alignment=WD_CELL_VERTICAL_ALIGNMENT.CENTER
+                if i==0:
+                    shade=OxmlElement('w:shd');shade.set(qn('w:fill'),'EEEEEE');c._tc.get_or_add_tcPr().append(shade)
+                for p in c.paragraphs:
+                    p.paragraph_format.space_before=Pt(4);p.paragraph_format.space_after=Pt(4)
+                    p.alignment=WD_ALIGN_PARAGRAPH.LEFT if j==0 else WD_ALIGN_PARAGRAPH.CENTER
+                    for r in p.runs:r.font.size=Pt(10.5);r.bold=i==0
+        if layout:layout.format_table(t)
 
-    manifests=[]
-    for topology,filename in [('classic','TimeLearnerClassicAlgorithms.ru.docx'),('branch','TimeLearnerBranchAlgorithms.ru.docx')]:
-        specific=content[topology];component=specific['component']
-        cases=[c for c in evidence['native_n2_cases'] if c['model_spec']['branch']==(topology=='branch')]
-        if len(cases)!=1:raise ValueError('one qualified native N2 case required per topology')
-        case=cases[0]
-        if not (case['counts']['TP']>=1 and case['counts']['TN']>=2):raise ValueError('user working criterion not met')
-        doc=Document();sec=doc.sections[0]
-        sec.page_width=Inches(8.5);sec.page_height=Inches(11)
-        sec.top_margin=sec.bottom_margin=Inches(.75);sec.left_margin=sec.right_margin=Inches(1.)
-        sec.header_distance=sec.footer_distance=Inches(.3)
-        for name in ('Normal','Title','Subtitle','Heading 1','Heading 2','Caption'):
-            st=doc.styles[name];st.font.name='Arial';st.font.color.rgb=RGBColor(0,0,0)
-            st.font.underline=False
-            st.element.get_or_add_rPr().find(qn('w:color')).attrib.pop(qn('w:themeColor'),None)
-            fonts=st.element.get_or_add_rPr().get_or_add_rFonts()
-            for attr in ('asciiTheme','hAnsiTheme','eastAsiaTheme','cstheme'):fonts.attrib.pop(qn('w:'+attr),None)
-            fonts.set(qn('w:ascii'),'Arial');fonts.set(qn('w:hAnsi'),'Arial')
-            props=st.element.find(qn('w:pPr'))
-            if props is not None:
-                for border in list(props.findall(qn('w:pBdr'))):props.remove(border)
-        normal=doc.styles['Normal'];normal.font.size=Pt(11);normal.paragraph_format.space_after=Pt(7)
-        normal.paragraph_format.line_spacing=1.12
-        doc.styles['Title'].font.size=Pt(22);doc.styles['Heading 1'].font.size=Pt(16)
-        doc.styles['Caption'].font.size=Pt(9.5)
-        hp=sec.header.paragraphs[0];hp.text=component+'   '+content['edition']
-        for r in hp.runs:r.font.size=Pt(9)
-        fp=sec.footer.paragraphs[0];fp.alignment=WD_ALIGN_PARAGRAPH.CENTER;fp.add_run('Страница ')
-        field=OxmlElement('w:fldSimple');field.set(qn('w:instr'),'PAGE');fp._p.append(field)
-        doc.add_paragraph(specific['title'],style='Title')
-        para(doc,content['edition'],style='Subtitle');para(doc,specific['lead']);para(doc,common['intro'])
-        heading(doc,'Критерий включения и семейство')
-        para(doc,common['qualification']);equation(doc,'Рабочий вариант  ⇔  TP ≥ 1  ∧  TN ≥ 2')
-        rows=[('N1 калиброванный N2',2,0,0,2,'1 foil в 2 режимах')]
-        if topology=='branch':rows += [('N1 Fast terminal7200',1,3,0,4,'Исходные 8 паттернов'),('N1 Fast terminal21600',1,1,0,6,'8 положений target')]
-        table(doc,['Вариант','TP','FP','FN','TN','Область'],rows,[2.05,.45,.45,.45,.45,2.65])
-        para(doc,common['family']);para(doc,specific['topology'])
+    for topology in ('classic','branch'):
+        doc=Document();section=doc.sections[0]
+        section.page_width=Inches(8.5);section.page_height=Inches(11)
+        section.left_margin=section.right_margin=Inches(1)
+        section.top_margin=section.bottom_margin=Inches(.75)
+        for name,size in [('Normal',11.5),('Title',17),('Subtitle',11.5),('Heading 1',14),('Heading 2',12),('Caption',10.5)]:
+            style_font(doc.styles[name],'Arial',size)
+        doc.styles['Caption'].font.bold=False
+        doc.styles['Caption'].font.italic=False
+        doc.styles['Normal'].paragraph_format.space_after=Pt(6)
+        doc.styles['Normal'].paragraph_format.line_spacing=1.12
+        code=doc.styles.add_style('Псевдокод',1);style_font(code,'Consolas',10.5)
+        code.paragraph_format.space_after=Pt(1);code.paragraph_format.line_spacing=1.05
+        code.paragraph_format.keep_with_next=True
+        footer=section.footer.paragraphs[0];footer.alignment=WD_ALIGN_PARAGRAPH.CENTER
+        footer.add_run('Страница ');field=OxmlElement('w:fldSimple');field.set(qn('w:instr'),'PAGE');footer._p.append(field)
+        layout=None
+        if profile:
+            from .gost_layout import GostDraftLayout
+            layout=GostDraftLayout(doc,profile)
+        common=content['common'];specific=content[topology];used=[]
+        def visible_reference(text):
+            if not next_edition:return text
+            text=re.sub(r'(?<![0-9a-f])[0-9a-f]{40}(?:[0-9a-f]{24})?(?![0-9a-f])',
+                        lambda match:match.group(0)[:16]+'…',text)
+            # Keep measured numbers with their units, without changing the
+            # underlying data or the preserved fourth-edition formatting.
+            return re.sub(r'(\d) (?=(?:мс|с|кГц|Гц|пФ|нФ|МОм|кОм|Ом)(?:\W|$))',
+                          lambda match:match.group(1)+'\u00a0',text)
+        def para(text,style=None):
+            paragraph=doc.add_paragraph(visible_reference(text),style=style)
+            if next_edition and style is None and text.startswith(
+                    ('Источник','Обучающая конфигурация','Проверочная конфигурация')):
+                # A long exact path must wrap without expanding the preceding
+                # Russian words to fill a justified line.
+                paragraph.alignment=WD_ALIGN_PARAGRAPH.LEFT
+            return paragraph
+        def paras(values):
+            for text in values:para(text)
+        def head(text,level=1):return layout.heading(text,level) if layout else doc.add_heading(text,level=level)
+        def equation(document,*values):
+            paragraph=native_equation(document,*values)
+            if layout:layout.number_equation(paragraph)
+            if formula_definitions:
+                number=layout.equations
+                definitions=formula_definitions[number-1]
+                if definitions['number']!=number or not definitions['symbols']:raise ValueError('Ordered formula definitions required')
+                paragraph.paragraph_format.keep_with_next=True
+                for i,record in enumerate(definitions['symbols']):
+                    definition=para('где ' if i==0 else '')
+                    inline_math(definition,record['symbol'])
+                    definition.add_run(' — '+record['description'])
+                    definition.paragraph_format.keep_with_next=i<len(definitions['symbols'])-1
+                    definition.paragraph_format.keep_together=True
+            return paragraph
+        def image(path,caption,source_ref=None,*,maximum_height_inches=None):
+            path=Path(path)
+            with Image.open(path) as im:width,height=im.size
+            scale=min((float(layout.width)/914400 if layout else 6.35)/width,
+                      (float(layout.height)/914400-1.2 if layout else 7.8)/height)
+            if maximum_height_inches is not None:
+                scale=min(scale,maximum_height_inches/height)
+            if layout:
+                reference=para('На рисунке '+str(len(used)+1)+' показана следующая иллюстрация.')
+                reference.paragraph_format.keep_with_next=True
+            p=para('');p.alignment=WD_ALIGN_PARAGRAPH.CENTER;p.paragraph_format.keep_with_next=True
+            if layout:p.paragraph_format.first_line_indent=Pt(0)
+            p.add_run().add_picture(str(path),width=Inches(width*scale),height=Inches(height*scale))
+            caption_text=caption.rstrip().rstrip('.') if layout else caption
+            c=para('Рисунок '+str(len(used)+1)+(' — ' if layout else ' ')+caption_text,'Caption');c.paragraph_format.keep_together=True
+            if source_ref:
+                c.paragraph_format.keep_with_next=True
+                provenance=para('Источник измерений: '+source_ref,'Caption')
+                provenance.paragraph_format.keep_together=True
+            used.append(dict(file=str(path),sha256=digest(path),caption=caption,source_ref=source_ref))
+        def diagram(identity,caption):
+            # Keep the vertical topology readable without expanding its labels
+            # to several times the body size and stranding three lines before it.
+            image(dr/(identity+'.png'),caption,
+                  maximum_height_inches=6.5 if layout and identity=='branch-topology' else None)
+        def concept(identity):
+            record=concepts.get(identity)
+            if record:image(fr/record['png']['path'],captions.get(identity,record['caption']),record['source_ref'])
+            elif draft:para('Черновик Измеренная иллюстрация '+identity+' подготавливается')
+        para(specific['title'],'Title');para(content['edition'],'Subtitle')
+        if draft:para('ЧЕРНОВИК Для внутренней проверки текста и верстки')
+        if layout:layout.structural_heading('Введение')
+        paras(common['introduction'])
+        head('Сегментная модель и входной паттерн')
+        paras(common['model']);paras(specific['topology']);paras(common['stimulus'])
+        head('Математическая цель обучения');paras(common['goal'])
+        equation(doc,sub('e','A,i'),' = ',sub('A','i'),' − ',scripts('A','i','(0)'))
+        equation(doc,sub('ε','A,i'),' = ',sub('ε','abs'),' + ',sub('ε','rel'),absolute(scripts('A','i','(0)')))
+        equation(doc,absolute(sub('e','A,i')),' ≤ ',sub('ε','A,i'))
+        equation(doc,scripts('e','t,i','−'),' = ',scripts('t','i','−'),' − ',scripts('t','r','+'),',   ',
+                 scripts('e','t,i','+'),' = ',scripts('t','i','+'),' − ',scripts('t','r','−'))
+        equation(doc,['function','max',group(absolute(scripts('e','t,i','−')),', ',absolute(scripts('e','t,i','+')))],' ≤ ',sub('δ','t'),',   i ≠ r')
+        equation(doc,sub('L','min,i'),' ≤ ',sub('L','i'),' ≤ ',sub('L','max,i'),',   ',sub('L','i'),' ∈ ℕ')
+        equation(doc,'' if next_edition else 'N0:   ',sub('N','min,i'),' ≤ ',sub('N','s,i'),' ≤ ',sub('N','max,i'),',   ',sub('N','s,i'),' ∈ ℕ')
+        equation(doc,'' if next_edition else 'N1:   0 < ',sub('R','min,i'),' ≤ ',sub('R','s,i'),' ≤ ',sub('R','max,i'))
+        head('Измерение закреплённого отклика');paras(common['measurement'])
+        diagram(specific['diagram'],'Физическая организация модели. Стрелки показывают передачу сигнала, штриховые связи — перезарядку. Геометрический масштаб условный.')
+        for identity in concept_ids[:5]:concept(identity)
+        head('Последовательность структурной адаптации');paras(common['search'])
+        diagram(specific['learning_diagram'],'Основная последовательность обучения. Локальная готовность и свежая проверка всех входов являются разными условиями.')
+        for line in ('Задать паттерн, исходную структуру и ограничения','Измерить собственные исходные амплитуды входов',
+          'Измерить опорный отклик','Пока остаются допустимые действия и бюджет',
+          '  Выбрать вход в порядке, заданном топологией','  Предложить допустимый полный кандидат',
+          '  Между пробами применить изменение структуры','  Получить завершённый измеренный отклик',
+          '  Если отклик недостоверен','    Продолжить по политике либо явно остановиться',
+          '  Иначе вычислить ошибки времени и амплитуды','    Сохранить проверенную точку поиска',
+          'Проверить все входы на конечной модели','Зафиксировать исход и фактическое состояние'):
+            para(line,'Псевдокод')
+        doc.paragraphs[-1].paragraph_format.keep_with_next=False
+        for title,key,diagram_id,concept_id in [('Синхронизация','synchronization',None,None),
+          ('Нормализация числом синапсов','n0','normalization-n0','n0-measured-search'),
+          ('Нормализация сопротивлением','n1','normalization-n1','n1-measured-search')]:
+            head(title);paras(common[key])
+            if key=='n1':
+                equation(doc,'R(q) = exp',group('ln ',sub('R','min'),' + q',group('ln ',sub('R','max'),' − ln ',sub('R','min'))),',   q = ',['fraction','2k − 1',sup('2','j')])
+                para('В формуле сетки j — уровень деления, k — номер нечётной точки этого уровня. Используются только ещё не проверенные допустимые значения.')
+                ratio=['fraction',absolute(sub('e','A,a')),
+                       ['row',absolute(sub('e','A,a')),' + ',absolute(sub('e','A,b'))]]
+                clamped=['function','min',group('¾, ',['function','max',group('¼, ',ratio)])]
+                equation(doc,'λ = ',clamped)
+                equation(doc,sub('R','new'),' = exp',group('ln ',sub('R','a'),
+                         ' + λ ln',group(['fraction',sub('R','b'),sub('R','a')])))
+                para('Индексы a и b обозначают измеренные концы выбранного интервала с разными знаками амплитудной ошибки. Применимость уточнения проверяется до вычисления нового сопротивления.')
+            if diagram_id:diagram(diagram_id,title+' с повторным измерением времени и амплитуды.')
+            if concept_id:concept(concept_id)
+            if key=='n0' and specific.get('count_search_comparison'):
+                comparison=specific['count_search_comparison']
+                paras(comparison['explanation'])
+                table(doc,comparison['headers'],comparison['rows'],
+                      [.6,1.2,1.2,1.6,1.6],title=comparison['table_title'])
+                para(comparison['source_ref'])
+        head('Завершение обучения и распознавание');paras(common['finalization']);paras(common['recognition'])
+        head('Экспериментальные примеры');ids=specific['example_order']
+        name=lambda i:details.get(i,{}).get('title','Пример '+str(ids.index(i)+1))
+        response_headers=['Пример','TP','FP','FN','TN'] if next_edition else ['Пример','Обнаружения','Ложные ответы','Пропуски','Правильные отклонения']
+        table(doc,response_headers,
+              [[name(i),*[cases[i]['counts'][k] for k in ('TP','FP','FN','TN')]] for i in ids],[2.4,1.,1.,.85,1.1],
+              title='Результаты экспериментальных примеров')
+        if next_edition:
+            para('TP — правильное обнаружение цели; FP — ложный ответ на отвлекающий паттерн; FN — пропуск цели; TN — правильное отклонение отвлекающего паттерна.')
+        para('Указаны числа предъявлений, а не число независимых обучений. Число разных отвлекающих паттернов приведено отдельно.')
+        if next_edition:
+            para('На временных графиках реакций синим показан измеренный потенциал сомы, оранжевым — фактические входные импульсы, красным пунктиром — выходные события нейрона. Время отсчитывается от первого фактического входа. Полный положительный отклик и полный диапазон с перезарядкой представлены отдельными видами; увеличение времени обозначено явно. Масштабы потенциала согласованы внутри набора одной модели. Если показаны четыре строки, это четыре сомных сегмента одного нейрона.')
+            para('В печатном тексте длинные контрольные суммы сокращены до первых шестнадцати знаков. Полные значения, исходные подписи и привязка каждого рисунка к наблюдению сохраняются в сопровождающем каталоге иллюстраций и сведениях о сборке документа.')
+        for identity in ids:
+            case=cases[identity];info=details.get(identity,{})
+            head(name(identity),2)
+            paras(explanations.get(identity,info.get('explanation',
+                  ['Черновик Подробные условия сверяются по первичным данным.'])))
+            para('Разных отвлекающих паттернов: '+str(case['unique_foil_patterns'])+'.')
+            threshold=info.get('threshold',case.get('threshold'))
+            threshold_text=(format(threshold,'.17g') if isinstance(threshold,(int,float))
+                            else 'уточняется по пакету модели в черновике')
+            if next_edition:threshold_text=threshold_text.replace('.',',')
+            para('Порог: '+threshold_text+'.')
+            if case.get('early_target'):para('Ответ на цель возник до последнего входного импульса. Это ограничивает вывод о распознавании полной временной структуры.')
+            if case['unique_foil_patterns']==1:para('Отрицательные предъявления относятся к одному паттерну при двух условиях сброса, а не к двум разным отрицательным классам.')
+            if case['training_outcome']=='budget_exhausted':para('Остановка по бюджету сохранена. Подбор порога не является доказательством сходимости обучения.')
+            for followup in case.get('followup_evaluations',[]):
+                para(followup['explanation'])
+                followup_headers=['Набор','TP','FP','FN','TN'] if next_edition else ['Набор','Обнаружения','Ложные ответы','Пропуски','Правильные отклонения']
+                table(doc,followup_headers,
+                    [[followup['title'],*[followup['counts'][k] for k in ('TP','FP','FN','TN')]]],
+                    [2.4,1.,1.,.85,1.1],title=followup['table_title'])
+                para('Источник дополнительной проверки: '+followup['source_ref'])
+            for key,label in [('train_configuration_ref','Обучающая конфигурация'),('test_configuration_ref','Проверочная конфигурация')]:
+                if info.get(key):para(label+': '+info[key])
+            selected=[f for f in trial_figures if f['case_id']==identity]
+            for f in selected:image(fr/f['png']['path'],f.get('short_caption',f['caption']),f['source_ref'])
+            if not selected and draft:para('Черновик Графики правильных и ложных ответов подготавливаются.')
+            para('Источник: '+case['source']['path']+'; версия '+case['source']['commit'])
+        updates=specific.get('result_updates',[])
+        if updates:
+            head('Дополнительные проверки обученных моделей')
+            for update in updates:
+                head(update['title'],2);paras(update['explanation'])
+                if update.get('table'):
+                    values=update['table']
+                    table(doc,values['headers'],values['rows'],values['widths'],
+                          title=values['title'])
+                # Introduce the evidence before the measured illustrations.
+                # A trailing reference alone must not occupy a new page just
+                # before the mandatory page break of the following section.
+                for reference in update.get('sources',[]):
+                    para('Источник дополнительной проверки: '+reference)
+                for identity in update.get('figures',[]):
+                    record=supplementary[identity]
+                    image(fr/record['png']['path'],captions.get(identity,record['caption']),record['source_ref'])
+        head('Реализация вычисления и владение моделью');paras(common['implementation'])
+        diagram('logical-classes','Логическая UML диаграмма обязанностей компонентов обучения.')
+        implementation_rows=[
+          ['Модуль обучения','NNeuronTimeLearner' if topology=='classic' else 'NNeuronTimeLearnerBranch'],
+          ['Управление сессией','NativeTrainingService'],['Ограниченный поиск','BoundedTrainingSession'],
+          ['Составное измерение','CompositeTrainingMeasurement'],['Общая проверка','FinalVerificationSession'],
+          ['Физическая модель','NPulseNeuron']]
+        if next_edition:implementation_rows.extend([
+          ['Нормализация числом синапсов','N0 / Normalization::SynapseCount'],
+          ['Нормализация сопротивлением','N1 / Normalization::TipResistance']])
+        table(doc,['Обязанность','Точное имя в программе'],implementation_rows,[3.,3.35],title='Соответствие обязанностей и компонентов программы')
+        diagram('probe-sequence','UML последовательность пробы. Расчёт такта и сбор отсчётов повторяются до закрытия окна. Контроллер не вызывает вложенный расчёт модели.')
+        head('Границы подтверждённого результата');paras(common['limitations'])
+        if next_edition:
+            para('Сегментные модели нейрона рассматриваются в работах [1, 2]. Действующий алгоритм и результаты этого отчёта описаны по приведённым версиям реализации и измерений.')
+            para('Полные временные отчёты содержат реакции на весь набор паттернов. Выбранные измеренные иллюстрации в этом документе не являются новыми независимыми опытами.')
+            layout.structural_heading('Список использованных источников')
+            for reference in content['bibliography']:para(reference)
+        else:
+            head('Источники и происхождение иллюстраций')
+            para('Публикации авторов служат образцом стиля и терминологии. Объяснение действующего алгоритма основано на реализации и измерениях.')
+            para('Корсаков А. М., Астапова Л. А., Бахшиев А. В. Применение сегментной спайковой модели нейрона со структурной адаптацией для решения задач классификации. Информатика и автоматизация. 2022. Том 21. № 3. DOI 10.15622/ia.21.3.2.')
+            para('Бахшиев А. В., Гунделах Ф. В. Математическая модель преобразования импульсов в естественных нейронах для разработки биологически вдохновлённых систем управления. Предоставленная авторами рукопись 2015 года; название приведено в переводе.')
+            para('Полные временные отчёты содержат реакции на весь набор паттернов. Выбранные измеренные иллюстрации в этом документе не являются новыми независимыми опытами.')
+        filename='TimeLearner'+('Classic' if topology=='classic' else 'Branch')+'Algorithms.ru.docx'
+        if formula_definitions and layout.equations!=len(formula_definitions):raise ValueError('Unconsumed formula definitions')
+        path=output/filename;doc.core_properties.title=specific['title'];doc.core_properties.language='ru-RU';doc.save(path)
+        results.append(dict(topology=topology,file=filename,bytes=path.stat().st_size,sha256=digest(path),
+            figures=used,draft=draft,release_candidate=release_candidate,released=False,
+            equation_format='native_OMML',render_and_visual_review_complete=False))
+        if layout:results[-1]['layout_draft_counts']=dict(sections=layout.sections,tables=layout.tables,equations=layout.equations)
+    result=dict(kind='timelearner_algorithm_docx_build',schema_version=2,edition=content.get('edition_id','2026-11-19-v4'),documents=results,
+        inputs={str(p):digest(p) for p in (content_path,review_path,evidence_path,diagrams)},
+        illustration_catalog_sha256=digest(figures) if figures else None,missing_illustrations_or_details=missing,
+        draft=draft,release_candidate=release_candidate,released=False,
+        all_comments_closed=False,visual_acceptance_complete=False,generated_binary_in_root_git=False)
+    if formula_path:result['inputs'][str(formula_path)]=digest(formula_path)
+    if profile:
+        result['format_profile']=dict(path=str(format_profile),sha256=digest(format_profile),
+            layout_implemented=True,standards_compliance_accepted=False,source_content_is_preserved_v4=not next_edition)
+    (output/'build.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8',newline='\n')
+    return result
 
-        page(doc,'Математическая постановка')
-        para(doc,common['math_intro'])
-        equation(doc,sub('e','A,i'),' = ',sub('A','i'),' − ',sup(sub('A','i'),'(0)'))
-        equation(doc,sub('δ','A,i'),' = ',sub('a','tol'),' + ',sub('r','tol'),' · ',absolute(sup(sub('A','i'),'(0)')))
-        equation(doc,absolute(sub('e','A,i')),' ≤ ',sub('δ','A,i'))
-        equation(doc,sub('e','t,i,lo'),' = ',sub('t','i,start'),' − ',sub('t','r,end'))
-        equation(doc,sub('e','t,i,hi'),' = ',sub('t','i,end'),' − ',sub('t','r,start'))
-        equation(doc,'max',parentheses(absolute(sub('e','t,i,lo')),', ',absolute(sub('e','t,i,hi'))),' ≤ ',sub('δ','t'))
-        para(doc,common['math_gate']);para(doc,common['peaks'])
-        equation(doc,sub('L','min,i'),' ≤ ',sub('L','i'),' ≤ ',sub('L','max,i'),';   ',sub('L','i'),' ∈ ℕ')
-        equation(doc,sub('R','min,i'),' ≤ ',sub('R','s,i'),' ≤ ',sub('R','max,i'),';   ',sub('R','s,i'),' > 0')
-        equation(doc,sub('N','min,i'),' ≤ ',sub('N','s,i'),' ≤ ',sub('N','max,i'),';   ',sub('N','s,i'),' ∈ ℕ')
-        para(doc,specific['differences'])
-
-        page(doc,'Общий ход обучения')
-        figure(doc,shared_flow,'Блок схема общего контура. Повтор распределён по native ticks; полный расчёт не вызывается из контроллера.',6.15)
-        para(doc,'Остановка по бюджету или invalid observation сохраняет собственную причину. Свежая финальная проверка не обходится флагом готовности активного входа.')
-
-        page(doc,'Детальный ход и варианты нормализации')
-        for line in common['pseudocode']:
-            p=para(doc,line);p.paragraph_format.space_after=Pt(3)
-            for run in p.runs:run.font.name='Courier New';run.font.size=Pt(9.5)
-        para(doc,common['n1']);para(doc,common['n0']);para(doc,common['statuses'])
-
-        page(doc,'Структура компонентов')
-        figure(doc,classes(component),'UML классов. Чёрный ромб обозначает композицию; белый ромб соответствует shared ownership поиска. Пунктир показывает зависимость адаптера.',6.35)
-        para(doc,common['ownership'])
-        para(doc,'Обе топологии используют NPulseNeuron с разной структурной конфигурацией. Режим learner StructureBuildMode 0/1 не смешивается с режимами 0/1/2 вложенного нейрона.')
-
-        page(doc,'Один шаг расчёта Rdk')
-        figure(doc,shared_sequence,'UML последовательности. learner — соответствующий TimeLearner; service — NativeTrainingService; probe — NativeProbeExecutor. Показан поддержанный native вычислительный порядок.',6.35)
-        para(doc,common['lifecycle']);para(doc,'Reset физического поддерева не равен Reset всего learner. Контрольный Reset и retarget имеют разные назначения; Copy и Alloc не используются как полный динамический checkpoint.')
-
-        page(doc,'Подтверждённый пример работы')
-        para(doc,content['classic']['example'])
-        para(doc,'Далее приведены четыре наблюдения N2 для '+component+'. Их нельзя смешивать с восьмипаттерновой матрицей N4.')
-        rows=[]
-        for observation in case['observations']:
-            spikes=observation['spike_times'];stimuli=observation['stimulus_times']
-            rows.append((observation['trial_id'],observation['label'],
-                         f'{1000*(stimuli[-1]-stimuli[0]):.1f}',len(spikes),
-                         'нет' if not spikes else f'{1000*(spikes[0]-stimuli[-1]):.1f}'))
-        table(doc,['Проба','Метка','Между входами мс','Спайков','От последнего входа мс'],rows,[.8,.85,1.35,.85,2.15])
-        para(doc,'Target имеет интервалы [0.01, 0.03] с, то есть второй импульс через 30 мс после первого. Foil_dispersed имеет разнесение 240 мс. В примере target вызвал native spike через 8.0–8.5 мс после последнего входа; оба отрицательных наблюдения молчат.')
-        para(doc,'Два TN — два предъявления одного уникального foil. Использованы reset_per_trial и preserve_neuron_dynamics. Раздельные полные окна не являются проверкой непрерывного потока без пропусков.')
-        para(doc,common['test'])
-        if topology=='branch':
-            page(doc,'Сравнение вариантов N4')
-            para(doc,specific['example'])
-            table(doc,['Вариант','Порог','TP','FP','TN','Время target с'],[
-                ('Fast terminal7200','0.05600905',1,3,4,'0.2535'),
-                ('Fast terminal21600','0.05435379',1,1,6,'0.4930')
-            ],[2.05,1.05,.5,.5,.5,1.4])
-            para(doc,'Последний вход целевого паттерна приходится на 0.4900 с. В terminal7200 спайк раньше последнего входа: этот результат включён по историческому окну ответа, но показывает чувствительность к префиксу. В terminal21600 целевой спайк появляется после последнего входа. Молчание foil проверяется на полном окне, а не только вблизи предполагаемой вершины.')
-            para(doc,'Во frozen-проверке 64 предъявлений модель и порог terminal21600 сохранены. В каждой из восьми перестановок получены TP=1 FP=1 FN=0 TN=6; ложный ответ сохраняется на phasea-row-4. Это восемь порядков одной модели, а не восемь независимых обучений. Базовые восемь записанных волн Elder совпали с M40 с максимальной абсолютной разностью 0.0; равенство всех последующих волн этим не утверждается.')
-        para(doc,specific['conclusion'])
-
-        page(doc,'Границы вывода и обновление')
-        para(doc,common['limits']);para(doc,common['history']);para(doc,common['update'])
-        heading(doc,'Источники этой редакции')
-        for text in [
-            'PulseLib '+evidence['algorithm_code']['PulseLib'],
-            'Rdk '+evidence['algorithm_code']['Rdk'],
-            'Runtime научных данных использует PulseLib '+evidence['algorithm_code']['science_runtime_PulseLib'],
-            'Core runtime и принятого PulseLib равны по проверенной source closure.',
-            'Формулы: Core/TimeLearner/BoundedTraining.cpp и FinalVerification.cpp.',
-            'Управление: NativeTrainingService и NativeLearnerLifecycle; наблюдения: NativeProbeExecutor.',
-            'Рабочий N2 model revision '+case['model_revision'],
-            'N2 source — прошедший NativeCalibratedState control. Полный исходный 14-case suite имеет 8 исключённых legacy threshold precondition failures; выбранный случай и его frozen observations проверены отдельно.',
-            'Полные идентификаторы, hashes, scope и ссылки на primary находятся в evidence-register.json рядом с поддерживаемыми источниками.',
-            'N4 источники: FastN1RecognitionScientificReport, FastN1FullTrainingRecognitionScientificReport и FastN1FrozenOrderScientificReport от16 ноября2026.' if topology=='branch' else
-            'Результаты N2 не следует сравнивать по доле правильных ответов с N4 как равные научные дизайны.'
-        ]:
-            p=para(doc,text)
-            for r in p.runs:r.font.size=Pt(9.5)
-        path=output/filename;doc.save(path)
-        manifests.append(dict(topology=topology,file=filename,bytes=path.stat().st_size,
-            sha256=hashlib.sha256(path.read_bytes()).hexdigest(),equation_format='native_OMML',
-            render_and_visual_review_complete=False,scope='first maintained V2 N1 edition'))
-    metadata=dict(kind='timelearner_algorithm_docx_build',schema_version=1,documents=manifests,
-        inputs={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in source.glob('*.json')},
-        generated_binary_in_root_git=False,visual_acceptance_complete=False)
-    (output/'build.json').write_text(json.dumps(metadata,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-    return metadata
-
+def main(argv=None):
+    parser=argparse.ArgumentParser(description=__doc__)
+    for name in ('source','output','diagrams'):parser.add_argument('--'+name,type=Path,required=True)
+    parser.add_argument('--figures',type=Path)
+    mode=parser.add_mutually_exclusive_group()
+    mode.add_argument('--draft',action='store_true')
+    mode.add_argument('--release-candidate',action='store_true',
+        help='Final layout for review; does not certify or publish either document')
+    parser.add_argument('--format-profile',type=Path,help='Explicit GOST profile for a draft or unreleased candidate')
+    parser.add_argument('--content-file',default='revision4-content.ru.json',help='Local content filename; new editions require an explicit profile and build mode')
+    args=parser.parse_args(argv);result=build(args.source,args.output,diagrams=args.diagrams,figures=args.figures,draft=args.draft,release_candidate=args.release_candidate,format_profile=args.format_profile,content_file=args.content_file)
+    print(json.dumps(dict(documents=[r['file'] for r in result['documents']],draft=args.draft,
+        release_candidate=args.release_candidate,released=False,
+        missing_illustrations_or_details=len(result['missing_illustrations_or_details']),visual_acceptance_complete=False)))
 
 if __name__=='__main__':
-    parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--source',type=Path,required=True);parser.add_argument('--output',type=Path,required=True)
-    args=parser.parse_args();print(json.dumps(build(args.source,args.output),ensure_ascii=False))
+    sys.path.insert(0,str(Path(__file__).resolve().parents[4]))
+    from Scripts.StructTrain.TimeLearner.publications.build_algorithm_docx import main as run
+    run()

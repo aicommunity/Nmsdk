@@ -1,0 +1,66 @@
+{
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/Audited-training-source-identity-12-fr633.json",
+    "size": 2111,
+    "sha256": "7cd73753e3d591c7ecd76a5aa8531c1133113379de4f281c42b0eea3f32881d5"
+  },
+  "catalog": {
+    "kind": "actual_audited_training_source_identity_regression_complete_evidence",
+    "schema_version": 1,
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/44/4430095cf1da4cdcb32e1adc29fd4181207857f1c3ab0f54073d652bbe5b80f5",
+        "sha256": "4430095cf1da4cdcb32e1adc29fd4181207857f1c3ab0f54073d652bbe5b80f5",
+        "bytes": 14600
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/71/71317635832f6af51d9580ffeeed57e522612a62b0e98699de36e5d6981cbd40",
+        "sha256": "71317635832f6af51d9580ffeeed57e522612a62b0e98699de36e5d6981cbd40",
+        "bytes": 9090876
+      }
+    },
+    "members": 76,
+    "analysis": {
+      "kind": "actual_audited_training_source_identity_regression",
+      "tests": {
+        "tests": 15,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "source_commit": "976a079c0d14250104da0a42195a4ed63216dde3",
+      "gate_controls_commit": "2932f98eb5766fe98e2690ba55e3e54d822c6f64",
+      "actual_production_consumers": false,
+      "original_KeyError_reproduced": false,
+      "original_gate_terminal": {
+        "execution": "completed",
+        "validity": "valid",
+        "tests": {
+          "tests": 15,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "actual_Branch_recorded_identity": true,
+        "actual_original_projection_and_source_binding": false,
+        "original_compact_not_modified": true,
+        "old_production_KeyError_reproduced": false,
+        "full_native_pipeline_not_executed": true,
+        "new_model_calculation": false,
+        "full_primary_archival_pending": true,
+        "scientific_verdict": null
+      },
+      "original_native_training_not_repeated": true,
+      "full_shared_source_pipeline_not_exercised": true,
+      "scientific_verdict": null
+    },
+    "independent_readback_pending": true,
+    "scientific_verdict": null
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "kind": "timelearner_lossless_source_transport_server_regression",
+  "schema_version": 1,
+  "source_commit": "324e320cec81462bded544daacc03d08e3605042",
+  "validation": {
+    "kind": "timelearner_python_validation_result",
+    "schema_version": 1,
+    "suite_id": "count-source-transport-regressions-m40-a2",
+    "package_fingerprint": "9b45833d76e0cb94931db6f1472dfb465782974ec0e0711eda09404218b6d8fa",
+    "execution": "completed",
+    "assertion_status": "passed",
+    "expected_test_ids": [
+      "Scripts.StructTrain.TimeLearner.tests.test_job_source_transport.JobSourceTransportTest.test_changed_bytes_are_rejected_even_if_json_values_remain_equal",
+      "Scripts.StructTrain.TimeLearner.tests.test_job_source_transport.JobSourceTransportTest.test_cold_job_cannot_import_a_file_source",
+      "Scripts.StructTrain.TimeLearner.tests.test_job_source_transport.JobSourceTransportTest.test_complete_source_and_resolved_digest_survive_all_three_roles",
+      "Scripts.StructTrain.TimeLearner.tests.test_job_source_transport.JobSourceTransportTest.test_physical_model_evaluation_has_a_distinct_lossless_data_role",
+      "Scripts.StructTrain.TimeLearner.tests.test_job_source_transport.JobSourceTransportTest.test_projection_role_metadata_and_history_changes_are_rejected",
+      "Scripts.StructTrain.TimeLearner.tests.test_job_source_transport.JobSourceTransportTest.test_size_guard_runs_before_reading",
+      "Scripts.StructTrain.TimeLearner.tests.test_job_source_transport.JobSourceTransportTest.test_source_cannot_escape_input_root",
+      "Scripts.StructTrain.TimeLearner.tests.test_json_transport.JsonTransportTest.test_existing_destination_cannot_be_overwritten",
+      "Scripts.StructTrain.TimeLearner.tests.test_json_transport.JsonTransportTest.test_output_limit_and_unterminated_string_cannot_publish",
+      "Scripts.StructTrain.TimeLearner.tests.test_json_transport.JsonTransportTest.test_strings_escapes_utf8_and_exact_number_tokens_across_chunks",
+      "Scripts.StructTrain.TimeLearner.tests.test_json_transport.JsonTransportTest.test_wrong_source_digest_cannot_publish_transport"
+    ],
+    "executed_tests": 11,
+    "failures": [],
+    "errors": [],
+    "skipped": [],
+    "fixtures": {},
+    "scientific_verdict": null
+  },
+  "process": {
+    "kind": "timelearner_process_result",
+    "schema_version": 2,
+    "execution": "completed",
+    "reason": "exit_zero_and_whole_group_closed",
+    "returncode": 0,
+    "wall_seconds": 43.955982046201825,
+    "model_time": null,
+    "runtime_provenance": "loaded_files_captured",
+    "mapping_error": null,
+    "runtime_fingerprint": "262df69197ada46c464cd5c16ee0d86503ad16ab69daf841f1623d34622c08ae",
+    "ownership_scope": "bound_cgroup",
+    "all_processes_closed": true,
+    "scientific_verdict": null,
+    "operational_diagnostics": {
+      "kind": "timelearner_operational_diagnostics",
+      "schema_version": 1,
+      "policy": "owned-streams-v1",
+      "status": "clear",
+      "error_records": 0,
+      "warning_records": 0,
+      "unclassified_stderr_chunks": 0,
+      "reasons": [],
+      "examples": [],
+      "streams": [
+        {
+          "path": "stdout.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "contained_streams_match": true,
+      "scientific_verdict": null
+    }
+  },
+  "kernel": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "d8baecbabcae75c5d51622a5131b8a8600aa9d9f99373ba0ca2edbbbe8c8b1bb",
+      "unit": "timelearner-9302d2bf-9848-4aec-a9e1-3b8f44e9e927.service",
+      "invocation_id": "46e3c6e611104a81951d4c519ed29669",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-9302d2bf-9848-4aec-a9e1-3b8f44e9e927.service",
+      "initial_main_pid": 2045925,
+      "initial_start_ticks": "439724279",
+      "sha256": "76c6723c0517c5154a215e6353e444795e001c0b074071f200b6f3767ec44b41"
+    }
+  },
+  "validation_passed": true,
+  "actual_large_model_preparation_is_separate": true,
+  "scientific_verdict": null
+}

@@ -1,0 +1,125 @@
+{
+  "native_export": {
+    "job": "s11-prepared-physical-branch-export-m40-a2",
+    "exists": true,
+    "terminal.json": {
+      "native_process_completed": true,
+      "physical_roundtrip_verified": true,
+      "model_revision": "0fe43bddd70414e903ec41e68eb3433d9b85feaa5799448e2af7793ed8c5ff9f",
+      "model_sha256": "30e001e16191d840beaa7f65514ec79f1dd4aea8cfaafd4daf664f432c57b09d",
+      "source_package_sha256": "f9e4d48f3e08ae52bad59474e70b7bf2cfd58b891d8b312e8b865a75848a2675"
+    },
+    "process-result.json": {
+      "kind": "timelearner_process_result",
+      "execution": "completed",
+      "reason": "exit_zero_and_whole_group_closed",
+      "returncode": 0,
+      "wall_seconds": 309.90530177857727,
+      "runtime_provenance": "loaded_files_captured",
+      "mapping_error": null,
+      "all_processes_closed": true
+    },
+    "native/execution.json": {
+      "execution": "completed",
+      "kind": "timelearner_native_physical_model_export_execution",
+      "model_revision": "0fe43bddd70414e903ec41e68eb3433d9b85feaa5799448e2af7793ed8c5ff9f",
+      "model_sha256": "30e001e16191d840beaa7f65514ec79f1dd4aea8cfaafd4daf664f432c57b09d",
+      "physical_roundtrip_verified": true,
+      "sha256": "1f9ffe0a6d6b4845fb73e7c1c12f9147ce18daf883ae66fc4f85268542d969f3"
+    },
+    "native_files": [
+      {
+        "name": "execution.json",
+        "bytes": 1500
+      },
+      {
+        "name": "input-projection.json",
+        "bytes": 686
+      },
+      {
+        "name": "model.json",
+        "bytes": 11074755
+      }
+    ],
+    "kernel": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "d9d8f28c27ce2940ceb86c5569dc197e7c530af3a9ab6e68d9703db8b897e2c7",
+        "unit": "timelearner-daa0e2ee-d3e5-4e8a-95a5-6127dcb35a9b.service",
+        "invocation_id": "850cd29338c24d068e0e3a9ef7869bca",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-daa0e2ee-d3e5-4e8a-95a5-6127dcb35a9b.service",
+        "initial_main_pid": 2817921,
+        "initial_start_ticks": "433091370",
+        "sha256": "7f81ef4dbc9937f6533c5e03e99d2b7222fc9b0b954da0210c8652d26b0509d9"
+      }
+    }
+  },
+  "sdk_runtime": {
+    "source_closure": {
+      "root": {
+        "head": "893b7344eb8794e5ef981eb133e669b6060e5aa3",
+        "status": ""
+      },
+      "Bin": {
+        "recorded_gitlink": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+        "head": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+        "status": ""
+      },
+      "Libraries/Nmsdk-MotionControlLib": {
+        "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+        "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+        "status": ""
+      },
+      "Libraries/Nmsdk-PulseLib": {
+        "recorded_gitlink": "c508392a8c963ceb639050d737717bff0d853b3a",
+        "head": "c508392a8c963ceb639050d737717bff0d853b3a",
+        "status": ""
+      },
+      "Libraries/Rdk-BasicLib": {
+        "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+        "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+        "status": ""
+      },
+      "Libraries/Rdk-CvBasicLib": {
+        "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+        "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+        "status": ""
+      },
+      "Libraries/Rdk-HardwareLib": {
+        "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+        "head": "de40b008e990105856726e01230dde19f42a90a9",
+        "status": ""
+      },
+      "Rdk": {
+        "recorded_gitlink": "de4134235c0dcb8b91fd9a43b267348ad1a163ca",
+        "head": "de4134235c0dcb8b91fd9a43b267348ad1a163ca",
+        "status": ""
+      }
+    },
+    "executable": {
+      "path": "/media/user/Data/TimeLearnerRefactor/runtime-terminal-portable-sdk-a8/NeuroModelerConsole",
+      "sha256": "68a5dbd0214f636d91ecd4df1c8877ce7cb75c060c0134910a081ffe57db189f",
+      "size": 26985440
+    }
+  },
+  "frozen_DATA_replay": {
+    "started": true,
+    "name": "s11-branch-recognition-data-replay-m40-a1",
+    "controls_commit": "334a9a3ef58ed1df48a7c2b035e46b1be16fbd34",
+    "supervisor_pid": 2836916,
+    "native_trials": 8,
+    "source_model_revision": "0fe43bddd70414e903ec41e68eb3433d9b85feaa5799448e2af7793ed8c5ff9f",
+    "source_model_data_sha256": "30e001e16191d840beaa7f65514ec79f1dd4aea8cfaafd4daf664f432c57b09d",
+    "native_memory_bytes": 2147483648,
+    "native_maximum_wall_seconds": 3600,
+    "outer_memory_bytes": 2147483648,
+    "outer_maximum_wall_seconds": 4800,
+    "original_source_execution_preserved": true,
+    "training_started": false,
+    "scientific_verdict": null
+  }
+}

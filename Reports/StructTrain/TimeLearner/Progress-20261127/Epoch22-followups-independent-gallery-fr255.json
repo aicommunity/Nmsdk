@@ -1,0 +1,180 @@
+{
+  "kind": "timelearner_external_scientific_result_reference",
+  "schema_version": 1,
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/b3/b325628eda8b0af03929eff79b34385f7c906ddd7f49d934e2cb84e06f308b18",
+      "sha256": "b325628eda8b0af03929eff79b34385f7c906ddd7f49d934e2cb84e06f308b18",
+      "bytes": 53257
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/1a/1a1e7437b082ae7e960a500d0745b6ec371d94109da32be887ec5b9fef36ee47",
+      "sha256": "1a1e7437b082ae7e960a500d0745b6ec371d94109da32be887ec5b9fef36ee47",
+      "bytes": 33181324
+    },
+    "restoration.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/3f/3f41411ed0d949d6d44815c6fd61ecefb189b6888325b75b7d775e96a9925415",
+      "sha256": "3f41411ed0d949d6d44815c6fd61ecefb189b6888325b75b7d775e96a9925415",
+      "bytes": 425
+    }
+  },
+  "source_catalog": {
+    "relative_path": "experiments/2026-11-27/Epoch22-followups-independent-gallery-fr255.json",
+    "bytes": 5508,
+    "sha256": "52d4f0965734db3da4cc49c1bf2528aee6404b60ab8292ea4e5777fd31a82471"
+  },
+  "source_members": 243,
+  "gallery_members": 320,
+  "observations": 43,
+  "PNG": 86,
+  "SVG": 86,
+  "cases": [
+    {
+      "id": "repeat",
+      "source_catalog": {
+        "relative_path": "experiments/2026-11-27/Windows14-epoch22-followups-independent-fr215.json",
+        "bytes": 2920,
+        "sha256": "3f3543afe75373a48d8035c19c48ded461a984856e03d8f8494feadc42852a4e"
+      },
+      "model_revision": "2783e83684eef31e0a258e271e0c2c3acf30a9a9ab175fc20632577b5b9028a6",
+      "observations": 8,
+      "counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.75,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.2857142857142857
+      },
+      "frozen_model_verified": true
+    },
+    {
+      "id": "new-foils",
+      "source_catalog": {
+        "relative_path": "experiments/2026-11-27/Windows14-epoch22-followups-independent-fr215.json",
+        "bytes": 2920,
+        "sha256": "3f3543afe75373a48d8035c19c48ded461a984856e03d8f8494feadc42852a4e"
+      },
+      "model_revision": "2783e83684eef31e0a258e271e0c2c3acf30a9a9ab175fc20632577b5b9028a6",
+      "observations": 27,
+      "counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 24,
+        "targets": 1,
+        "foils": 26,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.9259259259259259,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.07692307692307693
+      },
+      "frozen_model_verified": true
+    },
+    {
+      "id": "third-pulse",
+      "source_catalog": {
+        "relative_path": "experiments/2026-11-27/Windows14-epoch22-followups-independent-fr215.json",
+        "bytes": 2920,
+        "sha256": "3f3543afe75373a48d8035c19c48ded461a984856e03d8f8494feadc42852a4e"
+      },
+      "model_revision": "2783e83684eef31e0a258e271e0c2c3acf30a9a9ab175fc20632577b5b9028a6",
+      "observations": 8,
+      "counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "TN": 7,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 1.0,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.0
+      },
+      "frozen_model_verified": true
+    }
+  ],
+  "analyses": [
+    {
+      "phase": "repeat",
+      "counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.75,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.2857142857142857
+      },
+      "threshold": 0.023252703356543683,
+      "all_declared_complete_observations_verified": true
+    },
+    {
+      "phase": "new-foils",
+      "counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 24,
+        "targets": 1,
+        "foils": 26,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.9259259259259259,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.07692307692307693
+      },
+      "threshold": 0.023252703356543683,
+      "all_declared_complete_observations_verified": true
+    },
+    {
+      "phase": "third-pulse",
+      "counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "TN": 7,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 1.0,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.0
+      },
+      "threshold": 0.023252703356543683,
+      "all_declared_complete_observations_verified": true
+    }
+  ],
+  "all43_observations_reaudited_and_byte_compared": true,
+  "all_reader_loaded_bytes_verified": true,
+  "all_original_native_loaded_bytes_verified": true,
+  "all_reader_processes_closed": true,
+  "visual_review_complete": false,
+  "fixed_model": "Windows14 epoch22",
+  "new_Train": false,
+  "new_calibration": false,
+  "independent_holdout": false,
+  "scientific_verdict": null,
+  "source_kind": "timelearner_Classic_epoch22_all43_frozen_followups_independent_gallery",
+  "upstream_source_catalog": {
+    "relative_path": "experiments/2026-11-27/Windows14-epoch22-followups-independent-fr215.json",
+    "bytes": 2920,
+    "sha256": "3f3543afe75373a48d8035c19c48ded461a984856e03d8f8494feadc42852a4e"
+  }
+}

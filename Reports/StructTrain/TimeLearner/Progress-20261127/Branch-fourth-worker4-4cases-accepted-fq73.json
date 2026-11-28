@@ -1,0 +1,254 @@
+{
+  "kind": "timelearner_external_scientific_result_reference",
+  "schema_version": 1,
+  "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+  "catalog": {
+    "relative_path": "experiments/2026-11-27/Branch-fourth-worker4-4cases-accepted-fq73.json",
+    "bytes": 8678,
+    "sha256": "c82d72de336e7977063f412f03d20cad81913ab3f5a7526d01ab95de043ea547"
+  },
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/ec/ecc3f0c65054f54793aec2fda8a48d07b9a4de32232c4820814eb8c73b781d5d",
+      "sha256": "ecc3f0c65054f54793aec2fda8a48d07b9a4de32232c4820814eb8c73b781d5d",
+      "bytes": 3557
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/17/17df8c4972f1e123d03b4bed03f3e68a690964a841c1757e2cf05bd7dc4dc0a6",
+      "sha256": "17df8c4972f1e123d03b4bed03f3e68a690964a841c1757e2cf05bd7dc4dc0a6",
+      "bytes": 12324
+    },
+    "reader-restoration.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/a1/a1feda04045173389817d180568a26cd98894e9d218f644b4b3f379159c24aa6",
+      "sha256": "a1feda04045173389817d180568a26cd98894e9d218f644b4b3f379159c24aa6",
+      "bytes": 395
+    }
+  },
+  "metadata_members": 21,
+  "all_metadata_bytes_independently_restored_on_M40": true,
+  "all_source_primary_member_bytes_restored_on_reader": 671,
+  "all4_complete_native_cases_reaudited": true,
+  "all_actual_loaded_bytes_verified_on_reader": true,
+  "producer_primary_catalog": {
+    "relative_path": "experiments/2026-11-26/Worker4-baseline-and-fourth-collected-primary-fq39.json",
+    "bytes": 1994,
+    "sha256": "d536d64e066a4906294b4439cc310ff1ab0ac489348c47a9d8a2b106f48a52dd"
+  },
+  "reference_primary_catalog": {
+    "relative_path": "experiments/2026-11-26/Branch-fourth-t560-pair-accepted-fq18.json",
+    "bytes": 6622,
+    "sha256": "163c09ba7a038ce75ab91fff4b51df6523091bf7822439b18c267b32f5031e65"
+  },
+  "analyses": [
+    {
+      "tick": 1040,
+      "policy": "reset_per_trial",
+      "counts": {
+        "TP": 1,
+        "FP": 1,
+        "FN": 0,
+        "TN": 6,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.14285714285714285
+      },
+      "prefix": {
+        "kind": "timelearner_fourth_probe_prefix_comparison",
+        "schema_version": 1,
+        "source_trial_id": "branch-fourth-t960-reset-win8-fp19/rotation-3/position-5",
+        "observed_trial_id": "branch-fourth-t1040-reset-worker4-fp41/rotation-3/position-5",
+        "actual_fourth_relative_seconds": [
+          0.48,
+          0.52
+        ],
+        "cutoff_relative_seconds": 0.48,
+        "cutoff_sample_excluded": true,
+        "source_prefix_samples": 980,
+        "observed_prefix_samples": 980,
+        "absolute_tolerance": 1e-12,
+        "maximum_absolute_differences": {
+          "signals": 0.0,
+          "sample_times": 0.0,
+          "recorded_histories": 0.0,
+          "spike_times": 0.0
+        },
+        "recorded_signal_and_event_prefix_preserved": true,
+        "difference_reasons": [],
+        "source_spikes_before_cutoff": [],
+        "observed_spikes_before_cutoff": [],
+        "full_observations_retained": true,
+        "pre_window_recorded_history_compared": true,
+        "hidden_state_equality_claimed": false,
+        "classification_recomputed_from_prefix": false,
+        "scientific_verdict": null
+      },
+      "common_five_complete_responses_preserved": true
+    },
+    {
+      "tick": 1040,
+      "policy": "preserve_neuron_dynamics",
+      "counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.75,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.2857142857142857
+      },
+      "prefix": {
+        "kind": "timelearner_fourth_probe_prefix_comparison",
+        "schema_version": 1,
+        "source_trial_id": "branch-fourth-t960-preserve-win8-fp19/rotation-3/position-5",
+        "observed_trial_id": "branch-fourth-t1040-preserve-worker4-fp41/rotation-3/position-5",
+        "actual_fourth_relative_seconds": [
+          0.48,
+          0.52
+        ],
+        "cutoff_relative_seconds": 0.48,
+        "cutoff_sample_excluded": true,
+        "source_prefix_samples": 980,
+        "observed_prefix_samples": 980,
+        "absolute_tolerance": 1e-12,
+        "maximum_absolute_differences": {
+          "signals": 0.0,
+          "sample_times": 0.0,
+          "recorded_histories": 0.0,
+          "spike_times": 0.0
+        },
+        "recorded_signal_and_event_prefix_preserved": true,
+        "difference_reasons": [],
+        "source_spikes_before_cutoff": [
+          0.242
+        ],
+        "observed_spikes_before_cutoff": [
+          0.242
+        ],
+        "full_observations_retained": true,
+        "pre_window_recorded_history_compared": true,
+        "hidden_state_equality_claimed": false,
+        "classification_recomputed_from_prefix": false,
+        "scientific_verdict": null
+      },
+      "common_five_complete_responses_preserved": true
+    },
+    {
+      "tick": 1120,
+      "policy": "reset_per_trial",
+      "counts": {
+        "TP": 1,
+        "FP": 1,
+        "FN": 0,
+        "TN": 6,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.14285714285714285
+      },
+      "prefix": {
+        "kind": "timelearner_fourth_probe_prefix_comparison",
+        "schema_version": 1,
+        "source_trial_id": "branch-fourth-t960-reset-win8-fp19/rotation-3/position-5",
+        "observed_trial_id": "branch-fourth-t1120-reset-worker4-fp41/rotation-3/position-5",
+        "actual_fourth_relative_seconds": [
+          0.48,
+          0.56
+        ],
+        "cutoff_relative_seconds": 0.48,
+        "cutoff_sample_excluded": true,
+        "source_prefix_samples": 980,
+        "observed_prefix_samples": 980,
+        "absolute_tolerance": 1e-12,
+        "maximum_absolute_differences": {
+          "signals": 0.0,
+          "sample_times": 0.0,
+          "recorded_histories": 0.0,
+          "spike_times": 0.0
+        },
+        "recorded_signal_and_event_prefix_preserved": true,
+        "difference_reasons": [],
+        "source_spikes_before_cutoff": [],
+        "observed_spikes_before_cutoff": [],
+        "full_observations_retained": true,
+        "pre_window_recorded_history_compared": true,
+        "hidden_state_equality_claimed": false,
+        "classification_recomputed_from_prefix": false,
+        "scientific_verdict": null
+      },
+      "common_five_complete_responses_preserved": true
+    },
+    {
+      "tick": 1120,
+      "policy": "preserve_neuron_dynamics",
+      "counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.75,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.2857142857142857
+      },
+      "prefix": {
+        "kind": "timelearner_fourth_probe_prefix_comparison",
+        "schema_version": 1,
+        "source_trial_id": "branch-fourth-t960-preserve-win8-fp19/rotation-3/position-5",
+        "observed_trial_id": "branch-fourth-t1120-preserve-worker4-fp41/rotation-3/position-5",
+        "actual_fourth_relative_seconds": [
+          0.48,
+          0.56
+        ],
+        "cutoff_relative_seconds": 0.48,
+        "cutoff_sample_excluded": true,
+        "source_prefix_samples": 980,
+        "observed_prefix_samples": 980,
+        "absolute_tolerance": 1e-12,
+        "maximum_absolute_differences": {
+          "signals": 0.0,
+          "sample_times": 0.0,
+          "recorded_histories": 0.0,
+          "spike_times": 0.0
+        },
+        "recorded_signal_and_event_prefix_preserved": true,
+        "difference_reasons": [],
+        "source_spikes_before_cutoff": [
+          0.242
+        ],
+        "observed_spikes_before_cutoff": [
+          0.242
+        ],
+        "full_observations_retained": true,
+        "pre_window_recorded_history_compared": true,
+        "hidden_state_equality_claimed": false,
+        "classification_recomputed_from_prefix": false,
+        "scientific_verdict": null
+      },
+      "common_five_complete_responses_preserved": true
+    }
+  ],
+  "additional_baseline8_reaudited": true,
+  "new_training": false,
+  "threshold_selected": false,
+  "independent_holdout": false,
+  "scientific_verdict": null
+}

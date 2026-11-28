@@ -1,0 +1,131 @@
+{
+  "controls": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-recognition-physical-replay-a1",
+  "tests/terminal.json": {
+    "kind": "timelearner_actual_windows_physical_replay",
+    "execution": "completed",
+    "model_revision": "e3149bcebad4b9655060834c1f63e4730b2704ca27e6d92650209f66bb74e0d6",
+    "counts": {
+      "TP": 1,
+      "FP": 1,
+      "FN": 0,
+      "TN": 6,
+      "targets": 1,
+      "foils": 7,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.875,
+      "target_hit_rate": 1.0,
+      "foil_response_rate": 0.14285714285714285
+    },
+    "rows": [
+      {
+        "trial_id": "actual-windows-branch-recognition-DATA-replay/a1/trial-0",
+        "sample_id": "phasea-row-0",
+        "samples": 4001,
+        "spike_count": 1,
+        "maximum_absolute_sample_difference": 0.0,
+        "waveform_difference_reason": null,
+        "waveform_preserved": true,
+        "stimulus_and_spike_events_preserved": true
+      },
+      {
+        "trial_id": "actual-windows-branch-recognition-DATA-replay/a1/trial-1",
+        "sample_id": "phasea-row-1",
+        "samples": 4001,
+        "spike_count": 0,
+        "maximum_absolute_sample_difference": 0.0,
+        "waveform_difference_reason": null,
+        "waveform_preserved": true,
+        "stimulus_and_spike_events_preserved": true
+      },
+      {
+        "trial_id": "actual-windows-branch-recognition-DATA-replay/a1/trial-2",
+        "sample_id": "phasea-row-2",
+        "samples": 4001,
+        "spike_count": 0,
+        "maximum_absolute_sample_difference": 0.0,
+        "waveform_difference_reason": null,
+        "waveform_preserved": true,
+        "stimulus_and_spike_events_preserved": true
+      },
+      {
+        "trial_id": "actual-windows-branch-recognition-DATA-replay/a1/trial-3",
+        "sample_id": "phasea-row-3",
+        "samples": 4001,
+        "spike_count": 0,
+        "maximum_absolute_sample_difference": 0.0,
+        "waveform_difference_reason": null,
+        "waveform_preserved": true,
+        "stimulus_and_spike_events_preserved": true
+      },
+      {
+        "trial_id": "actual-windows-branch-recognition-DATA-replay/a1/trial-4",
+        "sample_id": "phasea-row-4",
+        "samples": 4001,
+        "spike_count": 1,
+        "maximum_absolute_sample_difference": 0.0,
+        "waveform_difference_reason": null,
+        "waveform_preserved": true,
+        "stimulus_and_spike_events_preserved": true
+      },
+      {
+        "trial_id": "actual-windows-branch-recognition-DATA-replay/a1/trial-5",
+        "sample_id": "phasea-row-5",
+        "samples": 4001,
+        "spike_count": 0,
+        "maximum_absolute_sample_difference": 0.0,
+        "waveform_difference_reason": null,
+        "waveform_preserved": true,
+        "stimulus_and_spike_events_preserved": true
+      },
+      {
+        "trial_id": "actual-windows-branch-recognition-DATA-replay/a1/trial-6",
+        "sample_id": "phasea-row-6",
+        "samples": 4001,
+        "spike_count": 0,
+        "maximum_absolute_sample_difference": 0.0,
+        "waveform_difference_reason": null,
+        "waveform_preserved": true,
+        "stimulus_and_spike_events_preserved": true
+      },
+      {
+        "trial_id": "actual-windows-branch-recognition-DATA-replay/a1/trial-7",
+        "sample_id": "phasea-row-7",
+        "samples": 4001,
+        "spike_count": 0,
+        "maximum_absolute_sample_difference": 0.0,
+        "waveform_difference_reason": null,
+        "waveform_preserved": true,
+        "stimulus_and_spike_events_preserved": true
+      }
+    ],
+    "all_eight_waveforms_and_events_preserved": true,
+    "transfer_valid": true
+  },
+  "tests/process-result.json": {
+    "kind": "timelearner_windows_process_result",
+    "execution": "completed",
+    "reason": "exit_zero",
+    "returncode": 0,
+    "all_processes_closed": true,
+    "runtime_provenance": "loaded_files_captured",
+    "wall_seconds": 1158.7446102999384
+  },
+  "tests/native/execution.json": {
+    "execution": "completed",
+    "kind": "timelearner_native_physical_model_evaluation_execution",
+    "model_revision": "e3149bcebad4b9655060834c1f63e4730b2704ca27e6d92650209f66bb74e0d6",
+    "model_sha256": "924c8f689ce84eecec1d4f0deb21ca34148703dd9e204f7bc5a80717afcc5c18",
+    "sha256": "b5ac0a8336eba3a88f89d285a828ec482c11216972ad73cc0d681e8521d02f0d"
+  },
+  "task": {
+    "last_result": 0,
+    "instances": [],
+    "state": 3
+  },
+  "owned_process": {
+    "pid": 14876,
+    "open_error": 87
+  },
+  "python_root_commit": "3a17f9e9cfa10f2dec70951aaa434435a7ceb334",
+  "controls_commit": "7b11d5c14ee637443db86b9949d119892e513d20"
+}

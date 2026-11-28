@@ -1,0 +1,300 @@
+{
+  "kind": "timelearner_actual_recognition_DATA_replay_evidence",
+  "schema_version": 1,
+  "classic": {
+    "job": "s11-classic-recognition-data-replay-elder-a2",
+    "trial_packets": 8,
+    "controller/comparison.json": {
+      "kind": "actual_classic_recognition_DATA_replay_comparison",
+      "counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.75,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.2857142857142857
+      },
+      "model_revision": "ec82f91aaf806a562fcfcc29501eeabbfa0ccd0d2a93bccaf9a7190681c5cda3",
+      "rows": [
+        {
+          "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/0",
+          "samples": 4001,
+          "maximum_absolute_sample_difference": 0.0,
+          "spike_count": 1
+        },
+        {
+          "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/1",
+          "samples": 4001,
+          "maximum_absolute_sample_difference": 0.0,
+          "spike_count": 0
+        },
+        {
+          "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/2",
+          "samples": 4001,
+          "maximum_absolute_sample_difference": 0.0,
+          "spike_count": 0
+        },
+        {
+          "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/3",
+          "samples": 4001,
+          "maximum_absolute_sample_difference": 0.0,
+          "spike_count": 0
+        },
+        {
+          "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/4",
+          "samples": 4001,
+          "maximum_absolute_sample_difference": 0.0,
+          "spike_count": 1
+        },
+        {
+          "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/5",
+          "samples": 4001,
+          "maximum_absolute_sample_difference": 0.0,
+          "spike_count": 0
+        },
+        {
+          "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/6",
+          "samples": 4001,
+          "maximum_absolute_sample_difference": 0.0,
+          "spike_count": 1
+        },
+        {
+          "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/7",
+          "samples": 4001,
+          "maximum_absolute_sample_difference": 0.0,
+          "spike_count": 0
+        }
+      ],
+      "all_eight_waveforms_and_events_preserved": true
+    },
+    "controller/outer-result.json": {
+      "kind": "timelearner_process_result",
+      "execution": "completed",
+      "reason": "exit_zero_and_whole_group_closed",
+      "returncode": 0,
+      "wall_seconds": 1516.4673975482583,
+      "runtime_provenance": "loaded_files_captured",
+      "all_processes_closed": true
+    },
+    "run/run-manifest.json": {
+      "kind": "timelearner_native_pipeline_run_manifest",
+      "execution": "completed",
+      "validity": "valid"
+    },
+    "run/process/result.json": {
+      "kind": "timelearner_process_result",
+      "execution": "completed",
+      "reason": "exit_zero_and_whole_group_closed",
+      "returncode": 0,
+      "wall_seconds": 1500.3021287471056,
+      "runtime_provenance": "loaded_files_captured",
+      "all_processes_closed": true
+    },
+    "run/native/execution.json": {
+      "execution": "completed",
+      "expected_trials": 8,
+      "kind": "timelearner_native_physical_model_evaluation_execution",
+      "model_revision": "ec82f91aaf806a562fcfcc29501eeabbfa0ccd0d2a93bccaf9a7190681c5cda3",
+      "model_ticks": 32008,
+      "observed_trials": 8
+    },
+    "resources": {
+      "capacity": {
+        "disk_bytes": 15032385536,
+        "memory_bytes": 25769803776,
+        "slots": 1
+      },
+      "reserved": {
+        "disk_bytes": 0,
+        "memory_bytes": 0,
+        "slots": 0
+      }
+    },
+    "outer_kernel": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "21df9421cca698f1dd6888bc5a002c8c461df549269906f6c35b35b551abb75f",
+        "unit": "timelearner-c59488c6-1828-42b2-9611-c3e2be73a3ef.service",
+        "invocation_id": "2e51b78f11904402bec4fed5339732c5",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-c59488c6-1828-42b2-9611-c3e2be73a3ef.service",
+        "initial_main_pid": 1058765,
+        "initial_start_ticks": "482464254",
+        "sha256": "c487c98215a5edae228d9d0150942052ec4ddd8564cc3e62180c316d2e4650f4"
+      }
+    },
+    "native_kernel": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "d0b477162290d37604700c9574952d64e165faf392288f67e5f39ac767f7500f",
+        "unit": "timelearner-79a7872f-a706-46cb-8b3b-2aed7bbc895a.service",
+        "invocation_id": "52f0bc7060544dccb98e465aa6aa6d05",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-79a7872f-a706-46cb-8b3b-2aed7bbc895a.service",
+        "initial_main_pid": 1058968,
+        "initial_start_ticks": "482464687",
+        "sha256": "b1539ae44e09dc805c6eb1b943617fe820fd4072630b5fea29e2f067ab4d3d25"
+      }
+    }
+  },
+  "branch": {
+    "job": "s11-branch-recognition-data-replay-m40-a1",
+    "trial_packets": 8,
+    "controller/comparison.json": {
+      "kind": "actual_branch_recognition_DATA_replay_comparison",
+      "counts": {
+        "TP": 1,
+        "FP": 1,
+        "FN": 0,
+        "TN": 6,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.14285714285714285
+      },
+      "model_revision": "0fe43bddd70414e903ec41e68eb3433d9b85feaa5799448e2af7793ed8c5ff9f",
+      "rows": [
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/0",
+          "samples": 4001,
+          "maximum_absolute_sample_difference": 0.0,
+          "spike_count": 1
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/1",
+          "samples": 4001,
+          "maximum_absolute_sample_difference": 0.0,
+          "spike_count": 0
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/2",
+          "samples": 4001,
+          "maximum_absolute_sample_difference": 0.0,
+          "spike_count": 0
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/3",
+          "samples": 4001,
+          "maximum_absolute_sample_difference": 0.0,
+          "spike_count": 0
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/4",
+          "samples": 4001,
+          "maximum_absolute_sample_difference": 0.0,
+          "spike_count": 1
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/5",
+          "samples": 4001,
+          "maximum_absolute_sample_difference": 0.0,
+          "spike_count": 0
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/6",
+          "samples": 4001,
+          "maximum_absolute_sample_difference": 0.0,
+          "spike_count": 0
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/7",
+          "samples": 4001,
+          "maximum_absolute_sample_difference": 0.0,
+          "spike_count": 0
+        }
+      ],
+      "all_eight_waveforms_and_events_preserved": true
+    },
+    "controller/outer-result.json": {
+      "kind": "timelearner_process_result",
+      "execution": "completed",
+      "reason": "exit_zero_and_whole_group_closed",
+      "returncode": 0,
+      "wall_seconds": 797.5654797907919,
+      "runtime_provenance": "loaded_files_captured",
+      "all_processes_closed": true
+    },
+    "run/run-manifest.json": {
+      "kind": "timelearner_native_pipeline_run_manifest",
+      "execution": "completed",
+      "validity": "valid"
+    },
+    "run/process/result.json": {
+      "kind": "timelearner_process_result",
+      "execution": "completed",
+      "reason": "exit_zero_and_whole_group_closed",
+      "returncode": 0,
+      "wall_seconds": 791.0515218386427,
+      "runtime_provenance": "loaded_files_captured",
+      "all_processes_closed": true
+    },
+    "run/native/execution.json": {
+      "execution": "completed",
+      "expected_trials": 8,
+      "kind": "timelearner_native_physical_model_evaluation_execution",
+      "model_revision": "0fe43bddd70414e903ec41e68eb3433d9b85feaa5799448e2af7793ed8c5ff9f",
+      "model_ticks": 32008,
+      "observed_trials": 8
+    },
+    "resources": {
+      "capacity": {
+        "disk_bytes": 34359738368,
+        "memory_bytes": 34359738368,
+        "slots": 1
+      },
+      "reserved": {
+        "disk_bytes": 0,
+        "memory_bytes": 0,
+        "slots": 0
+      }
+    },
+    "outer_kernel": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "9b979cf2d65c5320625e99b748a72f9255276ec8097a195303830ec5b2b04e65",
+        "unit": "timelearner-6703b67b-1e34-4015-96b5-42c67caf0111.service",
+        "invocation_id": "d37adce29906408892e039108c7960ee",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-6703b67b-1e34-4015-96b5-42c67caf0111.service",
+        "initial_main_pid": 2836935,
+        "initial_start_ticks": "433146710",
+        "sha256": "f78a3142a9a6865b34b831052ad6cbfc424edea511676602a3ef7c6e63785a16"
+      }
+    },
+    "native_kernel": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "cd888b12427e697a10e27abd37d504ac83d632910522ae3f5bf3738887da1a09",
+        "unit": "timelearner-72520c38-0a0e-4233-be5a-143a99ffd5f2.service",
+        "invocation_id": "0e777e1d1d6447068cacb87cfcd9ff3b",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-72520c38-0a0e-4233-be5a-143a99ffd5f2.service",
+        "initial_main_pid": 2837112,
+        "initial_start_ticks": "433147071",
+        "sha256": "09336cf1780cb286c2b23bac8b6c05f53b8c8b2525502e1417628e227d1651ba"
+      }
+    }
+  },
+  "training_completed": false,
+  "independently_heldout_evaluation": false,
+  "original_negative_receipts_preserved": true,
+  "scientific_verdict": null
+}

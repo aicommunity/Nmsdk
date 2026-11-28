@@ -17,7 +17,7 @@ from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
 
 def main(argv=None):
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('mode',choices=('exit0','exit7','wait','nested','unbound','partial','child'))
+    parser.add_argument('mode',choices=('exit0','exit7','wait','nested','unbound','partial','child','same-leaf-name'))
     parser.add_argument('root',type=Path)
     parser.add_argument('--reserve',action='store_true')
     args=parser.parse_args(argv)
@@ -33,6 +33,15 @@ def main(argv=None):
         'Cpp_or_model_execution':False}),encoding='utf-8')
     if args.mode=='wait':
         time.sleep(20)
+    if args.mode=='same-leaf-name':
+        runtime=json.loads((root/'fixture-runtime.json').read_bytes())
+        arguments=['-B','-m','Scripts.StructTrain.TimeLearner.tests.owned_native_fixture','child',str(root)]
+        for branch in ('heldout','third-pulse'):
+            child=output/branch/'evaluation/process/contained'
+            contained_process.start(runtime,arguments,Path(__file__).resolve().parents[4],child,
+                memory_bytes=128*1024**2,tasks=16,maximum_wall_seconds=15)
+            # Let the real supervisor consume each intent while both children exist.
+            time.sleep(1.5)
     if args.mode in ('nested','unbound','partial'):
         child=output/'leaf/process/contained'
         if args.mode=='partial':

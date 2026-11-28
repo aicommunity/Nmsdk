@@ -1,0 +1,300 @@
+{
+  "dispatch": {
+    "dispatched": true,
+    "job": "measured-count-native-linux-elder-d1",
+    "controls_commit": "86919570b9712eff666453ffbc1610ac03721cbe",
+    "supervisor": {
+      "pid": 1897312,
+      "start_ticks": "491195654",
+      "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+      "uid": 1000
+    },
+    "source": "/home/user/timelearner-refactor/source-measured-count-native-linux-elder-c1",
+    "source_commit": "e1c97ac2042e155ffe907ad695975304d69664a2",
+    "Pulse": "b03e13857cd7656a8ff1ff3162d28b25e90bb5a4",
+    "Rdk": "561986e9f336ee5914e2d119de90b005e06f3639",
+    "expected_cpp_cases": 114,
+    "old_source_runtime_and_data_unchanged": true,
+    "new_Train_started": false,
+    "scientific_verdict": null
+  },
+  "source_delivery": {
+    "kind": "timelearner_fresh_measured_count_Linux_SDK_source",
+    "schema_version": 1,
+    "prepared": true,
+    "source": "/home/user/timelearner-refactor/source-measured-count-native-linux-elder-c1",
+    "root": "e1c97ac2042e155ffe907ad695975304d69664a2",
+    "Pulse": "b03e13857cd7656a8ff1ff3162d28b25e90bb5a4",
+    "Rdk": "561986e9f336ee5914e2d119de90b005e06f3639",
+    "source_files": 4798,
+    "repository_closure": [
+      {
+        "role": "root",
+        "commit": "e1c97ac2042e155ffe907ad695975304d69664a2",
+        "files": 1749,
+        "pack": {
+          "bytes": 6003183,
+          "sha256": "396cc23923890ae16f333e962790c77ee4e1f142721caa6f069673c655504e17"
+        }
+      },
+      {
+        "role": "Bin",
+        "commit": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+        "files": 277,
+        "pack": {
+          "bytes": 700305,
+          "sha256": "0383c5f493da101f0a2744dfddc6ce349dc637ba16f29fa164c4cc5aaf3a6986"
+        }
+      },
+      {
+        "role": "Libraries/Nmsdk-MotionControlLib",
+        "commit": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+        "files": 93,
+        "pack": {
+          "bytes": 178031,
+          "sha256": "b744d92cb16429ed5a25b062e2268a160ce572295e8763a1039b78ddfccecd1b"
+        }
+      },
+      {
+        "role": "Libraries/Nmsdk-PulseLib",
+        "commit": "b03e13857cd7656a8ff1ff3162d28b25e90bb5a4",
+        "files": 367,
+        "pack": {
+          "bytes": 886133,
+          "sha256": "5185562391d63e59431bc2730fd4620a14cb85061f42208324a6c4ae5da282e7"
+        }
+      },
+      {
+        "role": "Libraries/Rdk-BasicLib",
+        "commit": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+        "files": 43,
+        "pack": {
+          "bytes": 30454,
+          "sha256": "072a94062df0db8737c91373c101202aa38046d8dee91702352df395cab79e82"
+        }
+      },
+      {
+        "role": "Libraries/Rdk-CvBasicLib",
+        "commit": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+        "files": 132,
+        "pack": {
+          "bytes": 183185,
+          "sha256": "312acde87b35a3dbb887bd4eb0a4b30fa1634a798d15270ffac59da8d20ff376"
+        }
+      },
+      {
+        "role": "Libraries/Rdk-HardwareLib",
+        "commit": "de40b008e990105856726e01230dde19f42a90a9",
+        "files": 356,
+        "pack": {
+          "bytes": 1978971,
+          "sha256": "a5bd9accccf33f4a022c4be633361aa31b39ddae3b3714e145e76576ac139211"
+        }
+      },
+      {
+        "role": "Rdk",
+        "commit": "561986e9f336ee5914e2d119de90b005e06f3639",
+        "files": 1781,
+        "pack": {
+          "bytes": 12356470,
+          "sha256": "fcf8a1bc14ef0f14d1adcc2d5ed300390d9097cf2cab5da86e605ec56fe910c0"
+        }
+      }
+    ],
+    "source_namespace": "/home/user/timelearner-refactor/git-transfers/measured-count-native-linux-elder-c1/namespace.json",
+    "cohort": "/home/user/timelearner-refactor/git-transfers/measured-count-native-linux-elder-c1/cohort.json",
+    "selected_tests": 114,
+    "old_source_runtime_and_data_unchanged": true,
+    "SDK_compiled": false,
+    "scientific_verdict": null
+  },
+  "latest_observation": {
+    "observed_utc": "2026-11-22T10:33:52.449406+00:00",
+    "dispatch.json": {
+      "dispatched": true,
+      "job": "measured-count-native-linux-elder-d1",
+      "controls_commit": "86919570b9712eff666453ffbc1610ac03721cbe",
+      "supervisor": {
+        "pid": 1897312,
+        "start_ticks": "491195654",
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "uid": 1000
+      },
+      "source": "/home/user/timelearner-refactor/source-measured-count-native-linux-elder-c1",
+      "source_commit": "e1c97ac2042e155ffe907ad695975304d69664a2",
+      "Pulse": "b03e13857cd7656a8ff1ff3162d28b25e90bb5a4",
+      "Rdk": "561986e9f336ee5914e2d119de90b005e06f3639",
+      "expected_cpp_cases": 114,
+      "old_source_runtime_and_data_unchanged": true,
+      "new_Train_started": false,
+      "scientific_verdict": null
+    },
+    "owner.json": {
+      "pid": 1897312,
+      "start_ticks": "491195654",
+      "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+      "uid": 1000
+    },
+    "canonical-returncode.json": {
+      "returncode": 0
+    },
+    "native-launch.json": {
+      "controller": "/home/user/timelearner-refactor/readbacks/s07-measured-count-native-linux-elder-d1-controller",
+      "request": {
+        "path": "/home/user/timelearner-refactor/readbacks/s07-measured-count-native-linux-elder-d1-prepared/owned-native-request.json",
+        "sha256": "66b921784af8c632453ee8906ca846e9065da9ca78ddac38e0aadc5484d94100",
+        "size": 729
+      },
+      "source_commit": "e1c97ac2042e155ffe907ad695975304d69664a2",
+      "selected_tests": 114,
+      "scientific_verdict": null
+    },
+    "actual_supervisor": {
+      "exists": true,
+      "matching": true
+    },
+    "native_controller": {
+      "controller": "/home/user/timelearner-refactor/readbacks/s07-measured-count-native-linux-elder-d1-controller",
+      "supervisor_identity": {
+        "pid": 1962845,
+        "start_ticks": "491205977",
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "uid": 1000
+      },
+      "supervisor_identity_known": true,
+      "supervisor_live": true,
+      "outer": {
+        "execution": "running",
+        "all_processes_closed": false,
+        "reason": "kernel_cgroup_observed",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "f93059dda2625829fdd1759c3cd6dbbba0c5b29af2454db439381976f337e72e",
+          "unit": "timelearner-98ecfef7-c7e4-49d5-a82e-87ea522558c3.service",
+          "invocation_id": "26247f109e2e497194e3e07de23753f6",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-98ecfef7-c7e4-49d5-a82e-87ea522558c3.service",
+          "initial_main_pid": 1970628,
+          "initial_start_ticks": "491207283",
+          "sha256": "9dc4b70fa7a4f550e97acf8372c35ec4bc179dfbed3471e9c1ab2c39b29c358b"
+        },
+        "state": {
+          "Type": "exec",
+          "Restart": "no",
+          "RemainAfterExit": "yes",
+          "MainPID": "1970628",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-98ecfef7-c7e4-49d5-a82e-87ea522558c3.service",
+          "MemoryMax": "12884901888",
+          "TasksMax": "128",
+          "KillMode": "control-group",
+          "Description": "TimeLearner contained attempt 98ecfef7-c7e4-49d5-a82e-87ea522558c3",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "running",
+          "InvocationID": "26247f109e2e497194e3e07de23753f6"
+        },
+        "memory_max": 12884901888,
+        "tasks_max": 128,
+        "scientific_verdict": null
+      },
+      "unbound_outer_intent": false,
+      "result": null,
+      "scientific_verdict": null
+    },
+    "canonical": {
+      "controller-result.json": {
+        "kind": "timelearner_process_result",
+        "schema_version": 2,
+        "execution": "completed",
+        "reason": "exit_zero_and_whole_group_closed",
+        "returncode": 0,
+        "wall_seconds": 83.77217817399651,
+        "model_time": null,
+        "runtime_provenance": "loaded_files_captured",
+        "mapping_error": null,
+        "runtime_fingerprint": "1ae3482060f876d0aaa1c7e13cc17b094a469b7bd45f41d63e6fc2cc9e4e9919",
+        "ownership_scope": "bound_cgroup",
+        "all_processes_closed": true,
+        "scientific_verdict": null,
+        "operational_diagnostics": {
+          "kind": "timelearner_operational_diagnostics",
+          "schema_version": 1,
+          "policy": "owned-streams-v1",
+          "status": "clear",
+          "error_records": 0,
+          "warning_records": 0,
+          "unclassified_stderr_chunks": 0,
+          "reasons": [],
+          "examples": [],
+          "streams": [
+            {
+              "path": "stdout.log",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "path": "stderr.log",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ],
+          "contained_streams_match": true,
+          "scientific_verdict": null
+        }
+      },
+      "worker/terminal.json": {
+        "operation_passed": true,
+        "operation": "native-canonical-preparation",
+        "heartbeat_errors": [],
+        "lease_release": "controller only after whole cgroup closure",
+        "selected_validation_scope_requires_source_review": true,
+        "scientific_verdict": null
+      },
+      "monitor-final.json": {
+        "guard_triggered": false,
+        "original_reason": null,
+        "peak_allocated_bytes": 2232320,
+        "minimum_free_bytes": 49315717120
+      }
+    },
+    "SDK": {
+      "compiled-inventory-crosscheck.json": {
+        "accepted": true,
+        "expected_total": 114
+      }
+    },
+    "SDK_logs": {
+      "configure.log": {
+        "bytes": 2081,
+        "tail": [
+          "    FETCHCONTENT_FULLY_DISCONNECTED",
+          "    FETCHCONTENT_UPDATES_DISCONNECTED",
+          "",
+          "",
+          "-- Build files have been written to: /home/user/timelearner-refactor/build-measured-count-native-linux-elder-d1"
+        ]
+      },
+      "build.log": {
+        "bytes": 65788,
+        "tail": [
+          "[100%] Building CXX object App/NeuroModelerConsole/CMakeFiles/NeuroModelerConsole.dir/__/__/Rdk/Core/Application/UEngineControl.cpp.o",
+          "[100%] Building CXX object App/NeuroModelerConsole/CMakeFiles/NeuroModelerConsole.dir/__/__/Rdk/Core/Application/UServerTransportTcp.cpp.o",
+          "[100%] Building CXX object App/NeuroModelerConsole/CMakeFiles/NeuroModelerConsole.dir/__/__/Rdk/Core/Application/UProjectDeployer.cpp.o",
+          "[100%] Linking CXX executable /home/user/timelearner-refactor/runtime-measured-count-native-linux-elder-d1/NeuroModelerConsole",
+          "[100%] Built target NeuroModelerConsole"
+        ]
+      }
+    },
+    "reserved": {
+      "disk_bytes": 8589934592,
+      "memory_bytes": 12884901888,
+      "slots": 1
+    }
+  },
+  "full_114_assertions_completed": false,
+  "new_Train_started": false,
+  "scientific_verdict": null
+}

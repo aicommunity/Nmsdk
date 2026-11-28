@@ -16,8 +16,18 @@ SHA = re.compile('[0-9a-f]{64}')
 COMMIT = re.compile('[0-9a-f]{40}')
 CASE_FIELDS = {'name', 'source_name', 'summary_name', 'source_raw_bytes', 'source_raw_sha256'}
 CASE_OPTIONS = {'diagnostic_threshold', 'duration', 'reset_policy', 'maximum_source_raw_bytes',
-                'summary_raw_bytes', 'summary_raw_sha256'}
+                'summary_raw_bytes', 'summary_raw_sha256', 'maximum_summary_raw_bytes', 'job_source_transport'}
 SUMMARY_COMPRESSION_FIELDS = {'summary_raw_bytes', 'summary_raw_sha256'}
+DEFAULT_SUMMARY_RAW_BYTES = 128*1024**2
+MAXIMUM_SUMMARY_RAW_BYTES = 1024*1024**2
+
+
+def _summary_limit(row):
+    maximum = row.get('maximum_summary_raw_bytes', DEFAULT_SUMMARY_RAW_BYTES)
+    require(type(maximum) is int and 0 < maximum <= MAXIMUM_SUMMARY_RAW_BYTES and
+            ('maximum_summary_raw_bytes' not in row or SUMMARY_COMPRESSION_FIELDS <= set(row)),
+            'native_data_diagnostic_summary_limit')
+    return maximum
 
 
 def validate_declaration(request):
@@ -36,17 +46,29 @@ def validate_declaration(request):
     bindings = {};summary_sources = {}
     for row in cases:
         compression = SUMMARY_COMPRESSION_FIELDS & set(row)
+        summary_maximum = _summary_limit(row)
         require(not compression or (compression == SUMMARY_COMPRESSION_FIELDS and
-                type(row['summary_raw_bytes']) is int and 0 < row['summary_raw_bytes'] <= 128*1024**2 and
+                type(row['summary_raw_bytes']) is int and 0 < row['summary_raw_bytes'] <= summary_maximum and
                 type(row['summary_raw_sha256']) is str and SHA.fullmatch(row['summary_raw_sha256'])),
                 'native_data_diagnostic_summary_binding')
+        if summary_maximum > DEFAULT_SUMMARY_RAW_BYTES:
+            require(request['limits']['memory_bytes'] >= 16*1024**3,
+                    'native_data_diagnostic_large_summary_resource_declaration')
         if 'diagnostic_threshold' in row:
             number(row['diagnostic_threshold'])
+        from .job_source_transport import TRANSPORT,MAXIMUM_SOURCE_BYTES
+        file_source='job_source_transport' in row
+        require(not file_source or row['job_source_transport']==TRANSPORT,
+                'native_data_diagnostic_source_transport')
         maximum = row.get('maximum_source_raw_bytes', 256*1024**2)
-        require(type(maximum) is int and 0 < maximum <= 512*1024**2 and
+        require(type(maximum) is int and 0 < maximum <= (MAXIMUM_SOURCE_BYTES if file_source else 512*1024**2) and
                 type(row['source_raw_bytes']) is int and 0 < row['source_raw_bytes'] <= maximum
                 and type(row['source_raw_sha256']) is str and SHA.fullmatch(row['source_raw_sha256']),
                 'native_data_diagnostic_raw_binding')
+        if maximum>512*1024**2:
+            require(request['limits']['memory_bytes']>=16*1024**3 and
+                    request['limits']['leaf_memory_bytes']>=16*1024**3,
+                    'native_data_diagnostic_large_source_resource_declaration')
         require(2 <= number(row.get('duration', 2.)) <= 30 and
                 row.get('reset_policy', 'reset_per_trial') in
                 ('reset_per_trial', 'preserve_neuron_dynamics'), 'native_data_diagnostic_presentation')
@@ -67,16 +89,44 @@ def validate_declaration(request):
 def read_summary(staged, row):
     """Explicitly framed summary transport; finite native input caps stay intact."""
     path = Path(staged)/row['summary_name']
+    maximum = _summary_limit(row)
     if SUMMARY_COMPRESSION_FIELDS <= set(row):
         from .qt_json import read_qcompress_bytes
         return read_qcompress_bytes(path, expected_bytes=row['summary_raw_bytes'],
-            expected_sha256=row['summary_raw_sha256'], maximum_bytes=128*1024**2)
+            expected_sha256=row['summary_raw_sha256'], maximum_bytes=maximum)
     from .collector_provenance import _frozen
     return _frozen(path, 64*1024**2)[0]
 
 
-def run_case(request, row, runtime_path, output):
+def recorded_source_archive(package):
+    """Find raw composite data without replacing the actual terminal model."""
+    require(type(package) is dict and package.get('kind')=='timelearner_stopped_state' and
+            package.get('certificate') is None, 'recorded_diagnostic_requires_actual_stopped_composite')
+    version=package.get('schema_version')
+    if version==7:
+        return package['measurement_archive']
+    require(version==8 and type(version) is int, 'recorded_diagnostic_requires_actual_stopped_composite')
+    historical=package.get('historical_state')
+    require(type(historical) is dict and historical.get('schema_version') in (5,6,7) and
+            historical.get('kind')=='timelearner_stopped_state' and historical.get('certificate') is None,
+            'recorded_diagnostic_terminal_requires_composite_history')
+    return historical['measurement_archive']
+
+
+def audit_recorded_source(package, summary, *, external_resolver=None):
+    """Audit the complete outer state; historical data never acquires its epoch."""
+    recorded_source_archive(package)
+    if package['schema_version']==8:
+        from .terminal_package_evidence import audit_terminal_package
+        return audit_terminal_package(package,summary,{}, {},external_resolver=external_resolver)
     from .candidate_window_package_evidence import audit_candidate_window_recovery_package
+    return audit_candidate_window_recovery_package(package,summary,external_resolver=external_resolver)
+
+
+def run_case(request, row, runtime_path, output):
+    # DATA JSON declares a string path; the public file reader takes Path.
+    # Normalize before the early capability gate as well as the runner call.
+    runtime_path = Path(runtime_path)
     from .composite_primary import capture_primary_blobs, write_primary_snapshot, filesystem_primary_resolver
     from .native_pipeline_worker import run_job
     from .phasea_matrix import extract
@@ -84,6 +134,9 @@ def run_case(request, row, runtime_path, output):
     from .stock_stopped_evaluation import job_for
     from .n1_protocol_robustness import _write
 
+    if row.get('job_source_transport') is not None:
+        from .native_cli import inspect_native_cli
+        inspect_native_cli(load(runtime_path),['diagnostic-evaluate'],require_file_source=True)
     output = Path(output);staged = output/'native-inputs';matrix_spec = request['matrix']
     matrix = extract((staged/matrix_spec['parameters_name']).read_bytes(),
                      (staged/matrix_spec['observations_name']).read_bytes(), matrix_spec['revision'])
@@ -92,14 +145,11 @@ def run_case(request, row, runtime_path, output):
                               maximum_bytes=row.get('maximum_source_raw_bytes', 256*1024**2))
     package = parse_json_bytes(raw);summary_raw = read_summary(staged, row)
     summary = parse_json_bytes(summary_raw)
-    require(type(package) is dict and package.get('schema_version') == 7 and
-            package.get('kind') == 'timelearner_stopped_state' and package.get('certificate') is None,
-            'recorded_diagnostic_requires_actual_stopped7')
-    source_audit = audit_candidate_window_recovery_package(package, summary)
+    source_audit = audit_recorded_source(package, summary)
     require(len(package['configuration']['model']['inputs']) == 4,
             'recorded_diagnostic_requires_n4')
     source = output/(row['name']+'-source')
-    archive = package['measurement_archive']
+    archive = recorded_source_archive(package)
     references = [trial['primary_ref'] for group in archive['records'] for trial in group['raw_trials']]
     primary = capture_primary_blobs(archive['primary_blobs'], references, archive['maximum_total_primary_bytes'])
     write_primary_snapshot(primary, source)
@@ -110,7 +160,7 @@ def run_case(request, row, runtime_path, output):
     del raw, summary_raw
     # Embedded bytes have now become declared external source files. Future
     # audits must check those files, never silently replace a damaged mirror.
-    audit_candidate_window_recovery_package(package, summary,
+    audit_recorded_source(package, summary,
         external_resolver=filesystem_primary_resolver(source))
     model = package['configuration']['model']
     descriptor = dict(name=row['name'], model_revision=package['model_revision'],
@@ -126,8 +176,16 @@ def run_case(request, row, runtime_path, output):
     policy = dict(kind='timelearner_native_process_policy', schema_version=1, backend='bound_cgroup',
         memory_bytes=request['limits']['leaf_memory_bytes'], tasks=request['limits']['leaf_tasks'],
         cooperative_capture=True)
+    options={'process_policy':policy}
+    if 'job_source_transport' in row:options['job_source_transport']=row['job_source_transport']
+    # The complete, audited payload is now on disk. The production pipeline
+    # independently reloads and audits both it and its snapshot. Keeping the
+    # preparation objects here would retain two more complete histories while
+    # those checked copies are loaded; large real N4 sources reach the parent
+    # memory limit before Console can run. No fields or checks are omitted.
+    del package, summary, archive, job
     result = run_job('diagnostic-evaluate', job_path, state_path, runtime_path, output/row['name'],
-                     request['limits']['leaf_wall_seconds'], process_policy=policy)
+                     request['limits']['leaf_wall_seconds'], **options)
     require(result['execution'] == 'completed' and result['validity'] == 'valid',
             'recorded_diagnostic_execution_incomplete')
     metrics = result['analysis']['metrics']

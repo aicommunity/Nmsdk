@@ -1,0 +1,53 @@
+{
+  "catalog": {
+    "relative_path": "experiments/2026-11-26/Branch-native-closing-source19-accepted-fp30.json",
+    "bytes": 1741,
+    "sha256": "3a56771b8daf47d93ea5ff0ac719d0487821ecc19c8f993606524ac69a76e4a0"
+  },
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/3b/3b333501d00703ce84bb5dcf09c94714ec0874f05e40c734b6f691954fbb0847",
+      "sha256": "3b333501d00703ce84bb5dcf09c94714ec0874f05e40c734b6f691954fbb0847",
+      "bytes": 8143
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/2e/2e82aaca0d79d94ba8b22b4e00c2b66f629c3eb815eca551d1f907b83da1c1dd",
+      "sha256": "2e82aaca0d79d94ba8b22b4e00c2b66f629c3eb815eca551d1f907b83da1c1dd",
+      "bytes": 686404
+    },
+    "independent-reader.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/51/514c1c66cc2c8754ade4509abb14a86d32b4d18489961923d3948c1dc41617f5",
+      "sha256": "514c1c66cc2c8754ade4509abb14a86d32b4d18489961923d3948c1dc41617f5",
+      "bytes": 755
+    }
+  },
+  "members": 50,
+  "all_member_bytes_independently_verified": true,
+  "admission": {
+    "kind": "timelearner_native_closing_source_gate_admission",
+    "schema_version": 1,
+    "root_commit": "bae263b991feb5c82b6c85b2aea5565847efff9f",
+    "executed_tests": 19,
+    "assertion_status": "passed",
+    "skipped": [],
+    "all_primary_member_bytes_independently_verified": true,
+    "catalog": {
+      "relative_path": "experiments/2026-11-26/Branch-native-closing-source19-accepted-fp30.json",
+      "bytes": 1741,
+      "sha256": "3a56771b8daf47d93ea5ff0ac719d0487821ecc19c8f993606524ac69a76e4a0"
+    },
+    "scientific_verdict": null
+  },
+  "kind": "timelearner_native_closing_source_accepted_gate_external_reference",
+  "schema_version": 1,
+  "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive"
+}

@@ -1,0 +1,364 @@
+{
+  "kind": "timelearner_interrupted_single_sweep_export_readback",
+  "schema_version": 1,
+  "job": "s10-single-complete-sweep-branch-elder-a3",
+  "controls": "ccb172580062996b16521530207edd18a02d191c",
+  "status": {
+    "status": {
+      "supervisor_live": false,
+      "outer": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent",
+        "scientific_verdict": null,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "f12bee0ce6ea9ddc0e652244d4766cb658d8e5977dbfdfff75be2428953cee0e",
+          "unit": "timelearner-b4467ecf-e2f2-46e7-8e60-ebf65e2fe0dc.service",
+          "invocation_id": "a78fe71d2ced4d0cbac872bde9110f6b",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-b4467ecf-e2f2-46e7-8e60-ebf65e2fe0dc.service",
+          "initial_main_pid": 2107759,
+          "initial_start_ticks": "450764099",
+          "sha256": "80db822c060bd20ca487ea04d603dd5a53ef10ce6f40ff5542e01c443af6f54f"
+        },
+        "state": {
+          "Type": "",
+          "Restart": "no",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "MemoryMax": "infinity",
+          "TasksMax": "38260",
+          "KillMode": "control-group",
+          "Description": "timelearner-b4467ecf-e2f2-46e7-8e60-ebf65e2fe0dc.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "InvocationID": ""
+        }
+      },
+      "result": {
+        "reason": {
+          "reason": "owned_native_disk_budget",
+          "traceback": "Traceback (most recent call last):\n  File \"/home/user/timelearner-refactor/source-archive-budget-verified-a2/Scripts/StructTrain/TimeLearner/owned_native_job.py\", line 405, in _run_owned\n    require(growth<=disk['maximum_increment_bytes'],'owned_native_disk_budget')\n  File \"/home/user/timelearner-refactor/source-archive-budget-verified-a2/Scripts/StructTrain/TimeLearner/native_evidence.py\", line 28, in require\n    raise EvidenceError(reason)\nScripts.StructTrain.TimeLearner.native_evidence.EvidenceError: owned_native_disk_budget\n"
+        },
+        "record_errors": [],
+        "last_before_cleanup": {
+          "execution": "running",
+          "all_processes_closed": false,
+          "reason": "kernel_cgroup_observed",
+          "binding": {
+            "kind": "timelearner_contained_binding",
+            "schema_version": 1,
+            "request_sha256": "f12bee0ce6ea9ddc0e652244d4766cb658d8e5977dbfdfff75be2428953cee0e",
+            "unit": "timelearner-b4467ecf-e2f2-46e7-8e60-ebf65e2fe0dc.service",
+            "invocation_id": "a78fe71d2ced4d0cbac872bde9110f6b",
+            "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-b4467ecf-e2f2-46e7-8e60-ebf65e2fe0dc.service",
+            "initial_main_pid": 2107759,
+            "initial_start_ticks": "450764099",
+            "sha256": "80db822c060bd20ca487ea04d603dd5a53ef10ce6f40ff5542e01c443af6f54f"
+          },
+          "state": {
+            "Type": "exec",
+            "Restart": "no",
+            "RemainAfterExit": "yes",
+            "MainPID": "2107759",
+            "Result": "success",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-b4467ecf-e2f2-46e7-8e60-ebf65e2fe0dc.service",
+            "MemoryMax": "8589934592",
+            "TasksMax": "256",
+            "KillMode": "control-group",
+            "Description": "TimeLearner contained attempt b4467ecf-e2f2-46e7-8e60-ebf65e2fe0dc",
+            "LoadState": "loaded",
+            "ActiveState": "active",
+            "SubState": "running",
+            "InvocationID": "a78fe71d2ced4d0cbac872bde9110f6b"
+          },
+          "memory_max": 8589934592,
+          "tasks_max": 256,
+          "scientific_verdict": null
+        },
+        "outer_binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "f12bee0ce6ea9ddc0e652244d4766cb658d8e5977dbfdfff75be2428953cee0e",
+          "unit": "timelearner-b4467ecf-e2f2-46e7-8e60-ebf65e2fe0dc.service",
+          "invocation_id": "a78fe71d2ced4d0cbac872bde9110f6b",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-b4467ecf-e2f2-46e7-8e60-ebf65e2fe0dc.service",
+          "initial_main_pid": 2107759,
+          "initial_start_ticks": "450764099",
+          "sha256": "80db822c060bd20ca487ea04d603dd5a53ef10ce6f40ff5542e01c443af6f54f"
+        },
+        "outer_closed": true,
+        "children_closed": [
+          {
+            "directory": "/home/user/timelearner-refactor/readbacks/s10-single-complete-sweep-branch-elder-a3/branch/process/contained",
+            "binding": {
+              "kind": "timelearner_contained_binding",
+              "schema_version": 1,
+              "request_sha256": "86e696281ff9b446422c0a8c368508aaae2ad658d86da8323bfbd59122231475",
+              "unit": "timelearner-4e4a2350-9adc-4866-a37e-d747bbf35f10.service",
+              "invocation_id": "a26d818398e84c8d81a09c29c5c4026a",
+              "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-4e4a2350-9adc-4866-a37e-d747bbf35f10.service",
+              "initial_main_pid": 2111617,
+              "initial_start_ticks": "450764969",
+              "sha256": "c593345a30f46a5a7b4afa01c51fc9b6808fddcd69b38df8a28894e82ab77463"
+            },
+            "closure": {
+              "execution": "unknown",
+              "all_processes_closed": true,
+              "reason": "bound_unit_and_group_absent",
+              "scientific_verdict": null,
+              "binding": {
+                "kind": "timelearner_contained_binding",
+                "schema_version": 1,
+                "request_sha256": "86e696281ff9b446422c0a8c368508aaae2ad658d86da8323bfbd59122231475",
+                "unit": "timelearner-4e4a2350-9adc-4866-a37e-d747bbf35f10.service",
+                "invocation_id": "a26d818398e84c8d81a09c29c5c4026a",
+                "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-4e4a2350-9adc-4866-a37e-d747bbf35f10.service",
+                "initial_main_pid": 2111617,
+                "initial_start_ticks": "450764969",
+                "sha256": "c593345a30f46a5a7b4afa01c51fc9b6808fddcd69b38df8a28894e82ab77463"
+              },
+              "state": {
+                "Type": "",
+                "Restart": "no",
+                "RemainAfterExit": "no",
+                "MainPID": "0",
+                "Result": "success",
+                "ExecMainCode": "0",
+                "ExecMainStatus": "0",
+                "ControlGroup": "",
+                "MemoryMax": "infinity",
+                "TasksMax": "38260",
+                "KillMode": "control-group",
+                "Description": "timelearner-4e4a2350-9adc-4866-a37e-d747bbf35f10.service",
+                "LoadState": "not-found",
+                "ActiveState": "inactive",
+                "SubState": "dead",
+                "InvocationID": ""
+              }
+            }
+          }
+        ],
+        "disk_peak_increment": 1677475840,
+        "minimum_free": 1309941760,
+        "execution_success_not_inferred_from_cleanup": true,
+        "scientific_verdict": null
+      },
+      "scientific_verdict": null
+    },
+    "cases": {
+      "branch": {
+        "native": {
+          "execution": "unknown",
+          "all_processes_closed": true,
+          "reason": "bound_unit_and_group_absent",
+          "scientific_verdict": null,
+          "binding": {
+            "kind": "timelearner_contained_binding",
+            "schema_version": 1,
+            "request_sha256": "86e696281ff9b446422c0a8c368508aaae2ad658d86da8323bfbd59122231475",
+            "unit": "timelearner-4e4a2350-9adc-4866-a37e-d747bbf35f10.service",
+            "invocation_id": "a26d818398e84c8d81a09c29c5c4026a",
+            "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-4e4a2350-9adc-4866-a37e-d747bbf35f10.service",
+            "initial_main_pid": 2111617,
+            "initial_start_ticks": "450764969",
+            "sha256": "c593345a30f46a5a7b4afa01c51fc9b6808fddcd69b38df8a28894e82ab77463"
+          },
+          "state": {
+            "Type": "",
+            "Restart": "no",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "Result": "success",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "MemoryMax": "infinity",
+            "TasksMax": "38260",
+            "KillMode": "control-group",
+            "Description": "timelearner-4e4a2350-9adc-4866-a37e-d747bbf35f10.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "InvocationID": ""
+          }
+        }
+      }
+    },
+    "reserved": {
+      "disk_bytes": 0,
+      "memory_bytes": 0,
+      "slots": 0
+    },
+    "disk_free": 1303035904,
+    "top_level": [
+      "tool-before.json",
+      "reservation.json",
+      "native-inputs",
+      "branch",
+      "source-before.json"
+    ]
+  },
+  "retained_packets": {
+    "retained_trial_json": 948,
+    "retained_trial_csv": 948,
+    "last_packets": [
+      {
+        "file": "train_stopped_trial_943.json",
+        "keys": [
+          "current_base_revision",
+          "evidence_schema_version",
+          "kind",
+          "native_status",
+          "observation",
+          "prepared",
+          "reasons",
+          "requested_specification",
+          "requires_fresh_verification"
+        ],
+        "status": "completed",
+        "input": 0,
+        "model_epoch": 72,
+        "revision": "d26d9620dd453539c2446b41fcc2f07d971115bd045206b8dda7497f525d5caa",
+        "trial": "single-complete-sweep/branch/a3/session/1/final/0/verify/72/4/composite/158/native/0",
+        "begin": 1696.2235,
+        "end": 1698.0235,
+        "complete": true,
+        "valid": true,
+        "reason": null
+      },
+      {
+        "file": "train_stopped_trial_944.json",
+        "keys": [
+          "current_base_revision",
+          "evidence_schema_version",
+          "kind",
+          "native_status",
+          "observation",
+          "prepared",
+          "reasons",
+          "requested_specification",
+          "requires_fresh_verification"
+        ],
+        "status": "completed",
+        "input": 0,
+        "model_epoch": 72,
+        "revision": "d26d9620dd453539c2446b41fcc2f07d971115bd045206b8dda7497f525d5caa",
+        "trial": "single-complete-sweep/branch/a3/session/1/final/0/verify/72/4/composite/158/native/1",
+        "begin": 1698.024,
+        "end": 1699.8239999999998,
+        "complete": true,
+        "valid": true,
+        "reason": null
+      },
+      {
+        "file": "train_stopped_trial_945.json",
+        "keys": [
+          "current_base_revision",
+          "evidence_schema_version",
+          "kind",
+          "native_status",
+          "observation",
+          "prepared",
+          "reasons",
+          "requested_specification",
+          "requires_fresh_verification"
+        ],
+        "status": "completed",
+        "input": 0,
+        "model_epoch": 72,
+        "revision": "d26d9620dd453539c2446b41fcc2f07d971115bd045206b8dda7497f525d5caa",
+        "trial": "single-complete-sweep/branch/a3/session/1/final/0/verify/72/4/composite/158/native/2",
+        "begin": 1699.8245,
+        "end": 1701.6245,
+        "complete": true,
+        "valid": true,
+        "reason": null
+      },
+      {
+        "file": "train_stopped_trial_946.json",
+        "keys": [
+          "current_base_revision",
+          "evidence_schema_version",
+          "kind",
+          "native_status",
+          "observation",
+          "prepared",
+          "reasons",
+          "requested_specification",
+          "requires_fresh_verification"
+        ],
+        "status": "completed",
+        "input": 0,
+        "model_epoch": 72,
+        "revision": "d26d9620dd453539c2446b41fcc2f07d971115bd045206b8dda7497f525d5caa",
+        "trial": "single-complete-sweep/branch/a3/session/1/final/0/verify/72/4/composite/158/native/3",
+        "begin": 1701.625,
+        "end": 1703.425,
+        "complete": true,
+        "valid": true,
+        "reason": null
+      },
+      {
+        "file": "train_stopped_trial_947.json",
+        "keys": [
+          "current_base_revision",
+          "evidence_schema_version",
+          "kind",
+          "native_status",
+          "observation",
+          "prepared",
+          "reasons",
+          "requested_specification",
+          "requires_fresh_verification"
+        ],
+        "status": "completed",
+        "input": 0,
+        "model_epoch": 72,
+        "revision": "d26d9620dd453539c2446b41fcc2f07d971115bd045206b8dda7497f525d5caa",
+        "trial": "single-complete-sweep/branch/a3/session/1/final/0/verify/72/4/composite/158/native/4",
+        "begin": 1703.4255,
+        "end": 1705.2255,
+        "complete": true,
+        "valid": true,
+        "reason": null
+      },
+      {
+        "file": "train_stopped_trial_948.json",
+        "keys": [
+          "current_base_revision",
+          "evidence_schema_version",
+          "kind",
+          "native_status",
+          "observation",
+          "prepared",
+          "reasons",
+          "requested_specification",
+          "requires_fresh_verification"
+        ],
+        "status": "completed",
+        "input": 0,
+        "model_epoch": 72,
+        "revision": "d26d9620dd453539c2446b41fcc2f07d971115bd045206b8dda7497f525d5caa",
+        "trial": "single-complete-sweep/branch/a3/session/1/final/0/verify/72/4/composite/158/native/5",
+        "begin": 1705.226,
+        "end": 1707.026,
+        "complete": true,
+        "valid": true,
+        "reason": null
+      }
+    ]
+  },
+  "primary_publication_pending": true,
+  "source_export_validated": false,
+  "training_completed": null,
+  "scientific_verdict": null
+}

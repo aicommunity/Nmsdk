@@ -24,6 +24,24 @@ def request():
 
 
 class OwnedNativeMetadataTest(unittest.TestCase):
+    def test_nested_repeated_leaf_names_are_distinct_and_order_independent(self):
+        a=Path('/output/heldout/evaluation/process/contained')
+        b=Path('/output/third-pulse/evaluation/process/contained')
+        leaf=Path('/output/train/process/contained')
+        names=subject._child_receipt_names([a,b,leaf])
+        self.assertEqual(names,subject._child_receipt_names([leaf,b,a]))
+        self.assertEqual(len(set(names.values())),3)
+        self.assertEqual(names[str(leaf)],'train')
+        self.assertNotEqual(names[str(a)],names[str(b)])
+
+    def test_repeated_child_path_is_rejected_before_launch(self):
+        child=Path('/output/train/process/contained')
+        with patch.object(subject,'start')as start:
+            with self.assertRaisesRegex(ValueError,'owned_native_duplicate_child_directory'):
+                subject._run_owned({},[],Path('/unused'),Path('/unused'),Path('/unused'),
+                    [child,child],None,'unused',{}, {},[])
+        start.assert_not_called()
+
     def test_request_has_no_user_command_or_worker_module_extension(self):
         source=request();self.assertEqual(subject.validate_request(source),source)
         for key in ('arguments','module','worker','limits','operation'):

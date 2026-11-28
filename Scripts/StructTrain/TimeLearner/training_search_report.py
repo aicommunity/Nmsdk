@@ -122,12 +122,15 @@ def _project_summary(summary, model):
         **_recovery_history(summary, size))
 
 
-def analyze_search_history(path):
+def analyze_search_history(path, *, maximum_summary_bytes=64*1024**2):
     """Full production DATA audit, followed by a hash-bound summary projection.
 
-    Only summary8 has this explicit projection contract. Historical formats keep
-    their existing readers; no missing history is reconstructed from counters.
+    Summary9 retains its summary8 search transcript separately from the graph
+    selected by terminal restoration. Other historical formats keep their own
+    readers; no missing history is reconstructed from counters.
     """
+    require(type(maximum_summary_bytes) is int and 0 < maximum_summary_bytes <= 1024**3,
+            'search_report_invalid_summary_budget')
     path = Path(path).resolve(strict=True)
     manifest_raw, manifest_record = _frozen(path, 16*1024**2)
     manifest = parse_json_bytes(manifest_raw)
@@ -149,15 +152,25 @@ def analyze_search_history(path):
     require(name in ('train_stopped_state.json', 'train_learned_state.json'),
             'search_report_terminal_package')
     summary, summary_record = bound('native/'+name.replace('_state.json', '_summary.json'),
-                                    64*1024**2)
+                                    maximum_summary_bytes)
     job, _ = bound('input/job.json', 16*1024**2)
     require(summary['actual_model_revision'] == execution['model_revision'] and
             summary['outcome'] == execution['training_outcome'], 'search_report_terminal_binding')
-    result = _project_summary(summary, job['configuration']['model'])
+    if summary.get('schema_version') == 9:
+        from .terminal_search_report import project_terminal_search_summary
+        result = project_terminal_search_summary(summary, job['configuration']['model'])
+        result = {key: value for key, value in result.items() if key not in ('kind', 'schema_version')}
+        report_version = 3
+    else:
+        result = _project_summary(summary, job['configuration']['model'])
+        report_version = 2
     _, after = _frozen(path, 16*1024**2)
     require(after == manifest_record, 'search_report_manifest_changed')
-    return dict(kind='timelearner_native_search_history_report', schema_version=2,
+    # Summary9 already projects this explicit negative claim. Assemble it once
+    # for both readers; the completed DATA audit does not attest a native run.
+    result['native_execution_attested'] = False
+    return dict(kind='timelearner_native_search_history_report', schema_version=report_version,
         source_manifest=manifest_record, source_summary=summary_record,
         source_run_execution=manifest['execution'], source_run_validity=manifest['validity'],
         runtime_fingerprint=manifest['runtime_fingerprint'], data_audit=proof,
-        native_execution_attested=False, **result)
+        **result)

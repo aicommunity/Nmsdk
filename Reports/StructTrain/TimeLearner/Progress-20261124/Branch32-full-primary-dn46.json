@@ -1,0 +1,65 @@
+{
+  "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-24/Branch32-full-primary-dn46.json",
+  "catalog_record": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-24/Branch32-full-primary-dn46.json",
+    "sha256": "527a648f1e3878a4093a0050a0cf1fb4b42002dcb813250200a0987cf29ff961",
+    "size": 26493
+  },
+  "kind": "timelearner_Branch32_full_primary_archive_and_recomputed_counts",
+  "schema_version": 1,
+  "primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/37/37ec41b9ab5c95fefe67dd0c7240a93fcb66686fe8adbf4619df5da768c0a149",
+    "sha256": "37ec41b9ab5c95fefe67dd0c7240a93fcb66686fe8adbf4619df5da768c0a149",
+    "bytes": 11406008
+  },
+  "bundle": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/ab/ab6cd664b8bd745c5ff49e8c838edb8af088645abaf28b475af11248b7420c9b",
+    "sha256": "ab6cd664b8bd745c5ff49e8c838edb8af088645abaf28b475af11248b7420c9b",
+    "bytes": 248915
+  },
+  "members": 1462,
+  "expanded_bytes": 6808007937,
+  "restoration": {
+    "kind": "timelearner_native_bundle_restoration",
+    "schema_version": 1,
+    "archive_sha256": "37ec41b9ab5c95fefe67dd0c7240a93fcb66686fe8adbf4619df5da768c0a149",
+    "archive_members_verified": 1462,
+    "retained_regular_files": 1462,
+    "compatibility": "retain-regular-glog-aliases-v1",
+    "omitted_redundant_aliases": [],
+    "source_archive_modified": false,
+    "native_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "observations_recomputed": 256,
+  "archive_producer_error_preserved": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/17/172b315a184cc22b6915813b85e040d5481d5638cb1c741eed3b50fa2a5e5a5b",
+    "sha256": "172b315a184cc22b6915813b85e040d5481d5638cb1c741eed3b50fa2a5e5a5b",
+    "bytes": 1342
+  },
+  "corrected_auditor": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/0a/0a6e3c1b3a39e52b93d3ef93f28e7f8a8f958b8bb437f87f3b166b9c52a3ec38",
+    "sha256": "0a6e3c1b3a39e52b93d3ef93f28e7f8a8f958b8bb437f87f3b166b9c52a3ec38",
+    "bytes": 5098
+  },
+  "no_repack_or_model_rerun": true,
+  "full_primary_archive": true,
+  "independent_restore_verified": true,
+  "full_native_artifact_reverification": true,
+  "original_sources_deleted": false,
+  "visual_acceptance_complete": false,
+  "full_stage11_accepted": false,
+  "scientific_verdict": null
+}

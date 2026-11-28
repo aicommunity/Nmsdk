@@ -1,0 +1,69 @@
+{
+  "kind": "timelearner_Branch32_r0_short_scientific_review_reference",
+  "schema_version": 1,
+  "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+  "catalog": {
+    "relative_path": "experiments/2026-11-26/Branch32-r0-short-scientific-independent-fl7.json",
+    "sha256": "245aa457d0d2c685dad34d60ecedc30cbd03813db7a8db60e5ec7aebd12430f0",
+    "bytes": 18073
+  },
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/a4/a4fed9f25f28fd6d93f3bbec05c608bd95869acee4792a784bc348ac40c6d9e8",
+      "sha256": "a4fed9f25f28fd6d93f3bbec05c608bd95869acee4792a784bc348ac40c6d9e8",
+      "bytes": 16209
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/7b/7b665a0f6f395d9a6eb0c722833b01f829679e33f2fe564bfb7c9003ce30e01c",
+      "sha256": "7b665a0f6f395d9a6eb0c722833b01f829679e33f2fe564bfb7c9003ce30e01c",
+      "bytes": 2647596
+    },
+    "source-result.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/a1/a16c4ab09d67435753c66891d5c218012dc48e4c4342b52e13ad925b4b9d9882",
+      "sha256": "a16c4ab09d67435753c66891d5c218012dc48e4c4342b52e13ad925b4b9d9882",
+      "bytes": 804
+    },
+    "reader.py": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/0b/0b1c1f5c85b948553257f12ac844a935fc8146689c971ea0a801df77cf4e1130",
+      "sha256": "0b1c1f5c85b948553257f12ac844a935fc8146689c971ea0a801df77cf4e1130",
+      "bytes": 5517
+    }
+  },
+  "members": 89,
+  "source_observations": 16,
+  "reviewed_PNG": 32,
+  "all64_image_hashes_verified": true,
+  "all16_source_bytes_match_original": true,
+  "target_position_zero_based": 0,
+  "target_first_full_sample_arrays_and_events_exactly_equal": true,
+  "target_native_output_from_first_input_seconds": 0.4835,
+  "target_additional_early_output": false,
+  "pair_equal_full_waveform_count": 1,
+  "pair_changed_full_waveform_count": 7,
+  "all8_actual_input_and_output_event_sets_equal": true,
+  "source_counts_both_cases": {
+    "TP": 1,
+    "FP": 1,
+    "FN": 0,
+    "TN": 6
+  },
+  "full32_case_visual_acceptance": false,
+  "total_new_reviewed_standard_Branch32_PNG": 64,
+  "additional_detail_PNG": 1,
+  "remaining_standard_Branch32_PNG": 448,
+  "new_simulation": false,
+  "new_threshold": false,
+  "scientific_verdict": null
+}

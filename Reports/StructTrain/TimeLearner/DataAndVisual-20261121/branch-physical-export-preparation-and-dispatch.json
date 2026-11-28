@@ -1,0 +1,70 @@
+{
+  "initial_admission_failure": {
+    "controls": "/media/user/Data/TimeLearnerRefactor/requests/s11-prepared-physical-branch-export-m40-a1",
+    "prepare-exception.json": {
+      "reason": "reservation_capacity_exhausted",
+      "traceback": "Traceback (most recent call last):\n  File \"/media/user/Data/TimeLearnerRefactor/requests/s11-prepared-physical-branch-export-m40-a1/prepare-supervisor.py\", line 18, in <module>\n    b=Path(d['base']);require(shutil.disk_usage(b).free>=768*1024**2,'threshold_preparation_disk_admission');registry=Reservations.open_existing(b/'resource-reservations.sqlite3');lease=registry.reserve(d['job']+'-prepare',[dict(path=str(p),access=a) for p,a in ((c,'write'),(Path(d['inputs']),'write'),(Path(d['old_controls']),'read'),(Path(d['old_inputs']),'read'),(Path(d['baseline']),'read'))],ttl_seconds=2100,demands=dict(slots=1,memory_bytes=16*1024**3,disk_bytes=64*1024**2))\n                                                                                                                                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/media/user/Data/TimeLearnerRefactor/source-diagnostic-memory-a1/Scripts/StructTrain/TimeLearner/resource_reservations.py\", line 310, in reserve\n    _require(all(used[key]+demands[key] <= self.capacity[key] for key in used),\n  File \"/media/user/Data/TimeLearnerRefactor/source-diagnostic-memory-a1/Scripts/StructTrain/TimeLearner/resource_reservations.py\", line 25, in _require\n    raise ReservationError(reason)\nScripts.StructTrain.TimeLearner.resource_reservations.ReservationError: reservation_capacity_exhausted\n"
+    },
+    "prepare-supervisor.log": "Traceback (most recent call last):\n  File \"/media/user/Data/TimeLearnerRefactor/requests/s11-prepared-physical-branch-export-m40-a1/prepare-supervisor.py\", line 18, in <module>\n    b=Path(d['base']);require(shutil.disk_usage(b).free>=768*1024**2,'threshold_preparation_disk_admission');registry=Reservations.open_existing(b/'resource-reservations.sqlite3');lease=registry.reserve(d['job']+'-prepare',[dict(path=str(p),access=a) for p,a in ((c,'write'),(Path(d['inputs']),'write'),(Path(d['old_controls']),'read'),(Path(d['old_inputs']),'read'),(Path(d['baseline']),'read'))],ttl_seconds=2100,demands=dict(slots=1,memory_bytes=16*1024**3,disk_bytes=64*1024**2))\n                                                                                                                                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/media/user/Data/TimeLearnerRefactor/source-diagnostic-memory-a1/Scripts/StructTrain/TimeLearner/resource_reservations.py\", line 310, in reserve\n    _require(all(used[key]+demands[key] <= self.capacity[key] for key in used),\n  File \"/media/user/Data/TimeLearnerRefactor/source-diagnostic-memory-a1/Scripts/StructTrain/TimeLearner/resource_reservations.py\", line 25, in _require\n    raise ReservationError(reason)\nScripts.StructTrain.TimeLearner.resource_reservations.ReservationError: reservation_capacity_exhausted\n"
+  },
+  "slot_capacity": {
+    "capacity": {
+      "disk_bytes": 34359738368,
+      "memory_bytes": 34359738368,
+      "slots": 1
+    },
+    "reserved": {
+      "disk_bytes": 0,
+      "memory_bytes": 0,
+      "slots": 0
+    },
+    "held": []
+  },
+  "new_preparation": {
+    "preparation_started": true,
+    "name": "s11-prepared-physical-branch-export-m40-a2",
+    "controls_commit": "1ec37cb5237b3017bf269fb3f69b314f14a06ce7",
+    "supervisor_pid": 2804055,
+    "preparer_root": "216659623fe5e82efc7be06de9445f6526592738",
+    "preparer_git_blob": "07c53ac1839440c43e7b13527c5218902abb8ef1",
+    "declared_incremental_disk_bytes": 1073741824,
+    "original_admission_failure_retained": true,
+    "native_export_started": false,
+    "scientific_verdict": null
+  },
+  "prepared": {
+    "controls": "/media/user/Data/TimeLearnerRefactor/requests/s11-prepared-physical-branch-export-m40-a2",
+    "prepared.json": {
+      "prepared": true,
+      "physical_export": true,
+      "source_model_revision": "0fe43bddd70414e903ec41e68eb3433d9b85feaa5799448e2af7793ed8c5ff9f",
+      "source_package_sha256": "f9e4d48f3e08ae52bad59474e70b7bf2cfd58b891d8b312e8b865a75848a2675"
+    },
+    "prepare-result.json": {
+      "execution": "completed",
+      "reason": "exit_zero_and_whole_group_closed",
+      "returncode": 0,
+      "wall_seconds": 75.78348116856068,
+      "runtime_provenance": "loaded_files_captured",
+      "all_processes_closed": true
+    },
+    "prepare-supervisor.log": "",
+    "prepare-process/contained/stderr.log": ""
+  },
+  "native": {
+    "started": true,
+    "job": "s11-prepared-physical-branch-export-m40-a2",
+    "controls_commit": "c82aa0e6b35b91b424e1ce758784055df4c2c932",
+    "controller_pid": 2817783,
+    "worker_root": "216659623fe5e82efc7be06de9445f6526592738",
+    "worker_git_blob": "07c53ac1839440c43e7b13527c5218902abb8ef1",
+    "source_model_revision": "0fe43bddd70414e903ec41e68eb3433d9b85feaa5799448e2af7793ed8c5ff9f",
+    "source_package_sha256": "f9e4d48f3e08ae52bad59474e70b7bf2cfd58b891d8b312e8b865a75848a2675",
+    "memory_bytes": 8589934592,
+    "maximum_wall_seconds": 3600,
+    "source_history_preserved": true,
+    "original_recognition_execution_changed": false,
+    "scientific_verdict": null
+  },
+  "scientific_verdict": null
+}

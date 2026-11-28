@@ -1,0 +1,1007 @@
+{
+  "kind": "timelearner_new_foil_compact_result",
+  "schema_version": 1,
+  "counts": {
+    "TP": 1,
+    "FP": 1,
+    "FN": 0,
+    "TN": 25,
+    "targets": 1,
+    "foils": 26,
+    "target_trials_with_outside_spikes": 0,
+    "accuracy": 0.9629629629629629,
+    "target_hit_rate": 1.0,
+    "foil_response_rate": 0.038461538461538464
+  },
+  "model_revision": "0fe43bddd70414e903ec41e68eb3433d9b85feaa5799448e2af7793ed8c5ff9f",
+  "threshold": 0.0999470202411733,
+  "target_position": 13,
+  "target_control_preserved": true,
+  "target_control_comparison": {
+    "kind": "timelearner_trial_response_comparison",
+    "schema_version": 1,
+    "comparator_version": 1,
+    "time_basis": "actual_stimulus_onset",
+    "absolute_tolerance": 1e-12,
+    "observation_schema_version": 2,
+    "source_trial_id": "branch/stopped-phasea-diagnostic/rotation-0/0",
+    "observed_trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-2-2-2",
+    "sample_id": "phasea-row-0",
+    "model_revision": "0fe43bddd70414e903ec41e68eb3433d9b85feaa5799448e2af7793ed8c5ff9f",
+    "source_begin": 0,
+    "observed_begin": 26.0065,
+    "source_stimulus_onset": 0.01,
+    "observed_stimulus_onset": 26.0165,
+    "absolute_clock_shift": 26.0065,
+    "source_samples": 4001,
+    "observed_samples": 4001,
+    "sample_counts_equal": true,
+    "window_offsets_equal": true,
+    "maximum_absolute_signal_difference": 0.0,
+    "maximum_relative_sample_time_difference": 2.4424906541753444e-15,
+    "maximum_relative_history_difference": 1.7069679003611782e-15,
+    "maximum_relative_event_time_difference": 1.7069679003611782e-15,
+    "maximum_window_offset_difference": 1.5629858518551032e-15,
+    "maximum_absolute_sample_difference": 2.4424906541753444e-15,
+    "waveforms_equal_within_declared_tolerance": true,
+    "stimulus_and_spike_events_equal": true,
+    "response_preserved": true,
+    "difference_reasons": [],
+    "pre_window_history_compared": false,
+    "scientific_verdict": null
+  },
+  "condition_fingerprint": "83334064d23453d8069ad75362b623c33f746e850d027e1df56bc2308da1966b",
+  "design": {
+    "kind": "timelearner_frozen_new_foil_design",
+    "schema_version": 1,
+    "protocol_id": "frozen_new_foil_isi_grid_half_steps_v1",
+    "scale_numerators": [
+      1,
+      2,
+      3
+    ],
+    "scale_denominator": 2,
+    "varied_isi_indices": [
+      1,
+      2,
+      3
+    ],
+    "fixed_onset_isi": 0.01,
+    "excluded_calibration_hashes": [
+      "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451",
+      "36041ec22b63d8d8bb408206a2271702dc7d9240d9052da27d23c78ea55f959d",
+      "4047791f09257b779ecdc2a373bcf9b1c84c323f5af6b1a9ec5df55479601243",
+      "55d26999e0e39704e925a7eb6fb22734aad6e1d9aba1cc6a623e86e3f3c614e6",
+      "6f76812a27c0b273529753e181fa2cc7a0b8d4f0b3c42fba2e436dbb2d0b9934",
+      "9c7cb4b0313fb5d1d3d87e903c3d4a500f2226bf6962d2f55b895e875e7c7a85",
+      "a9c1310975c490708e44be19a7efe99502884491009f8efd1672789731f90e28",
+      "ce915da00aa267d665ddd1c360b4803d115b13ec3eac683b0f8ba90a52a57413"
+    ],
+    "skipped_previously_used_conditions": [],
+    "target_position": 13,
+    "new_foil_trials": 26,
+    "target_control_trials": 1,
+    "label_rule": "exact_original_target_hash_is_target; all_new_grid_hashes_are_foil",
+    "interpretation": "new_foil_sensitivity; no_new_positive_class_or_stochastic_replicates",
+    "model_revision": "0fe43bddd70414e903ec41e68eb3433d9b85feaa5799448e2af7793ed8c5ff9f",
+    "threshold": 0.0999470202411733,
+    "training_performed": false,
+    "threshold_selected": false,
+    "new_foils_excluded_from_previous_matrix": true,
+    "continuous_stream_verified": false,
+    "inter_pattern_interval_varied": false,
+    "scientific_verdict": null
+  },
+  "native_process": {
+    "execution": "completed",
+    "wall_seconds": 2655.294396459125,
+    "runtime_provenance": "loaded_files_captured",
+    "all_processes_closed": true,
+    "returncode": 0
+  },
+  "native_manifest_execution": "completed",
+  "native_manifest_validity": "valid",
+  "rows": [
+    {
+      "spec": {
+        "run_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1",
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-1-1-1",
+        "sample_id": "unseen-isi-grid-v1-1-1-1",
+        "label": "foil",
+        "pattern_hash": "0d4dc5c79f119c8eabb3d7d57cb97ecdc0af7b36ce7ca3bd8d3a14d149415f7c",
+        "pattern_isi": [
+          0.01,
+          0.04,
+          0.08,
+          0.12
+        ],
+        "duration": 2.0,
+        "maximum_samples": 4005,
+        "reset_policy": "reset_per_trial",
+        "record_threshold_potential": true
+      },
+      "metrics": {
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-1-1-1",
+        "sample_id": "unseen-isi-grid-v1-1-1-1",
+        "label": "foil",
+        "presentation_index": 0,
+        "reset_policy": "reset_per_trial",
+        "response_begin": 0.01,
+        "response_end": 2.0,
+        "spike_count": 0,
+        "window_spikes": [],
+        "early_spikes": [],
+        "late_spikes": [],
+        "classification": "TN"
+      }
+    },
+    {
+      "spec": {
+        "run_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1",
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-1-1-2",
+        "sample_id": "unseen-isi-grid-v1-1-1-2",
+        "label": "foil",
+        "pattern_hash": "76414cf0919216a739721487b05060f27aa3dcf0e546d9f093bc0ae14ddbe207",
+        "pattern_isi": [
+          0.01,
+          0.04,
+          0.08,
+          0.24
+        ],
+        "duration": 2.0,
+        "maximum_samples": 4005,
+        "reset_policy": "reset_per_trial",
+        "record_threshold_potential": true
+      },
+      "metrics": {
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-1-1-2",
+        "sample_id": "unseen-isi-grid-v1-1-1-2",
+        "label": "foil",
+        "presentation_index": 1,
+        "reset_policy": "reset_per_trial",
+        "response_begin": 2.0105,
+        "response_end": 4.000500000000001,
+        "spike_count": 0,
+        "window_spikes": [],
+        "early_spikes": [],
+        "late_spikes": [],
+        "classification": "TN"
+      }
+    },
+    {
+      "spec": {
+        "run_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1",
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-1-1-3",
+        "sample_id": "unseen-isi-grid-v1-1-1-3",
+        "label": "foil",
+        "pattern_hash": "4ec3a461f142a196892a952ddf2d7145f812fc82ca8bfd04e8d9b639c91190f3",
+        "pattern_isi": [
+          0.01,
+          0.04,
+          0.08,
+          0.36
+        ],
+        "duration": 2.0,
+        "maximum_samples": 4005,
+        "reset_policy": "reset_per_trial",
+        "record_threshold_potential": true
+      },
+      "metrics": {
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-1-1-3",
+        "sample_id": "unseen-isi-grid-v1-1-1-3",
+        "label": "foil",
+        "presentation_index": 2,
+        "reset_policy": "reset_per_trial",
+        "response_begin": 4.011,
+        "response_end": 6.001,
+        "spike_count": 0,
+        "window_spikes": [],
+        "early_spikes": [],
+        "late_spikes": [],
+        "classification": "TN"
+      }
+    },
+    {
+      "spec": {
+        "run_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1",
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-1-2-1",
+        "sample_id": "unseen-isi-grid-v1-1-2-1",
+        "label": "foil",
+        "pattern_hash": "4811b0b9423d72f162f0aaa92b6fc712a2e505a6f5c98ebb93d64650db446e14",
+        "pattern_isi": [
+          0.01,
+          0.04,
+          0.16,
+          0.12
+        ],
+        "duration": 2.0,
+        "maximum_samples": 4005,
+        "reset_policy": "reset_per_trial",
+        "record_threshold_potential": true
+      },
+      "metrics": {
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-1-2-1",
+        "sample_id": "unseen-isi-grid-v1-1-2-1",
+        "label": "foil",
+        "presentation_index": 3,
+        "reset_policy": "reset_per_trial",
+        "response_begin": 6.0115,
+        "response_end": 8.0015,
+        "spike_count": 0,
+        "window_spikes": [],
+        "early_spikes": [],
+        "late_spikes": [],
+        "classification": "TN"
+      }
+    },
+    {
+      "spec": {
+        "run_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1",
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-1-2-2",
+        "sample_id": "unseen-isi-grid-v1-1-2-2",
+        "label": "foil",
+        "pattern_hash": "acfb8d39e464920c40346f5254cdb830281da8619ba50e9985d6fdd3f12d6f2a",
+        "pattern_isi": [
+          0.01,
+          0.04,
+          0.16,
+          0.24
+        ],
+        "duration": 2.0,
+        "maximum_samples": 4005,
+        "reset_policy": "reset_per_trial",
+        "record_threshold_potential": true
+      },
+      "metrics": {
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-1-2-2",
+        "sample_id": "unseen-isi-grid-v1-1-2-2",
+        "label": "foil",
+        "presentation_index": 4,
+        "reset_policy": "reset_per_trial",
+        "response_begin": 8.012,
+        "response_end": 10.002,
+        "spike_count": 1,
+        "window_spikes": [
+          8.454
+        ],
+        "early_spikes": [],
+        "late_spikes": [],
+        "classification": "FP"
+      }
+    },
+    {
+      "spec": {
+        "run_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1",
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-1-2-3",
+        "sample_id": "unseen-isi-grid-v1-1-2-3",
+        "label": "foil",
+        "pattern_hash": "ba3fc9d64f2d538a2776144b41ce689f933f881a706331c40e01e38fab13ffc9",
+        "pattern_isi": [
+          0.01,
+          0.04,
+          0.16,
+          0.36
+        ],
+        "duration": 2.0,
+        "maximum_samples": 4005,
+        "reset_policy": "reset_per_trial",
+        "record_threshold_potential": true
+      },
+      "metrics": {
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-1-2-3",
+        "sample_id": "unseen-isi-grid-v1-1-2-3",
+        "label": "foil",
+        "presentation_index": 5,
+        "reset_policy": "reset_per_trial",
+        "response_begin": 10.0125,
+        "response_end": 12.0025,
+        "spike_count": 0,
+        "window_spikes": [],
+        "early_spikes": [],
+        "late_spikes": [],
+        "classification": "TN"
+      }
+    },
+    {
+      "spec": {
+        "run_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1",
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-1-3-1",
+        "sample_id": "unseen-isi-grid-v1-1-3-1",
+        "label": "foil",
+        "pattern_hash": "e31faa93d73fda6547a1357ab171ccfce1d3a9fa063aafe94adcadea1297027b",
+        "pattern_isi": [
+          0.01,
+          0.04,
+          0.24,
+          0.12
+        ],
+        "duration": 2.0,
+        "maximum_samples": 4005,
+        "reset_policy": "reset_per_trial",
+        "record_threshold_potential": true
+      },
+      "metrics": {
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-1-3-1",
+        "sample_id": "unseen-isi-grid-v1-1-3-1",
+        "label": "foil",
+        "presentation_index": 6,
+        "reset_policy": "reset_per_trial",
+        "response_begin": 12.013,
+        "response_end": 14.003,
+        "spike_count": 0,
+        "window_spikes": [],
+        "early_spikes": [],
+        "late_spikes": [],
+        "classification": "TN"
+      }
+    },
+    {
+      "spec": {
+        "run_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1",
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-1-3-2",
+        "sample_id": "unseen-isi-grid-v1-1-3-2",
+        "label": "foil",
+        "pattern_hash": "0204ea664cfd81d4b704507ed10d716d4beaeda45c1fde69d47cb6fc16aa78c8",
+        "pattern_isi": [
+          0.01,
+          0.04,
+          0.24,
+          0.24
+        ],
+        "duration": 2.0,
+        "maximum_samples": 4005,
+        "reset_policy": "reset_per_trial",
+        "record_threshold_potential": true
+      },
+      "metrics": {
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-1-3-2",
+        "sample_id": "unseen-isi-grid-v1-1-3-2",
+        "label": "foil",
+        "presentation_index": 7,
+        "reset_policy": "reset_per_trial",
+        "response_begin": 14.0135,
+        "response_end": 16.003500000000003,
+        "spike_count": 0,
+        "window_spikes": [],
+        "early_spikes": [],
+        "late_spikes": [],
+        "classification": "TN"
+      }
+    },
+    {
+      "spec": {
+        "run_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1",
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-1-3-3",
+        "sample_id": "unseen-isi-grid-v1-1-3-3",
+        "label": "foil",
+        "pattern_hash": "a2554fb1c3181a878c725624967ebec0ba0b55461e94dc96c6b81da63a59b91e",
+        "pattern_isi": [
+          0.01,
+          0.04,
+          0.24,
+          0.36
+        ],
+        "duration": 2.0,
+        "maximum_samples": 4005,
+        "reset_policy": "reset_per_trial",
+        "record_threshold_potential": true
+      },
+      "metrics": {
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-1-3-3",
+        "sample_id": "unseen-isi-grid-v1-1-3-3",
+        "label": "foil",
+        "presentation_index": 8,
+        "reset_policy": "reset_per_trial",
+        "response_begin": 16.014,
+        "response_end": 18.004,
+        "spike_count": 0,
+        "window_spikes": [],
+        "early_spikes": [],
+        "late_spikes": [],
+        "classification": "TN"
+      }
+    },
+    {
+      "spec": {
+        "run_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1",
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-2-1-1",
+        "sample_id": "unseen-isi-grid-v1-2-1-1",
+        "label": "foil",
+        "pattern_hash": "3f39c2e3dcedaf6aa0c1d8d9204b7e6db9dd6a12c85cf8e314fd4f323d724df7",
+        "pattern_isi": [
+          0.01,
+          0.08,
+          0.08,
+          0.12
+        ],
+        "duration": 2.0,
+        "maximum_samples": 4005,
+        "reset_policy": "reset_per_trial",
+        "record_threshold_potential": true
+      },
+      "metrics": {
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-2-1-1",
+        "sample_id": "unseen-isi-grid-v1-2-1-1",
+        "label": "foil",
+        "presentation_index": 9,
+        "reset_policy": "reset_per_trial",
+        "response_begin": 18.0145,
+        "response_end": 20.0045,
+        "spike_count": 0,
+        "window_spikes": [],
+        "early_spikes": [],
+        "late_spikes": [],
+        "classification": "TN"
+      }
+    },
+    {
+      "spec": {
+        "run_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1",
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-2-1-2",
+        "sample_id": "unseen-isi-grid-v1-2-1-2",
+        "label": "foil",
+        "pattern_hash": "65137a4f01ca29e6d950b73405dadb0cbfe1e0f502f0b9e5a6f925bd1cc05308",
+        "pattern_isi": [
+          0.01,
+          0.08,
+          0.08,
+          0.24
+        ],
+        "duration": 2.0,
+        "maximum_samples": 4005,
+        "reset_policy": "reset_per_trial",
+        "record_threshold_potential": true
+      },
+      "metrics": {
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-2-1-2",
+        "sample_id": "unseen-isi-grid-v1-2-1-2",
+        "label": "foil",
+        "presentation_index": 10,
+        "reset_policy": "reset_per_trial",
+        "response_begin": 20.015,
+        "response_end": 22.005,
+        "spike_count": 0,
+        "window_spikes": [],
+        "early_spikes": [],
+        "late_spikes": [],
+        "classification": "TN"
+      }
+    },
+    {
+      "spec": {
+        "run_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1",
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-2-1-3",
+        "sample_id": "unseen-isi-grid-v1-2-1-3",
+        "label": "foil",
+        "pattern_hash": "3141dedb31d9116a5795d86827a641391cdf8d10a92d96b01a70578d81364ca1",
+        "pattern_isi": [
+          0.01,
+          0.08,
+          0.08,
+          0.36
+        ],
+        "duration": 2.0,
+        "maximum_samples": 4005,
+        "reset_policy": "reset_per_trial",
+        "record_threshold_potential": true
+      },
+      "metrics": {
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-2-1-3",
+        "sample_id": "unseen-isi-grid-v1-2-1-3",
+        "label": "foil",
+        "presentation_index": 11,
+        "reset_policy": "reset_per_trial",
+        "response_begin": 22.0155,
+        "response_end": 24.0055,
+        "spike_count": 0,
+        "window_spikes": [],
+        "early_spikes": [],
+        "late_spikes": [],
+        "classification": "TN"
+      }
+    },
+    {
+      "spec": {
+        "run_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1",
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-2-2-1",
+        "sample_id": "unseen-isi-grid-v1-2-2-1",
+        "label": "foil",
+        "pattern_hash": "ca1f860bcffe76800ab775898ec4f4c7360bca0d3ad9c39f07cf263414b22141",
+        "pattern_isi": [
+          0.01,
+          0.08,
+          0.16,
+          0.12
+        ],
+        "duration": 2.0,
+        "maximum_samples": 4005,
+        "reset_policy": "reset_per_trial",
+        "record_threshold_potential": true
+      },
+      "metrics": {
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-2-2-1",
+        "sample_id": "unseen-isi-grid-v1-2-2-1",
+        "label": "foil",
+        "presentation_index": 12,
+        "reset_policy": "reset_per_trial",
+        "response_begin": 24.016,
+        "response_end": 26.006,
+        "spike_count": 0,
+        "window_spikes": [],
+        "early_spikes": [],
+        "late_spikes": [],
+        "classification": "TN"
+      }
+    },
+    {
+      "spec": {
+        "run_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1",
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-2-2-2",
+        "sample_id": "phasea-row-0",
+        "label": "target",
+        "pattern_hash": "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451",
+        "pattern_isi": [
+          0.01,
+          0.08,
+          0.16,
+          0.24
+        ],
+        "duration": 2.0,
+        "maximum_samples": 4005,
+        "reset_policy": "reset_per_trial",
+        "record_threshold_potential": true
+      },
+      "metrics": {
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-2-2-2",
+        "sample_id": "phasea-row-0",
+        "label": "target",
+        "presentation_index": 13,
+        "reset_policy": "reset_per_trial",
+        "response_begin": 26.0165,
+        "response_end": 28.0065,
+        "spike_count": 1,
+        "window_spikes": [
+          26.4995
+        ],
+        "early_spikes": [],
+        "late_spikes": [],
+        "classification": "TP"
+      }
+    },
+    {
+      "spec": {
+        "run_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1",
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-2-2-3",
+        "sample_id": "unseen-isi-grid-v1-2-2-3",
+        "label": "foil",
+        "pattern_hash": "62eeec5935be01ad24869c7d65d37a0c0532b556e1ab39f887d29ccfd0d54b89",
+        "pattern_isi": [
+          0.01,
+          0.08,
+          0.16,
+          0.36
+        ],
+        "duration": 2.0,
+        "maximum_samples": 4005,
+        "reset_policy": "reset_per_trial",
+        "record_threshold_potential": true
+      },
+      "metrics": {
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-2-2-3",
+        "sample_id": "unseen-isi-grid-v1-2-2-3",
+        "label": "foil",
+        "presentation_index": 14,
+        "reset_policy": "reset_per_trial",
+        "response_begin": 28.017,
+        "response_end": 30.007,
+        "spike_count": 0,
+        "window_spikes": [],
+        "early_spikes": [],
+        "late_spikes": [],
+        "classification": "TN"
+      }
+    },
+    {
+      "spec": {
+        "run_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1",
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-2-3-1",
+        "sample_id": "unseen-isi-grid-v1-2-3-1",
+        "label": "foil",
+        "pattern_hash": "ecf332d3d5da0cf09a1a7a01f4d00ba5a8476481cc346bd7222e8084d67ebf8c",
+        "pattern_isi": [
+          0.01,
+          0.08,
+          0.24,
+          0.12
+        ],
+        "duration": 2.0,
+        "maximum_samples": 4005,
+        "reset_policy": "reset_per_trial",
+        "record_threshold_potential": true
+      },
+      "metrics": {
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-2-3-1",
+        "sample_id": "unseen-isi-grid-v1-2-3-1",
+        "label": "foil",
+        "presentation_index": 15,
+        "reset_policy": "reset_per_trial",
+        "response_begin": 30.0175,
+        "response_end": 32.0075,
+        "spike_count": 0,
+        "window_spikes": [],
+        "early_spikes": [],
+        "late_spikes": [],
+        "classification": "TN"
+      }
+    },
+    {
+      "spec": {
+        "run_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1",
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-2-3-2",
+        "sample_id": "unseen-isi-grid-v1-2-3-2",
+        "label": "foil",
+        "pattern_hash": "deafc6fb239d73f36e3edf8a3baf1afdb1ade9efc7e660a0eb6a9854369a5cd3",
+        "pattern_isi": [
+          0.01,
+          0.08,
+          0.24,
+          0.24
+        ],
+        "duration": 2.0,
+        "maximum_samples": 4005,
+        "reset_policy": "reset_per_trial",
+        "record_threshold_potential": true
+      },
+      "metrics": {
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-2-3-2",
+        "sample_id": "unseen-isi-grid-v1-2-3-2",
+        "label": "foil",
+        "presentation_index": 16,
+        "reset_policy": "reset_per_trial",
+        "response_begin": 32.018,
+        "response_end": 34.008,
+        "spike_count": 0,
+        "window_spikes": [],
+        "early_spikes": [],
+        "late_spikes": [],
+        "classification": "TN"
+      }
+    },
+    {
+      "spec": {
+        "run_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1",
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-2-3-3",
+        "sample_id": "unseen-isi-grid-v1-2-3-3",
+        "label": "foil",
+        "pattern_hash": "8f1fbbb002017f6638135f01daa643dbb28c8c6739d74e923b8f907d85e8c947",
+        "pattern_isi": [
+          0.01,
+          0.08,
+          0.24,
+          0.36
+        ],
+        "duration": 2.0,
+        "maximum_samples": 4005,
+        "reset_policy": "reset_per_trial",
+        "record_threshold_potential": true
+      },
+      "metrics": {
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-2-3-3",
+        "sample_id": "unseen-isi-grid-v1-2-3-3",
+        "label": "foil",
+        "presentation_index": 17,
+        "reset_policy": "reset_per_trial",
+        "response_begin": 34.0185,
+        "response_end": 36.0085,
+        "spike_count": 0,
+        "window_spikes": [],
+        "early_spikes": [],
+        "late_spikes": [],
+        "classification": "TN"
+      }
+    },
+    {
+      "spec": {
+        "run_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1",
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-3-1-1",
+        "sample_id": "unseen-isi-grid-v1-3-1-1",
+        "label": "foil",
+        "pattern_hash": "e5a7a5e3e10a68ae9fbd96838293e612bda118365645f793ad8044aa118b9fb5",
+        "pattern_isi": [
+          0.01,
+          0.12,
+          0.08,
+          0.12
+        ],
+        "duration": 2.0,
+        "maximum_samples": 4005,
+        "reset_policy": "reset_per_trial",
+        "record_threshold_potential": true
+      },
+      "metrics": {
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-3-1-1",
+        "sample_id": "unseen-isi-grid-v1-3-1-1",
+        "label": "foil",
+        "presentation_index": 18,
+        "reset_policy": "reset_per_trial",
+        "response_begin": 36.019,
+        "response_end": 38.009,
+        "spike_count": 0,
+        "window_spikes": [],
+        "early_spikes": [],
+        "late_spikes": [],
+        "classification": "TN"
+      }
+    },
+    {
+      "spec": {
+        "run_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1",
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-3-1-2",
+        "sample_id": "unseen-isi-grid-v1-3-1-2",
+        "label": "foil",
+        "pattern_hash": "2290c6361fd896c6c8a678cedd0a17fb2ea615ea4dbcc5bf5a03a7f69617fd8b",
+        "pattern_isi": [
+          0.01,
+          0.12,
+          0.08,
+          0.24
+        ],
+        "duration": 2.0,
+        "maximum_samples": 4005,
+        "reset_policy": "reset_per_trial",
+        "record_threshold_potential": true
+      },
+      "metrics": {
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-3-1-2",
+        "sample_id": "unseen-isi-grid-v1-3-1-2",
+        "label": "foil",
+        "presentation_index": 19,
+        "reset_policy": "reset_per_trial",
+        "response_begin": 38.0195,
+        "response_end": 40.0095,
+        "spike_count": 0,
+        "window_spikes": [],
+        "early_spikes": [],
+        "late_spikes": [],
+        "classification": "TN"
+      }
+    },
+    {
+      "spec": {
+        "run_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1",
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-3-1-3",
+        "sample_id": "unseen-isi-grid-v1-3-1-3",
+        "label": "foil",
+        "pattern_hash": "0a199ee324968c048809f3c88415deb856ab9fe19f27970e173da7b4b7c2101d",
+        "pattern_isi": [
+          0.01,
+          0.12,
+          0.08,
+          0.36
+        ],
+        "duration": 2.0,
+        "maximum_samples": 4005,
+        "reset_policy": "reset_per_trial",
+        "record_threshold_potential": true
+      },
+      "metrics": {
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-3-1-3",
+        "sample_id": "unseen-isi-grid-v1-3-1-3",
+        "label": "foil",
+        "presentation_index": 20,
+        "reset_policy": "reset_per_trial",
+        "response_begin": 40.02,
+        "response_end": 42.01,
+        "spike_count": 0,
+        "window_spikes": [],
+        "early_spikes": [],
+        "late_spikes": [],
+        "classification": "TN"
+      }
+    },
+    {
+      "spec": {
+        "run_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1",
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-3-2-1",
+        "sample_id": "unseen-isi-grid-v1-3-2-1",
+        "label": "foil",
+        "pattern_hash": "55aa551db11e8865220e7882fa53861694ad6a8174986697d9273f6fb0d66791",
+        "pattern_isi": [
+          0.01,
+          0.12,
+          0.16,
+          0.12
+        ],
+        "duration": 2.0,
+        "maximum_samples": 4005,
+        "reset_policy": "reset_per_trial",
+        "record_threshold_potential": true
+      },
+      "metrics": {
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-3-2-1",
+        "sample_id": "unseen-isi-grid-v1-3-2-1",
+        "label": "foil",
+        "presentation_index": 21,
+        "reset_policy": "reset_per_trial",
+        "response_begin": 42.0205,
+        "response_end": 44.0105,
+        "spike_count": 0,
+        "window_spikes": [],
+        "early_spikes": [],
+        "late_spikes": [],
+        "classification": "TN"
+      }
+    },
+    {
+      "spec": {
+        "run_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1",
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-3-2-2",
+        "sample_id": "unseen-isi-grid-v1-3-2-2",
+        "label": "foil",
+        "pattern_hash": "516451ffca4090f04eb4b1818132ec28c7c9f3b81b7ad016c5cedd0467ea4d7a",
+        "pattern_isi": [
+          0.01,
+          0.12,
+          0.16,
+          0.24
+        ],
+        "duration": 2.0,
+        "maximum_samples": 4005,
+        "reset_policy": "reset_per_trial",
+        "record_threshold_potential": true
+      },
+      "metrics": {
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-3-2-2",
+        "sample_id": "unseen-isi-grid-v1-3-2-2",
+        "label": "foil",
+        "presentation_index": 22,
+        "reset_policy": "reset_per_trial",
+        "response_begin": 44.021,
+        "response_end": 46.011,
+        "spike_count": 0,
+        "window_spikes": [],
+        "early_spikes": [],
+        "late_spikes": [],
+        "classification": "TN"
+      }
+    },
+    {
+      "spec": {
+        "run_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1",
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-3-2-3",
+        "sample_id": "unseen-isi-grid-v1-3-2-3",
+        "label": "foil",
+        "pattern_hash": "f19b971714d4e1d72119290f0e5f3c66d509d6965201397e31472c7f54155283",
+        "pattern_isi": [
+          0.01,
+          0.12,
+          0.16,
+          0.36
+        ],
+        "duration": 2.0,
+        "maximum_samples": 4005,
+        "reset_policy": "reset_per_trial",
+        "record_threshold_potential": true
+      },
+      "metrics": {
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-3-2-3",
+        "sample_id": "unseen-isi-grid-v1-3-2-3",
+        "label": "foil",
+        "presentation_index": 23,
+        "reset_policy": "reset_per_trial",
+        "response_begin": 46.0215,
+        "response_end": 48.0115,
+        "spike_count": 0,
+        "window_spikes": [],
+        "early_spikes": [],
+        "late_spikes": [],
+        "classification": "TN"
+      }
+    },
+    {
+      "spec": {
+        "run_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1",
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-3-3-1",
+        "sample_id": "unseen-isi-grid-v1-3-3-1",
+        "label": "foil",
+        "pattern_hash": "ebb4608e7c950d5d92db2773abad2c67f9d2d949e3e18fadd97f8928865262db",
+        "pattern_isi": [
+          0.01,
+          0.12,
+          0.24,
+          0.12
+        ],
+        "duration": 2.0,
+        "maximum_samples": 4005,
+        "reset_policy": "reset_per_trial",
+        "record_threshold_potential": true
+      },
+      "metrics": {
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-3-3-1",
+        "sample_id": "unseen-isi-grid-v1-3-3-1",
+        "label": "foil",
+        "presentation_index": 24,
+        "reset_policy": "reset_per_trial",
+        "response_begin": 48.022,
+        "response_end": 50.012,
+        "spike_count": 0,
+        "window_spikes": [],
+        "early_spikes": [],
+        "late_spikes": [],
+        "classification": "TN"
+      }
+    },
+    {
+      "spec": {
+        "run_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1",
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-3-3-2",
+        "sample_id": "unseen-isi-grid-v1-3-3-2",
+        "label": "foil",
+        "pattern_hash": "f64c8c5a08317b49fa7d12505695ee4fdea68f05d484de9466da4cc6a00a7186",
+        "pattern_isi": [
+          0.01,
+          0.12,
+          0.24,
+          0.24
+        ],
+        "duration": 2.0,
+        "maximum_samples": 4005,
+        "reset_policy": "reset_per_trial",
+        "record_threshold_potential": true
+      },
+      "metrics": {
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-3-3-2",
+        "sample_id": "unseen-isi-grid-v1-3-3-2",
+        "label": "foil",
+        "presentation_index": 25,
+        "reset_policy": "reset_per_trial",
+        "response_begin": 50.0225,
+        "response_end": 52.0125,
+        "spike_count": 0,
+        "window_spikes": [],
+        "early_spikes": [],
+        "late_spikes": [],
+        "classification": "TN"
+      }
+    },
+    {
+      "spec": {
+        "run_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1",
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-3-3-3",
+        "sample_id": "unseen-isi-grid-v1-3-3-3",
+        "label": "foil",
+        "pattern_hash": "d456b15f332cebb84c398e1af0bb98fb7b49bbca91abb65abed335446fc6503f",
+        "pattern_isi": [
+          0.01,
+          0.12,
+          0.24,
+          0.36
+        ],
+        "duration": 2.0,
+        "maximum_samples": 4005,
+        "reset_policy": "reset_per_trial",
+        "record_threshold_potential": true
+      },
+      "metrics": {
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-3-3-3",
+        "sample_id": "unseen-isi-grid-v1-3-3-3",
+        "label": "foil",
+        "presentation_index": 26,
+        "reset_policy": "reset_per_trial",
+        "response_begin": 52.023,
+        "response_end": 54.013,
+        "spike_count": 0,
+        "window_spikes": [],
+        "early_spikes": [],
+        "late_spikes": [],
+        "classification": "TN"
+      }
+    }
+  ],
+  "terminal_file": {
+    "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-branch-frozen-new-foils-m40-a1/terminal.json",
+    "sha256": "133431013196c1eda12f90d310d758c86bf96b6aafaf58c2b7e5a3cef1634019",
+    "bytes": 13992
+  },
+  "scientific_verdict": null
+}

@@ -1,0 +1,57 @@
+{
+  "kind": "timelearner_matched_N0_policy_pair_preparation",
+  "schema_version": 1,
+  "preparation": {
+    "queued": true,
+    "job": "classic-n0-length-policy0-elder-dh3",
+    "owner": {
+      "pid": 1662889,
+      "start_ticks": "508876721",
+      "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+      "uid": 1000
+    },
+    "controls_commit": "4b372edd0124b3deae07adceecd4504f09fbf171",
+    "bundle": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/67/67f637bb95421a9527ea0d81f4e1c908868e62f2ba62c3b41f5c45e7032f4a21",
+      "sha256": "67f637bb95421a9527ea0d81f4e1c908868e62f2ba62c3b41f5c45e7032f4a21",
+      "bytes": 48673
+    },
+    "catalog": "/mnt/nmsdk-structtrain-archive/experiments/2026-11-24/Classic-N0-paired-policy0-prepared-dh3.json",
+    "pairing": {
+      "kind": "timelearner_matched_N0_length_policy_pair",
+      "schema_version": 1,
+      "policy0_job_sha256": "f69e8f108aff58e22b01ff06cb7284e19173f1d467da7c07e9cbfdb02a07b430",
+      "policy4_job_sha256": "9ba7d7faa34c0c7de6a831793f439b872db74a67d75919e01399566f75bed54d",
+      "policy4_request": {
+        "path": "/home/user/timelearner-refactor/requests/classic-n0-length-policy4-elder-ay21/request.json",
+        "sha256": "69b7ab1eab2612eff00e584e7231943d20263e76ababbf7a0a6a4e769b3684cd",
+        "size": 1634
+      },
+      "policy4_declared_job": {
+        "path": "/home/user/timelearner-refactor/requests/classic-n0-length-policy4-elder-ay21/input/declared-policy4.json",
+        "sha256": "552659d7604bcfd1eac65ba76c2be4e88cee004b8baad788d4ffa6e7ad3075aa",
+        "size": 674101
+      },
+      "runtime_exact_bytes_equal": true,
+      "cold_initial_state_exact_bytes_equal": true,
+      "native_SDK_root": "49c4f08cc4cbc4675ce3e6dba160b931ab18d556",
+      "native_PulseLib": "f52713ce3d807c9a0abd8655caff82daba400519",
+      "same_full_configuration_except_run_identity_and_explicit_policy": true,
+      "policy0_native_field_omitted": true,
+      "search_probes": 160,
+      "maximum_sweeps": 1,
+      "training_wall_seconds": 32400.0,
+      "physical_native_cold_and_Ns2_admission_required": true,
+      "training_performed": false,
+      "scientific_verdict": null
+    },
+    "native_train_started": false,
+    "policy4_unchanged": true
+  },
+  "scientific_outcomes_not_yet_observed": true,
+  "whole_plan_complete": false,
+  "scientific_verdict": null
+}

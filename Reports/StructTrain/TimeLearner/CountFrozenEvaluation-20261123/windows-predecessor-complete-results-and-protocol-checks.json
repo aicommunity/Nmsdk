@@ -1,0 +1,2850 @@
+{
+  "observed_utc": "2026-11-23T01:59:04.057005+00:00",
+  "declared_conditions": 14,
+  "closed_conditions": 14,
+  "declared_trials": 28,
+  "model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+  "threshold": 0.0858575482028458,
+  "closed_cases": [
+    {
+      "id": "foil-1-reset",
+      "study": {
+        "protocol": "predecessor",
+        "predecessor": "phasea-row-1",
+        "cadence": "short",
+        "reset_policy": "reset_per_trial"
+      },
+      "condition_fingerprint": "0dec38f3d1d7fa5f556c0140c77e7df9f8cb0b6e6b38cdf719a45a5760d06647",
+      "counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "TN": 1,
+        "targets": 1,
+        "foils": 1,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 1.0,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.0
+      },
+      "events": [
+        {
+          "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-1-reset/position-0",
+          "sample_id": "phasea-row-1",
+          "stimulus_times": [
+            0.01,
+            0.25,
+            0.41,
+            0.49
+          ],
+          "spike_times": [],
+          "spike_count": 0,
+          "events_before_last_input": [],
+          "source_observation": {
+            "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-1-reset\\native\\trial-0.json",
+            "sha256": "22ca1c08f3880d007437b55b3721738f5802d8be0684e29e973f5476283294b3",
+            "size": 445293
+          }
+        },
+        {
+          "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-1-reset/position-1",
+          "sample_id": "phasea-row-0",
+          "stimulus_times": [
+            0.7005,
+            0.7805,
+            0.9405,
+            1.1805
+          ],
+          "spike_times": [
+            1.182
+          ],
+          "spike_count": 1,
+          "events_before_last_input": [],
+          "source_observation": {
+            "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-1-reset\\native\\trial-1.json",
+            "sha256": "d4f592a4cba74e66986c9e988d17ff0bf6a1563b187c8a886bfa5c17799ae731",
+            "size": 1695959
+          }
+        }
+      ],
+      "source_terminal": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-1-reset\\terminal.json",
+        "sha256": "4e907528b4a5e55c4e63d489ee4645f3aef0b69b3839f93b9fa5cda7be796a1c",
+        "size": 2415
+      },
+      "kernel": {
+        "original_named_job_absent": true,
+        "original_main_absent": true,
+        "pid_reused": false
+      }
+    },
+    {
+      "id": "foil-1-preserve",
+      "study": {
+        "protocol": "predecessor",
+        "predecessor": "phasea-row-1",
+        "cadence": "short",
+        "reset_policy": "preserve_neuron_dynamics"
+      },
+      "condition_fingerprint": "0c918461418d11c76a1f933db6fc1abd6b64472cd762dedef1cea7672422f9d3",
+      "counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "TN": 1,
+        "targets": 1,
+        "foils": 1,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 1.0,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.0
+      },
+      "events": [
+        {
+          "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-1-preserve/position-0",
+          "sample_id": "phasea-row-1",
+          "stimulus_times": [
+            0.01,
+            0.25,
+            0.41,
+            0.49
+          ],
+          "spike_times": [],
+          "spike_count": 0,
+          "events_before_last_input": [],
+          "source_observation": {
+            "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-1-preserve\\native\\trial-0.json",
+            "sha256": "140604cd911046793a096fb72e32c3e3509b4f100a689857e1ffb56c63523691",
+            "size": 445299
+          }
+        },
+        {
+          "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-1-preserve/position-1",
+          "sample_id": "phasea-row-0",
+          "stimulus_times": [
+            0.7005,
+            0.7805,
+            0.9405,
+            1.1805
+          ],
+          "spike_times": [
+            1.182
+          ],
+          "spike_count": 1,
+          "events_before_last_input": [],
+          "source_observation": {
+            "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-1-preserve\\native\\trial-1.json",
+            "sha256": "d4feed311c25eae623f0b521574b93e480f2b8135c2109bf7c4c9796f2659347",
+            "size": 1695074
+          }
+        }
+      ],
+      "source_terminal": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-1-preserve\\terminal.json",
+        "sha256": "075d6a1d0fd7a1ddf18663b9fd6f60c494e93fbce631f5be4b3202139df0e07c",
+        "size": 2439
+      },
+      "kernel": {
+        "original_named_job_absent": true,
+        "original_main_absent": true,
+        "pid_reused": false
+      }
+    },
+    {
+      "id": "foil-2-reset",
+      "study": {
+        "protocol": "predecessor",
+        "predecessor": "phasea-row-2",
+        "cadence": "short",
+        "reset_policy": "reset_per_trial"
+      },
+      "condition_fingerprint": "cfd442b748777daf2fff0856f5c4ecbeb9b1ef5239f9cb39de94f7595313bd2e",
+      "counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "TN": 1,
+        "targets": 1,
+        "foils": 1,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 1.0,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.0
+      },
+      "events": [
+        {
+          "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-2-reset/position-0",
+          "sample_id": "phasea-row-2",
+          "stimulus_times": [
+            0.01,
+            0.17,
+            0.25,
+            0.49
+          ],
+          "spike_times": [],
+          "spike_count": 0,
+          "events_before_last_input": [],
+          "source_observation": {
+            "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-2-reset\\native\\trial-0.json",
+            "sha256": "0acccad0b6a5e4bbacdd30eb6f7aa1426becb40d1360ffa190627b1b0a33f3f1",
+            "size": 444880
+          }
+        },
+        {
+          "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-2-reset/position-1",
+          "sample_id": "phasea-row-0",
+          "stimulus_times": [
+            0.7005,
+            0.7805,
+            0.9405,
+            1.1805
+          ],
+          "spike_times": [
+            1.182
+          ],
+          "spike_count": 1,
+          "events_before_last_input": [],
+          "source_observation": {
+            "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-2-reset\\native\\trial-1.json",
+            "sha256": "cca76be83c3aeacd6b56ef1d6279fab597116029764d8bf0912ff5f68a510aac",
+            "size": 1695959
+          }
+        }
+      ],
+      "source_terminal": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-2-reset\\terminal.json",
+        "sha256": "4f2c5f7806bf69b7955da1c3e72d9df69c1281df2bcf62f4ec135be75f3898f7",
+        "size": 2415
+      },
+      "kernel": {
+        "original_named_job_absent": true,
+        "original_main_absent": true,
+        "pid_reused": false
+      }
+    },
+    {
+      "id": "foil-2-preserve",
+      "study": {
+        "protocol": "predecessor",
+        "predecessor": "phasea-row-2",
+        "cadence": "short",
+        "reset_policy": "preserve_neuron_dynamics"
+      },
+      "condition_fingerprint": "100e8d8adc7d58a8a995546e0393d2a5ad2c78037587ed4f0b911a2eea524098",
+      "counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "TN": 1,
+        "targets": 1,
+        "foils": 1,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 1.0,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.0
+      },
+      "events": [
+        {
+          "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-2-preserve/position-0",
+          "sample_id": "phasea-row-2",
+          "stimulus_times": [
+            0.01,
+            0.17,
+            0.25,
+            0.49
+          ],
+          "spike_times": [],
+          "spike_count": 0,
+          "events_before_last_input": [],
+          "source_observation": {
+            "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-2-preserve\\native\\trial-0.json",
+            "sha256": "682f84bffe876658402eb81c1241f66221fa623882d35a8a48765b1aacbe2cbe",
+            "size": 444886
+          }
+        },
+        {
+          "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-2-preserve/position-1",
+          "sample_id": "phasea-row-0",
+          "stimulus_times": [
+            0.7005,
+            0.7805,
+            0.9405,
+            1.1805
+          ],
+          "spike_times": [
+            1.182
+          ],
+          "spike_count": 1,
+          "events_before_last_input": [],
+          "source_observation": {
+            "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-2-preserve\\native\\trial-1.json",
+            "sha256": "56d787d57da3ab2aea8b8a4864ff2e9741a33fca884baa073e78af8fcfb0a96d",
+            "size": 1695282
+          }
+        }
+      ],
+      "source_terminal": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-2-preserve\\terminal.json",
+        "sha256": "28aa38958af2a7022d6dd059425a22856bed538a1740abb043b24c17cb53fb96",
+        "size": 2439
+      },
+      "kernel": {
+        "original_named_job_absent": true,
+        "original_main_absent": true,
+        "pid_reused": false
+      }
+    },
+    {
+      "id": "foil-3-reset",
+      "study": {
+        "protocol": "predecessor",
+        "predecessor": "phasea-row-3",
+        "cadence": "short",
+        "reset_policy": "reset_per_trial"
+      },
+      "condition_fingerprint": "15302ecb87b9a547ec4934df9d97adde0f7b554df5db2408afe4e9bfb810396e",
+      "counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "TN": 1,
+        "targets": 1,
+        "foils": 1,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 1.0,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.0
+      },
+      "events": [
+        {
+          "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-3-reset/position-0",
+          "sample_id": "phasea-row-3",
+          "stimulus_times": [
+            0.01,
+            0.17,
+            0.33,
+            0.49
+          ],
+          "spike_times": [],
+          "spike_count": 0,
+          "events_before_last_input": [],
+          "source_observation": {
+            "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-3-reset\\native\\trial-0.json",
+            "sha256": "1c604db4ba019f3a3752a471149a996357fb5757375132819915dc1fe7381081",
+            "size": 444922
+          }
+        },
+        {
+          "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-3-reset/position-1",
+          "sample_id": "phasea-row-0",
+          "stimulus_times": [
+            0.7005,
+            0.7805,
+            0.9405,
+            1.1805
+          ],
+          "spike_times": [
+            1.182
+          ],
+          "spike_count": 1,
+          "events_before_last_input": [],
+          "source_observation": {
+            "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-3-reset\\native\\trial-1.json",
+            "sha256": "83e1807408affe8372ac286528911fe6198f4b2641145087a6b299301c9cac8a",
+            "size": 1695959
+          }
+        }
+      ],
+      "source_terminal": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-3-reset\\terminal.json",
+        "sha256": "cdae5570b8e63a44f13ee2d85c5d8b43efe6af1a0aeb558b200d697b91367f8c",
+        "size": 2415
+      },
+      "kernel": {
+        "original_named_job_absent": true,
+        "original_main_absent": true,
+        "pid_reused": false
+      }
+    },
+    {
+      "id": "foil-3-preserve",
+      "study": {
+        "protocol": "predecessor",
+        "predecessor": "phasea-row-3",
+        "cadence": "short",
+        "reset_policy": "preserve_neuron_dynamics"
+      },
+      "condition_fingerprint": "cc956c0f4bda8cc461775a9566c4efc578026e35813a2048e33b0e730468e756",
+      "counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "TN": 1,
+        "targets": 1,
+        "foils": 1,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 1.0,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.0
+      },
+      "events": [
+        {
+          "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-3-preserve/position-0",
+          "sample_id": "phasea-row-3",
+          "stimulus_times": [
+            0.01,
+            0.17,
+            0.33,
+            0.49
+          ],
+          "spike_times": [],
+          "spike_count": 0,
+          "events_before_last_input": [],
+          "source_observation": {
+            "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-3-preserve\\native\\trial-0.json",
+            "sha256": "71265a41d4b74b119ec46f5d6facbc33a0df082d1c66a3eef56a6603183ccaa9",
+            "size": 444928
+          }
+        },
+        {
+          "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-3-preserve/position-1",
+          "sample_id": "phasea-row-0",
+          "stimulus_times": [
+            0.7005,
+            0.7805,
+            0.9405,
+            1.1805
+          ],
+          "spike_times": [
+            1.182
+          ],
+          "spike_count": 1,
+          "events_before_last_input": [],
+          "source_observation": {
+            "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-3-preserve\\native\\trial-1.json",
+            "sha256": "3a117e1addce09fd0eafeb8f4eaf9dce45c85075a3945cfa3bc1aa593fa927ad",
+            "size": 1695224
+          }
+        }
+      ],
+      "source_terminal": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-3-preserve\\terminal.json",
+        "sha256": "5ac8131ba3ed0340cc67abe4c67b0a8615f274786b6563fa4fe723e374f9547a",
+        "size": 2439
+      },
+      "kernel": {
+        "original_named_job_absent": true,
+        "original_main_absent": true,
+        "pid_reused": false
+      }
+    },
+    {
+      "id": "foil-4-reset",
+      "study": {
+        "protocol": "predecessor",
+        "predecessor": "phasea-row-4",
+        "cadence": "short",
+        "reset_policy": "reset_per_trial"
+      },
+      "condition_fingerprint": "fff2605f3765b83671d27c995a830a157e0b03347784f52e21daaabb82279928",
+      "counts": {
+        "TP": 1,
+        "FP": 1,
+        "FN": 0,
+        "TN": 0,
+        "targets": 1,
+        "foils": 1,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.5,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 1.0
+      },
+      "events": [
+        {
+          "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-4-reset/position-0",
+          "sample_id": "phasea-row-4",
+          "stimulus_times": [
+            0.01,
+            0.03,
+            0.25,
+            0.49
+          ],
+          "spike_times": [
+            0.491
+          ],
+          "spike_count": 1,
+          "events_before_last_input": [],
+          "source_observation": {
+            "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-4-reset\\native\\trial-0.json",
+            "sha256": "99a8511d3a718a112f05e18f32fc82ee26d10c0e4fd0f6e0545abbaedd376fc1",
+            "size": 453636
+          }
+        },
+        {
+          "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-4-reset/position-1",
+          "sample_id": "phasea-row-0",
+          "stimulus_times": [
+            0.7005,
+            0.7805,
+            0.9405,
+            1.1805
+          ],
+          "spike_times": [
+            1.182
+          ],
+          "spike_count": 1,
+          "events_before_last_input": [],
+          "source_observation": {
+            "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-4-reset\\native\\trial-1.json",
+            "sha256": "91020c22b97a8ddbe18c62719a956608b3be8e0f099e14a961e8c2a2fc74e3c9",
+            "size": 1695959
+          }
+        }
+      ],
+      "source_terminal": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-4-reset\\terminal.json",
+        "sha256": "ab9a6f818ee4597a9f7182c5d405cdc0273ba57fbc8d46b624f362af2f59d9dc",
+        "size": 2440
+      },
+      "kernel": {
+        "original_named_job_absent": true,
+        "original_main_absent": true,
+        "pid_reused": false
+      }
+    },
+    {
+      "id": "foil-4-preserve",
+      "study": {
+        "protocol": "predecessor",
+        "predecessor": "phasea-row-4",
+        "cadence": "short",
+        "reset_policy": "preserve_neuron_dynamics"
+      },
+      "condition_fingerprint": "ba4f6b073bb98565df90cb0603af6b6f7a969696f9604bdbf0cadc94f3937e48",
+      "counts": {
+        "TP": 1,
+        "FP": 1,
+        "FN": 0,
+        "TN": 0,
+        "targets": 1,
+        "foils": 1,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.5,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 1.0
+      },
+      "events": [
+        {
+          "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-4-preserve/position-0",
+          "sample_id": "phasea-row-4",
+          "stimulus_times": [
+            0.01,
+            0.03,
+            0.25,
+            0.49
+          ],
+          "spike_times": [
+            0.491
+          ],
+          "spike_count": 1,
+          "events_before_last_input": [],
+          "source_observation": {
+            "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-4-preserve\\native\\trial-0.json",
+            "sha256": "064779d4e7fcc9e38a78b3ea1cc51f14afd9fc983dea93de902294dcc711e845",
+            "size": 453642
+          }
+        },
+        {
+          "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-4-preserve/position-1",
+          "sample_id": "phasea-row-0",
+          "stimulus_times": [
+            0.7005,
+            0.7805,
+            0.9405,
+            1.1805
+          ],
+          "spike_times": [
+            1.182
+          ],
+          "spike_count": 1,
+          "events_before_last_input": [],
+          "source_observation": {
+            "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-4-preserve\\native\\trial-1.json",
+            "sha256": "be43c401cd42246c08834d161a6b1311a165979f052970e6c6baee42eaea7f26",
+            "size": 1731221
+          }
+        }
+      ],
+      "source_terminal": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-4-preserve\\terminal.json",
+        "sha256": "c2ce90328bd7238c5327b784464473e01ec9a9a5c776125d548d4d01c0fee18b",
+        "size": 2464
+      },
+      "kernel": {
+        "original_named_job_absent": true,
+        "original_main_absent": true,
+        "pid_reused": false
+      }
+    },
+    {
+      "id": "foil-5-reset",
+      "study": {
+        "protocol": "predecessor",
+        "predecessor": "phasea-row-5",
+        "cadence": "short",
+        "reset_policy": "reset_per_trial"
+      },
+      "condition_fingerprint": "ab784eb16a0a55e04aa02fa15a4d864c940d1851ed5d8cea2095496f7166ed31",
+      "counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "TN": 1,
+        "targets": 1,
+        "foils": 1,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 1.0,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.0
+      },
+      "events": [
+        {
+          "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-5-reset/position-0",
+          "sample_id": "phasea-row-5",
+          "stimulus_times": [
+            0.01,
+            0.25,
+            0.47,
+            0.49
+          ],
+          "spike_times": [],
+          "spike_count": 0,
+          "events_before_last_input": [],
+          "source_observation": {
+            "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-5-reset\\native\\trial-0.json",
+            "sha256": "ba7cd975de13fdaa2001526270d1630678ea0dc1532887a13777ebb5a923bca8",
+            "size": 445383
+          }
+        },
+        {
+          "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-5-reset/position-1",
+          "sample_id": "phasea-row-0",
+          "stimulus_times": [
+            0.7005,
+            0.7805,
+            0.9405,
+            1.1805
+          ],
+          "spike_times": [
+            1.182
+          ],
+          "spike_count": 1,
+          "events_before_last_input": [],
+          "source_observation": {
+            "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-5-reset\\native\\trial-1.json",
+            "sha256": "8eae15bd73ba8e977019a60bce70969276b87a6806585172f7fb05724e40a79d",
+            "size": 1695959
+          }
+        }
+      ],
+      "source_terminal": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-5-reset\\terminal.json",
+        "sha256": "ff57976f4b1017f2fb8c1c60fe2f8c5592afd375b2f87fecbd645a2cf8f33cca",
+        "size": 2415
+      },
+      "kernel": {
+        "original_named_job_absent": true,
+        "original_main_absent": true,
+        "pid_reused": false
+      }
+    },
+    {
+      "id": "foil-5-preserve",
+      "study": {
+        "protocol": "predecessor",
+        "predecessor": "phasea-row-5",
+        "cadence": "short",
+        "reset_policy": "preserve_neuron_dynamics"
+      },
+      "condition_fingerprint": "ddd846f713e662cc7b4ab0845d7393e5f8623066c9203e8a2eca343aa56025d6",
+      "counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "TN": 1,
+        "targets": 1,
+        "foils": 1,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 1.0,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.0
+      },
+      "events": [
+        {
+          "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-5-preserve/position-0",
+          "sample_id": "phasea-row-5",
+          "stimulus_times": [
+            0.01,
+            0.25,
+            0.47,
+            0.49
+          ],
+          "spike_times": [],
+          "spike_count": 0,
+          "events_before_last_input": [],
+          "source_observation": {
+            "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-5-preserve\\native\\trial-0.json",
+            "sha256": "e236f730def4fe68328e9e41470f470df5c22e5da29a134911bd942ef93ada50",
+            "size": 445389
+          }
+        },
+        {
+          "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-5-preserve/position-1",
+          "sample_id": "phasea-row-0",
+          "stimulus_times": [
+            0.7005,
+            0.7805,
+            0.9405,
+            1.1805
+          ],
+          "spike_times": [
+            0.9415,
+            1.182
+          ],
+          "spike_count": 2,
+          "events_before_last_input": [
+            0.9415
+          ],
+          "source_observation": {
+            "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-5-preserve\\native\\trial-1.json",
+            "sha256": "2c87c4c849637bc7a9a78a21e0d1bdfaecb3112bb60a48a76ad46be650df569e",
+            "size": 1742698
+          }
+        }
+      ],
+      "source_terminal": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-5-preserve\\terminal.json",
+        "sha256": "b8fdb3d910d93cba91ad01cf4719a8a18b7529377250a2c81a227bd2e6415f57",
+        "size": 2483
+      },
+      "kernel": {
+        "original_named_job_absent": true,
+        "original_main_absent": true,
+        "pid_reused": false
+      }
+    },
+    {
+      "id": "foil-6-reset",
+      "study": {
+        "protocol": "predecessor",
+        "predecessor": "phasea-row-6",
+        "cadence": "short",
+        "reset_policy": "reset_per_trial"
+      },
+      "condition_fingerprint": "e74e46ec1da9d378a80068bb898abbbbf8518481bd3a5df5ad0f7325142f94be",
+      "counts": {
+        "TP": 1,
+        "FP": 1,
+        "FN": 0,
+        "TN": 0,
+        "targets": 1,
+        "foils": 1,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.5,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 1.0
+      },
+      "events": [
+        {
+          "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-6-reset/position-0",
+          "sample_id": "phasea-row-6",
+          "stimulus_times": [
+            0.01,
+            0.05,
+            0.09,
+            0.49
+          ],
+          "spike_times": [
+            0.4915
+          ],
+          "spike_count": 1,
+          "events_before_last_input": [],
+          "source_observation": {
+            "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-6-reset\\native\\trial-0.json",
+            "sha256": "90b3adbe0cc556bced815e1230e25bc1a72bd453832f3aa503698d876d4019ca",
+            "size": 453777
+          }
+        },
+        {
+          "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-6-reset/position-1",
+          "sample_id": "phasea-row-0",
+          "stimulus_times": [
+            0.7005,
+            0.7805,
+            0.9405,
+            1.1805
+          ],
+          "spike_times": [
+            1.182
+          ],
+          "spike_count": 1,
+          "events_before_last_input": [],
+          "source_observation": {
+            "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-6-reset\\native\\trial-1.json",
+            "sha256": "3c15d10cfb35047185d39c65e5b51a6b65f05c27478de0ba40c51d2ab8795684",
+            "size": 1695959
+          }
+        }
+      ],
+      "source_terminal": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-6-reset\\terminal.json",
+        "sha256": "a6a6a55f45bf7a3e4068c18847e7d18eac8bbe84db74379e3a4b107bad4828c6",
+        "size": 2441
+      },
+      "kernel": {
+        "original_named_job_absent": true,
+        "original_main_absent": true,
+        "pid_reused": false
+      }
+    },
+    {
+      "id": "foil-6-preserve",
+      "study": {
+        "protocol": "predecessor",
+        "predecessor": "phasea-row-6",
+        "cadence": "short",
+        "reset_policy": "preserve_neuron_dynamics"
+      },
+      "condition_fingerprint": "8f97b4fd31408d1515f7f50ffbd9fb771a7e6bb7132ce4bf9bee0957d9c3ab05",
+      "counts": {
+        "TP": 1,
+        "FP": 1,
+        "FN": 0,
+        "TN": 0,
+        "targets": 1,
+        "foils": 1,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.5,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 1.0
+      },
+      "events": [
+        {
+          "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-6-preserve/position-0",
+          "sample_id": "phasea-row-6",
+          "stimulus_times": [
+            0.01,
+            0.05,
+            0.09,
+            0.49
+          ],
+          "spike_times": [
+            0.4915
+          ],
+          "spike_count": 1,
+          "events_before_last_input": [],
+          "source_observation": {
+            "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-6-preserve\\native\\trial-0.json",
+            "sha256": "cdac1b8ef238336e9978a286efe2a27e051dee457dd5d231365764e3aeb181a1",
+            "size": 453783
+          }
+        },
+        {
+          "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-6-preserve/position-1",
+          "sample_id": "phasea-row-0",
+          "stimulus_times": [
+            0.7005,
+            0.7805,
+            0.9405,
+            1.1805
+          ],
+          "spike_times": [
+            1.182
+          ],
+          "spike_count": 1,
+          "events_before_last_input": [],
+          "source_observation": {
+            "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-6-preserve\\native\\trial-1.json",
+            "sha256": "8a0ad8b2d933d20e2cf99ef42aa29eafc8c959831d6be57740b376990a9ebc09",
+            "size": 1732979
+          }
+        }
+      ],
+      "source_terminal": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-6-preserve\\terminal.json",
+        "sha256": "85d0a35bbf3c37d0115c22695f6a32905b923d928bf106995df3f6c4f956364a",
+        "size": 2465
+      },
+      "kernel": {
+        "original_named_job_absent": true,
+        "original_main_absent": true,
+        "pid_reused": false
+      }
+    },
+    {
+      "id": "foil-7-reset",
+      "study": {
+        "protocol": "predecessor",
+        "predecessor": "phasea-row-7",
+        "cadence": "short",
+        "reset_policy": "reset_per_trial"
+      },
+      "condition_fingerprint": "c71e8bf6e6802c3f1b442ca32af6ad1d9fee15937b1652cdd29a865167b66d66",
+      "counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "TN": 1,
+        "targets": 1,
+        "foils": 1,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 1.0,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.0
+      },
+      "events": [
+        {
+          "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-7-reset/position-0",
+          "sample_id": "phasea-row-7",
+          "stimulus_times": [
+            0.01,
+            0.41,
+            0.45,
+            0.49
+          ],
+          "spike_times": [],
+          "spike_count": 0,
+          "events_before_last_input": [],
+          "source_observation": {
+            "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-7-reset\\native\\trial-0.json",
+            "sha256": "98dc63ee759b884a96057a967c7977b065a24e146ed1c0850ee7fd69a175a603",
+            "size": 445514
+          }
+        },
+        {
+          "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-7-reset/position-1",
+          "sample_id": "phasea-row-0",
+          "stimulus_times": [
+            0.7005,
+            0.7805,
+            0.9405,
+            1.1805
+          ],
+          "spike_times": [
+            1.182
+          ],
+          "spike_count": 1,
+          "events_before_last_input": [],
+          "source_observation": {
+            "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-7-reset\\native\\trial-1.json",
+            "sha256": "b020ccc8f189f419a1e63b56b8789984493ba2d9cfb440ac7f08318e3077e609",
+            "size": 1695959
+          }
+        }
+      ],
+      "source_terminal": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-7-reset\\terminal.json",
+        "sha256": "ef8d20bb5bc43d0da3605c3282aa3fd399317f56216ee661394ac86faccb25c6",
+        "size": 2415
+      },
+      "kernel": {
+        "original_named_job_absent": true,
+        "original_main_absent": true,
+        "pid_reused": false
+      }
+    },
+    {
+      "id": "foil-7-preserve",
+      "study": {
+        "protocol": "predecessor",
+        "predecessor": "phasea-row-7",
+        "cadence": "short",
+        "reset_policy": "preserve_neuron_dynamics"
+      },
+      "condition_fingerprint": "22c885c7a3c3d9e605eac7247a0451398cf79ba3acfae74e5e4e4ef22b60e7c9",
+      "counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "TN": 1,
+        "targets": 1,
+        "foils": 1,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 1.0,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.0
+      },
+      "events": [
+        {
+          "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-7-preserve/position-0",
+          "sample_id": "phasea-row-7",
+          "stimulus_times": [
+            0.01,
+            0.41,
+            0.45,
+            0.49
+          ],
+          "spike_times": [],
+          "spike_count": 0,
+          "events_before_last_input": [],
+          "source_observation": {
+            "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-7-preserve\\native\\trial-0.json",
+            "sha256": "a7f80930a9c5a81b8f21365415fadc46281ef67145f26065099b47114f1d8f48",
+            "size": 445520
+          }
+        },
+        {
+          "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-7-preserve/position-1",
+          "sample_id": "phasea-row-0",
+          "stimulus_times": [
+            0.7005,
+            0.7805,
+            0.9405,
+            1.1805
+          ],
+          "spike_times": [
+            0.941,
+            1.182
+          ],
+          "spike_count": 2,
+          "events_before_last_input": [
+            0.941
+          ],
+          "source_observation": {
+            "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-7-preserve\\native\\trial-1.json",
+            "sha256": "a5d10803af6fbe02c961e2d1fb3164350ceef576f5df9c2c0b3ba0f29d2326f8",
+            "size": 1740547
+          }
+        }
+      ],
+      "source_terminal": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-7-preserve\\terminal.json",
+        "sha256": "2f8aaeed6dd95fde35a8951b4cf8540d67fa310f341dca074421c36227390323",
+        "size": 2481
+      },
+      "kernel": {
+        "original_named_job_absent": true,
+        "original_main_absent": true,
+        "pid_reused": false
+      }
+    }
+  ],
+  "full_matrix_complete": true,
+  "matrix_terminal": {
+    "execution": "completed",
+    "validity": "valid",
+    "reason": "complete_predecessor_matrix",
+    "data_validity": "valid",
+    "protocol_consistency_verified": true,
+    "results": [
+      {
+        "id": "foil-1-reset",
+        "study": {
+          "protocol": "predecessor",
+          "predecessor": "phasea-row-1",
+          "cadence": "short",
+          "reset_policy": "reset_per_trial"
+        },
+        "terminal": {
+          "kind": "timelearner_actual_windows_frozen_physical_study",
+          "schema_version": 1,
+          "execution": "completed",
+          "validity": "valid",
+          "study": {
+            "protocol": "predecessor",
+            "predecessor": "phasea-row-1",
+            "cadence": "short",
+            "reset_policy": "reset_per_trial"
+          },
+          "model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+          "threshold": 0.0858575482028458,
+          "trials": 2,
+          "counts": {
+            "TP": 1,
+            "FP": 0,
+            "FN": 0,
+            "TN": 1,
+            "targets": 1,
+            "foils": 1,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 1.0,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.0
+          },
+          "condition_fingerprint": "0dec38f3d1d7fa5f556c0140c77e7df9f8cb0b6e6b38cdf719a45a5760d06647",
+          "repeated_control_comparisons": [],
+          "source_protocol_repeated_control_checked": false,
+          "cadence_evidence": {
+            "final_quiet_tail_seconds": 2.0004999999999997,
+            "complete_contiguous_observations_verified": true,
+            "paired_same_cadence_first_trial_comparison_pending": true,
+            "carryover_events_not_causally_assigned_to_a_single_pattern": true,
+            "actual_timing_and_events": [
+              {
+                "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-1-reset/position-0",
+                "sample_id": "phasea-row-1",
+                "reset_policy": "reset_per_trial",
+                "stimulus_times": [
+                  0.01,
+                  0.25,
+                  0.41,
+                  0.49
+                ],
+                "spike_times": [],
+                "events_before_current_first_input": [],
+                "events_before_current_last_input": [],
+                "first_input_interval_from_previous": null
+              },
+              {
+                "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-1-reset/position-1",
+                "sample_id": "phasea-row-0",
+                "reset_policy": "reset_per_trial",
+                "stimulus_times": [
+                  0.7005,
+                  0.7805,
+                  0.9405,
+                  1.1805
+                ],
+                "spike_times": [
+                  1.182
+                ],
+                "events_before_current_first_input": [],
+                "events_before_current_last_input": [],
+                "first_input_interval_from_previous": 0.6905
+              }
+            ]
+          },
+          "frozen_model_verified": true,
+          "complete_native_observations": true,
+          "threshold_selected": false,
+          "training_performed": false,
+          "source_training_completed": false,
+          "new_foils_excluded_from_calibration": false,
+          "independently_heldout_positive_class": false,
+          "scientific_verdict": null
+        },
+        "source_terminal": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-1-reset\\terminal.json",
+          "sha256": "4e907528b4a5e55c4e63d489ee4645f3aef0b69b3839f93b9fa5cda7be796a1c",
+          "size": 2415
+        }
+      },
+      {
+        "id": "foil-1-preserve",
+        "study": {
+          "protocol": "predecessor",
+          "predecessor": "phasea-row-1",
+          "cadence": "short",
+          "reset_policy": "preserve_neuron_dynamics"
+        },
+        "terminal": {
+          "kind": "timelearner_actual_windows_frozen_physical_study",
+          "schema_version": 1,
+          "execution": "completed",
+          "validity": "valid",
+          "study": {
+            "protocol": "predecessor",
+            "predecessor": "phasea-row-1",
+            "cadence": "short",
+            "reset_policy": "preserve_neuron_dynamics"
+          },
+          "model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+          "threshold": 0.0858575482028458,
+          "trials": 2,
+          "counts": {
+            "TP": 1,
+            "FP": 0,
+            "FN": 0,
+            "TN": 1,
+            "targets": 1,
+            "foils": 1,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 1.0,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.0
+          },
+          "condition_fingerprint": "0c918461418d11c76a1f933db6fc1abd6b64472cd762dedef1cea7672422f9d3",
+          "repeated_control_comparisons": [],
+          "source_protocol_repeated_control_checked": false,
+          "cadence_evidence": {
+            "final_quiet_tail_seconds": 2.0004999999999997,
+            "complete_contiguous_observations_verified": true,
+            "paired_same_cadence_first_trial_comparison_pending": true,
+            "carryover_events_not_causally_assigned_to_a_single_pattern": true,
+            "actual_timing_and_events": [
+              {
+                "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-1-preserve/position-0",
+                "sample_id": "phasea-row-1",
+                "reset_policy": "reset_per_trial",
+                "stimulus_times": [
+                  0.01,
+                  0.25,
+                  0.41,
+                  0.49
+                ],
+                "spike_times": [],
+                "events_before_current_first_input": [],
+                "events_before_current_last_input": [],
+                "first_input_interval_from_previous": null
+              },
+              {
+                "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-1-preserve/position-1",
+                "sample_id": "phasea-row-0",
+                "reset_policy": "preserve_neuron_dynamics",
+                "stimulus_times": [
+                  0.7005,
+                  0.7805,
+                  0.9405,
+                  1.1805
+                ],
+                "spike_times": [
+                  1.182
+                ],
+                "events_before_current_first_input": [],
+                "events_before_current_last_input": [],
+                "first_input_interval_from_previous": 0.6905
+              }
+            ]
+          },
+          "frozen_model_verified": true,
+          "complete_native_observations": true,
+          "threshold_selected": false,
+          "training_performed": false,
+          "source_training_completed": false,
+          "new_foils_excluded_from_calibration": false,
+          "independently_heldout_positive_class": false,
+          "scientific_verdict": null
+        },
+        "source_terminal": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-1-preserve\\terminal.json",
+          "sha256": "075d6a1d0fd7a1ddf18663b9fd6f60c494e93fbce631f5be4b3202139df0e07c",
+          "size": 2439
+        }
+      },
+      {
+        "id": "foil-2-reset",
+        "study": {
+          "protocol": "predecessor",
+          "predecessor": "phasea-row-2",
+          "cadence": "short",
+          "reset_policy": "reset_per_trial"
+        },
+        "terminal": {
+          "kind": "timelearner_actual_windows_frozen_physical_study",
+          "schema_version": 1,
+          "execution": "completed",
+          "validity": "valid",
+          "study": {
+            "protocol": "predecessor",
+            "predecessor": "phasea-row-2",
+            "cadence": "short",
+            "reset_policy": "reset_per_trial"
+          },
+          "model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+          "threshold": 0.0858575482028458,
+          "trials": 2,
+          "counts": {
+            "TP": 1,
+            "FP": 0,
+            "FN": 0,
+            "TN": 1,
+            "targets": 1,
+            "foils": 1,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 1.0,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.0
+          },
+          "condition_fingerprint": "cfd442b748777daf2fff0856f5c4ecbeb9b1ef5239f9cb39de94f7595313bd2e",
+          "repeated_control_comparisons": [],
+          "source_protocol_repeated_control_checked": false,
+          "cadence_evidence": {
+            "final_quiet_tail_seconds": 2.0004999999999997,
+            "complete_contiguous_observations_verified": true,
+            "paired_same_cadence_first_trial_comparison_pending": true,
+            "carryover_events_not_causally_assigned_to_a_single_pattern": true,
+            "actual_timing_and_events": [
+              {
+                "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-2-reset/position-0",
+                "sample_id": "phasea-row-2",
+                "reset_policy": "reset_per_trial",
+                "stimulus_times": [
+                  0.01,
+                  0.17,
+                  0.25,
+                  0.49
+                ],
+                "spike_times": [],
+                "events_before_current_first_input": [],
+                "events_before_current_last_input": [],
+                "first_input_interval_from_previous": null
+              },
+              {
+                "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-2-reset/position-1",
+                "sample_id": "phasea-row-0",
+                "reset_policy": "reset_per_trial",
+                "stimulus_times": [
+                  0.7005,
+                  0.7805,
+                  0.9405,
+                  1.1805
+                ],
+                "spike_times": [
+                  1.182
+                ],
+                "events_before_current_first_input": [],
+                "events_before_current_last_input": [],
+                "first_input_interval_from_previous": 0.6905
+              }
+            ]
+          },
+          "frozen_model_verified": true,
+          "complete_native_observations": true,
+          "threshold_selected": false,
+          "training_performed": false,
+          "source_training_completed": false,
+          "new_foils_excluded_from_calibration": false,
+          "independently_heldout_positive_class": false,
+          "scientific_verdict": null
+        },
+        "source_terminal": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-2-reset\\terminal.json",
+          "sha256": "4f2c5f7806bf69b7955da1c3e72d9df69c1281df2bcf62f4ec135be75f3898f7",
+          "size": 2415
+        }
+      },
+      {
+        "id": "foil-2-preserve",
+        "study": {
+          "protocol": "predecessor",
+          "predecessor": "phasea-row-2",
+          "cadence": "short",
+          "reset_policy": "preserve_neuron_dynamics"
+        },
+        "terminal": {
+          "kind": "timelearner_actual_windows_frozen_physical_study",
+          "schema_version": 1,
+          "execution": "completed",
+          "validity": "valid",
+          "study": {
+            "protocol": "predecessor",
+            "predecessor": "phasea-row-2",
+            "cadence": "short",
+            "reset_policy": "preserve_neuron_dynamics"
+          },
+          "model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+          "threshold": 0.0858575482028458,
+          "trials": 2,
+          "counts": {
+            "TP": 1,
+            "FP": 0,
+            "FN": 0,
+            "TN": 1,
+            "targets": 1,
+            "foils": 1,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 1.0,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.0
+          },
+          "condition_fingerprint": "100e8d8adc7d58a8a995546e0393d2a5ad2c78037587ed4f0b911a2eea524098",
+          "repeated_control_comparisons": [],
+          "source_protocol_repeated_control_checked": false,
+          "cadence_evidence": {
+            "final_quiet_tail_seconds": 2.0004999999999997,
+            "complete_contiguous_observations_verified": true,
+            "paired_same_cadence_first_trial_comparison_pending": true,
+            "carryover_events_not_causally_assigned_to_a_single_pattern": true,
+            "actual_timing_and_events": [
+              {
+                "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-2-preserve/position-0",
+                "sample_id": "phasea-row-2",
+                "reset_policy": "reset_per_trial",
+                "stimulus_times": [
+                  0.01,
+                  0.17,
+                  0.25,
+                  0.49
+                ],
+                "spike_times": [],
+                "events_before_current_first_input": [],
+                "events_before_current_last_input": [],
+                "first_input_interval_from_previous": null
+              },
+              {
+                "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-2-preserve/position-1",
+                "sample_id": "phasea-row-0",
+                "reset_policy": "preserve_neuron_dynamics",
+                "stimulus_times": [
+                  0.7005,
+                  0.7805,
+                  0.9405,
+                  1.1805
+                ],
+                "spike_times": [
+                  1.182
+                ],
+                "events_before_current_first_input": [],
+                "events_before_current_last_input": [],
+                "first_input_interval_from_previous": 0.6905
+              }
+            ]
+          },
+          "frozen_model_verified": true,
+          "complete_native_observations": true,
+          "threshold_selected": false,
+          "training_performed": false,
+          "source_training_completed": false,
+          "new_foils_excluded_from_calibration": false,
+          "independently_heldout_positive_class": false,
+          "scientific_verdict": null
+        },
+        "source_terminal": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-2-preserve\\terminal.json",
+          "sha256": "28aa38958af2a7022d6dd059425a22856bed538a1740abb043b24c17cb53fb96",
+          "size": 2439
+        }
+      },
+      {
+        "id": "foil-3-reset",
+        "study": {
+          "protocol": "predecessor",
+          "predecessor": "phasea-row-3",
+          "cadence": "short",
+          "reset_policy": "reset_per_trial"
+        },
+        "terminal": {
+          "kind": "timelearner_actual_windows_frozen_physical_study",
+          "schema_version": 1,
+          "execution": "completed",
+          "validity": "valid",
+          "study": {
+            "protocol": "predecessor",
+            "predecessor": "phasea-row-3",
+            "cadence": "short",
+            "reset_policy": "reset_per_trial"
+          },
+          "model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+          "threshold": 0.0858575482028458,
+          "trials": 2,
+          "counts": {
+            "TP": 1,
+            "FP": 0,
+            "FN": 0,
+            "TN": 1,
+            "targets": 1,
+            "foils": 1,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 1.0,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.0
+          },
+          "condition_fingerprint": "15302ecb87b9a547ec4934df9d97adde0f7b554df5db2408afe4e9bfb810396e",
+          "repeated_control_comparisons": [],
+          "source_protocol_repeated_control_checked": false,
+          "cadence_evidence": {
+            "final_quiet_tail_seconds": 2.0004999999999997,
+            "complete_contiguous_observations_verified": true,
+            "paired_same_cadence_first_trial_comparison_pending": true,
+            "carryover_events_not_causally_assigned_to_a_single_pattern": true,
+            "actual_timing_and_events": [
+              {
+                "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-3-reset/position-0",
+                "sample_id": "phasea-row-3",
+                "reset_policy": "reset_per_trial",
+                "stimulus_times": [
+                  0.01,
+                  0.17,
+                  0.33,
+                  0.49
+                ],
+                "spike_times": [],
+                "events_before_current_first_input": [],
+                "events_before_current_last_input": [],
+                "first_input_interval_from_previous": null
+              },
+              {
+                "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-3-reset/position-1",
+                "sample_id": "phasea-row-0",
+                "reset_policy": "reset_per_trial",
+                "stimulus_times": [
+                  0.7005,
+                  0.7805,
+                  0.9405,
+                  1.1805
+                ],
+                "spike_times": [
+                  1.182
+                ],
+                "events_before_current_first_input": [],
+                "events_before_current_last_input": [],
+                "first_input_interval_from_previous": 0.6905
+              }
+            ]
+          },
+          "frozen_model_verified": true,
+          "complete_native_observations": true,
+          "threshold_selected": false,
+          "training_performed": false,
+          "source_training_completed": false,
+          "new_foils_excluded_from_calibration": false,
+          "independently_heldout_positive_class": false,
+          "scientific_verdict": null
+        },
+        "source_terminal": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-3-reset\\terminal.json",
+          "sha256": "cdae5570b8e63a44f13ee2d85c5d8b43efe6af1a0aeb558b200d697b91367f8c",
+          "size": 2415
+        }
+      },
+      {
+        "id": "foil-3-preserve",
+        "study": {
+          "protocol": "predecessor",
+          "predecessor": "phasea-row-3",
+          "cadence": "short",
+          "reset_policy": "preserve_neuron_dynamics"
+        },
+        "terminal": {
+          "kind": "timelearner_actual_windows_frozen_physical_study",
+          "schema_version": 1,
+          "execution": "completed",
+          "validity": "valid",
+          "study": {
+            "protocol": "predecessor",
+            "predecessor": "phasea-row-3",
+            "cadence": "short",
+            "reset_policy": "preserve_neuron_dynamics"
+          },
+          "model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+          "threshold": 0.0858575482028458,
+          "trials": 2,
+          "counts": {
+            "TP": 1,
+            "FP": 0,
+            "FN": 0,
+            "TN": 1,
+            "targets": 1,
+            "foils": 1,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 1.0,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.0
+          },
+          "condition_fingerprint": "cc956c0f4bda8cc461775a9566c4efc578026e35813a2048e33b0e730468e756",
+          "repeated_control_comparisons": [],
+          "source_protocol_repeated_control_checked": false,
+          "cadence_evidence": {
+            "final_quiet_tail_seconds": 2.0004999999999997,
+            "complete_contiguous_observations_verified": true,
+            "paired_same_cadence_first_trial_comparison_pending": true,
+            "carryover_events_not_causally_assigned_to_a_single_pattern": true,
+            "actual_timing_and_events": [
+              {
+                "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-3-preserve/position-0",
+                "sample_id": "phasea-row-3",
+                "reset_policy": "reset_per_trial",
+                "stimulus_times": [
+                  0.01,
+                  0.17,
+                  0.33,
+                  0.49
+                ],
+                "spike_times": [],
+                "events_before_current_first_input": [],
+                "events_before_current_last_input": [],
+                "first_input_interval_from_previous": null
+              },
+              {
+                "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-3-preserve/position-1",
+                "sample_id": "phasea-row-0",
+                "reset_policy": "preserve_neuron_dynamics",
+                "stimulus_times": [
+                  0.7005,
+                  0.7805,
+                  0.9405,
+                  1.1805
+                ],
+                "spike_times": [
+                  1.182
+                ],
+                "events_before_current_first_input": [],
+                "events_before_current_last_input": [],
+                "first_input_interval_from_previous": 0.6905
+              }
+            ]
+          },
+          "frozen_model_verified": true,
+          "complete_native_observations": true,
+          "threshold_selected": false,
+          "training_performed": false,
+          "source_training_completed": false,
+          "new_foils_excluded_from_calibration": false,
+          "independently_heldout_positive_class": false,
+          "scientific_verdict": null
+        },
+        "source_terminal": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-3-preserve\\terminal.json",
+          "sha256": "5ac8131ba3ed0340cc67abe4c67b0a8615f274786b6563fa4fe723e374f9547a",
+          "size": 2439
+        }
+      },
+      {
+        "id": "foil-4-reset",
+        "study": {
+          "protocol": "predecessor",
+          "predecessor": "phasea-row-4",
+          "cadence": "short",
+          "reset_policy": "reset_per_trial"
+        },
+        "terminal": {
+          "kind": "timelearner_actual_windows_frozen_physical_study",
+          "schema_version": 1,
+          "execution": "completed",
+          "validity": "valid",
+          "study": {
+            "protocol": "predecessor",
+            "predecessor": "phasea-row-4",
+            "cadence": "short",
+            "reset_policy": "reset_per_trial"
+          },
+          "model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+          "threshold": 0.0858575482028458,
+          "trials": 2,
+          "counts": {
+            "TP": 1,
+            "FP": 1,
+            "FN": 0,
+            "TN": 0,
+            "targets": 1,
+            "foils": 1,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 0.5,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 1.0
+          },
+          "condition_fingerprint": "fff2605f3765b83671d27c995a830a157e0b03347784f52e21daaabb82279928",
+          "repeated_control_comparisons": [],
+          "source_protocol_repeated_control_checked": false,
+          "cadence_evidence": {
+            "final_quiet_tail_seconds": 2.0004999999999997,
+            "complete_contiguous_observations_verified": true,
+            "paired_same_cadence_first_trial_comparison_pending": true,
+            "carryover_events_not_causally_assigned_to_a_single_pattern": true,
+            "actual_timing_and_events": [
+              {
+                "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-4-reset/position-0",
+                "sample_id": "phasea-row-4",
+                "reset_policy": "reset_per_trial",
+                "stimulus_times": [
+                  0.01,
+                  0.03,
+                  0.25,
+                  0.49
+                ],
+                "spike_times": [
+                  0.491
+                ],
+                "events_before_current_first_input": [],
+                "events_before_current_last_input": [],
+                "first_input_interval_from_previous": null
+              },
+              {
+                "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-4-reset/position-1",
+                "sample_id": "phasea-row-0",
+                "reset_policy": "reset_per_trial",
+                "stimulus_times": [
+                  0.7005,
+                  0.7805,
+                  0.9405,
+                  1.1805
+                ],
+                "spike_times": [
+                  1.182
+                ],
+                "events_before_current_first_input": [],
+                "events_before_current_last_input": [],
+                "first_input_interval_from_previous": 0.6905
+              }
+            ]
+          },
+          "frozen_model_verified": true,
+          "complete_native_observations": true,
+          "threshold_selected": false,
+          "training_performed": false,
+          "source_training_completed": false,
+          "new_foils_excluded_from_calibration": false,
+          "independently_heldout_positive_class": false,
+          "scientific_verdict": null
+        },
+        "source_terminal": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-4-reset\\terminal.json",
+          "sha256": "ab9a6f818ee4597a9f7182c5d405cdc0273ba57fbc8d46b624f362af2f59d9dc",
+          "size": 2440
+        }
+      },
+      {
+        "id": "foil-4-preserve",
+        "study": {
+          "protocol": "predecessor",
+          "predecessor": "phasea-row-4",
+          "cadence": "short",
+          "reset_policy": "preserve_neuron_dynamics"
+        },
+        "terminal": {
+          "kind": "timelearner_actual_windows_frozen_physical_study",
+          "schema_version": 1,
+          "execution": "completed",
+          "validity": "valid",
+          "study": {
+            "protocol": "predecessor",
+            "predecessor": "phasea-row-4",
+            "cadence": "short",
+            "reset_policy": "preserve_neuron_dynamics"
+          },
+          "model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+          "threshold": 0.0858575482028458,
+          "trials": 2,
+          "counts": {
+            "TP": 1,
+            "FP": 1,
+            "FN": 0,
+            "TN": 0,
+            "targets": 1,
+            "foils": 1,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 0.5,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 1.0
+          },
+          "condition_fingerprint": "ba4f6b073bb98565df90cb0603af6b6f7a969696f9604bdbf0cadc94f3937e48",
+          "repeated_control_comparisons": [],
+          "source_protocol_repeated_control_checked": false,
+          "cadence_evidence": {
+            "final_quiet_tail_seconds": 2.0004999999999997,
+            "complete_contiguous_observations_verified": true,
+            "paired_same_cadence_first_trial_comparison_pending": true,
+            "carryover_events_not_causally_assigned_to_a_single_pattern": true,
+            "actual_timing_and_events": [
+              {
+                "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-4-preserve/position-0",
+                "sample_id": "phasea-row-4",
+                "reset_policy": "reset_per_trial",
+                "stimulus_times": [
+                  0.01,
+                  0.03,
+                  0.25,
+                  0.49
+                ],
+                "spike_times": [
+                  0.491
+                ],
+                "events_before_current_first_input": [],
+                "events_before_current_last_input": [],
+                "first_input_interval_from_previous": null
+              },
+              {
+                "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-4-preserve/position-1",
+                "sample_id": "phasea-row-0",
+                "reset_policy": "preserve_neuron_dynamics",
+                "stimulus_times": [
+                  0.7005,
+                  0.7805,
+                  0.9405,
+                  1.1805
+                ],
+                "spike_times": [
+                  1.182
+                ],
+                "events_before_current_first_input": [],
+                "events_before_current_last_input": [],
+                "first_input_interval_from_previous": 0.6905
+              }
+            ]
+          },
+          "frozen_model_verified": true,
+          "complete_native_observations": true,
+          "threshold_selected": false,
+          "training_performed": false,
+          "source_training_completed": false,
+          "new_foils_excluded_from_calibration": false,
+          "independently_heldout_positive_class": false,
+          "scientific_verdict": null
+        },
+        "source_terminal": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-4-preserve\\terminal.json",
+          "sha256": "c2ce90328bd7238c5327b784464473e01ec9a9a5c776125d548d4d01c0fee18b",
+          "size": 2464
+        }
+      },
+      {
+        "id": "foil-5-reset",
+        "study": {
+          "protocol": "predecessor",
+          "predecessor": "phasea-row-5",
+          "cadence": "short",
+          "reset_policy": "reset_per_trial"
+        },
+        "terminal": {
+          "kind": "timelearner_actual_windows_frozen_physical_study",
+          "schema_version": 1,
+          "execution": "completed",
+          "validity": "valid",
+          "study": {
+            "protocol": "predecessor",
+            "predecessor": "phasea-row-5",
+            "cadence": "short",
+            "reset_policy": "reset_per_trial"
+          },
+          "model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+          "threshold": 0.0858575482028458,
+          "trials": 2,
+          "counts": {
+            "TP": 1,
+            "FP": 0,
+            "FN": 0,
+            "TN": 1,
+            "targets": 1,
+            "foils": 1,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 1.0,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.0
+          },
+          "condition_fingerprint": "ab784eb16a0a55e04aa02fa15a4d864c940d1851ed5d8cea2095496f7166ed31",
+          "repeated_control_comparisons": [],
+          "source_protocol_repeated_control_checked": false,
+          "cadence_evidence": {
+            "final_quiet_tail_seconds": 2.0004999999999997,
+            "complete_contiguous_observations_verified": true,
+            "paired_same_cadence_first_trial_comparison_pending": true,
+            "carryover_events_not_causally_assigned_to_a_single_pattern": true,
+            "actual_timing_and_events": [
+              {
+                "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-5-reset/position-0",
+                "sample_id": "phasea-row-5",
+                "reset_policy": "reset_per_trial",
+                "stimulus_times": [
+                  0.01,
+                  0.25,
+                  0.47,
+                  0.49
+                ],
+                "spike_times": [],
+                "events_before_current_first_input": [],
+                "events_before_current_last_input": [],
+                "first_input_interval_from_previous": null
+              },
+              {
+                "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-5-reset/position-1",
+                "sample_id": "phasea-row-0",
+                "reset_policy": "reset_per_trial",
+                "stimulus_times": [
+                  0.7005,
+                  0.7805,
+                  0.9405,
+                  1.1805
+                ],
+                "spike_times": [
+                  1.182
+                ],
+                "events_before_current_first_input": [],
+                "events_before_current_last_input": [],
+                "first_input_interval_from_previous": 0.6905
+              }
+            ]
+          },
+          "frozen_model_verified": true,
+          "complete_native_observations": true,
+          "threshold_selected": false,
+          "training_performed": false,
+          "source_training_completed": false,
+          "new_foils_excluded_from_calibration": false,
+          "independently_heldout_positive_class": false,
+          "scientific_verdict": null
+        },
+        "source_terminal": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-5-reset\\terminal.json",
+          "sha256": "ff57976f4b1017f2fb8c1c60fe2f8c5592afd375b2f87fecbd645a2cf8f33cca",
+          "size": 2415
+        }
+      },
+      {
+        "id": "foil-5-preserve",
+        "study": {
+          "protocol": "predecessor",
+          "predecessor": "phasea-row-5",
+          "cadence": "short",
+          "reset_policy": "preserve_neuron_dynamics"
+        },
+        "terminal": {
+          "kind": "timelearner_actual_windows_frozen_physical_study",
+          "schema_version": 1,
+          "execution": "completed",
+          "validity": "valid",
+          "study": {
+            "protocol": "predecessor",
+            "predecessor": "phasea-row-5",
+            "cadence": "short",
+            "reset_policy": "preserve_neuron_dynamics"
+          },
+          "model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+          "threshold": 0.0858575482028458,
+          "trials": 2,
+          "counts": {
+            "TP": 1,
+            "FP": 0,
+            "FN": 0,
+            "TN": 1,
+            "targets": 1,
+            "foils": 1,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 1.0,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.0
+          },
+          "condition_fingerprint": "ddd846f713e662cc7b4ab0845d7393e5f8623066c9203e8a2eca343aa56025d6",
+          "repeated_control_comparisons": [],
+          "source_protocol_repeated_control_checked": false,
+          "cadence_evidence": {
+            "final_quiet_tail_seconds": 2.0004999999999997,
+            "complete_contiguous_observations_verified": true,
+            "paired_same_cadence_first_trial_comparison_pending": true,
+            "carryover_events_not_causally_assigned_to_a_single_pattern": true,
+            "actual_timing_and_events": [
+              {
+                "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-5-preserve/position-0",
+                "sample_id": "phasea-row-5",
+                "reset_policy": "reset_per_trial",
+                "stimulus_times": [
+                  0.01,
+                  0.25,
+                  0.47,
+                  0.49
+                ],
+                "spike_times": [],
+                "events_before_current_first_input": [],
+                "events_before_current_last_input": [],
+                "first_input_interval_from_previous": null
+              },
+              {
+                "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-5-preserve/position-1",
+                "sample_id": "phasea-row-0",
+                "reset_policy": "preserve_neuron_dynamics",
+                "stimulus_times": [
+                  0.7005,
+                  0.7805,
+                  0.9405,
+                  1.1805
+                ],
+                "spike_times": [
+                  0.9415,
+                  1.182
+                ],
+                "events_before_current_first_input": [],
+                "events_before_current_last_input": [
+                  0.9415
+                ],
+                "first_input_interval_from_previous": 0.6905
+              }
+            ]
+          },
+          "frozen_model_verified": true,
+          "complete_native_observations": true,
+          "threshold_selected": false,
+          "training_performed": false,
+          "source_training_completed": false,
+          "new_foils_excluded_from_calibration": false,
+          "independently_heldout_positive_class": false,
+          "scientific_verdict": null
+        },
+        "source_terminal": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-5-preserve\\terminal.json",
+          "sha256": "b8fdb3d910d93cba91ad01cf4719a8a18b7529377250a2c81a227bd2e6415f57",
+          "size": 2483
+        }
+      },
+      {
+        "id": "foil-6-reset",
+        "study": {
+          "protocol": "predecessor",
+          "predecessor": "phasea-row-6",
+          "cadence": "short",
+          "reset_policy": "reset_per_trial"
+        },
+        "terminal": {
+          "kind": "timelearner_actual_windows_frozen_physical_study",
+          "schema_version": 1,
+          "execution": "completed",
+          "validity": "valid",
+          "study": {
+            "protocol": "predecessor",
+            "predecessor": "phasea-row-6",
+            "cadence": "short",
+            "reset_policy": "reset_per_trial"
+          },
+          "model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+          "threshold": 0.0858575482028458,
+          "trials": 2,
+          "counts": {
+            "TP": 1,
+            "FP": 1,
+            "FN": 0,
+            "TN": 0,
+            "targets": 1,
+            "foils": 1,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 0.5,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 1.0
+          },
+          "condition_fingerprint": "e74e46ec1da9d378a80068bb898abbbbf8518481bd3a5df5ad0f7325142f94be",
+          "repeated_control_comparisons": [],
+          "source_protocol_repeated_control_checked": false,
+          "cadence_evidence": {
+            "final_quiet_tail_seconds": 2.0004999999999997,
+            "complete_contiguous_observations_verified": true,
+            "paired_same_cadence_first_trial_comparison_pending": true,
+            "carryover_events_not_causally_assigned_to_a_single_pattern": true,
+            "actual_timing_and_events": [
+              {
+                "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-6-reset/position-0",
+                "sample_id": "phasea-row-6",
+                "reset_policy": "reset_per_trial",
+                "stimulus_times": [
+                  0.01,
+                  0.05,
+                  0.09,
+                  0.49
+                ],
+                "spike_times": [
+                  0.4915
+                ],
+                "events_before_current_first_input": [],
+                "events_before_current_last_input": [],
+                "first_input_interval_from_previous": null
+              },
+              {
+                "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-6-reset/position-1",
+                "sample_id": "phasea-row-0",
+                "reset_policy": "reset_per_trial",
+                "stimulus_times": [
+                  0.7005,
+                  0.7805,
+                  0.9405,
+                  1.1805
+                ],
+                "spike_times": [
+                  1.182
+                ],
+                "events_before_current_first_input": [],
+                "events_before_current_last_input": [],
+                "first_input_interval_from_previous": 0.6905
+              }
+            ]
+          },
+          "frozen_model_verified": true,
+          "complete_native_observations": true,
+          "threshold_selected": false,
+          "training_performed": false,
+          "source_training_completed": false,
+          "new_foils_excluded_from_calibration": false,
+          "independently_heldout_positive_class": false,
+          "scientific_verdict": null
+        },
+        "source_terminal": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-6-reset\\terminal.json",
+          "sha256": "a6a6a55f45bf7a3e4068c18847e7d18eac8bbe84db74379e3a4b107bad4828c6",
+          "size": 2441
+        }
+      },
+      {
+        "id": "foil-6-preserve",
+        "study": {
+          "protocol": "predecessor",
+          "predecessor": "phasea-row-6",
+          "cadence": "short",
+          "reset_policy": "preserve_neuron_dynamics"
+        },
+        "terminal": {
+          "kind": "timelearner_actual_windows_frozen_physical_study",
+          "schema_version": 1,
+          "execution": "completed",
+          "validity": "valid",
+          "study": {
+            "protocol": "predecessor",
+            "predecessor": "phasea-row-6",
+            "cadence": "short",
+            "reset_policy": "preserve_neuron_dynamics"
+          },
+          "model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+          "threshold": 0.0858575482028458,
+          "trials": 2,
+          "counts": {
+            "TP": 1,
+            "FP": 1,
+            "FN": 0,
+            "TN": 0,
+            "targets": 1,
+            "foils": 1,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 0.5,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 1.0
+          },
+          "condition_fingerprint": "8f97b4fd31408d1515f7f50ffbd9fb771a7e6bb7132ce4bf9bee0957d9c3ab05",
+          "repeated_control_comparisons": [],
+          "source_protocol_repeated_control_checked": false,
+          "cadence_evidence": {
+            "final_quiet_tail_seconds": 2.0004999999999997,
+            "complete_contiguous_observations_verified": true,
+            "paired_same_cadence_first_trial_comparison_pending": true,
+            "carryover_events_not_causally_assigned_to_a_single_pattern": true,
+            "actual_timing_and_events": [
+              {
+                "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-6-preserve/position-0",
+                "sample_id": "phasea-row-6",
+                "reset_policy": "reset_per_trial",
+                "stimulus_times": [
+                  0.01,
+                  0.05,
+                  0.09,
+                  0.49
+                ],
+                "spike_times": [
+                  0.4915
+                ],
+                "events_before_current_first_input": [],
+                "events_before_current_last_input": [],
+                "first_input_interval_from_previous": null
+              },
+              {
+                "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-6-preserve/position-1",
+                "sample_id": "phasea-row-0",
+                "reset_policy": "preserve_neuron_dynamics",
+                "stimulus_times": [
+                  0.7005,
+                  0.7805,
+                  0.9405,
+                  1.1805
+                ],
+                "spike_times": [
+                  1.182
+                ],
+                "events_before_current_first_input": [],
+                "events_before_current_last_input": [],
+                "first_input_interval_from_previous": 0.6905
+              }
+            ]
+          },
+          "frozen_model_verified": true,
+          "complete_native_observations": true,
+          "threshold_selected": false,
+          "training_performed": false,
+          "source_training_completed": false,
+          "new_foils_excluded_from_calibration": false,
+          "independently_heldout_positive_class": false,
+          "scientific_verdict": null
+        },
+        "source_terminal": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-6-preserve\\terminal.json",
+          "sha256": "85d0a35bbf3c37d0115c22695f6a32905b923d928bf106995df3f6c4f956364a",
+          "size": 2465
+        }
+      },
+      {
+        "id": "foil-7-reset",
+        "study": {
+          "protocol": "predecessor",
+          "predecessor": "phasea-row-7",
+          "cadence": "short",
+          "reset_policy": "reset_per_trial"
+        },
+        "terminal": {
+          "kind": "timelearner_actual_windows_frozen_physical_study",
+          "schema_version": 1,
+          "execution": "completed",
+          "validity": "valid",
+          "study": {
+            "protocol": "predecessor",
+            "predecessor": "phasea-row-7",
+            "cadence": "short",
+            "reset_policy": "reset_per_trial"
+          },
+          "model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+          "threshold": 0.0858575482028458,
+          "trials": 2,
+          "counts": {
+            "TP": 1,
+            "FP": 0,
+            "FN": 0,
+            "TN": 1,
+            "targets": 1,
+            "foils": 1,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 1.0,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.0
+          },
+          "condition_fingerprint": "c71e8bf6e6802c3f1b442ca32af6ad1d9fee15937b1652cdd29a865167b66d66",
+          "repeated_control_comparisons": [],
+          "source_protocol_repeated_control_checked": false,
+          "cadence_evidence": {
+            "final_quiet_tail_seconds": 2.0004999999999997,
+            "complete_contiguous_observations_verified": true,
+            "paired_same_cadence_first_trial_comparison_pending": true,
+            "carryover_events_not_causally_assigned_to_a_single_pattern": true,
+            "actual_timing_and_events": [
+              {
+                "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-7-reset/position-0",
+                "sample_id": "phasea-row-7",
+                "reset_policy": "reset_per_trial",
+                "stimulus_times": [
+                  0.01,
+                  0.41,
+                  0.45,
+                  0.49
+                ],
+                "spike_times": [],
+                "events_before_current_first_input": [],
+                "events_before_current_last_input": [],
+                "first_input_interval_from_previous": null
+              },
+              {
+                "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-7-reset/position-1",
+                "sample_id": "phasea-row-0",
+                "reset_policy": "reset_per_trial",
+                "stimulus_times": [
+                  0.7005,
+                  0.7805,
+                  0.9405,
+                  1.1805
+                ],
+                "spike_times": [
+                  1.182
+                ],
+                "events_before_current_first_input": [],
+                "events_before_current_last_input": [],
+                "first_input_interval_from_previous": 0.6905
+              }
+            ]
+          },
+          "frozen_model_verified": true,
+          "complete_native_observations": true,
+          "threshold_selected": false,
+          "training_performed": false,
+          "source_training_completed": false,
+          "new_foils_excluded_from_calibration": false,
+          "independently_heldout_positive_class": false,
+          "scientific_verdict": null
+        },
+        "source_terminal": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-7-reset\\terminal.json",
+          "sha256": "ef8d20bb5bc43d0da3605c3282aa3fd399317f56216ee661394ac86faccb25c6",
+          "size": 2415
+        }
+      },
+      {
+        "id": "foil-7-preserve",
+        "study": {
+          "protocol": "predecessor",
+          "predecessor": "phasea-row-7",
+          "cadence": "short",
+          "reset_policy": "preserve_neuron_dynamics"
+        },
+        "terminal": {
+          "kind": "timelearner_actual_windows_frozen_physical_study",
+          "schema_version": 1,
+          "execution": "completed",
+          "validity": "valid",
+          "study": {
+            "protocol": "predecessor",
+            "predecessor": "phasea-row-7",
+            "cadence": "short",
+            "reset_policy": "preserve_neuron_dynamics"
+          },
+          "model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+          "threshold": 0.0858575482028458,
+          "trials": 2,
+          "counts": {
+            "TP": 1,
+            "FP": 0,
+            "FN": 0,
+            "TN": 1,
+            "targets": 1,
+            "foils": 1,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 1.0,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.0
+          },
+          "condition_fingerprint": "22c885c7a3c3d9e605eac7247a0451398cf79ba3acfae74e5e4e4ef22b60e7c9",
+          "repeated_control_comparisons": [],
+          "source_protocol_repeated_control_checked": false,
+          "cadence_evidence": {
+            "final_quiet_tail_seconds": 2.0004999999999997,
+            "complete_contiguous_observations_verified": true,
+            "paired_same_cadence_first_trial_comparison_pending": true,
+            "carryover_events_not_causally_assigned_to_a_single_pattern": true,
+            "actual_timing_and_events": [
+              {
+                "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-7-preserve/position-0",
+                "sample_id": "phasea-row-7",
+                "reset_policy": "reset_per_trial",
+                "stimulus_times": [
+                  0.01,
+                  0.41,
+                  0.45,
+                  0.49
+                ],
+                "spike_times": [],
+                "events_before_current_first_input": [],
+                "events_before_current_last_input": [],
+                "first_input_interval_from_previous": null
+              },
+              {
+                "trial_id": "windows-measured-count-predecessor-matrix-e1/foil-7-preserve/position-1",
+                "sample_id": "phasea-row-0",
+                "reset_policy": "preserve_neuron_dynamics",
+                "stimulus_times": [
+                  0.7005,
+                  0.7805,
+                  0.9405,
+                  1.1805
+                ],
+                "spike_times": [
+                  0.941,
+                  1.182
+                ],
+                "events_before_current_first_input": [],
+                "events_before_current_last_input": [
+                  0.941
+                ],
+                "first_input_interval_from_previous": 0.6905
+              }
+            ]
+          },
+          "frozen_model_verified": true,
+          "complete_native_observations": true,
+          "threshold_selected": false,
+          "training_performed": false,
+          "source_training_completed": false,
+          "new_foils_excluded_from_calibration": false,
+          "independently_heldout_positive_class": false,
+          "scientific_verdict": null
+        },
+        "source_terminal": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-7-preserve\\terminal.json",
+          "sha256": "2f8aaeed6dd95fde35a8951b4cf8540d67fa310f341dca074421c36227390323",
+          "size": 2481
+        }
+      }
+    ],
+    "model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+    "threshold": 0.0858575482028458,
+    "cases": 14,
+    "trials": 28,
+    "unique_original_targets": 1,
+    "unique_original_foils": 7,
+    "target_exposures": 14,
+    "independent_trainings": 0,
+    "threshold_selected": false,
+    "training_performed": false,
+    "training_completed": false,
+    "independently_heldout_patterns": false,
+    "next_operation": "archive_all_twenty_eight_observations_and_render_all_patterns",
+    "scientific_verdict": null
+  },
+  "protocol_comparisons": {
+    "protocol_consistent": true,
+    "comparisons": [
+      {
+        "predecessor": "phasea-row-1",
+        "kind": "identical_first_foil",
+        "comparison": {
+          "kind": "timelearner_trial_response_comparison",
+          "schema_version": 1,
+          "comparator_version": 1,
+          "time_basis": "actual_stimulus_onset",
+          "absolute_tolerance": 1e-12,
+          "observation_schema_version": 2,
+          "source_trial_id": "windows-measured-count-predecessor-matrix-e1/foil-1-reset/position-0",
+          "observed_trial_id": "windows-measured-count-predecessor-matrix-e1/foil-1-preserve/position-0",
+          "sample_id": "phasea-row-1",
+          "model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+          "source_begin": 0,
+          "observed_begin": 0,
+          "source_stimulus_onset": 0.01,
+          "observed_stimulus_onset": 0.01,
+          "absolute_clock_shift": 0.0,
+          "source_samples": 1381,
+          "observed_samples": 1381,
+          "sample_counts_equal": true,
+          "window_offsets_equal": true,
+          "maximum_absolute_signal_difference": 0.0,
+          "maximum_relative_sample_time_difference": 0.0,
+          "maximum_relative_history_difference": 0.0,
+          "maximum_relative_event_time_difference": 0.0,
+          "maximum_window_offset_difference": 0.0,
+          "maximum_absolute_sample_difference": 0.0,
+          "waveforms_equal_within_declared_tolerance": true,
+          "stimulus_and_spike_events_equal": true,
+          "response_preserved": true,
+          "difference_reasons": [],
+          "pre_window_history_compared": false,
+          "scientific_verdict": null
+        }
+      },
+      {
+        "predecessor": "phasea-row-2",
+        "kind": "identical_first_foil",
+        "comparison": {
+          "kind": "timelearner_trial_response_comparison",
+          "schema_version": 1,
+          "comparator_version": 1,
+          "time_basis": "actual_stimulus_onset",
+          "absolute_tolerance": 1e-12,
+          "observation_schema_version": 2,
+          "source_trial_id": "windows-measured-count-predecessor-matrix-e1/foil-2-reset/position-0",
+          "observed_trial_id": "windows-measured-count-predecessor-matrix-e1/foil-2-preserve/position-0",
+          "sample_id": "phasea-row-2",
+          "model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+          "source_begin": 0,
+          "observed_begin": 0,
+          "source_stimulus_onset": 0.01,
+          "observed_stimulus_onset": 0.01,
+          "absolute_clock_shift": 0.0,
+          "source_samples": 1381,
+          "observed_samples": 1381,
+          "sample_counts_equal": true,
+          "window_offsets_equal": true,
+          "maximum_absolute_signal_difference": 0.0,
+          "maximum_relative_sample_time_difference": 0.0,
+          "maximum_relative_history_difference": 0.0,
+          "maximum_relative_event_time_difference": 0.0,
+          "maximum_window_offset_difference": 0.0,
+          "maximum_absolute_sample_difference": 0.0,
+          "waveforms_equal_within_declared_tolerance": true,
+          "stimulus_and_spike_events_equal": true,
+          "response_preserved": true,
+          "difference_reasons": [],
+          "pre_window_history_compared": false,
+          "scientific_verdict": null
+        }
+      },
+      {
+        "predecessor": "phasea-row-3",
+        "kind": "identical_first_foil",
+        "comparison": {
+          "kind": "timelearner_trial_response_comparison",
+          "schema_version": 1,
+          "comparator_version": 1,
+          "time_basis": "actual_stimulus_onset",
+          "absolute_tolerance": 1e-12,
+          "observation_schema_version": 2,
+          "source_trial_id": "windows-measured-count-predecessor-matrix-e1/foil-3-reset/position-0",
+          "observed_trial_id": "windows-measured-count-predecessor-matrix-e1/foil-3-preserve/position-0",
+          "sample_id": "phasea-row-3",
+          "model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+          "source_begin": 0,
+          "observed_begin": 0,
+          "source_stimulus_onset": 0.01,
+          "observed_stimulus_onset": 0.01,
+          "absolute_clock_shift": 0.0,
+          "source_samples": 1381,
+          "observed_samples": 1381,
+          "sample_counts_equal": true,
+          "window_offsets_equal": true,
+          "maximum_absolute_signal_difference": 0.0,
+          "maximum_relative_sample_time_difference": 0.0,
+          "maximum_relative_history_difference": 0.0,
+          "maximum_relative_event_time_difference": 0.0,
+          "maximum_window_offset_difference": 0.0,
+          "maximum_absolute_sample_difference": 0.0,
+          "waveforms_equal_within_declared_tolerance": true,
+          "stimulus_and_spike_events_equal": true,
+          "response_preserved": true,
+          "difference_reasons": [],
+          "pre_window_history_compared": false,
+          "scientific_verdict": null
+        }
+      },
+      {
+        "predecessor": "phasea-row-4",
+        "kind": "identical_first_foil",
+        "comparison": {
+          "kind": "timelearner_trial_response_comparison",
+          "schema_version": 1,
+          "comparator_version": 1,
+          "time_basis": "actual_stimulus_onset",
+          "absolute_tolerance": 1e-12,
+          "observation_schema_version": 2,
+          "source_trial_id": "windows-measured-count-predecessor-matrix-e1/foil-4-reset/position-0",
+          "observed_trial_id": "windows-measured-count-predecessor-matrix-e1/foil-4-preserve/position-0",
+          "sample_id": "phasea-row-4",
+          "model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+          "source_begin": 0,
+          "observed_begin": 0,
+          "source_stimulus_onset": 0.01,
+          "observed_stimulus_onset": 0.01,
+          "absolute_clock_shift": 0.0,
+          "source_samples": 1381,
+          "observed_samples": 1381,
+          "sample_counts_equal": true,
+          "window_offsets_equal": true,
+          "maximum_absolute_signal_difference": 0.0,
+          "maximum_relative_sample_time_difference": 0.0,
+          "maximum_relative_history_difference": 0.0,
+          "maximum_relative_event_time_difference": 0.0,
+          "maximum_window_offset_difference": 0.0,
+          "maximum_absolute_sample_difference": 0.0,
+          "waveforms_equal_within_declared_tolerance": true,
+          "stimulus_and_spike_events_equal": true,
+          "response_preserved": true,
+          "difference_reasons": [],
+          "pre_window_history_compared": false,
+          "scientific_verdict": null
+        }
+      },
+      {
+        "predecessor": "phasea-row-5",
+        "kind": "identical_first_foil",
+        "comparison": {
+          "kind": "timelearner_trial_response_comparison",
+          "schema_version": 1,
+          "comparator_version": 1,
+          "time_basis": "actual_stimulus_onset",
+          "absolute_tolerance": 1e-12,
+          "observation_schema_version": 2,
+          "source_trial_id": "windows-measured-count-predecessor-matrix-e1/foil-5-reset/position-0",
+          "observed_trial_id": "windows-measured-count-predecessor-matrix-e1/foil-5-preserve/position-0",
+          "sample_id": "phasea-row-5",
+          "model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+          "source_begin": 0,
+          "observed_begin": 0,
+          "source_stimulus_onset": 0.01,
+          "observed_stimulus_onset": 0.01,
+          "absolute_clock_shift": 0.0,
+          "source_samples": 1381,
+          "observed_samples": 1381,
+          "sample_counts_equal": true,
+          "window_offsets_equal": true,
+          "maximum_absolute_signal_difference": 0.0,
+          "maximum_relative_sample_time_difference": 0.0,
+          "maximum_relative_history_difference": 0.0,
+          "maximum_relative_event_time_difference": 0.0,
+          "maximum_window_offset_difference": 0.0,
+          "maximum_absolute_sample_difference": 0.0,
+          "waveforms_equal_within_declared_tolerance": true,
+          "stimulus_and_spike_events_equal": true,
+          "response_preserved": true,
+          "difference_reasons": [],
+          "pre_window_history_compared": false,
+          "scientific_verdict": null
+        }
+      },
+      {
+        "predecessor": "phasea-row-6",
+        "kind": "identical_first_foil",
+        "comparison": {
+          "kind": "timelearner_trial_response_comparison",
+          "schema_version": 1,
+          "comparator_version": 1,
+          "time_basis": "actual_stimulus_onset",
+          "absolute_tolerance": 1e-12,
+          "observation_schema_version": 2,
+          "source_trial_id": "windows-measured-count-predecessor-matrix-e1/foil-6-reset/position-0",
+          "observed_trial_id": "windows-measured-count-predecessor-matrix-e1/foil-6-preserve/position-0",
+          "sample_id": "phasea-row-6",
+          "model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+          "source_begin": 0,
+          "observed_begin": 0,
+          "source_stimulus_onset": 0.01,
+          "observed_stimulus_onset": 0.01,
+          "absolute_clock_shift": 0.0,
+          "source_samples": 1381,
+          "observed_samples": 1381,
+          "sample_counts_equal": true,
+          "window_offsets_equal": true,
+          "maximum_absolute_signal_difference": 0.0,
+          "maximum_relative_sample_time_difference": 0.0,
+          "maximum_relative_history_difference": 0.0,
+          "maximum_relative_event_time_difference": 0.0,
+          "maximum_window_offset_difference": 0.0,
+          "maximum_absolute_sample_difference": 0.0,
+          "waveforms_equal_within_declared_tolerance": true,
+          "stimulus_and_spike_events_equal": true,
+          "response_preserved": true,
+          "difference_reasons": [],
+          "pre_window_history_compared": false,
+          "scientific_verdict": null
+        }
+      },
+      {
+        "predecessor": "phasea-row-7",
+        "kind": "identical_first_foil",
+        "comparison": {
+          "kind": "timelearner_trial_response_comparison",
+          "schema_version": 1,
+          "comparator_version": 1,
+          "time_basis": "actual_stimulus_onset",
+          "absolute_tolerance": 1e-12,
+          "observation_schema_version": 2,
+          "source_trial_id": "windows-measured-count-predecessor-matrix-e1/foil-7-reset/position-0",
+          "observed_trial_id": "windows-measured-count-predecessor-matrix-e1/foil-7-preserve/position-0",
+          "sample_id": "phasea-row-7",
+          "model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+          "source_begin": 0,
+          "observed_begin": 0,
+          "source_stimulus_onset": 0.01,
+          "observed_stimulus_onset": 0.01,
+          "absolute_clock_shift": 0.0,
+          "source_samples": 1381,
+          "observed_samples": 1381,
+          "sample_counts_equal": true,
+          "window_offsets_equal": true,
+          "maximum_absolute_signal_difference": 0.0,
+          "maximum_relative_sample_time_difference": 0.0,
+          "maximum_relative_history_difference": 0.0,
+          "maximum_relative_event_time_difference": 0.0,
+          "maximum_window_offset_difference": 0.0,
+          "maximum_absolute_sample_difference": 0.0,
+          "waveforms_equal_within_declared_tolerance": true,
+          "stimulus_and_spike_events_equal": true,
+          "response_preserved": true,
+          "difference_reasons": [],
+          "pre_window_history_compared": false,
+          "scientific_verdict": null
+        }
+      },
+      {
+        "kind": "reset_target_across_predecessors",
+        "comparison": {
+          "kind": "timelearner_trial_response_comparison",
+          "schema_version": 1,
+          "comparator_version": 1,
+          "time_basis": "actual_stimulus_onset",
+          "absolute_tolerance": 1e-12,
+          "observation_schema_version": 2,
+          "source_trial_id": "windows-measured-count-predecessor-matrix-e1/foil-1-reset/position-1",
+          "observed_trial_id": "windows-measured-count-predecessor-matrix-e1/foil-2-reset/position-1",
+          "sample_id": "phasea-row-0",
+          "model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+          "source_begin": 0.6905,
+          "observed_begin": 0.6905,
+          "source_stimulus_onset": 0.7005,
+          "observed_stimulus_onset": 0.7005,
+          "absolute_clock_shift": 0.0,
+          "source_samples": 4982,
+          "observed_samples": 4982,
+          "sample_counts_equal": true,
+          "window_offsets_equal": true,
+          "maximum_absolute_signal_difference": 0.0,
+          "maximum_relative_sample_time_difference": 0.0,
+          "maximum_relative_history_difference": 0.0,
+          "maximum_relative_event_time_difference": 0.0,
+          "maximum_window_offset_difference": 0.0,
+          "maximum_absolute_sample_difference": 0.0,
+          "waveforms_equal_within_declared_tolerance": true,
+          "stimulus_and_spike_events_equal": true,
+          "response_preserved": true,
+          "difference_reasons": [],
+          "pre_window_history_compared": false,
+          "scientific_verdict": null
+        }
+      },
+      {
+        "kind": "reset_target_across_predecessors",
+        "comparison": {
+          "kind": "timelearner_trial_response_comparison",
+          "schema_version": 1,
+          "comparator_version": 1,
+          "time_basis": "actual_stimulus_onset",
+          "absolute_tolerance": 1e-12,
+          "observation_schema_version": 2,
+          "source_trial_id": "windows-measured-count-predecessor-matrix-e1/foil-1-reset/position-1",
+          "observed_trial_id": "windows-measured-count-predecessor-matrix-e1/foil-3-reset/position-1",
+          "sample_id": "phasea-row-0",
+          "model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+          "source_begin": 0.6905,
+          "observed_begin": 0.6905,
+          "source_stimulus_onset": 0.7005,
+          "observed_stimulus_onset": 0.7005,
+          "absolute_clock_shift": 0.0,
+          "source_samples": 4982,
+          "observed_samples": 4982,
+          "sample_counts_equal": true,
+          "window_offsets_equal": true,
+          "maximum_absolute_signal_difference": 0.0,
+          "maximum_relative_sample_time_difference": 0.0,
+          "maximum_relative_history_difference": 0.0,
+          "maximum_relative_event_time_difference": 0.0,
+          "maximum_window_offset_difference": 0.0,
+          "maximum_absolute_sample_difference": 0.0,
+          "waveforms_equal_within_declared_tolerance": true,
+          "stimulus_and_spike_events_equal": true,
+          "response_preserved": true,
+          "difference_reasons": [],
+          "pre_window_history_compared": false,
+          "scientific_verdict": null
+        }
+      },
+      {
+        "kind": "reset_target_across_predecessors",
+        "comparison": {
+          "kind": "timelearner_trial_response_comparison",
+          "schema_version": 1,
+          "comparator_version": 1,
+          "time_basis": "actual_stimulus_onset",
+          "absolute_tolerance": 1e-12,
+          "observation_schema_version": 2,
+          "source_trial_id": "windows-measured-count-predecessor-matrix-e1/foil-1-reset/position-1",
+          "observed_trial_id": "windows-measured-count-predecessor-matrix-e1/foil-4-reset/position-1",
+          "sample_id": "phasea-row-0",
+          "model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+          "source_begin": 0.6905,
+          "observed_begin": 0.6905,
+          "source_stimulus_onset": 0.7005,
+          "observed_stimulus_onset": 0.7005,
+          "absolute_clock_shift": 0.0,
+          "source_samples": 4982,
+          "observed_samples": 4982,
+          "sample_counts_equal": true,
+          "window_offsets_equal": true,
+          "maximum_absolute_signal_difference": 0.0,
+          "maximum_relative_sample_time_difference": 0.0,
+          "maximum_relative_history_difference": 0.0,
+          "maximum_relative_event_time_difference": 0.0,
+          "maximum_window_offset_difference": 0.0,
+          "maximum_absolute_sample_difference": 0.0,
+          "waveforms_equal_within_declared_tolerance": true,
+          "stimulus_and_spike_events_equal": true,
+          "response_preserved": true,
+          "difference_reasons": [],
+          "pre_window_history_compared": false,
+          "scientific_verdict": null
+        }
+      },
+      {
+        "kind": "reset_target_across_predecessors",
+        "comparison": {
+          "kind": "timelearner_trial_response_comparison",
+          "schema_version": 1,
+          "comparator_version": 1,
+          "time_basis": "actual_stimulus_onset",
+          "absolute_tolerance": 1e-12,
+          "observation_schema_version": 2,
+          "source_trial_id": "windows-measured-count-predecessor-matrix-e1/foil-1-reset/position-1",
+          "observed_trial_id": "windows-measured-count-predecessor-matrix-e1/foil-5-reset/position-1",
+          "sample_id": "phasea-row-0",
+          "model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+          "source_begin": 0.6905,
+          "observed_begin": 0.6905,
+          "source_stimulus_onset": 0.7005,
+          "observed_stimulus_onset": 0.7005,
+          "absolute_clock_shift": 0.0,
+          "source_samples": 4982,
+          "observed_samples": 4982,
+          "sample_counts_equal": true,
+          "window_offsets_equal": true,
+          "maximum_absolute_signal_difference": 0.0,
+          "maximum_relative_sample_time_difference": 0.0,
+          "maximum_relative_history_difference": 0.0,
+          "maximum_relative_event_time_difference": 0.0,
+          "maximum_window_offset_difference": 0.0,
+          "maximum_absolute_sample_difference": 0.0,
+          "waveforms_equal_within_declared_tolerance": true,
+          "stimulus_and_spike_events_equal": true,
+          "response_preserved": true,
+          "difference_reasons": [],
+          "pre_window_history_compared": false,
+          "scientific_verdict": null
+        }
+      },
+      {
+        "kind": "reset_target_across_predecessors",
+        "comparison": {
+          "kind": "timelearner_trial_response_comparison",
+          "schema_version": 1,
+          "comparator_version": 1,
+          "time_basis": "actual_stimulus_onset",
+          "absolute_tolerance": 1e-12,
+          "observation_schema_version": 2,
+          "source_trial_id": "windows-measured-count-predecessor-matrix-e1/foil-1-reset/position-1",
+          "observed_trial_id": "windows-measured-count-predecessor-matrix-e1/foil-6-reset/position-1",
+          "sample_id": "phasea-row-0",
+          "model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+          "source_begin": 0.6905,
+          "observed_begin": 0.6905,
+          "source_stimulus_onset": 0.7005,
+          "observed_stimulus_onset": 0.7005,
+          "absolute_clock_shift": 0.0,
+          "source_samples": 4982,
+          "observed_samples": 4982,
+          "sample_counts_equal": true,
+          "window_offsets_equal": true,
+          "maximum_absolute_signal_difference": 0.0,
+          "maximum_relative_sample_time_difference": 0.0,
+          "maximum_relative_history_difference": 0.0,
+          "maximum_relative_event_time_difference": 0.0,
+          "maximum_window_offset_difference": 0.0,
+          "maximum_absolute_sample_difference": 0.0,
+          "waveforms_equal_within_declared_tolerance": true,
+          "stimulus_and_spike_events_equal": true,
+          "response_preserved": true,
+          "difference_reasons": [],
+          "pre_window_history_compared": false,
+          "scientific_verdict": null
+        }
+      },
+      {
+        "kind": "reset_target_across_predecessors",
+        "comparison": {
+          "kind": "timelearner_trial_response_comparison",
+          "schema_version": 1,
+          "comparator_version": 1,
+          "time_basis": "actual_stimulus_onset",
+          "absolute_tolerance": 1e-12,
+          "observation_schema_version": 2,
+          "source_trial_id": "windows-measured-count-predecessor-matrix-e1/foil-1-reset/position-1",
+          "observed_trial_id": "windows-measured-count-predecessor-matrix-e1/foil-7-reset/position-1",
+          "sample_id": "phasea-row-0",
+          "model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+          "source_begin": 0.6905,
+          "observed_begin": 0.6905,
+          "source_stimulus_onset": 0.7005,
+          "observed_stimulus_onset": 0.7005,
+          "absolute_clock_shift": 0.0,
+          "source_samples": 4982,
+          "observed_samples": 4982,
+          "sample_counts_equal": true,
+          "window_offsets_equal": true,
+          "maximum_absolute_signal_difference": 0.0,
+          "maximum_relative_sample_time_difference": 0.0,
+          "maximum_relative_history_difference": 0.0,
+          "maximum_relative_event_time_difference": 0.0,
+          "maximum_window_offset_difference": 0.0,
+          "maximum_absolute_sample_difference": 0.0,
+          "waveforms_equal_within_declared_tolerance": true,
+          "stimulus_and_spike_events_equal": true,
+          "response_preserved": true,
+          "difference_reasons": [],
+          "pre_window_history_compared": false,
+          "scientific_verdict": null
+        }
+      }
+    ],
+    "old_two_second_source_window_not_substituted": true
+  },
+  "source_matrix_terminal": {
+    "path": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-measured-count-predecessor-matrix-e1\\orchestration-terminal.json",
+    "sha256": "f7c25dc359b452c79d780370942cff491259b2c1812c8ad98554530ec8aadfc8",
+    "size": 48573
+  },
+  "source_protocol_comparisons": {
+    "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1\\protocol-comparisons.json",
+    "sha256": "19ae21c1600ec69920c5ffaae19981399743c173039a2648c4269cf191cd0500",
+    "size": 20608
+  },
+  "scientific_verdict": null
+}

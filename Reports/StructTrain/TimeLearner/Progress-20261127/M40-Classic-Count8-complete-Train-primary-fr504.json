@@ -1,0 +1,238 @@
+{
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/M40-Classic-Count8-complete-Train-primary-fr504.json",
+    "sha256": "f5330509609ec11ac0e9fc75047fd75cc917f289b156102a68e3736f3c043ee0",
+    "size": 7689
+  },
+  "catalog": {
+    "kind": "timelearner_actual_Classic_Count8_complete_closed_primary",
+    "schema_version": 1,
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/04/046147c7715f3d8dc27868d93cbc612b2136a18487078fbf78c1d7238101de46",
+        "sha256": "046147c7715f3d8dc27868d93cbc612b2136a18487078fbf78c1d7238101de46",
+        "bytes": 257619
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/46/4624b94bbb7d35557c8e2b282ed81b92003bd019663c9c93dba5265dd9ab7a06",
+        "sha256": "4624b94bbb7d35557c8e2b282ed81b92003bd019663c9c93dba5265dd9ab7a06",
+        "bytes": 70930348
+      }
+    },
+    "members": 1408,
+    "expanded_bytes": 2829917099,
+    "actual_main_native_loaded_files": 28,
+    "source_unchanged": true,
+    "original_training_unchanged": true,
+    "source_audit": {
+      "execution": "completed",
+      "validity": "valid",
+      "full_primary_audit": {
+        "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-count8-full-audit-fr480/full-primary-audit.json",
+        "sha256": "fc150389748bd876ceac5c7f47a76504d72cc35d01b4b44c90682a7b6b43e72e",
+        "size": 61890
+      },
+      "compact": {
+        "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-count8-full-audit-fr480/compact-training-readback.json",
+        "sha256": "4e12eb2fc204f2c0a85aed490f56934aca62aa68c7233fec3cc4307a8d1cc5d2",
+        "size": 3809
+      },
+      "physical_projection": {
+        "kind": "timelearner_physical_DATA_projection",
+        "schema_version": 1,
+        "source": {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-repaired-count-cap8-m40-fr221/train/native/train_stopped_state.json",
+          "sha256": "c8203e6067ee47394af804632d8c2b80e696762db97787a41f7fed5160df0da9",
+          "size": 979078246
+        },
+        "output": {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-count8-full-audit-fr480/physical-model-DATA.json",
+          "sha256": "4f7339da1d4aac8cb825a158bfeb479da3ca4e8070865ac8b59b370109f33202",
+          "size": 13028660
+        },
+        "source_boundary": {
+          "kind": "timelearner_stopped_state",
+          "schema_version": 8,
+          "state_kind": "diagnostic",
+          "sha256": "41a475d9afc784d79eba0e9a96cbe2366cffe56f7d28f9e49812d0cde3d1fd8a",
+          "model_revision": "cce61e402b5325ae47a8d2ce89df633680d1765e5a78f0ad63c2330db5893ef2"
+        },
+        "model_revision": "cce61e402b5325ae47a8d2ce89df633680d1765e5a78f0ad63c2330db5893ef2",
+        "physical_model_data_sha256": "985b0406bfe8c3d833280dad3e349796272c76f61ea9f1c6141f17bffa8a7a6e",
+        "source_unchanged": true,
+        "source_history_retained_separately": true,
+        "source_training_evidence_checked": false,
+        "native_import_verified": false,
+        "training_certificate_transferred": false,
+        "calibration_confirmed": false,
+        "scientific_verdict": null
+      },
+      "training_outcome": "budget_exhausted",
+      "original_training_outcome": "budget_exhausted",
+      "completed_boundary": false,
+      "source_original_unchanged": true,
+      "job_sha256": "5e4d30866adfd414e7cc19ddda0a828a21af4c17d7637a67252250633eea069b",
+      "native_import_verified": false,
+      "classification_performed": false,
+      "scientific_verdict": null
+    },
+    "compact": {
+      "kind": "timelearner_actual_Classic_Count8_closed_training_readback",
+      "schema_version": 2,
+      "job_sha256": "5e4d30866adfd414e7cc19ddda0a828a21af4c17d7637a67252250633eea069b",
+      "source_package": {
+        "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-repaired-count-cap8-m40-fr221/train/native/train_stopped_state.json",
+        "sha256": "c8203e6067ee47394af804632d8c2b80e696762db97787a41f7fed5160df0da9",
+        "size": 979078246
+      },
+      "source_summary": {
+        "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-repaired-count-cap8-m40-fr221/train/native/train_stopped_summary.json",
+        "sha256": "c094672e2c2a4467d0da31fb1bbca8bfd060e0bb2366a5e5afc2820d415a54a7",
+        "size": 55842506
+      },
+      "training_outcome": "budget_exhausted",
+      "completed_boundary": false,
+      "terminal": {
+        "actual_model_epoch": 25,
+        "search_terminal_epoch": 24,
+        "actual_parameters": [
+          {
+            "length": 241,
+            "resistance": 86000000,
+            "synapses": 13
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 121,
+            "resistance": 86000000,
+            "synapses": 8
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "search_terminal_parameters": [
+          {
+            "length": 241,
+            "resistance": 86000000,
+            "synapses": 13
+          },
+          {
+            "length": 201,
+            "resistance": 86000000,
+            "synapses": 10
+          },
+          {
+            "length": 121,
+            "resistance": 86000000,
+            "synapses": 8
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "fresh_all_input_verification": false,
+        "status": "restored",
+        "stopped_outcome": "budget_exhausted",
+        "stopped_reason": "native_training_time_budget_exhausted",
+        "reason": "",
+        "wall_seconds": 9.4960274156183
+      },
+      "historical": {
+        "accepted_parameters": [
+          {
+            "length": 241,
+            "resistance": 86000000,
+            "synapses": 13
+          },
+          {
+            "length": 201,
+            "resistance": 86000000,
+            "synapses": 10
+          },
+          {
+            "length": 121,
+            "resistance": 86000000,
+            "synapses": 8
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "actual_parameters": [
+          {
+            "length": 241,
+            "resistance": 86000000,
+            "synapses": 13
+          },
+          {
+            "length": 201,
+            "resistance": 86000000,
+            "synapses": 10
+          },
+          {
+            "length": 121,
+            "resistance": 86000000,
+            "synapses": 8
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "applied_edits": 24,
+        "search_probes": 56,
+        "composite_counters": {
+          "archive": {
+            "groups": 60,
+            "native_probes": 358,
+            "primary_bytes": 136112620,
+            "sampled_frames": 1286260
+          },
+          "attempt": {
+            "logical_groups": 60,
+            "native_probes": 358,
+            "sampled_frames": 1286260
+          }
+        },
+        "final_group_ids": [],
+        "reference_group_ids": [
+          "classic-repaired-count-cap8-m40-fr221/session/1/capture/1/1/composite/1",
+          "classic-repaired-count-cap8-m40-fr221/session/1/capture/1/2/composite/2",
+          "classic-repaired-count-cap8-m40-fr221/session/1/capture/1/3/composite/3",
+          "classic-repaired-count-cap8-m40-fr221/session/1/capture/1/4/composite/4"
+        ],
+        "outcome": "budget_exhausted",
+        "reason": "native_training_time_budget_exhausted",
+        "tolerances": {
+          "amplitude_absolute": 1e-05,
+          "amplitude_relative": 0,
+          "sync": 0.02
+        }
+      },
+      "candidate_count": 27,
+      "classification_performed": false,
+      "scientific_verdict": null
+    },
+    "independent_full_readback_pending": true,
+    "new_Train": false,
+    "scientific_verdict": null
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "kind": "timelearner_diagnostic_source_memory_actor_projections",
+  "schema_version": 1,
+  "workers": {
+    "elder": {
+      "prepared": true,
+      "source": "/home/user/timelearner-refactor/source-diagnostic-memory-a1",
+      "source_root": "fbf52dbb33a7ed7284826559e0ceb9c23e0a65ff",
+      "seed": "/home/user/timelearner-refactor/source-json-transport-a1",
+      "seed_root": "80059519dc15b9bd23c22456bf166a3903d7cec7",
+      "Git_pack_sha256": "930c3c3c7be9d0fa13bf83e1ad52b1bcafb8254f3393974d51d2f380de9eb31c",
+      "materialized_files": 1318,
+      "SDK_gitlinks_materialized_or_verified": false,
+      "scope": "Exact Git Python projection only; immutable native SDK/runtime not modified",
+      "scientific_verdict": null
+    },
+    "m40": {
+      "prepared": true,
+      "source": "/media/user/Data/TimeLearnerRefactor/source-diagnostic-memory-a1",
+      "source_root": "fbf52dbb33a7ed7284826559e0ceb9c23e0a65ff",
+      "seed": "/media/user/Data/TimeLearnerRefactor/source-json-transport-a1",
+      "seed_root": "80059519dc15b9bd23c22456bf166a3903d7cec7",
+      "Git_pack_sha256": "930c3c3c7be9d0fa13bf83e1ad52b1bcafb8254f3393974d51d2f380de9eb31c",
+      "materialized_files": 891,
+      "SDK_gitlinks_materialized_or_verified": false,
+      "scope": "Exact Git Python projection only; immutable native SDK/runtime not modified",
+      "scientific_verdict": null
+    },
+    "windows": {
+      "via_jump": "10.245.1.12",
+      "host": "10.245.1.14",
+      "operator_sha256": "24d754c94cd01691c26f5b60fed962494031f1d9cf41ed34154029d97f158476",
+      "returncode": 0,
+      "stderr": "",
+      "observation": {
+        "prepared": true,
+        "source": "C:\\Projects\\TimeLearnerWorker\\source-diagnostic-memory-a1",
+        "source_root": "fbf52dbb33a7ed7284826559e0ceb9c23e0a65ff",
+        "seed": "C:\\Projects\\TimeLearnerWorker\\source-json-transport-a1",
+        "seed_root": "80059519dc15b9bd23c22456bf166a3903d7cec7",
+        "Git_pack_sha256": "930c3c3c7be9d0fa13bf83e1ad52b1bcafb8254f3393974d51d2f380de9eb31c",
+        "materialized_files": 891,
+        "SDK_gitlinks_materialized_or_verified": false,
+        "scope": "Exact Git Python projection only; immutable native SDK/runtime not modified",
+        "scientific_verdict": null
+      }
+    }
+  },
+  "immutable_CPP_and_runtime_changed": false,
+  "scientific_verdict": null
+}

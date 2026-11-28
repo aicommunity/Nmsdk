@@ -1,0 +1,121 @@
+{
+  "dispatch": {
+    "dispatched": true,
+    "queued": true,
+    "job": "windows-measured-count-predecessor-matrix-e1",
+    "controls_commit": "44f2b193d49fea51ceef5408d2e29ad7fa1610e8",
+    "source_root": "efa727302fe9c28292925a64dc0fb471acd25dec",
+    "task": {
+      "scientific_verdict": null,
+      "instance": "{DEB09620-6CB7-4B05-BD38-47621873AB4E}",
+      "execution_time_limit": "PT12H",
+      "task": "TimeLearner-windows-measured-count-predecessor-matrix-e1",
+      "engine_pid": 7752
+    },
+    "cases": 14,
+    "expected_trials": 28,
+    "model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+    "threshold": 0.0858575482028458,
+    "depends_on": "windows-measured-count-frozen-new-foils-s1",
+    "preparation_checks_passed": 20,
+    "no_new_Train": true,
+    "no_threshold_selection": true,
+    "scientific_verdict": null
+  },
+  "observation": {
+    "observed_utc": "2026-11-23T01:22:10.514045+00:00",
+    "job": "windows-measured-count-predecessor-matrix-e1",
+    "state.json": {
+      "stage": "native-predecessor-evaluation",
+      "case": "foil-2-preserve",
+      "observed_utc": "2026-11-23T01:20:45.894092+00:00",
+      "scientific_verdict": null
+    },
+    "owner.json": {
+      "pid": 20236,
+      "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+      "creation_filetime": "134398696876070937"
+    },
+    "previous-job-closure.json": {
+      "task": {
+        "last_result": 0,
+        "instances": 0,
+        "state": 3
+      },
+      "terminal": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-measured-count-frozen-new-foils-s1\\orchestration-terminal.json",
+        "sha256": "b67f6665fe280eef31e2067a476c53c95f48d7e01a70bb423a3fc8971a931638",
+        "size": 821
+      },
+      "native_process": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-frozen-new-foils-s1\\process-result.json",
+        "sha256": "75884ff15bac03eeefa319cdd7e6e6166610ecacf32994dd27c261ebe41d606c",
+        "size": 675
+      }
+    },
+    "sealed-matrix-commit.json": {
+      "commit": "98fdfc30a994c9d221c1288daf64303a7d0d8f7a"
+    },
+    "prepared_cases": 14,
+    "completed_cases": [
+      {
+        "id": "foil-1-preserve",
+        "counts": {
+          "TP": 1,
+          "FP": 0,
+          "FN": 0,
+          "TN": 1,
+          "targets": 1,
+          "foils": 1,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 1.0,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.0
+        }
+      },
+      {
+        "id": "foil-1-reset",
+        "counts": {
+          "TP": 1,
+          "FP": 0,
+          "FN": 0,
+          "TN": 1,
+          "targets": 1,
+          "foils": 1,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 1.0,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.0
+        }
+      },
+      {
+        "id": "foil-2-reset",
+        "counts": {
+          "TP": 1,
+          "FP": 0,
+          "FN": 0,
+          "TN": 1,
+          "targets": 1,
+          "foils": 1,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 1.0,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.0
+        }
+      }
+    ],
+    "active_case": {
+      "case": "foil-2-preserve",
+      "trial_files": 1,
+      "native_owner": {
+        "executable": "C:\\Projects\\TimeLearnerWorker\\runtime-measured-count-native-win-a3\\NeuroModelerConsole.exe",
+        "creation_filetime": "134398704566953287",
+        "pid": 10204,
+        "job_name": "Local\\TimeLearner-931f470e-0676-49d0-8c8b-ff94581bd385",
+        "runtime_fingerprint": "09bff57ff10faa264e483a191810bd3c4048153408f9420f3f1b63d3239bdf3f",
+        "suspended_until_limits_applied": true
+      }
+    }
+  },
+  "scientific_verdict": null
+}

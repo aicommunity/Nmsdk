@@ -1,0 +1,166 @@
+{
+  "kind": "timelearner_actual_classic_capture_failure",
+  "schema_version": 1,
+  "failure": {
+    "files": [
+      {
+        "name": "owned-process.json",
+        "bytes": 651
+      },
+      {
+        "name": "request.json",
+        "bytes": 755
+      },
+      {
+        "name": "stderr.log",
+        "bytes": 40
+      },
+      {
+        "name": "stdout.log",
+        "bytes": 0
+      },
+      {
+        "name": "result.json",
+        "bytes": 1395
+      },
+      {
+        "name": "capture-ready.json",
+        "bytes": 97
+      },
+      {
+        "name": "whole-group-closure.json",
+        "bytes": 1301
+      },
+      {
+        "name": "terminal-unit-state.json",
+        "bytes": 1301
+      },
+      {
+        "name": "runtime.json",
+        "bytes": 12127
+      }
+    ],
+    "arguments": [
+      "--app-ini",
+      "/home/user/timelearner-refactor/runtime-terminal-export-linux-a1/NeuroModelerConsole.ini",
+      "--timelearner-diagnostic-evaluate",
+      "/home/user/timelearner-refactor/readbacks/s11-prepared-long-model-threshold-elder-a1-inputs/native-job-source.json",
+      "--timelearner-output",
+      "/home/user/timelearner-refactor/readbacks/s11-prepared-long-model-threshold-elder-a1/native"
+    ],
+    "request_limits": {
+      "maximum_wall_seconds": 2700,
+      "memory_bytes": 8589934592,
+      "tasks": 128,
+      "cooperative_capture": true
+    },
+    "capture-ready.json": {
+      "kind": "native_runtime_capture_ready",
+      "pid": 774033,
+      "schema_version": 1,
+      "start_ticks": "481470746"
+    },
+    "terminal-unit-state.json": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "0c2f5e9aabff05d377757f27bdc5ccfdb3d8054a664ce7a47cfa11fa8adcb8e3",
+        "unit": "timelearner-bd61e293-542c-4883-b686-89c1ad616e18.service",
+        "invocation_id": "6bc5c381476640e08aceb7a094d4c2c2",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-bd61e293-542c-4883-b686-89c1ad616e18.service",
+        "initial_main_pid": 774033,
+        "initial_start_ticks": "481470746",
+        "sha256": "1d862d36e040ca4f92ddbc72339f0b12019612f63744887e088f40bcbf8d2138"
+      },
+      "state": {
+        "Type": "exec",
+        "Restart": "no",
+        "RemainAfterExit": "yes",
+        "MainPID": "0",
+        "Result": "exit-code",
+        "ExecMainCode": "1",
+        "ExecMainStatus": "2",
+        "ControlGroup": "",
+        "MemoryMax": "8589934592",
+        "TasksMax": "128",
+        "KillMode": "control-group",
+        "Description": "TimeLearner contained attempt bd61e293-542c-4883-b686-89c1ad616e18",
+        "LoadState": "loaded",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "InvocationID": "6bc5c381476640e08aceb7a094d4c2c2"
+      }
+    },
+    "whole-group-closure.json": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "0c2f5e9aabff05d377757f27bdc5ccfdb3d8054a664ce7a47cfa11fa8adcb8e3",
+        "unit": "timelearner-bd61e293-542c-4883-b686-89c1ad616e18.service",
+        "invocation_id": "6bc5c381476640e08aceb7a094d4c2c2",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-bd61e293-542c-4883-b686-89c1ad616e18.service",
+        "initial_main_pid": 774033,
+        "initial_start_ticks": "481470746",
+        "sha256": "1d862d36e040ca4f92ddbc72339f0b12019612f63744887e088f40bcbf8d2138"
+      },
+      "state": {
+        "Type": "exec",
+        "Restart": "no",
+        "RemainAfterExit": "yes",
+        "MainPID": "0",
+        "Result": "exit-code",
+        "ExecMainCode": "1",
+        "ExecMainStatus": "2",
+        "ControlGroup": "",
+        "MemoryMax": "8589934592",
+        "TasksMax": "128",
+        "KillMode": "control-group",
+        "Description": "TimeLearner contained attempt bd61e293-542c-4883-b686-89c1ad616e18",
+        "LoadState": "loaded",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "InvocationID": "6bc5c381476640e08aceb7a094d4c2c2"
+      }
+    }
+  },
+  "monitor_timing": {
+    "capture_ready_unix": 1795247188.503223,
+    "last_monitor_before": 1795247176.716295,
+    "first_monitor_after": 1795247221.5242553,
+    "seconds_before_ready": 11.786927938461304,
+    "seconds_after_ready": 33.02103233337402,
+    "monitor_count": 2113,
+    "largest_monitor_gaps": [
+      {
+        "seconds": 44.80796027183533,
+        "begin": 1795247176.716295,
+        "end": 1795247221.5242553
+      },
+      {
+        "seconds": 3.7649474143981934,
+        "begin": 1795245350.3691344,
+        "end": 1795245354.1340818
+      },
+      {
+        "seconds": 3.7497096061706543,
+        "begin": 1795245322.069317,
+        "end": 1795245325.8190267
+      },
+      {
+        "seconds": 3.742675542831421,
+        "begin": 1795245285.31149,
+        "end": 1795245289.0541656
+      }
+    ],
+    "process_result_seconds_after_ready": 33.95330786705017,
+    "scientific_verdict": null
+  },
+  "original_execution_reclassified": false,
+  "scientific_verdict": null
+}

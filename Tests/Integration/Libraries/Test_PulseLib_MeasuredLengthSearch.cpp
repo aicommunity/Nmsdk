@@ -5,6 +5,21 @@
 
 namespace {
 using namespace NMSDK::TimeLearner;
+TEST(NearestUnvisitedLengthSearch, ExploresBothSidesWithSmallerLengthTieAndNoDomainEnumeration)
+{
+    EXPECT_EQ(ProposeNearestUnvisitedLength({1,2,3,241},241,1,1000),240);
+    EXPECT_EQ(ProposeNearestUnvisitedLength({240,241},241,1,1000),242);
+    EXPECT_EQ(ProposeNearestUnvisitedLength({240,241,242},241,1,1000),239);
+    EXPECT_EQ(ProposeNearestUnvisitedLength({1,1,-1,999},1,1,3),2);
+    EXPECT_EQ(ProposeNearestUnvisitedLength({},4,1,3),3);
+    EXPECT_FALSE(ProposeNearestUnvisitedLength({1,2,3},2,1,3));
+    const auto maximum=std::numeric_limits<int>::max();
+    EXPECT_EQ(ProposeNearestUnvisitedLength({maximum},maximum,1,maximum),maximum-1);
+    EXPECT_EQ(ProposeNearestUnvisitedLength({1},1,1,maximum),2);
+    EXPECT_THROW(ProposeNearestUnvisitedLength({},0,1,3),std::invalid_argument);
+    EXPECT_THROW(ProposeNearestUnvisitedLength({},1,0,3),std::invalid_argument);
+    EXPECT_THROW(ProposeNearestUnvisitedLength({},1,3,1),std::invalid_argument);
+}
 TEST(UnvisitedLengthSearch, RejectedNeighbourhoodDoesNotConfineTheDeclaredDomain)
 {
     EXPECT_EQ(ProposeUnvisitedLength({28},28,100),100);

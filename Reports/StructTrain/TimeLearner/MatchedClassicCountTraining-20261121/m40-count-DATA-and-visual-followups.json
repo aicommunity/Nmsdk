@@ -1,0 +1,272 @@
+{
+  "kind": "timelearner_actual_classic_count_recognition_followups",
+  "schema_version": 1,
+  "DATA_dispatch": {
+    "queued": true,
+    "job": "s11-classic-count-DATA-followup-m40-a2",
+    "controls_commit": "b4fedb27c984eb8b65d4fdebc04465a01f412675",
+    "source_root": "324e320cec81462bded544daacc03d08e3605042",
+    "supervisor": {
+      "pid": 2525847,
+      "start_ticks": "440836610",
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "uid": 1000
+    },
+    "source_model_revision": "cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b",
+    "actual_source_counts": {
+      "TP": 1,
+      "FP": 1,
+      "FN": 0,
+      "TN": 6,
+      "targets": 1,
+      "foils": 7,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.875,
+      "target_hit_rate": 1.0,
+      "foil_response_rate": 0.14285714285714285
+    },
+    "source_actual_threshold": 0.020736298148054874,
+    "native_runtime_unchanged": true,
+    "source_Train_not_restarted": true,
+    "physical_export_complete": false,
+    "all_eight_replay_complete": false,
+    "scientific_verdict": null
+  },
+  "original_preparation_failure": {
+    "queued": false,
+    "reason": "name '__file__' is not defined",
+    "traceback": "Traceback (most recent call last):\n  File \"<string>\", line 149, in <module>\nNameError: name '__file__' is not defined. Did you mean: '__name__'?\n",
+    "scientific_verdict": null
+  },
+  "original_failure_preceded_any_native_export": true,
+  "first_attempt_retained": "requests/s11-classic-count-DATA-followup-m40-a1/preparation-rejected.json",
+  "actual_jobs": {
+    "observed_utc": "2026-11-22T07:47:06.330953+00:00",
+    "jobs": {
+      "s11-classic-count-DATA-followup-m40-a2": {
+        "dispatched.json": {
+          "queued": true,
+          "job": "s11-classic-count-DATA-followup-m40-a2",
+          "controls_commit": "b4fedb27c984eb8b65d4fdebc04465a01f412675",
+          "source_root": "324e320cec81462bded544daacc03d08e3605042",
+          "supervisor": {
+            "pid": 2525847,
+            "start_ticks": "440836610",
+            "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+            "uid": 1000
+          },
+          "source_model_revision": "cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b",
+          "actual_source_counts": {
+            "TP": 1,
+            "FP": 1,
+            "FN": 0,
+            "TN": 6,
+            "targets": 1,
+            "foils": 7,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 0.875,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.14285714285714285
+          },
+          "source_actual_threshold": 0.020736298148054874,
+          "native_runtime_unchanged": true,
+          "source_Train_not_restarted": true,
+          "physical_export_complete": false,
+          "all_eight_replay_complete": false,
+          "scientific_verdict": null
+        },
+        "supervisor-identity.json": {
+          "pid": 2525847,
+          "start_ticks": "440836610",
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "uid": 1000
+        },
+        "actual_supervisor": {
+          "exists": true,
+          "matching": true,
+          "identity": {
+            "pid": 2525847,
+            "start_ticks": "440836610",
+            "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+            "uid": 1000
+          }
+        },
+        "phases": {
+          "prepare-export": {
+            "execution": "unknown",
+            "all_processes_closed": true,
+            "reason": "bound_unit_and_group_absent",
+            "binding": {
+              "kind": "timelearner_contained_binding",
+              "schema_version": 1,
+              "request_sha256": "7ff051d29a1a072404c5a4eb3f19f04a39f457e00106892f8c44d41f7b199f24",
+              "unit": "timelearner-57ecb828-c8bd-4ed5-a78e-ba9c1ee4dfa5.service",
+              "invocation_id": "35b608fe26644308ab7674f36a16c497",
+              "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-57ecb828-c8bd-4ed5-a78e-ba9c1ee4dfa5.service",
+              "initial_main_pid": 2537510,
+              "initial_start_ticks": "440841477",
+              "sha256": "ff12832fc11c32b0f32217a641370783d8463103a3027be6e53f928a82630a59"
+            },
+            "worker-terminal.json": {
+              "phase": "prepare-export",
+              "completed": true,
+              "source_original_Train_unchanged": true,
+              "source_original_outcome": "budget_exhausted",
+              "scientific_verdict": null
+            }
+          },
+          "native-export": {
+            "execution": "running",
+            "all_processes_closed": false,
+            "reason": "kernel_cgroup_observed",
+            "binding": {
+              "kind": "timelearner_contained_binding",
+              "schema_version": 1,
+              "request_sha256": "13d4929cd686ac48cd4ec6c2349e8423c0ec21c5ed4c78aa514ce004a21e15c5",
+              "unit": "timelearner-0bae915e-33b1-4a38-b354-0df202042646.service",
+              "invocation_id": "178c0d82cc2c4ff2b120244abe2e2f28",
+              "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-0bae915e-33b1-4a38-b354-0df202042646.service",
+              "initial_main_pid": 2609497,
+              "initial_start_ticks": "440854473",
+              "sha256": "01ee71f4181bfd1ee5647798443919ef425bb53490c594b6238e6d9ec2ea3889"
+            }
+          }
+        },
+        "-export": {
+          "actual_native": {
+            "execution": "running",
+            "all_processes_closed": false,
+            "reason": "kernel_cgroup_observed",
+            "binding": {
+              "kind": "timelearner_contained_binding",
+              "schema_version": 1,
+              "request_sha256": "46b0bfa8f4552abd00fe131a63dee06f493e07992db8a9021654c7e5138fab57",
+              "unit": "timelearner-862411ce-ea7f-4564-9b3f-dc28b0d0a120.service",
+              "invocation_id": "2c4bd74b6171469b91057d4e9e7b250d",
+              "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-862411ce-ea7f-4564-9b3f-dc28b0d0a120.service",
+              "initial_main_pid": 2618289,
+              "initial_start_ticks": "440855259",
+              "sha256": "37c5135d7d7fd9193d213224c2dcb2c1eb86c918ddfee6ed6e046d3dd513d5da"
+            }
+          },
+          "trial_files": 0
+        }
+      },
+      "classic-count-m40-complete-response-figures-a1": {
+        "dispatch.json": {
+          "dispatched": true,
+          "job": "classic-count-m40-complete-response-figures-a1",
+          "controls_commit": "b53c3f05b14cc4adaf24779378e25d4dc839a79b",
+          "supervisor": {
+            "pid": 2725090,
+            "start_ticks": "440871424",
+            "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+            "uid": 1000
+          },
+          "original_Train_publication": {
+            "kind": "timelearner_complete_original_classic_count_Train_primary",
+            "schema_version": 1,
+            "original_job": "s11-classic-count-training-m40-a1",
+            "objects": {
+              "primary.tar.xz": {
+                "kind": "nmsdk_structtrain_external_object",
+                "schema_version": 1,
+                "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+                "object": "objects/sha256/f9/f9d2945d04175c638d3045b11d52f0592d1d191cebd7ae6e2bf08f5c532aaf7c",
+                "sha256": "f9d2945d04175c638d3045b11d52f0592d1d191cebd7ae6e2bf08f5c532aaf7c",
+                "bytes": 52120632
+              },
+              "bundle.json": {
+                "kind": "nmsdk_structtrain_external_object",
+                "schema_version": 1,
+                "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+                "object": "objects/sha256/9c/9cfb915642bfbfa7ecc316b890545f778ea7c4a377b1d21a9f544c2e4ccf0356",
+                "sha256": "9cfb915642bfbfa7ecc316b890545f778ea7c4a377b1d21a9f544c2e4ccf0356",
+                "bytes": 436826
+              },
+              "collection-proof.json": {
+                "kind": "nmsdk_structtrain_external_object",
+                "schema_version": 1,
+                "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+                "object": "objects/sha256/66/664c8b72405a62ea2ae9e98fb621b19a88c8e8de3ea3e8d8e20cf336290faa56",
+                "sha256": "664c8b72405a62ea2ae9e98fb621b19a88c8e8de3ea3e8d8e20cf336290faa56",
+                "bytes": 436572
+              },
+              "collection-manifest.json": {
+                "kind": "nmsdk_structtrain_external_object",
+                "schema_version": 1,
+                "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+                "object": "objects/sha256/b9/b9737eb0daad2ea24f1ff02c3baa8b8f63a9a80edf37c917327a247f62e359fd",
+                "sha256": "b9737eb0daad2ea24f1ff02c3baa8b8f63a9a80edf37c917327a247f62e359fd",
+                "bytes": 402591
+              },
+              "controller-result.json": {
+                "kind": "nmsdk_structtrain_external_object",
+                "schema_version": 1,
+                "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+                "object": "objects/sha256/ae/ae2147543699e33257a7a0848997a224c10f4af41ae79bd8a7e8e5115aa50b6c",
+                "sha256": "ae2147543699e33257a7a0848997a224c10f4af41ae79bd8a7e8e5115aa50b6c",
+                "bytes": 1177
+              }
+            },
+            "members": 2152,
+            "expanded_bytes": 3259061577,
+            "archive_bytes": 52120632,
+            "originals_retained": true,
+            "collection_proves_bytes_and_closure_only": true,
+            "original_outcome": "budget_exhausted",
+            "independent_host_restoration_pending": true,
+            "scientific_verdict": null
+          },
+          "original_Train_catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-22/classic-count-M4-m40/original-Train-primary-a1.json",
+          "source_model_revision": "cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b",
+          "bounded_auxiliary_memory_bytes": 2147483648,
+          "maximum_wall_seconds": 1800,
+          "source_model_not_reexecuted": true,
+          "originals_retained": true,
+          "scientific_verdict": null
+        },
+        "supervisor-identity.json": {
+          "pid": 2725090,
+          "start_ticks": "440871424",
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "uid": 1000
+        },
+        "actual_supervisor": {
+          "exists": true,
+          "matching": true,
+          "identity": {
+            "pid": 2725090,
+            "start_ticks": "440871424",
+            "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+            "uid": 1000
+          }
+        },
+        "phases": {},
+        "actual_auxiliary": {
+          "execution": "running",
+          "all_processes_closed": false,
+          "reason": "kernel_cgroup_observed",
+          "binding": {
+            "kind": "timelearner_contained_binding",
+            "schema_version": 1,
+            "request_sha256": "8b2d8656c8d326037f50dfaf2ec983870301e2e20e086dee7bbb3dd02ad3767c",
+            "unit": "timelearner-5f55dce0-a2b9-412c-9e04-593864dc91c8.service",
+            "invocation_id": "63f08ef047ac4582b600eb6194ff2b05",
+            "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-5f55dce0-a2b9-412c-9e04-593864dc91c8.service",
+            "initial_main_pid": 2725225,
+            "initial_start_ticks": "440871448",
+            "sha256": "0f5525194bcae2562ee9cb1672b7f294bbd5803eea71737804c0dcd053e2c2aa"
+          }
+        }
+      }
+    },
+    "resource_reserved": {
+      "disk_bytes": 268435456,
+      "memory_bytes": 9663676416,
+      "slots": 1
+    }
+  },
+  "original_Train_not_restarted": true,
+  "scientific_verdict": null
+}

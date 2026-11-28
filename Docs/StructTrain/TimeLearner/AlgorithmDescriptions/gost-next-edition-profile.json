@@ -1,0 +1,166 @@
+{
+  "kind": "timelearner_scientific_report_format_profile",
+  "schema_version": 1,
+  "prepared_at": "2026-11-21",
+  "status": "current_v5_published",
+  "runtime_readiness_record": "AuthorizedDocxRender-20261122.json",
+  "draft_layout": {
+    "builder": "Scripts/StructTrain/TimeLearner/publications/build_algorithm_docx.py",
+    "helper": "Scripts/StructTrain/TimeLearner/publications/gost_layout.py",
+    "requires_explicit_profile_and_draft": true,
+    "structural_review": "CandidateStructureReview-20261123.json",
+    "source_content": "revision5 candidate n5, complete Classic128 and selected reviewed short-pair figures, new Branch evidence",
+    "standards_compliance_accepted": false,
+    "visual_acceptance_complete": false,
+    "legacy_runtime_readiness_is_not_bundled_renderer_acceptance": true,
+    "actual_render_record": "CandidateDocxRender-20261123.json",
+    "actual_page_review_record": "CandidatePageReview-20261123.json",
+    "draft_builder_implemented": true,
+    "historical_snapshot": true
+  },
+  "applies_to": [
+    "Classic",
+    "Branch"
+  ],
+  "preserved_publication": "2026-11-20-v4",
+  "standards": [
+    {
+      "designation": "ГОСТ 7.32-2017",
+      "role": "research_report_structure_and_presentation",
+      "catalog_status_on_checked_date": "active",
+      "catalog": "https://protect.gost.ru/gost/details/7d280e43-7036-4a69-8e6e-d15867028343",
+      "official_imprint_text_copy": "https://iriran.ru/sites/default/files/gost_7.32-2017.pdf",
+      "catalog_corrections": [
+        "ИУС 2-2019",
+        "ИУС 3-2020",
+        "ИУС 1-2022"
+      ],
+      "full_correction_text_review_complete": true
+    },
+    {
+      "designation": "ГОСТ Р 7.0.100-2018",
+      "role": "bibliographic_description_only_not_citation_rules",
+      "catalog_status_on_checked_date": "active",
+      "catalog": "https://protect.gost.ru/gost/details/389dfd5a-535a-458a-81c3-14b729b1cee1",
+      "catalog_corrections": [
+        "ИУС 3-2020"
+      ],
+      "full_text_review_complete": false,
+      "full_correction_text_review_complete": true
+    }
+  ],
+  "page": {
+    "width_mm": 210,
+    "height_mm": 297,
+    "margins_mm": {
+      "left": 30,
+      "right": 15,
+      "top": 20,
+      "bottom": 20
+    },
+    "clause": "7.32-2017:6.1.1"
+  },
+  "body": {
+    "font": "Times New Roman",
+    "project_font_size_pt": 14,
+    "standard_minimum_font_size_pt": 12,
+    "line_spacing": 1.5,
+    "first_line_indent_mm": 12.5,
+    "color": "000000",
+    "clause": "7.32-2017:6.1.1"
+  },
+  "headings": {
+    "main_sections_start_new_page": true,
+    "numbered_headings_bold_initial_capital_no_terminal_dot": true,
+    "structural_headings_centered_uppercase": true,
+    "clauses": [
+      "7.32-2017:6.2",
+      "7.32-2017:6.4"
+    ]
+  },
+  "page_numbers": {
+    "position": "bottom_center",
+    "format": "arabic_digits_only",
+    "title_counted_but_number_hidden": true,
+    "clause": "7.32-2017:6.3"
+  },
+  "figures": {
+    "caption": "Рисунок {number} — {title}",
+    "caption_alignment": "center_below_explanatory_text",
+    "first_mention_cross_reference_required": true,
+    "clause": "7.32-2017:6.5"
+  },
+  "tables": {
+    "caption": "Таблица {number} — {title}",
+    "caption_alignment": "left_above_table_without_indent",
+    "continued_table_caption_required": true,
+    "clause": "7.32-2017:6.6"
+  },
+  "equations": {
+    "editable_format": "OMML",
+    "alignment": "center",
+    "number": "right_parenthesized_arabic",
+    "symbols_explained_immediately_below": true,
+    "clause": "7.32-2017:6.8"
+  },
+  "release_gates": {
+    "applicable_corrections_reviewed": true,
+    "bibliography_and_citations_reviewed": true,
+    "administrative_cover_metadata_verified_or_parent_report_scope_declared": true,
+    "builder_support_implemented": true,
+    "both_DOCX_rendered_and_every_page_reviewed": true,
+    "all_graphs_readable_at_Word_page_scale": true
+  },
+  "content_constraints": {
+    "pulse_count_symbol": "M",
+    "synapses_per_input_symbol": "N_s,i",
+    "technical_normalization_identifiers_unchanged": [
+      "N0",
+      "N1"
+    ],
+    "original_publication_bytes_unchanged": true,
+    "experiments_take_priority": true,
+    "pending_Train_has_no_invented_result": true,
+    "heavy_outputs_in_root_Git": false
+  },
+  "previous_runtime_readiness_record": "DocumentRuntimeReadiness-20261122.json",
+  "user_authorized_installed_LibreOffice_for_this_pair": true,
+  "remaining_content_update": "Current v5 exact bytes externally published and independently restored. Subsequent scientific results require a new content snapshot and render; active Train has no invented result.",
+  "correction_review": "GostCorrectionReview-20261122.json",
+  "bibliography_review": "BibliographyReview-20261122.json",
+  "reviewed_historical_draft_a13": {
+    "builder": "Scripts/StructTrain/TimeLearner/publications/build_algorithm_docx.py",
+    "helper": "Scripts/StructTrain/TimeLearner/publications/gost_layout.py",
+    "requires_explicit_profile_and_draft": true,
+    "structural_review": "CurrentDraftStructuralReview-20261122.json",
+    "source_content": "revision5 draft a13, 11 working examples, 62/53 reviewed pages, not released",
+    "standards_compliance_accepted": false,
+    "visual_acceptance_complete": true,
+    "legacy_runtime_readiness_is_not_bundled_renderer_acceptance": true,
+    "actual_render_record": "AuthorizedDocxRender-20261122.json",
+    "actual_page_review_record": "CurrentPageReview-20261122.json",
+    "draft_builder_implemented": true
+  },
+  "candidate_build": {
+    "explicit_flag": "--release-candidate",
+    "missing_measurements_or_figures_forbidden": true,
+    "does_not_certify_standards": true,
+    "does_not_publish": true,
+    "review_requires_actual_candidate_document_hashes": true
+  },
+  "current_candidate_frozen_format_input": {
+    "external_package_name": "format-profile.candidate-n5.json",
+    "sha256": "c199626a7cefc9892a7d9ce5fd00d9738c2c2f2fab4c50fa6c8f7e16e2dae77b",
+    "metadata_pointers_in_maintained_profile_updated_after_render": true,
+    "layout_parameters_unchanged": true
+  },
+  "current_accepted_pair": {
+    "edition": "2026-11-25-v5",
+    "candidate": "eg1",
+    "review": "CurrentScienceReleaseReview-20261125.json",
+    "standards_scope": "Thematic scientific sections; parent report administrative cover handled on inclusion",
+    "all155_page_pixels_reviewed": true,
+    "previous_v4_unchanged": true,
+    "publication": "Reports/StructTrain/TimeLearner/AlgorithmDescriptions-20261125/publication.json"
+  }
+}

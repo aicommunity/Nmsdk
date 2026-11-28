@@ -1,0 +1,13 @@
+digraph G {
+graph [rankdir=TB,bgcolor="white",pad=0.08,nodesep=0.22,ranksep=0.32];
+node [shape=record,fontname="Times New Roman",fontsize=20,margin="0.08,0.04"];
+edge [fontname="Times New Roman",fontsize=18,arrowsize=0.75];
+c [label="{Контроллер обучения|Предложить кандидат\lСохранить историю\l}"];
+o [label="{Наблюдение пробы|Пик и достоверность\lВремя и амплитуда\lРевизия модели\l}"];
+v [label="{Общая проверка|Свежие отклики\lвсех входов\l}"];
+a [label="{Адаптер независимых\nпутей|Отдельные длины\lи нормализаторы\l}"];
+b [label="{Адаптер общей ветви|Точки подключения\lОбщие участки\l}"];
+n [label="{Дерево компонентов|Построить и сбросить\lРассчитать штатный такт\l}"];
+c->o [label="читает"];c->v [label="запускает"];{rank=same;o;v}
+c->a;c->b;o->a [style=invis];v->b [style=invis];{rank=same;a;b}a->n;b->n;
+}

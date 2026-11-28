@@ -1,0 +1,101 @@
+{
+  "kind": "timelearner_external_scientific_result_reference",
+  "schema_version": 1,
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/b8/b8ed1fd4474e63ae745e9c0e011866ca3e7594b832b71be0a4fe9197b9416d38",
+      "sha256": "b8ed1fd4474e63ae745e9c0e011866ca3e7594b832b71be0a4fe9197b9416d38",
+      "bytes": 42669
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/7a/7ae7f1777f7349d30d39d5dd82b54ff74d4991c5ceed431cfed86d004632d1ac",
+      "sha256": "7ae7f1777f7349d30d39d5dd82b54ff74d4991c5ceed431cfed86d004632d1ac",
+      "bytes": 25108728
+    }
+  },
+  "members": 243,
+  "observations": 43,
+  "phases": [
+    {
+      "phase": "repeat",
+      "observations": 8,
+      "counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.75,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.2857142857142857
+      },
+      "all_complete": true,
+      "frozen_model_verified": true,
+      "threshold": 0.023252703356543683
+    },
+    {
+      "phase": "new-foils",
+      "observations": 27,
+      "counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 24,
+        "targets": 1,
+        "foils": 26,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.9259259259259259,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.07692307692307693
+      },
+      "all_complete": true,
+      "frozen_model_verified": true,
+      "threshold": 0.023252703356543683
+    },
+    {
+      "phase": "third-pulse",
+      "observations": 8,
+      "counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "TN": 7,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 1.0,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.0
+      },
+      "all_complete": true,
+      "frozen_model_verified": true,
+      "threshold": 0.023252703356543683
+    }
+  ],
+  "all8_original_full_responses_preserved": true,
+  "new_foil_and_third_pulse_declarations_recomputed_exactly": true,
+  "all43_observations_production_reaudited": true,
+  "all_actual_native_loaded_bytes_verified": true,
+  "all_original_processes_closed": true,
+  "source_model_revision": "2783e83684eef31e0a258e271e0c2c3acf30a9a9ab175fc20632577b5b9028a6",
+  "source_training_outcome": "budget_exhausted",
+  "new_Train": false,
+  "new_calibration": false,
+  "independent_positive_holdout": false,
+  "all_pattern_galleries_pending": true,
+  "scientific_verdict": null,
+  "source_catalog": {
+    "relative_path": "experiments/2026-11-27/Windows14-epoch22-followups-independent-fr215.json",
+    "bytes": 2920,
+    "sha256": "3f3543afe75373a48d8035c19c48ded461a984856e03d8f8494feadc42852a4e"
+  },
+  "source_kind": "timelearner_actual_epoch22_Windows_frozen_followups_independent_acceptance"
+}

@@ -1,0 +1,108 @@
+{
+  "kind": "timelearner_pending_terminal_data8_windows_sdk",
+  "schema_version": 1,
+  "worker": "10.245.1.14",
+  "route": "via10.245.1.12",
+  "root": "7047c695dbf33c9a2901e4209f9425ca727085e8",
+  "pulse": "0cf335ae08347f2d042d7eb3f5d05ef70a55789c",
+  "namespace_files": 5092,
+  "namespace_blob": "24c8c2ecc240c04146d84b52e4e175319d7d8f62",
+  "specification_blob": "b18337bd06e1d59dd2703095c41763c3d3309dca",
+  "controls_commit": "d8922a5df0624034e086f54ff2473782508b35aa",
+  "build_specification": {
+    "kind": "timelearner_private_windows_build",
+    "schema_version": 1,
+    "source_root": "C:\\Projects\\TimeLearnerWorker\\source-terminal-physical-data8-win-a1",
+    "source_commit": "7047c695dbf33c9a2901e4209f9425ca727085e8",
+    "namespace_git_blob": "24c8c2ecc240c04146d84b52e4e175319d7d8f62",
+    "expected_source_files": 5092,
+    "installed_dependencies": "C:/Projects/TimeLearnerWorker/build-a4/vcpkg_installed",
+    "build_root": "C:\\Projects\\TimeLearnerWorker\\build-terminal-physical-data8-win-a1",
+    "runtime_root": "C:\\Projects\\TimeLearnerWorker\\runtime-terminal-physical-data8-win-a1",
+    "output_root": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-terminal-physical-data8-sdk-build-a1",
+    "worker_sha256": "c31340a8883110ffdf1ac1a57056ada4063ab28d4208cf35652ebd0a1cc381a1",
+    "profile_sha256": {
+      "vcpkg.json": "444c0eae22c7ab2e3355b40d9f53793d3defe2b3cc59488eac40c7be1a52c92e",
+      "triplets/x64-windows-tl.cmake": "26eaf5b6e9ee2ffeb9a380b0a2d7148cff6374c9870f381e69e8c78aec144718"
+    },
+    "installed_status_sha256": "7e02dc6d4b89d5711c3b62c60d607430189dcc3c599da8581449c300bf0b63ca",
+    "visual_studio_root": "C:/Program Files/Microsoft Visual Studio/18/Community",
+    "compiler": "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/cl.exe",
+    "vsdevcmd_sha256": "a7815e85d636828e5cf70fe4235b11fcb41750896a4d2d60756b43bacaf4f0b2",
+    "vcpkg_commit": "1577f17ee57f42a0ef6d75bbb82cb37d0b76d7e8"
+  },
+  "source_closure": {
+    "root": {
+      "head": "7047c695dbf33c9a2901e4209f9425ca727085e8",
+      "status": ""
+    },
+    "Bin": {
+      "recorded_gitlink": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "head": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "status": ""
+    },
+    "Libraries/Nmsdk-MotionControlLib": {
+      "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "status": ""
+    },
+    "Libraries/Nmsdk-PulseLib": {
+      "recorded_gitlink": "0cf335ae08347f2d042d7eb3f5d05ef70a55789c",
+      "head": "0cf335ae08347f2d042d7eb3f5d05ef70a55789c",
+      "status": ""
+    },
+    "Libraries/Rdk-BasicLib": {
+      "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "status": ""
+    },
+    "Libraries/Rdk-CvBasicLib": {
+      "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "status": ""
+    },
+    "Libraries/Rdk-HardwareLib": {
+      "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+      "head": "de40b008e990105856726e01230dde19f42a90a9",
+      "status": ""
+    },
+    "Rdk": {
+      "recorded_gitlink": "de4134235c0dcb8b91fd9a43b267348ad1a163ca",
+      "head": "de4134235c0dcb8b91fd9a43b267348ad1a163ca",
+      "status": ""
+    }
+  },
+  "dispatch": {
+    "scientific_verdict": null,
+    "tool_commit": "7047c695dbf33c9a2901e4209f9425ca727085e8",
+    "task": "TimeLearner-windows-terminal-physical-data8-sdk-build-a1",
+    "specification_git_blob": "b18337bd06e1d59dd2703095c41763c3d3309dca",
+    "instance": "{1C7794B0-C050-45ED-B741-D8498E3727BE}",
+    "kind": "windows_sdk_build_dispatch",
+    "output": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-terminal-physical-data8-sdk-build-a1",
+    "worker_sha256": "c31340a8883110ffdf1ac1a57056ada4063ab28d4208cf35652ebd0a1cc381a1"
+  },
+  "owned_process": {
+    "executable": "C:\\Windows\\System32\\cmd.exe",
+    "creation_filetime": "134395723910228896",
+    "pid": 16040,
+    "job_name": "Local\\TimeLearner-2cb67bbf-e69d-46ba-b436-072255982a2b",
+    "runtime_fingerprint": "ed83e2c9782702781791e8447e1188ddf107d66086394f37d20cb8de6c4d57cc",
+    "suspended_until_limits_applied": true
+  },
+  "kernel_observation": {
+    "name": "Local\\TimeLearner-2cb67bbf-e69d-46ba-b436-072255982a2b",
+    "active_processes": 7,
+    "total_processes": 319
+  },
+  "build_accepted": null,
+  "build_terminal": false,
+  "native78_executed": false,
+  "python3_executed": false,
+  "scientific_worker_admitted": false,
+  "scientific_verdict": null,
+  "execution": "running",
+  "validity": null,
+  "observed_at": "2026-11-19T14:43:01.119314+00:00",
+  "windows_build_records": {}
+}

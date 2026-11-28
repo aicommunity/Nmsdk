@@ -1,0 +1,158 @@
+{
+  "kind": "timelearner_Classic_policy0_completed_full_primary_audit_and_DATA",
+  "schema_version": 1,
+  "observed_utc": "2026-11-25T00:01:27.217606+00:00",
+  "source_SDK": {
+    "root": "49c4f08cc4cbc4675ce3e6dba160b931ab18d556",
+    "PulseLib": "f52713ce3d807c9a0abd8655caff82daba400519",
+    "Rdk": "561986e9f336ee5914e2d119de90b005e06f3639",
+    "Bin": "2c285cb472134fc92394153c089603a830a03f70"
+  },
+  "worker": "Elder",
+  "original_job_sha256": "f69e8f108aff58e22b01ff06cb7284e19173f1d467da7c07e9cbfdb02a07b430",
+  "training_outcome": "budget_exhausted",
+  "completed_boundary": false,
+  "final_all_input_verification": false,
+  "restored_parameters": [
+    {
+      "length": 241,
+      "resistance": 86000000,
+      "synapses": 13
+    },
+    {
+      "length": 201,
+      "resistance": 86000000,
+      "synapses": 11
+    },
+    {
+      "length": 1,
+      "resistance": 86000000,
+      "synapses": 1
+    },
+    {
+      "length": 1,
+      "resistance": 86000000,
+      "synapses": 1
+    }
+  ],
+  "historical_search_terminal_parameters": [
+    {
+      "length": 241,
+      "resistance": 86000000,
+      "synapses": 13
+    },
+    {
+      "length": 11,
+      "resistance": 86000000,
+      "synapses": 1
+    },
+    {
+      "length": 1,
+      "resistance": 86000000,
+      "synapses": 1
+    },
+    {
+      "length": 1,
+      "resistance": 86000000,
+      "synapses": 1
+    }
+  ],
+  "restored_model_revision": "86fd93bacae6608714149002a324874111cd6e861466c107d91c289c32d81d58",
+  "restored_epoch": 40,
+  "transcript_epoch": 39,
+  "search_probes": 82,
+  "applied_edits": 39,
+  "candidate_records": 40,
+  "candidate_records_per_input": {
+    "0": 25,
+    "1": 15,
+    "2": 0
+  },
+  "full_primary_audit": {
+    "proof": {
+      "path": "/home/user/timelearner-refactor/readbacks/classic-policy0-full-primary-audit-elder-dr8/worker/tmp/matched-count-training-audit.json",
+      "sha256": "6c2ea65510d02e72b8fe991261ae69ca93ca7fa94830c99b60530b6458985337",
+      "size": 93216
+    },
+    "source_package": {
+      "path": "/home/user/timelearner-refactor/readbacks/classic-n0-length-policy0-elder-dh3/train/native/train_stopped_state.json",
+      "sha256": "7edc3b311f8c97cf444587e32d0a0e91f2c5d24592308bfc396e80cadd8b121e",
+      "size": 881326992
+    },
+    "decoded_package_times": 1,
+    "logical_groups": 86,
+    "native_probes": 512,
+    "sampled_frames": 1842789,
+    "primary_bytes": 199059011,
+    "all_declared_original_observations_audited": true,
+    "portable_audit_does_not_restore_live_authority": true
+  },
+  "summary_source": {
+    "path": "/home/user/timelearner-refactor/readbacks/classic-n0-length-policy0-elder-dh3/train/native/train_stopped_summary.json",
+    "size": 42472545,
+    "sha256": "d244cc2fe7eefb82e7b6ac76140f4025c577439b146201430084e9b7f64750cf"
+  },
+  "operational_failures_preserved": [
+    "4GiB reader OOM; same complete audit passed with24GiB",
+    "first projection preparation selected old tools without required module",
+    "first archive preparation rejected incomplete symlink inventory; production snapshot correction dispatched"
+  ],
+  "external_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-25/Classic-policy0-audited-model-and-summary-ds18.json",
+    "sha256": "51b0a73b044896c3e35fb39f5588140fb36e37e033cbd88a1b2e101cb8909628",
+    "size": 11676
+  },
+  "restored_DATA": {
+    "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-policy0-DATA-restored-ds18/model.json",
+    "sha256": "820b420cdd6c0d0ec48f930448199eae455c4f3c6031817c1adc8ffa50f58add",
+    "size": 15604790
+  },
+  "all13_compressed_and_uncompressed_hashes_verified": true,
+  "full_Train_primary_archive_complete": true,
+  "full_Train_independent_restore_complete": false,
+  "recognition_conversion_preparation": {
+    "catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/prepared-controls/20261125-policy0-recognition-conversion-ds21.json",
+      "sha256": "6649f6e5b485f4a9a6559e0415fe6bf962c4a5425a700b76b37827e29b087d77",
+      "size": 1946
+    },
+    "controls_bundle": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/c9/c9b73103dd7e947eb63707426ea7af97e4123cc49be61a80dc54d543daf89fca",
+      "sha256": "c9b73103dd7e947eb63707426ea7af97e4123cc49be61a80dc54d543daf89fca",
+      "bytes": 6601
+    },
+    "owner_live_at_observation": true
+  },
+  "classification_performed": false,
+  "scientific_verdict": null,
+  "full_Train_external_archive": {
+    "catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-25/Classic-policy0-full-primary-dt11.json",
+      "sha256": "b3c1f077958f32e9bdf256ada01b7b9035a803cc2f983f045dc7e148f37c7f5f",
+      "size": 4634
+    },
+    "primary": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/de/ded9109088a3b79a75730a4fbf303c8ab31a9626d5f1931d31ae70ea9981e4a4",
+      "sha256": "ded9109088a3b79a75730a4fbf303c8ab31a9626d5f1931d31ae70ea9981e4a4",
+      "bytes": 38926028
+    },
+    "bundle": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/cb/cb1bebb841d1801cf620fe056fd80cb8e9a0bfe3b92a1cdfc14b9c2bfbf9dad6",
+      "sha256": "cb1bebb841d1801cf620fe056fd80cb8e9a0bfe3b92a1cdfc14b9c2bfbf9dad6",
+      "bytes": 304605
+    },
+    "logical_members": 1717,
+    "expanded_bytes": 2461964303,
+    "independent_member_restore_complete": false,
+    "scientific_verdict": null
+  }
+}

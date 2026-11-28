@@ -1,0 +1,216 @@
+{
+  "kind": "timelearner_review_and_controls_publication",
+  "schema_version": 1,
+  "observed_utc": "2026-11-23T21:28:48.398798+00:00",
+  "gallery_catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-24/fixed-Classic-matched-duration-holdout-as6/figures-reviewed-au5.json",
+  "gallery": {
+    "kind": "timelearner_fixed_Classic_holdout_reviewed_gallery",
+    "schema_version": 1,
+    "source_primary": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/e2/e2bcd437d16c64e5aa3ee63fa65c4d03c08afd77eabe4ad09c3c92c951389813",
+      "sha256": "e2bcd437d16c64e5aa3ee63fa65c4d03c08afd77eabe4ad09c3c92c951389813",
+      "bytes": 715908
+    },
+    "original_figure_manifest": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/6e/6e331c308f2173d3d0e424d2208636763642a3d7252b7da8203262bcd56b573e",
+      "sha256": "6e331c308f2173d3d0e424d2208636763642a3d7252b7da8203262bcd56b573e",
+      "bytes": 22263
+    },
+    "visual_review": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/2b/2b9603580c8a93f0d5b8020387d8a76b6b7d7118037bc7f8de7a0f0e88908a01",
+      "sha256": "2b9603580c8a93f0d5b8020387d8a76b6b7d7118037bc7f8de7a0f0e88908a01",
+      "bytes": 8494
+    },
+    "PNG_reviewed": 16,
+    "trials": 8,
+    "objects": {
+      "primary": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/ff/ff108855e12b68752056f08249d418a27c1a55e8f8efe25a8b88a2b2d4bf71cb",
+        "sha256": "ff108855e12b68752056f08249d418a27c1a55e8f8efe25a8b88a2b2d4bf71cb",
+        "bytes": 2392460
+      },
+      "bundle": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/4c/4c04f0319c4c31f3d85c6b0306ee25f0e71f1fe830478afe758b268f3927ee75",
+        "sha256": "4c04f0319c4c31f3d85c6b0306ee25f0e71f1fe830478afe758b268f3927ee75",
+        "bytes": 5869
+      }
+    },
+    "independent_byte_restoration": {
+      "kind": "timelearner_native_bundle_restoration",
+      "schema_version": 1,
+      "archive_sha256": "ff108855e12b68752056f08249d418a27c1a55e8f8efe25a8b88a2b2d4bf71cb",
+      "archive_members_verified": 34,
+      "retained_regular_files": 34,
+      "compatibility": "retain-regular-glog-aliases-v1",
+      "omitted_redundant_aliases": [],
+      "source_archive_modified": false,
+      "native_execution_attested": false,
+      "scientific_verdict": null
+    },
+    "cache": "/media/user/Data/Nmsdk-StructTrainExpArchive/report-cache/2026-11-23/fixed-Classic-duration-holdout-at24/figures",
+    "viewer": "/media/user/Data/Nmsdk-StructTrainExpArchive/report-cache/2026-11-23/fixed-Classic-duration-holdout-at24/figures/index.html",
+    "original_manifest_modified": false,
+    "new_native_execution": false,
+    "scientific_verdict": null,
+    "independent_recovery_scratch_removed": true
+  },
+  "controls": {
+    "M40": {
+      "controls_commit": "59cbc31a883621f40408de4858a12f52d5b6a80a",
+      "controls_bundle": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/6d/6d4ce48c34c27cd1062134564ba80d7082363eb8681140c610b5f72327304bcc",
+        "sha256": "6d4ce48c34c27cd1062134564ba80d7082363eb8681140c610b5f72327304bcc",
+        "bytes": 3740
+      },
+      "recovered_files": {
+        ".gitattributes": {
+          "bytes": 8,
+          "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da"
+        },
+        ".gitignore": {
+          "bytes": 196,
+          "sha256": "4a0f1eb37acfb7e092522bda225385930912c6c480e5ecd2441005da0587d250"
+        },
+        "queue-spec.json": {
+          "bytes": 2224,
+          "sha256": "47e12c1f2ba4addc37cf5172deca392e0803c1468840ad2a327c4ae92dcb1169"
+        },
+        "queue.py": {
+          "bytes": 4575,
+          "sha256": "abc1d4db770d4205f2369caa5db9110e6fcb2ce091f2293bcf18e8ff6050a691"
+        },
+        "request.json": {
+          "bytes": 1006,
+          "sha256": "ed37e0d25c0f61c533a661d41b38f62f68838b328f9c1051b13fd2222d1c329b"
+        }
+      },
+      "all_blobs_recovered": true,
+      "compared_to_live_controls": true
+    },
+    "Elder": {
+      "controls_commit": "f741193b5045cd5b598f2e91388c865bc1f779df",
+      "controls_bundle": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/fb/fb0fb6f0649294a6a45e15f71d374fa19739fa048343435666f52deef194fa5c",
+        "sha256": "fb0fb6f0649294a6a45e15f71d374fa19739fa048343435666f52deef194fa5c",
+        "bytes": 3654
+      },
+      "recovered_files": {
+        ".gitattributes": {
+          "bytes": 8,
+          "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da"
+        },
+        ".gitignore": {
+          "bytes": 196,
+          "sha256": "4a0f1eb37acfb7e092522bda225385930912c6c480e5ecd2441005da0587d250"
+        },
+        "queue-spec.json": {
+          "bytes": 1823,
+          "sha256": "1de3a4c6534e44257a13d1afe76a3a744660f68d69bf29d9408064540a5780e4"
+        },
+        "queue.py": {
+          "bytes": 4575,
+          "sha256": "abc1d4db770d4205f2369caa5db9110e6fcb2ce091f2293bcf18e8ff6050a691"
+        },
+        "request.json": {
+          "bytes": 993,
+          "sha256": "48d712362a076db1982ea0f482f6ba7dc8af9e9a7da4dd5b44748d2129d3ca55"
+        }
+      },
+      "all_blobs_recovered": true,
+      "compared_to_live_controls": false
+    },
+    "Windows": {
+      "controls_commit": "eabff1e7c00779a48fa169abb4a2a509860a7f93",
+      "controls_bundle": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/26/2610a961afe3ce63b433d5591560a8ed979c0434065490e26c0542374ad35b53",
+        "sha256": "2610a961afe3ce63b433d5591560a8ed979c0434065490e26c0542374ad35b53",
+        "bytes": 1526
+      },
+      "recovered_files": {
+        ".gitattributes": {
+          "bytes": 9,
+          "sha256": "8b9c3028d6467ff3be7c793141927841d70f47f52d0590677438f488ca154992"
+        },
+        ".gitignore": {
+          "bytes": 73,
+          "sha256": "fa8399d40b5a4472595761644d8c57af8e2103fd51944cd54a3ba6f71b1c48a1"
+        },
+        "launch.cmd": {
+          "bytes": 556,
+          "sha256": "1c25cff09938735e6c51a414964f2c444e04dd75074699e7b7ee1a6dfbc6180d"
+        },
+        "request.json": {
+          "bytes": 1542,
+          "sha256": "1aedcbbd014895a4c8f2b58dd8d33a91b616a65145b7e97ba412e9a44c059e97"
+        }
+      },
+      "all_blobs_recovered": true,
+      "compared_to_live_controls": false,
+      "dispatch": {
+        "kind": "timelearner_Windows_closed_audited_two_sweep_recognition_retry",
+        "schema_version": 1,
+        "job": "windows-two-sweep-recognition-at29",
+        "source_root": "5868b10c8deceec801e60962cadda70e74fb9c1c",
+        "controls_commit": "eabff1e7c00779a48fa169abb4a2a509860a7f93",
+        "task": {
+          "execution_time_limit": "P1DT12H",
+          "last_result": 267009,
+          "instances": 1,
+          "state": 4
+        },
+        "source_training_not_restarted": true,
+        "original_training_and_primary_tasks_closed_successfully": true,
+        "previous_failed_attempt_started_no_native_evaluation": true,
+        "previous_observer_error": "WinError31 querying identity during original process closure; no unknown process treated as stopped",
+        "original_source_audit": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-two-sweep-primary-audit-ad4\\tmp\\two-sweep-count-training-audit.json",
+          "sha256": "388538f407aea0a946e669086e9f55638c2fbc3b031afc2a7c07de28b5ae4bdf",
+          "size": 271705
+        },
+        "live_observer_race_fixed": false,
+        "new_scientific_result": null,
+        "controls_bundle": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-two-sweep-recognition-at29\\controls.bundle",
+          "sha256": "2610a961afe3ce63b433d5591560a8ed979c0434065490e26c0542374ad35b53",
+          "size": 1526
+        }
+      }
+    }
+  },
+  "Delay": {
+    "junit.xml": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/e9/e942011ea4f98244e4961b64f31dbbb71505ee57c2e1af4ef11949859955f9c4",
+      "sha256": "e942011ea4f98244e4961b64f31dbbb71505ee57c2e1af4ef11949859955f9c4",
+      "bytes": 19127
+    }
+  },
+  "no_native_model_executed": true,
+  "scientific_verdict": null
+}

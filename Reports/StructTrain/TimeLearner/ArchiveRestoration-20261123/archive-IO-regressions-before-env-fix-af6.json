@@ -1,0 +1,21 @@
+{
+  "kind": "timelearner_archive_IO_regressions",
+  "schema_version": 1,
+  "expected": 14,
+  "observed": 14,
+  "failures": 0,
+  "errors": 1,
+  "skipped": 0,
+  "passed": false,
+  "native_execution": false,
+  "log_sha256": "50f9dcd42423626400a79b7359ac24d24d4c1b2368635ca75241e71ed53ecac9",
+  "finished_utc": "2026-11-23T13:17:01.501974+00:00",
+  "earlier_attempt": {
+    "expected": 14,
+    "observed": 14,
+    "errors": 1,
+    "case": "test_private_revision_alias_is_shared_with_linked_worktree",
+    "reason": "git init failed with128 before production alias lookup under shared C:/ TEMP; isolated E:/ Git admission passed; no product failure inferred",
+    "log_source": "recorded tool output30982/cc8712"
+  }
+}

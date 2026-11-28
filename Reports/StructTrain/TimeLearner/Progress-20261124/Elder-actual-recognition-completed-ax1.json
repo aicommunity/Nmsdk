@@ -1,0 +1,47 @@
+{
+  "kind": "timelearner_Elder_actual_recognition_terminal_readback",
+  "schema_version": 1,
+  "host": "Elder-1",
+  "observed_utc": "2026-11-24T00:36:01.274360+00:00",
+  "job": "classic-proposal-stopped-recognition-elder-at22",
+  "terminal": {
+    "execution": "completed",
+    "validity": "valid",
+    "baseline_counts": {
+      "TP": 0,
+      "FP": 0,
+      "FN": 1,
+      "TN": 7,
+      "targets": 1,
+      "foils": 7,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.875,
+      "target_hit_rate": 0.0,
+      "foil_response_rate": 0.0
+    },
+    "actual_threshold_counts": {
+      "TP": 1,
+      "FP": 2,
+      "FN": 0,
+      "TN": 5,
+      "targets": 1,
+      "foils": 7,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.75,
+      "target_hit_rate": 1.0,
+      "foil_response_rate": 0.2857142857142857
+    },
+    "threshold": 0.02342413248481376,
+    "report_family_response_requirement_met": true,
+    "complete_source_history_audited": true,
+    "original_Train_outcome": "budget_exhausted",
+    "training_completed": false,
+    "independently_heldout_evaluation": false,
+    "scientific_verdict": null
+  },
+  "all_study_phases_closed": true,
+  "all_native_groups_closed": true,
+  "source_model_revision": "86fd93bacae6608714149002a324874111cd6e861466c107d91c289c32d81d58",
+  "complete_primary_publication_pending": true,
+  "scientific_verdict": null
+}

@@ -1,0 +1,274 @@
+{
+  "observed_at_utc": "2026-11-18T19:43:37.395589+00:00",
+  "via_jump": "10.245.1.12",
+  "host": "10.245.1.14",
+  "operator_sha256": "ac605a8233fadf233b67340c0e5ac84e5d38b3b6bb9747f6b7cb105e983ec90c",
+  "returncode": 0,
+  "stderr": "",
+  "observation": {
+    "controls.json": {
+      "commit": "fd140bbbca5435dfbcc282ebdc5297bdae7c7262",
+      "directory": "C:\\Projects\\TimeLearnerWorker\\controls\\elder-frozen-heldout4-a1"
+    },
+    "declaration.json": {
+      "declared_before_native": true,
+      "source": {
+        "accepted_metrics": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-elder-fixed-threshold8-a1\\metrics.json",
+          "sha256": "6ff8082a468fc85538a9cb88a47a19b0e94a2a4ae2807d139d2c3237331bcb4c",
+          "size": 165264
+        },
+        "accepted_native_audit": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-elder-fixed-threshold8-a1\\native-audit.json",
+          "sha256": "9101058be7fd19ab9bf057c2325d0f31d26879465a04df292431320b0fcbfc2b",
+          "size": 332626
+        },
+        "source": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-elder-retained-physical-export-a2\\restored\\s10-single-complete-sweep-branch-elder-a3\\branch\\native\\train_stopped_state.json",
+          "sha256": "57a8934db33b34ec819440f677a4cd1af6109df2813068356cec3ea55357cccd",
+          "size": 958170225
+        }
+      },
+      "patterns": {
+        "patterns": [
+          {
+            "sample_id": "seen-target-control",
+            "label": "target",
+            "pattern_isi": [
+              0.01,
+              0.08,
+              0.16,
+              0.24
+            ],
+            "pattern_hash": "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451"
+          },
+          {
+            "sample_id": "heldout-permutation-1",
+            "label": "foil",
+            "pattern_isi": [
+              0.01,
+              0.08,
+              0.24,
+              0.16
+            ],
+            "pattern_hash": "551689e8c6bae956339a1801ddb3832ea1b90c5df3aedd4b031c22535dd7a216"
+          },
+          {
+            "sample_id": "heldout-permutation-2",
+            "label": "foil",
+            "pattern_isi": [
+              0.01,
+              0.16,
+              0.24,
+              0.08
+            ],
+            "pattern_hash": "ffc97fcc6e42fbe9e8b56829a9e9ea869afdadd5168835be1002e46ac11bb6a5"
+          },
+          {
+            "sample_id": "heldout-permutation-3",
+            "label": "foil",
+            "pattern_isi": [
+              0.01,
+              0.24,
+              0.08,
+              0.16
+            ],
+            "pattern_hash": "00e15a9217d169de4826a214efd4dbfbad295bc96a78d47eceb5d1e13524daa0"
+          }
+        ],
+        "calibration_matrix_sha256": "6766f93966b91e81b92313f1d15ac5df3aa981ad34078e1d3f51606be2efc026",
+        "source_matrix_file": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\controls\\elder-single-sweep-baseline8-a1\\matrix.json",
+          "sha256": "16948d448b8d83e32eff98b415663696cc966c294b81bc76d7e956ed46e07c63",
+          "size": 3350
+        },
+        "generation": "three remaining permutations of target inter-pulse intervals; excluded exact calibration/training matrix hashes",
+        "seen_positive_control": true,
+        "unseen_foils": 3,
+        "independent_training_replicates": 0,
+        "threshold_reselection": false
+      },
+      "threshold": 0.09874840158355691,
+      "scientific_verdict": null
+    },
+    "prepared.json": {
+      "source_file": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-elder-retained-physical-export-a2\\restored\\s10-single-complete-sweep-branch-elder-a3\\branch\\native\\train_stopped_state.json",
+        "sha256": "57a8934db33b34ec819440f677a4cd1af6109df2813068356cec3ea55357cccd",
+        "size": 958170225
+      },
+      "job_sha256": "92a897de05c4e0f637d70ed5dffad10011e133ee0a8191f38905d21849a46d16",
+      "envelope": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\windows-elder-frozen-heldout4-a1-source-job.json",
+        "sha256": "54a595b897eaef4b3f5f16ceeaeffd8bc0330830eae493be92ad623e79e4df40",
+        "size": 3646
+      },
+      "trials": [
+        {
+          "run_id": "windows-elder-frozen-heldout4-a1/frozen-heldout",
+          "trial_id": "windows-elder-frozen-heldout4-a1/frozen-heldout/0",
+          "sample_id": "seen-target-control",
+          "label": "target",
+          "pattern_isi": [
+            0.01,
+            0.08,
+            0.16,
+            0.24
+          ],
+          "pattern_hash": "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451",
+          "duration": 2.0,
+          "maximum_samples": 4005,
+          "reset_policy": "reset_per_trial",
+          "record_threshold_potential": true
+        },
+        {
+          "run_id": "windows-elder-frozen-heldout4-a1/frozen-heldout",
+          "trial_id": "windows-elder-frozen-heldout4-a1/frozen-heldout/1",
+          "sample_id": "heldout-permutation-1",
+          "label": "foil",
+          "pattern_isi": [
+            0.01,
+            0.08,
+            0.24,
+            0.16
+          ],
+          "pattern_hash": "551689e8c6bae956339a1801ddb3832ea1b90c5df3aedd4b031c22535dd7a216",
+          "duration": 2.0,
+          "maximum_samples": 4005,
+          "reset_policy": "reset_per_trial",
+          "record_threshold_potential": true
+        },
+        {
+          "run_id": "windows-elder-frozen-heldout4-a1/frozen-heldout",
+          "trial_id": "windows-elder-frozen-heldout4-a1/frozen-heldout/2",
+          "sample_id": "heldout-permutation-2",
+          "label": "foil",
+          "pattern_isi": [
+            0.01,
+            0.16,
+            0.24,
+            0.08
+          ],
+          "pattern_hash": "ffc97fcc6e42fbe9e8b56829a9e9ea869afdadd5168835be1002e46ac11bb6a5",
+          "duration": 2.0,
+          "maximum_samples": 4005,
+          "reset_policy": "reset_per_trial",
+          "record_threshold_potential": true
+        },
+        {
+          "run_id": "windows-elder-frozen-heldout4-a1/frozen-heldout",
+          "trial_id": "windows-elder-frozen-heldout4-a1/frozen-heldout/3",
+          "sample_id": "heldout-permutation-3",
+          "label": "foil",
+          "pattern_isi": [
+            0.01,
+            0.24,
+            0.08,
+            0.16
+          ],
+          "pattern_hash": "00e15a9217d169de4826a214efd4dbfbad295bc96a78d47eceb5d1e13524daa0",
+          "duration": 2.0,
+          "maximum_samples": 4005,
+          "reset_policy": "reset_per_trial",
+          "record_threshold_potential": true
+        }
+      ],
+      "threshold": 0.09874840158355691,
+      "expected_revision": "3e7234958d0539f9ee022580ab6149ea4255cb5536a6c9123e75f226ba9d7985",
+      "before": {
+        "accepted_metrics": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-elder-fixed-threshold8-a1\\metrics.json",
+          "sha256": "6ff8082a468fc85538a9cb88a47a19b0e94a2a4ae2807d139d2c3237331bcb4c",
+          "size": 165264
+        },
+        "accepted_native_audit": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-elder-fixed-threshold8-a1\\native-audit.json",
+          "sha256": "9101058be7fd19ab9bf057c2325d0f31d26879465a04df292431320b0fcbfc2b",
+          "size": 332626
+        },
+        "source": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-elder-retained-physical-export-a2\\restored\\s10-single-complete-sweep-branch-elder-a3\\branch\\native\\train_stopped_state.json",
+          "sha256": "57a8934db33b34ec819440f677a4cd1af6109df2813068356cec3ea55357cccd",
+          "size": 958170225
+        }
+      }
+    },
+    "prepare": {
+      "binding": {
+        "pid": 12540,
+        "creation_filetime": "134395028743549300",
+        "job_name": "Local\\TimeLearner-5eebb55f-057e-433e-9a6a-4e0dbf7325b0"
+      },
+      "result.json": {
+        "kind": "timelearner_windows_process_result",
+        "schema_version": 1,
+        "execution": "completed",
+        "validity": "valid",
+        "reason": "exit_zero",
+        "returncode": 0,
+        "scientific_verdict": null,
+        "thread_limit_enforced": false,
+        "memory_limit_semantics": "job_committed_virtual_memory",
+        "wall_budget_scope": "whole_attempt_including_preparation",
+        "descendants_at_main_exit": [],
+        "all_processes_closed": true,
+        "cooperative_capture": "not_requested",
+        "runtime_provenance": "loaded_files_captured",
+        "observed_module_files": 33,
+        "wall_seconds": 458.3052266999148,
+        "child_resumed": true,
+        "job_name": "Local\\TimeLearner-5eebb55f-057e-433e-9a6a-4e0dbf7325b0"
+      },
+      "stdout.log": {
+        "bytes": 0,
+        "tail": ""
+      },
+      "stderr.log": {
+        "bytes": 0,
+        "tail": ""
+      },
+      "kernel_job": {
+        "absent": true,
+        "error": 2
+      },
+      "kernel_process": {
+        "absent": true,
+        "error": 87
+      }
+    },
+    "native": {
+      "binding": {
+        "pid": 13716,
+        "creation_filetime": "134395033327393688",
+        "job_name": "Local\\TimeLearner-9a5c0a66-ce0c-4739-827f-3cb1b5d9cf5e"
+      },
+      "stdout.log": {
+        "bytes": 0,
+        "tail": ""
+      },
+      "stderr.log": {
+        "bytes": 0,
+        "tail": ""
+      },
+      "kernel_job": {
+        "limits": {
+          "flags": 8712,
+          "memory_bytes": 17179869184,
+          "maximum_processes": 32,
+          "peak_job_memory_bytes": 4242526208
+        },
+        "pids": [
+          13716,
+          16084
+        ]
+      },
+      "kernel_process": {
+        "identity": {
+          "executable": "C:\\Projects\\TimeLearnerWorker\\runtime-frozen-physical-model-evaluation-win-a2\\NeuroModelerConsole.exe",
+          "creation_filetime": "134395033327393688"
+        },
+        "running": true
+      }
+    }
+  }
+}

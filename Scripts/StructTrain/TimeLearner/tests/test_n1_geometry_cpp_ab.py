@@ -10,7 +10,7 @@ import re
 import subprocess
 import unittest
 
-from ..collector_provenance import frozen_digest
+from ..collector_provenance import capture_training_algorithm_inventory, frozen_digest
 from ..native_evidence import load, require
 from ..native_gate import audit_junit, _environment
 from ..process_runner import execute
@@ -72,8 +72,14 @@ def _discover(executable, output):
 
 
 class N1GeometryCppABTest(unittest.TestCase):
+    controls_environment = 'TIMELEARNER_N1_GEOMETRY_CPP_CONTROLS'
+    required_regression_ids = (
+        'BoundedTrainingN1GeometryFairness/'
+        'ValidDenseResistanceMeshDoesNotStarveOtherLengthsInEitherRecoveryMode',)
+    result_kind = 'timelearner_n1_geometry_cpp_ab'
+
     def test_before_exposes_starvation_and_after_passes_complete_decision_cohort(self):
-        binding = os.environ.get('TIMELEARNER_N1_GEOMETRY_CPP_CONTROLS')
+        binding = os.environ.get(self.controls_environment)
         require(binding is not None, 'decision_cpp_controls_required')
         spec = load(Path(binding)/'declaration.json')
         require(set(spec) == {'before', 'after', 'output', 'toolchain', 'expected_case_ids',
@@ -107,8 +113,11 @@ class N1GeometryCppABTest(unittest.TestCase):
             type(spec['expected_before_failures']) is list and
             len(set(spec['expected_before_failures'])) == len(spec['expected_before_failures']) and
             set(spec['expected_before_failures']) <= set(expected), 'decision_cpp_expected_inventory')
-        regression = ('BoundedTrainingN1GeometryFairness/'
-            'ValidDenseResistanceMeshDoesNotStarveOtherLengthsInEitherRecoveryMode')
+        declared_inventories = {name: capture_training_algorithm_inventory(Path(spec[name]['directory']))
+                                for name in ('before', 'after')}
+        for inventory in declared_inventories.values():
+            require(set(inventory['ids']) == set(expected) and inventory['count'] == len(expected),
+                    'decision_cpp_expected_inventory_differs_from_target_sources')
         for name in ('before', 'after'):
             root = Path(spec[name]['directory']);folder = output/name;folder.mkdir()
             build = folder/'build'
@@ -123,7 +132,7 @@ class N1GeometryCppABTest(unittest.TestCase):
             _command(['cmake', '--build', str(build), '--parallel', '2'], folder/'build.log', 600)
             executable = build/'runtime/Test_PulseLib_TrainingAlgorithms'
             ids = _discover(executable, folder/'discovery.log')
-            require(regression in ids, 'decision_cpp_regression_missing')
+            require(set(self.required_regression_ids) <= set(ids), 'decision_cpp_regression_missing')
             self.assertEqual(set(ids), set(expected))
             self.assertEqual(len(ids), len(expected))
             flags = build_flags(build/'CMakeCache.txt')
@@ -143,7 +152,8 @@ class N1GeometryCppABTest(unittest.TestCase):
                 process = execute(runtime, ['--gtest_output=xml:'+str(junit),
                     '--gtest_filter=*', '--gtest_repeat=1'], folder,
                     folder/'process', 120., cooperative_capture=True)
-            self.assertEqual(process['returncode'], 1 if name == 'before' else 0)
+            self.assertEqual(process['returncode'],
+                1 if name == 'before' and spec['expected_before_failures'] else 0)
             self.assertEqual(process['runtime_provenance'], 'loaded_files_captured')
             inventory = audit_junit(junit, expected)
             wanted = spec['expected_before_failures'] if name == 'before' else []
@@ -156,6 +166,9 @@ class N1GeometryCppABTest(unittest.TestCase):
         self.assertEqual(dependency_before, {str(f): frozen_digest(f, 32*1024**2) for f in dependencies})
         (output/'source-inventories.json').write_text(json.dumps(snapshots, indent=2)+'\n')
         (output/'dependency-inventory.json').write_text(json.dumps(dependency_before, indent=2)+'\n')
-        (output/'result.json').write_text(json.dumps(dict(kind='timelearner_n1_geometry_cpp_ab',
-            schema_version=1, results=results, before_expected_failure=True, physical_models_executed=False,
+        (output/'declared-case-inventories.json').write_text(
+            json.dumps(declared_inventories, indent=2)+'\n')
+        (output/'result.json').write_text(json.dumps(dict(kind=self.result_kind,
+            schema_version=1, results=results,
+            before_expected_failure=bool(spec['expected_before_failures']), physical_models_executed=False,
             scientific_verdict=None), indent=2, allow_nan=False)+'\n')

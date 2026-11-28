@@ -1,0 +1,62 @@
+{
+  "dispatched": true,
+  "job": "n0-proposal-reservation-cpp-ab-m40-x6",
+  "controls_commit": "9686408df99e4666a9026cad89536bc7a64f1f0d",
+  "supervisor": {
+    "pid": 877584,
+    "start_ticks": "449370085",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000
+  },
+  "correction": {
+    "original_queue": "n0-proposal-reservation-cpp-ab-m40-x3",
+    "original_owner": {
+      "pid": 858627,
+      "start_ticks": "449347971",
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "uid": 1000
+    },
+    "original_owner_closed": true,
+    "original_exception": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/n0-proposal-reservation-cpp-ab-m40-x3/queue-exception.json",
+      "sha256": "8a4802d47dfc57fcc86e6acc351633f3e6cd5b606743cedb1b8ab664464486df",
+      "size": 545
+    },
+    "original_validation_never_started": true,
+    "reason": "reserved_dictionary_truthiness_prevented_admission; corrected_to_slots_equals_zero",
+    "science_and_archive_unchanged": true,
+    "current_reserved": {
+      "disk_bytes": 0,
+      "memory_bytes": 0,
+      "slots": 0
+    },
+    "scientific_verdict": null
+  },
+  "before": {
+    "directory": "/media/user/Data/TimeLearnerRefactor/source-n0-reservation-before-20261123-x3",
+    "root_commit": "91f1c77408a57d10162c8a57114eea992b2cadb1",
+    "pulse_commit": "b03e13857cd7656a8ff1ff3162d28b25e90bb5a4"
+  },
+  "after": {
+    "directory": "/media/user/Data/TimeLearnerRefactor/source-n0-reservation-after-20261123-x3",
+    "root_commit": "b2c3cb65ab572c680a56f28b86d40445b9392b0c",
+    "pulse_commit": "3f5a2205a4e6c02de545cdc214172482ac53c4b2"
+  },
+  "expected_cpp_cases": 146,
+  "expected_before_failures": [
+    "BoundedTrainingMeasuredCount/ClassicRefinesBeforeReservingOrdinaryNeighbours",
+    "BoundedTrainingMeasuredCount/BranchRefinesBeforeReservingOrdinaryNeighbours",
+    "BoundedTrainingMeasuredCount/DeferredNeighboursNeverReplaceAFreshFinalCertificate"
+  ],
+  "controls_backup": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/e2/e270a748090c2b26ba643cfa4f81b1d2d44b8aceccee3eb0f0d6c56305a5131c",
+    "sha256": "e270a748090c2b26ba643cfa4f81b1d2d44b8aceccee3eb0f0d6c56305a5131c",
+    "bytes": 8296
+  },
+  "controls_backup_catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/prepared-controls/20261123-n0-proposal-reservation-cpp-ab-x6.json",
+  "native_scientific_admission": false,
+  "scientific_verdict": null
+}

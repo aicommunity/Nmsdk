@@ -1,0 +1,100 @@
+{
+  "catalog": "experiments/2026-11-23/Audited-response-timing-validation-ar17/index.json",
+  "record": {
+    "kind": "timelearner_audited_response_timing_rule_validation_publication",
+    "schema_version": 1,
+    "source_root": "3edf1397a44ac2bed9c65191cd43ba39b93cdc24",
+    "executed_tests": 11,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "objects": {
+      "passed_Git_controls_bundle": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/0b/0bd4998d464c0e54c207c0c862cf177300dac22a10318196e422ead20114423d",
+        "bytes": 4086,
+        "sha256": "0bd4998d464c0e54c207c0c862cf177300dac22a10318196e422ead20114423d"
+      },
+      "failed-before-tests_Git_controls_bundle": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/f5/f5b83c94e0e33b2f66d2a0e95575f73bd4193f8988473645e2a55e982e5c0d65",
+        "bytes": 4074,
+        "sha256": "f5b83c94e0e33b2f66d2a0e95575f73bd4193f8988473645e2a55e982e5c0d65"
+      },
+      "validation_primary": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/74/74ac4d83948c2937ef6b5aee913eff2297943af1870bf5d41f6296f293b42564",
+        "bytes": 9208,
+        "sha256": "74ac4d83948c2937ef6b5aee913eff2297943af1870bf5d41f6296f293b42564"
+      },
+      "source_recorded_rule_corpus": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/31/31e791bdbe3a6eb628c16b06806cb63a45a9b6f8fe7f7bbab2edebcf91cf4b6d",
+        "sha256": "31e791bdbe3a6eb628c16b06806cb63a45a9b6f8fe7f7bbab2edebcf91cf4b6d",
+        "bytes": 455524
+      }
+    },
+    "controls_independent_restoration": {
+      "passed": {
+        "commit": "3f47e4a14da5d5fb1510af9938ee60f1cacfebed",
+        "verified": true,
+        "repository": "experiments/2026-11-23/Audited-response-timing-validation-ar17/passed-independent-restored.git"
+      },
+      "failed-before-tests": {
+        "commit": "93647141a45d5259ea8cb53c4a3557cc2c6fb217",
+        "verified": true,
+        "repository": "experiments/2026-11-23/Audited-response-timing-validation-ar17/failed-before-tests-independent-restored.git"
+      }
+    },
+    "primary_independent_restoration": {
+      "members": 36,
+      "expanded_bytes": 62407,
+      "all_member_sha256_verified": true
+    },
+    "recorded_corpus_independent_restoration": {
+      "members": 12,
+      "expanded_bytes": 14363038,
+      "all_member_sha256_verified": true
+    },
+    "original_recorded_counts": {
+      "TP": 1,
+      "FP": 1,
+      "FN": 0,
+      "TN": 6,
+      "targets": 1,
+      "foils": 7,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.875,
+      "target_hit_rate": 1.0,
+      "foil_response_rate": 0.14285714285714285
+    },
+    "original_audit_sha256": "ded244c88f8f4c7aeb862f080a7c3253f278d5d129b3f6fd5ff5e20b51bd5171",
+    "all_scientific_classifications_unchanged": true,
+    "failed_task_retirement": {
+      "return_code": 0,
+      "observation": {
+        "removed_exact_idle_failed_task": true,
+        "before": {
+          "arguments": "/d /c \"C:\\Projects\\TimeLearnerWorker\\controls\\original-audit.json\\launch.cmd\"",
+          "last_result": -2147024629,
+          "working": "C:\\Projects\\TimeLearnerWorker\\controls\\original-audit.json",
+          "instances": 0,
+          "state": 3
+        }
+      }
+    },
+    "native_models_executed": 0,
+    "full_renderer_executed": false,
+    "new_full_model_reaudit_performed": false,
+    "whole_stage3_complete": false,
+    "scientific_verdict": null
+  }
+}

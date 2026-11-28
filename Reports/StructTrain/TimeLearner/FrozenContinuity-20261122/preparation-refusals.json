@@ -1,0 +1,29 @@
+{
+  "kind": "timelearner_iti_preparation_refusals",
+  "schema_version": 1,
+  "attempts": [
+    {
+      "attempt": "a1",
+      "reason": "[WinError 64] Указанное сетевое имя более недоступно: '\\\\\\\\10.245.1.17\\\\Nmsdk-StructTrainExpArchive\\\\'",
+      "readback_sha256": "29653fb2930d083678c36d8c3aab638aa2442946b7f0595176fd8d17ed1cf457",
+      "model_executed": false,
+      "scope": "archive access"
+    },
+    {
+      "attempt": "a2",
+      "reason": "[WinError 5] Отказано в доступе: '\\\\\\\\10.245.1.12\\\\Nmsdk-StructTrainExpArchive\\\\'",
+      "readback_sha256": "976f2be0c922564b6e8668202831a2684588f4363823af408786884b0a025062",
+      "model_executed": false,
+      "scope": "archive access"
+    },
+    {
+      "attempt": "a3",
+      "reason": "",
+      "readback_sha256": "57db7926e172460e4c74d85e4e03b3d639b8359f9d3784fd49962aa82aa0073a",
+      "model_executed": false,
+      "scope": "Windows DATA is not the M40 model; wrong model assumption rejected before validation"
+    }
+  ],
+  "shared_archive_access_not_fixed_by_these_tests": true,
+  "scientific_verdict": null
+}

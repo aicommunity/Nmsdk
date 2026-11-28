@@ -1,0 +1,56 @@
+{
+  "kind": "timelearner_scientific_diagram_sources",
+  "schema_version": 1,
+  "diagrams": [
+    {
+      "id": "classic-topology",
+      "caption": "Независимые дендритные пути и участки сомы",
+      "engine": "dot",
+      "source": "classic-topology.dot"
+    },
+    {
+      "id": "branch-topology",
+      "caption": "Точки подключения на общей дендритной ветви",
+      "engine": "dot",
+      "source": "branch-topology.dot"
+    },
+    {
+      "id": "classic-learning",
+      "caption": "Структурная адаптация независимых путей",
+      "engine": "dot",
+      "source": "classic-learning.dot"
+    },
+    {
+      "id": "branch-learning",
+      "caption": "Структурная адаптация общей ветви",
+      "engine": "dot",
+      "source": "branch-learning.dot"
+    },
+    {
+      "id": "normalization-n0",
+      "caption": "Нормализация целым числом синапсов",
+      "engine": "dot",
+      "source": "normalization-n0.dot"
+    },
+    {
+      "id": "normalization-n1",
+      "caption": "Нормализация сопротивлением с повторным измерением времени",
+      "engine": "dot",
+      "source": "normalization-n1.dot"
+    },
+    {
+      "id": "logical-classes",
+      "caption": "Логическая UML диаграмма компонентов обучения",
+      "engine": "dot",
+      "source": "logical-classes.dot"
+    },
+    {
+      "id": "probe-sequence",
+      "engine": "neato",
+      "caption": "UML последовательность штатного измерения",
+      "source": "probe-sequence.dot"
+    }
+  ],
+  "edition": "2026-11-22-v5-draft",
+  "reading_scope": "Compact overview diagrams; mathematical guards and protocols remain in the accompanying text"
+}

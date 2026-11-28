@@ -1,0 +1,67 @@
+{
+  "kind": "timelearner_cap24_new_grid27_scientific_gallery_readback",
+  "schema_version": 1,
+  "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+  "gallery_catalog": {
+    "relative_path": "experiments/2026-11-26/Windows-cap24-new-grid27-scientific-figures-independent-fa24.json",
+    "sha256": "34453d51fbe068bfaf5fc7bf3afb45dc1a469cac082ab80dc0892171e8fcc5ac",
+    "bytes": 2718
+  },
+  "primary_catalog": {
+    "relative_path": "experiments/2026-11-26/Windows-cap24-new-grid27-independent-ex9.json",
+    "sha256": "a996b2871a38a3888a43700d433b9a6e4425ba9a9ee0250f1ce895e38a1c72ca",
+    "bytes": 34478
+  },
+  "gallery_objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/73/73daf031fb39295e0302ef267c3be68502fa29740e98a7c92a3423f3b1b4d35c",
+      "sha256": "73daf031fb39295e0302ef267c3be68502fa29740e98a7c92a3423f3b1b4d35c",
+      "bytes": 24919
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/1f/1f6ed0dfa2b9056b92239a624c24a410bb5946b2a92724346223301637a9b394",
+      "sha256": "1f6ed0dfa2b9056b92239a624c24a410bb5946b2a92724346223301637a9b394",
+      "bytes": 8757172
+    },
+    "source-result.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/e0/e07c6a0b90a4a5498f2998dcf1653a94fd45eaec2db6dda49d6aa72bf6751d4a",
+      "sha256": "e07c6a0b90a4a5498f2998dcf1653a94fd45eaec2db6dda49d6aa72bf6751d4a",
+      "bytes": 835
+    }
+  },
+  "primary_members": 74,
+  "gallery_members": 143,
+  "reviewed_PNG": 54,
+  "verified_PNG_SVG": 108,
+  "observations": 27,
+  "model_revision": "cefb18c0cdf799e782bc973ecdfcb13e5089eb323235115d83a56a61062ef02d",
+  "threshold": 0.026094309839601246,
+  "counts": {
+    "TP": 1,
+    "FP": 1,
+    "FN": 0,
+    "TN": 25
+  },
+  "source_observations_match_independently_restored_primary": 27,
+  "new_Train": false,
+  "new_threshold": false,
+  "independently_heldout_positive_class": false,
+  "previous_other_eight_pattern_negative_result_preserved": {
+    "TP": 1,
+    "FP": 7,
+    "FN": 0,
+    "TN": 0
+  },
+  "all_order_or_ITI_robustness_verified": false,
+  "full_plan_complete": false,
+  "scientific_verdict": null
+}

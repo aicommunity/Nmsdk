@@ -1,0 +1,127 @@
+{
+  "kind": "timelearner_actual_threshold_preparation_dispatches",
+  "schema_version": 1,
+  "preparation": {
+    "elder": {
+      "controls": "/home/user/timelearner-refactor/requests/s11-prepared-long-model-threshold-elder-a1",
+      "exists": true,
+      "prepare-result.json": {
+        "execution": "completed",
+        "reason": "exit_zero_and_whole_group_closed",
+        "returncode": 0,
+        "wall_seconds": 48.34981897100806,
+        "runtime_provenance": "loaded_files_captured",
+        "all_processes_closed": true,
+        "scientific_verdict": null
+      },
+      "prepared.json": {
+        "prepared": true,
+        "job": "s11-prepared-long-model-threshold-elder-a1",
+        "threshold": 0.025742023300155625,
+        "nonspiking_proxy": {
+          "TP": 1,
+          "FN": 0,
+          "FP": 2,
+          "TN": 5
+        },
+        "scientific_verdict": null
+      },
+      "prepare-process/result.json": {
+        "execution": "completed",
+        "reason": "exit_zero_and_whole_group_closed",
+        "returncode": 0,
+        "wall_seconds": 48.34981897100806,
+        "runtime_provenance": "loaded_files_captured",
+        "all_processes_closed": true,
+        "scientific_verdict": null
+      }
+    },
+    "m40": {
+      "controls": "/media/user/Data/TimeLearnerRefactor/requests/s11-prepared-long-model-threshold-m40-a1",
+      "exists": true,
+      "prepare-result.json": {
+        "execution": "completed",
+        "reason": "exit_zero_and_whole_group_closed",
+        "returncode": 0,
+        "wall_seconds": 81.55925437714905,
+        "runtime_provenance": "loaded_files_captured",
+        "all_processes_closed": true,
+        "scientific_verdict": null
+      },
+      "prepared.json": {
+        "prepared": true,
+        "job": "s11-prepared-long-model-threshold-m40-a1",
+        "threshold": 0.0999470202411733,
+        "nonspiking_proxy": {
+          "TP": 1,
+          "FN": 0,
+          "FP": 1,
+          "TN": 6
+        },
+        "scientific_verdict": null
+      },
+      "prepare-process/result.json": {
+        "execution": "completed",
+        "reason": "exit_zero_and_whole_group_closed",
+        "returncode": 0,
+        "wall_seconds": 81.55925437714905,
+        "runtime_provenance": "loaded_files_captured",
+        "all_processes_closed": true,
+        "scientific_verdict": null
+      }
+    }
+  },
+  "native": {
+    "elder": {
+      "started": true,
+      "job": "s11-prepared-long-model-threshold-elder-a1",
+      "controls": "/home/user/timelearner-refactor/requests/s11-prepared-long-model-threshold-elder-a1",
+      "controls_commit": "691cf57df8cf45137bce99c821097448dfa13e62",
+      "binding": {
+        "controller_pid": 773909
+      },
+      "threshold": 0.025742023300155625,
+      "source_model_revision": "483b379cfd982a26330714e469cb36d665f2661f7e22b08b02030d1a58672d61",
+      "source_package_sha256": "1c8dba5b4c3a8e866c5c2c4874bff955fa57a8e0af2d9f2a6f8c07d2a1c24b65",
+      "worker_root": "c99ad6e24bf9dda4dedc21d8ff7a26120987abc1",
+      "worker_git_blob": "994a7c7d01a1fbb0dfb68bff5bb59fce32e27a14",
+      "native_trials": 8,
+      "memory_bytes": 8589934592,
+      "maximum_wall_seconds": 2700,
+      "protocol": "historical_same_matrix",
+      "training_completed": false,
+      "scientific_verdict": null
+    },
+    "m40": {
+      "started": true,
+      "job": "s11-prepared-long-model-threshold-m40-a1",
+      "controls": "/media/user/Data/TimeLearnerRefactor/requests/s11-prepared-long-model-threshold-m40-a1",
+      "controls_commit": "ee765f798fc3986d0961c536a57f96fc637f85da",
+      "binding": {
+        "controller_pid": 2499022
+      },
+      "threshold": 0.0999470202411733,
+      "source_model_revision": "ac29284570efcb7e733f4364daa245d35e6665cd249010962da465b32177040a",
+      "source_package_sha256": "defebe51276b9b84a4837d15ba6903663394f0fc1d93c435d7c10f4ad8564a2a",
+      "worker_root": "c99ad6e24bf9dda4dedc21d8ff7a26120987abc1",
+      "worker_git_blob": "994a7c7d01a1fbb0dfb68bff5bb59fce32e27a14",
+      "native_trials": 8,
+      "memory_bytes": 8589934592,
+      "maximum_wall_seconds": 2700,
+      "protocol": "historical_same_matrix",
+      "training_completed": false,
+      "scientific_verdict": null
+    }
+  },
+  "windows_scheduled_preparation": {
+    "scientific_verdict": null,
+    "instance": "{981A7524-6B0E-49A0-9EB4-C17DC6F14EF5}",
+    "execution_time_limit": "PT1H",
+    "task": "TimeLearner-windows-prepared-long-model-threshold-a1-preparation",
+    "engine_pid": 12804
+  },
+  "protocol": "historical_same_matrix",
+  "source_history_fields_removed": false,
+  "training_completed": false,
+  "scientific_verdict": null
+}

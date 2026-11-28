@@ -13,6 +13,7 @@ from .native_evidence import load, require
 from .recognition_metrics import load_evaluation, score_recognition_evaluation, score_threshold_candidate
 from .plotting import render_soma, render_series, plotting_runtime, render_positive_lobe_views
 from .lt_decision_reports import render_lt_decisions
+from .trial_response_timing import summarize_trial_timing, timing_html
 
 
 def _write(path, value):
@@ -21,6 +22,11 @@ def _write(path, value):
 
 def render_evaluation(source: Path, model: Path, output: Path, *, calibration_probe=False):
     return _render_evaluation(source, model, output, calibration_probe=calibration_probe)
+
+
+def render_physical_data_evaluation(source: Path, model: Path, output: Path, *, include_native_tiles=True):
+    """Frozen physical DATA responses, without transferring source authority."""
+    return _render_evaluation(source, model, output, physical_data=True, include_native_tiles=include_native_tiles)
 
 
 def render_diagnostic_evaluation(source: Path, model: Path, stopped: Path, output: Path):
@@ -39,19 +45,33 @@ def render_diagnostic_evaluation_case(source: Path, model: Path, source_case, ou
     return _render_evaluation(source, model, output, source_case=source_case)
 
 
-def _render_evaluation(source, model, output, *, calibration_probe=False, source_case=None):
+def _render_evaluation(source, model, output, *, calibration_probe=False, source_case=None, physical_data=False,
+                       include_native_tiles=True):
+    require(type(include_native_tiles) is bool and (include_native_tiles or physical_data),
+            'compact_views_require_physical_DATA_report')
     runtime = plotting_runtime()
     diagnostic = source_case is not None
+    require(not physical_data or not (diagnostic or calibration_probe), 'physical_report_scope_conflict')
     from .recognition_metrics import load_partial_diagnostic_evaluation, score_partial_diagnostic_evaluation
     if diagnostic:
         spec, observations, missing = load_partial_diagnostic_evaluation(source)
+    elif physical_data:
+        from .recognition_metrics import load_physical_model_data_evaluation
+        spec, observations = load_physical_model_data_evaluation(source)
     else:
         spec, observations = load_evaluation(source)
     package = load(model)
     context_label = 'Stopped Train: '+source_case[0]["training_outcome"] if diagnostic else None
-    scorer = score_threshold_candidate if calibration_probe else score_recognition_evaluation
+    if physical_data:
+        from .recognition_metrics import score_physical_model_data_evaluation
+        context_label = 'Физическая DATA-модель; обучение и калибровка не подтверждены'
+        scorer = score_physical_model_data_evaluation
+    else:
+        scorer = score_threshold_candidate if calibration_probe else score_recognition_evaluation
     analysis = (score_partial_diagnostic_evaluation(spec, observations, package, source_case)
                 if diagnostic else scorer(spec, observations, package))
+    timing = (summarize_trial_timing(spec,observations,analysis)
+              if analysis['validity']=='valid' else None)
     calibrated = package.get("kind") == "timelearner_calibrated_recognition_state"
     diagnostic_candidate = diagnostic and package.get('kind') == 'timelearner_diagnostic_threshold_candidate'
     if diagnostic_candidate:
@@ -59,7 +79,11 @@ def _render_evaluation(source, model, output, *, calibration_probe=False, source
     context = package["source_candidate"]["source_recognition"] if calibrated else (
         package["source_recognition"] if calibration_probe or diagnostic_candidate else package)
     # Descriptors: native binding enumerates Soma1..N (Branch has one soma).
-    count = 1 if context["source_solo"]["configuration"]["model"]["branch"] else len(context["recognition_inputs"])
+    if physical_data:
+        definition = package['configuration']['model']
+        count = 1 if definition['branch'] else len(definition['inputs'])
+    else:
+        count = 1 if context["source_solo"]["configuration"]["model"]["branch"] else len(context["recognition_inputs"])
     nodes = {node["path"]: node for node in package["neuron"]["graph"]["identity"]["model"]["nodes"]}
     descriptors = []
     for i in range(count):
@@ -69,13 +93,17 @@ def _render_evaluation(source, model, output, *, calibration_probe=False, source
                             "units": "model_units_SI_unverified", "adapter": "native_recognition_soma"})
     require(all((diagnostic or o["samples"]) and all(len(s["soma"]) == count for s in o["samples"]) for o in observations),
             "missing_report_soma_samples")
-    limits = []
+    limits, shared_minima, shared_maxima = [], [], []
     for i in range(count):
         values = [s["soma"][i] for o in observations for s in o["samples"]]
         if not values:
             limits.append(None)
+            shared_minima.append(None)
+            shared_maxima.append(None)
             continue
         lo, hi = min(values), max(values)
+        shared_minima.append(lo)
+        shared_maxima.append(hi)
         padding = (hi-lo)*.08 if hi > lo else max(abs(lo)*.08, 1e-12)
         limits.append((lo-padding, hi+padding))
     # Never overwrite an existing report, source data or completed job directory.
@@ -120,10 +148,16 @@ def _render_evaluation(source, model, output, *, calibration_probe=False, source
         for descriptor in descriptors:
             folder = output/f'trial-{index:04d}-soma-{descriptor["index"]+1:03d}'
             folder.mkdir()
-            views = render_soma(o, descriptor["index"], descriptor["path"], limits[descriptor["index"]], folder,
-                                context_label=context_label)
-            views.extend(render_positive_lobe_views(o, descriptor["index"], descriptor["path"], folder,
-                context_label=context_label))
+            display = o
+            if not include_native_tiles:
+                maximum = max(range(len(o['samples'])), key=lambda i:o['samples'][i]['soma'][descriptor['index']])
+                display = {**o, 'diagnostic_peak_indices':
+                           [maximum] if 0 < maximum < len(o['samples'])-1 else []}
+            views = render_soma(display, descriptor["index"], descriptor["path"], limits[descriptor["index"]], folder,
+                                context_label=context_label, include_native_tiles=include_native_tiles)
+            views.extend(render_positive_lobe_views(display, descriptor["index"], descriptor["path"], folder,
+                context_label=context_label, shared_minimum=shared_minima[descriptor["index"]],
+                shared_maximum=shared_maxima[descriptor["index"]], include_native_tiles=include_native_tiles))
             for view in views:
                 view["files"] = [f"{folder.name}/{p}" for p in view["files"]]
             figures.append({"trial_id": o["trial_id"], "sample_id": o["sample_id"], "label": o["label"],
@@ -136,6 +170,7 @@ def _render_evaluation(source, model, output, *, calibration_probe=False, source
                              f'<a href="{png}">full PNG</a></p><img src="{png}" alt="{view["view"]}">')
     _write(primary/"evaluation.json", copied_spec)
     _write(output/"analysis.json", analysis)
+    if timing is not None:_write(output/'timing-summary.json',timing)
     # Preserve actual presentation order and gaps in a separate series view.
     ordered = [by_id[t["trial_id"]] for t in sorted(spec["trials"], key=lambda t: t["presentation_index"]) if t["trial_id"] in by_id]
     series = []
@@ -151,7 +186,7 @@ def _render_evaluation(source, model, output, *, calibration_probe=False, source
         series.append({"descriptor": descriptor, **rendered})
     _write(output/"series.json", series)
     decisions = render_lt_decisions(spec, observations, analysis.get('effective_threshold'), output,
-                                   context_label=context_label)
+                                   context_label=context_label, include_native_tiles=include_native_tiles)
     _write(output/'lt-decision-views.json', decisions)
     links.append('<h2>LT decision potential and actual spike events</h2>'
                  '<p>Threshold belongs to the LT decision channel. Local Y views explicitly mark an off-scale threshold. '
@@ -182,6 +217,13 @@ def _render_evaluation(source, model, output, *, calibration_probe=False, source
 
                                 "visual acceptance pending"],
                 "visual_acceptance_complete": False, "evaluation_verdict": None}
+    manifest['event_timing'] = dict(available=timing is not None,
+        path='timing-summary.json' if timing is not None else None,
+        source_classifications_unchanged=True, new_response_criterion=False,
+        reason=None if timing is not None else 'incomplete_or_invalid_declared_trials')
+    if physical_data and not include_native_tiles:
+        manifest['schema_version'] = 2
+        manifest['time_view_policy'] = 'full-window-and-measured-peak-details'
     if diagnostic:
         manifest.update(purpose="stopped_training_recognition_diagnostic", diagnostic_only=True,
                         training_completed=False, source_training_outcome=source_case[0]["training_outcome"],
@@ -192,11 +234,19 @@ def _render_evaluation(source, model, output, *, calibration_probe=False, source
                                           "sample_count": len(by_id[t["trial_id"]]["samples"]) if t["trial_id"] in by_id else 0}
                                          for t in spec["trials"]],
                         observed_trial_soma_pairs=len(figures))
+    if physical_data:
+        manifest.update(purpose='physical_model_data_evaluation_diagnostic', data_only=True,
+                        source_boundary=package['source_boundary'],
+                        source_training_evidence_checked=False, training_certificate_transferred=False,
+                        calibration_confirmed=False, native_import_verified=False,
+                        controller_checkpoint_restored=False)
     _write(output/"manifest.json", manifest)
     (output/"index.html").write_text('<!doctype html><html lang="en"><meta charset="utf-8">'
         '<title>TimeLearner visual diagnostic report</title><style>body{font:18px sans-serif;margin:2em}'
         'img{display:block;width:100%;max-width:1920px}p{max-width:90em}</style>'
         '<h1>TimeLearner visual diagnostic report</h1>'
+        + ('<p>Физическая DATA-модель: графики и метрики описывают записанные реакции. '
+           'Обучение, импорт исходной модели и калибровка этим отчётом не подтверждаются.</p>' if physical_data else '')
         + ('<p>Unfinished Train: '+html.escape(source_case[0]["training_outcome"])+'. Diagnostic responses only; no convergence certificate. Missing curves mean unobserved trials.</p>' if diagnostic else '')
         + ('<p>Threshold candidate probe: this report does not certify calibration or independent evaluation.</p>' if calibration_probe else '')
         + '<p>Actual soma SumPotential and shared input samples. '
@@ -204,6 +254,8 @@ def _render_evaluation(source, model, output, *, calibration_probe=False, source
         '<a href="primary/model.json">model</a>. <a href="analysis.json">Metrics</a>. '
         'SI units unverified; diagnostic report, visual acceptance pending. '
         'Click full PNG/SVG/PDF for readable scale. Purple dotted markers: actual LT spike events.</p>'
+        +(timing_html(timing) if timing is not None else
+          '<p>Временная диагностика недоступна: полный набор достоверных наблюдений отсутствует.</p>')
         +'<h2>Presentation-order series</h2><p><a href="series.json">timing table and series manifest</a></p>'
         +''.join(f'<p>{v["view"]}: <a href="{p}">{p}</a></p>' for item in series for v in item["views"] for p in v["files"])
         +"\n".join(links)+'</html>\n', encoding="utf-8")
@@ -213,6 +265,8 @@ def _render_evaluation(source, model, output, *, calibration_probe=False, source
     return {"kind": manifest["kind"], "status": manifest["status"],
             "trial_soma_pairs": len(figures), "lt_decision_trial_pairs": len(decisions["trials"]),
             "files": len(sums), "evaluation_verdict": None,
+            **({"data_only": True, "source_training_evidence_checked": False,
+                "training_certificate_transferred": False, "calibration_confirmed": False} if physical_data else {}),
             **({"diagnostic_only": manifest["diagnostic_only"],
                 "training_completed": manifest["training_completed"],
                 "source_training_outcome": manifest["source_training_outcome"]} if diagnostic else {})}

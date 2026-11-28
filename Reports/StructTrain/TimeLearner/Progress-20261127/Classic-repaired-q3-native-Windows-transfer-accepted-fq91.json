@@ -1,0 +1,81 @@
+{
+  "kind": "timelearner_external_scientific_result_reference",
+  "schema_version": 1,
+  "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+  "catalog": {
+    "relative_path": "experiments/2026-11-27/Classic-repaired-q3-native-Windows-transfer-accepted-fq91.json",
+    "bytes": 3129,
+    "sha256": "72a48b981d6cb701f76a1b0b5ba6554529b8c4164d0eab2faeb02e39452cc748"
+  },
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/11/11301be9129197c3a0b7341f924450cc1cd59cb1074962fcdb6cb6a8f9a79bc3",
+      "sha256": "11301be9129197c3a0b7341f924450cc1cd59cb1074962fcdb6cb6a8f9a79bc3",
+      "bytes": 36144
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/01/01842a879940af6690aeb039d848a0c3fd808604cc8a8eb0ecdc27c37bf8cc21",
+      "sha256": "01842a879940af6690aeb039d848a0c3fd808604cc8a8eb0ecdc27c37bf8cc21",
+      "bytes": 22157328
+    },
+    "independent-reader.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/3f/3f8be5650e3bfb41f0c158d08e11d6cd62aa5356c903f7ec812952adf245ece6",
+      "sha256": "3f8be5650e3bfb41f0c158d08e11d6cd62aa5356c903f7ec812952adf245ece6",
+      "bytes": 13568
+    },
+    "native-evaluation-audit.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/c9/c9d8e413ae7ad35e84b7886e5ec29567b8ecc6c88f680adca2935fbd905ca52e",
+      "sha256": "c9d8e413ae7ad35e84b7886e5ec29567b8ecc6c88f680adca2935fbd905ca52e",
+      "bytes": 6680
+    },
+    "producer-result.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/ec/ecdf880d97b33231997ea74845eda8a87c6ed1e73096d104d94b9ec7cb8201b4",
+      "sha256": "ecdf880d97b33231997ea74845eda8a87c6ed1e73096d104d94b9ec7cb8201b4",
+      "bytes": 1276
+    }
+  },
+  "members": 203,
+  "all203_primary_member_bytes_independently_restored": true,
+  "all3_native_operations_reaudited": true,
+  "all_actual_native_loaded_file_bytes_verified": true,
+  "counts": {
+    "TP": 1,
+    "FP": 4,
+    "FN": 0,
+    "TN": 3,
+    "targets": 1,
+    "foils": 7,
+    "target_trials_with_outside_spikes": 0,
+    "accuracy": 0.5,
+    "target_hit_rate": 1.0,
+    "foil_response_rate": 0.5714285714285714
+  },
+  "all8_full_waveforms_and_events_preserved": true,
+  "maximum_absolute_signal_difference": 0.0,
+  "absolute_tolerance": 1e-12,
+  "model_revision": "315a738591e7c20a8a87d7949b113375044bc346280bf4876a3ef1299c409b29",
+  "effective_threshold": 0.013209835982777501,
+  "source_Linux_acceptance_catalog": "experiments/2026-11-27/Classic-repaired-q3-recognition-accepted-fq67.json",
+  "source_training_outcome": "budget_exhausted",
+  "source_model_epoch": 61,
+  "new_training": false,
+  "new_calibration": false,
+  "direct_original_DATA3_import_defect_resolved": false,
+  "independent_holdout": false,
+  "scientific_verdict": null
+}

@@ -1,0 +1,72 @@
+{
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/cache-cleanup-elder-fr675.json",
+    "size": 2831,
+    "sha256": "4ee35713f06b1a9cc9572113a34a8950c60a18f5987ca49ac896b1e94e743b81"
+  },
+  "catalog": {
+    "kind": "verified_Elder_old_reader_restore_cache_cleanup",
+    "schema_version": 1,
+    "result": {
+      "execution": "completed",
+      "validity": "valid",
+      "deleted_only_restorable_cache": true,
+      "verified_members": 1408,
+      "logical_bytes_freed": 2829917099,
+      "free_before": 5806415872,
+      "free_after": 8639672320,
+      "verification": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/55/55b75d6c444ba91fdd59e5d6c75fa0bd482e9035fcfb0432f9f7cee21703831b",
+        "sha256": "55b75d6c444ba91fdd59e5d6c75fa0bd482e9035fcfb0432f9f7cee21703831b",
+        "bytes": 277726
+      },
+      "target": "/home/user/timelearner-refactor/readbacks/Classic1408-independent-fr520/restored"
+    },
+    "objects": {
+      "worker.py": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/1a/1a58c3e6ccf57ba74ea3a3c35b78eda4def9de460661efb669e255d91f6fd704",
+        "sha256": "1a58c3e6ccf57ba74ea3a3c35b78eda4def9de460661efb669e255d91f6fd704",
+        "bytes": 5673
+      },
+      "request.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/d1/d1733d4a36af57caf0b5a7ad840d40d58580edcb68e105d94949fe6e147f2661",
+        "sha256": "d1733d4a36af57caf0b5a7ad840d40d58580edcb68e105d94949fe6e147f2661",
+        "bytes": 321
+      },
+      "controls.bundle": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/9f/9fe951de4e8056d6f34117b19507a3954487da4306e6ddaa4e68a4b2ae25cecb",
+        "sha256": "9fe951de4e8056d6f34117b19507a3954487da4306e6ddaa4e68a4b2ae25cecb",
+        "bytes": 2994
+      },
+      "verified-before-delete.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/55/55b75d6c444ba91fdd59e5d6c75fa0bd482e9035fcfb0432f9f7cee21703831b",
+        "sha256": "55b75d6c444ba91fdd59e5d6c75fa0bd482e9035fcfb0432f9f7cee21703831b",
+        "bytes": 277726
+      },
+      "terminal.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/e5/e5b2d0d1f8645daefe4b6ce55bbe535a70274eeda25e371f604d2c22d0d96cc4",
+        "sha256": "e5b2d0d1f8645daefe4b6ce55bbe535a70274eeda25e371f604d2c22d0d96cc4",
+        "bytes": 682
+      }
+    },
+    "controls_commit": "d0285e3a7052700be6f6fccbf89b2af80f646f4c"
+  }
+}

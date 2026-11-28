@@ -1,0 +1,66 @@
+{
+  "kind": "timelearner_Elder_policy0_full_primary_audit_prepared",
+  "schema_version": 1,
+  "dispatch": {
+    "dispatched": true,
+    "job": "classic-policy0-full-primary-audit-elder-dq26",
+    "controls_commit": "95981f626cb384ae5c3de6ecb9ec652f1dae5a18",
+    "supervisor": {
+      "pid": 3663753,
+      "start_ticks": "512854182",
+      "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+      "uid": 1000
+    },
+    "source_commit": "e4a35b92710250dceb1977aa66dbcbe3d3fe9753",
+    "source": "/home/user/timelearner-refactor/source-n0-length-policy-tools-elder-ay20",
+    "original_request": {
+      "path": "/home/user/timelearner-refactor/requests/classic-n0-length-policy0-elder-dh3/request.json",
+      "sha256": "cfbdb4c1f2e0613a00941e11d50c8fd4f7073a1dff083821e0ceb383f564a984",
+      "size": 1630
+    },
+    "controls_bundle": {
+      "path": "/home/user/timelearner-refactor/requests/classic-policy0-full-primary-audit-elder-dq26/controls.bundle",
+      "sha256": "51a99a4dd764e5cdd6fa4ad717c2217a7b869efd83c5a8b886daf7e525486a83",
+      "size": 38136
+    },
+    "full_primary_audit_pending": true,
+    "no_native_execution_or_restart": true,
+    "scientific_verdict": null
+  },
+  "observed_utc": "2026-11-24T22:22:14.347201+00:00",
+  "owner": {
+    "pid": 3663753,
+    "start_ticks": "512854182",
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "uid": 1000
+  },
+  "owner_live": true,
+  "waiting": {
+    "utc": "2026-11-24T22:22:11.498619+00:00",
+    "all_processes_closed": false,
+    "supervisor_live": true,
+    "waiting_for": "original_policy0_native_and_supervisor_closed_and_free_slot"
+  },
+  "archive": {
+    "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/prepared-controls/20261125-policy0-audit-elder-dq26.json",
+    "catalog_sha256": "b03cc7c65ad61bd431f0c0a381a6b7b5affb497f669dba116df40097e4c5ac33",
+    "catalog_bytes": 3228,
+    "controls_bundle": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/51/51a99a4dd764e5cdd6fa4ad717c2217a7b869efd83c5a8b886daf7e525486a83",
+      "sha256": "51a99a4dd764e5cdd6fa4ad717c2217a7b869efd83c5a8b886daf7e525486a83",
+      "bytes": 38136
+    },
+    "job": "classic-policy0-full-primary-audit-elder-dq26",
+    "full_primary_audit_pending": true,
+    "scientific_verdict": null
+  },
+  "full_primary_audit_pending": true,
+  "original_training_all_processes_closed": false,
+  "original_training_terminal": null,
+  "native_training_not_restarted": true,
+  "no_new_scientific_verdict": true,
+  "scientific_verdict": null
+}

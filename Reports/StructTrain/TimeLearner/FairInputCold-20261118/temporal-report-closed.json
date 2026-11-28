@@ -1,0 +1,1831 @@
+{
+  "reservations": {
+    "kind": "timelearner_worker_resource_reservations",
+    "schema_version": 2,
+    "worker_host": "M40",
+    "leases": [
+      {
+        "token": "c8004bcd-0bbb-4bc2-a9e8-8f164447988b",
+        "job_id": "s10-finite-train-contract-m40-a3",
+        "owner": {
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "executable": "/usr/bin/python3.12",
+          "pid": 1390858,
+          "start_ticks": "395070014",
+          "uid": 1000
+        },
+        "resources": [
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-finite-train-contract-m40-a3",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-finite-train-contract-m40-a3"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/finite-train-contract-a3/Docs/StructTrain/TimeLearner/ValidationPlans/M40FiniteTrainContractA3-20261117",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/finite-train-contract-a3/Docs/StructTrain/TimeLearner/ValidationPlans/M40FiniteTrainContractA3-20261117"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-finite-train-a3",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-finite-train-a3"
+          }
+        ],
+        "state": "released",
+        "created": 1794875502.6607592,
+        "deadline": 1794875662.6886437,
+        "updated": 1794875547.906091,
+        "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+        "demands": {
+          "disk_bytes": 33554432,
+          "memory_bytes": 536870912,
+          "slots": 1
+        },
+        "heartbeat_expired": true,
+        "owner_status": "missing",
+        "inspection_required": false,
+        "scientific_verdict": null
+      },
+      {
+        "token": "9fdd8391-cc2c-4e35-a084-89889d906dc2",
+        "job_id": "s10-finite-train-native-m40-a2",
+        "owner": {
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "executable": "/usr/bin/python3.12",
+          "pid": 1411084,
+          "start_ticks": "395080464",
+          "uid": 1000
+        },
+        "resources": [
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-finite-train-native-m40-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-finite-train-native-m40-a2"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/finite-train-native-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40FiniteTrainNativeA2-20261117",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/finite-train-native-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40FiniteTrainNativeA2-20261117"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-export-memory-sdk-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-export-memory-sdk-a2"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-finite-train-a3",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-finite-train-a3"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native-export-memory-sdk-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native-export-memory-sdk-a2"
+          }
+        ],
+        "state": "released",
+        "created": 1794875607.5834122,
+        "deadline": 1794876099.4338007,
+        "updated": 1794875980.0363114,
+        "release_note": "Maintained native controller: exact outer owner and all finite canonical child intents closed; original outcome preserved; no science implied.",
+        "demands": {
+          "disk_bytes": 8589934592,
+          "memory_bytes": 12884901888,
+          "slots": 1
+        },
+        "heartbeat_expired": true,
+        "owner_status": "missing",
+        "inspection_required": false,
+        "scientific_verdict": null
+      },
+      {
+        "token": "c73cb82b-e23f-41cb-9b63-db2e04fb2e26",
+        "job_id": "s11-fresh-matrix-baseline-m40-a1",
+        "owner": {
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "executable": "/usr/bin/python3.12",
+          "pid": 1446922,
+          "start_ticks": "395181760",
+          "uid": 1000
+        },
+        "resources": [
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/publications/fresh-native-model-inputs-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/publications/fresh-native-model-inputs-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/publications/recorded-n4-diagnostic-inputs-a1/inputs",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/publications/recorded-n4-diagnostic-inputs-a1/inputs"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-finite-train-native-m40-a2/branch/native",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-finite-train-native-m40-a2/branch/native"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-finite-train-native-m40-a2/classic/native",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-finite-train-native-m40-a2/classic/native"
+          },
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fresh-matrix-baseline-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fresh-matrix-baseline-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/finite-train-native-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40FiniteTrainNativeA2-20261117",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/finite-train-native-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40FiniteTrainNativeA2-20261117"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/fresh-matrix-baseline-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40FreshMatrixBaselineA1-20261117",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/fresh-matrix-baseline-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40FreshMatrixBaselineA1-20261117"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-export-memory-sdk-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-export-memory-sdk-a2"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-finite-train-a3",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-finite-train-a3"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native-export-memory-sdk-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native-export-memory-sdk-a2"
+          }
+        ],
+        "state": "released",
+        "created": 1794876620.540641,
+        "deadline": 1794877114.3896532,
+        "updated": 1794877001.709888,
+        "release_note": "Maintained native controller: exact outer owner and all finite canonical child intents closed; original outcome preserved; no science implied.",
+        "demands": {
+          "disk_bytes": 8589934592,
+          "memory_bytes": 12884901888,
+          "slots": 1
+        },
+        "heartbeat_expired": true,
+        "owner_status": "missing",
+        "inspection_required": false,
+        "scientific_verdict": null
+      },
+      {
+        "token": "fa8f4def-f4bb-4967-b379-d756ecacaa64",
+        "job_id": "s11-fresh-matrix-candidate-m40-a1",
+        "owner": {
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "executable": "/usr/bin/python3.12",
+          "pid": 1494655,
+          "start_ticks": "395435616",
+          "uid": 1000
+        },
+        "resources": [
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/publications/fresh-native-model-inputs-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/publications/fresh-native-model-inputs-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/publications/recorded-n4-diagnostic-inputs-a1/inputs",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/publications/recorded-n4-diagnostic-inputs-a1/inputs"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-finite-train-native-m40-a2/branch/native",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-finite-train-native-m40-a2/branch/native"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-finite-train-native-m40-a2/classic/native",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-finite-train-native-m40-a2/classic/native"
+          },
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fresh-matrix-candidate-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fresh-matrix-candidate-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/finite-train-native-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40FiniteTrainNativeA2-20261117",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/finite-train-native-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40FiniteTrainNativeA2-20261117"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/fresh-matrix-candidate-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40FreshMatrixCandidateA1-20261117",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/fresh-matrix-candidate-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40FreshMatrixCandidateA1-20261117"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-export-memory-sdk-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-export-memory-sdk-a2"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-fresh-readout-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-fresh-readout-a2"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native-export-memory-sdk-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native-export-memory-sdk-a2"
+          }
+        ],
+        "state": "released",
+        "created": 1794879159.1041496,
+        "deadline": 1794879693.281122,
+        "updated": 1794879583.4235222,
+        "release_note": "Maintained native controller: exact outer owner and all finite canonical child intents closed; original outcome preserved; no science implied.",
+        "demands": {
+          "disk_bytes": 8589934592,
+          "memory_bytes": 12884901888,
+          "slots": 1
+        },
+        "heartbeat_expired": true,
+        "owner_status": "missing",
+        "inspection_required": false,
+        "scientific_verdict": null
+      },
+      {
+        "token": "d325922a-5a8f-4cb5-9848-b6e659a78858",
+        "job_id": "s11-fresh-matrices-report-m40-a1",
+        "owner": {
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "executable": "/media/user/Data/TimeLearnerRefactor/plot-python-owned-copy-a1/bin/python",
+          "pid": 1545965,
+          "start_ticks": "395707083",
+          "uid": 1000
+        },
+        "resources": [
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fresh-matrices-report-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fresh-matrices-report-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fresh-matrix-baseline-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fresh-matrix-baseline-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fresh-matrix-baseline-m40-a1-controller",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fresh-matrix-baseline-m40-a1-controller"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fresh-matrix-candidate-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fresh-matrix-candidate-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fresh-matrix-candidate-m40-a1-controller",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fresh-matrix-candidate-m40-a1-controller"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/finite-train-native-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40FiniteTrainNativeA2-20261117",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/finite-train-native-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40FiniteTrainNativeA2-20261117"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/fresh-matrices-report-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40FreshMatricesReportA1-20261117",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/fresh-matrices-report-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40FreshMatricesReportA1-20261117"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-fresh-readout-a3",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-fresh-readout-a3"
+          }
+        ],
+        "state": "released",
+        "created": 1794881873.351575,
+        "deadline": 1794884794.909416,
+        "updated": 1794884681.0182652,
+        "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+        "demands": {
+          "disk_bytes": 8589934592,
+          "memory_bytes": 8589934592,
+          "slots": 1
+        },
+        "heartbeat_expired": true,
+        "owner_status": "missing",
+        "inspection_required": false,
+        "scientific_verdict": null
+      },
+      {
+        "token": "ce4eea85-1ffe-4f78-8aa3-79c05a872635",
+        "job_id": "s10-finite-science-integration-contract-m40-a1",
+        "owner": {
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "executable": "/usr/bin/python3.12",
+          "pid": 1704731,
+          "start_ticks": "396017664",
+          "uid": 1000
+        },
+        "resources": [
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-finite-science-integration-contract-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-finite-science-integration-contract-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/finite-science-integration-contract-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40FiniteScienceIntegrationContractA1-20261117",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/finite-science-integration-contract-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40FiniteScienceIntegrationContractA1-20261117"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-finite-science-integration-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-finite-science-integration-a1"
+          }
+        ],
+        "state": "released",
+        "created": 1794884979.1644323,
+        "deadline": 1794885139.1865811,
+        "updated": 1794885023.24751,
+        "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+        "demands": {
+          "disk_bytes": 33554432,
+          "memory_bytes": 536870912,
+          "slots": 1
+        },
+        "heartbeat_expired": true,
+        "owner_status": "missing",
+        "inspection_required": false,
+        "scientific_verdict": null
+      },
+      {
+        "token": "5dae3d01-c994-453d-a5ec-754a4027d477",
+        "job_id": "s11-fresh-train-baseline-primary-m40-a1",
+        "owner": {
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "executable": "/usr/bin/python3.12",
+          "pid": 1724658,
+          "start_ticks": "396027293",
+          "uid": 1000
+        },
+        "resources": [
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-finite-train-native-m40-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-finite-train-native-m40-a2"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-finite-train-native-m40-a2-controller",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-finite-train-native-m40-a2-controller"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fresh-matrix-baseline-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fresh-matrix-baseline-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fresh-matrix-baseline-m40-a1-controller",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fresh-matrix-baseline-m40-a1-controller"
+          },
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fresh-train-baseline-primary-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fresh-train-baseline-primary-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/fresh-train-baseline-primary-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40FreshTrainBaselinePrimaryA1-20261117",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/fresh-train-baseline-primary-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40FreshTrainBaselinePrimaryA1-20261117"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-fresh-readout-a3",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-fresh-readout-a3"
+          }
+        ],
+        "state": "released",
+        "created": 1794885075.511315,
+        "deadline": 1794885225.532921,
+        "updated": 1794885112.1920495,
+        "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+        "demands": {
+          "disk_bytes": 4294967296,
+          "memory_bytes": 8589934592,
+          "slots": 1
+        },
+        "heartbeat_expired": true,
+        "owner_status": "missing",
+        "inspection_required": false,
+        "scientific_verdict": null
+      },
+      {
+        "token": "8d76c8c6-1674-4467-8a53-c9ad0d0bdebd",
+        "job_id": "s11-fresh-candidate-report-primary-m40-a1",
+        "owner": {
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "executable": "/usr/bin/python3.12",
+          "pid": 1740023,
+          "start_ticks": "396055674",
+          "uid": 1000
+        },
+        "resources": [
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-finite-science-integration-contract-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-finite-science-integration-contract-m40-a1"
+          },
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fresh-candidate-report-primary-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fresh-candidate-report-primary-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fresh-matrices-report-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fresh-matrices-report-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fresh-matrix-candidate-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fresh-matrix-candidate-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fresh-matrix-candidate-m40-a1-controller",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fresh-matrix-candidate-m40-a1-controller"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/fresh-candidate-report-primary-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40FreshCandidateReportPrimaryA1-20261117",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/fresh-candidate-report-primary-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40FreshCandidateReportPrimaryA1-20261117"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-finite-science-integration-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-finite-science-integration-a1"
+          }
+        ],
+        "state": "released",
+        "created": 1794885359.4892435,
+        "deadline": 1794885999.7642038,
+        "updated": 1794885881.5742946,
+        "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+        "demands": {
+          "disk_bytes": 4294967296,
+          "memory_bytes": 8589934592,
+          "slots": 1
+        },
+        "heartbeat_expired": true,
+        "owner_status": "missing",
+        "inspection_required": false,
+        "scientific_verdict": null
+      },
+      {
+        "token": "1f1236b3-7fb0-4294-a165-7e82242147aa",
+        "job_id": "s10-finite-long-cold-train-integrated-m40-a3",
+        "owner": {
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "executable": "/usr/bin/python3.12",
+          "pid": 1796078,
+          "start_ticks": "396260395",
+          "uid": 1000
+        },
+        "resources": [
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-finite-long-cold-train-integrated-m40-a3",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-finite-long-cold-train-integrated-m40-a3"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/finite-train-long-integrated-a3/Docs/StructTrain/TimeLearner/ValidationPlans/M40FiniteLongColdTrainIntegratedA3-20261117",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/finite-train-long-integrated-a3/Docs/StructTrain/TimeLearner/ValidationPlans/M40FiniteLongColdTrainIntegratedA3-20261117"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/finite-train-native-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40FiniteTrainNativeA2-20261117",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/finite-train-native-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40FiniteTrainNativeA2-20261117"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-export-memory-sdk-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-export-memory-sdk-a2"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-finite-science-integration-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-finite-science-integration-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native-export-memory-sdk-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native-export-memory-sdk-a2"
+          }
+        ],
+        "state": "released",
+        "created": 1794887406.8904748,
+        "deadline": 1794924888.6766741,
+        "updated": 1794924779.6893194,
+        "release_note": "Maintained native controller: exact outer owner and all finite canonical child intents closed; original outcome preserved; no science implied.",
+        "demands": {
+          "disk_bytes": 17179869184,
+          "memory_bytes": 25769803776,
+          "slots": 1
+        },
+        "heartbeat_expired": true,
+        "owner_status": "missing",
+        "inspection_required": false,
+        "scientific_verdict": null
+      },
+      {
+        "token": "561d7c18-de8d-4384-a90a-86033ed2095b",
+        "job_id": "s10-finite-fair-input-cold-m40-a4",
+        "owner": {
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "executable": "/usr/bin/python3.12",
+          "pid": 3811368,
+          "start_ticks": "400066075",
+          "uid": 1000
+        },
+        "resources": [
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-finite-fair-input-cold-m40-a4",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-finite-fair-input-cold-m40-a4"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/finite-train-fair-input-a4/Docs/StructTrain/TimeLearner/ValidationPlans/M40FiniteFairInputColdA4-20261117",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/finite-train-fair-input-a4/Docs/StructTrain/TimeLearner/ValidationPlans/M40FiniteFairInputColdA4-20261117"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/finite-train-native-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40FiniteTrainNativeA2-20261117",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/finite-train-native-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40FiniteTrainNativeA2-20261117"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-export-memory-sdk-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-export-memory-sdk-a2"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-finite-science-integration-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-finite-science-integration-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native-export-memory-sdk-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native-export-memory-sdk-a2"
+          }
+        ],
+        "state": "released",
+        "created": 1794925463.72501,
+        "deadline": 1794955865.1933942,
+        "updated": 1794955747.852405,
+        "release_note": "Maintained native controller: exact outer owner and all finite canonical child intents closed; original outcome preserved; no science implied.",
+        "demands": {
+          "disk_bytes": 17179869184,
+          "memory_bytes": 25769803776,
+          "slots": 1
+        },
+        "heartbeat_expired": true,
+        "owner_status": "missing",
+        "inspection_required": false,
+        "scientific_verdict": null
+      },
+      {
+        "token": "189ae9c3-67f8-4987-8d9c-c00a3ea54f11",
+        "job_id": "s05-native-json-byte-kernel-m40-a1",
+        "owner": {
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "executable": "/usr/bin/python3.12",
+          "pid": 1361488,
+          "start_ticks": "404367685",
+          "uid": 1000
+        },
+        "resources": [
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-json-byte-kernel-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-json-byte-kernel-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/native-json-byte-kernel-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/native-json-byte-kernel-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/native-json-byte-kernel-a1/inputs",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/native-json-byte-kernel-a1/inputs"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native-json-byte-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native-json-byte-a1"
+          }
+        ],
+        "state": "released",
+        "created": 1794968479.3947036,
+        "deadline": 1794968629.4175386,
+        "updated": 1794968524.498229,
+        "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+        "demands": {
+          "disk_bytes": 134217728,
+          "memory_bytes": 2147483648,
+          "slots": 1
+        },
+        "heartbeat_expired": true,
+        "owner_status": "missing",
+        "inspection_required": false,
+        "scientific_verdict": null
+      },
+      {
+        "token": "41e015ce-b458-44a4-9dd1-665354cdedb7",
+        "job_id": "s05-physical-model-data-sdk-m40-a1-canonical",
+        "owner": {
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "executable": "/usr/bin/python3.12",
+          "pid": 1389836,
+          "start_ticks": "404436691",
+          "uid": 1000
+        },
+        "resources": [
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14"
+          },
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-physical-model-data-sdk-m40-a1-canonical",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-physical-model-data-sdk-m40-a1-canonical"
+          },
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-physical-model-data-sdk-m40-a1-prepared",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-physical-model-data-sdk-m40-a1-prepared"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/physical-model-data-sdk-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40PhysicalModelDataSdkA1-20261118",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/physical-model-data-sdk-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40PhysicalModelDataSdkA1-20261118"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/resources-bin8cb-native-image-rest-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/resources-bin8cb-native-image-rest-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-burst-readback-sdk-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-burst-readback-sdk-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-export-memory-sdk-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-export-memory-sdk-a2"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-publication-receipt-sdk-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-publication-receipt-sdk-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-recovery-coverage-sdk-a5",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-recovery-coverage-sdk-a5"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-physical-model-data-sdk-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-physical-model-data-sdk-a1"
+          }
+        ],
+        "state": "released",
+        "created": 1794969169.5113518,
+        "deadline": 1794969439.671402,
+        "updated": 1794969327.8383913,
+        "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+        "demands": {
+          "disk_bytes": 134217728,
+          "memory_bytes": 536870912,
+          "slots": 1
+        },
+        "heartbeat_expired": true,
+        "owner_status": "missing",
+        "inspection_required": false,
+        "scientific_verdict": null
+      },
+      {
+        "token": "7b0f5b64-171b-4f43-b53d-6c9fbba9aa95",
+        "job_id": "s05-physical-model-data-sdk-m40-a1",
+        "owner": {
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "executable": "/usr/bin/python3.12",
+          "pid": 1458893,
+          "start_ticks": "404475791",
+          "uid": 1000
+        },
+        "resources": [
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-physical-model-data-sdk-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/build-physical-model-data-sdk-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14"
+          },
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-physical-model-data-sdk-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-physical-model-data-sdk-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/resources-bin8cb-native-image-rest-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/resources-bin8cb-native-image-rest-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-burst-readback-sdk-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-burst-readback-sdk-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-export-memory-sdk-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-export-memory-sdk-a2"
+          },
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-physical-model-data-sdk-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-physical-model-data-sdk-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-publication-receipt-sdk-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-publication-receipt-sdk-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-recovery-coverage-sdk-a5",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-recovery-coverage-sdk-a5"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-physical-model-data-sdk-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-physical-model-data-sdk-a1"
+          }
+        ],
+        "state": "released",
+        "created": 1794969560.4649892,
+        "deadline": 1794970412.3848176,
+        "updated": 1794970307.2580013,
+        "release_note": "Maintained native controller: exact outer owner and all finite canonical child intents closed; original outcome preserved; no science implied.",
+        "demands": {
+          "disk_bytes": 4294967296,
+          "memory_bytes": 8589934592,
+          "slots": 1
+        },
+        "heartbeat_expired": true,
+        "owner_status": "missing",
+        "inspection_required": false,
+        "scientific_verdict": null
+      },
+      {
+        "token": "b3b3095a-96c4-490e-99ee-2fdd1e1f7219",
+        "job_id": "s11-fair-input-cold-primary-m40-a1",
+        "owner": {
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "executable": "/usr/bin/python3.12",
+          "pid": 1480512,
+          "start_ticks": "404583144",
+          "uid": 1000
+        },
+        "resources": [
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-finite-fair-input-cold-m40-a4",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-finite-fair-input-cold-m40-a4"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-finite-fair-input-cold-m40-a4-controller",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-finite-fair-input-cold-m40-a4-controller"
+          },
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-cold-primary-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-cold-primary-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/fair-input-cold-primary-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40FairInputColdPrimaryA1-20261118",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/fair-input-cold-primary-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40FairInputColdPrimaryA1-20261118"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-finite-science-integration-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-finite-science-integration-a1"
+          }
+        ],
+        "state": "released",
+        "created": 1794970634.0611103,
+        "deadline": 1794970854.1124144,
+        "updated": 1794970741.2776175,
+        "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+        "demands": {
+          "disk_bytes": 4294967296,
+          "memory_bytes": 8589934592,
+          "slots": 1
+        },
+        "heartbeat_expired": true,
+        "owner_status": "missing",
+        "inspection_required": false,
+        "scientific_verdict": null
+      },
+      {
+        "token": "63102edf-750a-454c-af1a-28a18744195a",
+        "job_id": "s05-physical-model-data-sdk-m40-a2-canonical",
+        "owner": {
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "executable": "/usr/bin/python3.12",
+          "pid": 1502741,
+          "start_ticks": "404639428",
+          "uid": 1000
+        },
+        "resources": [
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14"
+          },
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-physical-model-data-sdk-m40-a2-canonical",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-physical-model-data-sdk-m40-a2-canonical"
+          },
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-physical-model-data-sdk-m40-a2-prepared",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-physical-model-data-sdk-m40-a2-prepared"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/physical-model-data-sdk-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40PhysicalModelDataSdkA2-20261118",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/physical-model-data-sdk-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40PhysicalModelDataSdkA2-20261118"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/resources-bin8cb-native-image-rest-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/resources-bin8cb-native-image-rest-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-burst-readback-sdk-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-burst-readback-sdk-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-export-memory-sdk-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-export-memory-sdk-a2"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-publication-receipt-sdk-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-publication-receipt-sdk-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-recovery-coverage-sdk-a5",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-recovery-coverage-sdk-a5"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-physical-model-data-sdk-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-physical-model-data-sdk-a2"
+          }
+        ],
+        "state": "released",
+        "created": 1794971196.8929677,
+        "deadline": 1794971467.0226018,
+        "updated": 1794971349.7777872,
+        "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+        "demands": {
+          "disk_bytes": 134217728,
+          "memory_bytes": 536870912,
+          "slots": 1
+        },
+        "heartbeat_expired": true,
+        "owner_status": "missing",
+        "inspection_required": false,
+        "scientific_verdict": null
+      },
+      {
+        "token": "269a7104-17d0-4055-9e77-1629dee6da56",
+        "job_id": "s05-physical-model-data-sdk-m40-a2",
+        "owner": {
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "executable": "/usr/bin/python3.12",
+          "pid": 1573859,
+          "start_ticks": "404695183",
+          "uid": 1000
+        },
+        "resources": [
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-physical-model-data-sdk-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/build-physical-model-data-sdk-a2"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14"
+          },
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-physical-model-data-sdk-m40-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-physical-model-data-sdk-m40-a2"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/resources-bin8cb-native-image-rest-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/resources-bin8cb-native-image-rest-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-burst-readback-sdk-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-burst-readback-sdk-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-export-memory-sdk-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-export-memory-sdk-a2"
+          },
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-physical-model-data-sdk-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-physical-model-data-sdk-a2"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-publication-receipt-sdk-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-publication-receipt-sdk-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-recovery-coverage-sdk-a5",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-recovery-coverage-sdk-a5"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-physical-model-data-sdk-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-physical-model-data-sdk-a2"
+          }
+        ],
+        "state": "released",
+        "created": 1794971754.4089885,
+        "deadline": 1794972876.7520707,
+        "updated": 1794972762.3976734,
+        "release_note": "Maintained native controller: exact outer owner and all finite canonical child intents closed; original outcome preserved; no science implied.",
+        "demands": {
+          "disk_bytes": 4294967296,
+          "memory_bytes": 8589934592,
+          "slots": 1
+        },
+        "heartbeat_expired": true,
+        "owner_status": "missing",
+        "inspection_required": false,
+        "scientific_verdict": null
+      },
+      {
+        "token": "90e324df-6d0c-4e32-aa07-ba82bb44e0f8",
+        "job_id": "s05-large-summary-transport-m40-a1",
+        "owner": {
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "executable": "/usr/bin/python3.12",
+          "pid": 1598479,
+          "start_ticks": "404812014",
+          "uid": 1000
+        },
+        "resources": [
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-large-summary-transport-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-large-summary-transport-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/large-summary-transport-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/large-summary-transport-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/large-summary-transport-a1/inputs",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/large-summary-transport-a1/inputs"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-large-summary-transport-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-large-summary-transport-a1"
+          }
+        ],
+        "state": "released",
+        "created": 1794972922.6929944,
+        "deadline": 1794973092.7523274,
+        "updated": 1794972981.1006193,
+        "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+        "demands": {
+          "disk_bytes": 134217728,
+          "memory_bytes": 2147483648,
+          "slots": 1
+        },
+        "heartbeat_expired": true,
+        "owner_status": "missing",
+        "inspection_required": false,
+        "scientific_verdict": null
+      },
+      {
+        "token": "2dcb1219-71d2-4eda-993c-14a1452cbcca",
+        "job_id": "s05-physical-model-data-sdk-m40-a3-canonical",
+        "owner": {
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "executable": "/usr/bin/python3.12",
+          "pid": 1636066,
+          "start_ticks": "404950911",
+          "uid": 1000
+        },
+        "resources": [
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14"
+          },
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-physical-model-data-sdk-m40-a3-canonical",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-physical-model-data-sdk-m40-a3-canonical"
+          },
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-physical-model-data-sdk-m40-a3-prepared",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-physical-model-data-sdk-m40-a3-prepared"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/physical-model-data-sdk-a3/Docs/StructTrain/TimeLearner/ValidationPlans/M40PhysicalModelDataSdkA3-20261118",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/physical-model-data-sdk-a3/Docs/StructTrain/TimeLearner/ValidationPlans/M40PhysicalModelDataSdkA3-20261118"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/resources-bin8cb-native-image-rest-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/resources-bin8cb-native-image-rest-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-burst-readback-sdk-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-burst-readback-sdk-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-export-memory-sdk-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-export-memory-sdk-a2"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-publication-receipt-sdk-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-publication-receipt-sdk-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-recovery-coverage-sdk-a5",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-recovery-coverage-sdk-a5"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-physical-model-data-sdk-a3",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-physical-model-data-sdk-a3"
+          }
+        ],
+        "state": "released",
+        "created": 1794974311.7229667,
+        "deadline": 1794974561.8280926,
+        "updated": 1794974446.4467442,
+        "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+        "demands": {
+          "disk_bytes": 134217728,
+          "memory_bytes": 536870912,
+          "slots": 1
+        },
+        "heartbeat_expired": true,
+        "owner_status": "missing",
+        "inspection_required": false,
+        "scientific_verdict": null
+      },
+      {
+        "token": "2ca32592-285e-4b6f-8ca6-71cf723fc536",
+        "job_id": "s05-physical-model-data-sdk-m40-a3",
+        "owner": {
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "executable": "/usr/bin/python3.12",
+          "pid": 1703113,
+          "start_ticks": "404975961",
+          "uid": 1000
+        },
+        "resources": [
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-physical-model-data-sdk-a3",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/build-physical-model-data-sdk-a3"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14"
+          },
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-physical-model-data-sdk-m40-a3",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-physical-model-data-sdk-m40-a3"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/resources-bin8cb-native-image-rest-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/resources-bin8cb-native-image-rest-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-burst-readback-sdk-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-burst-readback-sdk-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-export-memory-sdk-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-export-memory-sdk-a2"
+          },
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-physical-model-data-sdk-a3",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-physical-model-data-sdk-a3"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-publication-receipt-sdk-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-publication-receipt-sdk-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-recovery-coverage-sdk-a5",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-recovery-coverage-sdk-a5"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-physical-model-data-sdk-a3",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-physical-model-data-sdk-a3"
+          }
+        ],
+        "state": "released",
+        "created": 1794974562.1669743,
+        "deadline": 1794975704.1552565,
+        "updated": 1794975595.9561512,
+        "release_note": "Maintained native controller: exact outer owner and all finite canonical child intents closed; original outcome preserved; no science implied.",
+        "demands": {
+          "disk_bytes": 4294967296,
+          "memory_bytes": 8589934592,
+          "slots": 1
+        },
+        "heartbeat_expired": true,
+        "owner_status": "missing",
+        "inspection_required": false,
+        "scientific_verdict": null
+      },
+      {
+        "token": "eb16412e-832d-431b-aeca-eaf9241999b2",
+        "job_id": "s11-fair-input-cold-matrix-m40-a1",
+        "owner": {
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "executable": "/usr/bin/python3.12",
+          "pid": 1731755,
+          "start_ticks": "405115074",
+          "uid": 1000
+        },
+        "resources": [
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/publications/fair-input-cold-matrix-inputs-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/publications/fair-input-cold-matrix-inputs-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/publications/recorded-n4-diagnostic-inputs-a1/inputs",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/publications/recorded-n4-diagnostic-inputs-a1/inputs"
+          },
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-cold-matrix-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-cold-matrix-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/fair-input-cold-matrix-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40FairInputColdMatrixA1-20261118",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/fair-input-cold-matrix-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40FairInputColdMatrixA1-20261118"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-physical-model-data-sdk-a3",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-physical-model-data-sdk-a3"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-large-summary-transport-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-large-summary-transport-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-physical-model-data-sdk-a3",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-physical-model-data-sdk-a3"
+          }
+        ],
+        "state": "released",
+        "created": 1794975953.6862295,
+        "deadline": 1794983386.1368344,
+        "updated": 1794983274.0357788,
+        "release_note": "Maintained native controller: exact outer owner and all finite canonical child intents closed; original outcome preserved; no science implied.",
+        "demands": {
+          "disk_bytes": 17179869184,
+          "memory_bytes": 34359738368,
+          "slots": 1
+        },
+        "heartbeat_expired": true,
+        "owner_status": "missing",
+        "inspection_required": false,
+        "scientific_verdict": null
+      },
+      {
+        "token": "62094382-ba8a-4241-bc26-3ea4fd6397fe",
+        "job_id": "s11-fair-input-threshold-m40-a1",
+        "owner": {
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "executable": "/usr/bin/python3.12",
+          "pid": 2077947,
+          "start_ticks": "406490231",
+          "uid": 1000
+        },
+        "resources": [
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/publications/fair-input-cold-matrix-inputs-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/publications/fair-input-cold-matrix-inputs-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/publications/recorded-n4-diagnostic-inputs-a1/inputs",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/publications/recorded-n4-diagnostic-inputs-a1/inputs"
+          },
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-threshold-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-threshold-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/fair-input-cold-matrix-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40FairInputColdMatrixA1-20261118",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/fair-input-cold-matrix-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40FairInputColdMatrixA1-20261118"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/fair-input-threshold-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/fair-input-threshold-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-physical-model-data-sdk-a3",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-physical-model-data-sdk-a3"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-large-summary-transport-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-large-summary-transport-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-physical-model-data-sdk-a3",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-physical-model-data-sdk-a3"
+          }
+        ],
+        "state": "released",
+        "created": 1794989705.2848842,
+        "deadline": 1794997965.2731295,
+        "updated": 1794997847.0295558,
+        "release_note": "Maintained native controller: exact outer owner and all finite canonical child intents closed; original outcome preserved; no science implied.",
+        "demands": {
+          "disk_bytes": 17179869184,
+          "memory_bytes": 34359738368,
+          "slots": 1
+        },
+        "heartbeat_expired": true,
+        "owner_status": "missing",
+        "inspection_required": false,
+        "scientific_verdict": null
+      },
+      {
+        "token": "b16c91b4-5554-478d-a4b6-b7b06a190725",
+        "job_id": "s11-fair-cold-threshold-primary-m40-a1",
+        "owner": {
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "executable": "/usr/bin/python3.12",
+          "pid": 2430763,
+          "start_ticks": "407706742",
+          "uid": 1000
+        },
+        "resources": [
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-cold-threshold-primary-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-cold-threshold-primary-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-cold-matrix-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-cold-matrix-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-cold-matrix-m40-a1-controller",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-cold-matrix-m40-a1-controller"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-threshold-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-threshold-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-threshold-m40-a1-controller",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-threshold-m40-a1-controller"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/fair-cold-threshold-primary-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40FairColdThresholdPrimaryA1-20261118",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/fair-cold-threshold-primary-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40FairColdThresholdPrimaryA1-20261118"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-finite-science-integration-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-finite-science-integration-a1"
+          }
+        ],
+        "state": "released",
+        "created": 1795001870.1014524,
+        "deadline": 1795002614.5356233,
+        "updated": 1795002502.1025226,
+        "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+        "demands": {
+          "disk_bytes": 2147483648,
+          "memory_bytes": 8589934592,
+          "slots": 1
+        },
+        "heartbeat_expired": true,
+        "owner_status": "missing",
+        "inspection_required": false,
+        "scientific_verdict": null
+      },
+      {
+        "token": "3eb06b2a-cadd-4330-90ff-3b2b2cfcf442",
+        "job_id": "s11-fair-input-threshold-report-m40-a1",
+        "owner": {
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "executable": "/media/user/Data/TimeLearnerRefactor/plot-python-owned-copy-a1/bin/python",
+          "pid": 2469972,
+          "start_ticks": "407772835",
+          "uid": 1000
+        },
+        "resources": [
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-threshold-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-threshold-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-threshold-m40-a1-controller",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-threshold-m40-a1-controller"
+          },
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-threshold-report-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-threshold-report-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/fair-input-threshold-report-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40FairInputThresholdReportA1-20261118",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/fair-input-threshold-report-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40FairInputThresholdReportA1-20261118"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/fair-input-threshold-report-a1/fixtures/expectations",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/fair-input-threshold-report-a1/fixtures/expectations"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/fair-input-threshold-report-a1/fixtures/runtime",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/fair-input-threshold-report-a1/fixtures/runtime"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-large-summary-transport-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-large-summary-transport-a1"
+          }
+        ],
+        "state": "released",
+        "created": 1795002530.8718033,
+        "deadline": 1795009110.000688,
+        "updated": 1795008994.5207164,
+        "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+        "demands": {
+          "disk_bytes": 8589934592,
+          "memory_bytes": 17179869184,
+          "slots": 1
+        },
+        "heartbeat_expired": true,
+        "owner_status": "missing",
+        "inspection_required": false,
+        "scientific_verdict": null
+      }
+    ],
+    "automatic_release_on_expiry": false,
+    "execution_attested": false,
+    "scientific_verdict": null,
+    "capacity": {
+      "disk_bytes": 34359738368,
+      "memory_bytes": 34359738368,
+      "slots": 1
+    },
+    "reserved": {
+      "disk_bytes": 0,
+      "memory_bytes": 0,
+      "slots": 0
+    },
+    "available": {
+      "disk_bytes": 34359738368,
+      "memory_bytes": 34359738368,
+      "slots": 1
+    },
+    "disk_device": 2048,
+    "os_resource_limits_enforced": false
+  },
+  "kernel": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "0f39da4da51517664f354b1a980c968bebe98e04a7e6a31c2708ca67e6623a72",
+      "unit": "timelearner-12031cef-c7a5-4f26-9c1d-16ae3b1005f2.service",
+      "invocation_id": "83fd38f99ade44e584bacdc389fc0cbd",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-12031cef-c7a5-4f26-9c1d-16ae3b1005f2.service",
+      "initial_main_pid": 2469972,
+      "initial_start_ticks": "407772835",
+      "sha256": "b6a0e83937894f0300949f1926de53c9d7bf71f5f2f7ed818181a51a41e733bd"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-12031cef-c7a5-4f26-9c1d-16ae3b1005f2.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "controller-result.json": {
+    "kind": "timelearner_process_result",
+    "schema_version": 2,
+    "execution": "completed",
+    "reason": "exit_zero_and_whole_group_closed",
+    "returncode": 0,
+    "wall_seconds": 6463.740116822999,
+    "model_time": null,
+    "runtime_provenance": "loaded_files_captured",
+    "mapping_error": null,
+    "runtime_fingerprint": "14a535ad6493358f30951a5ae8d7d7a8b9676ee4782c165e71efc3a033f6d95b",
+    "ownership_scope": "bound_cgroup",
+    "all_processes_closed": true,
+    "scientific_verdict": null,
+    "operational_diagnostics": {
+      "kind": "timelearner_operational_diagnostics",
+      "schema_version": 1,
+      "policy": "owned-streams-v1",
+      "status": "clear",
+      "error_records": 0,
+      "warning_records": 0,
+      "unclassified_stderr_chunks": 0,
+      "reasons": [],
+      "examples": [],
+      "streams": [
+        {
+          "path": "stdout.log",
+          "bytes": 1724,
+          "sha256": "6241e460005739f74d91c4e8753fd6ff7e262011c59e13c5eae10ed37838315f"
+        },
+        {
+          "path": "stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "contained_streams_match": true,
+      "scientific_verdict": null
+    }
+  },
+  "worker/terminal.json": {
+    "operation_passed": true,
+    "operation": "python-validation",
+    "heartbeat_errors": [],
+    "lease_release": "controller only after whole cgroup closure",
+    "selected_validation_scope_requires_source_review": true,
+    "scientific_verdict": null
+  },
+  "worker/validation/result.json": {
+    "kind": "timelearner_python_validation_result",
+    "schema_version": 1,
+    "suite_id": "s11-fair-input-threshold-report-m40-a1",
+    "package_fingerprint": "cc0475f0bbd945cc7c93e676ea914ce08c696351ef75bfe81f8a004fb82211e8",
+    "execution": "completed",
+    "assertion_status": "passed",
+    "expected_test_ids": [
+      "Scripts.StructTrain.TimeLearner.tests.test_declared_diagnostic_report.DeclaredDiagnosticReportTest.test_complete_declared_population_retains_actual_stopped_state_and_fixed_threshold",
+      "Scripts.StructTrain.TimeLearner.tests.test_declared_diagnostic_report.DeclaredDiagnosticReportTest.test_every_declared_trial_soma_pair_has_full_scale_and_resolved_zoom_views"
+    ],
+    "executed_tests": 2,
+    "failures": [],
+    "errors": [],
+    "skipped": [],
+    "fixtures": {
+      "TIMELEARNER_RECORDED_MATRIX_PRIMARY": {
+        "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-threshold-m40-a1",
+        "files": 91,
+        "fingerprint": "162702fae7923a83980e8cbc0783fdc251307ad38b8c5d4e41f41a744d85bf10"
+      },
+      "TIMELEARNER_RECORDED_MATRIX_CONTROLLER": {
+        "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-threshold-m40-a1-controller",
+        "files": 24,
+        "fingerprint": "20eeb3c4aba32c28ea9a7649d8d922b1c37f536922fbee8a2ff4877af16c0758"
+      },
+      "TIMELEARNER_RECORDED_MATRIX_RUNTIME": {
+        "path": "/media/user/Data/TimeLearnerRefactor/requests/fair-input-threshold-report-a1/fixtures/runtime",
+        "files": 1,
+        "fingerprint": "934bd4b3e2246b8bf7e33a3e5c3b7db92f3b349cd859072240e70a35dc169b77"
+      },
+      "TIMELEARNER_RECORDED_MATRIX_EXPECTATIONS": {
+        "path": "/media/user/Data/TimeLearnerRefactor/requests/fair-input-threshold-report-a1/fixtures/expectations",
+        "files": 1,
+        "fingerprint": "30347a39b8ce86292fb3929ab6c706a831e9f0c8295316e01a3e4efc22240275"
+      }
+    },
+    "scientific_verdict": null
+  },
+  "topology_manifests": {
+    "classic": {
+      "keys": [
+        "kind",
+        "schema_version",
+        "purpose",
+        "calibration_claim",
+        "source_calibration_evidence_checked",
+        "run_id",
+        "model_revision",
+        "status",
+        "observation_validity",
+        "expected_trial_soma_pairs",
+        "figures",
+        "series",
+        "lt_decision_views",
+        "runtime",
+        "limitations",
+        "visual_acceptance_complete",
+        "evaluation_verdict",
+        "diagnostic_only",
+        "training_completed",
+        "source_training_outcome",
+        "source_stopped_sha256",
+        "missing_observation_ids",
+        "declared_trials",
+        "observed_trial_soma_pairs"
+      ],
+      "figures": 32,
+      "pairs": [
+        {
+          "presentation_index": 0,
+          "descriptor": "$.Soma1.SumPotential"
+        },
+        {
+          "presentation_index": 0,
+          "descriptor": "$.Soma2.SumPotential"
+        },
+        {
+          "presentation_index": 0,
+          "descriptor": "$.Soma3.SumPotential"
+        },
+        {
+          "presentation_index": 0,
+          "descriptor": "$.Soma4.SumPotential"
+        },
+        {
+          "presentation_index": 1,
+          "descriptor": "$.Soma1.SumPotential"
+        },
+        {
+          "presentation_index": 1,
+          "descriptor": "$.Soma2.SumPotential"
+        },
+        {
+          "presentation_index": 1,
+          "descriptor": "$.Soma3.SumPotential"
+        },
+        {
+          "presentation_index": 1,
+          "descriptor": "$.Soma4.SumPotential"
+        },
+        {
+          "presentation_index": 2,
+          "descriptor": "$.Soma1.SumPotential"
+        },
+        {
+          "presentation_index": 2,
+          "descriptor": "$.Soma2.SumPotential"
+        },
+        {
+          "presentation_index": 2,
+          "descriptor": "$.Soma3.SumPotential"
+        },
+        {
+          "presentation_index": 2,
+          "descriptor": "$.Soma4.SumPotential"
+        },
+        {
+          "presentation_index": 3,
+          "descriptor": "$.Soma1.SumPotential"
+        },
+        {
+          "presentation_index": 3,
+          "descriptor": "$.Soma2.SumPotential"
+        },
+        {
+          "presentation_index": 3,
+          "descriptor": "$.Soma3.SumPotential"
+        },
+        {
+          "presentation_index": 3,
+          "descriptor": "$.Soma4.SumPotential"
+        },
+        {
+          "presentation_index": 4,
+          "descriptor": "$.Soma1.SumPotential"
+        },
+        {
+          "presentation_index": 4,
+          "descriptor": "$.Soma2.SumPotential"
+        },
+        {
+          "presentation_index": 4,
+          "descriptor": "$.Soma3.SumPotential"
+        },
+        {
+          "presentation_index": 4,
+          "descriptor": "$.Soma4.SumPotential"
+        },
+        {
+          "presentation_index": 5,
+          "descriptor": "$.Soma1.SumPotential"
+        },
+        {
+          "presentation_index": 5,
+          "descriptor": "$.Soma2.SumPotential"
+        },
+        {
+          "presentation_index": 5,
+          "descriptor": "$.Soma3.SumPotential"
+        },
+        {
+          "presentation_index": 5,
+          "descriptor": "$.Soma4.SumPotential"
+        },
+        {
+          "presentation_index": 6,
+          "descriptor": "$.Soma1.SumPotential"
+        },
+        {
+          "presentation_index": 6,
+          "descriptor": "$.Soma2.SumPotential"
+        },
+        {
+          "presentation_index": 6,
+          "descriptor": "$.Soma3.SumPotential"
+        },
+        {
+          "presentation_index": 6,
+          "descriptor": "$.Soma4.SumPotential"
+        },
+        {
+          "presentation_index": 7,
+          "descriptor": "$.Soma1.SumPotential"
+        },
+        {
+          "presentation_index": 7,
+          "descriptor": "$.Soma2.SumPotential"
+        },
+        {
+          "presentation_index": 7,
+          "descriptor": "$.Soma3.SumPotential"
+        },
+        {
+          "presentation_index": 7,
+          "descriptor": "$.Soma4.SumPotential"
+        }
+      ]
+    },
+    "branch": {
+      "keys": [
+        "kind",
+        "schema_version",
+        "purpose",
+        "calibration_claim",
+        "source_calibration_evidence_checked",
+        "run_id",
+        "model_revision",
+        "status",
+        "observation_validity",
+        "expected_trial_soma_pairs",
+        "figures",
+        "series",
+        "lt_decision_views",
+        "runtime",
+        "limitations",
+        "visual_acceptance_complete",
+        "evaluation_verdict",
+        "diagnostic_only",
+        "training_completed",
+        "source_training_outcome",
+        "source_stopped_sha256",
+        "missing_observation_ids",
+        "declared_trials",
+        "observed_trial_soma_pairs"
+      ],
+      "figures": 8,
+      "pairs": [
+        {
+          "presentation_index": 0,
+          "descriptor": "$.Soma1.SumPotential"
+        },
+        {
+          "presentation_index": 1,
+          "descriptor": "$.Soma1.SumPotential"
+        },
+        {
+          "presentation_index": 2,
+          "descriptor": "$.Soma1.SumPotential"
+        },
+        {
+          "presentation_index": 3,
+          "descriptor": "$.Soma1.SumPotential"
+        },
+        {
+          "presentation_index": 4,
+          "descriptor": "$.Soma1.SumPotential"
+        },
+        {
+          "presentation_index": 5,
+          "descriptor": "$.Soma1.SumPotential"
+        },
+        {
+          "presentation_index": 6,
+          "descriptor": "$.Soma1.SumPotential"
+        },
+        {
+          "presentation_index": 7,
+          "descriptor": "$.Soma1.SumPotential"
+        }
+      ]
+    }
+  }
+}

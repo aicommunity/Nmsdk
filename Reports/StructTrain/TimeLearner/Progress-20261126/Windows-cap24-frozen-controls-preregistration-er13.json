@@ -1,0 +1,182 @@
+{
+  "catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-26/Windows-cap24-repeat-followup-prereg-independent-er12.json",
+    "sha256": "fadb4abfba350a86465b526a822378fc0a4ed4bd2c3685ba451c8925fcb53f83",
+    "size": 8119
+  },
+  "record": {
+    "kind": "timelearner_independent_cap24_repeat_followup_preregistration",
+    "schema_version": 1,
+    "utc": "2026-11-26T01:05:30.455807+00:00",
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/da/da4892e98dd5765e0159a261141e633fde22310d3b9985c835f49307271e41a8",
+        "sha256": "da4892e98dd5765e0159a261141e633fde22310d3b9985c835f49307271e41a8",
+        "bytes": 2764
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/3f/3fb465a5654b63a3e4df8e02f52d164ada42e16c965a1c18f548f67691f395b5",
+        "sha256": "3fb465a5654b63a3e4df8e02f52d164ada42e16c965a1c18f548f67691f395b5",
+        "bytes": 14336
+      },
+      "source-result.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/ce/ce059322cb5588ece5b2897077a7994d181500899962730cddffe63938749dd3",
+        "sha256": "ce059322cb5588ece5b2897077a7994d181500899962730cddffe63938749dd3",
+        "bytes": 6951
+      }
+    },
+    "restoration": {
+      "kind": "timelearner_native_bundle_restoration",
+      "schema_version": 1,
+      "archive_sha256": "3fb465a5654b63a3e4df8e02f52d164ada42e16c965a1c18f548f67691f395b5",
+      "archive_members_verified": 13,
+      "retained_regular_files": 13,
+      "compatibility": null,
+      "omitted_redundant_aliases": [],
+      "source_archive_modified": false,
+      "native_execution_attested": false,
+      "scientific_verdict": null
+    },
+    "source_code_commit": "7085d5f0678905d0b145f5fc552a33d498672002",
+    "actual_owner_observation": {
+      "utc": "2026-11-26T01:00:38.721177+00:00",
+      "queues": {
+        "classic-cap24-frozen-repeat-win-eq15": {
+          "files": {
+            "request.json": {
+              "path": "C:\\Projects\\TimeLearnerWorker\\controls\\classic-cap24-frozen-repeat-win-eq15\\request.json",
+              "sha256": "242df957f4c717ff508bfb15bc67e2619fdc8f551648f7c0635b94e16ce959ae",
+              "size": 402
+            },
+            "preregistration.json": {
+              "path": "C:\\Projects\\TimeLearnerWorker\\controls\\classic-cap24-frozen-repeat-win-eq15\\preregistration.json",
+              "sha256": "4885c437658ebadbf373f174a63048eb34e679fe204e4d8b20af38e9a1617b44",
+              "size": 1978
+            },
+            "owner.json": {
+              "path": "C:\\Projects\\TimeLearnerWorker\\controls\\classic-cap24-frozen-repeat-win-eq15\\owner.json",
+              "sha256": "3056b0faef31f4f6b6aee8e88842ac33d7baba0ddf6fa840d6d2327c87522231",
+              "size": 174
+            },
+            "dispatch.json": {
+              "path": "C:\\Projects\\TimeLearnerWorker\\controls\\classic-cap24-frozen-repeat-win-eq15\\dispatch.json",
+              "sha256": "480c9b80ec3a41a97175211fdd076240ae8acce589241aff4ad0c76cec4a3bd9",
+              "size": 1434
+            },
+            "task-dispatch-eq22.json": {
+              "path": "C:\\Projects\\TimeLearnerWorker\\controls\\classic-cap24-frozen-repeat-win-eq15\\task-dispatch-eq22.json",
+              "sha256": "6c786cefb823436ff5e5c167f01ef7a2d5aa3b1760521418a391fd09633ed837",
+              "size": 865
+            },
+            "launch-failure-eq15.json": {
+              "path": "C:\\Projects\\TimeLearnerWorker\\controls\\classic-cap24-frozen-repeat-win-eq15\\launch-failure-eq15.json",
+              "sha256": "ddae30b19058c4fcf445eb85f38ee5b0b65cf07de438e7ce22ed2bffde465939",
+              "size": 357
+            },
+            "controls.bundle": {
+              "path": "C:\\Projects\\TimeLearnerWorker\\controls\\classic-cap24-frozen-repeat-win-eq15\\controls.bundle",
+              "sha256": "5de33665a849574ca41de10a0083f50d0cdd35df3034e79773fe916ed9d1b78a",
+              "size": 8973
+            }
+          },
+          "owned_native": [
+            {
+              "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\classic-cap24-frozen-repeat-win-eq15\\cli-process\\owned-process.json",
+              "owner": {
+                "executable": "C:\\Projects\\TimeLearnerWorker\\runtime-physical-threshold-DATA3-sdk43-win-dg21\\NeuroModelerConsole.exe",
+                "creation_filetime": "134401267207547650",
+                "pid": 6600,
+                "job_name": "Local\\TimeLearner-a4c49632-9d04-4bb8-b50f-9f4f24034be9",
+                "runtime_fingerprint": "77fa25c0e052822dea3e3093d304bcd7cf19343308248441af3029ba86da0791",
+                "suspended_until_limits_applied": true
+              },
+              "live": false
+            },
+            {
+              "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\classic-cap24-frozen-repeat-win-eq15\\process\\owned-process.json",
+              "owner": {
+                "executable": "C:\\Projects\\TimeLearnerWorker\\runtime-physical-threshold-DATA3-sdk43-win-dg21\\NeuroModelerConsole.exe",
+                "creation_filetime": "134401267231418086",
+                "pid": 14092,
+                "job_name": "Local\\TimeLearner-e9c5082d-5ace-48f4-8f5f-32d485bed905",
+                "runtime_fingerprint": "77fa25c0e052822dea3e3093d304bcd7cf19343308248441af3029ba86da0791",
+                "suspended_until_limits_applied": true
+              },
+              "live": true
+            }
+          ],
+          "owner": {
+            "pid": 16248,
+            "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+            "creation_filetime": "134401267113066087"
+          },
+          "owner_live": true,
+          "classic-cap24-frozen-repeat-win-eq15": {
+            "trials": 6
+          }
+        },
+        "classic-cap24-frozen-third-grid-win-eq31": {
+          "files": {
+            "request.json": {
+              "path": "C:\\Projects\\TimeLearnerWorker\\controls\\classic-cap24-frozen-third-grid-win-eq31\\request.json",
+              "sha256": "cfb1458d00108635ed5c37774f8533608dbed4a722b32a7aca60a97317097293",
+              "size": 1322
+            },
+            "preregistration.json": {
+              "path": "C:\\Projects\\TimeLearnerWorker\\controls\\classic-cap24-frozen-third-grid-win-eq31\\preregistration.json",
+              "sha256": "6df369dcb4b3b3d26255d8249a54717e766cec8b0ee774e3ff8ba98710b68f75",
+              "size": 1064
+            },
+            "owner.json": {
+              "path": "C:\\Projects\\TimeLearnerWorker\\controls\\classic-cap24-frozen-third-grid-win-eq31\\owner.json",
+              "sha256": "e293bf2ff854e8a9b6651ad9ac9ca0fbe1eb333afd6fc2e18c73418783498cb4",
+              "size": 174
+            },
+            "dispatch.json": {
+              "path": "C:\\Projects\\TimeLearnerWorker\\controls\\classic-cap24-frozen-third-grid-win-eq31\\dispatch.json",
+              "sha256": "0cab54e9a23370d41101e253ee57a143bdc56e352442972d8283c968ad520304",
+              "size": 1105
+            },
+            "controls.bundle": {
+              "path": "C:\\Projects\\TimeLearnerWorker\\controls\\classic-cap24-frozen-third-grid-win-eq31\\controls.bundle",
+              "sha256": "9735fc759948af06935bd0700fb6ac7f529b29cf91d57ab6e4c52d83253e7acc",
+              "size": 1672
+            }
+          },
+          "owned_native": [],
+          "waiting.json": {
+            "phase": "actual_repeat",
+            "owner_live": true,
+            "exact_owner": {
+              "pid": 16248,
+              "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+              "creation_filetime": "134401267113066087"
+            }
+          },
+          "owner": {
+            "pid": 15520,
+            "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+            "creation_filetime": "134401272480758401"
+          },
+          "owner_live": true
+        }
+      },
+      "scientific_verdict": null
+    },
+    "source_training_outcome": "budget_exhausted",
+    "new_Train": false,
+    "threshold_selection": false,
+    "complete_repeat_and_phase_responses_not_yet_verified": true,
+    "original_Windows_kernel_not_reattested": true,
+    "scientific_verdict": null
+  }
+}

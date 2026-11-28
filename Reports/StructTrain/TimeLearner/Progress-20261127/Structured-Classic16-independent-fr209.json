@@ -1,0 +1,85 @@
+{
+  "kind": "timelearner_external_scientific_result_reference",
+  "schema_version": 1,
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/a3/a3fbe4242c171e3cfadcd1e9fa355836617b90d8cbca1720e0edc977de425615",
+      "sha256": "a3fbe4242c171e3cfadcd1e9fa355836617b90d8cbca1720e0edc977de425615",
+      "bytes": 23037
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/88/88ef8c25f172bdda0ae1155e4d5478b16d9f5f16a5322cd9c9d0b11edb116513",
+      "sha256": "88ef8c25f172bdda0ae1155e4d5478b16d9f5f16a5322cd9c9d0b11edb116513",
+      "bytes": 24805144
+    }
+  },
+  "acceptance": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/81/8196155b3706b9ce77a1cf4bcff98e15f248dc4a7a6ba075e93d4e96410f3bfb",
+    "sha256": "8196155b3706b9ce77a1cf4bcff98e15f248dc4a7a6ba075e93d4e96410f3bfb",
+    "bytes": 1368
+  },
+  "members": 127,
+  "analyses": [
+    {
+      "phase": "baseline",
+      "counts": {
+        "TP": 0,
+        "FP": 0,
+        "FN": 1,
+        "TN": 7,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 0.0,
+        "foil_response_rate": 0.0
+      },
+      "all8_full_responses_preserved": true
+    },
+    {
+      "phase": "confirmation",
+      "counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.75,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.2857142857142857
+      },
+      "all8_full_responses_preserved": true
+    }
+  ],
+  "observations": 16,
+  "all_actual_loaded_file_bytes_verified": true,
+  "all_declared_processes_closed": true,
+  "primary_independently_restored": true,
+  "new_Train": false,
+  "new_calibration": false,
+  "entire_stage5_accepted": false,
+  "candidate_accepted": false,
+  "scientific_verdict": null,
+  "upstream_source_catalog": {
+    "relative_path": "experiments/2026-11-27/Original-MSVC-Classic-direct-GCC-primary-fr201.json",
+    "bytes": 1219,
+    "sha256": "37966925463052e8f9c89a3bd8681f57f217026ad367d262e6e0b8c6aa2451da"
+  },
+  "source_catalog": {
+    "relative_path": "experiments/2026-11-27/Structured-Classic16-independent-fr209.json",
+    "bytes": 2568,
+    "sha256": "9061fcc36dd9e6c957268304b1d16b38d56d7e413fefda7009967188b2ed5c6e"
+  },
+  "source_kind": "timelearner_structured_DATA_native_evidence_independent_acceptance"
+}

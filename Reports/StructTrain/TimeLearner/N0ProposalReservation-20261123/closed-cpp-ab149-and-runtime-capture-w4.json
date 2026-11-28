@@ -1,0 +1,49 @@
+{
+  "kind": "timelearner_closed_N0_reservation_compiled_before_after",
+  "schema_version": 1,
+  "observed_utc": "2026-11-23T08:37:13.183119+00:00",
+  "queue_supervisor_kernel_live": false,
+  "whole_process_group_closed": true,
+  "controller_returncode": 0,
+  "results": {
+    "before": {
+      "inventory": {
+        "expected": 149,
+        "observed": 149,
+        "failed_test_ids": [
+          "BoundedTrainingMeasuredCount/ClassicRefinesBeforeReservingOrdinaryNeighbours",
+          "BoundedTrainingMeasuredCount/BranchRefinesBeforeReservingOrdinaryNeighbours",
+          "BoundedTrainingMeasuredCount/DeferredNeighboursNeverReplaceAFreshFinalCertificate"
+        ],
+        "assertion_status": "failed",
+        "sha256": "f50539f7a58994950376a9462d2dcd099232cca8db4132aec79461c2586192e1"
+      },
+      "runtime_fingerprint": "353f0f72a9d515faa496fb489c5c1d1807e312893381c5b864410651cc4ffe03",
+      "process": {
+        "execution": "process_error",
+        "returncode": 1,
+        "runtime_provenance": "loaded_files_captured",
+        "all_processes_closed": null
+      }
+    },
+    "after": {
+      "inventory": {
+        "expected": 149,
+        "observed": 149,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "3d46c90839acf4c7c87594c3e22444db3356d27c566e1cc76d0dae6f1a2b5401"
+      },
+      "runtime_fingerprint": "46dd6df60e4eaf342e3578a76ab7e1cc12d5398aa290d6ea543a21bb3530c1b5",
+      "process": {
+        "execution": "completed",
+        "returncode": 0,
+        "runtime_provenance": "loaded_files_captured",
+        "all_processes_closed": null
+      }
+    }
+  },
+  "physical_models_executed": false,
+  "native_sdk_admitted": false,
+  "scientific_verdict": null
+}

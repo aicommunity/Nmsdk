@@ -1,0 +1,13 @@
+digraph LogarithmicResistance {
+ graph [rankdir=TB,bgcolor="white",pad=0.12,nodesep=0.22,ranksep=0.35,
+   fontname="Times New Roman",fontsize=23,label="Предложения сопротивлений до измерения отклика",labelloc=t];
+ node [shape=box,fontname="Times New Roman",fontsize=21,margin="0.12,0.09"];
+ edge [fontname="Times New Roman",fontsize=19,arrowsize=0.75];
+ coordinate [label="Координата ρ = ln(R/R*)\nМасштаб R* > 0"];
+ bounds [label="Индивидуальный диапазон\nRmin ≤ R ≤ Rmax"];
+ middle [label="Первое деление\nρmid = (ρmin + ρmax)/2\nRmid = √(Rmin Rmax)"];
+ lower [label="Деление нижнего интервала\nRlow = √(Rmin Rmid)"];
+ upper [label="Деление верхнего интервала\nRhigh = √(Rmid Rmax)"];
+ measure [label="Для предложенного значения\nсоздать реальные синапсы\nизмерить время и амплитуду"];
+ coordinate->bounds->middle;middle->lower;middle->upper;{lower upper}->measure;
+}

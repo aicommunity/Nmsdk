@@ -1,0 +1,188 @@
+{
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/M40-Classic-Count8-cadence64-primary-fr608.json",
+    "size": 5602,
+    "sha256": "dbdde3b0933a472a45a9b0c7918fa9951c647bd9547fe058ea55d75c6245f2d6"
+  },
+  "catalog": {
+    "kind": "complete_Classic_Count8_all_cadence64_primary",
+    "schema_version": 1,
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/db/db3e34875fdb73f804c13f8f0f559f8e34bb137efdb5e78a6f7a38bebc84b8d7",
+        "sha256": "db3e34875fdb73f804c13f8f0f559f8e34bb137efdb5e78a6f7a38bebc84b8d7",
+        "bytes": 155571
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/7a/7a87d629fbf9b064b8124a48671e95c8c197bd097897469bf36ad0875f269d8e",
+        "sha256": "7a87d629fbf9b064b8124a48671e95c8c197bd097897469bf36ad0875f269d8e",
+        "bytes": 45184864
+      }
+    },
+    "members": 883,
+    "expanded_bytes": 5312682596,
+    "rows": [
+      {
+        "case": "r0-short-reset",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "frozen_model_verified": true,
+        "final_quiet_tail_seconds": 2.0004999999999997,
+        "condition_fingerprint": "10b1d9545de8e6853886863e6d86f82af77d224ef28ee323f47125c07d60b82c"
+      },
+      {
+        "case": "r0-short-continuous",
+        "counts": {
+          "TP": 1,
+          "FP": 3,
+          "FN": 0,
+          "TN": 4,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.625,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.42857142857142855
+        },
+        "frozen_model_verified": true,
+        "final_quiet_tail_seconds": 2.0004999999999997,
+        "condition_fingerprint": "85189d8b0bd33c2feaf5b668139be807ec811adf84dedeaba13b359d0676b901"
+      },
+      {
+        "case": "r3-short-reset",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "frozen_model_verified": true,
+        "final_quiet_tail_seconds": 2.0004999999999997,
+        "condition_fingerprint": "68a2262bbb0a8574a78f912e447eb216e62e5e51396131d1f9486a8aff3e71e9"
+      },
+      {
+        "case": "r3-short-continuous",
+        "counts": {
+          "TP": 1,
+          "FP": 3,
+          "FN": 0,
+          "TN": 4,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.625,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.42857142857142855
+        },
+        "frozen_model_verified": true,
+        "final_quiet_tail_seconds": 2.0004999999999997,
+        "condition_fingerprint": "f202f440b3d11a69ae255c43c17506aa398b72ad8d42d075922ba88ad50da89e"
+      },
+      {
+        "case": "r0-long-reset",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "frozen_model_verified": true,
+        "final_quiet_tail_seconds": 2.0005000000000006,
+        "condition_fingerprint": "acd07b997e1420a8b612f48832ad8b4ee623fd4b1af287115a7233c3224caf7b"
+      },
+      {
+        "case": "r0-long-continuous",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "frozen_model_verified": true,
+        "final_quiet_tail_seconds": 2.0005000000000006,
+        "condition_fingerprint": "25f12ab9dabcf978de820ecfec6c4d25404885ac9f843d8b24d8f59bc98f6425"
+      },
+      {
+        "case": "r3-long-reset",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "frozen_model_verified": true,
+        "final_quiet_tail_seconds": 2.0005000000000006,
+        "condition_fingerprint": "88f28819b19a2240e1b7f7d2b1726b1033bccecb4a5a6471d035eb37547bc4b3"
+      },
+      {
+        "case": "r3-long-continuous",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "frozen_model_verified": true,
+        "final_quiet_tail_seconds": 2.0005000000000006,
+        "condition_fingerprint": "6d3092f069d29dbf12f6f84eed7c4d936b59fef6fa44c39cb9ce6b6da8c0936a"
+      }
+    ],
+    "observations": 64,
+    "total_declared_observations": 64,
+    "completed_cases_in_this_package": 8,
+    "total_cases": 8,
+    "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226",
+    "fixed_threshold": 0.026100997379370133,
+    "new_Train": false,
+    "new_calibration": false,
+    "source_run_still_active": false,
+    "full_primary_independent_readback_pending": true,
+    "scientific_verdict": null
+  }
+}

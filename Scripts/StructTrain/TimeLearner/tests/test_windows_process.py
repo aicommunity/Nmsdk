@@ -33,10 +33,11 @@ class WindowsProcessTest(unittest.TestCase):
         cls.manifest['runtime_identity'] = runtime_content_identity(cls.manifest)
         cls.manifest['runtime_fingerprint'] = digest_json(cls.manifest['runtime_identity'])
 
-    def run_fixture(self, name, code, *, wall=5, processes=1, cancel=None, extra=None, memory=128*1024**2, cooperative=False):
+    def run_fixture(self, name, code, *, wall=5, processes=1, cancel=None, extra=None, memory=128*1024**2, cooperative=False, monitor=None):
         result = windows_process.execute(self.manifest, ['-X', 'utf8', '-c', code, *(extra or [])],
             self.root, self.root/name, memory_bytes=memory, maximum_processes=processes,
-            maximum_wall_seconds=wall, lock_file=self.lock, cancel_file=cancel, cooperative_capture=cooperative)
+            maximum_wall_seconds=wall, lock_file=self.lock, cancel_file=cancel,
+            cooperative_capture=cooperative, monitor=monitor)
         (self.root/(name+'-observed.json')).write_text(json.dumps(result, indent=2)+'\n')
         return result
 
@@ -102,6 +103,29 @@ class WindowsProcessTest(unittest.TestCase):
     def test_timeout_closes_the_owned_job(self):
         result = self.run_fixture('timeout', 'import time;time.sleep(30)', wall=.3)
         self.stopped(result, 'timeout')
+
+    def test_monitor_observes_the_actual_owned_process(self):
+        calls=[]
+        result=self.run_fixture('monitored','import time;time.sleep(.4)',monitor=calls.append)
+        self.complete(result)
+        owner=json.loads((self.root/'monitored/owned-process.json').read_bytes())
+        self.assertTrue(calls)
+        self.assertTrue(all(s['pid']==owner['pid'] and s['wall_seconds']>=0 for s in calls))
+
+    def test_monitor_error_closes_main_and_descendant_and_releases_lock(self):
+        marker=self.root/'monitor-error-child-started.txt'
+        code=('import subprocess,sys,time;from pathlib import Path;'
+              'p=subprocess.Popen([sys.executable,"-c","import time;time.sleep(30)"],'
+              'creationflags=0x08000000);Path('+repr(str(marker))+').write_text(str(p.pid));time.sleep(30)')
+        def monitor(state):
+            if marker.exists():raise EvidenceError('controlled_output_budget_failure')
+        result=self.run_fixture('monitor-error',code,wall=15,processes=4,monitor=monitor)
+        self.assertTrue(marker.exists())
+        self.assertEqual(result['execution'],'process_error')
+        self.assertEqual(result['reason'],'controlled_output_budget_failure')
+        self.assertTrue(result['child_resumed'])
+        self.assertTrue(result['all_processes_closed'])
+        self.complete(self.run_fixture('after-monitor-error','import time;time.sleep(.3)'))
 
     def test_timeout_after_capture_preserves_runtime_evidence(self):
         result = self.run_fixture('captured-timeout', 'import time;time.sleep(30)', wall=5)

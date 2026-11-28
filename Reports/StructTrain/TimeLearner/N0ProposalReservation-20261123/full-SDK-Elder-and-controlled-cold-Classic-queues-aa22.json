@@ -1,0 +1,309 @@
+{
+  "kind": "timelearner_proposal_order_next_native_and_cold_runs",
+  "schema_version": 1,
+  "source_delivery": {
+    "source": "/home/user/timelearner-refactor/source-n0-proposal-full-sdk-elder-aa10",
+    "roles": [
+      {
+        "role": "root",
+        "commit": "b2c3cb65ab572c680a56f28b86d40445b9392b0c",
+        "files": 1332,
+        "pack_sha256": "31a79c10c3ef87fcb199fb20b7a194a829c34389fa327afc701089de6941400c"
+      },
+      {
+        "role": "Bin",
+        "commit": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+        "files": 269,
+        "pack_sha256": "81737400a9e98c765b6bfbc137f3e88c09d665e8a18d8810047510d59ec53e9a"
+      },
+      {
+        "role": "Libraries/Nmsdk-MotionControlLib",
+        "commit": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+        "files": 93,
+        "pack_sha256": "175582d813c389e2530d08dc6ccf40e4c9ea48354f1eb82ea8f173412f4c3098"
+      },
+      {
+        "role": "Libraries/Nmsdk-PulseLib",
+        "commit": "3f5a2205a4e6c02de545cdc214172482ac53c4b2",
+        "files": 719,
+        "pack_sha256": "cf3a9703aa19a9e8b1615280d50e6ef2f810ebed96793989d2314bbb9793effc"
+      },
+      {
+        "role": "Libraries/Rdk-BasicLib",
+        "commit": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+        "files": 43,
+        "pack_sha256": "f9a22719d17d462be054950514ad0497f6a0b115d04c9c68c7cfe672cb9e3eb7"
+      },
+      {
+        "role": "Libraries/Rdk-CvBasicLib",
+        "commit": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+        "files": 132,
+        "pack_sha256": "81391cf38827dcf2bd03b05be42185ee729c000791b2b4787c45a7236a147ab9"
+      },
+      {
+        "role": "Libraries/Rdk-HardwareLib",
+        "commit": "de40b008e990105856726e01230dde19f42a90a9",
+        "files": 356,
+        "pack_sha256": "d873adb6caa1fe40e26193a07a6d28efdf8857eb38091feabd3b93965dc2d8ec"
+      },
+      {
+        "role": "Rdk",
+        "commit": "561986e9f336ee5914e2d119de90b005e06f3639",
+        "files": 1781,
+        "pack_sha256": "447ba59ccf1fa4b8121f22ec285f66c06c25335b8d86a95576094e5fab51799c"
+      }
+    ],
+    "source_closure": {
+      "root": {
+        "head": "b2c3cb65ab572c680a56f28b86d40445b9392b0c",
+        "status": ""
+      },
+      "Bin": {
+        "recorded_gitlink": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+        "head": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+        "status": ""
+      },
+      "Libraries/Nmsdk-MotionControlLib": {
+        "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+        "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+        "status": ""
+      },
+      "Libraries/Nmsdk-PulseLib": {
+        "recorded_gitlink": "3f5a2205a4e6c02de545cdc214172482ac53c4b2",
+        "head": "3f5a2205a4e6c02de545cdc214172482ac53c4b2",
+        "status": ""
+      },
+      "Libraries/Rdk-BasicLib": {
+        "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+        "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+        "status": ""
+      },
+      "Libraries/Rdk-CvBasicLib": {
+        "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+        "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+        "status": ""
+      },
+      "Libraries/Rdk-HardwareLib": {
+        "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+        "head": "de40b008e990105856726e01230dde19f42a90a9",
+        "status": ""
+      },
+      "Rdk": {
+        "recorded_gitlink": "561986e9f336ee5914e2d119de90b005e06f3639",
+        "head": "561986e9f336ee5914e2d119de90b005e06f3639",
+        "status": ""
+      }
+    },
+    "all_role_heads_and_gitlinks_exact": true,
+    "shared_runtime_untouched": true
+  },
+  "Elder_SDK_queue": {
+    "dispatched": true,
+    "job": "n0-proposal-full-sdk-elder-aa15",
+    "controls_commit": "fb1e0e8d139e29bbfdc7d53fb3e58ceb433fbe75",
+    "supervisor": {
+      "pid": 716739,
+      "start_ticks": "499801227",
+      "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+      "uid": 1000
+    },
+    "source": "/home/user/timelearner-refactor/source-n0-proposal-full-sdk-elder-aa10",
+    "source_commit": "b2c3cb65ab572c680a56f28b86d40445b9392b0c",
+    "pulse": "3f5a2205a4e6c02de545cdc214172482ac53c4b2",
+    "Rdk": "561986e9f336ee5914e2d119de90b005e06f3639",
+    "expected_cpp_cases": 114,
+    "namespace_files": 4725,
+    "runtime": "/home/user/timelearner-refactor/runtime-n0-proposal-full-sdk-elder-aa15",
+    "native_output": "/home/user/timelearner-refactor/readbacks/s07-n0-proposal-full-sdk-elder-aa15",
+    "controls_backup": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/37/37ee1471acb635075bb10cfcdeab7fb2cf6ce51fc9e621d65054ccdecb272e63",
+      "sha256": "37ee1471acb635075bb10cfcdeab7fb2cf6ce51fc9e621d65054ccdecb272e63",
+      "bytes": 386403
+    },
+    "controls_backup_catalog": "/mnt/nmsdk-structtrain-archive/operations/timelearner/prepared-controls/20261123-n0-proposal-full-sdk-elder-aa15.json",
+    "old_runtime_and_sources_unchanged": true,
+    "new_Train_started": false,
+    "scientific_verdict": null
+  },
+  "M40_new_cold_queue": {
+    "queued": true,
+    "job": "classic-n0-proposal-cold-m40-aa21",
+    "owner": {
+      "pid": 1313308,
+      "start_ticks": "450406168",
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "uid": 1000
+    },
+    "controls_commit": "320a530205a7e8f332ec21ebbe5d8328aad0725b",
+    "controls_bundle": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/bf/bf750f741af6877a730b75cfe7e0233f4380111014d593f3af95e47c62ab72f9",
+      "sha256": "bf750f741af6877a730b75cfe7e0233f4380111014d593f3af95e47c62ab72f9",
+      "bytes": 46047
+    },
+    "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/prepared-controls/20261123-classic-n0-proposal-cold-m40-aa21.json",
+    "waiting_for": "n0-proposal-full-sdk-m40-w14",
+    "declared_case_matches_before": true,
+    "actual_cold_graph_preflight_still_required": true,
+    "source_root": "b2c3cb65ab572c680a56f28b86d40445b9392b0c",
+    "PulseLib": "3f5a2205a4e6c02de545cdc214172482ac53c4b2",
+    "cold": true,
+    "probes": 160,
+    "sweeps": 1,
+    "search_wall_seconds": 32400,
+    "training_started": false,
+    "scientific_verdict": null
+  },
+  "M40_kernel_observation": {
+    "observed_utc": "2026-11-23T13:18:37.373366+03:00",
+    "host": "M40",
+    "jobs": {
+      "n0-proposal-full-sdk-m40-w14": {
+        "owner.json": {
+          "pid": 1048198,
+          "start_ticks": "449970651",
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "uid": 1000
+        },
+        "native-launch.json": {
+          "controller": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n0-proposal-full-sdk-m40-w14-controller",
+          "request": {
+            "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n0-proposal-full-sdk-m40-w14-prepared/owned-native-request.json",
+            "sha256": "fb32d5be622dd4c06b218c2a814eb63b55c5119398b83e91e8845f706dfc356f",
+            "size": 716
+          },
+          "source_commit": "b2c3cb65ab572c680a56f28b86d40445b9392b0c",
+          "selected_tests": 114,
+          "scientific_verdict": null
+        },
+        "kernel_supervisor_live": true,
+        "native_controller": {
+          "controller": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n0-proposal-full-sdk-m40-w14-controller",
+          "supervisor_identity": {
+            "pid": 1116894,
+            "start_ticks": "449991626",
+            "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+            "uid": 1000
+          },
+          "supervisor_identity_known": true,
+          "supervisor_live": true,
+          "outer": {
+            "execution": "running",
+            "all_processes_closed": false,
+            "reason": "kernel_cgroup_observed",
+            "binding": {
+              "kind": "timelearner_contained_binding",
+              "schema_version": 1,
+              "request_sha256": "28857e4f22ba7ce4d98f2bb97bc75d778793c66482ec37ed37de24842956299a",
+              "unit": "timelearner-c9f89672-899b-4f92-a08b-d748240ef8bf.service",
+              "invocation_id": "a42c67a9d34d410ba7ab10848fba3730",
+              "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-c9f89672-899b-4f92-a08b-d748240ef8bf.service",
+              "initial_main_pid": 1124899,
+              "initial_start_ticks": "449995142",
+              "sha256": "f112459aa43c2d938ad3ff56009e7016d7dc7f8de3c6908989e7fdc853978308"
+            },
+            "state": {
+              "Type": "exec",
+              "Restart": "no",
+              "RemainAfterExit": "yes",
+              "MainPID": "1124899",
+              "Result": "success",
+              "ExecMainCode": "0",
+              "ExecMainStatus": "0",
+              "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-c9f89672-899b-4f92-a08b-d748240ef8bf.service",
+              "MemoryMax": "12884901888",
+              "TasksMax": "128",
+              "KillMode": "control-group",
+              "Description": "TimeLearner contained attempt c9f89672-899b-4f92-a08b-d748240ef8bf",
+              "LoadState": "loaded",
+              "ActiveState": "active",
+              "SubState": "running",
+              "InvocationID": "a42c67a9d34d410ba7ab10848fba3730"
+            },
+            "memory_max": 12884901888,
+            "tasks_max": 128,
+            "scientific_verdict": null
+          },
+          "unbound_outer_intent": false,
+          "result": null,
+          "scientific_verdict": null
+        }
+      },
+      "classic-n0-proposal-cold-m40-aa21-queue": {
+        "owner.json": {
+          "pid": 1313308,
+          "start_ticks": "450406168",
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "uid": 1000
+        },
+        "state.json": {
+          "state": "waiting_for_full_native_SDK114",
+          "predecessor": "/media/user/Data/TimeLearnerRefactor/readbacks/n0-proposal-full-sdk-m40-w14",
+          "training_started": false,
+          "scientific_verdict": null
+        },
+        "kernel_supervisor_live": true
+      }
+    },
+    "cold_native_output_exists": false,
+    "cold_raw_trials": 0,
+    "reserved": {
+      "disk_bytes": 8589934592,
+      "memory_bytes": 12884901888,
+      "slots": 1
+    }
+  },
+  "Elder_kernel_observation": {
+    "observed_utc": "2026-11-23T13:18:37.734367+03:00",
+    "host": "Elder-1",
+    "jobs": {
+      "n0-proposal-full-sdk-elder-aa15": {
+        "owner.json": {
+          "pid": 716739,
+          "start_ticks": "499801227",
+          "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+          "uid": 1000
+        },
+        "waiting-for-visual-closure.json": {
+          "predecessor": "/home/user/timelearner-refactor/readbacks/classic-measured-count-visuals-elder-z14",
+          "wait_budget_seconds": 10800,
+          "scientific_verdict": null
+        },
+        "kernel_supervisor_live": true
+      },
+      "classic-measured-count-visuals-elder-z14": {
+        "supervisor-identity.json": {
+          "pid": 693203,
+          "start_ticks": "499643325",
+          "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+          "uid": 1000
+        },
+        "terminal.json": {
+          "execution": "completed",
+          "returncode": 0,
+          "collection_result_present": true,
+          "scientific_verdict": null
+        },
+        "kernel_supervisor_live": false,
+        "PNG_count": 6708
+      }
+    },
+    "reserved": {
+      "disk_bytes": 67108864,
+      "memory_bytes": 2147483648,
+      "slots": 1
+    }
+  },
+  "existing_Windows_two_sweep_Train_unchanged": true,
+  "new_Classic_Train_started": false,
+  "new_Classic_Train_requires_SDK114_and_two_native_cold_preflights": true,
+  "new_Classic_mathematical_case_and_budget_identical_except_attempt_id": true,
+  "full_plan_stage_7_not_accepted": true,
+  "scientific_verdict": null,
+  "interpretation_limit": "Same mathematical case and declared budgets; before Train on Elder, after queued on M40 with different runtime. Search coverage under equal wall time is not a causal single-factor performance A/B. The149 controlled C++ before/after cases are separate evidence."
+}

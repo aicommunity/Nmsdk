@@ -1,0 +1,218 @@
+{
+  "kind": "timelearner_N0_proposal_full_native_SDK_acceptance",
+  "schema_version": 1,
+  "observed_utc": "2026-11-23T11:11:39.864956+00:00",
+  "job": "n0-proposal-full-sdk-m40-w14",
+  "expected_cases": 114,
+  "audited": {
+    "expected": 114,
+    "observed": 114,
+    "failed_test_ids": [],
+    "assertion_status": "passed",
+    "sha256": "368ab5fe4dfa678bc583db512f0b37a278e07fb54c5d504636fc6bc4e236332b"
+  },
+  "junit": {
+    "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n0-proposal-full-sdk-m40-w14/measured-count-full-native114/native.xml",
+    "sha256": "368ab5fe4dfa678bc583db512f0b37a278e07fb54c5d504636fc6bc4e236332b",
+    "size": 41425
+  },
+  "terminal": {
+    "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n0-proposal-full-sdk-m40-w14/terminal.json",
+    "sha256": "53b05f8e4982c0af956d5e7ff0c1aa2a790b361d0b004d611e8879d43b3982b9",
+    "size": 508
+  },
+  "source_closure": {
+    "root": {
+      "head": "b2c3cb65ab572c680a56f28b86d40445b9392b0c",
+      "status": ""
+    },
+    "Bin": {
+      "recorded_gitlink": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "head": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "status": ""
+    },
+    "Libraries/Nmsdk-MotionControlLib": {
+      "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "status": ""
+    },
+    "Libraries/Nmsdk-PulseLib": {
+      "recorded_gitlink": "3f5a2205a4e6c02de545cdc214172482ac53c4b2",
+      "head": "3f5a2205a4e6c02de545cdc214172482ac53c4b2",
+      "status": ""
+    },
+    "Libraries/Rdk-BasicLib": {
+      "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "status": ""
+    },
+    "Libraries/Rdk-CvBasicLib": {
+      "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "status": ""
+    },
+    "Libraries/Rdk-HardwareLib": {
+      "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+      "head": "de40b008e990105856726e01230dde19f42a90a9",
+      "status": ""
+    },
+    "Rdk": {
+      "recorded_gitlink": "561986e9f336ee5914e2d119de90b005e06f3639",
+      "head": "561986e9f336ee5914e2d119de90b005e06f3639",
+      "status": ""
+    }
+  },
+  "case_runtime": {
+    "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n0-proposal-full-sdk-m40-w14/measured-count-full-native114-runtime.json",
+    "sha256": "eedee5dde499ed8f0958b25548909ee62855e240e1c0db49d040dacbd1fd017a",
+    "size": 12667
+  },
+  "runtime_identity": {
+    "kind": "timelearner_runtime_content",
+    "schema_version": 2,
+    "executable": "4480505ca846131bff46aa4a2cc1c8f1be777cf5e5d7cfda10cce3e8b33c11fc",
+    "app_ini": "06b960e1a6df16ae244a5902f2ce9abe2e8bacb8923e20274270f0635cdf2e57",
+    "resolved_libraries": [
+      "0a2128bc10841fb29e76d08d945864dfb0b6a66da5df6df5d8299197439e54bb",
+      "0cfb17c7e8d458f92cd29bbc7bfcaf51c84536b263dbdffa8507341dedc0c0bc",
+      "0d6934adafb2ef3c640382440c14d6bd60f391e688c000796ffcea0c72849269",
+      "135f3c8f006d2fe5e68e51281c7974cb991a03de3bfb3593d68d174dfcf854d1",
+      "15f34bcb75dfb0fa30af13cf2b82fb7a9a8e0fbbadf7cabcd397dd65bde552f3",
+      "1fd75fe70354a416d75aef22bcae68c47bd25d20e2d0568c30b1a9838cf62f11",
+      "26b37d25f7ca2a2d348de8ecabacda12e921cd933b21fa069a179760db77219d",
+      "288df2caa66a2de606532a8796fe1efc93d07ec0c3ab41bc38743b70ba304a75",
+      "28e77a498f2f17f8cb883c91303f9901343ea0d8e34959d138dd462fcc9b201f",
+      "2c137b29a3740fb6d12a4c18823bc2b15215646c3ba3bb208b89782df28559f0",
+      "3550b194eb2cf2e6f798f033eb9ca279d498c21296b4a18790ce158d2023e47b",
+      "526bbf0d9467d22451d04bfdb585cd7b84a22c9978dace5501704125ec2972f9",
+      "5dcc4d25466e29ca390ed6fabb371c69b65dff6fa4e91c34561057a020d6994a",
+      "5fc0940888e9d2e1a00e66d6b1a559c36364ee867683652e1074fa576952cc3f",
+      "6075a70c30fd7216b9214ae50f2def0ce835092b034088ed9bd64c6a376c740f",
+      "6ac6abc86ac891c6e13486470e26f1d939f47fda9e6b5d5508a7f5ec881adc84",
+      "755a371e86cc9f564ab54f66140747700fb0a103f698f659f2060f707897e09a",
+      "7560aadde38e5f4237a47a1ddd5891f9b36768a77a60faae30beee003ac01901",
+      "96ef9163aee942bdc09e6f4a1acd2fd6b178c03af824c569741440d63ac9f4f4",
+      "9b34e2442ccf558196946a5e944c4e73e6fb5a6cd035c9845b778bbac9f1e390",
+      "a7f147d23fbbf713bff170b906a0488e62e62bd6e92cdf50ad086e2d5bd09093",
+      "cc080fc134a77c4a2e415e2143566aa925d01a858592a9e660eb5430c56bddf1",
+      "d1c9583dc7c1fce6f0a0701dd4356448425e45afe15c0946c23edeaf93d9397c",
+      "d93224d2b0dab4247598be683adca02f5cf00586f99c187579cd7e92058fb7cb",
+      "ddbb3718b8bd9cbd780e5ab08b4503c30a6c4fa0706ebe5d074ed6b596c1714e",
+      "dfb8b2e4e5d5d945a9ebdd6645816e2297d535cd6a7e529bd66a2f6332142270",
+      "f61677c7bdb7c2aa2a243ea781bfd16afcb361cede7b4ef76127a9d8eb9a5242"
+    ],
+    "build_flags": {
+      "CMAKE_BUILD_TYPE": "Release",
+      "CMAKE_CXX_FLAGS": "",
+      "CMAKE_CXX_FLAGS_DEBUG": "-g",
+      "CMAKE_CXX_FLAGS_MINSIZEREL": "-Os -DNDEBUG",
+      "CMAKE_CXX_FLAGS_RELEASE": "-O3 -DNDEBUG",
+      "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "-O2 -g -DNDEBUG",
+      "CMAKE_EXE_LINKER_FLAGS": "",
+      "CMAKE_EXE_LINKER_FLAGS_DEBUG": "",
+      "CMAKE_EXE_LINKER_FLAGS_MINSIZEREL": "",
+      "CMAKE_EXE_LINKER_FLAGS_RELEASE": "",
+      "CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO": "",
+      "CMAKE_MODULE_LINKER_FLAGS": "",
+      "CMAKE_MODULE_LINKER_FLAGS_DEBUG": "",
+      "CMAKE_MODULE_LINKER_FLAGS_MINSIZEREL": "",
+      "CMAKE_MODULE_LINKER_FLAGS_RELEASE": "",
+      "CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO": "",
+      "CMAKE_SHARED_LINKER_FLAGS": "",
+      "CMAKE_SHARED_LINKER_FLAGS_DEBUG": "",
+      "CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL": "",
+      "CMAKE_SHARED_LINKER_FLAGS_RELEASE": "",
+      "CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO": "",
+      "CMAKE_STATIC_LINKER_FLAGS": "",
+      "CMAKE_STATIC_LINKER_FLAGS_DEBUG": "",
+      "CMAKE_STATIC_LINKER_FLAGS_MINSIZEREL": "",
+      "CMAKE_STATIC_LINKER_FLAGS_RELEASE": "",
+      "CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO": "",
+      "NO_MOTION_CONTROL": "ON",
+      "RDK_LLM_BUILD_EMBEDDED": "OFF"
+    },
+    "compiler": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769",
+    "loaded_process_files": null
+  },
+  "runtime_fingerprint": "423815d909c496d0c106baacfd39cab1632b0b5a02addd7e2a7240377cfa6c58",
+  "scope": "Selected actual component114 regression cohort for the proposal-order change; not entire plan or mandatory model/mode matrix",
+  "all_plan_modes_accepted": false,
+  "scientific_verdict": null,
+  "closed_units": [
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n0-proposal-full-sdk-m40-w14/measured-count-full-native114/process/contained",
+      "all_processes_closed": true,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "d7cbf247cb7df97c22a07bd1de1eaee82b571e89e68bc6ff8c40a12e38404cc7",
+        "unit": "timelearner-052f218e-d871-4967-be52-dac5b570c590.service",
+        "invocation_id": "6b38c557c40f450e87705066043bb756",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-052f218e-d871-4967-be52-dac5b570c590.service",
+        "initial_main_pid": 1142902,
+        "initial_start_ticks": "450097638",
+        "sha256": "ccb611c11d5c08d6fe3c4816b6c451ba6b5d6bf6a4f571cb28f6e3e556720344"
+      }
+    },
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n0-proposal-full-sdk-m40-w14-controller/process/contained",
+      "all_processes_closed": true,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "28857e4f22ba7ce4d98f2bb97bc75d778793c66482ec37ed37de24842956299a",
+        "unit": "timelearner-c9f89672-899b-4f92-a08b-d748240ef8bf.service",
+        "invocation_id": "a42c67a9d34d410ba7ab10848fba3730",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-c9f89672-899b-4f92-a08b-d748240ef8bf.service",
+        "initial_main_pid": 1124899,
+        "initial_start_ticks": "449995142",
+        "sha256": "f112459aa43c2d938ad3ff56009e7016d7dc7f8de3c6908989e7fdc853978308"
+      }
+    },
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n0-proposal-full-sdk-m40-w14-canonical/process/contained",
+      "all_processes_closed": true,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "97e264aa31d6248306ba724c5fcaf07510ff5405b11b587c4df603bec02ccc60",
+        "unit": "timelearner-b436e348-72b1-42f4-a468-ee150b2d9141.service",
+        "invocation_id": "7a02a4e386ea4000ac09ac7603fc4a1b",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-b436e348-72b1-42f4-a468-ee150b2d9141.service",
+        "initial_main_pid": 1056085,
+        "initial_start_ticks": "449974075",
+        "sha256": "206857968914b2f2a78cec055de3d78d0ce24ff3148a9bbd93e1b410ebfab8f5"
+      }
+    }
+  ],
+  "primary_archive": {
+    "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-23/n0-proposal-full-native-SDK-m40/primary-ab10.json",
+    "archive": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/d1/d1939ec81b13166b54120c08ab1efe83d4e3ac1ed7b05919952c16e4908a26d3",
+      "sha256": "d1939ec81b13166b54120c08ab1efe83d4e3ac1ed7b05919952c16e4908a26d3",
+      "bytes": 40578644
+    },
+    "bundle": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/04/04cd14d39286f7a37581978a06f10824398f9100026b222c762f11512e5d985e",
+      "sha256": "04cd14d39286f7a37581978a06f10824398f9100026b222c762f11512e5d985e",
+      "bytes": 552993
+    },
+    "members": 2220,
+    "expanded_bytes": 1507681307,
+    "all_member_bytes_verified_on_M40": true,
+    "source_unchanged": true,
+    "active_new_Train_not_archived_or_modified": true,
+    "independent_host_restore": false
+  },
+  "observation_receipt": {
+    "name": "timelearner-m40-SDK-and-cold-status-20261123-ab13.json",
+    "bytes": 16730,
+    "sha256": "98bef53f98b1767f87efd26e4069358c428401b455a08f8ab9d47d28fd21108c"
+  }
+}

@@ -1,0 +1,142 @@
+{
+  "observed_utc": "2026-11-23T19:15:26.607077+00:00",
+  "job": "windows-audited-response-timing-validation-ar14",
+  "task": {
+    "last_result": 0,
+    "instances": 0,
+    "state": 3
+  },
+  "terminal.json": {
+    "passed": true,
+    "process": {
+      "kind": "timelearner_windows_process_result",
+      "schema_version": 1,
+      "execution": "completed",
+      "validity": "valid",
+      "reason": "exit_zero",
+      "returncode": 0,
+      "scientific_verdict": null,
+      "thread_limit_enforced": false,
+      "memory_limit_semantics": "job_committed_virtual_memory",
+      "wall_budget_scope": "whole_attempt_including_preparation",
+      "descendants_at_main_exit": [],
+      "all_processes_closed": true,
+      "cooperative_capture": "not_requested",
+      "runtime_provenance": "loaded_files_captured",
+      "observed_module_files": 33,
+      "wall_seconds": 6.180664899991825,
+      "child_resumed": true,
+      "job_name": "Local\\TimeLearner-76feebb7-09df-4d72-be64-4e22c4f6a89a"
+    },
+    "validation": {
+      "kind": "timelearner_python_validation_result",
+      "schema_version": 1,
+      "suite_id": "windows-audited-response-timing-validation-ar14",
+      "package_fingerprint": "a4f300b3b82617cdedf26d87e12544778bc9d8a449edc3eddeef86c67fd182db",
+      "execution": "completed",
+      "assertion_status": "passed",
+      "expected_test_ids": [
+        "Scripts.StructTrain.TimeLearner.tests.test_prepared_report_inputs.PreparedReportInputsTest.test_byte_identical_relocation_does_not_change_scientific_identity",
+        "Scripts.StructTrain.TimeLearner.tests.test_prepared_report_inputs.PreparedReportInputsTest.test_duplicate_native_artifacts_are_not_collapsed_by_dictionary",
+        "Scripts.StructTrain.TimeLearner.tests.test_prepared_report_inputs.PreparedReportInputsTest.test_early_and_later_target_outputs_remain_separate_from_weak_TP",
+        "Scripts.StructTrain.TimeLearner.tests.test_prepared_report_inputs.PreparedReportInputsTest.test_event_exactly_at_last_input_uses_roundoff_only_without_new_tolerance",
+        "Scripts.StructTrain.TimeLearner.tests.test_prepared_report_inputs.PreparedReportInputsTest.test_exact_observations_and_declared_counts_are_preserved",
+        "Scripts.StructTrain.TimeLearner.tests.test_prepared_report_inputs.PreparedReportInputsTest.test_incomplete_and_duplicate_trial_sets_cannot_produce_summary",
+        "Scripts.StructTrain.TimeLearner.tests.test_prepared_report_inputs.PreparedReportInputsTest.test_mismatched_audited_model_or_counts_are_not_reported",
+        "Scripts.StructTrain.TimeLearner.tests.test_prepared_report_inputs.PreparedReportInputsTest.test_nonfinite_and_wrong_spike_count_cannot_hide_in_timing",
+        "Scripts.StructTrain.TimeLearner.tests.test_prepared_report_inputs.PreparedReportInputsTest.test_rewritten_observation_and_resigned_execution_are_still_rejected",
+        "Scripts.StructTrain.TimeLearner.tests.test_prepared_report_inputs.PreparedReportInputsTest.test_row_permutation_keeps_supplement_and_Russian_table",
+        "Scripts.StructTrain.TimeLearner.tests.test_prepared_report_inputs.PreparedReportInputsTest.test_unbound_legacy_audit_requires_explicit_full_reaudit"
+      ],
+      "executed_tests": 11,
+      "failures": [],
+      "errors": [],
+      "skipped": [],
+      "fixtures": {
+        "TIMELEARNER_BOUND_REPORT_CORPUS": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\fixtures\\recorded-eight-report-guards-ar14",
+          "files": 12,
+          "fingerprint": "bb95c6fe1f11b5ff1c45fc170597b6f085e9678daec22b30171d777ee9be69a0"
+        }
+      },
+      "scientific_verdict": null
+    },
+    "source_root": "3edf1397a44ac2bed9c65191cd43ba39b93cdc24",
+    "native_model_executed": false,
+    "concurrent_training_not_restarted": true,
+    "scientific_verdict": null
+  },
+  "process-result.json": {
+    "kind": "timelearner_windows_process_result",
+    "schema_version": 1,
+    "execution": "completed",
+    "validity": "valid",
+    "reason": "exit_zero",
+    "returncode": 0,
+    "scientific_verdict": null,
+    "thread_limit_enforced": false,
+    "memory_limit_semantics": "job_committed_virtual_memory",
+    "wall_budget_scope": "whole_attempt_including_preparation",
+    "descendants_at_main_exit": [],
+    "all_processes_closed": true,
+    "cooperative_capture": "not_requested",
+    "runtime_provenance": "loaded_files_captured",
+    "observed_module_files": 33,
+    "wall_seconds": 6.180664899991825,
+    "child_resumed": true,
+    "job_name": "Local\\TimeLearner-76feebb7-09df-4d72-be64-4e22c4f6a89a"
+  },
+  "validation": {
+    "kind": "timelearner_python_validation_result",
+    "schema_version": 1,
+    "suite_id": "windows-audited-response-timing-validation-ar14",
+    "package_fingerprint": "a4f300b3b82617cdedf26d87e12544778bc9d8a449edc3eddeef86c67fd182db",
+    "execution": "completed",
+    "assertion_status": "passed",
+    "expected_test_ids": [
+      "Scripts.StructTrain.TimeLearner.tests.test_prepared_report_inputs.PreparedReportInputsTest.test_byte_identical_relocation_does_not_change_scientific_identity",
+      "Scripts.StructTrain.TimeLearner.tests.test_prepared_report_inputs.PreparedReportInputsTest.test_duplicate_native_artifacts_are_not_collapsed_by_dictionary",
+      "Scripts.StructTrain.TimeLearner.tests.test_prepared_report_inputs.PreparedReportInputsTest.test_early_and_later_target_outputs_remain_separate_from_weak_TP",
+      "Scripts.StructTrain.TimeLearner.tests.test_prepared_report_inputs.PreparedReportInputsTest.test_event_exactly_at_last_input_uses_roundoff_only_without_new_tolerance",
+      "Scripts.StructTrain.TimeLearner.tests.test_prepared_report_inputs.PreparedReportInputsTest.test_exact_observations_and_declared_counts_are_preserved",
+      "Scripts.StructTrain.TimeLearner.tests.test_prepared_report_inputs.PreparedReportInputsTest.test_incomplete_and_duplicate_trial_sets_cannot_produce_summary",
+      "Scripts.StructTrain.TimeLearner.tests.test_prepared_report_inputs.PreparedReportInputsTest.test_mismatched_audited_model_or_counts_are_not_reported",
+      "Scripts.StructTrain.TimeLearner.tests.test_prepared_report_inputs.PreparedReportInputsTest.test_nonfinite_and_wrong_spike_count_cannot_hide_in_timing",
+      "Scripts.StructTrain.TimeLearner.tests.test_prepared_report_inputs.PreparedReportInputsTest.test_rewritten_observation_and_resigned_execution_are_still_rejected",
+      "Scripts.StructTrain.TimeLearner.tests.test_prepared_report_inputs.PreparedReportInputsTest.test_row_permutation_keeps_supplement_and_Russian_table",
+      "Scripts.StructTrain.TimeLearner.tests.test_prepared_report_inputs.PreparedReportInputsTest.test_unbound_legacy_audit_requires_explicit_full_reaudit"
+    ],
+    "executed_tests": 11,
+    "failures": [],
+    "errors": [],
+    "skipped": [],
+    "fixtures": {
+      "TIMELEARNER_BOUND_REPORT_CORPUS": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\fixtures\\recorded-eight-report-guards-ar14",
+        "files": 12,
+        "fingerprint": "bb95c6fe1f11b5ff1c45fc170597b6f085e9678daec22b30171d777ee9be69a0"
+      }
+    },
+    "scientific_verdict": null
+  },
+  "unit_kernel_live": false,
+  "original_Train": {
+    "owner": {
+      "executable": "C:\\Projects\\TimeLearnerWorker\\runtime-measured-count-native-win-a3\\NeuroModelerConsole.exe",
+      "creation_filetime": "134398728342403660",
+      "pid": 21328,
+      "job_name": "Local\\TimeLearner-ba240411-ffe3-4283-a9ff-c7b2cfc3812a",
+      "runtime_fingerprint": "09bff57ff10faa264e483a191810bd3c4048153408f9420f3f1b63d3239bdf3f",
+      "suspended_until_limits_applied": true
+    },
+    "kernel_live": true
+  },
+  "recognition_queue": {
+    "owner": {
+      "pid": 18148,
+      "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+      "creation_filetime": "134399321290196236"
+    },
+    "kernel_live": true
+  }
+}

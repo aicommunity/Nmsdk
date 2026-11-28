@@ -1,0 +1,177 @@
+{
+  "kind": "timelearner_actual_Classic_proposal_recognition_complete",
+  "schema_version": 1,
+  "observed_utc": "2026-11-23T23:34:26.674421+00:00",
+  "job": "classic-proposal-stopped-recognition-m40-at15",
+  "terminal": {
+    "execution": "completed",
+    "validity": "valid",
+    "baseline_counts": {
+      "TP": 0,
+      "FP": 0,
+      "FN": 1,
+      "TN": 7,
+      "targets": 1,
+      "foils": 7,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.875,
+      "target_hit_rate": 0.0,
+      "foil_response_rate": 0.0
+    },
+    "actual_threshold_counts": {
+      "TP": 1,
+      "FP": 2,
+      "FN": 0,
+      "TN": 5,
+      "targets": 1,
+      "foils": 7,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.75,
+      "target_hit_rate": 1.0,
+      "foil_response_rate": 0.2857142857142857
+    },
+    "threshold": 0.02342413248481376,
+    "report_family_response_requirement_met": true,
+    "complete_source_history_audited": true,
+    "original_Train_outcome": "budget_exhausted",
+    "training_completed": false,
+    "independently_heldout_evaluation": false,
+    "scientific_verdict": null
+  },
+  "model_revision": "8a8b447f4ecb17f7e9140aa5504f5dedea523ce4e6d802b4a032dc7cd3d44412",
+  "baseline": {
+    "kind": "timelearner_prepared_diagnostic_independent_audit",
+    "source_model_revision": "8a8b447f4ecb17f7e9140aa5504f5dedea523ce4e6d802b4a032dc7cd3d44412",
+    "protocol": "fixed_threshold_baseline",
+    "report_family_response_requirement_met": false,
+    "training_completed": false,
+    "report_primary_binding": {
+      "kind": "timelearner_full_audit_report_primary_binding",
+      "schema_version": 1,
+      "native_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-proposal-stopped-recognition-m40-at15-baseline/native",
+      "files": {
+        "execution.json": {
+          "bytes": 3113,
+          "sha256": "730498c43a963f5ce24e33346aa6acef468a6ac704be769ac021507970282056"
+        },
+        "evaluation.json": {
+          "bytes": 4144,
+          "sha256": "133bba863a2ca3d42a4bec24f525bcc541cd4699ffa704d8136d071c321572b3"
+        },
+        "trial-0.json": {
+          "bytes": 1748866,
+          "sha256": "894af7031b83630bb43e4d352aee609ebad7b6aa1caa4c58b283342533aab0d1"
+        },
+        "trial-1.json": {
+          "bytes": 1748934,
+          "sha256": "1356384f2197b710ef4ca86fff20fbb0226023662f80539566ea4b4c9c50428c"
+        },
+        "trial-2.json": {
+          "bytes": 1748887,
+          "sha256": "62d95769d3a59d60df91762cca2ba0d1d2c1e03a10b243c48aa27071d0ddc6d9"
+        },
+        "trial-3.json": {
+          "bytes": 1748502,
+          "sha256": "5ff1ddc2b9dc626042ab0938a67e547456fee2b4d3aa7c0c1596d3c3d1c8cdd4"
+        },
+        "trial-4.json": {
+          "bytes": 1749107,
+          "sha256": "49a4a84e3466e80a7b7884315e7fb3964580a232789d80090d09c7d712ad4042"
+        },
+        "trial-5.json": {
+          "bytes": 1753178,
+          "sha256": "4fad475733e50842efeae0ed7badb12b644db2bd06fffa3635f5add66923e756"
+        },
+        "trial-6.json": {
+          "bytes": 1753978,
+          "sha256": "6938eb2daf1aca7877cb59fda699700865bf4af3cec5df50ab3b2cc08f0d26fa"
+        },
+        "trial-7.json": {
+          "bytes": 1754011,
+          "sha256": "efea3f6a888b81f258bc20e11978b524f3f2f6acba74aff1c5dbff464720cf6f"
+        }
+      }
+    },
+    "counts": {
+      "TP": 0,
+      "FP": 0,
+      "FN": 1,
+      "TN": 7,
+      "targets": 1,
+      "foils": 7,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.875,
+      "target_hit_rate": 0.0,
+      "foil_response_rate": 0.0
+    }
+  },
+  "threshold": {
+    "kind": "timelearner_prepared_diagnostic_independent_audit",
+    "source_model_revision": "8a8b447f4ecb17f7e9140aa5504f5dedea523ce4e6d802b4a032dc7cd3d44412",
+    "protocol": "historical_same_matrix",
+    "report_family_response_requirement_met": true,
+    "training_completed": false,
+    "report_primary_binding": {
+      "kind": "timelearner_full_audit_report_primary_binding",
+      "schema_version": 1,
+      "native_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-proposal-stopped-recognition-m40-at15-threshold/native",
+      "files": {
+        "execution.json": {
+          "bytes": 3114,
+          "sha256": "6f1f9603a37a7f9cbda0d649f255004b1f56624ee0d9261914991ab70519dce1"
+        },
+        "evaluation.json": {
+          "bytes": 4145,
+          "sha256": "5f88d11de4e473788ad6b0ade522634240f45f5bf3b87f948ed486d372634460"
+        },
+        "trial-0.json": {
+          "bytes": 1813789,
+          "sha256": "d5cbe7a6b6ae7008899612a4a742c4809b6da69054e7711ee9045606aa091c38"
+        },
+        "trial-1.json": {
+          "bytes": 1748935,
+          "sha256": "382286b6fd29e58fc3d65b4ee86ae7a534fd5910bc0e145a5ad7ae621485ec6b"
+        },
+        "trial-2.json": {
+          "bytes": 1748888,
+          "sha256": "9ff9d418e392515606552d4c9d0a0f6a6e807b321eda06b584945dfaaaa638fd"
+        },
+        "trial-3.json": {
+          "bytes": 1748503,
+          "sha256": "34ab76baa8d1e21f617d103a8e852fd908e7cdb0644dcb3a5766b4f678c45ce9"
+        },
+        "trial-4.json": {
+          "bytes": 1814092,
+          "sha256": "17f9b4b7cf2d26abab31d1c88c0a38d60bedef1515c5b88b155ba48ab7f62e42"
+        },
+        "trial-5.json": {
+          "bytes": 1753179,
+          "sha256": "a23a906dc56f93822a29a7739254fe05abfe26d7c7f0594c5e1899c409e93b43"
+        },
+        "trial-6.json": {
+          "bytes": 1821959,
+          "sha256": "ad1ce8b4802449bada206d685f12f38045495e5dfeaf3f91c0c5e9e6a0fb3334"
+        },
+        "trial-7.json": {
+          "bytes": 1754012,
+          "sha256": "caf8354686ee6d7b08f49fe4594f9106561f0a9ce8f556d5c996dded13d84485"
+        }
+      }
+    },
+    "counts": {
+      "TP": 1,
+      "FP": 2,
+      "FN": 0,
+      "TN": 5,
+      "targets": 1,
+      "foils": 7,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.75,
+      "target_hit_rate": 1.0,
+      "foil_response_rate": 0.2857142857142857
+    }
+  },
+  "all_native_processes_closed": true,
+  "all_six_phases_closed": true,
+  "scientific_verdict": null
+}

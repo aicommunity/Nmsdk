@@ -1,0 +1,272 @@
+{
+  "kind": "timelearner_N0_proposal_full_native_SDK_acceptance",
+  "schema_version": 1,
+  "observed_utc": "2026-11-23T12:16:55.733517+00:00",
+  "job": "n0-proposal-full-sdk-elder-aa15",
+  "expected_cases": 114,
+  "audited": {
+    "expected": 114,
+    "observed": 114,
+    "failed_test_ids": [],
+    "assertion_status": "passed",
+    "sha256": "5c99816b9d0477e6ea0efa87fea53e30f89a956005a62c316dd3edb33ffac8ac"
+  },
+  "junit": {
+    "path": "/home/user/timelearner-refactor/readbacks/s07-n0-proposal-full-sdk-elder-aa15/measured-count-full-native114/native.xml",
+    "sha256": "5c99816b9d0477e6ea0efa87fea53e30f89a956005a62c316dd3edb33ffac8ac",
+    "size": 41302
+  },
+  "terminal": {
+    "path": "/home/user/timelearner-refactor/readbacks/s07-n0-proposal-full-sdk-elder-aa15/terminal.json",
+    "sha256": "53b05f8e4982c0af956d5e7ff0c1aa2a790b361d0b004d611e8879d43b3982b9",
+    "size": 508
+  },
+  "source_closure": {
+    "root": {
+      "head": "b2c3cb65ab572c680a56f28b86d40445b9392b0c",
+      "status": ""
+    },
+    "Bin": {
+      "recorded_gitlink": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "head": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "status": ""
+    },
+    "Libraries/Nmsdk-MotionControlLib": {
+      "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "status": ""
+    },
+    "Libraries/Nmsdk-PulseLib": {
+      "recorded_gitlink": "3f5a2205a4e6c02de545cdc214172482ac53c4b2",
+      "head": "3f5a2205a4e6c02de545cdc214172482ac53c4b2",
+      "status": ""
+    },
+    "Libraries/Rdk-BasicLib": {
+      "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "status": ""
+    },
+    "Libraries/Rdk-CvBasicLib": {
+      "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "status": ""
+    },
+    "Libraries/Rdk-HardwareLib": {
+      "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+      "head": "de40b008e990105856726e01230dde19f42a90a9",
+      "status": ""
+    },
+    "Rdk": {
+      "recorded_gitlink": "561986e9f336ee5914e2d119de90b005e06f3639",
+      "head": "561986e9f336ee5914e2d119de90b005e06f3639",
+      "status": ""
+    }
+  },
+  "case_runtime": {
+    "path": "/home/user/timelearner-refactor/readbacks/s07-n0-proposal-full-sdk-elder-aa15/measured-count-full-native114-runtime.json",
+    "sha256": "4991ecf71ef201c94018254d9fc476390a8a4aeb92349a987eb1139b4a44344f",
+    "size": 12160
+  },
+  "runtime_identity": {
+    "kind": "timelearner_runtime_content",
+    "schema_version": 2,
+    "executable": "6142a96b6b1e90c4a0fdc7bc5179c15d2bdb436fadc3722f083aca65aa08a493",
+    "app_ini": "72c40f3149f27a5af94688bdf540c12ea0e3c7d64c52e2b49d8baa1286949acd",
+    "resolved_libraries": [
+      "1f47ab3bd9929605e30935503e339b6f5dcceb71595f0716377be1318962561d",
+      "24fa78caa9b66c10c90711c51089f45273b643f132031172d54a3e98d711d48e",
+      "2947cd1e41a64bc2d6faea86e908cdd327d0ed0910b0d439e1bbe04a6be0bf82",
+      "3dd5511ae94785c9f921429b0f2b2f7aabb461b6f0e6de6dfdbef15f24bdfee6",
+      "41c8fe93ef58c42bc46798ce7bb84cbb964185b7529547dec7e501f15bd8a2a0",
+      "41daf7836f7fce21a40ca63a00c5caf21b05a35a76ccc075d86f1716212cdf01",
+      "4683f3623dc47a92e862dc3c8770caff81c9f4c7e116bb672fc439737b06d88a",
+      "50ccfac99b282467125c8ae1a8cb64df5f450bba0f623719de622a5fa20f2efb",
+      "545886948b178af06160dfd7590ee8be108bd1e28263bf63816e4a2c43cd0a59",
+      "5d1f6f104f79698e137c9f17c4b0317dfd96816c0eb6a87c50619a41472ca382",
+      "5df4f4df42d76270bb6981fabc7c1fdccd8ad28a23d84d67f73203fb3f537667",
+      "64c206f0146cc58bbddc4f22054436f4ff278f5a554aa3ce6921ddf7e9133370",
+      "7fa51c1500cb9fcc4c7d69b7fe0a6d7203cfe6af64373f6c411c5445ef1b402c",
+      "86acf2c843bcfaf5e8c24ab959737960c797da53b41658dc8ec6f257c786048c",
+      "b2cf6c33b74d2f22543b7a469a75b538911e690f769d0b238843a49465b83793",
+      "baae995e98223eee1afe6c640f21bdbba91b9c170584ce766418b59810d98a93",
+      "c040a6f396c62c619197210241d14ff63e6c0c379d15e0c05fac189f9f939194",
+      "c1404396288e178c8db2f30203cb8150e4d2c14cacee9a2883e0092f45399cc8",
+      "dd57666f073f56ff30011ac5c0099a857516d3fb2acab98630579fdb015ae7b5",
+      "e90c511808431835f34f6640c0cbe6639381d6f04370e33af7ca27e14f101bd9",
+      "ea9cc5e083371770527e933345315e413dd7c460548d8f7e868004a67d88b482",
+      "f3c7dc509e8da8f780666a7c74c92b98af95aecd26d3ef0f3e36470c7490e400",
+      "fbed9505adacada2abb37c6b43be2df6de81e742712c6025694ba48de62c7e78",
+      "fc9d43b2f6c20e53b009238f767c5b949d202389e20de9e202ea684b4ba3729a",
+      "ff0825e113603c3866680d5d52216bc6d8eedf3a59f52a0aef67ff01994db128"
+    ],
+    "build_flags": {
+      "CMAKE_BUILD_TYPE": "Release",
+      "CMAKE_CXX_FLAGS": "",
+      "CMAKE_CXX_FLAGS_DEBUG": "-g",
+      "CMAKE_CXX_FLAGS_MINSIZEREL": "-Os -DNDEBUG",
+      "CMAKE_CXX_FLAGS_RELEASE": "-O3 -DNDEBUG",
+      "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "-O2 -g -DNDEBUG",
+      "CMAKE_EXE_LINKER_FLAGS": "",
+      "CMAKE_EXE_LINKER_FLAGS_DEBUG": "",
+      "CMAKE_EXE_LINKER_FLAGS_MINSIZEREL": "",
+      "CMAKE_EXE_LINKER_FLAGS_RELEASE": "",
+      "CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO": "",
+      "CMAKE_MODULE_LINKER_FLAGS": "",
+      "CMAKE_MODULE_LINKER_FLAGS_DEBUG": "",
+      "CMAKE_MODULE_LINKER_FLAGS_MINSIZEREL": "",
+      "CMAKE_MODULE_LINKER_FLAGS_RELEASE": "",
+      "CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO": "",
+      "CMAKE_SHARED_LINKER_FLAGS": "",
+      "CMAKE_SHARED_LINKER_FLAGS_DEBUG": "",
+      "CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL": "",
+      "CMAKE_SHARED_LINKER_FLAGS_RELEASE": "",
+      "CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO": "",
+      "CMAKE_STATIC_LINKER_FLAGS": "",
+      "CMAKE_STATIC_LINKER_FLAGS_DEBUG": "",
+      "CMAKE_STATIC_LINKER_FLAGS_MINSIZEREL": "",
+      "CMAKE_STATIC_LINKER_FLAGS_RELEASE": "",
+      "CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO": "",
+      "NO_MOTION_CONTROL": "ON",
+      "RDK_LLM_BUILD_EMBEDDED": "OFF"
+    },
+    "compiler": "2360901d864cf10bfd6296e261cb2c14053552a80377761ab07146ec9ec9a2c0",
+    "loaded_process_files": null
+  },
+  "runtime_fingerprint": "52fbd4880d64252251910d69e954c242d51e8a4a820bfc402ea9ec0759c5ddc7",
+  "scope": "Selected actual component114 regression cohort for the proposal-order change; not entire plan or mandatory model/mode matrix",
+  "all_plan_modes_accepted": false,
+  "scientific_verdict": null,
+  "host": "Elder-1",
+  "closed_units": [
+    {
+      "directory": "/home/user/timelearner-refactor/readbacks/s07-n0-proposal-full-sdk-elder-aa15/measured-count-full-native114/process/contained",
+      "all_processes_closed": true,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "cdc1df9ffea04219f86dc3854c08ac0cf7c677e5ffcd81cb632c9864c00b083d",
+        "unit": "timelearner-761fe32f-587a-49be-b837-47dbe2999876.service",
+        "invocation_id": "2d0fab1dfa3c4ed9a6f71f80481b9e24",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-761fe32f-587a-49be-b837-47dbe2999876.service",
+        "initial_main_pid": 819732,
+        "initial_start_ticks": "500030931",
+        "sha256": "47d9963321d776f2e6828185149f7fbf80bdb02e9904d0e024bc266f13caadd9"
+      }
+    },
+    {
+      "directory": "/home/user/timelearner-refactor/readbacks/s07-n0-proposal-full-sdk-elder-aa15-controller/process/contained",
+      "all_processes_closed": true,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "20f17562ad05be9b2c010ba4cd6b070e309972ba341a19b330291906d1d026b5",
+        "unit": "timelearner-92598476-2e45-4863-8ee5-8d62b08a0406.service",
+        "invocation_id": "5f849a36f16f4e6e9b26cc8e294b6ffa",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-92598476-2e45-4863-8ee5-8d62b08a0406.service",
+        "initial_main_pid": 799145,
+        "initial_start_ticks": "499892442",
+        "sha256": "ec502c4b62bb2b6487663aa1038b3377ada7dcc315f80dad3c1e970cf659e193"
+      }
+    },
+    {
+      "directory": "/home/user/timelearner-refactor/readbacks/s07-n0-proposal-full-sdk-elder-aa15-canonical/process/contained",
+      "all_processes_closed": true,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "6771bc83a60413877e52b06a689cf8e826f4a8a0c4250fc1a8f1140cf86b6ad8",
+        "unit": "timelearner-a394b282-b8a3-467b-be90-3816ce3ec503.service",
+        "invocation_id": "67d44d44a85f48d4b51b35ab8f5b3326",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-a394b282-b8a3-467b-be90-3816ce3ec503.service",
+        "initial_main_pid": 733823,
+        "initial_start_ticks": "499882084",
+        "sha256": "9a70c0b13322532d7dcc545e4864ac6eb5b77182faac31e6105f64bec6537573"
+      }
+    }
+  ],
+  "new_same_host_cold_Train": {
+    "execution": "running",
+    "all_processes_closed": false,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "51ab07298f83fea6489c8e57a7dc07b1daea65c7a19c40ca4bb583af28637d04",
+      "unit": "timelearner-3ce6b441-441b-42d3-8a42-95425e253ff1.service",
+      "invocation_id": "073a475bf9a14f248abe51e6c761f50f",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-3ce6b441-441b-42d3-8a42-95425e253ff1.service",
+      "initial_main_pid": 1112225,
+      "initial_start_ticks": "500567073",
+      "sha256": "5c8793dc2df9d411e8a3e0d02c1dfef908850c990dddaa74decaba7e1d51ae5f"
+    },
+    "raw_trials": 72
+  },
+  "post_Train_full_primary_audit": {
+    "observed_utc": "2026-11-23T12:31:24.467492+00:00",
+    "job": "classic-n0-proposal-full-primary-audit-elder-ae4",
+    "queue-owner.json": {
+      "pid": 1155342,
+      "start_ticks": "500649504",
+      "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+      "uid": 1000
+    },
+    "queue-state.json": {
+      "reason": "waiting_for_original_native_and_controller_closure",
+      "observed_utc": "2026-11-23T12:31:10.046066+00:00",
+      "native_closed": false,
+      "controller_closed": false,
+      "elapsed_wait_seconds": 345.64741828944534,
+      "no_Train_restarted": true,
+      "scientific_verdict": null
+    },
+    "dispatch.json": {
+      "pid": 1155342,
+      "start_ticks": "500649504",
+      "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+      "uid": 1000
+    },
+    "queue_kernel_live": true,
+    "actual_Train": {
+      "execution": "running",
+      "all_processes_closed": false,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "51ab07298f83fea6489c8e57a7dc07b1daea65c7a19c40ca4bb583af28637d04",
+        "unit": "timelearner-3ce6b441-441b-42d3-8a42-95425e253ff1.service",
+        "invocation_id": "073a475bf9a14f248abe51e6c761f50f",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-3ce6b441-441b-42d3-8a42-95425e253ff1.service",
+        "initial_main_pid": 1112225,
+        "initial_start_ticks": "500567073",
+        "sha256": "5c8793dc2df9d411e8a3e0d02c1dfef908850c990dddaa74decaba7e1d51ae5f"
+      },
+      "raw_trials": 72
+    },
+    "controls_publication": {
+      "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-23/n0-proposal-cold-Classic-elder/post-Train-primary-audit-ae5.json",
+      "record": {
+        "kind": "timelearner_Elder_exact_Train_primary_audit_queue",
+        "schema_version": 1,
+        "source_root": "b2c3cb65ab572c680a56f28b86d40445b9392b0c",
+        "controls_commit": "364d9ce59512df91651c08fb023ba9614293e266",
+        "controls_bundle": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/9f/9f8f190d7701ef4664d84d9b16d054d25f06e928b8d1c6a21ae1f59658e8660f",
+          "sha256": "9f8f190d7701ef4664d84d9b16d054d25f06e928b8d1c6a21ae1f59658e8660f",
+          "bytes": 3856
+        },
+        "dispatch": {
+          "pid": 1155342,
+          "start_ticks": "500649504",
+          "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+          "uid": 1000
+        },
+        "original_Train": "classic-n0-proposal-cold-elder-ab3",
+        "audit_not_yet_completed": true,
+        "scientific_verdict": null
+      }
+    }
+  },
+  "all114_full_SDK_primary_not_yet_archived": true
+}

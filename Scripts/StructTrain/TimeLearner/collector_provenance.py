@@ -69,6 +69,22 @@ def _identity(value):
     return (value.st_dev, value.st_ino, value.st_size, value.st_mtime_ns, value.st_ctime_ns)
 
 
+def _path_matches_opened(path, path_stat, opened):
+    if os.name != 'nt':
+        return _identity(path_stat) == _identity(opened)
+    # Windows stat and CRT fstat can expose different file-id widths. Compare
+    # path stats to path stats, and prove descriptor identity by opening the
+    # current path again and comparing two native fstat results. Do not mask
+    # inode bits or remove the path-to-open-handle identity check.
+    descriptor=os.open(path,os.O_RDONLY | getattr(os,'O_BINARY',0) | getattr(os,'O_NOFOLLOW',0))
+    try:
+        current=os.fstat(descriptor)
+        return (path_stat.st_size == opened.st_size and stat.S_ISREG(current.st_mode) and
+                _identity(current) == _identity(opened))
+    finally:
+        os.close(descriptor)
+
+
 def _frozen(path, maximum_bytes):
     require(type(maximum_bytes) is int and maximum_bytes > 0, "collector_invalid_size_budget")
     path = _canonical(path)
@@ -78,12 +94,14 @@ def _frozen(path, maximum_bytes):
     descriptor = os.open(path, os.O_RDONLY | getattr(os, "O_BINARY", 0) | getattr(os, "O_NOFOLLOW", 0))
     with os.fdopen(descriptor, "rb") as stream:
         opened = os.fstat(stream.fileno())
-        require(_identity(before) == _identity(opened), "collector_file_changed_during_read")
+        require(_path_matches_opened(path,before,opened), "collector_file_changed_during_read")
         raw = stream.read(before.st_size + 1)
         after_open = os.fstat(stream.fileno())
-    after_path = path.lstat()
+        after_path = path.lstat()
+        require(_path_matches_opened(path,after_path,after_open), "collector_file_changed_during_read")
+    _canonical(path)
     require(len(raw) == before.st_size and len(raw) <= maximum_bytes and
-            _identity(before) == _identity(after_open) == _identity(after_path),
+            _identity(before) == _identity(after_path) and _identity(opened) == _identity(after_open),
             "collector_file_changed_during_read")
     return raw, {"source_path": str(path), "bytes": len(raw), "sha256": _sha(raw)}
 
@@ -98,15 +116,19 @@ def frozen_digest(path, maximum_bytes):
     descriptor = os.open(path, os.O_RDONLY | getattr(os, "O_BINARY", 0) | getattr(os, "O_NOFOLLOW", 0))
     digest = hashlib.sha256();count = 0
     with os.fdopen(descriptor, "rb") as stream:
-        require(_identity(before) == _identity(os.fstat(stream.fileno())),
+        opened=os.fstat(stream.fileno())
+        require(_path_matches_opened(path,before,opened),
                 "collector_file_changed_during_read")
         while block := stream.read(1024*1024):
             count += len(block)
             require(count <= maximum_bytes, "collector_file_changed_during_read")
             digest.update(block)
         after_open = os.fstat(stream.fileno())
+        after_path = path.lstat()
+        require(_path_matches_opened(path,after_path,after_open), "collector_file_changed_during_read")
+    _canonical(path)
     require(count == before.st_size and
-            _identity(before) == _identity(after_open) == _identity(path.lstat()),
+            _identity(before) == _identity(after_path) and _identity(opened) == _identity(after_open),
             "collector_file_changed_during_read")
     return {"source_path": str(path), "bytes": count, "sha256": digest.hexdigest()}
 
@@ -260,7 +282,8 @@ def capture_owned_supervisor(container, *, supervisor_log, worker_stdout, maximu
 
 def _git(repository, *arguments):
     return subprocess.check_output(["git", "-C", str(repository), *arguments],
-        env={**os.environ, "GIT_NO_LAZY_FETCH": "1", "GIT_OPTIONAL_LOCKS": "0"}, stderr=subprocess.PIPE)
+        env={**os.environ, "GIT_NO_LAZY_FETCH": "1", "GIT_OPTIONAL_LOCKS": "0"}, stderr=subprocess.PIPE,
+        creationflags=getattr(subprocess, 'CREATE_NO_WINDOW', 0))
 
 
 def _relative(path):
@@ -679,6 +702,56 @@ def _clean_closure(root):
             (name == "root" or row["head"] == row["recorded_gitlink"]) for name, row in value.items()),
             "collector_actual_source_not_clean")
     return value
+
+
+def capture_training_algorithm_inventory(source_root):
+    """Read this decision target's complete declared cohort from pinned Git bytes.
+
+    This is a decision-unit source projection, not full SDK admission. The
+    supported CMake declaration is deliberately literal; a changed dialect must
+    fail before compilation rather than silently omit a translation unit. The
+    compiled GoogleTest discovery must still match these IDs exactly.
+    """
+    root = _canonical(source_root)
+    commit = _git(root, "rev-parse", "HEAD").decode().strip()
+    require(_COMMIT.fullmatch(commit) is not None and not _git(
+            root, "status", "--porcelain", "--untracked-files=no",
+            "--ignore-submodules=all").strip(), "collector_decision_source_not_clean")
+
+    def read(path):
+        raw, record = _git_blob(root, commit, path)
+        working, _ = _frozen(root/path, 16*1024**2)
+        require(raw == working, "collector_worktree_git_bytes_changed")
+        return raw, record
+
+    raw, declaration = read("Tests/Integration/Libraries/TrainingAlgorithms.cmake")
+    blocks = re.findall(r"^add_executable\(Test_PulseLib_TrainingAlgorithms\s*\n"
+                        r"(.*?)^\)", raw.decode("utf-8"), re.M | re.S)
+    require(len(blocks) == 1, "collector_decision_cmake_dialect")
+    entries = re.findall(r'"([^"\n]+)"', blocks[0])
+    require(entries and len(entries) == len(set(entries)) and
+            not re.sub(r'"[^"\n]+"', "", blocks[0]).strip() and
+            all(re.fullmatch(r"\$\{_tl_(?:tests|core)\}/[A-Za-z0-9_/]+\.cpp", value)
+                for value in entries), "collector_decision_cmake_dialect")
+    paths = ["Tests/Integration/"+value[len("${_tl_tests}/"):]
+             for value in entries if value.startswith("${_tl_tests}/Libraries/Test_")]
+    require(paths, "collector_decision_test_sources_missing")
+    sources, identities = {}, []
+    for path in paths:
+        content, record = read(path)
+        ids, outside = _literal_cases(content)
+        require(not outside, "collector_test_dialect_unsupported")
+        sources[path] = {**record, "dialect": DIALECT, "ids": ids}
+        identities += ids
+    require(len(identities) == len(set(identities)), "collector_inventory_duplicate_case")
+    require(_git(root, "rev-parse", "HEAD").decode().strip() == commit and not _git(
+            root, "status", "--porcelain", "--untracked-files=no",
+            "--ignore-submodules=all").strip(), "collector_source_changed_during_capture")
+    return {"kind": "timelearner_decision_target_git_inventory", "schema_version": 1,
+            "root_commit": commit, "declaration": declaration, "sources": sources,
+            "ids": identities, "count": len(identities), "compiled_inventory_verified": False,
+            "SDK_source_verified": False, "test_success_attested": False,
+            "scientific_verdict": None}
 
 
 def capture_git_case_inventory(source_root, *, selections, inventory_documents=()):

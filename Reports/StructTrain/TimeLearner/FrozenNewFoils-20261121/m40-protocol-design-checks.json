@@ -1,0 +1,42 @@
+{
+  "name": "s11-frozen-foil-design-m40-a1",
+  "controller-result.json": {
+    "kind": "timelearner_process_result",
+    "execution": "completed",
+    "reason": "exit_zero_and_whole_group_closed",
+    "returncode": 0,
+    "wall_seconds": 41.79662106279284,
+    "runtime_provenance": "loaded_files_captured",
+    "all_processes_closed": true
+  },
+  "worker/terminal.json": {
+    "operation_passed": true
+  },
+  "worker/validation/result.json": {
+    "kind": "timelearner_python_validation_result",
+    "execution": "completed",
+    "assertion_status": "passed",
+    "executed_tests": 4,
+    "failures": [],
+    "errors": [],
+    "skipped": []
+  },
+  "kernel": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "f9f500f836d20d5c2447e73d46ef1a26bdf90966530ca98fefc164b3def56651",
+      "unit": "timelearner-e443ff47-86f8-49a0-b245-0ee368ca4395.service",
+      "invocation_id": "82835687718e44afad915cfaa77d8361",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-e443ff47-86f8-49a0-b245-0ee368ca4395.service",
+      "initial_main_pid": 3523869,
+      "initial_start_ticks": "434317222",
+      "sha256": "060e795ea40a9dfabd9f84b03e694579632ac229f221e702f65e2d67fb8191b8"
+    }
+  },
+  "code_root": "370f207b58364a37ef90aa9aa526e7e65afa55e6",
+  "controls_commit": "eab977c869121288db6e678e54a8c8c620ca0a51"
+}

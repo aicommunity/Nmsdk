@@ -1,0 +1,1405 @@
+{
+  "kind": "timelearner_closed_Classic_cap8_actual_training_readback",
+  "schema_version": 1,
+  "utc": "2026-11-25T07:57:23.163596+00:00",
+  "summary_file": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/Windows-cap8-primary-dz9/independent-restored/original-job/train/native/train_stopped_summary.json",
+    "sha256": "94bc33b3646c3bdc1a0dad4892d8dfbaba46e1d33be14f9eab294d89b76fe17d",
+    "size": 68248862
+  },
+  "top_keys": [
+    "actual_model_revision",
+    "certificate",
+    "closed_boundary",
+    "controller_checkpoint",
+    "historical_summary",
+    "kind",
+    "model_epoch",
+    "outcome",
+    "parameters",
+    "reason",
+    "restored_live_authority",
+    "schema_version",
+    "session_attempt",
+    "sha256",
+    "state",
+    "terminal_event",
+    "terminal_journal",
+    "terminal_policy",
+    "transcript_model_epoch"
+  ],
+  "historical_keys": [
+    "accepted_parameters",
+    "actual_model_revision",
+    "actual_parameters",
+    "applied_edits",
+    "candidates",
+    "capture_epoch",
+    "capture_revision",
+    "certificate",
+    "certificate_matches_actual_model",
+    "composite_counters",
+    "contains_controller_checkpoint",
+    "contains_evaluation_verdict",
+    "final_group_ids",
+    "final_semantic_proof_ids",
+    "kind",
+    "measurement_method",
+    "model_epoch",
+    "model_state_kind",
+    "outcome",
+    "owner_family_binding",
+    "reason",
+    "recovery_ledger",
+    "reference_complete",
+    "reference_group_ids",
+    "reference_semantic_proof_ids",
+    "references",
+    "rejections",
+    "resistance_domains",
+    "runtime_plan",
+    "schema_version",
+    "search_history_retained",
+    "search_probes",
+    "source_origin",
+    "state",
+    "tolerances"
+  ],
+  "terminal": {
+    "actual_model_epoch": 24,
+    "search_terminal_epoch": 23,
+    "actual_parameters": [
+      {
+        "length": 241,
+        "resistance": 86000000,
+        "synapses": 13
+      },
+      {
+        "length": 201,
+        "resistance": 86000000,
+        "synapses": 11
+      },
+      {
+        "length": 121,
+        "resistance": 86000000,
+        "synapses": 9
+      },
+      {
+        "length": 1,
+        "resistance": 86000000,
+        "synapses": 1
+      }
+    ],
+    "search_terminal_parameters": [
+      {
+        "length": 241,
+        "resistance": 86000000,
+        "synapses": 13
+      },
+      {
+        "length": 201,
+        "resistance": 86000000,
+        "synapses": 11
+      },
+      {
+        "length": 121,
+        "resistance": 86000000,
+        "synapses": 9
+      },
+      {
+        "length": 1,
+        "resistance": 86000000,
+        "synapses": 1
+      }
+    ],
+    "fresh_all_input_verification": false,
+    "status": "restored",
+    "stopped_outcome": "budget_exhausted",
+    "stopped_reason": "native_training_time_budget_exhausted",
+    "reason": "",
+    "wall_seconds": 10.655428800033405
+  },
+  "historical": {
+    "accepted_parameters": [
+      {
+        "length": 241,
+        "resistance": 86000000,
+        "synapses": 13
+      },
+      {
+        "length": 201,
+        "resistance": 86000000,
+        "synapses": 11
+      },
+      {
+        "length": 121,
+        "resistance": 86000000,
+        "synapses": 9
+      },
+      {
+        "length": 1,
+        "resistance": 86000000,
+        "synapses": 1
+      }
+    ],
+    "actual_parameters": [
+      {
+        "length": 241,
+        "resistance": 86000000,
+        "synapses": 13
+      },
+      {
+        "length": 201,
+        "resistance": 86000000,
+        "synapses": 11
+      },
+      {
+        "length": 121,
+        "resistance": 86000000,
+        "synapses": 9
+      },
+      {
+        "length": 1,
+        "resistance": 86000000,
+        "synapses": 1
+      }
+    ],
+    "applied_edits": 23,
+    "search_probes": 54,
+    "composite_counters": {
+      "archive": {
+        "groups": 58,
+        "native_probes": 347,
+        "primary_bytes": 131844444,
+        "sampled_frames": 1249487
+      },
+      "attempt": {
+        "logical_groups": 58,
+        "native_probes": 347,
+        "sampled_frames": 1249487
+      }
+    },
+    "final_group_ids": [],
+    "reference_group_ids": [
+      "candidate-cap/20261124/classic/M4/cap8/session/1/capture/1/1/composite/1",
+      "candidate-cap/20261124/classic/M4/cap8/session/1/capture/1/2/composite/2",
+      "candidate-cap/20261124/classic/M4/cap8/session/1/capture/1/3/composite/3",
+      "candidate-cap/20261124/classic/M4/cap8/session/1/capture/1/4/composite/4"
+    ],
+    "outcome": "budget_exhausted",
+    "reason": "native_training_time_budget_exhausted",
+    "tolerances": {
+      "amplitude_absolute": 0.00001,
+      "amplitude_relative": 0,
+      "sync": 0.02
+    }
+  },
+  "reference_metadata": {
+    "reference_complete": true,
+    "reference_group_ids": [
+      "candidate-cap/20261124/classic/M4/cap8/session/1/capture/1/1/composite/1",
+      "candidate-cap/20261124/classic/M4/cap8/session/1/capture/1/2/composite/2",
+      "candidate-cap/20261124/classic/M4/cap8/session/1/capture/1/3/composite/3",
+      "candidate-cap/20261124/classic/M4/cap8/session/1/capture/1/4/composite/4"
+    ],
+    "reference_semantic_proof_ids": [
+      "0f717dab531cd10b957875416bdcdb752826e9447cc595a8b76fa2312058013e",
+      "a76674f9e57e7a246ae6ffb282708196668262795cd2c32cb99b94025946e919",
+      "9a2aea91be210bf771aceb4368028f0e9975a79780bedf5dc12a31849eac64b1",
+      "24a2d5fbd595806921fc84ffe71e9b69853f142357fb9c60ce81ee80c81a8bb9"
+    ],
+    "references": [
+      {
+        "effective_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+        "input_id": "input0",
+        "measurement_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/capture/1/1/composite/1",
+        "raw_potential": 0.026776213813404892,
+        "run_id": "candidate-cap/20261124/classic/M4/cap8/session/1/capture/1",
+        "semantic_proof_id": "0f717dab531cd10b957875416bdcdb752826e9447cc595a8b76fa2312058013e",
+        "trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/capture/1/1"
+      },
+      {
+        "effective_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+        "input_id": "input1",
+        "measurement_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/capture/1/2/composite/2",
+        "raw_potential": 0.02677621381340556,
+        "run_id": "candidate-cap/20261124/classic/M4/cap8/session/1/capture/1",
+        "semantic_proof_id": "a76674f9e57e7a246ae6ffb282708196668262795cd2c32cb99b94025946e919",
+        "trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/capture/1/2"
+      },
+      {
+        "effective_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+        "input_id": "input2",
+        "measurement_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/capture/1/3/composite/3",
+        "raw_potential": 0.026776213813405003,
+        "run_id": "candidate-cap/20261124/classic/M4/cap8/session/1/capture/1",
+        "semantic_proof_id": "9a2aea91be210bf771aceb4368028f0e9975a79780bedf5dc12a31849eac64b1",
+        "trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/capture/1/3"
+      },
+      {
+        "effective_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+        "input_id": "input3",
+        "measurement_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/capture/1/4/composite/4",
+        "raw_potential": 0.026776213813405003,
+        "run_id": "candidate-cap/20261124/classic/M4/cap8/session/1/capture/1",
+        "semantic_proof_id": "24a2d5fbd595806921fc84ffe71e9b69853f142357fb9c60ce81ee80c81a8bb9",
+        "trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/capture/1/4"
+      }
+    ]
+  },
+  "candidate_records_per_input": {
+    "0": 9,
+    "1": 9,
+    "2": 8,
+    "3": 0
+  },
+  "candidate_count": 26,
+  "candidates": [
+    {
+      "amplitude_residual": 0,
+      "anchor_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/1/composite/5",
+      "anchor_semantic_proof_id": "d1f136612a8533890606169f1c13a6b80cdc55a51e0e088e0b029168d8d544de",
+      "anchor_trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/1",
+      "full_parameters": [
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 0,
+      "measurement_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/2/composite/6",
+      "model_epoch": 0,
+      "model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+      "parameter_change_cost": 0,
+      "parameters": {
+        "length": 1,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "4fbe4424bdf95102c1f7d65d4abd4720b311afc0b47736d213d366251293b1f8",
+      "timing_high": -0.4799999999999969,
+      "timing_low": -0.4799999999999969,
+      "trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/2",
+      "within_amplitude": true,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.005101293201065005,
+      "anchor_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/4/composite/7",
+      "anchor_semantic_proof_id": "8de219a559246bc143e83b77a9762658677aff8d3c32cd3652ad90d807327c92",
+      "anchor_trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/4",
+      "full_parameters": [
+        {
+          "length": 2,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 0,
+      "measurement_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/5/composite/8",
+      "model_epoch": 1,
+      "model_revision": "5a93d05d3fb309f2e3fb84dd325ff050ac0ec40a3eb7f3e954aeda1f155711ba",
+      "parameter_change_cost": 1,
+      "parameters": {
+        "length": 2,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "cbbf5c8fbf784b1034d1fee82394e4f98bd07af38a5fe2add056dced9fda44e7",
+      "timing_high": -0.47799999999999443,
+      "timing_low": -0.47799999999999443,
+      "trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/5",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.008111309598994532,
+      "anchor_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/7/composite/9",
+      "anchor_semantic_proof_id": "3a6a769da71a9fb1baea7175bfc318a5390ff42605d0ed4bbf2104bdca7e5fcb",
+      "anchor_trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/7",
+      "full_parameters": [
+        {
+          "length": 3,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 0,
+      "measurement_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/8/composite/10",
+      "model_epoch": 2,
+      "model_revision": "cb5296e192221701112cb751498d3fc6a9eda041845d0d86f370caee30ae7a47",
+      "parameter_change_cost": 2,
+      "parameters": {
+        "length": 3,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "eb7e167e0545d211df826b5c48f66da414644097eb422263d7d08508951416c0",
+      "timing_high": -0.4759999999999991,
+      "timing_low": -0.4759999999999991,
+      "trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/8",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.024270498304848176,
+      "anchor_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/10/composite/11",
+      "anchor_semantic_proof_id": "05d4926de17cc05f4aa35dc3197341408eb1d0a5af7df8490791731c27073482",
+      "anchor_trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/10",
+      "full_parameters": [
+        {
+          "length": 241,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 0,
+      "measurement_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/11/composite/12",
+      "model_epoch": 3,
+      "model_revision": "b5a70d97bca3292530385d81d3a881a1744879c9959bff503d3bd957850d3b00",
+      "parameter_change_cost": 240,
+      "parameters": {
+        "length": 241,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "f54adfe3d7b8cce0decf157d4d85c2ca990bcb902a22ad4309bffcd224c1d3ac",
+      "timing_high": 0.008499999999997954,
+      "timing_low": 0.008499999999997954,
+      "trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/11",
+      "within_amplitude": false,
+      "within_timing": true
+    },
+    {
+      "amplitude_residual": -0.021765165709616174,
+      "anchor_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/13/composite/13",
+      "anchor_semantic_proof_id": "ada92d2cd6d08ace626b9bd0956940ed743926cf539ed2b7634374039bfeadfb",
+      "anchor_trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/13",
+      "full_parameters": [
+        {
+          "length": 241,
+          "resistance": 86000000,
+          "synapses": 2
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 0,
+      "measurement_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/14/composite/14",
+      "model_epoch": 4,
+      "model_revision": "8f15f69a38970e6937745770fde549126fbcd781988dec5adcfe361e9b970922",
+      "parameter_change_cost": 241,
+      "parameters": {
+        "length": 241,
+        "resistance": 86000000,
+        "synapses": 2
+      },
+      "semantic_proof_id": "b2fccb70ce7847da486740ca6107a927aeaa02ccb050311219f565d8004efde1",
+      "timing_high": 0.008000000000009777,
+      "timing_low": 0.008000000000009777,
+      "trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/14",
+      "within_amplitude": false,
+      "within_timing": true
+    },
+    {
+      "amplitude_residual": -0.0026843562309166735,
+      "anchor_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/16/composite/15",
+      "anchor_semantic_proof_id": "49430aff123a45efabb56af24512b1b7a8dbd0ccf49b034be3fe7a73f0db5270",
+      "anchor_trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/16",
+      "full_parameters": [
+        {
+          "length": 241,
+          "resistance": 86000000,
+          "synapses": 11
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 0,
+      "measurement_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/17/composite/16",
+      "model_epoch": 5,
+      "model_revision": "d4ff3edd162b1c2049772a8f3287d6d34a1e057b7a66363508af3f91d090ef24",
+      "parameter_change_cost": 250,
+      "parameters": {
+        "length": 241,
+        "resistance": 86000000,
+        "synapses": 11
+      },
+      "semantic_proof_id": "e587bb2e342aaa503696f7715f0b88b38ba7a7174725909b57f2e8e11ec46fb0",
+      "timing_high": 0.008000000000009777,
+      "timing_low": 0.008000000000009777,
+      "trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/17",
+      "within_amplitude": false,
+      "within_timing": true
+    },
+    {
+      "amplitude_residual": -0.001118787289492329,
+      "anchor_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/19/composite/17",
+      "anchor_semantic_proof_id": "1ab3b46ac2cb602e75f47d32f7b2d14f34bb0b9c2626030b11b6d07bc6f3a01c",
+      "anchor_trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/19",
+      "full_parameters": [
+        {
+          "length": 241,
+          "resistance": 86000000,
+          "synapses": 12
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 0,
+      "measurement_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/20/composite/18",
+      "model_epoch": 6,
+      "model_revision": "6377d10ab56686dcfabe0aa1af0e423872e680f79bd00cfae7abaa79c120c764",
+      "parameter_change_cost": 251,
+      "parameters": {
+        "length": 241,
+        "resistance": 86000000,
+        "synapses": 12
+      },
+      "semantic_proof_id": "e908d3f798248dc3559509afbd295012bb91aaa55a18ba9b126147c6ceb88deb",
+      "timing_high": 0.007999999999981355,
+      "timing_low": 0.007999999999981355,
+      "trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/20",
+      "within_amplitude": false,
+      "within_timing": true
+    },
+    {
+      "amplitude_residual": 0.0003371597840141627,
+      "anchor_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/22/composite/19",
+      "anchor_semantic_proof_id": "6131da909b4cbd80d9d3318b7e845dea5bd23d303cc72995f581f8a84d29f538",
+      "anchor_trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/22",
+      "full_parameters": [
+        {
+          "length": 241,
+          "resistance": 86000000,
+          "synapses": 13
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 0,
+      "measurement_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/23/composite/20",
+      "model_epoch": 7,
+      "model_revision": "260b4ac0ccff461966123cb563cb1c0efcb900b7ed3993abe376c1b68116b7a0",
+      "parameter_change_cost": 252,
+      "parameters": {
+        "length": 241,
+        "resistance": 86000000,
+        "synapses": 13
+      },
+      "semantic_proof_id": "26ef2ded90325f3af0d8d5be6962b1258893d02f99fca04132984a266faa86a5",
+      "timing_high": 0.008000000000009777,
+      "timing_low": 0.008000000000009777,
+      "trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/23",
+      "within_amplitude": false,
+      "within_timing": true
+    },
+    {
+      "amplitude_residual": 0.0003371597840141627,
+      "anchor_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/24/composite/21",
+      "anchor_semantic_proof_id": "a61a335918bf2601e16eefb1926f68c48f1a216458100a29752ccf0104d17053",
+      "anchor_trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/24",
+      "full_parameters": [
+        {
+          "length": 241,
+          "resistance": 86000000,
+          "synapses": 13
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 0,
+      "measurement_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/25/composite/22",
+      "model_epoch": 7,
+      "model_revision": "260b4ac0ccff461966123cb563cb1c0efcb900b7ed3993abe376c1b68116b7a0",
+      "parameter_change_cost": 252,
+      "parameters": {
+        "length": 241,
+        "resistance": 86000000,
+        "synapses": 13
+      },
+      "semantic_proof_id": "f12dd8565be66c5d3ddfb57d3368523ecf056a712fffe8b482b1da10a11c663b",
+      "timing_high": 0.008000000000009777,
+      "timing_low": 0.008000000000009777,
+      "trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/25",
+      "within_amplitude": false,
+      "within_timing": true
+    },
+    {
+      "amplitude_residual": 0,
+      "anchor_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/26/composite/23",
+      "anchor_semantic_proof_id": "f5486962c88a1ffa2bbc64416fa339da87e4ffcffc72be5b0f02fd923ff30101",
+      "anchor_trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/26",
+      "full_parameters": [
+        {
+          "length": 241,
+          "resistance": 86000000,
+          "synapses": 13
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 1,
+      "measurement_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/27/composite/24",
+      "model_epoch": 7,
+      "model_revision": "260b4ac0ccff461966123cb563cb1c0efcb900b7ed3993abe376c1b68116b7a0",
+      "parameter_change_cost": 0,
+      "parameters": {
+        "length": 1,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "0f25d91fdd5f4a9b8c61f6f821ef735a27e3b84ea1e100cbcadd0ac9f3fbc3d6",
+      "timing_high": -0.39999999999997726,
+      "timing_low": -0.39999999999997726,
+      "trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/27",
+      "within_amplitude": true,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.005101293201060897,
+      "anchor_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/29/composite/25",
+      "anchor_semantic_proof_id": "cf0ee3b481beca7dba34b35ffa5800ced95ae2e4f3d9e7f79d3336b138039a4a",
+      "anchor_trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/29",
+      "full_parameters": [
+        {
+          "length": 241,
+          "resistance": 86000000,
+          "synapses": 13
+        },
+        {
+          "length": 2,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 1,
+      "measurement_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/30/composite/26",
+      "model_epoch": 8,
+      "model_revision": "4d7b91047359da0c66ebcf39786c43a9b27616bfbcf624be9eeb75905db1b61d",
+      "parameter_change_cost": 1,
+      "parameters": {
+        "length": 2,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "a266cc9611d7890c206a21067cc4ce90ca51890c37ff9974b074ed7892aa1405",
+      "timing_high": -0.3979999999999677,
+      "timing_low": -0.3979999999999677,
+      "trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/30",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.008111309598972771,
+      "anchor_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/32/composite/27",
+      "anchor_semantic_proof_id": "28c5b03738e5bcde3df5aee88b4e48790a391702b66b890a2a9a08659916ef88",
+      "anchor_trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/32",
+      "full_parameters": [
+        {
+          "length": 241,
+          "resistance": 86000000,
+          "synapses": 13
+        },
+        {
+          "length": 3,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 1,
+      "measurement_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/33/composite/28",
+      "model_epoch": 9,
+      "model_revision": "91c245678dc1d8a0ca797020492135fe616f335b656cc52aa5614f0a7e94a981",
+      "parameter_change_cost": 2,
+      "parameters": {
+        "length": 3,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "51a3e6ed75963511e0da908e3144c6baf497061141846db3af1baf5f443bfd70",
+      "timing_high": -0.39599999999995816,
+      "timing_low": -0.39599999999995816,
+      "trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/33",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.024033458249806294,
+      "anchor_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/35/composite/29",
+      "anchor_semantic_proof_id": "58d91233feb169cf327883a5eb25862c079e83a5b884f4ce973af60421b5d0f3",
+      "anchor_trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/35",
+      "full_parameters": [
+        {
+          "length": 241,
+          "resistance": 86000000,
+          "synapses": 13
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 1,
+      "measurement_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/36/composite/30",
+      "model_epoch": 10,
+      "model_revision": "321b2467ab4ea8510b7dffff9c9bdd48f929ff6eb54d310e2e832ecd853df1cc",
+      "parameter_change_cost": 200,
+      "parameters": {
+        "length": 201,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "d805b30c0202f1250ca4f8dfb1cfeef40a19f2217f7d8d847e300bb13cacc692",
+      "timing_high": -0.005499999999983629,
+      "timing_low": -0.005499999999983629,
+      "trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/36",
+      "within_amplitude": false,
+      "within_timing": true
+    },
+    {
+      "amplitude_residual": -0.021291063925146236,
+      "anchor_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/38/composite/31",
+      "anchor_semantic_proof_id": "3a8f1a92bab50989d026f75035f3c39eb8a0589dcec3630b86f19837a78d80a6",
+      "anchor_trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/38",
+      "full_parameters": [
+        {
+          "length": 241,
+          "resistance": 86000000,
+          "synapses": 13
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 2
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 1,
+      "measurement_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/39/composite/32",
+      "model_epoch": 11,
+      "model_revision": "e005258de689a5452c303858af30e5bc4f9caa32d88933ff1e0bdffac5ae9bca",
+      "parameter_change_cost": 201,
+      "parameters": {
+        "length": 201,
+        "resistance": 86000000,
+        "synapses": 2
+      },
+      "semantic_proof_id": "997d4735a5f975a0b8bcbfe0aeb4bfe137adeddb8091a52b6b7ba4ffe222697d",
+      "timing_high": -0.0055000000000404725,
+      "timing_low": -0.0055000000000404725,
+      "trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/39",
+      "within_amplitude": false,
+      "within_timing": true
+    },
+    {
+      "amplitude_residual": -0.002245119356194647,
+      "anchor_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/41/composite/33",
+      "anchor_semantic_proof_id": "7d318ee9fc60ecff8f6cc8085646fc353933ae221d2845224eb7ecbf24234bc8",
+      "anchor_trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/41",
+      "full_parameters": [
+        {
+          "length": 241,
+          "resistance": 86000000,
+          "synapses": 13
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 10
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 1,
+      "measurement_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/42/composite/34",
+      "model_epoch": 12,
+      "model_revision": "6d46535a4f318b9f41a489357ed250c34603708c6000beef21b9a5dcfdcccce9",
+      "parameter_change_cost": 209,
+      "parameters": {
+        "length": 201,
+        "resistance": 86000000,
+        "synapses": 10
+      },
+      "semantic_proof_id": "29a143039fb020b5b33c6b97922618279ef564aa6d58cc38d4ce26bfd49e4692",
+      "timing_high": -0.005499999999983629,
+      "timing_low": -0.005499999999983629,
+      "trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/42",
+      "within_amplitude": false,
+      "within_timing": true
+    },
+    {
+      "amplitude_residual": -0.0004055786231563774,
+      "anchor_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/44/composite/35",
+      "anchor_semantic_proof_id": "5288f64ff87a50d32058bc6e3d69fefa002ca1b57bf2e571c0ae0947f6ae6126",
+      "anchor_trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/44",
+      "full_parameters": [
+        {
+          "length": 241,
+          "resistance": 86000000,
+          "synapses": 13
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 11
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 1,
+      "measurement_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/45/composite/36",
+      "model_epoch": 13,
+      "model_revision": "3bc6410557f2a39247aa6b9ae32ff69cd28807549ac36e2f88a23e5eea4af546",
+      "parameter_change_cost": 210,
+      "parameters": {
+        "length": 201,
+        "resistance": 86000000,
+        "synapses": 11
+      },
+      "semantic_proof_id": "700c64e193526b7ba438c0b7764edd1ead51d099a8bc0302675c10af76dce2b5",
+      "timing_high": -0.005999999999971806,
+      "timing_low": -0.005999999999971806,
+      "trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/45",
+      "within_amplitude": false,
+      "within_timing": true
+    },
+    {
+      "amplitude_residual": 0.0013080718183188234,
+      "anchor_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/47/composite/37",
+      "anchor_semantic_proof_id": "859fb8d7fbef6e5b2d41b6d67089aa6825552250022c9394c02f40c78c47838d",
+      "anchor_trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/47",
+      "full_parameters": [
+        {
+          "length": 241,
+          "resistance": 86000000,
+          "synapses": 13
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 12
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 1,
+      "measurement_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/48/composite/38",
+      "model_epoch": 14,
+      "model_revision": "a49e57d66c2f1151b1646585cabbe9352ae60bc6264baedbcfc11d7cc041f096",
+      "parameter_change_cost": 211,
+      "parameters": {
+        "length": 201,
+        "resistance": 86000000,
+        "synapses": 12
+      },
+      "semantic_proof_id": "7db29f39ee4ad6ad4e43780932bcbe230e6b8de1e6ebbd94dee0666e070e4a37",
+      "timing_high": -0.0060000000000854925,
+      "timing_low": -0.0060000000000854925,
+      "trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/48",
+      "within_amplitude": false,
+      "within_timing": true
+    },
+    {
+      "amplitude_residual": -0.0004055786231563774,
+      "anchor_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/50/composite/39",
+      "anchor_semantic_proof_id": "ec31812ebff14ea41cf00e2c549062f4966aa9da7224eb4f23680c7c8bcf362c",
+      "anchor_trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/50",
+      "full_parameters": [
+        {
+          "length": 241,
+          "resistance": 86000000,
+          "synapses": 13
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 11
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 1,
+      "measurement_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/51/composite/40",
+      "model_epoch": 15,
+      "model_revision": "3bc6410557f2a39247aa6b9ae32ff69cd28807549ac36e2f88a23e5eea4af546",
+      "parameter_change_cost": 210,
+      "parameters": {
+        "length": 201,
+        "resistance": 86000000,
+        "synapses": 11
+      },
+      "semantic_proof_id": "ac853d32984ddb1ac3d61675f9c46303dc7a836a3b774072d57b6ac6bd767d34",
+      "timing_high": -0.005999999999971806,
+      "timing_low": -0.005999999999971806,
+      "trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/51",
+      "within_amplitude": false,
+      "within_timing": true
+    },
+    {
+      "amplitude_residual": 0,
+      "anchor_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/52/composite/41",
+      "anchor_semantic_proof_id": "5ad909f3b69ee4c345d0b68d0deedc4e79355dc902d08cb850557793064628cf",
+      "anchor_trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/52",
+      "full_parameters": [
+        {
+          "length": 241,
+          "resistance": 86000000,
+          "synapses": 13
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 11
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/53/composite/42",
+      "model_epoch": 15,
+      "model_revision": "3bc6410557f2a39247aa6b9ae32ff69cd28807549ac36e2f88a23e5eea4af546",
+      "parameter_change_cost": 0,
+      "parameters": {
+        "length": 1,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "a189800cae6ad06b748ef120c6b3940ff70c65622cbb5aaa0dc03b52a5aac873",
+      "timing_high": -0.2400000000000091,
+      "timing_low": -0.2400000000000091,
+      "trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/53",
+      "within_amplitude": true,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.005101293201065005,
+      "anchor_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/55/composite/43",
+      "anchor_semantic_proof_id": "1b880d25630e22cd69b7ea9c70dd09a251badecea4741f9467aa4e38c00be107",
+      "anchor_trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/55",
+      "full_parameters": [
+        {
+          "length": 241,
+          "resistance": 86000000,
+          "synapses": 13
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 11
+        },
+        {
+          "length": 2,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/56/composite/44",
+      "model_epoch": 16,
+      "model_revision": "ef0273653f63430bf5e3e210d0384566d84045c4df0b861c6e132b0c7fa4f2b5",
+      "parameter_change_cost": 1,
+      "parameters": {
+        "length": 2,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "30cff1df0ad707d72d49b732d657279c0c707db246fdf094dc4741c38b1eac56",
+      "timing_high": -0.2380000000000564,
+      "timing_low": -0.2380000000000564,
+      "trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/56",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.008111309598994643,
+      "anchor_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/58/composite/45",
+      "anchor_semantic_proof_id": "62db80046bffb145ab0a93190a134a13003777f2863149d2697f95ec4f147cfc",
+      "anchor_trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/58",
+      "full_parameters": [
+        {
+          "length": 241,
+          "resistance": 86000000,
+          "synapses": 13
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 11
+        },
+        {
+          "length": 3,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/59/composite/46",
+      "model_epoch": 17,
+      "model_revision": "e1e4209c85fd7441bdd7a034edda11179e633187a190d6084ddbe1f9c0fb562c",
+      "parameter_change_cost": 2,
+      "parameters": {
+        "length": 3,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "bc1011466e9cf3a947e58d403f2af0ca383133a7ec38e4b9cc82f1298fb2184c",
+      "timing_high": -0.23599999999999,
+      "timing_low": -0.23599999999999,
+      "trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/59",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.02347230991428706,
+      "anchor_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/61/composite/47",
+      "anchor_semantic_proof_id": "239eeb9df4079cef74c636bc577ec4f4ec6d79e4a024b224b7fc39f5521b5744",
+      "anchor_trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/61",
+      "full_parameters": [
+        {
+          "length": 241,
+          "resistance": 86000000,
+          "synapses": 13
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 11
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/62/composite/48",
+      "model_epoch": 18,
+      "model_revision": "dc39ecac9b628f5bbac54843be7a0c4bf185d1c213f79d20cb4f1caf392d1829",
+      "parameter_change_cost": 120,
+      "parameters": {
+        "length": 121,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "e53253eecfad949c87c139bca0139f713575d59430f117d45d6e20c7b12f7b2d",
+      "timing_high": 0,
+      "timing_low": 0,
+      "trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/62",
+      "within_amplitude": false,
+      "within_timing": true
+    },
+    {
+      "amplitude_residual": -0.02016885398420243,
+      "anchor_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/64/composite/49",
+      "anchor_semantic_proof_id": "b81771b21fa9f61a087184372dc8b1ce0b5900b1e067800b5d82a0c3c649e9b6",
+      "anchor_trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/64",
+      "full_parameters": [
+        {
+          "length": 241,
+          "resistance": 86000000,
+          "synapses": 13
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 11
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 2
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/65/composite/50",
+      "model_epoch": 19,
+      "model_revision": "f81f879a77cf2bc1b60b9988add6552032a9b16d302a814b8c06dca3a41c385d",
+      "parameter_change_cost": 121,
+      "parameters": {
+        "length": 121,
+        "resistance": 86000000,
+        "synapses": 2
+      },
+      "semantic_proof_id": "8610a743d717212202d5bfee433963367da2a1dcd47119c216f911146b6a0ccf",
+      "timing_high": 0,
+      "timing_low": 0,
+      "trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/65",
+      "within_amplitude": false,
+      "within_timing": true
+    },
+    {
+      "amplitude_residual": -0.002128091681155686,
+      "anchor_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/67/composite/51",
+      "anchor_semantic_proof_id": "f8f2dccaf1e220aebfdfaa25355ff63c467e95f595c53c27fb4a97c6b73fe8f4",
+      "anchor_trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/67",
+      "full_parameters": [
+        {
+          "length": 241,
+          "resistance": 86000000,
+          "synapses": 13
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 11
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/68/composite/52",
+      "model_epoch": 20,
+      "model_revision": "c740e0c07f8ef1ef6b224a3d9d4d857246a5b6dc6052b680f133a3dd2ffbf88e",
+      "parameter_change_cost": 127,
+      "parameters": {
+        "length": 121,
+        "resistance": 86000000,
+        "synapses": 8
+      },
+      "semantic_proof_id": "be9c0f597ce1752fa2b9c00427cfadc240c853ca01827c274e0e9a7b2125e77f",
+      "timing_high": -0.0004999999999881766,
+      "timing_low": -0.0004999999999881766,
+      "trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/68",
+      "within_amplitude": false,
+      "within_timing": true
+    },
+    {
+      "amplitude_residual": 0.00040147809359181164,
+      "anchor_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/70/composite/53",
+      "anchor_semantic_proof_id": "9edd7017fafefa4d9537712dcf6884198ca6b5b5443ecb7e9b62bd319a7012ad",
+      "anchor_trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/70",
+      "full_parameters": [
+        {
+          "length": 241,
+          "resistance": 86000000,
+          "synapses": 13
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 11
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 9
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/71/composite/54",
+      "model_epoch": 21,
+      "model_revision": "b82b884e18fb1871a1db8d6925586c2e50946cb073598d7726b8bcf79c938e56",
+      "parameter_change_cost": 128,
+      "parameters": {
+        "length": 121,
+        "resistance": 86000000,
+        "synapses": 9
+      },
+      "semantic_proof_id": "f0f41267eec3b214175a282ec4085eeb8e4d23ca43e19d6d30d2cd5b8025f9e3",
+      "timing_high": -0.0004999999999881766,
+      "timing_low": -0.0004999999999881766,
+      "trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/71",
+      "within_amplitude": false,
+      "within_timing": true
+    },
+    {
+      "amplitude_residual": 0.0005137562648862559,
+      "anchor_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/73/composite/55",
+      "anchor_semantic_proof_id": "e8ce7343453f7852a39138e2a264616fcfa0d37a24d8cc1c0fb7f9894ff3921e",
+      "anchor_trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/73",
+      "full_parameters": [
+        {
+          "length": 241,
+          "resistance": 86000000,
+          "synapses": 13
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 11
+        },
+        {
+          "length": 120,
+          "resistance": 86000000,
+          "synapses": 9
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/74/composite/56",
+      "model_epoch": 22,
+      "model_revision": "fc01eb8646165c1a081b97f204c5d55842ad7aaa940c698e330629087f2a4d53",
+      "parameter_change_cost": 127,
+      "parameters": {
+        "length": 120,
+        "resistance": 86000000,
+        "synapses": 9
+      },
+      "semantic_proof_id": "9b1b92f4a3b19d3568d695e9f10ddf73b1236d161433dc922d8cda05e744ba2d",
+      "timing_high": -0.0025000000000545697,
+      "timing_low": -0.0025000000000545697,
+      "trial_id": "candidate-cap/20261124/classic/M4/cap8/session/1/search/74",
+      "within_amplitude": false,
+      "within_timing": true
+    }
+  ],
+  "classification_performed": false,
+  "scientific_verdict": null
+}

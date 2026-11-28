@@ -1,0 +1,50 @@
+{
+  "kind": "timelearner_external_scientific_result_reference",
+  "schema_version": 1,
+  "source_catalog": {
+    "relative_path": "experiments/2026-11-27/Native-image-rest-independent-differences-fr234.json",
+    "bytes": 1819,
+    "sha256": "c3766d5b368e77adaf0f4081f742a7fc211adf1c4b5b3196097a0a32f80e01af"
+  },
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/56/5673c30c720107026ed68881344369de44af46362c8f36de8b8c49f439656991",
+      "sha256": "5673c30c720107026ed68881344369de44af46362c8f36de8b8c49f439656991",
+      "bytes": 36023
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/7f/7fd6a0181116ef743bd0d9656fad893ab01ef4fc523225c18d3371555e35dfd7",
+      "sha256": "7fd6a0181116ef743bd0d9656fad893ab01ef4fc523225c18d3371555e35dfd7",
+      "bytes": 33169956
+    }
+  },
+  "analysis": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/eb/eb09150e83763edc6d648dbe43bfe6d81eb0411ffc7a4594a0e54d6b415899fd",
+    "sha256": "eb09150e83763edc6d648dbe43bfe6d81eb0411ffc7a4594a0e54d6b415899fd",
+    "bytes": 18108
+  },
+  "members": 212,
+  "parent_test_invocations": 8,
+  "unique_parent_test_identifiers": 4,
+  "mismatching_archive_pairs": 9,
+  "all_actual_loaded_bytes_verified": true,
+  "all_signed_archive_and_native_XML_digests_verified": true,
+  "all9_mismatching_archive_pairs_compared": true,
+  "implementation_fix": false,
+  "scientific_verdict": null,
+  "source_kind": "timelearner_actual_native_image_rest_archive_field_differences",
+  "upstream_source_catalog": {
+    "relative_path": "experiments/2026-11-27/Native-image-rest-diagnostic-jump12-fr220.json",
+    "bytes": 2485,
+    "sha256": "f356dede793f908ff59656253eac5b40b1e88c2b2af771ae9a2c1d65079280af"
+  }
+}

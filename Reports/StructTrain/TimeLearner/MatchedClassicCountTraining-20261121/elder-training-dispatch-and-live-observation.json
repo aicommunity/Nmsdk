@@ -1,0 +1,112 @@
+{
+  "kind": "timelearner_matched_classic_count_train_same_host",
+  "schema_version": 1,
+  "dispatch": {
+    "dispatched": true,
+    "job": "s11-classic-count-training-elder-a1",
+    "supervisor_pid": 2828878,
+    "controller": "/home/user/timelearner-refactor/readbacks/s11-classic-count-training-elder-a1-controller",
+    "output": "/home/user/timelearner-refactor/readbacks/s11-classic-count-training-elder-a1",
+    "original_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+    "job_sha256": "765fe15255d66df2680137084f12e8afb0530b8c37606187623276c686fa70f9",
+    "scientific_verdict": null,
+    "controls_commit": "aeada9cccf78ed2e3ab821f387f8f47691920470",
+    "root_commit": "401339a0efa7be313385e91446932e2e96998d96",
+    "native_wall_seconds": 39600,
+    "internal_search_wall_seconds": 32400,
+    "maximum_synapses": 128,
+    "native_memory_bytes": 17179869184,
+    "whole_wall_seconds": 43200,
+    "original_initial_graph_verified_on_Elder_and_M40": true,
+    "fresh_own_preflights_required": true,
+    "full_primary_audit_required": true,
+    "same_runtime_as_original_Elder_N1": true,
+    "maximum_output_bytes": 8589934592,
+    "resource_snapshot": {
+      "memory": {
+        "MemTotal": 33520996352,
+        "MemAvailable": 29450272768
+      },
+      "disk": {
+        "total": 502390513664,
+        "used": 419055722496,
+        "free": 57739526144
+      },
+      "registry": {
+        "schema_version": 2,
+        "worker_host": "Elder-1",
+        "capacity": {
+          "disk_bytes": 15032385536,
+          "memory_bytes": 25769803776,
+          "slots": 1
+        },
+        "reserved": {
+          "disk_bytes": 0,
+          "memory_bytes": 0,
+          "slots": 0
+        },
+        "available": {
+          "disk_bytes": 15032385536,
+          "memory_bytes": 25769803776,
+          "slots": 1
+        }
+      },
+      "native_and_controller_memory_bytes": 19327352832,
+      "scientific_verdict": null
+    }
+  },
+  "observation": {
+    "job": "s11-classic-count-training-elder-a1",
+    "train-kernel": {
+      "execution": "running",
+      "all_processes_closed": false,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "ea0282ed856e07dc6d0c5be485c3fe45bafbebcaa56039819f36ecf20dd92c2f",
+        "unit": "timelearner-90278466-d2c8-4061-8c1c-dca1d8570ab4.service",
+        "invocation_id": "b4c947258b63437aa89702d34f6c1834",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-90278466-d2c8-4061-8c1c-dca1d8570ab4.service",
+        "initial_main_pid": 2836090,
+        "initial_start_ticks": "486111793",
+        "sha256": "22eba6ed2a2fe6c9792c1ec9c53b946d4a2c89b6564d77139c563433b8ef7e89"
+      }
+    },
+    "outer": {
+      "execution": "running",
+      "all_processes_closed": false,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "491ab45e0815cfe989174366805a286e184299d4bb4ceb8c48f8949db12ec7e0",
+        "unit": "timelearner-ff34a266-3a97-41dc-96c7-5c224233b87d.service",
+        "invocation_id": "bbd50aa93c9947d0bbd00e370f1a8bed",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-ff34a266-3a97-41dc-96c7-5c224233b87d.service",
+        "initial_main_pid": 2832337,
+        "initial_start_ticks": "486110391",
+        "sha256": "4b34acf90cf82fb4d9c824548c414d625cd80269ecb7c1ec70aff9c2872abe04"
+      }
+    },
+    "raw_trial_files_present": 5,
+    "train_elapsed_wall_seconds": 11.81000000052154,
+    "disk_free_bytes": 57729437696,
+    "observed_utc": "2026-11-21T20:02:38.900909+00:00",
+    "readbacks/s11-classic-count-training-elder-a1/preflight-accepted.json": {
+      "initial_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+      "same_actual_cold_graph_as_resistance_control": true,
+      "job_sha256": "765fe15255d66df2680137084f12e8afb0530b8c37606187623276c686fa70f9",
+      "factor_model_revision": "e23cda6cb58312d2e51a92df035baf9fb8629efc42aecbad4da1e39a47d7864e",
+      "factor_synapses": 2,
+      "initial_nodes": 44,
+      "factor_nodes": 45,
+      "training_started": false,
+      "scientific_verdict": null
+    }
+  },
+  "user_freed_50GB_before_launch": true,
+  "same_native_binary_as_original_Elder_N1": true,
+  "completed_training_or_classification": false,
+  "scientific_verdict": null
+}

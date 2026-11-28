@@ -1,0 +1,51 @@
+{
+  "kind": "timelearner_frozen_cadence32_preregistration_receipt",
+  "schema_version": 1,
+  "source_commit": "35cc9657edf207f00c1fcfc63528597029a0eb22",
+  "controls_commit": "e7e57ebebea1744f96fcbfecf992925bef9281ac",
+  "job": "classic-q3-cadence32-elder-ep11",
+  "exact_owner": {
+    "pid": 3918725,
+    "start_ticks": "522025356",
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "uid": 1000
+  },
+  "source_model_revision": "2783e83684eef31e0a258e271e0c2c3acf30a9a9ab175fc20632577b5b9028a6",
+  "fixed_threshold": 0.023252703356543683,
+  "external_archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+  "independent_preregistration": {
+    "relative_path": "experiments/2026-11-26/Elder-q3-cadence32-preregistration-independent-ep18.json",
+    "sha256": "47f7af9553612c8749b14f586f90eb020e38590dde999034e46a6d73cd5cb2ec",
+    "bytes": 2996
+  },
+  "preregistration_objects_verified": 8,
+  "cases": 32,
+  "total_trials": 256,
+  "expected_scope_tests": 33,
+  "cadences_seconds": [
+    2,
+    0.69
+  ],
+  "target_positions": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "following_trial_reset_policies": [
+    "reset_per_trial",
+    "preserve_neuron_dynamics"
+  ],
+  "first_trial_reset_policy": "reset_per_trial",
+  "source_training_outcome": "budget_exhausted",
+  "source_completed_boundary": false,
+  "training_performed": false,
+  "threshold_selected": false,
+  "native_execution_attested": false,
+  "execution_status": "preparing_source_and_full_matrix",
+  "scientific_verdict": null
+}

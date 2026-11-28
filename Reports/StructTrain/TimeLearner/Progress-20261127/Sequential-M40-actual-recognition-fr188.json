@@ -1,0 +1,87 @@
+{
+  "kind": "timelearner_external_scientific_result_reference",
+  "schema_version": 1,
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/09/093c97016c82b46f86681c8e24bb9b5179066604d0ec51398914929a4ce1fd37",
+      "sha256": "093c97016c82b46f86681c8e24bb9b5179066604d0ec51398914929a4ce1fd37",
+      "bytes": 51836
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/94/94edc90ad38ba7edd99d181301742cd8b34a5610748b5811deadf6c17886a9d2",
+      "sha256": "94edc90ad38ba7edd99d181301742cd8b34a5610748b5811deadf6c17886a9d2",
+      "bytes": 23942392
+    }
+  },
+  "members": 299,
+  "expanded_bytes": 887536846,
+  "source_solo_model_revision": "8a8b447f4ecb17f7e9140aa5504f5dedea523ce4e6d802b4a032dc7cd3d44412",
+  "recognition_model_revision": "169d0090482014456785a7c3f4a6927a29527e4c225306a4c628b6335cc4faa9",
+  "training_outcome": "budget_exhausted",
+  "completed_boundary": false,
+  "calibration_protocol": "historical_same_matrix",
+  "threshold": 0.02342413248481376,
+  "phases": [
+    {
+      "phase": "baseline",
+      "counts": {
+        "TP": 0,
+        "FP": 0,
+        "FN": 1,
+        "TN": 7,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 0.0,
+        "foil_response_rate": 0.0
+      },
+      "model_revision": "8a8b447f4ecb17f7e9140aa5504f5dedea523ce4e6d802b4a032dc7cd3d44412",
+      "threshold": 100.0
+    },
+    {
+      "phase": "confirmation",
+      "counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.75,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.2857142857142857
+      },
+      "model_revision": "169d0090482014456785a7c3f4a6927a29527e4c225306a4c628b6335cc4faa9",
+      "threshold": 0.02342413248481376
+    }
+  ],
+  "observations": 16,
+  "all_native_groups_closed": true,
+  "all_actual_native_loaded_bytes_preserved": true,
+  "source_original_unchanged": true,
+  "independent_reader_pending": true,
+  "all_pattern_visual_report_pending": true,
+  "full_training_reader_runtime_gap_fr180_still_separate": true,
+  "new_Train": false,
+  "independent_holdout": false,
+  "scientific_verdict": null,
+  "upstream_source_catalog": {
+    "relative_path": "experiments/2026-11-27/M40-sequential-Train-independent-bytes-fr140.json",
+    "bytes": 2060,
+    "sha256": "c3f5d3659d317abf189c4d368b359cd0dc2a269dd24e39b8f5b1e49d9cc86a8e"
+  },
+  "source_catalog": {
+    "relative_path": "experiments/2026-11-27/Sequential-M40-actual-recognition-fr188.json",
+    "bytes": 2828,
+    "sha256": "4378a7cea027aa7fc268ba3d7b72db1fffb8bcc14f785631fab96e8df7a51831"
+  },
+  "source_kind": "timelearner_actual_sequential_stopped_Classic_native_recognition"
+}

@@ -1,0 +1,22 @@
+{
+  "kind": "timelearner_report_rule_validation_preparation_failures",
+  "schema_version": 1,
+  "source_generation_ar4": "Local script template assertion; file not created and remote invocation only reported missing input; no tests.",
+  "transport_ar5": "Oversized public payload refused before controls existed; explicit ar7 remote presence check confirmed all three paths absent.",
+  "SMB_ar8": {
+    "via_jump": "10.245.1.12",
+    "host": "10.245.1.14",
+    "operator_sha256": "5825e81e14473813ccd3e0657030863d6217da6bbba6df5c873f7c24ee1cac7d",
+    "returncode": 0,
+    "stderr": "",
+    "observation": {
+      "reason": "[WinError 64] Указанное сетевое имя более недоступно: '\\\\\\\\10.245.1.17\\\\Nmsdk-StructTrainExpArchive\\\\'",
+      "traceback": "Traceback (most recent call last):\n  File \"C:\\Projects\\TimeLearnerWorker\\git-transfers\\timing-neighbourhood-win-a1\\timelearner-windows-audited-response-timing-validation-dispatch-20261123-ar7.py\", line 26, in <module>\n    raw=resolve(payload['archive']).read_bytes()\n        ~~~~~~~^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Projects\\TimeLearnerWorker\\source-audited-response-timing-win-ar3\\Scripts\\StructTrain\\TimeLearner\\external_archive.py\", line 89, in resolve\n    root = _root(_configured_root(root))\n  File \"C:\\Projects\\TimeLearnerWorker\\source-audited-response-timing-win-ar3\\Scripts\\StructTrain\\TimeLearner\\external_archive.py\", line 63, in _root\n    root = root.resolve(strict=True)\n  File \"pathlib\\__init__.py\", line 938, in resolve\n  File \"<frozen ntpath>\", line 694, in realpath\nOSError: [WinError 64] Указанное сетевое имя более недоступно: '\\\\\\\\10.245.1.17\\\\Nmsdk-StructTrainExpArchive\\\\'\n",
+      "scientific_verdict": null
+    }
+  },
+  "ar12": "Archive member variable overwrote dispatcher job name; task action referred to nonexistent controls/original-audit.json; zero test process/results observed; exact idle failed task removed after ar13 scope check.",
+  "successful_replacement": "windows-audited-response-timing-validation-ar14, actual11 PASS",
+  "no_original_Train_restarted": true,
+  "scientific_verdict": null
+}

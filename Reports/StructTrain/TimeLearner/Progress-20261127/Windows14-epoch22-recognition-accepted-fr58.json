@@ -1,0 +1,116 @@
+{
+  "kind": "timelearner_external_scientific_result_reference",
+  "schema_version": 1,
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/62/627d87e93660cd8e024261d17c5bc91e2fd068ee8331c4c904ef31a2401c66c2",
+      "sha256": "627d87e93660cd8e024261d17c5bc91e2fd068ee8331c4c904ef31a2401c66c2",
+      "bytes": 43891
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/66/661ac8769346bde43a7590982ecf131149b1dbb29a81af36eeb1a4b28fb64a07",
+      "sha256": "661ac8769346bde43a7590982ecf131149b1dbb29a81af36eeb1a4b28fb64a07",
+      "bytes": 22570020
+    },
+    "restoration.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/ac/ac41db58edd38eaba61068c29c6c0519dceabd5ffbc275c072ff464a3fc951c4",
+      "sha256": "ac41db58edd38eaba61068c29c6c0519dceabd5ffbc275c072ff464a3fc951c4",
+      "bytes": 425
+    },
+    "physical-edits-audit.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/c0/c0caa415aaae0aac6e22dd8cecc467cb9d1d40d3f1c8b64e2320f4ed52a82c8d",
+      "sha256": "c0caa415aaae0aac6e22dd8cecc467cb9d1d40d3f1c8b64e2320f4ed52a82c8d",
+      "bytes": 2024
+    },
+    "baseline-audit.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/be/be1b31f5a931a91154b51d057b431ba171c781826d6c77c760f7dacb14e8ce0e",
+      "sha256": "be1b31f5a931a91154b51d057b431ba171c781826d6c77c760f7dacb14e8ce0e",
+      "bytes": 5858
+    },
+    "confirmation-audit.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/db/db31e7835e731d97e1f96a6433bba00db5d0b8119db93d40a0ad807f109fa22c",
+      "sha256": "db31e7835e731d97e1f96a6433bba00db5d0b8119db93d40a0ad807f109fa22c",
+      "bytes": 6601
+    }
+  },
+  "all251_primary_members_independently_restored": true,
+  "all_actual_native_loaded_file_bytes_verified": true,
+  "all4_native_operations_reaudited": true,
+  "analyses": [
+    {
+      "phase": "baseline",
+      "counts": {
+        "TP": 0,
+        "FP": 0,
+        "FN": 1,
+        "TN": 7,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 0.0,
+        "foil_response_rate": 0.0
+      },
+      "model_revision": "b1430c16b95da83567a01dcd314dbec36c92d2f6965308119ba66b0e14d0f2fc",
+      "threshold": 100.0,
+      "all8_complete_observations_verified": true,
+      "frozen_model_verified": true
+    },
+    {
+      "phase": "confirmation",
+      "counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.75,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.2857142857142857
+      },
+      "model_revision": "2783e83684eef31e0a258e271e0c2c3acf30a9a9ab175fc20632577b5b9028a6",
+      "threshold": 0.023252703356543683,
+      "all8_complete_observations_verified": true,
+      "frozen_model_verified": true
+    }
+  ],
+  "source_training_outcome": "budget_exhausted",
+  "source_epoch": 22,
+  "prior_history_epoch": 21,
+  "training_certificate": false,
+  "calibration_protocol": "Historical Same-Matrix",
+  "independent_holdout": false,
+  "original_post_native_pack_failure_retained": false,
+  "native_experiments_restarted": false,
+  "scientific_verdict": null,
+  "upstream_source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/Windows14-epoch22-recognition-collected-fr58.json",
+    "sha256": "250a9bbf067b123dd51e7d96004f8ae886eb7105929ca23abc3f3eeb31f23513",
+    "size": 2404
+  },
+  "source_catalog": {
+    "relative_path": "experiments/2026-11-27/Windows14-epoch22-recognition-accepted-fr58.json",
+    "bytes": 4323,
+    "sha256": "d64d5d105a1e4ad4097ad554f7329bdefc08ee0cec0b8f01472c2bab4caaba7d"
+  }
+}

@@ -1,0 +1,231 @@
+{
+  "kind": "timelearner_parameterized_native_format_and_actual_matrix_progress",
+  "schema_version": 1,
+  "tool_commit": "0636315b73c3dd09f2b9d417273c83f1c085c437",
+  "format_validation": {
+    "kind": "timelearner_actual_compiled_parameterized_format_validation",
+    "schema_version": 1,
+    "utc": "2026-11-25T22:26:28.629332+00:00",
+    "tool_commit": "0636315b73c3dd09f2b9d417273c83f1c085c437",
+    "actor": "/media/user/Data/TimeLearnerRefactor/source-parameterized-native-m40-eo9",
+    "actual_result": {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/parameterized-native-format-eo9/validation/result.json",
+      "sha256": "eb3bf3d8d3e1038a7f139a77508ab36dd356c6521962e1e095fbe2dd95fdcc87",
+      "size": 5401
+    },
+    "expected": 30,
+    "executed": 30,
+    "assertion_status": "passed",
+    "skipped": [],
+    "failures": [],
+    "errors": [],
+    "all_processes_closed": true,
+    "new_Native_calculation": false,
+    "full_stage_acceptance": false,
+    "scientific_verdict": null
+  },
+  "format_validation_terminal": {
+    "path": "/media/user/Data/TimeLearnerRefactor/readbacks/parameterized-native-format-eo9/terminal.json",
+    "sha256": "d37de0a126bb6301b70eef8ba3e9311679c123cab5f87f752dfc8c4ce55d7b42",
+    "size": 784
+  },
+  "independent_format_primary": {
+    "catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-25/Parameterized-native-format-independent-eo12.json",
+      "size": 3641,
+      "sha256": "415996e5f1fc9b5e11c61621e48477625c421712127cd1de1aa9e5df5e205594"
+    },
+    "kind": "timelearner_independent_parameterized_native_format_validation",
+    "schema_version": 1,
+    "utc": "2026-11-25T22:29:09.829858+00:00",
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/77/776bb960b55aa2703e5ecf4a9c64003527231ceeea3ce307e0a29712a6c40d30",
+        "sha256": "776bb960b55aa2703e5ecf4a9c64003527231ceeea3ce307e0a29712a6c40d30",
+        "bytes": 11420
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/f2/f227cd6a0e63f2f901bf009e10d9885b47716bcbdcdddbff51bb0e7466ec0e74",
+        "sha256": "f227cd6a0e63f2f901bf009e10d9885b47716bcbdcdddbff51bb0e7466ec0e74",
+        "bytes": 4846424
+      }
+    },
+    "restoration": {
+      "kind": "timelearner_native_bundle_restoration",
+      "schema_version": 1,
+      "archive_sha256": "f227cd6a0e63f2f901bf009e10d9885b47716bcbdcdddbff51bb0e7466ec0e74",
+      "archive_members_verified": 70,
+      "retained_regular_files": 70,
+      "compatibility": "retain-regular-glog-aliases-v1",
+      "omitted_redundant_aliases": [],
+      "source_archive_modified": false,
+      "native_execution_attested": false,
+      "scientific_verdict": null
+    },
+    "attempts": [
+      {
+        "attempt": "eo6",
+        "expected": 29,
+        "assertion_status": "failed",
+        "terminal": {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/parameterized-native-format-eo6/terminal.json",
+          "sha256": "9dbd7c0f957b23d03eb0bd1a2c10a85b468246b9c17190b9e6a780c7c22911e3",
+          "size": 930
+        },
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "11024ecca66fc4cca9eb62b006fe75f0bab0a02152af747ff8e6cb27aaa3d789",
+          "unit": "timelearner-2a28e270-1e96-48aa-aa35-d7cf47e41880.service",
+          "invocation_id": "ab2ac5506f1b4298b7cbb375a384c8f5",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-2a28e270-1e96-48aa-aa35-d7cf47e41880.service",
+          "initial_main_pid": 3477425,
+          "initial_start_ticks": "472056486",
+          "sha256": "af0e67d2ffe9b167364b49cce64bf8d414f76897da2c7fa32fdc6811c1f4cf9f"
+        }
+      },
+      {
+        "attempt": "eo9",
+        "expected": 30,
+        "assertion_status": "passed",
+        "terminal": {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/parameterized-native-format-eo9/terminal.json",
+          "sha256": "d37de0a126bb6301b70eef8ba3e9311679c123cab5f87f752dfc8c4ce55d7b42",
+          "size": 784
+        },
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "e74f0a9def02330e8a26db26b488b562c8148658fb8ad73f5a83baf6720a9bb2",
+          "unit": "timelearner-6cbf3123-c81c-405d-b899-77ca861baf15.service",
+          "invocation_id": "4ae6c9ccce9540d2917019033d1ed545",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-6cbf3123-c81c-405d-b899-77ca861baf15.service",
+          "initial_main_pid": 3496496,
+          "initial_start_ticks": "472078072",
+          "sha256": "71079babdf72fd73021158f2c0b28bdf81e20764f2d364434482356cf6a37405"
+        }
+      }
+    ],
+    "actual_compiled_names": 2303,
+    "actual_parameterized_names": 133,
+    "complete_partition_verified": true,
+    "actual_legacy_JUnit_observed": 26,
+    "new_Native_execution_proven": false,
+    "full_stage_acceptance": false,
+    "scientific_verdict": null
+  },
+  "actual_native_matrix_observation": {
+    "utc": "2026-11-25T22:30:13.986206+00:00",
+    "exists": true,
+    "completed": [
+      {
+        "leaf": "leaf-00",
+        "suite": "TopologiesAndRates/NativeTimingProperties",
+        "expected": 4,
+        "result": {
+          "kind": "timelearner_native_test_gate_result",
+          "schema_version": 1,
+          "execution": "completed",
+          "validity": "valid",
+          "assertion_status": "passed",
+          "reason": "complete_declared_test_inventory",
+          "inventory": {
+            "expected": 4,
+            "observed": 4,
+            "failed_test_ids": [],
+            "assertion_status": "passed",
+            "sha256": "a0de2dfb5942ca8f57e0ad9348868854450c45cd47e6f0b54e11e9a17a096e36"
+          },
+          "scientific_verdict": null
+        },
+        "closed": true
+      },
+      {
+        "leaf": "leaf-01",
+        "suite": "NativeStorage/HotReadoutReset",
+        "expected": 8,
+        "result": {
+          "kind": "timelearner_native_test_gate_result",
+          "schema_version": 1,
+          "execution": "completed",
+          "validity": "valid",
+          "assertion_status": "passed",
+          "reason": "complete_declared_test_inventory",
+          "inventory": {
+            "expected": 8,
+            "observed": 8,
+            "failed_test_ids": [],
+            "assertion_status": "passed",
+            "sha256": "582cb0d280ce8660fa3b3360750b41f85121c5d1221fbd6c331ccfa06f391ccd"
+          },
+          "scientific_verdict": null
+        },
+        "closed": true
+      },
+      {
+        "leaf": "leaf-02",
+        "suite": "NativeStorage/HotXmlReadoutReset",
+        "expected": 32,
+        "result": {
+          "kind": "timelearner_native_test_gate_result",
+          "schema_version": 1,
+          "execution": "completed",
+          "validity": "valid",
+          "assertion_status": "passed",
+          "reason": "complete_declared_test_inventory",
+          "inventory": {
+            "expected": 32,
+            "observed": 32,
+            "failed_test_ids": [],
+            "assertion_status": "passed",
+            "sha256": "7d8df92bd58d0320a60552b4a7e6d8b2e7d6ff2fa599670aff3053f39e00955b"
+          },
+          "scientific_verdict": null
+        },
+        "closed": true
+      }
+    ],
+    "owner.json": {
+      "pid": 3503792,
+      "start_ticks": "472084843",
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "uid": 1000
+    },
+    "waiting.json": {
+      "utc": "2026-11-25T22:29:35.865493+00:00",
+      "leaf": "leaf-03",
+      "suite": "NativeStorage/LoadedLearnerReadout",
+      "expected_cases": 32,
+      "completed_leaves": 3
+    },
+    "owner_live": true,
+    "latest_group": {
+      "all_processes_closed": false,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "48a3dfd0e52fab2b45bfd6a52d2be7097f461f869e1cfe91d99ff568ee5b7fa6",
+        "unit": "timelearner-aaccf7dd-02ac-409a-b30b-17c4af7da4ae.service",
+        "invocation_id": "b3525cee3cbc4bbd818c22db8f9f94f8",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-aaccf7dd-02ac-409a-b30b-17c4af7da4ae.service",
+        "initial_main_pid": 3519142,
+        "initial_start_ticks": "472097439",
+        "sha256": "9b69e9a2ddd5cfc2f88d9f47c568255adcb4edc56a8101b50ccf825b745bbd09"
+      }
+    },
+    "native_log_tail": "uite.\n[----------] Global test environment set-up.\n[----------] 32 tests from NativeStorage/LoadedLearnerReadout\n[ RUN      ] NativeStorage/LoadedLearnerReadout.NativeModeZeroXmlRestoresBuffersGraphAndResponse/0\n[       OK ] NativeStorage/LoadedLearnerReadout.NativeModeZeroXmlRestoresBuffersGraphAndResponse/0 (1287 ms)\n[ RUN      ] NativeStorage/LoadedLearnerReadout.NativeModeZeroXmlRestoresBuffersGraphAndResponse/1\n[       OK ] NativeStorage/LoadedLearnerReadout.NativeModeZeroXmlRestoresBuffersGraphAndResponse/1 (422 ms)\n[ RUN      ] NativeStorage/LoadedLearnerReadout.NativeModeZeroXmlRestoresBuffersGraphAndResponse/2\n[       OK ] NativeStorage/LoadedLearnerReadout.NativeModeZeroXmlRestoresBuffersGraphAndResponse/2 (3517 ms)\n[ RUN      ] NativeStorage/LoadedLearnerReadout.NativeModeZeroXmlRestoresBuffersGraphAndResponse/3\n[       OK ] NativeStorage/LoadedLearnerReadout.NativeModeZeroXmlRestoresBuffersGraphAndResponse/3 (3367 ms)\n[ RUN      ] NativeStorage/LoadedLearnerReadout.NativeModeZeroXmlRestoresBuffersGraphAndResponse/4\n[       OK ] NativeStorage/LoadedLearnerReadout.NativeModeZeroXmlRestoresBuffersGraphAndResponse/4 (549 ms)\n[ RUN      ] NativeStorage/LoadedLearnerReadout.NativeModeZeroXmlRestoresBuffersGraphAndResponse/5\n[       OK ] NativeStorage/LoadedLearnerReadout.NativeModeZeroXmlRestoresBuffersGraphAndResponse/5 (534 ms)\n[ RUN      ] NativeStorage/LoadedLearnerReadout.NativeModeZeroXmlRestoresBuffersGraphAndResponse/6\n[       OK ] NativeStorage/LoadedLearnerReadout.NativeModeZeroXmlRestoresBuffersGraphAndResponse/6 (5063 ms)\n[ RUN      ] NativeStorage/LoadedLearnerReadout.NativeModeZeroXmlRestoresBuffersGraphAndResponse/7\n[       OK ] NativeStorage/LoadedLearnerReadout.NativeModeZeroXmlRestoresBuffersGraphAndResponse/7 (6499 ms)\n[ RUN      ] NativeStorage/LoadedLearnerReadout.NativeModeZeroXmlRestoresBuffersGraphAndResponse/8\n[       OK ] NativeStorage/LoadedLearnerReadout.NativeModeZeroXmlRestoresBuffersGraphAndResponse/8 (1104 ms)\n[ RUN      ] NativeStorage/LoadedLearnerReadout.NativeModeZeroXmlRestoresBuffersGraphAndResponse/9\n[       OK ] NativeStorage/LoadedLearnerReadout.NativeModeZeroXmlRestoresBuffersGraphAndResponse/9 (1105 ms)\n[ RUN      ] NativeStorage/LoadedLearnerReadout.NativeModeZeroXmlRestoresBuffersGraphAndResponse/10\n[       OK ] NativeStorage/LoadedLearnerReadout.NativeModeZeroXmlRestoresBuffersGraphAndResponse/10 (9868 ms)\n[ RUN      ] NativeStorage/LoadedLearnerReadout.NativeModeZeroXmlRestoresBuffersGraphAndResponse/11\n"
+  },
+  "full_matrix_result_pending": true,
+  "all_2303_cases_accepted": false,
+  "full_stage_accepted": false,
+  "fully_accepted_stages": [
+    0
+  ],
+  "scientific_verdict": null
+}

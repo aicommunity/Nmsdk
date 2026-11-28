@@ -157,6 +157,34 @@ class TrainingSearchReportTest(unittest.TestCase):
         self.assertFalse(result['attempt_total_independently_recounted'])
         self.assertIsNone(result['training_or_final_verification_verdict'])
 
+    def test_bound_summary8_and_terminal_summary9_can_assemble_report_without_attestation(self):
+        from .test_terminal_search_report import terminal_fixture
+        # This control exercises report assembly after a mocked audit boundary;
+        # the real terminal-corpus CLI control below performs the full audit.
+        for summary, model in (fixture(), terminal_fixture()):
+            with self.subTest(summary_schema=summary['schema_version']), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary);(root/'native').mkdir();(root/'input').mkdir()
+                files = {'native/train_stopped_summary.json': summary,
+                    'native/execution.json': dict(package_path='train_stopped_state.json',
+                        model_revision=summary['actual_model_revision'], training_outcome=summary['outcome']),
+                    'input/job.json': dict(configuration=dict(model=model))}
+                records = []
+                for name, value in files.items():
+                    raw = json.dumps(value).encode();(root/name).write_bytes(raw)
+                    records.append(dict(path=name, bytes=len(raw), sha256=hashlib.sha256(raw).hexdigest()))
+                manifest = root/'run-manifest.json'
+                manifest.write_text(json.dumps(dict(operation='train', validity='valid', execution='completed',
+                    runtime_fingerprint='d'*64, artifacts=records)))
+                with patch('Scripts.StructTrain.TimeLearner.training_search_report.audit_run_manifest',
+                           return_value=dict(run_evidence_consistent=True)) as audit:
+                    result = analyze_search_history(manifest)
+                audit.assert_called_once_with(manifest.resolve())
+                self.assertEqual(result['schema_version'], 3 if summary['schema_version'] == 9 else 2)
+                self.assertFalse(result['native_execution_attested'])
+                self.assertEqual(result['outcome'], summary['outcome'])
+                self.assertIsNone(result['scientific_verdict'])
+
+
     def test_exact_revision_and_parameters_match_is_not_a_certificate(self):
         summary, model = fixture()
         summary['actual_model_revision'] = 'a'*64
@@ -219,6 +247,37 @@ class TrainingSearchReportActualTest(unittest.TestCase):
         self.assertIsNone(document['evaluation_verdict'])
         self.assertIsNone(result['scientific_verdict'])
         (Path(os.environ['TMPDIR'])/'actual-training-search-report.json').write_text(
+            json.dumps(document, indent=2, allow_nan=False)+'\n', encoding='utf-8')
+
+
+class TerminalSearchReportActualTest(unittest.TestCase):
+    def test_production_cli_audits_closed_Branch_resistance_summary9_without_attesting_completion(self):
+        from ..__main__ import main
+        manifest = Path(os.environ['TIMELEARNER_TERMINAL_SEARCH_REPORT_PRIMARY'])/'run-manifest.json'
+        output = io.StringIO()
+        with contextlib.redirect_stdout(output):
+            code = main(['analyze', str(manifest), '--format', 'native-search-history'])
+        self.assertEqual(code, 0)
+        document = json.loads(output.getvalue());result = document['analysis']
+        self.assertEqual(document['validity'], 'valid')
+        self.assertEqual(result['schema_version'], 3)
+        self.assertEqual(result['topology'], 'Branch')
+        self.assertEqual(result['normalization'], 'N1')
+        self.assertEqual(result['input_count'], 4)
+        self.assertEqual(result['outcome'], 'budget_exhausted')
+        self.assertEqual(result['source_summary']['bytes'], 9536697)
+        self.assertEqual(result['source_summary']['sha256'],
+            '18ee1a4fc4369f16d44c8a90df1a1a03adf555320596d7ea9f4ef8c25f909571')
+        self.assertEqual(result['actual_model_revision'],
+            'ab751ba723852917588b694d156f1d8c9033b8b0a0ec7b8e93faacec0d747dc4')
+        self.assertTrue(result['data_audit']['run_evidence_consistent'])
+        self.assertTrue(result['historical_search']['recorded_candidate_measurements'])
+        self.assertFalse(result['native_execution_attested'])
+        self.assertFalse(result['producer_reported_fresh_all_input_verification'])
+        self.assertFalse(result['historical_measurements_rebound_to_actual_epoch'])
+        self.assertIsNone(document['evaluation_verdict'])
+        self.assertIsNone(result['scientific_verdict'])
+        (Path(os.environ['TMPDIR'])/'actual-terminal-training-search-report.json').write_text(
             json.dumps(document, indent=2, allow_nan=False)+'\n', encoding='utf-8')
 
 

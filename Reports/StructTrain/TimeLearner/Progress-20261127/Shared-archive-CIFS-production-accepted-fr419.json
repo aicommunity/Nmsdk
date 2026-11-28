@@ -1,0 +1,78 @@
+{
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/Shared-archive-CIFS-production-accepted-fr419.json",
+    "sha256": "38f4b1fe5f90803a14008a8883d8fedc3f1ada35bb987320f63b26aecc112686",
+    "size": 3067
+  },
+  "catalog": {
+    "kind": "timelearner_production_shared_archive_CIFS_fix_independent_acceptance",
+    "schema_version": 1,
+    "source_catalog": {
+      "relative_path": "experiments/2026-11-27/Shared-archive-CIFS-fix-validation-fr414.json",
+      "bytes": 1580,
+      "sha256": "1245e088913817fc71ee5cc04d5d2f1754c765c348e9d3d894b8133adf36f53e"
+    },
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/15/158b7c0005c0b1745c3a1fd0b7e5e3d3d1eb98b8a085ee56146c33dcd5de85a4",
+        "sha256": "158b7c0005c0b1745c3a1fd0b7e5e3d3d1eb98b8a085ee56146c33dcd5de85a4",
+        "bytes": 1951
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/77/771aca504da8244824089fcc288f54945d8f14a6413ab6c0c12be4ebe94b0646",
+        "sha256": "771aca504da8244824089fcc288f54945d8f14a6413ab6c0c12be4ebe94b0646",
+        "bytes": 90096
+      }
+    },
+    "analysis": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/d6/d6b108aea34925984acaef269869a2b1a015f633ca5362918ee9a3dc40d03bab",
+      "sha256": "d6b108aea34925984acaef269869a2b1a015f633ca5362918ee9a3dc40d03bab",
+      "bytes": 4944
+    },
+    "baseline": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/dc/dc997cdfb010e732d2d4a3a3040a0cab2622bf273501fcb1f2ae206c1406f3d9",
+      "sha256": "dc997cdfb010e732d2d4a3a3040a0cab2622bf273501fcb1f2ae206c1406f3d9",
+      "bytes": 3381
+    },
+    "unit_log": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/44/44d5fa6b2d3b455635afeef2c16597a3505fd7072daca041d1f1f8473257f79d",
+      "sha256": "44d5fa6b2d3b455635afeef2c16597a3505fd7072daca041d1f1f8473257f79d",
+      "bytes": 3410
+    },
+    "outer_metadata_failure": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/8a/8a4d3d81d610cbef26b24a76c07b51466fd5d6c119a1b9bda19f6f11c46c880d",
+      "sha256": "8a4d3d81d610cbef26b24a76c07b51466fd5d6c119a1b9bda19f6f11c46c880d",
+      "bytes": 1856
+    },
+    "operator_root": "e308d7d8fc2113b5af03501e8cff500443619480",
+    "unit_tests": 11,
+    "unit_failures": 0,
+    "unit_skips": 0,
+    "fresh_stores": 3,
+    "duplicate_stores": 3,
+    "concurrent_writers": 2,
+    "full_bytes_verified": true,
+    "corrupt_object_rejected_in_private_fixture": true,
+    "original_validation_outer_status": "process_error_after_successful_test_and_object_publication_due_CIFS_stat_refresh",
+    "native_matrices_and_models_not_repeated": true,
+    "scientific_verdict": null
+  }
+}

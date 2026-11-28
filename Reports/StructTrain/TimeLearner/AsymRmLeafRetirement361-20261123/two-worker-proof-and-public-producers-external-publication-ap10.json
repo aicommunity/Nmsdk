@@ -1,0 +1,69 @@
+{
+  "catalog": "experiments/2026-11-23/AsymRm-leaf-retirement361-ap10/index.json",
+  "record": {
+    "kind": "timelearner_two_worker_migration361_complete_metadata_publication",
+    "schema_version": 1,
+    "source_metadata_catalog": "experiments/2026-11-23/AsymRm-leaf-retirement361-ap9/index.json",
+    "source_root": "3d5decb2b8bda7b8952752c0664ce55a7936fb4a",
+    "workers": [
+      "M40",
+      "Elder-1"
+    ],
+    "positive_bytes": 203143,
+    "positive_sha256": "7cf377e5e77358d99e21eebdbe045206b800e9187337f2437c0ef21233ca26d3",
+    "source_records_verified": 361,
+    "objects": {
+      "M40.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/92/92bcc4b4417ba120ab1eb7570e86446a0b27df80193bd09ee2e2498b4b8b52eb",
+        "bytes": 6136,
+        "sha256": "92bcc4b4417ba120ab1eb7570e86446a0b27df80193bd09ee2e2498b4b8b52eb"
+      },
+      "Elder.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/99/9988d20c07c9802730eec1c0163b7475b0a9dd5c6a3e14eaa9f78490773ede0e",
+        "bytes": 2933,
+        "sha256": "9988d20c07c9802730eec1c0163b7475b0a9dd5c6a3e14eaa9f78490773ede0e"
+      },
+      "initial_fixture_refusal.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/db/dbf04092af5bfe37962965212c334ea0d9a02d3e1822a4529007597cab2bba46",
+        "bytes": 792,
+        "sha256": "dbf04092af5bfe37962965212c334ea0d9a02d3e1822a4529007597cab2bba46"
+      },
+      "timelearner-verify-migration361-production-20261123-ap9.py": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/c3/c303c82b6aaf5d253bef51847cb3eddd9628e5cd1958fdf974e4fceb7845912c",
+        "bytes": 6563,
+        "sha256": "c303c82b6aaf5d253bef51847cb3eddd9628e5cd1958fdf974e4fceb7845912c"
+      },
+      "timelearner-prepare-migration361-Git-metadata-20261123-ap4.py": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/28/2818cf2eafe76d5566c2849e0b344f172d64c2166df11034a5befa85f1aec1fe",
+        "bytes": 7445,
+        "sha256": "2818cf2eafe76d5566c2849e0b344f172d64c2166df11034a5befa85f1aec1fe"
+      },
+      "timelearner-complete-migration361-Git-metadata-20261123-ap8.py": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/40/4041e5520d8a8d0c76ceed87887aa761afcdc5666594e6cd03eca1f0fe71d8da",
+        "bytes": 4242,
+        "sha256": "4041e5520d8a8d0c76ceed87887aa761afcdc5666594e6cd03eca1f0fe71d8da"
+      }
+    },
+    "whole_migration_attested": false,
+    "native_models_executed": 0,
+    "scientific_verdict": null
+  }
+}

@@ -1,0 +1,327 @@
+{
+  "kind": "timelearner_whole_physical_frequency_boundary_acceptance",
+  "schema_version": 1,
+  "checked_at": "2026-11-26T02:18:16.346Z",
+  "catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-26/Elder-frequency8-independent-et23.json",
+    "sha256": "8f42e5587768c5cc5bc57b2f2983feb0c9e6a2498d364ce8101645e5bda9280a",
+    "size": 8489
+  },
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/a0/a0f28b4db6555ac034eb32b3edfc2f7a50ea406cbec38c8eee938df308c75a6f",
+      "sha256": "a0f28b4db6555ac034eb32b3edfc2f7a50ea406cbec38c8eee938df308c75a6f",
+      "bytes": 59186
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/ad/ad5d41bf3dee8edb050e06c2a7b703d742087d764423633a5e328a95c78a0fbd",
+      "sha256": "ad5d41bf3dee8edb050e06c2a7b703d742087d764423633a5e328a95c78a0fbd",
+      "bytes": 43231704
+    },
+    "source-result.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/d8/d8dbad3b83c523e8317a9fbb19003d4575dd48f3a5bdfbff65d860b4f77d18a4",
+      "sha256": "d8dbad3b83c523e8317a9fbb19003d4575dd48f3a5bdfbff65d860b4f77d18a4",
+      "bytes": 873
+    }
+  },
+  "members": 292,
+  "test_source_root": "f5c65e158a2701f3085230d60291f710b2007e3f",
+  "linked_SDK": {
+    "root": {
+      "head": "d2c7487a88a5c1c372f825dc708a543c03234fcb",
+      "status": ""
+    },
+    "Bin": {
+      "recorded_gitlink": "2c285cb472134fc92394153c089603a830a03f70",
+      "head": "2c285cb472134fc92394153c089603a830a03f70",
+      "status": ""
+    },
+    "Libraries/Nmsdk-MotionControlLib": {
+      "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "status": ""
+    },
+    "Libraries/Nmsdk-PulseLib": {
+      "recorded_gitlink": "e36996cd53a545782b54c76d610162c602567399",
+      "head": "e36996cd53a545782b54c76d610162c602567399",
+      "status": ""
+    },
+    "Libraries/Rdk-BasicLib": {
+      "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "status": ""
+    },
+    "Libraries/Rdk-CvBasicLib": {
+      "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "status": ""
+    },
+    "Libraries/Rdk-HardwareLib": {
+      "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+      "head": "de40b008e990105856726e01230dde19f42a90a9",
+      "status": ""
+    },
+    "Rdk": {
+      "recorded_gitlink": "561986e9f336ee5914e2d119de90b005e06f3639",
+      "head": "561986e9f336ee5914e2d119de90b005e06f3639",
+      "status": ""
+    }
+  },
+  "cases": [
+    {
+      "case": "Branch_20000_to_2000_DirectLtZone",
+      "previous_frequency": 20000,
+      "target_frequency": 2000,
+      "branch": true,
+      "lt_membrane": false,
+      "samples": 401,
+      "signals": 44,
+      "actual_input_ticks": [
+        20,
+        80,
+        102,
+        162,
+        184,
+        244,
+        266,
+        326,
+        348
+      ],
+      "warm_input_edges": 6,
+      "maximum_signal_difference": 0,
+      "warm_potential_range": 0.06549771226381396,
+      "probe_potential_range": 0.07473821853315976,
+      "identity_preserved": true
+    },
+    {
+      "case": "Branch_20000_to_2000_LtMembrane",
+      "previous_frequency": 20000,
+      "target_frequency": 2000,
+      "branch": true,
+      "lt_membrane": true,
+      "samples": 401,
+      "signals": 52,
+      "actual_input_ticks": [
+        20,
+        80,
+        102,
+        162,
+        184,
+        244,
+        266,
+        326,
+        348
+      ],
+      "warm_input_edges": 6,
+      "maximum_signal_difference": 0,
+      "warm_potential_range": 0.06549771226381396,
+      "probe_potential_range": 0.07473821853315976,
+      "identity_preserved": true
+    },
+    {
+      "case": "Branch_2000_to_20000_DirectLtZone",
+      "previous_frequency": 2000,
+      "target_frequency": 20000,
+      "branch": true,
+      "lt_membrane": false,
+      "samples": 4001,
+      "signals": 44,
+      "actual_input_ticks": [
+        200,
+        800,
+        1020,
+        1620,
+        1840,
+        2440,
+        2660,
+        3260,
+        3480
+      ],
+      "warm_input_edges": 6,
+      "maximum_signal_difference": 0,
+      "warm_potential_range": 0.0747352852052583,
+      "probe_potential_range": 0.06550155649194711,
+      "identity_preserved": true
+    },
+    {
+      "case": "Branch_2000_to_20000_LtMembrane",
+      "previous_frequency": 2000,
+      "target_frequency": 20000,
+      "branch": true,
+      "lt_membrane": true,
+      "samples": 4001,
+      "signals": 52,
+      "actual_input_ticks": [
+        200,
+        800,
+        1020,
+        1620,
+        1840,
+        2440,
+        2660,
+        3260,
+        3480
+      ],
+      "warm_input_edges": 6,
+      "maximum_signal_difference": 0,
+      "warm_potential_range": 0.0747352852052583,
+      "probe_potential_range": 0.06550155649194711,
+      "identity_preserved": true
+    },
+    {
+      "case": "Classic_20000_to_2000_DirectLtZone",
+      "previous_frequency": 20000,
+      "target_frequency": 2000,
+      "branch": false,
+      "lt_membrane": false,
+      "samples": 401,
+      "signals": 68,
+      "actual_input_ticks": [
+        20,
+        80,
+        102,
+        162,
+        184,
+        244,
+        266,
+        326,
+        348
+      ],
+      "warm_input_edges": 6,
+      "maximum_signal_difference": 0,
+      "warm_potential_range": 0.06549771226381396,
+      "probe_potential_range": 0.07473821853315976,
+      "identity_preserved": true
+    },
+    {
+      "case": "Classic_20000_to_2000_LtMembrane",
+      "previous_frequency": 20000,
+      "target_frequency": 2000,
+      "branch": false,
+      "lt_membrane": true,
+      "samples": 401,
+      "signals": 76,
+      "actual_input_ticks": [
+        20,
+        80,
+        102,
+        162,
+        184,
+        244,
+        266,
+        326,
+        348
+      ],
+      "warm_input_edges": 6,
+      "maximum_signal_difference": 0,
+      "warm_potential_range": 0.06549771226381396,
+      "probe_potential_range": 0.07473821853315976,
+      "identity_preserved": true
+    },
+    {
+      "case": "Classic_2000_to_20000_DirectLtZone",
+      "previous_frequency": 2000,
+      "target_frequency": 20000,
+      "branch": false,
+      "lt_membrane": false,
+      "samples": 4001,
+      "signals": 68,
+      "actual_input_ticks": [
+        200,
+        800,
+        1020,
+        1620,
+        1840,
+        2440,
+        2660,
+        3260,
+        3480
+      ],
+      "warm_input_edges": 6,
+      "maximum_signal_difference": 0,
+      "warm_potential_range": 0.0747352852052583,
+      "probe_potential_range": 0.06550155649194711,
+      "identity_preserved": true
+    },
+    {
+      "case": "Classic_2000_to_20000_LtMembrane",
+      "previous_frequency": 2000,
+      "target_frequency": 20000,
+      "branch": false,
+      "lt_membrane": true,
+      "samples": 4001,
+      "signals": 76,
+      "actual_input_ticks": [
+        200,
+        800,
+        1020,
+        1620,
+        1840,
+        2440,
+        2660,
+        3260,
+        3480
+      ],
+      "warm_input_edges": 6,
+      "maximum_signal_difference": 0,
+      "warm_potential_range": 0.0747352852052583,
+      "probe_potential_range": 0.06550155649194711,
+      "identity_preserved": true
+    }
+  ],
+  "comparison_samples": 17608,
+  "scalar_signal_pairs": 1056480,
+  "actual_loaded_byte_objects_verified": 28,
+  "maximum_signal_difference": 0,
+  "all_original_dependencies_and_scientific_runtime_unchanged": true,
+  "full_new_SDK_build_claimed": false,
+  "new_Train": false,
+  "live_learner_frequency_change_not_attested": true,
+  "multirate_not_attested": true,
+  "temporal_gallery_pending": false,
+  "scientific_verdict": null,
+  "gallery": {
+    "catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-26/Elder-frequency8-temporal-figures-independent-et31.json",
+      "sha256": "12b71805107f94996af07691adcbd8baa5dee4de344a9dacbe507524d6f92cd8",
+      "size": 2217
+    },
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/b0/b03222145a4b71bd36e26aecf1914b2a86aa4772a377669a3e38dd57de78803e",
+        "sha256": "b03222145a4b71bd36e26aecf1914b2a86aa4772a377669a3e38dd57de78803e",
+        "bytes": 7136
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/01/011f0f37c4ad54b6b4fcbff2f3c5fc0481f331d5ad65e590b5c14b1b42d112d5",
+        "sha256": "011f0f37c4ad54b6b4fcbff2f3c5fc0481f331d5ad65e590b5c14b1b42d112d5",
+        "bytes": 3612360
+      },
+      "source-result.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/91/91c8ddc9942811183fd78f5659350f7ccf28afe85e9f284077cdd8ff82a224b5",
+        "sha256": "91c8ddc9942811183fd78f5659350f7ccf28afe85e9f284077cdd8ff82a224b5",
+        "bytes": 775
+      }
+    },
+    "members": 38,
+    "reviewed_PNG": 8
+  }
+}

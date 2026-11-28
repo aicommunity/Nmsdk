@@ -1,0 +1,125 @@
+{
+  "kind": "timelearner_actual_live_windows_classic_fresh_q3",
+  "schema_version": 1,
+  "utc": "2026-11-26T11:08:40.736503+00:00",
+  "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+  "controls_catalog": {
+    "relative_path": "experiments/2026-11-26/Windows-fresh-q3-controls-independent-fg33.json",
+    "bytes": 7480,
+    "sha256": "fa96c66ad468159c7b8fdb3fa812e161702a0e8abf44d212d0c03caf9e2f57fd"
+  },
+  "controls_objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/8b/8b19f97e1ff59cf3e7f5fcbf5f4e47ef85d39b219839b9040f4b8cc242c75508",
+      "sha256": "8b19f97e1ff59cf3e7f5fcbf5f4e47ef85d39b219839b9040f4b8cc242c75508",
+      "bytes": 2551
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/da/da469638d046d86810028e437f79bc80c13fdef2f0832491d412cb6673eb8fb2",
+      "sha256": "da469638d046d86810028e437f79bc80c13fdef2f0832491d412cb6673eb8fb2",
+      "bytes": 68320
+    },
+    "source-result.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/dd/dd638e6f9bc2323f262cf9958b437c3cba5252e047f51a01ec09e82cc8a30c95",
+      "sha256": "dd638e6f9bc2323f262cf9958b437c3cba5252e047f51a01ec09e82cc8a30c95",
+      "bytes": 687
+    }
+  },
+  "controls_commit": "c659ea3acc2bfd4d725503b13a063834ba6acb2b",
+  "source_root": "d2287267563119e3d99fd5c932ca2a3a1cca5df9",
+  "SDK_source": "e6ed1b43c96e0ff69492ce19ba6106013188ca27",
+  "PulseLib": "446e17ea4e900cae63db9158f34e85d7992046ab",
+  "case_id": "classic-fresh-selection-q3-win-fg16",
+  "job_sha256": "4404473788adb0addc5d8b89004007a220a45373f253f4c52e601c64251c317f",
+  "runtime_fingerprint": "4c14d4f7cc4fdfa55b2b6971dc5b8358563dd3c3bdfa4a9dd0aa2e279a727079",
+  "topology": "Classic",
+  "normalization": "synapse_count",
+  "normalization_code": "N0",
+  "M": 4,
+  "frequency_hz": 2000,
+  "input_traversal": {
+    "policy": "classic_candidate_round_robin",
+    "candidates_per_visit": 3,
+    "maximum_seed_elements": 131072
+  },
+  "maximum_probes": 160,
+  "maximum_edits": 1280,
+  "maximum_candidates_per_input": 24,
+  "maximum_sweeps": 1,
+  "amplitude_goal": "CapturedPerInput",
+  "Train_peak": "assigned_impulse_maximum",
+  "source_cold_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+  "preflight": {
+    "job_sha256": "4404473788adb0addc5d8b89004007a220a45373f253f4c52e601c64251c317f",
+    "normalization": "N0",
+    "initial_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+    "effective_initial_model_checked": true,
+    "factor_control_synapses": 2,
+    "initial_nodes": 44,
+    "factor_control_nodes": 45,
+    "factor_control_input_indices": [
+      0
+    ],
+    "factor_control_is_a_separate_initial_state": true,
+    "full_training_audit_pending": true,
+    "scientific_verdict": null
+  },
+  "cold_start_comparison": {
+    "source": {
+      "path": "C:\\Projects\\TimeLearnerWorker\\readbacks\\classic-q3-cold-source-import-fg15\\restored\\initial-state.json",
+      "sha256": "0f86a4e4c262044e1529f8caab5bd29deb6c0c49904ec3e740b003ef08051306",
+      "size": 223854
+    },
+    "observed": {
+      "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\classic-fresh-selection-q3-win-fg16\\preflight\\native\\initial-state.json",
+      "sha256": "9464c6e64bac7a705f28efe708271eff64db128c7d488ba8edf5251f5b34cfae",
+      "size": 223854
+    },
+    "physical_graph_and_parameters_preserved": true,
+    "controller_budget_changed": false,
+    "training_started": false,
+    "scientific_verdict": null
+  },
+  "actual_preflight_memory_bytes": 4294967296,
+  "actual_Train_memory_bytes": 8589934592,
+  "maximum_processes": 64,
+  "native_wall_seconds": 39600,
+  "preflight_wall_seconds": 900,
+  "task": "TimeLearner-classic-fresh-selection-q3-win-fg16",
+  "task_instance": "{B5F2A830-8A4C-4864-9123-D2DB58A2FF61}",
+  "task_owner": {
+    "pid": 21316,
+    "executable": "C:\\Windows\\System32\\cmd.exe",
+    "creation_filetime": "134401640973014425"
+  },
+  "python_controller_owner": {
+    "pid": 13632,
+    "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+    "creation_filetime": "134401640973454968"
+  },
+  "native_Train_owner": {
+    "executable": "C:\\Projects\\TimeLearnerWorker\\runtime-cyclic-selection-sdk237-win-fc13\\NeuroModelerConsole.exe",
+    "creation_filetime": "134401642193291469",
+    "pid": 20300,
+    "job_name": "Local\\TimeLearner-1229d054-33bf-453d-b64a-cddc98940f25",
+    "runtime_fingerprint": "4c14d4f7cc4fdfa55b2b6971dc5b8358563dd3c3bdfa4a9dd0aa2e279a727079",
+    "suspended_until_limits_applied": true
+  },
+  "actual_native_Train_live": true,
+  "task_enumeration_returned_empty_while_actual_bound_owners_live": true,
+  "do_not_restart_based_on_scheduler_enumeration_alone": true,
+  "bootstrap_EOL_note": "Five scientific/control JSON files are byte-identical to Git; admission.json and launch.cmd differ only by recorded CRLF/LF normalization. Exact raw bytes retained in external primary; active controls not rewritten.",
+  "comparison_scope": "Same initial graph and algorithm declaration as current M40 q3; different compiler and host. Does not replace the M40 sequential control.",
+  "training_outcome": null,
+  "classification_result": null,
+  "full_plan_complete": false
+}

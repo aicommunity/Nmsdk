@@ -1,0 +1,95 @@
+{
+  "kind": "timelearner_actual_threshold_full_audit_dispatches",
+  "schema_version": 1,
+  "workers": {
+    "elder": {
+      "queued": true,
+      "name": "s11-long-threshold-independent-audit-elder-a1",
+      "controls": "/home/user/timelearner-refactor/requests/s11-long-threshold-independent-audit-elder-a1",
+      "controls_commit": "ad192a8f896acc12b6a3dd5162bbaba0d973d818",
+      "queue_pid": 913087,
+      "auditor_root": "c82841d8cca8e579f3a423477f3883de450cf8d1",
+      "auditor_git_blob": "cd520d3b41c07c22685306dd719658c3d2d741eb",
+      "native_must_close_first": true,
+      "audit_memory_bytes": 17179869184,
+      "audit_wall_seconds": 7200,
+      "native_budget_changed": false,
+      "scientific_verdict": null
+    },
+    "m40": {
+      "queued": true,
+      "name": "s11-long-threshold-independent-audit-m40-a1",
+      "controls": "/media/user/Data/TimeLearnerRefactor/requests/s11-long-threshold-independent-audit-m40-a1",
+      "controls_commit": "0f8ddba016517073b095ff713323bd3d6d06d66c",
+      "queue_pid": 2651553,
+      "auditor_root": "c82841d8cca8e579f3a423477f3883de450cf8d1",
+      "auditor_git_blob": "cd520d3b41c07c22685306dd719658c3d2d741eb",
+      "native_must_close_first": true,
+      "audit_memory_bytes": 17179869184,
+      "audit_wall_seconds": 7200,
+      "native_budget_changed": false,
+      "scientific_verdict": null
+    },
+    "windows": {
+      "queued": true,
+      "controls": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-long-threshold-independent-audit-a1",
+      "controls_commit": "3d3410e5f844b753b1927445038f0f479b001713",
+      "task": {
+        "scientific_verdict": null,
+        "instance": "{B60F5663-3AC5-4784-AD38-7837F78425D7}",
+        "execution_time_limit": "PT5H",
+        "task": "TimeLearner-windows-long-threshold-independent-audit-a1",
+        "engine_pid": 12968
+      },
+      "auditor_root": "c82841d8cca8e579f3a423477f3883de450cf8d1",
+      "auditor_git_blob": "cd520d3b41c07c22685306dd719658c3d2d741eb",
+      "native_must_close_first": true,
+      "native_budget_changed": false,
+      "scientific_verdict": null
+    }
+  },
+  "windows_new_attempt": {
+    "dispatched": true,
+    "name": "windows-long-threshold-independent-audit-a2",
+    "controls": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-long-threshold-independent-audit-a2",
+    "controls_commit": "34e36b6b141aceb2c61def7714910a634fd0a3dc",
+    "task": {
+      "scientific_verdict": null,
+      "instance": "{14A6D785-08CE-4827-B690-C22D747CE3D8}",
+      "execution_time_limit": "PT5H",
+      "task": "TimeLearner-windows-long-threshold-independent-audit-a2",
+      "engine_pid": 7808
+    },
+    "auditor_root": "c82841d8cca8e579f3a423477f3883de450cf8d1",
+    "auditor_git_blob": "cd520d3b41c07c22685306dd719658c3d2d741eb",
+    "audit_memory_bytes": 12884901888,
+    "all_source_checks_retained": true,
+    "native_experiment_not_repeated": true,
+    "scientific_verdict": null
+  },
+  "m40_live_observation": {
+    "controls": "/media/user/Data/TimeLearnerRefactor/requests/s11-long-threshold-independent-audit-m40-a1",
+    "kernel": {
+      "execution": "running",
+      "all_processes_closed": false,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "b9aa72e56bb699e9e0b1d11059ecda29f0a9ee74c14f08edbfb50146bd4fc17f",
+        "unit": "timelearner-450115cd-74db-4aca-a4dd-4a5ccc482670.service",
+        "invocation_id": "bd09676d8b8248d68abd46ef6507b355",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-450115cd-74db-4aca-a4dd-4a5ccc482670.service",
+        "initial_main_pid": 2651574,
+        "initial_start_ticks": "432580949",
+        "sha256": "bd5b91edc454d40ec4ff71cf0d67e17955c54e9bfe7b5c8ec4e533114a4015d6"
+      }
+    },
+    "memory": {
+      "VmHWM": "5707556 kB",
+      "VmRSS": "3135012 kB"
+    }
+  },
+  "all_source_checks_retained": true,
+  "scientific_verdict": null
+}

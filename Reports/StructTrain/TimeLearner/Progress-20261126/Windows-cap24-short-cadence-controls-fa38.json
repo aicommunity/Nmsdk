@@ -1,0 +1,95 @@
+{
+  "kind": "timelearner_cap24_short_cadence_registered_controls",
+  "schema_version": 1,
+  "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+  "catalog": {
+    "relative_path": "experiments/2026-11-26/Windows-cap24-short-cadence-controls-fa37.json",
+    "sha256": "183bc0d7405b1cd12b13ebd2034120ff3bc02817decca7b473aa995b7fbedaf5",
+    "bytes": 4010
+  },
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/db/dbbee59c57ab1dbd18d0a2353127fb73c2aa32483c7a99260be87aab483347dd",
+      "sha256": "dbbee59c57ab1dbd18d0a2353127fb73c2aa32483c7a99260be87aab483347dd",
+      "bytes": 2715
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/76/76b72f541d2bcddb29c561e288993fa71bfbac671c3d71809613f8bed3434536",
+      "sha256": "76b72f541d2bcddb29c561e288993fa71bfbac671c3d71809613f8bed3434536",
+      "bytes": 34080
+    },
+    "source-result.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/b7/b7205e0fc38ac3820e4de584d4fcb82e0696f476f0870723e481db95db58fd68",
+      "sha256": "b7205e0fc38ac3820e4de584d4fcb82e0696f476f0870723e481db95db58fd68",
+      "bytes": 5434
+    }
+  },
+  "members": 15,
+  "cases": {
+    "reset": {
+      "controls_commit": "cbf8ca649a98891d66a45cd43920da35916b7d92",
+      "controls_bundle": {
+        "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/Windows-cap24-short-cadence-controls-fa37/restored/reset/controls.bundle",
+        "sha256": "8d07bd4a962f0ccd4fca0cc907ab08f2e5e44fb4d8c71e21879880e48f48ae14",
+        "size": 14008
+      },
+      "all_six_declared_files_equal_Git_commit": true,
+      "condition_fingerprint": "100b682131b0bc5aeac9994f90bf2862f7b63713bd401fead6c14fe3a0bd5ab0",
+      "dispatch": {
+        "utc": "2026-11-26T07:45:03.757359+00:00",
+        "case": {
+          "job": "classic-cap24-cadence-short-last-reset-win-fa15",
+          "controls": "C:\\Projects\\TimeLearnerWorker\\controls\\classic-cap24-cadence-short-last-reset-win-fa15",
+          "task": {
+            "instance": "{AAFB9A9F-6EF6-497E-9D8C-932B84EE6E9C}",
+            "registered": true,
+            "task": "TimeLearner-classic-cap24-cadence-short-last-reset-win-fa15"
+          },
+          "dispatched": true
+        },
+        "predecessor_native_owners_closed": true,
+        "predecessor_task_closed": true,
+        "predecessor_terminal": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\classic-cap24-cadence-last-preserve-win-ey5\\terminal.json",
+          "sha256": "44287584b1eaa6144dac72c62e5999037581b69f33923ce5471a73d25b47a4f7",
+          "size": 5403
+        },
+        "scientific_verdict": null
+      },
+      "prepared_only": false
+    },
+    "preserve": {
+      "controls_commit": "68ed543c1934b63d629efc15188362d29792540d",
+      "controls_bundle": {
+        "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/Windows-cap24-short-cadence-controls-fa37/restored/preserve/controls.bundle",
+        "sha256": "f50a751ceec9e4c05c7ac6d633459bac12a8a443a20e10039591e5a2b058f221",
+        "size": 14049
+      },
+      "all_six_declared_files_equal_Git_commit": true,
+      "condition_fingerprint": "c719343dc944673ee1d0ce21d0c530ec86cbfe0f7f983566cd9d0ca6c102a108",
+      "dispatch": null,
+      "prepared_only": true
+    }
+  },
+  "target_position": 7,
+  "model_revision": "cefb18c0cdf799e782bc973ecdfcb13e5089eb323235115d83a56a61062ef02d",
+  "threshold": 0.026094309839601246,
+  "first_trial_reset_in_both_cases": true,
+  "whole_final_quiet_window_required_seconds": 2,
+  "carried_events_not_causally_assigned_to_single_pattern": true,
+  "new_Train": false,
+  "new_threshold": false,
+  "expected_response_counts": null,
+  "controls_only_not_scientific_outcomes": true,
+  "scientific_verdict": null,
+  "declared_expected_first_input_interval_seconds": 0.6905
+}

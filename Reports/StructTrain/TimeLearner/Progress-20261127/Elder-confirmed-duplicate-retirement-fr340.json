@@ -1,0 +1,70 @@
+{
+  "source_catalog": {
+    "path": "/mnt/nmsdk-structtrain-archive/experiments/2026-11-27/Elder-confirmed-duplicate-retirement-fr340.json",
+    "sha256": "ff08ce8f8e962194836a4fdedaeddb031eaac5c1815c5c6a2f665f72aa5f02ff",
+    "size": 2683
+  },
+  "canonical_archive_path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/Elder-confirmed-duplicate-retirement-fr340.json",
+  "catalog": {
+    "kind": "timelearner_confirmed_duplicate_retirement",
+    "schema_version": 1,
+    "objects": {
+      "validated-removal-plan.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/32/324fa9ee6206cd5668aae342f112f5e0f2f31c8023d43a9ae36b45a1a2824eb4",
+        "sha256": "324fa9ee6206cd5668aae342f112f5e0f2f31c8023d43a9ae36b45a1a2824eb4",
+        "bytes": 31268
+      },
+      "retirement.jsonl": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/59/59a15639e22fd820350706e0f935912ecefbb3f415e2e4cf53d4109ab62ddaa6",
+        "sha256": "59a15639e22fd820350706e0f935912ecefbb3f415e2e4cf53d4109ab62ddaa6",
+        "bytes": 25411
+      },
+      "summary.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/cc/cc4652084ce8702e3cb91fd44a2d5d4cc2f6b34e193f779af1a8b7aaa18dfac8",
+        "sha256": "cc4652084ce8702e3cb91fd44a2d5d4cc2f6b34e193f779af1a8b7aaa18dfac8",
+        "bytes": 971
+      },
+      "producer.py": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/ac/ac54cd2885536e2730a0a6c545a809df5f155b3d56b1caf5deccfb6af0bd2a87",
+        "sha256": "ac54cd2885536e2730a0a6c545a809df5f155b3d56b1caf5deccfb6af0bd2a87",
+        "bytes": 5811
+      }
+    },
+    "summary": {
+      "execution": "completed",
+      "removed_duplicate_files": 32,
+      "retained_model_files": 32,
+      "logical_bytes_removed": 8880988793,
+      "allocated_bytes_removed": 8881123328,
+      "free_before_bytes": 6167441408,
+      "free_after_bytes": 15048560640,
+      "all_deleted_bytes_independently_restored_before_deletion": true,
+      "no_unique_primary_deleted": true,
+      "no_hardlinks_or_symlinks_created": true,
+      "original_paths_recoverable_from_external_archive": true,
+      "source_catalog": {
+        "path": "/mnt/nmsdk-structtrain-archive/experiments/2026-11-27/Elder-duplicate-model-primary-fr333.json",
+        "sha256": "9019dfaf0d13f68a218586fd21657a10a7c2d661c7248a3775f7af71cff94880",
+        "size": 2453
+      },
+      "independent_acceptance": {
+        "path": "/mnt/nmsdk-structtrain-archive/experiments/2026-11-27/Elder-duplicate-model-readback-jump12-fr334.json",
+        "sha256": "f1e5a9f932697703dceae7f569ac8cb6add25e3005e0d8d63e12f755f7d251a7",
+        "size": 1822
+      },
+      "scientific_verdict": null
+    }
+  }
+}

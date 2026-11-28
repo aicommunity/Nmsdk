@@ -570,10 +570,51 @@ void RepeatedPrivateImageRestRoundtrip(unsigned int frequency)
             "native-archive-fixture-v1");
         ASSERT_TRUE(imported) << "cycle=" << cycle;
         const auto again = NmsdkTools::ExportModelArchive(imported, Metadata());
+        if(again != original)
+        {
+            // Preserve the actual production archives before reporting the
+            // comparison failure. A shared-storage/order-dependent difference
+            // must be diagnosed from its fields, without weakening equality.
+            if(const char* output = std::getenv("TIMELEARNER_EXECUTION_OUTPUT"))
+            {
+                std::filesystem::create_directories(output);
+                const auto prefix = QString::fromLocal8Bit(output) + "/image-rest-" +
+                    QString::number(frequency) + "-cycle-" + QString::number(cycle);
+                Write(prefix + "-before.json", original);
+                Write(prefix + "-after.json", again);
+            }
+        }
         EXPECT_EQ(again["class_definitions"], original["class_definitions"])
             << "private image rest state must survive native import and pool reuse; cycle=" << cycle;
         EXPECT_EQ(again, original) << "cycle=" << cycle;
         EXPECT_TRUE(NmsdkTools::VerifyModelIdentity(before, imported)["match"].toBool());
+        // Keep the raw archive comparison above: a disconnected input shape
+        // difference is evidence to diagnose, not permission to discard state.
+        // Independently check whether that difference changes a native probe.
+        QJsonArray sourceInputs, sourceSoma, sourceClock;
+        QJsonArray importedInputs, importedSoma, importedClock;
+        const auto sourceResponse = Waveform(source, frequency, nullptr,
+            &sourceInputs, &sourceSoma, &sourceClock);
+        const auto importedResponse = Waveform(imported, frequency, nullptr,
+            &importedInputs, &importedSoma, &importedClock);
+        EXPECT_EQ(importedInputs, sourceInputs) << "cycle=" << cycle;
+        EXPECT_EQ(importedClock, sourceClock) << "cycle=" << cycle;
+        EXPECT_EQ(importedResponse, sourceResponse) << "cycle=" << cycle;
+        EXPECT_EQ(importedSoma, sourceSoma) << "cycle=" << cycle;
+        double peak = 0.;
+        for(const auto& value : sourceSoma) peak = std::max(peak, std::abs(value.toDouble()));
+        EXPECT_GT(peak, 0.) << "silent fixture cannot confirm response preservation";
+        if(const char* output = std::getenv("TIMELEARNER_EXECUTION_OUTPUT"))
+        {
+            std::filesystem::create_directories(output);
+            Write(QString::fromLocal8Bit(output) + "/image-rest-response-" +
+                QString::number(frequency) + "-cycle-" + QString::number(cycle) + ".json",
+                QJsonObject{{"frequency_hz", int(frequency)}, {"cycle", cycle},
+                    {"source_inputs", sourceInputs}, {"imported_inputs", importedInputs},
+                    {"source_clock", sourceClock}, {"imported_clock", importedClock},
+                    {"source_channel_response", sourceResponse}, {"imported_channel_response", importedResponse},
+                    {"source_soma_response", sourceSoma}, {"imported_soma_response", importedSoma}});
+        }
         core.storage->ReturnObject(imported);
     }
     EXPECT_EQ(NmsdkTools::IdentifyModel(source), before);
@@ -588,5 +629,79 @@ TEST(NativeImageRestSnapshot, RepeatedArchiveAndPoolReuseAt2000)
 TEST(NativeImageRestSnapshot, RepeatedArchiveAndPoolReuseAt20000)
 {
     RepeatedPrivateImageRestRoundtrip(20000);
+}
+
+QJsonObject RewriteFeedbackBuffer(QJsonObject snapshot,const std::vector<std::string>& componentPath,
+                                 const char* rows,const char* cols,const char* value)
+{
+    USerStorageXML xml;
+    if(!xml.Load(snapshot["native_xml"].toString().toStdString(),"TimeLearnerNativeGraph") ||
+       !xml.SelectNode(snapshot["component_name"].toString().toStdString()))
+        throw std::runtime_error("fixture feedback XML root missing");
+    for(const auto& name:componentPath)
+        if(!xml.SelectNode(name))throw std::runtime_error("fixture feedback component missing");
+    if(!xml.SelectNode("State") || !xml.SelectNode("InputFeedbackSignal") ||
+       !xml.SetNodeAttribute("Rows",rows) || !xml.SetNodeAttribute("Cols",cols) || !xml.SetNodeText(value))
+        throw std::runtime_error("fixture feedback buffer missing");
+    xml.SelectRoot();std::string bytes;
+    if(!xml.Save(bytes))throw std::runtime_error("fixture feedback XML Save failed");
+    snapshot["native_xml"]=QString::fromStdString(bytes);
+    snapshot["native_xml_sha256"]=QString::fromLatin1(QCryptographicHash::hash(
+        QByteArray::fromStdString(bytes),QCryptographicHash::Sha256).toHex());
+    return snapshot;
+}
+
+QJsonObject WithPrivateFeedbackBuffer(QJsonObject archive,const char* rows,const char* cols,const char* value)
+{
+    auto definitions=archive["class_definitions"].toArray();bool changed=false;
+    for(int i=0;i<definitions.size();++i)
+    {
+        auto definition=definitions[i].toObject();
+        if(definition["kind"]!=QJsonValue("derived_image") ||
+           definition["base_class"]!=QJsonValue("NPMembraneBio"))continue;
+        definition["snapshot"]=RewriteFeedbackBuffer(definition["snapshot"].toObject(),{},rows,cols,value);
+        definitions[i]=definition;changed=true;break;
+    }
+    if(!changed)throw std::runtime_error("fixture native membrane image missing");
+    archive["class_definitions"]=definitions;Seal(archive);return archive;
+}
+
+TEST(NativeImageRestSnapshot, LegacyNeutralPrivateFeedbackCacheHasCanonicalDefinition)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();auto source=Prepared(2000,true,true);
+    const auto identity=NmsdkTools::IdentifyModel(source);
+    const auto original=NmsdkTools::ExportModelArchive(source,Metadata());
+    const auto empty=WithPrivateFeedbackBuffer(original,"0","0","");
+    const auto legacy=WithPrivateFeedbackBuffer(original,"1","1","0");
+    EXPECT_EQ(original,empty) << "new class image definitions must already use the canonical empty cache";
+    EXPECT_NE(legacy,empty);
+    EXPECT_TRUE(NmsdkTools::SamePortableModelArchive(empty,legacy));
+    EXPECT_TRUE(NmsdkTools::SamePortableModelArchive(legacy,empty));
+    // Comparison leaves both signed documents and the live model untouched.
+    EXPECT_NE(legacy,empty);
+    EXPECT_EQ(NmsdkTools::IdentifyModel(source),identity);
+    core.storage->ReturnObject(source);
+}
+
+TEST(NativeImageRestSnapshot, NonNeutralAndWiderPrivateFeedbackBuffersRemainDistinct)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();auto source=Prepared(2000,true,true);
+    const auto original=NmsdkTools::ExportModelArchive(source,Metadata());
+    EXPECT_FALSE(NmsdkTools::SamePortableModelArchive(original,WithPrivateFeedbackBuffer(original,"1","1","0.5")));
+    EXPECT_FALSE(NmsdkTools::SamePortableModelArchive(original,WithPrivateFeedbackBuffer(original,"1","2","0 0")));
+    auto legacy=WithPrivateFeedbackBuffer(original,"1","1","0");
+    legacy["sha256"]="unverified";
+    EXPECT_FALSE(NmsdkTools::SamePortableModelArchive(original,legacy));
+    core.storage->ReturnObject(source);
+}
+
+TEST(NativeImageRestSnapshot, GraphInputStateIsNotAClassImageCache)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();auto source=Prepared(2000,true,true);
+    const auto original=NmsdkTools::ExportModelArchive(source,Metadata());auto empty=original,one=original;
+    empty["graph"]=RewriteFeedbackBuffer(original["graph"].toObject(),{"Components","Soma1"},"0","0","");Seal(empty);
+    one["graph"]=RewriteFeedbackBuffer(original["graph"].toObject(),{"Components","Soma1"},"1","1","0");Seal(one);
+    EXPECT_FALSE(NmsdkTools::SamePortableModelArchive(empty,one));
+    core.storage->ReturnObject(source);
 }
 }

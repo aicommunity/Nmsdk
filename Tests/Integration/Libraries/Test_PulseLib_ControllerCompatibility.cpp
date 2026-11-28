@@ -160,6 +160,16 @@ TEST_P(NativeControllerCompatibility, NativeBurstObservationsAndDecisions)
     {
         QProcess child; auto environment=QProcessEnvironment::systemEnvironment();
         environment.insert("TIMELEARNER_COMPAT_CHILD","1"); child.setProcessEnvironment(environment);
+        // Each fresh process reserves its own native EventsLog directory.
+        // Sharing the parent's execution-output makes the second case fail
+        // before any model is initialized, even though its graph is valid.
+        const auto output=QString::fromLocal8Bit(std::getenv("TIMELEARNER_COMPAT_OUTPUT"));
+        ASSERT_TRUE(QDir().mkpath(output));
+        const auto childOutput=output+"/"+name+"-child";
+        ASSERT_TRUE(QDir().mkdir(childOutput));
+        environment.insert("TIMELEARNER_EXECUTION_OUTPUT",childOutput);
+        environment.insert("TIMELEARNER_COMPOSITE_OUTPUT",childOutput+"/native-composite");
+        child.setProcessEnvironment(environment);
 #if defined(_WIN32)
         child.setProgram(QFileInfo("Test_PulseLib_StorageComponents.exe").absoluteFilePath());
 #else

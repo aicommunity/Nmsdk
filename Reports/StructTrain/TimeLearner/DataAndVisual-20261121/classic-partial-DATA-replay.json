@@ -1,0 +1,155 @@
+{
+  "original_failure": {
+    "controls": "/home/user/timelearner-refactor/requests/s11-classic-recognition-data-replay-elder-a1",
+    "outer-result.json": {
+      "kind": "timelearner_process_result",
+      "execution": "process_error",
+      "reason": "nonzero_exit_or_missing_terminal_status",
+      "returncode": 1,
+      "wall_seconds": 1204.897766849026,
+      "all_processes_closed": true
+    },
+    "worker-exception.json": {
+      "reason": "data_replay_pipeline_invalid",
+      "traceback": "Traceback (most recent call last):\n  File \"/home/user/timelearner-refactor/requests/s11-classic-recognition-data-replay-elder-a1/worker.py\", line 8, in <module>\n    inputs=Path(d['inputs']);require(file_record(inputs/'job.json')['sha256']==d['job_file_sha256'] and file_record(inputs/'model.json')['sha256']==d['source_file_sha256'],'data_replay_inputs_changed');policy=dict(kind='timelearner_native_process_policy',schema_version=1,backend='bound_cgroup',memory_bytes=d['native_memory_bytes'],tasks=128,cooperative_capture=True);result=run_job('physical-model-evaluate',inputs/'job.json',inputs/'model.json',c/'runtime.json',Path(d['output']),d['maximum_native_wall_seconds'],process_policy=policy);require(result['execution']=='completed' and result['validity']=='valid','data_replay_pipeline_invalid');metrics=result['analysis']['metrics'];require(metrics['model_revision']==d['source_model_revision'] and metrics['data_only'] and len(metrics['trials'])==8,'data_replay_scope_changed');native=Path(d['output'])/'native';original=Path(d['source_original']);rows=[]\n  File \"/home/user/timelearner-refactor/source-diagnostic-memory-a1/Scripts/StructTrain/TimeLearner/native_evidence.py\", line 28, in require\n    raise EvidenceError(reason)\nScripts.StructTrain.TimeLearner.native_evidence.EvidenceError: data_replay_pipeline_invalid\n"
+    },
+    "supervisor-exception.json": {
+      "reason": "data_replay_controller_incomplete",
+      "traceback": "Traceback (most recent call last):\n  File \"/home/user/timelearner-refactor/requests/s11-classic-recognition-data-replay-elder-a1/supervisor.py\", line 18, in <module>\n    require(result['execution']=='completed' and result['all_processes_closed'],'data_replay_controller_incomplete');require((c/'comparison.json').is_file(),'data_replay_comparison_missing')\n  File \"/home/user/timelearner-refactor/source-diagnostic-memory-a1/Scripts/StructTrain/TimeLearner/native_evidence.py\", line 28, in require\n    raise EvidenceError(reason)\nScripts.StructTrain.TimeLearner.native_evidence.EvidenceError: data_replay_controller_incomplete\n"
+    },
+    "kernel": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "ef14e8a063b6266e3beefba05a33e14a75de9439539412481de47ddc46027361",
+        "unit": "timelearner-f682dbef-e2dd-483f-ace1-643986fe5350.service",
+        "invocation_id": "6d1d45d20d73469ab914178b89e1ae22",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-f682dbef-e2dd-483f-ace1-643986fe5350.service",
+        "initial_main_pid": 948581,
+        "initial_start_ticks": "482264618",
+        "sha256": "0c635f5e5f66a011c42aa398a5c984fb0b718fb4c2e1e598ff2c5785c3277ae3"
+      }
+    }
+  },
+  "native_closure": {
+    "capacity": {
+      "disk_bytes": 15032385536,
+      "memory_bytes": 25769803776,
+      "slots": 1
+    },
+    "reserved": {
+      "disk_bytes": 0,
+      "memory_bytes": 0,
+      "slots": 0
+    },
+    "held": [],
+    "native_trial_packets": 6,
+    "run-manifest.json": {
+      "kind": "timelearner_native_pipeline_run_manifest",
+      "execution": "timeout",
+      "validity": "unverified_execution"
+    },
+    "process/result.json": {
+      "kind": "timelearner_process_result",
+      "execution": "timeout",
+      "reason": "wall_budget_exhausted",
+      "returncode": null,
+      "wall_seconds": 1200.2372783599421,
+      "runtime_provenance": "incomplete_loaded_files",
+      "all_processes_closed": true
+    },
+    "child_kernel": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "4e2caa3465ad44aa491a52dd442f151ae2c16914199dc506b94fddf93d9324c5",
+        "unit": "timelearner-69360177-f562-48c0-9c07-8604bac0f97c.service",
+        "invocation_id": "0117c352750b441189e605c47a6139f9",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-69360177-f562-48c0-9c07-8604bac0f97c.service",
+        "initial_main_pid": 948784,
+        "initial_start_ticks": "482265050",
+        "sha256": "111caf2900f424f1172aa526371afbd6444bf9bba45e15b9e2194b3f55dee529"
+      }
+    }
+  },
+  "partial_waveform_comparison": {
+    "kind": "partial_actual_DATA_replay_comparison",
+    "schema_version": 1,
+    "observed_trials": 6,
+    "expected_trials": 8,
+    "rows": [
+      {
+        "file": "trial-0.json",
+        "samples": 4001,
+        "largest_sample_difference": 0.0,
+        "spike_count": 1,
+        "bytes": 1823939,
+        "sha256": "029991828735a0ed7ca0f1af0b5899fd526d0017b0e45e23b5209ef796a14918"
+      },
+      {
+        "file": "trial-1.json",
+        "samples": 4001,
+        "largest_sample_difference": 0.0,
+        "spike_count": 0,
+        "bytes": 1753093,
+        "sha256": "4ac0d87c8e89d7ed9c3d8428ba00431bfac47faa9d2a899859f5132ae2572813"
+      },
+      {
+        "file": "trial-2.json",
+        "samples": 4001,
+        "largest_sample_difference": 0.0,
+        "spike_count": 0,
+        "bytes": 1753049,
+        "sha256": "9818ef228f41d1258faa7c1cf2963500ca9b23a2b66637349b7ba867da9ca85b"
+      },
+      {
+        "file": "trial-3.json",
+        "samples": 4001,
+        "largest_sample_difference": 0.0,
+        "spike_count": 0,
+        "bytes": 1752727,
+        "sha256": "1f0e8d60759eab1d26de9f7e761be6788ba07f369c216935474b8f2fddeb84fd"
+      },
+      {
+        "file": "trial-4.json",
+        "samples": 4001,
+        "largest_sample_difference": 0.0,
+        "spike_count": 1,
+        "bytes": 1821147,
+        "sha256": "b5c248bbcd3d32a666237164a4c125ba883bee625c5f2de4dce8cefba5012b2f"
+      },
+      {
+        "file": "trial-5.json",
+        "samples": 4001,
+        "largest_sample_difference": 0.0,
+        "spike_count": 0,
+        "bytes": 1757162,
+        "sha256": "44c3930b41a90e9aeb3c94f94d6f6bd4e4889b53344ae325d6a95c2520710f27"
+      }
+    ],
+    "all_eight_verified": false,
+    "original_attempt_timeout_retained": true,
+    "scientific_verdict": null
+  },
+  "retry": {
+    "started": true,
+    "name": "s11-classic-recognition-data-replay-elder-a2",
+    "controls_commit": "0d94831dfe6977208774ea16ec80a46f91fe87c0",
+    "supervisor_pid": 1058748,
+    "native_trials": 8,
+    "native_maximum_wall_seconds": 3600,
+    "outer_maximum_wall_seconds": 4800,
+    "source_model_revision": "ec82f91aaf806a562fcfcc29501eeabbfa0ccd0d2a93bccaf9a7190681c5cda3",
+    "source_model_data_sha256": "6e887ae2c4be6dbf6d4df0a8707766728bf8b669e5dc2406e57433ade147f450",
+    "original_timeout_retained": true,
+    "model_or_threshold_changed": false,
+    "scientific_verdict": null
+  },
+  "scientific_verdict": null
+}

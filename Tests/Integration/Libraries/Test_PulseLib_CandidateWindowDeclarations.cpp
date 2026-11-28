@@ -159,12 +159,90 @@ TEST(CandidateWindowCold7,ExplicitRoundtripBuildsProtocol5WithOriginalReferenceW
     EXPECT_EQ(plan.protocol.candidateWindowMeasurement->candidateWindowPolicy,*c.candidateWindowPolicy);
     EXPECT_EQ(plan.search.tolerances.sync,.02);EXPECT_EQ(plan.search.tolerances.amplitudeAbsolute,1e-5);EXPECT_EQ(plan.protocol.minimumAmplitude,1e-6);
 }
+
+TEST(InputTraversalNativeDeclarations,ColdScalarCompositeCandidateAndTerminalEnvelopesKeepThePolicy) {
+    for(const auto normalization:{Normalization::SynapseCount,Normalization::TipResistance})
+    for(const int protocol:{3,4,5})
+    for(const bool capacitance:{false,true})
+    for(const bool terminal:{false,true}) {
+        SCOPED_TRACE(::testing::Message()<<"normalization="<<static_cast<int>(normalization)
+            <<" protocol="<<protocol<<" capacitance="<<capacitance<<" terminal="<<terminal);
+        auto c=Cold7Declaration();c.model.normalization=c.search.normalization=normalization;
+        c.model.editPolicy.normalization=normalization;
+        c.search.inputTraversal=InputTraversalPolicy::ClassicCandidateRoundRobin;
+        c.search.candidatesPerInputVisit=3;c.search.maximumTraversalSeedElements=2048;
+        if(protocol==3){c.candidateWindowPolicy.reset();c.composite.reset();}
+        if(protocol==4){c.candidateWindowPolicy.reset();c.composite->schemaVersion=1;}
+        if(capacitance){c.recordCapacitanceHistory=true;c.capacitanceMaximumRelativeChange=.3;
+            c.search.capacitanceSearch=CapacitanceSearchPolicy{.8,1.2,0,3,16};}
+        if(terminal)c.terminalSelection=NativeTerminalSelectionPolicy{};
+        const auto wire=EncodeConfiguredNativeTraining(c);const auto restored=DecodeConfiguredNativeTraining(wire);
+        EXPECT_EQ(EncodeConfiguredNativeTraining(restored),wire);
+        EXPECT_EQ(restored.search.inputTraversal,c.search.inputTraversal);
+        EXPECT_EQ(restored.search.candidatesPerInputVisit,3u);EXPECT_EQ(restored.search.maximumTraversalSeedElements,2048u);
+        EXPECT_TRUE(wire["search"].toObject().contains("input_traversal"));
+        EXPECT_EQ(MakeConfiguredNativeTrainingPlan(restored).protocol.schemaVersion,std::size_t(protocol));
+    }
+}
+
+TEST(InputTraversalNativeDeclarations,RuntimePlansRetainTheirOwnWarmQuantumAndRecoveryEnvelope) {
+    for(const int protocol:{4,5})
+    for(const bool recovery:{false,true}) {
+        if(protocol==4 && recovery)continue;
+        auto c=Cold7Declaration();c.search.inputTraversal=InputTraversalPolicy::ClassicCandidateRoundRobin;
+        c.search.candidatesPerInputVisit=3;
+        if(protocol==4){c.candidateWindowPolicy.reset();c.composite->schemaVersion=1;}
+        if(recovery){c.search.invalidMeasurementRecovery=InvalidMeasurementRecovery::AdvanceRejectedCandidateWindow;
+            c.search.maximumInvalidObservations=1;}
+        auto plan=MakeConfiguredNativeTrainingPlan(c);plan.search.initialModelRevision=std::string(64,'b');plan.search.initialModelEpoch=7;
+        plan.search.candidatesPerInputVisit=5;plan.search.maximumTraversalSeedElements=4096;
+        const auto wire=protocol==4?EncodeCompositeRuntimePlan(plan):EncodeCandidateWindowRuntimePlan(plan);
+        const auto restored=protocol==4?DecodeCompositeRuntimePlan(wire,plan.protocol):DecodeCandidateWindowRuntimePlan(wire,plan.protocol);
+        EXPECT_EQ(restored.search.inputTraversal,InputTraversalPolicy::ClassicCandidateRoundRobin);
+        EXPECT_EQ(restored.search.candidatesPerInputVisit,5u);EXPECT_EQ(restored.search.maximumTraversalSeedElements,4096u);
+        EXPECT_EQ(protocol==4?EncodeCompositeRuntimePlan(restored):EncodeCandidateWindowRuntimePlan(restored),wire);
+        EXPECT_EQ(restored.search.invalidMeasurementRecovery,plan.search.invalidMeasurementRecovery);
+    }
+}
+
+TEST(InputTraversalNativeDeclarations,BranchUnknownVersionAndInsufficientSeedBudgetCannotBeNormalizedAway) {
+    auto c=Cold7Declaration();c.search.inputTraversal=InputTraversalPolicy::ClassicCandidateRoundRobin;
+    c.search.candidatesPerInputVisit=3;const auto original=EncodeConfiguredNativeTraining(c);
+    auto inconsistent=c;inconsistent.model.editPolicy.normalization=Normalization::TipResistance;
+    EXPECT_THROW(EncodeConfiguredNativeTraining(inconsistent),std::invalid_argument);
+    c.model.branch=true;EXPECT_THROW(EncodeConfiguredNativeTraining(c),std::invalid_argument);
+    for(const int defect:{0,1,2,3}) {
+        auto wire=original;auto search=wire["search"].toObject();auto traversal=search["input_traversal"].toObject();
+        if(defect==0)traversal["schema_version"]=2;
+        if(defect==1)traversal["candidates_per_visit"]=33;
+        if(defect==2)traversal["maximum_seed_elements"]=1;
+        if(defect==3)traversal["maximum_seed_elements"]=true;
+        search["input_traversal"]=traversal;wire["search"]=search;
+        EXPECT_THROW(DecodeConfiguredNativeTraining(wire),std::invalid_argument);
+    }
+}
 TEST(CandidateWindowCold7,EveryRepeatAndCapacitanceBaseKeepsItsOwnDeclaration) {
     for(int base=1;base<=4;++base){auto c=Cold7Declaration();if(base>=2)c.search.n0CandidateRepeats=2;
         if(base>=3){c.recordCapacitanceHistory=true;c.capacitanceMaximumRelativeChange=.2;}
         if(base==4)c.search.capacitanceSearch=CapacitanceSearchPolicy{};
         const auto wire=EncodeConfiguredNativeTraining(c);EXPECT_EQ(wire["base_schema_version"],QJsonValue(base));
         EXPECT_EQ(EncodeConfiguredNativeTraining(DecodeConfiguredNativeTraining(wire)),wire);}
+}
+TEST(CandidateWindowCold7,N0LengthNeighborhoodSurvivesEveryBaseAndLegacyOmitsIt) {
+    for(int base=1;base<=4;++base) {
+        auto c=Cold7Declaration();if(base>=2)c.search.n0CandidateRepeats=2;
+        if(base>=3){c.recordCapacitanceHistory=true;c.capacitanceMaximumRelativeChange=.2;}
+        if(base==4)c.search.capacitanceSearch=CapacitanceSearchPolicy{};
+        auto wire=EncodeConfiguredNativeTraining(c);
+        EXPECT_FALSE(wire["search"].toObject().contains("maximum_n0_length_proposals"));
+        c.search.maximumN0LengthProposals=4;wire=EncodeConfiguredNativeTraining(c);
+        EXPECT_EQ(DecodeConfiguredNativeTraining(wire).search.maximumN0LengthProposals,4u);
+        EXPECT_EQ(EncodeConfiguredNativeTraining(DecodeConfiguredNativeTraining(wire)),wire);
+        for(const QJsonValue bad:{QJsonValue(0),QJsonValue(true),QJsonValue(1.5),QJsonValue(33)}) {
+            auto damaged=wire;auto search=wire["search"].toObject();search["maximum_n0_length_proposals"]=bad;
+            damaged["search"]=search;EXPECT_THROW(DecodeConfiguredNativeTraining(damaged),std::invalid_argument);
+        }
+    }
 }
 TEST(CandidateWindowCold7,Cold6RejectsCandidatePolicyInsteadOfPromotingVersion) {
     auto wire=EncodeConfiguredNativeTraining(Cold7Declaration());wire["schema_version"]=6;
@@ -284,6 +362,16 @@ TEST(CandidateWindowRuntime2,RoundtripPreservesBoundRuntimeWithoutColdConfigurat
     EXPECT_EQ(decoded.search.initialModelRevision,plan.search.initialModelRevision);EXPECT_EQ(decoded.search.initialModelEpoch,7u);
     EXPECT_FALSE(decoded.observationSink);EXPECT_FALSE(decoded.compositeSink);EXPECT_FALSE(decoded.beforeCompositeConsume);
     EXPECT_TRUE(decoded.inputWindows.empty());
+}
+TEST(CandidateWindowRuntime2,N0LengthPolicyRoundtripsWithoutAColdConfiguration) {
+    auto plan=Runtime2Declaration();plan.search.maximumN0LengthProposals=4;
+    auto wire=EncodeCandidateWindowRuntimePlan(plan);
+    EXPECT_EQ(DecodeCandidateWindowRuntimePlan(wire,plan.protocol).search.maximumN0LengthProposals,4u);
+    EXPECT_EQ(EncodeCandidateWindowRuntimePlan(DecodeCandidateWindowRuntimePlan(wire,plan.protocol)),wire);
+    auto search=wire["search"].toObject();search["maximum_n0_length_proposals"]=0;wire["search"]=search;
+    EXPECT_THROW(DecodeCandidateWindowRuntimePlan(wire,plan.protocol),std::invalid_argument);
+    plan.search.normalization=Normalization::TipResistance;
+    EXPECT_THROW(EncodeCandidateWindowRuntimePlan(plan),std::invalid_argument);
 }
 TEST(CandidateWindowRuntime2,SerializedNumbersOwnStorageAfterAllTemporaryDocumentsAreDestroyed) {
     const auto plan=Runtime2Declaration();QByteArray bytes;

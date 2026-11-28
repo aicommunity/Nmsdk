@@ -1,13 +1,35 @@
 > Политика хранения пересмотрена 14.11.2026: primary bundles и полные галереи
 > сохраняются во внешнем общем архиве M40. В Git — metadata и проверенные
 > `*.archive.json` ссылки. [Доступ и восстановление](../../../Docs/StructTrain/TimeLearner/ExternalExperimentArchive.ru.md).
-> Замена истории ещё выполняется и не означает научную приёмку.
+> Завершение коррекции истории само по себе не означает научную приёмку.
 
 # Поддерживаемый пакет TimeLearner
 
 Перед выбором протокола: [принятые возможности и отдельно проверяемый кандидат](../../../Docs/StructTrain/TimeLearner/ControllerCapabilities.ru.md).
 
 Запуск из корневого репозитория: `python -m Scripts.StructTrain.TimeLearner`.
+
+Для большого уже проверенного JSON-пакета доступен отдельный транспорт
+`python -m Scripts.StructTrain.TimeLearner.json_transport SOURCE DESTINATION
+--expected-bytes BYTES --expected-sha256 RAW_SHA --manifest MANIFEST`.
+Размер и raw SHA берутся из исходной записи артефакта. Удаляются только
+пробелы JSON вне строк; содержимое строк, числовые токены, параметры и вся
+история сохраняются. Исходный файл не изменяется. Это не валидатор модели:
+перед Test обязательны штатное строгое чтение, проверка semantic package SHA
+и связи с исходным исполнением. Новый файл и `.pending` не перезаписываются;
+после ошибки неполный `.pending` не является опубликованным пакетом.
+
+Для записанного `physical-model-evaluate` предусмотрен тот же построитель
+графиков: `report EVALUATION.json --format physical-model-evaluation
+--model MODEL.json --output NEW_DIRECTORY`. Он использует строгий DATA-scorer,
+сохраняет исходные наблюдения и модель, строит все пары паттерн/сома, общую
+временную серию и фактический LT-потенциал с входными импульсами. Обзоры и
+увеличения не прореживают отсчёты. `report RUN_MANIFEST --format pipeline-run`
+также различает эту операцию. DATA-отчёт не подтверждает исходное обучение,
+импорт модели, калибровку либо независимость Test. Полная галерея хранится
+в кэше сервера; в Git — текст и проверенные ссылки на общий архив.
+Новый адаптер от20.11.2026 требует отдельной серверной приёмки на настоящих
+Console-данных; изменение Python не обновляет runtime выполняющихся заданий.
 
 Для визуального разбора сохранённого полного Train-пакета предназначен модуль
 `python -m Scripts.StructTrain.TimeLearner.composite_training_temporal NATIVE OUTPUT
@@ -20,8 +42,8 @@
 все отсчёты сохраняются. Полоса окна — только прогноз, она не обозначает найденный
 пик. Отказы selection и исходный outcome остаются в manifest. Графики не создают
 сертификат, не заменяют frozen Test и требуют визуальной проверки. Полный набор
-хранить кэшем M40, в Git — выбранные небольшие рисунки и проверенные ссылки на primary data
-в общем архиве M40.
+хранить кэшем M40, в Git — текстовое описание и проверенные ссылки на primary data
+и рисунки в общем архиве M40.
 
 `python -m Scripts.StructTrain.TimeLearner.candidate_window_diagnostic_replay
 NATIVE OUTPUT.json --groups 12 14 18` независимо пересчитывает геометрию исходного
@@ -579,3 +601,12 @@ candidate anchor либо final verification. Исправлен exact expected 
 `analyze INPUTS.json --format legacy-statistic-traces --output NEW.json` — строгий описательный адаптер числовых StatisticLog; явные layout/width/hash, без trial или training PASS. [Схема и область](../../../Docs/StructTrain/TimeLearner/LegacyStatisticTraceReader.ru.md). Elder12/12 и M40 12/12 приняты; это не сертификат обучения.
 
 Managed pipeline schema2 добавляет вычисляемый ConditionSpec и journal binding; schema1 сохраняет historical operational semantics. [Схема, границы и pending приёмка](../../../Docs/StructTrain/TimeLearner/PipelineConditionBinding.ru.md).
+
+`python -m Scripts.StructTrain.TimeLearner.linux_physical_recognition_sequence --supervise REQUEST.json`
+ожидает точного владельца полного аудита Linux Train и затем выполняет
+штатный импорт DATA, восемь baseline-реакций, предложение одного порога
+и реальный пороговый повтор. Новый Train не запускается. Все четыре фазы
+имеют отдельные ограниченные группы владельца и нативного потомка;
+используются production native pipeline, ConditionSpec и первичные аудиторы.
+Это Same-Matrix diagnostic, не независимый Test и не сертификат сходимости.
+[Точная постановка и незавершённая приёмка](../../../Docs/StructTrain/TimeLearner/ClassicRoundRobinRecognitionContinuation-20261125.ru.md).

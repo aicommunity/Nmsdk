@@ -1,0 +1,260 @@
+{
+  "readback": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/17/1723aee902de635ec1462ed8cc614a4b1ce316eba12bdbdebe4d42845f49dee1",
+    "sha256": "1723aee902de635ec1462ed8cc614a4b1ce316eba12bdbdebe4d42845f49dee1",
+    "bytes": 7550
+  },
+  "kind": "timelearner_Classic_heldout_recorded_soma_and_LT_readback",
+  "schema_version": 1,
+  "observed_utc": "2026-11-24T17:36:17.988454+00:00",
+  "model_revision": "eee84b64692115508ccd8ca7e69b29477d29198b9b0758e69f16a781f4093367",
+  "threshold": 0.02620777717403984,
+  "source_execution": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/Classic-policy4-heldout-restored-dl13/restored/jobs/classic-policy4-data3-matched-duration-heldout-dk19/native/execution.json",
+    "sha256": "53fd4a819531d5687f344b192b5a2f4605d0fce8f1b1d6b177228f5ffaa11529",
+    "size": 3346
+  },
+  "source_audit": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/Classic-policy4-heldout-restored-dl13/restored/jobs/classic-policy4-data3-matched-duration-heldout-dk19/audit.json",
+    "sha256": "02adb5dc83375ce5dd6e806b27b8355f326205aa14ae5bd4e644f79ea59cdb52",
+    "size": 6888
+  },
+  "effective_LT_node": {
+    "aliases": [],
+    "child_order": [],
+    "class": "TLNativeFast3F2000_LTZone",
+    "frequency_hz": "2000",
+    "parameters": {
+      "Activity": {
+        "binding": false,
+        "data": {
+          "type": "boolean",
+          "value": true
+        },
+        "mask": "257"
+      },
+      "AvgInterval": {
+        "binding": false,
+        "data": {
+          "type": "binary64",
+          "value": "3ff0000000000000"
+        },
+        "mask": "257"
+      },
+      "MaxCalculationDuration": {
+        "binding": false,
+        "data": {
+          "type": "signed_integer",
+          "value": "-1"
+        },
+        "mask": "257"
+      },
+      "NumChannelsInGroup": {
+        "binding": false,
+        "data": {
+          "type": "signed_integer",
+          "value": "2"
+        },
+        "mask": "257"
+      },
+      "PulseAmplitude": {
+        "binding": false,
+        "data": {
+          "type": "binary64",
+          "value": "3ff0000000000000"
+        },
+        "mask": "257"
+      },
+      "PulseLength": {
+        "binding": false,
+        "data": {
+          "type": "binary64",
+          "value": "3f50624dd2f1a9fc"
+        },
+        "mask": "257"
+      },
+      "Threshold": {
+        "binding": false,
+        "data": {
+          "type": "binary64",
+          "value": "3f9ad636277413b4"
+        },
+        "mask": "257"
+      },
+      "ThresholdOff": {
+        "binding": false,
+        "data": {
+          "type": "binary64",
+          "value": "0000000000000000"
+        },
+        "mask": "257"
+      },
+      "TimeStep": {
+        "binding": false,
+        "data": {
+          "type": "unsigned_integer",
+          "value": "2000"
+        },
+        "mask": "513"
+      },
+      "UseAveragePotential": {
+        "binding": false,
+        "data": {
+          "type": "boolean",
+          "value": true
+        },
+        "mask": "257"
+      }
+    },
+    "path": "$.LTZone"
+  },
+  "sample_count": 32008,
+  "maximum_LT_minus_mean_difference": 2.220446049250313e-16,
+  "rows": [
+    {
+      "trial_id": "classic-policy4-data3-matched-duration-heldout-dk19/heldout-M4-ticks-447-311-202",
+      "sample_id": "heldout-M4-ticks-447-311-202",
+      "label": "foil",
+      "classification": "TN",
+      "soma_maxima": [
+        0.025922477467857696,
+        0.025047089065589168,
+        0.026776213813405003,
+        0.026776213813405003
+      ],
+      "actual_recorded_LT_maximum": 0.019974172079057245,
+      "LT_minus_mean_maximum_absolute_difference": 0.0,
+      "samples": 4001,
+      "spike_count": 0,
+      "spike_times": []
+    },
+    {
+      "trial_id": "classic-policy4-data3-matched-duration-heldout-dk19/heldout-M4-ticks-347-255-358",
+      "sample_id": "heldout-M4-ticks-347-255-358",
+      "label": "foil",
+      "classification": "TN",
+      "soma_maxima": [
+        0.025345365167178113,
+        0.024765611245341934,
+        0.026776213813405003,
+        0.026776213813405003
+      ],
+      "actual_recorded_LT_maximum": 0.020025250254650517,
+      "LT_minus_mean_maximum_absolute_difference": 0.0,
+      "samples": 4001,
+      "spike_count": 0,
+      "spike_times": []
+    },
+    {
+      "trial_id": "classic-policy4-data3-matched-duration-heldout-dk19/heldout-M4-ticks-461-379-120",
+      "sample_id": "heldout-M4-ticks-461-379-120",
+      "label": "foil",
+      "classification": "TN",
+      "soma_maxima": [
+        0.03499302154742712,
+        0.03179777158827524,
+        0.026776213817310768,
+        0.026776213817310768
+      ],
+      "actual_recorded_LT_maximum": 0.01997415709458819,
+      "LT_minus_mean_maximum_absolute_difference": 0.0,
+      "samples": 4001,
+      "spike_count": 0,
+      "spike_times": []
+    },
+    {
+      "trial_id": "classic-policy4-data3-matched-duration-heldout-dk19/heldout-M4-ticks-137-413-410",
+      "sample_id": "heldout-M4-ticks-137-413-410",
+      "label": "foil",
+      "classification": "TN",
+      "soma_maxima": [
+        0.03151243268162918,
+        0.02869262570397446,
+        0.026776213813506256,
+        0.026776213813506256
+      ],
+      "actual_recorded_LT_maximum": 0.02620724006403749,
+      "LT_minus_mean_maximum_absolute_difference": 0.0,
+      "samples": 4001,
+      "spike_count": 0,
+      "spike_times": []
+    },
+    {
+      "trial_id": "classic-policy4-data3-matched-duration-heldout-dk19/heldout-M4-ticks-562-127-271",
+      "sample_id": "heldout-M4-ticks-562-127-271",
+      "label": "foil",
+      "classification": "TN",
+      "soma_maxima": [
+        0.03352348216315382,
+        0.03036607646089906,
+        0.026776213814275418,
+        0.026776213814275418
+      ],
+      "actual_recorded_LT_maximum": 0.01997415275461839,
+      "LT_minus_mean_maximum_absolute_difference": 0.0,
+      "samples": 4001,
+      "spike_count": 0,
+      "spike_times": []
+    },
+    {
+      "trial_id": "classic-policy4-data3-matched-duration-heldout-dk19/repeated-target",
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "classification": "TP",
+      "soma_maxima": [
+        0.028198903744210857,
+        0.026411972159851804,
+        0.02677621381340556,
+        0.02677621381340556
+      ],
+      "actual_recorded_LT_maximum": 0.02639918752597037,
+      "LT_minus_mean_maximum_absolute_difference": 2.220446049250313e-16,
+      "samples": 4001,
+      "spike_count": 1,
+      "spike_times": [
+        10.496
+      ]
+    },
+    {
+      "trial_id": "classic-policy4-data3-matched-duration-heldout-dk19/heldout-M4-ticks-385-176-399",
+      "sample_id": "heldout-M4-ticks-385-176-399",
+      "label": "foil",
+      "classification": "TN",
+      "soma_maxima": [
+        0.02694788659001357,
+        0.025635339832848048,
+        0.026776213813405003,
+        0.026776213813405003
+      ],
+      "actual_recorded_LT_maximum": 0.0199785093522373,
+      "LT_minus_mean_maximum_absolute_difference": 0.0,
+      "samples": 4001,
+      "spike_count": 0,
+      "spike_times": []
+    },
+    {
+      "trial_id": "classic-policy4-data3-matched-duration-heldout-dk19/heldout-M4-ticks-454-328-178",
+      "sample_id": "heldout-M4-ticks-454-328-178",
+      "label": "foil",
+      "classification": "TN",
+      "soma_maxima": [
+        0.026833487568247993,
+        0.025566737376506277,
+        0.026776213813405003,
+        0.026776213813405003
+      ],
+      "actual_recorded_LT_maximum": 0.019974162034068155,
+      "LT_minus_mean_maximum_absolute_difference": 0.0,
+      "samples": 4001,
+      "spike_count": 0,
+      "spike_times": []
+    }
+  ],
+  "source_classifications_unchanged": true,
+  "new_model_execution": false,
+  "no_new_peak_selection_rule": true,
+  "scientific_verdict": null
+}

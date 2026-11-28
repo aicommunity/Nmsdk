@@ -1,0 +1,127 @@
+{
+  "kind": "timelearner_positive_response_range_server_checks",
+  "schema_version": 1,
+  "source_root": "5216549eb887c7ac6fd38f4e6fbbb1bf4afdf52e",
+  "checks": {
+    "testsRun": 11,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "successful": true
+  },
+  "process": {
+    "returncode": 0,
+    "source_root": "5216549eb887c7ac6fd38f4e6fbbb1bf4afdf52e",
+    "Python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+    "arguments": [
+      "/media/user/Data/TimeLearnerRefactor/requests/shared-positive-report-and-DATA3-holdout-dg22/run-plotting-checks.py",
+      "/media/user/Data/TimeLearnerRefactor/source-shared-positive-report-scale-m40-dg22",
+      "/media/user/Data/TimeLearnerRefactor/plot-venv-channel-lt-overview-a1/lib/python3.12/site-packages",
+      "/media/user/Data/TimeLearnerRefactor/requests/shared-positive-report-and-DATA3-holdout-dg22/plotting-checks.json"
+    ],
+    "closed": true,
+    "model_calculation_performed": false
+  },
+  "primary_archive": {
+    "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-24/large-Branch-DATA3-holdout-primary-dg16.json",
+    "record": {
+      "kind": "timelearner_frozen_DATA3_holdout_primary_catalog",
+      "schema_version": 1,
+      "objects": {
+        "primary": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/d5/d58dcb0cfb52fa815091b8448f632d9930ab7a0fcf05f76245aeccfb8e5bf790",
+          "sha256": "d58dcb0cfb52fa815091b8448f632d9930ab7a0fcf05f76245aeccfb8e5bf790",
+          "bytes": 595288
+        },
+        "bundle": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/40/4066eb5477c3bb15e169244f2fc71bf8ab5c81b0121e9aa743ec41385c113f2e",
+          "sha256": "4066eb5477c3bb15e169244f2fc71bf8ab5c81b0121e9aa743ec41385c113f2e",
+          "bytes": 14314
+        }
+      },
+      "members": 84,
+      "expanded_bytes": 214528513,
+      "archive_bytes": 595288,
+      "all_members_independently_verified": true,
+      "packaged_pipeline_closure": {
+        "run_snapshots_verified": 1,
+        "artifact_entries_verified": 40,
+        "scientific_verdict": null
+      },
+      "canonical_alias_projection": [
+        {
+          "omitted_alias": "science/holdout/native.events-log/EventsLog/NeuroModeler.INFO",
+          "retained_target": "science/holdout/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261124-130944.2144759",
+          "bytes": 291,
+          "sha256": "39a453595474df6d90d8ab586d61f66d819cda34531d1c4299cc1df1adb66898",
+          "owner_pid": 2144759,
+          "original_symlink_target_attested": false
+        }
+      ],
+      "source_train_execution": "completed",
+      "training_outcome": "budget_exhausted",
+      "threshold_fixed": true,
+      "new_training_performed": false,
+      "counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "TN": 7,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 1.0,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.0
+      },
+      "model_revision": "a71ae5270f9c8fe9c03bc479e473b3d08ea9e798bf134c32ad8aa559a2e34d8a",
+      "threshold": 0.09864679711103091,
+      "target_is_repeated_control": true,
+      "target_control_preserved": true,
+      "independent_negatives": 7,
+      "original_foil4_FP_retained": true,
+      "plot_code_root": "5216549eb887c7ac6fd38f4e6fbbb1bf4afdf52e",
+      "plotting_tests": 11,
+      "whole_plan_complete": false
+    }
+  },
+  "source": {
+    "root": "5216549eb887c7ac6fd38f4e6fbbb1bf4afdf52e",
+    "source": "/media/user/Data/TimeLearnerRefactor/source-shared-positive-report-scale-m40-dg22",
+    "clean": true,
+    "native_runtime_not_changed": true,
+    "plotting": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-shared-positive-report-scale-m40-dg22/Scripts/StructTrain/TimeLearner/plotting.py",
+      "sha256": "1303635335ec812d740d14d35d1b327f4baa571c4f1c8629a2bfa4c7280268cf",
+      "size": 25054
+    }
+  },
+  "source_failures_preserved": {
+    "M40_dg16": "declared12 but actual11 tests; stopped before tests, source/native jobs unchanged",
+    "Windows_dg10": "incomplete test-suite selection; stopped before C++ build/tests; corrected selection exactly matches accepted M40 cohort43"
+  },
+  "actual_new_shared_range_report": "completed 2026-11-24T10:43:49Z; all positive overviews have common Y",
+  "visual_review_complete": false,
+  "whole_plan_complete": false,
+  "selected_visual_review": {
+    "count": 40,
+    "all8_patterns": true,
+    "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-24/large-Branch-DATA3-heldout-forty-views-dg36.json",
+    "object": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/01/0165ab0b3e95c965eb8ab948769df1d2ab6d9da65b224f23bf7acc6a612d34ff",
+      "sha256": "0165ab0b3e95c965eb8ab948769df1d2ab6d9da65b224f23bf7acc6a612d34ff",
+      "bytes": 24206
+    },
+    "all2132_reviewed": false,
+    "publication_ready": false
+  }
+}

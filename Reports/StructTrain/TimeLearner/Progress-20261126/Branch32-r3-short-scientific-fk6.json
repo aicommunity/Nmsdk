@@ -1,0 +1,101 @@
+{
+  "kind": "timelearner_Branch32_r3_short_scientific_review_reference",
+  "schema_version": 1,
+  "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+  "catalog": {
+    "relative_path": "experiments/2026-11-26/Branch32-r3-short-scientific-independent-fk3.json",
+    "sha256": "ed7d179ce3ca236f91a4a8dd8c4d652849b3f9baffb3d686f2cfdc9ad05e5831",
+    "bytes": 6879
+  },
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/78/78934a5739d32407c597b8d9915dab8f3c1cd7b2ced455e2d9153b75de6dd5b2",
+      "sha256": "78934a5739d32407c597b8d9915dab8f3c1cd7b2ced455e2d9153b75de6dd5b2",
+      "bytes": 17635
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/b9/b9b2b3481488bd0f428ffbf962fc853b83655ff76b586ce861f443c55fbdd3ab",
+      "sha256": "b9b2b3481488bd0f428ffbf962fc853b83655ff76b586ce861f443c55fbdd3ab",
+      "bytes": 3095532
+    },
+    "source-result.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/7f/7f2740f4cc4dd66338f0e9b15ee9af3479c2ce0e802354995e43f60b0f46afc7",
+      "sha256": "7f2740f4cc4dd66338f0e9b15ee9af3479c2ce0e802354995e43f60b0f46afc7",
+      "bytes": 1005
+    }
+  },
+  "members": 98,
+  "observations": 16,
+  "reviewed_PNG": 33,
+  "all66_image_hashes_verified": true,
+  "all16_observation_bytes_match_original_bundle": true,
+  "global_target_maxima_independently_recomputed": 32,
+  "early_recorded_global_maximum_cases": [
+    "r1-short-preserve",
+    "r2-short-preserve",
+    "r3-short-preserve",
+    "r4-short-preserve",
+    "r5-short-preserve",
+    "r6-short-preserve",
+    "r7-short-preserve"
+  ],
+  "early_recorded_global_maximum_seconds": 0.2425,
+  "other25_recorded_global_maximum_seconds": 0.4835,
+  "recorded_soma_equals_recorded_LT_potential_observations": 256,
+  "maximum_recorded_channel_difference": 0.0,
+  "LT_membrane_structure_determined_from_recording_equality": false,
+  "target_native_events_seconds": {
+    "reset": [
+      0.4835
+    ],
+    "preserve": [
+      0.242,
+      0.4835
+    ]
+  },
+  "full32_case_visual_acceptance": false,
+  "new_simulation": false,
+  "new_classification_rule": false,
+  "new_calibration": false,
+  "original_counts_unchanged": true,
+  "full_goal_complete": false,
+  "independent_reader_source": {
+    "catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-26/Branch32-r3-short-independent-reader-fk8.json",
+      "sha256": "1d84fecd940d0e30604712eb6e7aa1d79a4658f868bfe7c8d28581b4e6af7f6b",
+      "size": 906
+    },
+    "record": {
+      "kind": "timelearner_Branch32_scientific_independent_reader_source",
+      "schema_version": 1,
+      "accepted_catalog": {
+        "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-26/Branch32-r3-short-scientific-independent-fk3.json",
+        "sha256": "ed7d179ce3ca236f91a4a8dd8c4d652849b3f9baffb3d686f2cfdc9ad05e5831",
+        "size": 6879
+      },
+      "reader_source": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/a4/a428f9d125e077d9d6ce19b2cbb18260362104392ee719b51e7d68d137b58f3a",
+        "sha256": "a428f9d125e077d9d6ce19b2cbb18260362104392ee719b51e7d68d137b58f3a",
+        "bytes": 7896
+      },
+      "reader_source_path": "/media/user/Data/TimeLearnerRefactor/transfers/Branch32-reviewed-fk3/verify.py",
+      "exact_reader_used_for_completed_fk3": true,
+      "new_simulation": false
+    }
+  },
+  "generated_standard_PNG_for_all32_cases": 512,
+  "reviewed_standard_PNG": 32,
+  "standard_PNG_still_requiring_visual_review": 480
+}

@@ -1,0 +1,340 @@
+{
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/Elder-Branch-Count24-recognition16-primary-fr462.json",
+    "sha256": "0b8b42f17dd5c729afb3fec20a7480d0f55c382d98a5ab5382dd7e3da5d5e519",
+    "size": 9532
+  },
+  "catalog": {
+    "kind": "timelearner_actual_stopped_Branch_recognition_primary",
+    "schema_version": 1,
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/29/296c48e1d47edb86baf72bf1c84feb5172f8e4ea5b48ff186ce080c3eb482259",
+        "sha256": "296c48e1d47edb86baf72bf1c84feb5172f8e4ea5b48ff186ce080c3eb482259",
+        "bytes": 37608
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/45/456369863a7bf74ebd975d123af3cc0e21003c9a6d2aa7c3e8a83d5057bb0d21",
+        "sha256": "456369863a7bf74ebd975d123af3cc0e21003c9a6d2aa7c3e8a83d5057bb0d21",
+        "bytes": 22638720
+      }
+    },
+    "members": 221,
+    "expanded_bytes": 244771873,
+    "native_capture_inventory": [
+      {
+        "path": "conversion/process/loaded-files.json",
+        "files": 28
+      },
+      {
+        "path": "baseline/run/process/loaded-files.json",
+        "files": 28
+      },
+      {
+        "path": "threshold/process/loaded-files.json",
+        "files": 28
+      },
+      {
+        "path": "confirmation/run/process/loaded-files.json",
+        "files": 28
+      }
+    ],
+    "observations": 16,
+    "baseline_counts": {
+      "TP": 0,
+      "FP": 0,
+      "FN": 1,
+      "TN": 7,
+      "targets": 1,
+      "foils": 7,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.875,
+      "target_hit_rate": 0.0,
+      "foil_response_rate": 0.0
+    },
+    "confirmation_counts": {
+      "TP": 1,
+      "FP": 5,
+      "FN": 0,
+      "TN": 2,
+      "targets": 1,
+      "foils": 7,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.375,
+      "target_hit_rate": 1.0,
+      "foil_response_rate": 0.7142857142857143
+    },
+    "threshold": 0.03185847824397947,
+    "timing": {
+      "kind": "timelearner_actual_stopped_Branch_full_eight_confirmation_timing",
+      "schema_version": 1,
+      "observations": [
+        {
+          "phase": "baseline",
+          "index": 0,
+          "sample_id": "phasea-row-0",
+          "label": "target",
+          "relative_spikes": [],
+          "relative_stimuli": [
+            0,
+            0.08,
+            0.24,
+            0.48
+          ],
+          "model_revision": "e4f8ed1c32287f77d8770d96423728f02cc983d29c2e84177db35f51823f28b9"
+        },
+        {
+          "phase": "baseline",
+          "index": 1,
+          "sample_id": "phasea-row-1",
+          "label": "foil",
+          "relative_spikes": [],
+          "relative_stimuli": [
+            0,
+            0.2400000000000002,
+            0.3999999999999999,
+            0.48
+          ],
+          "model_revision": "e4f8ed1c32287f77d8770d96423728f02cc983d29c2e84177db35f51823f28b9"
+        },
+        {
+          "phase": "baseline",
+          "index": 2,
+          "sample_id": "phasea-row-2",
+          "label": "foil",
+          "relative_spikes": [],
+          "relative_stimuli": [
+            0,
+            0.16000000000000014,
+            0.2400000000000002,
+            0.47999999999999954
+          ],
+          "model_revision": "e4f8ed1c32287f77d8770d96423728f02cc983d29c2e84177db35f51823f28b9"
+        },
+        {
+          "phase": "baseline",
+          "index": 3,
+          "sample_id": "phasea-row-3",
+          "label": "foil",
+          "relative_spikes": [],
+          "relative_stimuli": [
+            0,
+            0.16000000000000014,
+            0.3200000000000003,
+            0.4800000000000004
+          ],
+          "model_revision": "e4f8ed1c32287f77d8770d96423728f02cc983d29c2e84177db35f51823f28b9"
+        },
+        {
+          "phase": "baseline",
+          "index": 4,
+          "sample_id": "phasea-row-4",
+          "label": "foil",
+          "relative_spikes": [],
+          "relative_stimuli": [
+            0,
+            0.019999999999999574,
+            0.2400000000000002,
+            0.4800000000000004
+          ],
+          "model_revision": "e4f8ed1c32287f77d8770d96423728f02cc983d29c2e84177db35f51823f28b9"
+        },
+        {
+          "phase": "baseline",
+          "index": 5,
+          "sample_id": "phasea-row-5",
+          "label": "foil",
+          "relative_spikes": [],
+          "relative_stimuli": [
+            0,
+            0.2400000000000002,
+            0.46000000000000085,
+            0.4800000000000004
+          ],
+          "model_revision": "e4f8ed1c32287f77d8770d96423728f02cc983d29c2e84177db35f51823f28b9"
+        },
+        {
+          "phase": "baseline",
+          "index": 6,
+          "sample_id": "phasea-row-6",
+          "label": "foil",
+          "relative_spikes": [],
+          "relative_stimuli": [
+            0,
+            0.040000000000000924,
+            0.08000000000000007,
+            0.4800000000000004
+          ],
+          "model_revision": "e4f8ed1c32287f77d8770d96423728f02cc983d29c2e84177db35f51823f28b9"
+        },
+        {
+          "phase": "baseline",
+          "index": 7,
+          "sample_id": "phasea-row-7",
+          "label": "foil",
+          "relative_spikes": [],
+          "relative_stimuli": [
+            0,
+            0.40000000000000036,
+            0.4399999999999995,
+            0.47999999999999865
+          ],
+          "model_revision": "e4f8ed1c32287f77d8770d96423728f02cc983d29c2e84177db35f51823f28b9"
+        },
+        {
+          "phase": "confirmation",
+          "index": 0,
+          "sample_id": "phasea-row-0",
+          "label": "target",
+          "relative_spikes": [
+            0.252
+          ],
+          "relative_stimuli": [
+            0,
+            0.08,
+            0.24,
+            0.48
+          ],
+          "model_revision": "c63ee4115bdb94161ce96cd31e8fcc8717b7d1b298bf5df66ee2d89d14bc4cdd"
+        },
+        {
+          "phase": "confirmation",
+          "index": 1,
+          "sample_id": "phasea-row-1",
+          "label": "foil",
+          "relative_spikes": [],
+          "relative_stimuli": [
+            0,
+            0.2400000000000002,
+            0.3999999999999999,
+            0.48
+          ],
+          "model_revision": "c63ee4115bdb94161ce96cd31e8fcc8717b7d1b298bf5df66ee2d89d14bc4cdd"
+        },
+        {
+          "phase": "confirmation",
+          "index": 2,
+          "sample_id": "phasea-row-2",
+          "label": "foil",
+          "relative_spikes": [
+            0.4870000000000001
+          ],
+          "relative_stimuli": [
+            0,
+            0.16000000000000014,
+            0.2400000000000002,
+            0.47999999999999954
+          ],
+          "model_revision": "c63ee4115bdb94161ce96cd31e8fcc8717b7d1b298bf5df66ee2d89d14bc4cdd"
+        },
+        {
+          "phase": "confirmation",
+          "index": 3,
+          "sample_id": "phasea-row-3",
+          "label": "foil",
+          "relative_spikes": [],
+          "relative_stimuli": [
+            0,
+            0.16000000000000014,
+            0.3200000000000003,
+            0.4800000000000004
+          ],
+          "model_revision": "c63ee4115bdb94161ce96cd31e8fcc8717b7d1b298bf5df66ee2d89d14bc4cdd"
+        },
+        {
+          "phase": "confirmation",
+          "index": 4,
+          "sample_id": "phasea-row-4",
+          "label": "foil",
+          "relative_spikes": [
+            0.24499999999999922
+          ],
+          "relative_stimuli": [
+            0,
+            0.019999999999999574,
+            0.2400000000000002,
+            0.4800000000000004
+          ],
+          "model_revision": "c63ee4115bdb94161ce96cd31e8fcc8717b7d1b298bf5df66ee2d89d14bc4cdd"
+        },
+        {
+          "phase": "confirmation",
+          "index": 5,
+          "sample_id": "phasea-row-5",
+          "label": "foil",
+          "relative_spikes": [
+            0.484
+          ],
+          "relative_stimuli": [
+            0,
+            0.2400000000000002,
+            0.46000000000000085,
+            0.4800000000000004
+          ],
+          "model_revision": "c63ee4115bdb94161ce96cd31e8fcc8717b7d1b298bf5df66ee2d89d14bc4cdd"
+        },
+        {
+          "phase": "confirmation",
+          "index": 6,
+          "sample_id": "phasea-row-6",
+          "label": "foil",
+          "relative_spikes": [
+            0.2705000000000002,
+            0.3149999999999995
+          ],
+          "relative_stimuli": [
+            0,
+            0.040000000000000924,
+            0.08000000000000007,
+            0.4800000000000004
+          ],
+          "model_revision": "c63ee4115bdb94161ce96cd31e8fcc8717b7d1b298bf5df66ee2d89d14bc4cdd"
+        },
+        {
+          "phase": "confirmation",
+          "index": 7,
+          "sample_id": "phasea-row-7",
+          "label": "foil",
+          "relative_spikes": [
+            0.6674999999999986,
+            0.7089999999999996
+          ],
+          "relative_stimuli": [
+            0,
+            0.40000000000000036,
+            0.4399999999999995,
+            0.47999999999999865
+          ],
+          "model_revision": "c63ee4115bdb94161ce96cd31e8fcc8717b7d1b298bf5df66ee2d89d14bc4cdd"
+        }
+      ],
+      "target_response_ms": 252,
+      "last_target_stimulus_ms": 480,
+      "response_precedes_last_target_stimulus": true,
+      "complete_four_pulse_recognition_not_established": true,
+      "source_training_completed": false,
+      "scientific_verdict": null
+    },
+    "source_training_completed": false,
+    "diagnostic_only": true,
+    "independent_readback_pending": true,
+    "full_pattern_gallery_pending": true,
+    "scientific_verdict": null,
+    "source_training_catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/Elder-Branch-Count24-closed-primary-fr440.json",
+      "sha256": "620aba9fc7e79cdb5e4f6cb60a635c77333afa7bea201b1d6474a20b8f3cb2b5",
+      "size": 6952
+    },
+    "source_training_independent_acceptance": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/Elder-Branch1442-and-negative640-independent-fr448.json",
+      "sha256": "3b75373389e12e57668204f757b6dfdcfd6befb8f75151d19ebf043d6ddff4d1",
+      "size": 3114
+    }
+  }
+}

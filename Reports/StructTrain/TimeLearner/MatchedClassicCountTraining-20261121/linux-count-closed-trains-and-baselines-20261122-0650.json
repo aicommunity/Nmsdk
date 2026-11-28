@@ -1,0 +1,602 @@
+{
+  "kind": "timelearner_linux_count_closed_training_and_native_recognition_progress",
+  "schema_version": 1,
+  "observed_utc": "2026-11-22T06:50:42Z",
+  "workers": [
+    {
+      "worker": "M40",
+      "observed_utc": "2026-11-22T06:50:42.204173+00:00",
+      "free_bytes": 315272704000,
+      "original_Train": {
+        "job": "s11-classic-count-training-m40-a1",
+        "native": {
+          "execution": "completed",
+          "training_outcome": "budget_exhausted",
+          "completed_boundary": false,
+          "model_ticks": 2254447,
+          "frequency_hz": 2000,
+          "model_time_begin": 0,
+          "model_time_end": 1127.2235,
+          "wall_seconds": null,
+          "all_processes_closed": null
+        },
+        "process": {
+          "execution": "completed",
+          "training_outcome": null,
+          "completed_boundary": null,
+          "model_ticks": null,
+          "frequency_hz": null,
+          "model_time_begin": null,
+          "model_time_end": null,
+          "wall_seconds": 33113.393031236716,
+          "all_processes_closed": true
+        },
+        "all_native_and_controller_processes_closed": true,
+        "model_revision": "b803678f5e47c7a393658d8847aba0a7b7f1237ece576043a6feb044473214d8",
+        "model_epoch": 48,
+        "transcript_model_epoch": 48,
+        "source_package": {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-classic-count-training-m40-a1/train/native/train_stopped_state.json",
+          "sha256": "11ca2ca242a93f107e7252c3dfad90b330932f2c95231a86c5131e14b0f9cc2f",
+          "size": 1173768677
+        },
+        "full_primary_audit": {
+          "kind": "timelearner_python_validation_result",
+          "schema_version": 1,
+          "suite_id": "classic-count-full-primary-audit-m40-a3",
+          "package_fingerprint": "4a90cd7dcff85356ce0ae9a1b0eca146f3042c8c76fe865c78a0890c5eff0fee",
+          "execution": "completed",
+          "assertion_status": "passed",
+          "expected_test_ids": [
+            "Scripts.StructTrain.TimeLearner.tests.test_closed_matched_count_training.ClosedMatchedCountTrainingTest.test_actual_complete_primary_and_single_package_decode"
+          ],
+          "executed_tests": 1,
+          "failures": [],
+          "errors": [],
+          "skipped": [],
+          "fixtures": {
+            "TIMELEARNER_MATCHED_COUNT_NATIVE": {
+              "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-classic-count-training-m40-a1/train/native",
+              "files": 1992,
+              "fingerprint": "3cf32b1d13cb268493a3479b40e008a856765b0816e5fe8e99ac9be021771d7b"
+            },
+            "TIMELEARNER_MATCHED_COUNT_ORIGINAL": {
+              "path": "/media/user/Data/TimeLearnerRefactor/requests/classic-count-full-primary-audit-m40-a3/original-fixture",
+              "files": 1,
+              "fingerprint": "539d7d27813e4fdcba54d5d14a6d8e787a101326f3f30b2933d52239081fc5be"
+            }
+          },
+          "scientific_verdict": null
+        },
+        "full_primary_audit_record": {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-count-full-primary-audit-m40-a3/worker/tmp/matched-count-training-audit.json",
+          "sha256": "5e8b1874eaee84aaa474078f1cd62906457798297851b7339d3b0f6384c8a578",
+          "bytes": 112193
+        },
+        "measured_primary": {
+          "logical_groups": 105,
+          "native_probes": 627,
+          "sampled_frames": 2254293,
+          "primary_bytes": 242297425
+        },
+        "search_summary": {
+          "summary_consistent": true,
+          "search_history_retained": true,
+          "candidates_recomputed": 50,
+          "capacitance_candidates": 0,
+          "resistance_domains": [],
+          "native_execution_verified": false,
+          "search_decisions_replayed": false,
+          "parameter_change_cost_recomputed": false,
+          "rejection_reasons_recomputed": false,
+          "evaluation_verdict": null,
+          "summary_schema_version": 8,
+          "terminal_provenance_verified": false,
+          "controller_checkpoint_restored": false
+        },
+        "Exact": false,
+        "training_completed": false
+      },
+      "recognition_study": "s11-classic-count-recognition-m40-a2",
+      "original_native_runtime_unchanged": true,
+      "original_Train_not_restarted": true,
+      "measured_secant_search_used": false,
+      "phases": {
+        "baseline": {
+          "actual_native": {
+            "execution": "unknown",
+            "all_processes_closed": true,
+            "reason": "bound_unit_and_group_absent",
+            "binding": {
+              "kind": "timelearner_contained_binding",
+              "schema_version": 1,
+              "request_sha256": "f4ef9bcc1980f4478540c38559dd30fbf7fce601cdb42aa8d7ed4c768a6c4f61",
+              "unit": "timelearner-f89dee69-fac4-4672-acd0-2271812dabe7.service",
+              "invocation_id": "e40940fc5d8b4f1e87505e9841e63680",
+              "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-f89dee69-fac4-4672-acd0-2271812dabe7.service",
+              "initial_main_pid": 2083561,
+              "initial_start_ticks": "439742181",
+              "sha256": "7a9083cef5c7a4fee5b3f9417e8563a4e920d504fe31a3bfb3b71dcee21cada6"
+            }
+          },
+          "trial_files_present": 8,
+          "process-result.json": {
+            "kind": "timelearner_process_result",
+            "schema_version": 2,
+            "execution": "completed",
+            "reason": "exit_zero_and_whole_group_closed",
+            "returncode": 0,
+            "wall_seconds": 3071.3437801832333,
+            "model_time": null,
+            "runtime_provenance": "loaded_files_captured",
+            "mapping_error": null,
+            "runtime_fingerprint": "7ef93691c86311ef72259382b0d4e950d910ed2fbd6aaed113649cf894e9a404",
+            "ownership_scope": "bound_cgroup",
+            "all_processes_closed": true,
+            "scientific_verdict": null,
+            "operational_diagnostics": {
+              "kind": "timelearner_operational_diagnostics",
+              "schema_version": 1,
+              "policy": "owned-streams-v1",
+              "status": "clear",
+              "error_records": 0,
+              "warning_records": 0,
+              "unclassified_stderr_chunks": 0,
+              "reasons": [],
+              "examples": [],
+              "streams": [
+                {
+                  "path": "stdout.log",
+                  "bytes": 0,
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                {
+                  "path": "stderr.log",
+                  "bytes": 0,
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              ],
+              "contained_streams_match": true,
+              "scientific_verdict": null
+            }
+          },
+          "terminal.json": {
+            "native_process_completed": true,
+            "original_preparation_failure_preserved": true,
+            "source_bytes_unchanged": true,
+            "observations_independently_audited": false,
+            "training_completed": false,
+            "scientific_verdict": null
+          },
+          "full_independent_audit": {
+            "counts": {
+              "TP": 0,
+              "FP": 0,
+              "FN": 1,
+              "TN": 7,
+              "targets": 1,
+              "foils": 7,
+              "target_trials_with_outside_spikes": 0,
+              "accuracy": 0.875,
+              "target_hit_rate": 0.0,
+              "foil_response_rate": 0.0
+            },
+            "effective_threshold": 100.0,
+            "model_revision": "b803678f5e47c7a393658d8847aba0a7b7f1237ece576043a6feb044473214d8",
+            "complete_source_history_audited": true,
+            "all_input_bytes_unchanged": true,
+            "frozen_model_verified": true,
+            "report_family_response_requirement_met": false,
+            "training_completed": false,
+            "independently_heldout_evaluation": false,
+            "evidence_record": {
+              "path": "/media/user/Data/TimeLearnerRefactor/requests/s11-classic-count-recognition-m40-a2/baseline/independent-audit.json",
+              "sha256": "bb11efb9fcac791115acab794302922aa64638154921a72d4a5782ec5ec778ca",
+              "bytes": 243327
+            }
+          }
+        },
+        "threshold": {
+          "actual_native": {
+            "execution": "running",
+            "all_processes_closed": false,
+            "reason": "kernel_cgroup_observed",
+            "binding": {
+              "kind": "timelearner_contained_binding",
+              "schema_version": 1,
+              "request_sha256": "c444e932d6272ce08eb14ccad41415bd475cf4c3b5f697ab60f6f0b502ced168",
+              "unit": "timelearner-038d1638-17d5-4b55-9127-ccfd9e5e1d68.service",
+              "invocation_id": "6388a3deb6e04db4b30c57975a51407b",
+              "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-038d1638-17d5-4b55-9127-ccfd9e5e1d68.service",
+              "initial_main_pid": 2288232,
+              "initial_start_ticks": "440220031",
+              "sha256": "cfd7a36a06fceaf20574dd0aab647288e1b1fd8252db4a2967bd11eb86b94795"
+            }
+          },
+          "trial_files_present": 7,
+          "proposal": {
+            "threshold": 0.020736298148054874,
+            "full_matrix_peak_margin": -0.0034452345288309982,
+            "nonspiking_proxy": {
+              "TP": 1,
+              "FN": 0,
+              "FP": 1,
+              "TN": 6
+            },
+            "rule": "midpoint_of_target_maximum_and_highest_strictly_lower_foil_maximum",
+            "rows": [
+              {
+                "trial_id": "s11-classic-count-recognition-m40-a2/baseline/trial-0",
+                "sample_id": "phasea-row-0",
+                "label": "target",
+                "lt_maximum": 0.02089192710472107
+              },
+              {
+                "trial_id": "s11-classic-count-recognition-m40-a2/baseline/trial-1",
+                "sample_id": "phasea-row-1",
+                "label": "foil",
+                "lt_maximum": 0.01728587710191659
+              },
+              {
+                "trial_id": "s11-classic-count-recognition-m40-a2/baseline/trial-2",
+                "sample_id": "phasea-row-2",
+                "label": "foil",
+                "lt_maximum": 0.01709755395536175
+              },
+              {
+                "trial_id": "s11-classic-count-recognition-m40-a2/baseline/trial-3",
+                "sample_id": "phasea-row-3",
+                "label": "foil",
+                "lt_maximum": 0.017097553766214524
+              },
+              {
+                "trial_id": "s11-classic-count-recognition-m40-a2/baseline/trial-4",
+                "sample_id": "phasea-row-4",
+                "label": "foil",
+                "lt_maximum": 0.02058066919138868
+              },
+              {
+                "trial_id": "s11-classic-count-recognition-m40-a2/baseline/trial-5",
+                "sample_id": "phasea-row-5",
+                "label": "foil",
+                "lt_maximum": 0.01702608020640828
+              },
+              {
+                "trial_id": "s11-classic-count-recognition-m40-a2/baseline/trial-6",
+                "sample_id": "phasea-row-6",
+                "label": "foil",
+                "lt_maximum": 0.024337161633552068
+              },
+              {
+                "trial_id": "s11-classic-count-recognition-m40-a2/baseline/trial-7",
+                "sample_id": "phasea-row-7",
+                "label": "foil",
+                "lt_maximum": 0.01728587710191659
+              }
+            ],
+            "actual_confirmation_and_full_audit_required": true
+          }
+        }
+      },
+      "readback_records": [
+        {
+          "path": "C:\\Users\\BAKHSH~1\\AppData\\Local\\Temp\\timelearner-m40-recognition-focused-observed-20261122-resume-a5.json",
+          "bytes": 246000,
+          "sha256": "59ba038675e9d16d49aec7968b18ec91f0a8495965d3d4e2ebe0335586b3c07f"
+        },
+        {
+          "path": "C:\\Users\\BAKHSH~1\\AppData\\Local\\Temp\\timelearner-m40-all-observed-20261122-resume-a2.json",
+          "bytes": 115675,
+          "sha256": "5ee5cbcb906727787b12944eb48cce2bfdf1b482aed9f6ecccb40d9b24fce6e1"
+        },
+        {
+          "path": "C:\\Users\\BAKHSH~1\\AppData\\Local\\Temp\\timelearner-m40-count-study-live-progress-observed-20261122-a1.json",
+          "bytes": 1545,
+          "sha256": "7918046facccd105847666d5b5ce728b59fd28b87e36d53501acfde8c60fe189"
+        }
+      ],
+      "scientific_verdict": null
+    },
+    {
+      "worker": "Elder-1",
+      "observed_utc": "2026-11-22T06:50:42.401122+00:00",
+      "free_bytes": 52442271744,
+      "original_Train": {
+        "job": "s11-classic-count-training-elder-a1",
+        "native": {
+          "execution": "completed",
+          "training_outcome": "budget_exhausted",
+          "completed_boundary": false,
+          "model_ticks": 1806771,
+          "frequency_hz": 2000,
+          "model_time_begin": 0,
+          "model_time_end": 903.3855,
+          "wall_seconds": null,
+          "all_processes_closed": null
+        },
+        "process": {
+          "execution": "completed",
+          "training_outcome": null,
+          "completed_boundary": null,
+          "model_ticks": null,
+          "frequency_hz": null,
+          "model_time_begin": null,
+          "model_time_end": null,
+          "wall_seconds": 33016.672579931095,
+          "all_processes_closed": true
+        },
+        "all_native_and_controller_processes_closed": true,
+        "model_revision": "823f6a86f3924b9ee7e222362364ee27fca7b2c8e352d5cbe7a60957a552c824",
+        "model_epoch": 39,
+        "transcript_model_epoch": 38,
+        "source_package": {
+          "path": "/home/user/timelearner-refactor/readbacks/s11-classic-count-training-elder-a1/train/native/train_stopped_state.json",
+          "sha256": "f0730c672470309690ca3fdb1dccf7a53df21a505e9e063f3aa302fde9d3e57f",
+          "size": 867724594
+        },
+        "full_primary_audit": {
+          "kind": "timelearner_python_validation_result",
+          "schema_version": 1,
+          "suite_id": "classic-count-full-primary-audit-elder-a3",
+          "package_fingerprint": "4a90cd7dcff85356ce0ae9a1b0eca146f3042c8c76fe865c78a0890c5eff0fee",
+          "execution": "completed",
+          "assertion_status": "passed",
+          "expected_test_ids": [
+            "Scripts.StructTrain.TimeLearner.tests.test_closed_matched_count_training.ClosedMatchedCountTrainingTest.test_actual_complete_primary_and_single_package_decode"
+          ],
+          "executed_tests": 1,
+          "failures": [],
+          "errors": [],
+          "skipped": [],
+          "fixtures": {
+            "TIMELEARNER_MATCHED_COUNT_NATIVE": {
+              "path": "/home/user/timelearner-refactor/readbacks/s11-classic-count-training-elder-a1/train/native",
+              "files": 1596,
+              "fingerprint": "02f77ea2b24da4cd19cd6ba65a261c205baf9e9694f1f95f6fa85603721734d7"
+            },
+            "TIMELEARNER_MATCHED_COUNT_ORIGINAL": {
+              "path": "/home/user/timelearner-refactor/requests/classic-count-full-primary-audit-elder-a3/original-fixture",
+              "files": 1,
+              "fingerprint": "539d7d27813e4fdcba54d5d14a6d8e787a101326f3f30b2933d52239081fc5be"
+            }
+          },
+          "scientific_verdict": null
+        },
+        "full_primary_audit_record": {
+          "path": "/home/user/timelearner-refactor/readbacks/classic-count-full-primary-audit-elder-a3/worker/tmp/matched-count-training-audit.json",
+          "sha256": "0bc4c4d6f55e5c6d5196335c6eae7578e76d5717228474fe6b8c833a7c4e3619",
+          "bytes": 92250
+        },
+        "measured_primary": {
+          "logical_groups": 84,
+          "native_probes": 502,
+          "sampled_frames": 1806648,
+          "primary_bytes": 195162786
+        },
+        "search_summary": {
+          "summary_consistent": true,
+          "search_history_retained": true,
+          "candidates_recomputed": 39,
+          "capacitance_candidates": 0,
+          "resistance_domains": [],
+          "native_execution_verified": false,
+          "search_decisions_replayed": false,
+          "parameter_change_cost_recomputed": false,
+          "rejection_reasons_recomputed": false,
+          "evaluation_verdict": null,
+          "summary_schema_version": 8,
+          "terminal_provenance_verified": false,
+          "controller_checkpoint_restored": false
+        },
+        "Exact": false,
+        "training_completed": false
+      },
+      "recognition_study": "s11-classic-count-recognition-elder-a1",
+      "original_native_runtime_unchanged": true,
+      "original_Train_not_restarted": true,
+      "measured_secant_search_used": false,
+      "phases": {
+        "baseline": {
+          "actual_native": {
+            "execution": "unknown",
+            "all_processes_closed": true,
+            "reason": "bound_unit_and_group_absent",
+            "binding": {
+              "kind": "timelearner_contained_binding",
+              "schema_version": 1,
+              "request_sha256": "d0f8066fbf0815bd6e7e2384ed97305ee98dbb9c206023dd341f07cd5b2a4087",
+              "unit": "timelearner-321c1ed0-bb8a-4fe9-8ef8-6aab4b30f147.service",
+              "invocation_id": "2de44c223c1b474597f5b5b23afa026e",
+              "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-321c1ed0-bb8a-4fe9-8ef8-6aab4b30f147.service",
+              "initial_main_pid": 418966,
+              "initial_start_ticks": "489475635",
+              "sha256": "84f9b6ab2cf7be6aab0856bf05c0af6f5f9269ab06175a0ef8579e6f515d4790"
+            }
+          },
+          "trial_files_present": 8,
+          "process-result.json": {
+            "kind": "timelearner_process_result",
+            "schema_version": 2,
+            "execution": "completed",
+            "reason": "exit_zero_and_whole_group_closed",
+            "returncode": 0,
+            "wall_seconds": 3574.0667844600976,
+            "model_time": null,
+            "runtime_provenance": "loaded_files_captured",
+            "mapping_error": null,
+            "runtime_fingerprint": "747839b156a004bc84e31ce23675ca1dc635037927da041429aeca5130c4ea9e",
+            "ownership_scope": "bound_cgroup",
+            "all_processes_closed": true,
+            "scientific_verdict": null,
+            "operational_diagnostics": {
+              "kind": "timelearner_operational_diagnostics",
+              "schema_version": 1,
+              "policy": "owned-streams-v1",
+              "status": "clear",
+              "error_records": 0,
+              "warning_records": 0,
+              "unclassified_stderr_chunks": 0,
+              "reasons": [],
+              "examples": [],
+              "streams": [
+                {
+                  "path": "stdout.log",
+                  "bytes": 0,
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                {
+                  "path": "stderr.log",
+                  "bytes": 0,
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              ],
+              "contained_streams_match": true,
+              "scientific_verdict": null
+            }
+          },
+          "terminal.json": {
+            "native_process_completed": true,
+            "original_preparation_failure_preserved": true,
+            "source_bytes_unchanged": true,
+            "observations_independently_audited": false,
+            "training_completed": false,
+            "scientific_verdict": null
+          },
+          "full_independent_audit": {
+            "counts": {
+              "TP": 0,
+              "FP": 0,
+              "FN": 1,
+              "TN": 7,
+              "targets": 1,
+              "foils": 7,
+              "target_trials_with_outside_spikes": 0,
+              "accuracy": 0.875,
+              "target_hit_rate": 0.0,
+              "foil_response_rate": 0.0
+            },
+            "effective_threshold": 100.0,
+            "model_revision": "823f6a86f3924b9ee7e222362364ee27fca7b2c8e352d5cbe7a60957a552c824",
+            "complete_source_history_audited": true,
+            "all_input_bytes_unchanged": true,
+            "frozen_model_verified": true,
+            "report_family_response_requirement_met": false,
+            "training_completed": false,
+            "independently_heldout_evaluation": false,
+            "evidence_record": {
+              "path": "/home/user/timelearner-refactor/requests/s11-classic-count-recognition-elder-a1/baseline/independent-audit.json",
+              "sha256": "ddd697ae6b18b3dd465ef2c057a223d31f1610630a8e1872ea6937e80f5266f7",
+              "bytes": 200599
+            }
+          }
+        },
+        "threshold": {
+          "actual_native": {
+            "execution": "running",
+            "all_processes_closed": false,
+            "reason": "kernel_cgroup_observed",
+            "binding": {
+              "kind": "timelearner_contained_binding",
+              "schema_version": 1,
+              "request_sha256": "3d81b244fc0184004b32e85d0d46d1d9f3469cad88cd61e21096e7a5b224a30f",
+              "unit": "timelearner-7257218e-20be-44bb-ada4-b04a1ce836fd.service",
+              "invocation_id": "29cce16d410c4493a20d1e57fa47916a",
+              "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-7257218e-20be-44bb-ada4-b04a1ce836fd.service",
+              "initial_main_pid": 627030,
+              "initial_start_ticks": "489986731",
+              "sha256": "8fbdf081bb74b749b996d4463885491c224d5e8a923e09724773bc3083915ce6"
+            }
+          },
+          "trial_files_present": 0,
+          "proposal": {
+            "threshold": 0.020736298148054874,
+            "full_matrix_peak_margin": -0.0034452345288309982,
+            "nonspiking_proxy": {
+              "TP": 1,
+              "FN": 0,
+              "FP": 1,
+              "TN": 6
+            },
+            "rule": "midpoint_of_target_maximum_and_highest_strictly_lower_foil_maximum",
+            "rows": [
+              {
+                "trial_id": "s11-classic-count-recognition-elder-a1/baseline/trial-0",
+                "sample_id": "phasea-row-0",
+                "label": "target",
+                "lt_maximum": 0.02089192710472107
+              },
+              {
+                "trial_id": "s11-classic-count-recognition-elder-a1/baseline/trial-1",
+                "sample_id": "phasea-row-1",
+                "label": "foil",
+                "lt_maximum": 0.01728587710191659
+              },
+              {
+                "trial_id": "s11-classic-count-recognition-elder-a1/baseline/trial-2",
+                "sample_id": "phasea-row-2",
+                "label": "foil",
+                "lt_maximum": 0.01709755395536175
+              },
+              {
+                "trial_id": "s11-classic-count-recognition-elder-a1/baseline/trial-3",
+                "sample_id": "phasea-row-3",
+                "label": "foil",
+                "lt_maximum": 0.017097553766214524
+              },
+              {
+                "trial_id": "s11-classic-count-recognition-elder-a1/baseline/trial-4",
+                "sample_id": "phasea-row-4",
+                "label": "foil",
+                "lt_maximum": 0.02058066919138868
+              },
+              {
+                "trial_id": "s11-classic-count-recognition-elder-a1/baseline/trial-5",
+                "sample_id": "phasea-row-5",
+                "label": "foil",
+                "lt_maximum": 0.01702608020640828
+              },
+              {
+                "trial_id": "s11-classic-count-recognition-elder-a1/baseline/trial-6",
+                "sample_id": "phasea-row-6",
+                "label": "foil",
+                "lt_maximum": 0.024337161633552068
+              },
+              {
+                "trial_id": "s11-classic-count-recognition-elder-a1/baseline/trial-7",
+                "sample_id": "phasea-row-7",
+                "label": "foil",
+                "lt_maximum": 0.01728587710191659
+              }
+            ],
+            "actual_confirmation_and_full_audit_required": true
+          }
+        }
+      },
+      "readback_records": [
+        {
+          "path": "C:\\Users\\BAKHSH~1\\AppData\\Local\\Temp\\timelearner-elder-recognition-focused-observed-20261122-resume-a5.json",
+          "bytes": 205156,
+          "sha256": "31bb23b2c92160c6ead3099912f9b56fdc18ce9889431a4ec43d56e5668354b9"
+        },
+        {
+          "path": "C:\\Users\\BAKHSH~1\\AppData\\Local\\Temp\\timelearner-elder-all-observed-20261122-resume-a2.json",
+          "bytes": 89266,
+          "sha256": "45a6dcf61608c5a14a5651c71056fa7a4793343500c848abe72b1348b13b5569"
+        },
+        {
+          "path": "C:\\Users\\BAKHSH~1\\AppData\\Local\\Temp\\timelearner-elder-count-study-live-progress-observed-20261122-a1.json",
+          "bytes": 1538,
+          "sha256": "3ec82002beaeb92762e5db03b6b6ef5f6bfad54ce76991a705f77243f436c92f"
+        }
+      ],
+      "scientific_verdict": null
+    }
+  ],
+  "both_original_Trains_stopped_at_budget_not_Exact": true,
+  "both_baselines_completed_and_audited": true,
+  "threshold_proposals_are_not_classification_verdicts": true,
+  "repeated_deterministic_workers_are_not_independent_seed_replicates": true,
+  "no_heavy_artifact_added_to_Git": true,
+  "full_external_primary_archives_pending": true,
+  "scientific_verdict": null
+}

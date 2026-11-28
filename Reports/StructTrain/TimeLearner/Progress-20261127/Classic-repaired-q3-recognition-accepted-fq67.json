@@ -1,0 +1,116 @@
+{
+  "kind": "timelearner_external_scientific_result_reference",
+  "schema_version": 1,
+  "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+  "catalog": {
+    "relative_path": "experiments/2026-11-27/Classic-repaired-q3-recognition-accepted-fq67.json",
+    "bytes": 4301,
+    "sha256": "491ed358c57a803b161490a7c9c8e8aa8cdd60f3653ad0baa08450339f761f8d"
+  },
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/eb/eb8802779e58b4b1cf9b808fa44cc3e69559e8e9475628c37bc8e54ad9166b55",
+      "sha256": "eb8802779e58b4b1cf9b808fa44cc3e69559e8e9475628c37bc8e54ad9166b55",
+      "bytes": 35551
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/d3/d3e592f22e7bae62635c5f107acbd0174252ff41077a6f8fab98732a174323a3",
+      "sha256": "d3e592f22e7bae62635c5f107acbd0174252ff41077a6f8fab98732a174323a3",
+      "bytes": 22887592
+    },
+    "restoration.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/1a/1ae6079608c57f413408e9bf1d1aa659da2b1f573c9ffb495bd34f40f840c956",
+      "sha256": "1ae6079608c57f413408e9bf1d1aa659da2b1f573c9ffb495bd34f40f840c956",
+      "bytes": 425
+    },
+    "physical-edits-audit.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/be/be3431b8c50061a8a4653f137647096e072599949fc26eb620548e35703d195d",
+      "sha256": "be3431b8c50061a8a4653f137647096e072599949fc26eb620548e35703d195d",
+      "bytes": 2023
+    },
+    "baseline-audit.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/17/17327f6918191808ba0e21576ff7a2fe801180696ac4c85e7fbf64823d4e5d27",
+      "sha256": "17327f6918191808ba0e21576ff7a2fe801180696ac4c85e7fbf64823d4e5d27",
+      "bytes": 5783
+    },
+    "confirmation-audit.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/b8/b8dceec6c16d0a291e846a01916d68949bf6aeb7001b7f604e60fbffe9be0e2c",
+      "sha256": "b8dceec6c16d0a291e846a01916d68949bf6aeb7001b7f604e60fbffe9be0e2c",
+      "bytes": 6632
+    }
+  },
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-26/Classic-repaired-q3-recognition-collected-jump12-fq43.json",
+    "sha256": "887a7436f764fb95f002a202561f57d6e901765e562ef68929f13e0a093098ed",
+    "size": 6413
+  },
+  "all210_primary_members_independently_restored": true,
+  "all_actual_native_loaded_file_bytes_verified": true,
+  "all4_native_operations_reaudited": true,
+  "analyses": [
+    {
+      "phase": "baseline",
+      "counts": {
+        "TP": 0,
+        "FP": 0,
+        "FN": 1,
+        "TN": 7,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 0.0,
+        "foil_response_rate": 0.0
+      },
+      "model_revision": "37171255e3b48254910796f7cb40d05fa0e31aca3cccf3b328dba5ec08b71050",
+      "threshold": 100.0,
+      "all8_complete_observations_verified": true,
+      "frozen_model_verified": true
+    },
+    {
+      "phase": "confirmation",
+      "counts": {
+        "TP": 1,
+        "FP": 4,
+        "FN": 0,
+        "TN": 3,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.5,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.5714285714285714
+      },
+      "model_revision": "315a738591e7c20a8a87d7949b113375044bc346280bf4876a3ef1299c409b29",
+      "threshold": 0.013209835982777501,
+      "all8_complete_observations_verified": true,
+      "frozen_model_verified": true
+    }
+  ],
+  "source_training_outcome": "budget_exhausted",
+  "source_epoch": 61,
+  "training_certificate": false,
+  "calibration_protocol": "Historical Same-Matrix",
+  "independent_holdout": false,
+  "original_post_native_pack_failure_retained": true,
+  "native_experiments_restarted": false,
+  "scientific_verdict": null
+}

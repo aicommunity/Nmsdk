@@ -1,0 +1,73 @@
+{
+  "catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-25/Windows-Classic-cap8-full-primary-dz12.json",
+    "sha256": "02f19473798c112f52615b77482fbe0b215acda45acb69e28979626eebc45d16",
+    "size": 3931
+  },
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/b2/b2a1c4d0020fea8cc17a2d2843c7e49c085c5398203abc3de878b4a3e7e974bb",
+      "sha256": "b2a1c4d0020fea8cc17a2d2843c7e49c085c5398203abc3de878b4a3e7e974bb",
+      "bytes": 235952
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/de/deb7006a9a1200e253db5b119bdef632a74af17fcf7cc8083b75381c2b55b4f5",
+      "sha256": "deb7006a9a1200e253db5b119bdef632a74af17fcf7cc8083b75381c2b55b4f5",
+      "bytes": 36958084
+    },
+    "collection-controls.bundle": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/d6/d61c26e446e9a6d14d275da4e4b152dfe994e85da409fe91c5637daebbe349a7",
+      "sha256": "d61c26e446e9a6d14d275da4e4b152dfe994e85da409fe91c5637daebbe349a7",
+      "bytes": 3780
+    },
+    "collection-result.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/c4/c4bc4728f746e59353a291b49a257018bd4e30ea5351da69b2f1abe1f443b037",
+      "sha256": "c4bc4728f746e59353a291b49a257018bd4e30ea5351da69b2f1abe1f443b037",
+      "bytes": 1492
+    },
+    "collection-process-result.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/76/767a846d7abd41dbac15e4499a6bd921c14d8aa5efde968935f9d07ebb0c15ac",
+      "sha256": "767a846d7abd41dbac15e4499a6bd921c14d8aa5efde968935f9d07ebb0c15ac",
+      "bytes": 698
+    },
+    "collection-terminal.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/bb/bb90a1bbaa573b24dd346cafbba9fa5aff746fb577751058e3efc8d1ad962869",
+      "sha256": "bb90a1bbaa573b24dd346cafbba9fa5aff746fb577751058e3efc8d1ad962869",
+      "bytes": 340
+    }
+  },
+  "restoration": {
+    "kind": "timelearner_previously_restored_bundle_full_byte_reverification",
+    "schema_version": 1,
+    "archive_sha256": "deb7006a9a1200e253db5b119bdef632a74af17fcf7cc8083b75381c2b55b4f5",
+    "archive_members_verified": 1271,
+    "retained_regular_files": 1271,
+    "all_names_and_member_hashes_verified": true,
+    "source_archive_modified": false,
+    "native_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "source_job_sha256": "ae8fa0410ebcf850966509d39dbef7a8ae55fa9ec84269dcff550556b778dcf6",
+  "source_model_revision": "b82b884e18fb1871a1db8d6925586c2e50946cb073598d7726b8bcf79c938e56",
+  "training_outcome": "budget_exhausted",
+  "classification_performed": false,
+  "scientific_verdict": null
+}

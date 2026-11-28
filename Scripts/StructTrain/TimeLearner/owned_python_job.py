@@ -137,7 +137,8 @@ def _source_snapshot(root, commit):
     root = _canonical(Path(root))
     def git(*args):
         return subprocess.check_output(['git', '-C', str(root), *args],
-            env={**os.environ, 'GIT_NO_LAZY_FETCH': '1', 'GIT_OPTIONAL_LOCKS': '0'})
+            env={**os.environ, 'GIT_NO_LAZY_FETCH': '1', 'GIT_OPTIONAL_LOCKS': '0'},
+            creationflags=getattr(subprocess, 'CREATE_NO_WINDOW', 0))
     require(git('rev-parse', 'HEAD').decode().strip() == commit and
             not git('status', '--porcelain', '--untracked-files=all', '--ignore-submodules=all').strip(),
             'owned_job_source_epoch_or_status')
@@ -343,6 +344,29 @@ def _worker(request_path):
     return 0 if passed else 1
 
 
+def _allocated_output_bytes(root):
+    """Measure a live output tree while child temporary directories disappear.
+
+    pathlib's recursive iterator can raise during directory descent, before
+    the caller receives a path. Only missing descendants are an expected race;
+    a missing job root, permission failure or I/O error remains fatal.
+    Symlinks are charged with lstat and never traversed.
+    """
+    root = Path(root)
+    allocated = root.lstat().st_blocks*512
+    def traversal_error(error):
+        if not (isinstance(error, FileNotFoundError) and error.filename is not None
+                and Path(error.filename) != root):
+            raise error
+    for directory, children, files in os.walk(root, followlinks=False, onerror=traversal_error):
+        for name in children+files:
+            try:
+                allocated += (Path(directory)/name).lstat().st_blocks*512
+            except FileNotFoundError:
+                continue
+    return allocated
+
+
 def run(request_path):
     raw, _ = _frozen(Path(request_path), 1024*1024)
     request = validate_request(_json(raw));base, job = _paths(request)
@@ -375,12 +399,7 @@ def run(request_path):
         if time.monotonic()-last_check[0] < 1:
             return
         last_check[0] = time.monotonic()
-        allocated = 0
-        for path in job.rglob('*'):
-            try:
-                allocated += path.lstat().st_blocks*512
-            except FileNotFoundError:
-                continue  # Concurrent TemporaryDirectory cleanup is expected.
+        allocated = _allocated_output_bytes(job)
         free = shutil.disk_usage(base).free;peak_allocated[0] = max(peak_allocated[0], allocated)
         minimum_free[0] = min(minimum_free[0], free)
         with (job/'monitor.jsonl').open('a', encoding='utf-8') as stream:

@@ -1,0 +1,61 @@
+{
+  "kind": "timelearner_delay_property_reproduction_design",
+  "schema_version": 1,
+  "fixture": "Tests/Integration/Libraries/Test_PulseLib_DelayOwnership.cpp",
+  "fixture_sha256": "f0e95989447db0275adb9c1b5acc2882582de05df145fbbe7de19f2c2d487c16",
+  "cmake_target": "Test_PulseLib_StorageComponents",
+  "PulseLib_before": "3f5a2205a4e6c02de545cdc214172482ac53c4b2",
+  "Rdk": "561986e9f336ee5914e2d119de90b005e06f3639",
+  "case_discovery": "Production collector_provenance._literal_cases over whole fixture source; not compiled discovery",
+  "expected_case_ids": [
+    "TimeLearnerDelayOwnership/BranchAutomaticGapIgnoresConfiguredFloor",
+    "TimeLearnerDelayOwnership/BranchLegacyCandidateAppliedImmediately",
+    "TimeLearnerDelayOwnership/BranchLegacyCandidateRetainsObservationFloor",
+    "TimeLearnerDelayOwnership/BranchNativeOwnedMutationRejected",
+    "TimeLearnerDelayOwnership/BranchRejectsNonFiniteDelay",
+    "TimeLearnerDelayOwnership/ClassicAutomaticGapIgnoresConfiguredFloor",
+    "TimeLearnerDelayOwnership/ClassicLegacyCandidateAppliedImmediately",
+    "TimeLearnerDelayOwnership/ClassicLegacyCandidateRetainsObservationFloor",
+    "TimeLearnerDelayOwnership/ClassicNativeOwnedMutationRejected",
+    "TimeLearnerDelayOwnership/ClassicRejectsNonFiniteDelay"
+  ],
+  "expected_before_pass_ids": [
+    "TimeLearnerDelayOwnership/BranchAutomaticGapIgnoresConfiguredFloor",
+    "TimeLearnerDelayOwnership/ClassicAutomaticGapIgnoresConfiguredFloor"
+  ],
+  "expected_before_failure_ids": [
+    "TimeLearnerDelayOwnership/BranchLegacyCandidateAppliedImmediately",
+    "TimeLearnerDelayOwnership/BranchLegacyCandidateRetainsObservationFloor",
+    "TimeLearnerDelayOwnership/BranchNativeOwnedMutationRejected",
+    "TimeLearnerDelayOwnership/BranchRejectsNonFiniteDelay",
+    "TimeLearnerDelayOwnership/ClassicLegacyCandidateAppliedImmediately",
+    "TimeLearnerDelayOwnership/ClassicLegacyCandidateRetainsObservationFloor",
+    "TimeLearnerDelayOwnership/ClassicNativeOwnedMutationRejected",
+    "TimeLearnerDelayOwnership/ClassicRejectsNonFiniteDelay"
+  ],
+  "expected_after_all_pass_ids": [
+    "TimeLearnerDelayOwnership/BranchAutomaticGapIgnoresConfiguredFloor",
+    "TimeLearnerDelayOwnership/BranchLegacyCandidateAppliedImmediately",
+    "TimeLearnerDelayOwnership/BranchLegacyCandidateRetainsObservationFloor",
+    "TimeLearnerDelayOwnership/BranchNativeOwnedMutationRejected",
+    "TimeLearnerDelayOwnership/BranchRejectsNonFiniteDelay",
+    "TimeLearnerDelayOwnership/ClassicAutomaticGapIgnoresConfiguredFloor",
+    "TimeLearnerDelayOwnership/ClassicLegacyCandidateAppliedImmediately",
+    "TimeLearnerDelayOwnership/ClassicLegacyCandidateRetainsObservationFloor",
+    "TimeLearnerDelayOwnership/ClassicNativeOwnedMutationRejected",
+    "TimeLearnerDelayOwnership/ClassicRejectsNonFiniteDelay"
+  ],
+  "runtime_executed": false,
+  "compiled_discovery_completed": false,
+  "source_fix_applied": false,
+  "frequency_hz": 2000,
+  "input_pulses": 2,
+  "scope": "Real storage/Environment and effective NDatasetMatrix property; no nested scheduler or copied production function body",
+  "exclusions": [
+    "Actual stimulus gap over scheduled ticks",
+    "connected/external assignment",
+    "active unfinished native probe",
+    "other frequencies and dimensions"
+  ],
+  "scientific_verdict": null
+}

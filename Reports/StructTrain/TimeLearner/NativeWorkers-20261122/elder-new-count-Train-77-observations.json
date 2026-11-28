@@ -1,0 +1,151 @@
+{
+  "observed_utc": "2026-11-22T20:18:01.535928+00:00",
+  "job": "classic-measured-count-m4-elder-k1",
+  "launch-context.json": {
+    "request_sha256": "e4133e612efc94cd4ebd7c6d16d5e2164c3d942034bf128cc60e8b97863a0733",
+    "tool_commit": "83f1369fd50ace51f834e40b7f2bd8bd2fd76e2e",
+    "original_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+    "job_sha256": "62ed2197480f90219ea12b35727977095361e81c5806e143c5777da9f538f4db",
+    "factor_job_sha256": "cc6120d921fac7b171c7661014f10e460cf06bfec1dd98e48747f75278d3d690",
+    "operation": "train",
+    "scientific_verdict": null
+  },
+  "supervisor-identity.json": {
+    "pid": 2609066,
+    "start_ticks": "494671983",
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "uid": 1000
+  },
+  "supervisor_live": true,
+  "outer": {
+    "execution": "running",
+    "all_processes_closed": false,
+    "reason": "kernel_cgroup_observed",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "2775d11934bc188e56d37e8fb1f89f86c7ff338c86d962be460cfbf7851dd279",
+      "unit": "timelearner-a4d2a868-c0e5-4b2d-b66d-7e0c5382e83c.service",
+      "invocation_id": "d6cbc0ea56954d15afc20febe4a2b456",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-a4d2a868-c0e5-4b2d-b66d-7e0c5382e83c.service",
+      "initial_main_pid": 2612912,
+      "initial_start_ticks": "494672745",
+      "sha256": "59e636789643dec604bfc1de4ea6b9e3e06468af996d42ddff5346e0718ab5ae"
+    },
+    "state": {
+      "Type": "exec",
+      "Restart": "no",
+      "RemainAfterExit": "yes",
+      "MainPID": "2612912",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-a4d2a868-c0e5-4b2d-b66d-7e0c5382e83c.service",
+      "MemoryMax": "2147483648",
+      "TasksMax": "128",
+      "KillMode": "control-group",
+      "Description": "TimeLearner contained attempt a4d2a868-c0e5-4b2d-b66d-7e0c5382e83c",
+      "LoadState": "loaded",
+      "ActiveState": "active",
+      "SubState": "running",
+      "InvocationID": "d6cbc0ea56954d15afc20febe4a2b456"
+    },
+    "memory_max": 2147483648,
+    "tasks_max": 128,
+    "scientific_verdict": null
+  },
+  "native": {
+    "execution": "running",
+    "all_processes_closed": false,
+    "reason": "kernel_cgroup_observed",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "0d199f9f3447391cd6de9d2583f8227cb2d011353cee6f897051af50f11b724e",
+      "unit": "timelearner-a2ed26c0-e5ae-4f8c-806d-edae1f1285a9.service",
+      "invocation_id": "328cf9612c324a93828da40d25ba0e22",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-a2ed26c0-e5ae-4f8c-806d-edae1f1285a9.service",
+      "initial_main_pid": 2617049,
+      "initial_start_ticks": "494674224",
+      "sha256": "48f1df3630a402e010f254f1892fd5a24cd6179e6ca810590fcf47d552d7f71f"
+    },
+    "state": {
+      "Type": "exec",
+      "Restart": "no",
+      "RemainAfterExit": "yes",
+      "MainPID": "2617049",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-a2ed26c0-e5ae-4f8c-806d-edae1f1285a9.service",
+      "MemoryMax": "17179869184",
+      "TasksMax": "64",
+      "KillMode": "control-group",
+      "Description": "TimeLearner contained attempt a2ed26c0-e5ae-4f8c-806d-edae1f1285a9",
+      "LoadState": "loaded",
+      "ActiveState": "active",
+      "SubState": "running",
+      "InvocationID": "328cf9612c324a93828da40d25ba0e22"
+    },
+    "memory_max": 17179869184,
+    "tasks_max": 64,
+    "scientific_verdict": null
+  },
+  "preflight-accepted.json": {
+    "initial_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+    "same_actual_cold_graph_as_resistance_control": true,
+    "job_sha256": "62ed2197480f90219ea12b35727977095361e81c5806e143c5777da9f538f4db",
+    "factor_model_revision": "e23cda6cb58312d2e51a92df035baf9fb8629efc42aecbad4da1e39a47d7864e",
+    "factor_synapses": 2,
+    "initial_nodes": 44,
+    "factor_nodes": 45,
+    "training_started": false,
+    "scientific_verdict": null
+  },
+  "native_primary_file_counts": {
+    "raw-trial-*.json": 77,
+    "probe_trial_*.json": 0,
+    "train_stopped_trial_*.json": 0,
+    "composite*.json": 0
+  },
+  "native_file_count": 157,
+  "native_recent_files": [
+    {
+      "name": "raw-trial-74.csv",
+      "bytes": 368496
+    },
+    {
+      "name": "raw-trial-75.json",
+      "bytes": 5087
+    },
+    {
+      "name": "raw-trial-75.csv",
+      "bytes": 381951
+    },
+    {
+      "name": "raw-trial-76.json",
+      "bytes": 5096
+    },
+    {
+      "name": "raw-trial-76.csv",
+      "bytes": 381995
+    },
+    {
+      "name": "raw-trial-77.csv",
+      "bytes": 382063
+    },
+    {
+      "name": "raw-trial-77.json",
+      "bytes": 5088
+    },
+    {
+      "name": "raw-trial-78.csv",
+      "bytes": 228823
+    }
+  ],
+  "reserved": {
+    "disk_bytes": 8589934592,
+    "memory_bytes": 19327352832,
+    "slots": 1
+  }
+}

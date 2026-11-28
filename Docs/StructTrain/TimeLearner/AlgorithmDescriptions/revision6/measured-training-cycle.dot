@@ -1,0 +1,31 @@
+digraph Learning {
+ graph [rankdir=TB,bgcolor=white,pad=0.12,nodesep=0.30,ranksep=0.25];
+ node [shape=box,fontname="Times New Roman",fontsize=18,margin="0.10,0.08"];
+ edge [fontname="Times New Roman",fontsize=16,arrowsize=0.7];
+ initial [label="Задать исходную структуру,\nцелевой паттерн и ограничения"];
+ capture [label="Измерить собственные\nисходные уровни путей"];
+ captured [shape=diamond,label="Исходные измерения\nдостоверны?"];
+ select [label="Выбрать путь и\nдопустимый кандидат"];
+ allowed [shape=diamond,label="Разрешено\nследующее действие?"];
+ probe [label="Подготовить модель\nи выполнить полную пробу"];
+ valid [shape=diamond,label="Измерение\nдостоверно?"];
+ errors [label="Вычислить ошибки времени\nи амплитуды; сохранить точку"];
+ next [shape=diamond,label="Исследование\nпутей завершено?"];
+ verify [label="Свежие измерения всех путей\nна конечной структуре"];
+ verified [shape=diamond,label="Контрольные измерения\nдостоверны?"];
+ result [shape=diamond,label="Все условия\nвыполнены?"];
+ exact [shape=oval,label="Сохранить модель\nи результат общей проверки"];
+ recovery [label="Повторить или сменить вариант\nпо объявленному правилу"];
+ recoverable [shape=diamond,label="Продолжение\nразрешено?"];
+ stop [shape=oval,label="Сохранить фактическую модель\nи конкретную причину остановки"];
+ initial->capture->captured;
+ captured->select [label="да"];captured->stop [label="нет"];
+ select->allowed;
+ allowed->probe [label="да"];allowed->stop [label="нет"];
+ probe->valid;valid->errors [label="да"];valid->recoverable [label="нет"];
+ recoverable->recovery [label="да"];recoverable->stop [label="нет"];
+ recovery->allowed;
+ errors->next;next->select [label="нет"];next->verify [label="да"];
+ verify->verified;verified->result [label="да"];verified->stop [label="нет"];
+ result->exact [label="да"];result->select [label="нет, новый проход"];
+}

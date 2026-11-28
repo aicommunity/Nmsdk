@@ -1,0 +1,108 @@
+{
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/Windows8-current496-independent-fr607.json",
+    "size": 3558,
+    "sha256": "0b0115229bbe8bfc7c874be30c8bf9262cbd1dad10dacc1c7f7c13004a3a75e8"
+  },
+  "catalog": {
+    "kind": "actual_Win8_current496_full_independent_reader_evidence",
+    "schema_version": 1,
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/df/df09f1601aef191c1507dd70a70ec83964a08138f071bd51d725cf1049d0cf11",
+        "sha256": "df09f1601aef191c1507dd70a70ec83964a08138f071bd51d725cf1049d0cf11",
+        "bytes": 6413
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/89/899d61f0db0f2dbabb995477a03d9f4f72255cd8e1f7a05064c37e95178a6e73",
+        "sha256": "899d61f0db0f2dbabb995477a03d9f4f72255cd8e1f7a05064c37e95178a6e73",
+        "bytes": 6052648
+      }
+    },
+    "members": 33,
+    "analysis": {
+      "kind": "actual_Win8_current496_full_independent_readback",
+      "schema_version": 1,
+      "source_catalogs": {
+        "primary": {
+          "relative_path": "experiments/2026-11-27/Windows8-current-runtime-Classic-control8-primary-fr598.json",
+          "bytes": 4689,
+          "sha256": "2260b0233b168b20258e2252e2d78eaec90ae918a4719b7d535626e5184520bd"
+        },
+        "source": {
+          "relative_path": "experiments/2026-11-27/Elder-Classic-Count8-second-pulse18-primary-fr576.json",
+          "bytes": 9011,
+          "sha256": "6fb06ae4b12f2d94df3f27cddb3d64884489b6771ec54dbffa46e06385172955"
+        },
+        "origin": {
+          "relative_path": "experiments/2026-11-27/Windows14-current-runtime-for-Win8-fr579.json",
+          "bytes": 2991,
+          "sha256": "99cb8de77ce1f42c80510ec08bf3c7b311513eaa04de9fbdb5a239b768ca548c"
+        }
+      },
+      "primary_members": 496,
+      "source_members": 185,
+      "origin_members": 66,
+      "all_declared_members_restored": true,
+      "native_observations": 8,
+      "counts": {
+        "TP": 1,
+        "FP": 1,
+        "FN": 0,
+        "TN": 6,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.14285714285714285
+      },
+      "all_eight_responses_preserved_1e12": true,
+      "actual_native_loaded_files": 48,
+      "actual_native_and_publisher_loaded_bytes_verified": true,
+      "all_four_controls_Git_verified": [
+        {
+          "role": "bootstrap",
+          "commit": "7110c006e8f312873462a8e824e9847034e0c181",
+          "files": 6,
+          "all_bytes_verified": true
+        },
+        {
+          "role": "owner",
+          "commit": "ae8c1903da02d929725060f45e1547cb7bd605aa",
+          "files": 5,
+          "all_bytes_verified": true
+        },
+        {
+          "role": "native",
+          "commit": "4a1c5c5cf27633b90d9ff5acf4bf426766e27330",
+          "files": 4,
+          "all_bytes_verified": true
+        },
+        {
+          "role": "publisher",
+          "commit": "b749e4e8dcb2d582efdcf796600b46e890cc5a58",
+          "files": 5,
+          "all_bytes_verified": true
+        }
+      ],
+      "source_before_after_equal": true,
+      "model_document_identical_to_Linux_source": true,
+      "only_declared_ini_paths_changed": true,
+      "source_namespace_5224_independent_remote_filesystem_reattestation": false,
+      "no_new_native_computation": true,
+      "original_closed_process_ownership_not_reattested": true,
+      "scientific_verdict": null
+    },
+    "reader_controls_commit": "65e2b7b894bd92c25c7db941a88f20a4335d797a",
+    "reader_loaded_maps_and_bytes_retained": true,
+    "acceptance_pending": true,
+    "scientific_verdict": null
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "kind": "timelearner_actual_Delay_build_and_fixed_Branch_queue",
+  "schema_version": 1,
+  "source_root": "a303fbacb42e860a6298944151f0674ff447dda3",
+  "candidate_pulselib": "01eed43124e6dbb424c192d7a5b2045c1d4a22cf",
+  "native_cpp_cases_declared": 132,
+  "native_cpp_cases_executed": 0,
+  "compiled_candidate_not_yet_admitted": true,
+  "actual_observation": {
+    "observed_utc": "2026-11-23T22:48:18.658017+00:00",
+    "tasks": {
+      "TimeLearner-windows-delay-candidate-native-sdk-build-av3": {
+        "last_result": 267009,
+        "instances": 1,
+        "state": 4
+      },
+      "TimeLearner-windows-branch-matched-duration-holdout-av9": {
+        "last_result": 267009,
+        "instances": 1,
+        "state": 4
+      }
+    },
+    "files": {
+      "jobs/windows-delay-candidate-native-sdk-build-av3/build-process/owned-process.json": {
+        "executable": "C:\\Windows\\System32\\cmd.exe",
+        "creation_filetime": "134399459477941991",
+        "pid": 5732,
+        "job_name": "Local\\TimeLearner-bcf8407c-9ac4-4904-90d9-df399734dbbe",
+        "runtime_fingerprint": "80611be1ce9d571b6dc73877bf4d26b80a636e4de81108814b175a4d36cd798d",
+        "suspended_until_limits_applied": true
+      },
+      "controls/windows-branch-matched-duration-holdout-av9/owner.json": {
+        "pid": 20756,
+        "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+        "creation_filetime": "134399466222607045"
+      },
+      "controls/windows-branch-matched-duration-holdout-av9/state.json": {
+        "stage": "waiting-for-exact-private-build-whole-process-closure",
+        "observed_utc": "2026-11-23T22:30:22.466954+00:00",
+        "scientific_verdict": null
+      },
+      "controls/windows-branch-matched-duration-holdout-av9/orchestration.json": {
+        "actor": "C:\\Projects\\TimeLearnerWorker\\source-delay-candidate-native-win-av3",
+        "source_root": "a303fbacb42e860a6298944151f0674ff447dda3",
+        "sdk_source": "C:\\Projects\\TimeLearnerWorker\\source-measured-count-native-win-a3",
+        "native_runtime": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-measured-count-recognition-physical-replay-q1\\runtime.json",
+        "source_output": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-recognition-physical-replay-q1",
+        "output": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-matched-duration-holdout-av9",
+        "accepted_validation": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-frozen-study-preparation-validation-a1\\terminal.json",
+          "sha256": "8f25960b6f4d69d6674efa5a8f5bcbf97ba0200a24215d68abe8678007309a02",
+          "size": 2674
+        },
+        "previous_chain": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-delay-candidate-native-sdk-build-av3",
+        "supervisor_sha256": "a9bc5bb2e0ed3d1829f533bf9b70bec4116d977c9584c0eb9283278713d7824a"
+      }
+    },
+    "kernel": {
+      "jobs/windows-delay-candidate-native-sdk-build-av3/build-process/owned-process.json": true,
+      "controls/windows-branch-matched-duration-holdout-av9/owner.json": true
+    },
+    "job_directories": [
+      "jobs/windows-delay-candidate-native-sdk-build-av3",
+      "controls/windows-branch-matched-duration-holdout-av9"
+    ],
+    "root_file_names": {
+      "jobs/windows-delay-candidate-native-sdk-build-av3": [
+        "build-runtime.json",
+        "build.cmd",
+        "commands.json",
+        "dependencies-before.json.gz",
+        "producer.py",
+        "source-before.json",
+        "specification.json",
+        "tools-before.json",
+        "vcvars.log"
+      ],
+      "controls/windows-branch-matched-duration-holdout-av9": [
+        ".gitattributes",
+        ".gitignore",
+        "controls.bundle",
+        "dispatch.json",
+        "dispatch.ps1",
+        "launch.cmd",
+        "orchestration.json",
+        "owner.json",
+        "preparation.json",
+        "state.json",
+        "stderr.log",
+        "stdout.log",
+        "supervisor.py",
+        "task.xml"
+      ]
+    },
+    "actual_native_trials": {
+      "jobs/windows-delay-candidate-native-sdk-build-av3": 0,
+      "controls/windows-branch-matched-duration-holdout-av9": 0
+    },
+    "public_worker_log_tails": {
+      "jobs/windows-delay-candidate-native-sdk-build-av3/build-process/stdout.log": "ociation.cpp.obj\r\n[459/543] Building CXX object Libraries\\Nmsdk-PulseLib\\CMakeFiles\\Nmsdk-PulseLib.core.dir\\Core\\TimeLearner\\ResponseDomainEvidenceJson.cpp.obj\r\n[460/543] Building CXX object Libraries\\Nmsdk-PulseLib\\CMakeFiles\\Nmsdk-PulseLib.core.dir\\Core\\TimeLearner\\StimulusSubset.cpp.obj\r\n[461/543] Building CXX object Libraries\\Nmsdk-PulseLib\\CMakeFiles\\Nmsdk-PulseLib.core.dir\\Core\\TimeLearner\\StorageProfiles.cpp.obj\r\nC:\\Projects\\TimeLearnerWorker\\source-delay-candidate-native-win-av3\\Libraries\\Nmsdk-PulseLib\\Core\\TimeLearner\\../../../../Rdk/Core/Engine/UClassImageRegistry.h(10): warning C4275: non dll-interface class 'std::runtime_error' used as base for dll-interface class 'RDK::ClassImageError'\nC:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\include\\stdexcept(100): note: see declaration of 'std::runtime_error'\nC:\\Projects\\TimeLearnerWorker\\source-delay-candidate-native-win-av3\\Libraries\\Nmsdk-PulseLib\\Core\\TimeLearner\\../../../../Rdk/Core/Engine/UClassImageRegistry.h(10): note: see declaration of 'RDK::ClassImageError'\n[462/543] Building CXX object Libraries\\Nmsdk-PulseLib\\CMakeFiles\\Nmsdk-PulseLib.core.dir\\Core\\TimeLearner\\StrictNativeJson.cpp.obj\r\n[463/543] Building CXX object Libraries\\Nmsdk-PulseLib\\CMakeFiles\\Nmsdk-PulseLib.core.dir\\Core\\TimeLearner\\TrainingCapacitance.cpp.obj\r\n[464/543] Automatic MOC and UIC for target NeuroModelerConsole\r\n[465/543] Automatic MOC and UIC for target Test_PulseLib_StorageComponents\r\n[466/543] Linking CXX static library C:\\Projects\\TimeLearnerWorker\\runtime-delay-candidate-native-win-av3\\Lib.CMake\\Nmsdk-MotionControlLib.core.lib\r\n[467/543] Linking CXX static library C:\\Projects\\TimeLearnerWorker\\runtime-delay-candidate-native-win-av3\\Lib.CMake\\Nmsdk-PulseLib.core.lib\r\n[468/543] Building CXX object App\\NeuroModelerConsole\\CMakeFiles\\NeuroModelerConsole.dir\\NeuroModelerConsole_autogen\\mocs_compilation.cpp.obj\r\n[469/543] Building CXX object App\\NeuroModelerConsole\\CMakeFiles\\NeuroModelerConsole.dir\\main.cpp.obj\r\n[470/543] Building CXX object App\\NeuroModelerConsole\\CMakeFiles\\NeuroModelerConsole.dir\\TimeLearnerCalibrationJob.cpp.obj\r\n[471/543] Building CXX object App\\NeuroModelerConsole\\CMakeFiles\\NeuroModelerConsole.dir\\TimeLearnerTrainingJob.cpp.obj\r\n[472/543] Building CXX object App\\NeuroModelerConsole\\CMakeFiles\\NeuroModelerConsole.dir\\TimeLearnerProbeJob.cpp.obj\r\n[473/543] Building CXX object App\\NeuroModelerConsole\\CMakeFiles\\NeuroModelerConsole.dir\\TimeLearnerTransportJob.cpp.obj\r\n[474/543] Building CXX object App\\NeuroModelerConsole\\CMakeFiles\\NeuroModelerConsole.dir\\ClDescGenerator.cpp.obj\r\n[475/543] Building CXX object App\\NeuroModelerConsole\\CMakeFiles\\NeuroModelerConsole.dir\\PropertyAliasAnalyzer.cpp.obj\r\n[476/543] Building CXX object App\\NeuroModelerConsole\\CMakeFiles\\NeuroModelerConsole.dir\\__\\__\\Libraries\\Libraries.cpp.obj\r\n[477/543] Building CXX object App\\NeuroModelerConsole\\CMakeFiles\\NeuroModelerConsole.dir\\__\\__\\Rdk\\Core\\Application\\UEngineControl.cpp.obj\r\n",
+      "jobs/windows-delay-candidate-native-sdk-build-av3/build-process/stderr.log": "CMake Warning (dev) at C:/Projects/TimeLearnerWorker/build-a4/vcpkg_installed/x64-windows-tl/share/boost/vcpkg-cmake-wrapper.cmake:3 (_find_package):\n  Policy CMP0167 is not set: The FindBoost module is removed.  Run \"cmake\n  --help-policy CMP0167\" for policy details.  Use the cmake_policy command to\n  set the policy and suppress this warning.\n\nCall Stack (most recent call first):\n  C:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (include)\n  cmake/RdkDefines.cmake:76 (find_package)\n  CMakeLists.txt:95 (include)\nThis warning is for project developers.  Use -Wno-dev to suppress it.\n\nCMake Warning (dev) at C:/Projects/TimeLearnerWorker/build-a4/vcpkg_installed/x64-windows-tl/share/boost/vcpkg-cmake-wrapper.cmake:3 (_find_package):\n  Policy CMP0167 is not set: The FindBoost module is removed.  Run \"cmake\n  --help-policy CMP0167\" for policy details.  Use the cmake_policy command to\n  set the policy and suppress this warning.\n\nCall Stack (most recent call first):\n  C:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (include)\n  Libraries/Rdk-CvBasicLib/CMakeLists.txt:47 (find_package)\nThis warning is for project developers.  Use -Wno-dev to suppress it.\n\nCMake Warning (dev) at C:/Projects/TimeLearnerWorker/build-a4/vcpkg_installed/x64-windows-tl/share/boost/vcpkg-cmake-wrapper.cmake:3 (_find_package):\n  Policy CMP0167 is not set: The FindBoost module is removed.  Run \"cmake\n  --help-policy CMP0167\" for policy details.  Use the cmake_policy command to\n  set the policy and suppress this warning.\n\nCall Stack (most recent call first):\n  C:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (include)\n  App/NeuroModeler/CMakeLists.txt:271 (find_package)\nThis warning is for project developers.  Use -Wno-dev to suppress it.\n\nCMake Warning (dev) at C:/Projects/TimeLearnerWorker/build-a4/vcpkg_installed/x64-windows-tl/share/boost/vcpkg-cmake-wrapper.cmake:3 (_find_package):\n  Policy CMP0167 is not set: The FindBoost module is removed.  Run \"cmake\n  --help-policy CMP0167\" for policy details.  Use the cmake_policy command to\n  set the policy and suppress this warning.\n\nCall Stack (most recent call first):\n  C:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (include)\n  App/NeuroModelerConsole/CMakeLists.txt:61 (find_package)\nThis warning is for project developers.  Use -Wno-dev to suppress it.\n\nCMake Warning:\n  Manually-specified variables were not used by the project:\n\n    VCPKG_OVERLAY_TRIPLETS\n\n\n"
+    }
+  },
+  "Branch_source_model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+  "Branch_native_SDK_unchanged": "80330fc51c4713c7bd1936be98e43ec0217b2337",
+  "Branch_expected_trials": 8,
+  "Branch_actual_trials": 0,
+  "scientific_verdict": null
+}
