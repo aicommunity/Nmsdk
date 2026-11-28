@@ -21,6 +21,7 @@
 #include <exception>
 #include <functional>
 #include <iomanip>
+#include <iostream>
 #include <limits>
 #include <locale>
 #include <sstream>
@@ -79,9 +80,29 @@ protected:
                 << " type=" << error.GetType() << " number=" << error.GetNumber()
                 << " file=" << error.GetExFileName() << ":" << error.GetExLineNumber()
                 << " object=" << error.GetObjectName() << " message=" << error.what();
+            CleanupLedger(phase);
         }
-        catch(const std::exception& error) { ADD_FAILURE() << phase << ": " << error.what(); }
-        catch(...) { ADD_FAILURE() << phase << ": unknown native exception"; }
+        catch(const std::exception& error) { ADD_FAILURE() << phase << ": " << error.what(); CleanupLedger(phase); }
+        catch(...) { ADD_FAILURE() << phase << ": unknown native exception"; CleanupLedger(phase); }
+    }
+
+    void CleanupLedger(const char* phase)
+    {
+        // Logger failures can mask the original caught lifecycle exception.
+        // The operation ledger survives independently and includes its reason.
+        try {
+            unsigned visited=0;
+            std::function<void(UEPtr<UContainer>)> walk=[&](UEPtr<UContainer> node) {
+                if(!node || visited++>=512) return;
+                const auto failure=node->LastOperationFailure();
+                if(failure.Sequence || failure.Overflowed)
+                    std::cout << "CleanupLedger phase=" << phase << " component=" << node->GetFullName()
+                        << " sequence=" << failure.Sequence << " operation=" << failure.Operation
+                        << " reason=" << failure.Reason << std::endl;
+                for(int index=0;index<node->GetNumComponents();++index)walk(node->GetComponentByIndex(index));
+            };
+            walk(model);
+        } catch(...) { std::cout << "CleanupLedger unavailable phase=" << phase << std::endl; }
     }
 
     void TearDown() override
@@ -664,6 +685,40 @@ TEST_F(AxoneLifecycle, TreeCopyRefreshesPortsAndPreservesLearnedChildParameters)
     EXPECT_EQ(copy->ResolvePortPath("left"), "Left.Output");
     EXPECT_DOUBLE_EQ(Zone(copy->GetPortComponent("left"), "Segment1.LTZone")->Threshold.GetData(), .057);
     EXPECT_DOUBLE_EQ(copy->GetComponentL<NAxoneDelay>("Left.Delay1", true)->DelayTime.GetData(), .007);
+}
+
+TEST_F(AxoneLifecycle, TreeFreeDetachesCompleteGraphWithoutRebuilding)
+{
+    auto tree=Take<NAxoneTreeChain>("NAxoneTreeChain");
+    tree->Topology=TreeTopology();
+    Init();
+    const auto marker=tree->OperationFailureSequence();
+    ASSERT_NO_THROW(tree->Free());
+    EXPECT_FALSE(tree->GetOwner());
+    EXPECT_EQ(tree->GetNumComponents(),0);
+    EXPECT_FALSE(model->GetComponent("Axon",true));
+    EXPECT_FALSE(tree->HasOperationFailureSince(marker));
+    EXPECT_TRUE(tree->GetPropertyAliases().empty());
+}
+
+TEST_F(AxoneLifecycle, TreeCanBeReacquiredAfterWholeModelDestruction)
+{
+    auto tree=Take<NAxoneTreeChain>("NAxoneTreeChain");
+    tree->Topology=TreeTopology("NAxoneChainAndDelay");
+    Init();
+    ASSERT_NO_THROW(environment->DestroyModel());
+    ASSERT_FALSE(environment->GetModel());
+    ASSERT_TRUE(environment->CreateModel("NModel"));
+    model=dynamic_pointer_cast<UNet>(environment->GetModel());
+    ASSERT_TRUE(model);
+    model->SetGlobalTimeStep(20000);
+    auto next=Take<NAxoneTreeChain>("NAxoneTreeChain","Reacquired");
+    next->Topology=TreeTopology("NAxoneChain",4,true);
+    Init();
+    RequireInitialized(next);
+    EXPECT_EQ(next->ResolvePortPath("left"),"Left.Output");
+    EXPECT_EQ(next->ResolvePortPath("later"),"Later.Output");
+    EXPECT_EQ(next->GetComponentL<NAxoneChain>("Left",true)->NumSegments.GetData(),4);
 }
 
 struct TreeCase { std::string id, carrier; unsigned frequency; };
