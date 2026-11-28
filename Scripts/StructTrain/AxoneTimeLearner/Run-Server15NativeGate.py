@@ -120,6 +120,7 @@ def run(args) -> dict:
     producer_before = {"path": str(producer), "sha256": sha(producer), "size": producer.stat().st_size}
     result = {"kind": "axone_server15_native_gate", "schema_version": 1,
               "source_commit": args.expected_root_commit, "partition": args.partition,
+              "selected_test_id": args.case_id,
               "archive_id": args.archive_id, "scientific_verdict": None,
               "complete": False, "native_checks_passed": False}
     try:
@@ -154,6 +155,9 @@ def run(args) -> dict:
                     sha(cpp_path) == recipe["test_source"]["sha256"], "declared_native_test_source_changed")
             cpp_text = cpp_path.read_text(encoding="utf-8")
         expected = declared_tests(recipe, cpp_text, args.partition)
+        if args.case_id is not None:
+            require(args.case_id in expected, "selected_case_not_in_declared_partition")
+            expected = [args.case_id]
         closure = source_closure(source)
         before = inventory(runtime)
         require(before and "Test_PulseLib_StorageComponents.exe" in before and
@@ -218,6 +222,7 @@ def main() -> int:
     parser.add_argument("--archive-id", required=True)
     parser.add_argument("--expected-root-commit", required=True)
     parser.add_argument("--partition", choices=("lifecycle", "linear", "tree", "all"), default="all")
+    parser.add_argument("--case-id", help="One exact test identity already present in the declared partition.")
     parser.add_argument("--wall-seconds", type=int, default=1800)
     parser.add_argument("--memory-bytes", type=int, default=2 * 1024**3)
     args = parser.parse_args()
