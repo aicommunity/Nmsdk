@@ -3,6 +3,11 @@
 Reuse the complete immutable source namespace. Decode its package once and
 reference it in the resolved job without copying its large history tree.
 The existing prepared_diagnostic executor performs the native run afterwards.
+
+Declaration version1 retains the two historical Count proof protocols.
+Version2 names the actual contained cold Train run-manifest as source_proof
+and recomputes its full production audit, independently of N0/N1 normalization.
+Both versions retain budget_exhausted and never claim completed training.
 """
 import argparse
 import json
@@ -77,7 +82,7 @@ def prepare(declaration):
               'native_runtime','sdk_source','destination','inputs','output','run_id','python_source'}
     require(type(declaration) is dict and set(declaration)==expected and
             declaration['kind']=='timelearner_stopped_baseline_preparation' and
-            type(declaration['schema_version']) is int and declaration['schema_version']==1,
+            type(declaration['schema_version']) is int and declaration['schema_version'] in (1,2),
             'stopped_baseline_preparation_schema')
     native=Path(declaration['source_native']).resolve(strict=True)
     destination=Path(declaration['destination']).resolve(strict=True)
@@ -87,10 +92,17 @@ def prepare(declaration):
             'stopped_baseline_fresh_separate_paths')
     proof_path=Path(declaration['source_proof']).resolve(strict=True)
     audit_path=Path(declaration['source_audit']).resolve(strict=True)
-    proof=load(proof_path);audit=load(audit_path)
-    protocol=closed_count_source(proof,native,audit)
+    audit=load(audit_path)
+    if declaration['schema_version'] == 1:
+        proof=load(proof_path)
+        protocol=closed_count_source(proof,native,audit)
+        audited_source=proof['source_package']
+    else:
+        from .stopped_pipeline_source import closed_pipeline_source
+        protocol=closed_pipeline_source(proof_path,native,audit)
+        audited_source=protocol['source_package']
     source=native/'train_stopped_state.json';before=file_record(source)
-    require(before==proof['source_package'],'stopped_baseline_audited_package_bytes_changed')
+    require(before==audited_source,'stopped_baseline_audited_package_bytes_changed')
     package=load(source)
     require(package['kind']=='timelearner_stopped_state' and package['state_kind']=='diagnostic' and
             package['certificate'] is None and package['training_outcome']=='budget_exhausted' and
