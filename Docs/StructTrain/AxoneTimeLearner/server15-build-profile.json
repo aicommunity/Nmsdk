@@ -1,0 +1,96 @@
+{
+  "kind": "axone_server15_build_profile",
+  "schema_version": 1,
+  "date": "2026-11-28",
+  "reference": {
+    "root": "E:/Science-Repo/nmsdk-git",
+    "checkout_commit": "1dc2879785fe4a49fd04bdf4323fe955f6763be2",
+    "branch": "autoPreset",
+    "cache": {
+      "path": "E:\\Science-Repo\\nmsdk-git\\build\\win-vs2022-ninja-release-localqt\\CMakeCache.txt",
+      "bytes": 41634,
+      "sha256": "50082fb48a9b18b37ee95fffd5862327b0c3115257ab989ac24329c45406ec2b"
+    },
+    "cache_values": {
+      "BUILD_SHARED_LIBS": "OFF",
+      "BUILD_TESTING": "ON",
+      "CMAKE_BUILD_TYPE": "Release",
+      "CMAKE_CXX_STANDARD": "20",
+      "CMAKE_MAKE_PROGRAM": "C:/ProgramData/chocolatey/bin/ninja.exe",
+      "CMAKE_PREFIX_PATH": "C:\\Qt\\5.15.2\\msvc2019_64",
+      "CMAKE_TOOLCHAIN_FILE": "E:/Science-Repo/nmsdk-git/cmake/vcpkg_toolchain_from_env.cmake",
+      "NMSDK_DEPENDENCY_PROFILE": "v143-localqt",
+      "NMSDK_QT_PROVIDER": "local",
+      "NMSDK_USE_WEBENGINE": "OFF",
+      "NO_MOTION_CONTROL": "ON",
+      "RDK_LLM_BUILD_EMBEDDED": "OFF",
+      "RDK_UNICODE_RUN": "ON",
+      "RDK_USE_CUDA": "OFF",
+      "RDK_USE_DARKNET": "OFF",
+      "RDK_USE_LLM": "ON",
+      "RDK_USE_MATLAB": "OFF",
+      "RDK_USE_ODESOLVER": "OFF",
+      "RDK_USE_OPENCV": "OFF",
+      "RDK_USE_PYTHON": "OFF",
+      "RDK_USE_SQL": "OFF",
+      "RDK_USE_TENSORFLOW": "OFF",
+      "VCPKG_HOST_TRIPLET": "x64-windows",
+      "VCPKG_INSTALLED_DIR": "E:/Science-Repo/nmsdk-git/.deps/vcpkg/v143-localqt",
+      "VCPKG_MANIFEST_FEATURES": "llm;tests",
+      "VCPKG_TARGET_TRIPLET": "x64-windows",
+      "CMAKE_COMMAND": "C:/Program Files/CMake/bin/cmake.exe",
+      "CMAKE_GENERATOR": "Ninja"
+    },
+    "vcpkg_commit": "cc73782a88db48af17f8bfb8328d4cab3d4c246f",
+    "manifest_baseline": "5cad485d1ddb649c8fa1022bf0b3908555e6e6ba",
+    "compiler_version": "19.44.35230.0",
+    "source_modified": false
+  },
+  "server": {
+    "ssh": "user@10.245.1.15",
+    "computer": "AQUA3060",
+    "clone_root": "C:/Projects/nmsdk-axone-timelearner",
+    "vcpkg_root": "C:/Projects/vcpkg",
+    "data_root": "E:/Nmsdk-AxoneTimeLearner-Data",
+    "data_share": "\\\\10.245.1.15\\E\\Nmsdk-AxoneTimeLearner-Data",
+    "file_system": "NTFS",
+    "volume_serial": "CC129017",
+    "qt_root": "C:/Qt/5.15.2/msvc2019_64",
+    "cmake": "C:/Qt/Tools/CMake_64/bin/cmake.exe",
+    "cmake_version": "3.29.3",
+    "ninja": "C:/Qt/Tools/Ninja/ninja.exe",
+    "ninja_version": "1.12.0",
+    "vc_tools_version": "14.40.33807",
+    "windows_sdk_version": "10.0.22621.0",
+    "logical_processors": 12,
+    "memory_bytes": 34207805440
+  },
+  "configuration": {
+    "preset": "axone-win-v143-localqt",
+    "native_targets": [
+      "NeuroModelerConsole",
+      "Test_PulseLib_StorageComponents"
+    ],
+    "jobs": 6,
+    "manifest_features": [
+      "llm",
+      "tests"
+    ],
+    "local_qt": true
+  },
+  "acceptance": {
+    "environment_read": true,
+    "clone_prepared": false,
+    "vcpkg_prepared": false,
+    "configure": false,
+    "compilation": false,
+    "native_tests": false,
+    "scientific_execution": false
+  },
+  "constraints": [
+    "Build and native execution only on .15.",
+    "Exact SDK root/submodule versions; no dirty source trees.",
+    "Primary axonal data is on E: .15; do not counterfeit the M40 archive marker.",
+    "No source-code or physical-model migration from the autoPreset reference checkout."
+  ]
+}

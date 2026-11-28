@@ -3,6 +3,44 @@
   "cmakeMinimumRequired": { "major": 3, "minor": 20, "patch": 0 },
   "configurePresets": [
     {
+      "name": "axone-win-v143-localqt",
+      "displayName": "Axone research: VS2022 v143 / local Qt5 / native tests",
+      "inherits": [
+        "nmsdk-global-defaults"
+      ],
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      },
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "cl.exe",
+        "CMAKE_CXX_COMPILER": "cl.exe",
+        "CMAKE_CXX_STANDARD": "20",
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/cmake/vcpkg_toolchain_from_env.cmake",
+        "VCPKG_MANIFEST_DIR": "${sourceDir}",
+        "VCPKG_TARGET_TRIPLET": "x64-windows",
+        "VCPKG_HOST_TRIPLET": "x64-windows",
+        "VCPKG_MANIFEST_FEATURES": "llm;tests",
+        "VCPKG_OVERLAY_PORTS": "",
+        "BUILD_SHARED_LIBS": "OFF",
+        "BUILD_TESTING": "ON",
+        "NMSDK_FORCE_QT_FROM_VCPKG": "OFF",
+        "QT_VERSION_MAJOR": "5",
+        "CMAKE_DISABLE_FIND_PACKAGE_Qt5WebEngineWidgets": "ON",
+        "RDK_USE_LLM": "ON",
+        "RDK_USE_OPENCV": "OFF",
+        "RDK_USE_CUDA": "OFF",
+        "RDK_USE_MATLAB": "OFF",
+        "RDK_USE_SQL": "OFF",
+        "RDK_BUILD_LEGACY_ENGINE_UNIT_TESTS": "OFF",
+        "NMSDK_ENABLE_INTERACTIVE_GUI_TESTS": "OFF"
+      }
+    },
+    {
       "name": "nmsdk-global-defaults",
       "hidden": true,
       "cacheVariables": {
