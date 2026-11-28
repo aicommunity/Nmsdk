@@ -35,6 +35,20 @@ def require(condition, reason):
         raise RuntimeError(reason)
 
 
+def audit_dependencies(spec):
+    """Use the producer's explicit dependency boundary, never an output boundary."""
+    version = spec.get('schema_version')
+    require(type(version) is int and version in (1, 2), 'unknown_audit_specification')
+    require((version == 2) == ('dependency_layout' in spec),
+            'audit_dependency_layout_version_mismatch')
+    helper_spec = importlib.util.spec_from_file_location('audit_dependency_producer',
+        Path(__file__).with_name('sdk-build.py'))
+    helper = importlib.util.module_from_spec(helper_spec);helper_spec.loader.exec_module(helper)
+    helper.BASE = BASE
+    return helper.installed_dependencies(spec['installed_dependencies'],
+                                        spec.get('dependency_layout', 'worker_private'))
+
+
 def private_path(value):
     path = Path(value).absolute()
     require(path != BASE and path.is_relative_to(BASE), 'outside_private_workspace')
@@ -124,11 +138,11 @@ def main():
     require(os.name == 'nt' and __debug__, 'normal_windows_python_required')
     import msvcrt
     specification, spec = read_specification(args.specification, args.worker_root)
-    require(spec['kind'] == 'timelearner_closed_windows_build_audit' and
-            type(spec['schema_version']) is int and spec['schema_version'] == 1, 'unknown_audit_specification')
+    require(spec['kind'] == 'timelearner_closed_windows_build_audit', 'unknown_audit_specification')
     require(digest(Path(__file__)) == spec['worker_sha256'], 'audit_worker_bytes_differ')
-    source, original, runtime, dependencies, output = [private_path(spec[key]) for key in
-        ('source_root', 'original_build_output', 'runtime_root', 'installed_dependencies', 'output_root')]
+    dependencies = audit_dependencies(spec)
+    source, original, runtime, output = [private_path(spec[key]) for key in
+        ('source_root', 'original_build_output', 'runtime_root', 'output_root')]
     paths = [source, original, runtime, dependencies, output]
     require(len(set(paths)) == 5 and all(a == b or not a.is_relative_to(b) for a in paths for b in paths), 'overlapping_audit_paths')
     require(not output.exists(), 'fresh_audit_output_required')
@@ -156,7 +170,9 @@ def main():
         original_spec = json.loads((original/'specification.json').read_bytes())
         require(private_path(original_spec['source_root']) == source and
                 private_path(original_spec['runtime_root']) == runtime and
-                private_path(original_spec['installed_dependencies']) == dependencies and
+                audit_dependencies(original_spec) == dependencies and
+                original_spec.get('dependency_layout', 'worker_private') ==
+                    spec.get('dependency_layout', 'worker_private') and
                 original_spec['source_commit'] == spec['source_commit'] and
                 original_spec['namespace_git_blob'] == spec['namespace_git_blob'], 'original_build_binding_changed')
         original_outcome = original_build_outcome(terminal, result)

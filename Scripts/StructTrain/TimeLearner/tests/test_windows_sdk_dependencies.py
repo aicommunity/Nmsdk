@@ -18,6 +18,11 @@ class ActualWindowsSdkDependenciesTest(unittest.TestCase):
         cls.producer = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(cls.producer)
         cls.producer.BASE = Path('D:/Projects/TimeLearnerWorker')
+        audit_spec = importlib.util.spec_from_file_location('actual_sdk_dependency_audit',
+            producer.with_name('audit-closed-build.py'))
+        cls.audit = importlib.util.module_from_spec(audit_spec)
+        audit_spec.loader.exec_module(cls.audit)
+        cls.audit.BASE = cls.producer.BASE
 
     def test_actual_completed_short_install_is_accepted_without_moving_its_bytes(self):
         before = hashlib.sha256((self.deps/'vcpkg/status').read_bytes()).hexdigest()
@@ -50,6 +55,26 @@ class ActualWindowsSdkDependenciesTest(unittest.TestCase):
             self.producer.installed_dependencies(str(self.deps), 'short')
         with self.assertRaisesRegex(RuntimeError, 'path_outside_private_worker'):
             self.producer.private_path('D:/tl/new-runtime')
+
+    def test_closed_build_audit_uses_the_same_explicit_readonly_dependency_boundary(self):
+        before = hashlib.sha256((self.deps/'vcpkg/status').read_bytes()).hexdigest()
+        self.assertEqual(self.audit.audit_dependencies({
+            'schema_version': 2, 'dependency_layout': 'short_readonly_D',
+            'installed_dependencies': str(self.deps)}), self.deps)
+        self.assertEqual(hashlib.sha256((self.deps/'vcpkg/status').read_bytes()).hexdigest(), before)
+        with self.assertRaisesRegex(RuntimeError, 'outside_private_workspace'):
+            self.audit.private_path('D:/tl/new-runtime')
+
+    def test_audit_requires_explicit_version_and_preserves_legacy_boundary(self):
+        for version, layout in ((1, 'short_readonly_D'), (2, None), (True, None), (3, None)):
+            spec = {'schema_version': version, 'installed_dependencies': str(self.deps)}
+            if layout is not None:
+                spec['dependency_layout'] = layout
+            with self.subTest(version=version, layout=layout), self.assertRaises(RuntimeError):
+                self.audit.audit_dependencies(spec)
+        with self.assertRaisesRegex(RuntimeError, 'path_outside_private_worker'):
+            self.audit.audit_dependencies({'schema_version': 1,
+                                           'installed_dependencies': str(self.deps)})
 
 
 if __name__ == '__main__':

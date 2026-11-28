@@ -146,6 +146,13 @@ Its historical recovery case remains restricted to the original negative
 `descendants_remaining` result with zero exit code and subsequent kernel absence.
 The audit records the actual original acceptance value in either case.
 
+Audit specification version2 explicitly binds the build's `dependency_layout`.
+It uses the same producer resolver for `short_readonly_D`; only the immutable
+installed tree may be outside the private D worker. Source, runtime, output,
+original build records and locks retain their private boundaries. Version1
+keeps the original private dependency layout. The complete before/after
+dependency inventory and the original layout binding remain mandatory.
+
 `validate-native.py` consumes that exact audit and the unchanged source/runtime.
 It invokes the **production schema4 native gate and Windows Job backend from the
 compiled SDK**. It does not replace the backend with a test copy. Complete actual
