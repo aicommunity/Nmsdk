@@ -117,7 +117,7 @@ def analyze_case(case,folder):
         require(len(declared)==len(actual) and all(abs(t-event["onset_tick"]/frequency)<=1e-12
                 for t,event in zip(declared,actual)),"capture_events_disagree_with_waveform")
     result.update(input_events=inputs,output_events=outputs,association=association(inputs,outputs,frequency),
-                  source_emission_count_from_edges=len(inputs),output_count=len(outputs),
+                  source_edge_count=len(inputs),output_count=len(outputs),
                   source_peak=max(data["source"]),axon_peak=max(data["axon"]))
     if case["carrier"]=="NAxoneDelay":
         expected=math.floor(case["delay_s"]*frequency)
@@ -153,8 +153,13 @@ def main():
     require(destination.is_relative_to(data/"Experiments") and not destination.exists() and
             not destination.is_relative_to(gate_root),"fresh_analysis_output_required")
     destination.mkdir(parents=True,exist_ok=False)
+    specification=read(gate_root/"gate-specification.json")
+    expected=specification["expected_test_ids"]
+    require(len(expected)==verdict["expected_cases"], "gate_inventory_changed")
+    selected=[case for case in recipe["cases"] if case["gtest_filter"] in expected]
+    require(bool(selected), "no_declared_waveform_cases_selected")
     rows=[]
-    for case in recipe["cases"]:
+    for case in selected:
         try:
             rows.append(analyze_case(case,gate_root/"native-gate/native/AxoneP1"))
         except (ValueError,RuntimeError,OSError,KeyError,TypeError) as error:
@@ -166,6 +171,8 @@ def main():
              "producer":{"path":str(Path(__file__).resolve()),"sha256":sha(Path(__file__))},
              "analysis_complete":all(row["capture_valid"] for row in rows),
              "native_assertion_status":verdict["gate"].get("assertion_status"),
+             "native_expected_cases":len(expected), "analyzed_waveform_cases":len(selected),
+             "unmapped_native_test_ids":[name for name in expected if name not in {c["gtest_filter"] for c in selected}],
              "cases":rows,"training":False,"carrier_selected":False,"full_P1_accepted":False,
              "scientific_verdict":None,
              "limitations":["One engineering execution; three declared repeatability runs are not replaced.",
