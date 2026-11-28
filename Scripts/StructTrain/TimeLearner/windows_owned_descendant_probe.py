@@ -30,13 +30,17 @@ def run(controls):
     seed = Path(controls).resolve(strict=True)
     q = load(seed/'request.json')
     assert os.name == 'nt' and q['kind'] == 'timelearner_owned_windows_descendant_diagnostic'
+    assert type(q['attempts']) is int and 1 <= q['attempts'] <= 32
+    base = Path(q['worker_root'])
+    assert base.resolve(strict=True) == base
     out = Path(q['output'])
-    assert out.parent == Path(q['worker_root'])/'jobs' and not out.exists()
+    assert out.parent == base/'jobs' and not out.exists()
     out.mkdir()
     log = (out/'worker.log').open('x', encoding='utf-8', buffering=1)
     sys.stdout = sys.stderr = log
     sys.dont_write_bytecode = True
     sdk = Path(q['sdk'])
+    assert sdk.is_relative_to(base) and sdk.resolve(strict=True) == sdk
     sys.path.insert(0, str(sdk))
     from Scripts.StructTrain.TimeLearner.windows_process import execute, _Windows
     from Scripts.StructTrain.TimeLearner.native_gate import _environment
@@ -49,6 +53,7 @@ def run(controls):
     write(out/'owner.json',dict(pid=os.getpid(),creation_filetime=str(times[0].value),executable=sys.executable))
     try:
         runtime_path = Path(q['runtime_manifest'])
+        assert runtime_path.is_relative_to(base/'jobs') and runtime_path.resolve(strict=True) == runtime_path
         runtime_record = file_record(runtime_path)
         runtime = load(runtime_path)
         before = source_closure(sdk)
