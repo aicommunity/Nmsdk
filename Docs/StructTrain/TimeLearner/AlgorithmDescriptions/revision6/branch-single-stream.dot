@@ -1,0 +1,21 @@
+digraph Branch {
+ graph [rankdir=TB,bgcolor="white",pad=0.10,nodesep=0.28,ranksep=0.25,
+   fontname="Times New Roman",fontsize=22,label="Распознавание нейроном с общей ветвью при M = 4",labelloc=t];
+ node [shape=box,fontname="Times New Roman",fontsize=20,margin="0.09,0.07"];
+ edge [fontname="Times New Roman",fontsize=17,arrowsize=0.75];
+ stream [label="Один внешний поток\nПолная пачка из четырёх импульсов"];
+ s1 [label="Синапсы n₁, R₁"];s2 [label="Синапсы n₂, R₂"];
+ s3 [label="Синапсы n₃, R₃"];s4 [label="Синапсы n₄, R₄"];
+ a1 [label="Точка L₁",shape=ellipse];a2 [label="Точка L₂",shape=ellipse];
+ a3 [label="Точка L₃",shape=ellipse];a4 [label="Точка L₄",shape=ellipse];
+ b1 [shape=point,width=0.025,label=""];b2 [shape=point,width=0.025,label=""];
+ b3 [shape=point,width=0.025,label=""];b4 [shape=point,width=0.025,label=""];
+ stream->b1;b1->b2->b3->b4 [dir=none];
+ b1->s1;b2->s2;b3->s3;b4->s4;s1->a1;s2->a2;s3->a3;s4->a4;
+ a1->a2->a3->a4 [dir=none,penwidth=2.2];
+ s1->s2->s3->s4 [style=invis];
+ {rank=same;b1;s1;a1;}{rank=same;b2;s2;a2;}{rank=same;b3;s3;a3;}{rank=same;b4;s4;a4;}
+ soma [label="Сома\nПотенциал u(t)"];
+ lt [label="Низкопороговая зона\nВыходные события и обратная связь"];
+ a4->soma [dir=none,penwidth=2.2];soma->lt;
+}
