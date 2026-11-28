@@ -105,7 +105,7 @@ def native_contracts(root: Path) -> dict:
         raise ValueError("native_contract_case_inventory_changed")
     return {
         "kind": "axone_native_contract_inputs", "schema_version": 1,
-        "protocol_id": "P1-native-contracts-v6", "status": "source_prepared",
+        "protocol_id": "P1-native-contracts-v7", "status": "source_prepared",
         "scientific_result": None, "native_execution_performed": False,
         "test_target": "Test_PulseLib_StorageComponents",
         "test_source": record(source_path, source_bytes), "source": source,
@@ -241,7 +241,7 @@ def materialize(root: Path, output: Path, overwrite: bool) -> dict:
     config_root = (root / CONFIG_REL).resolve()
     if output != config_root:
         raise ValueError("output_must_equal_axone_source_config_root")
-    outputs = [("protocols/P1-native-contracts-v6.json", native_contracts(root)), *historical_p2(root)]
+    outputs = [("protocols/P1-native-contracts-v7.json", native_contracts(root)), *historical_p2(root)]
     records = []
     for relative, document in outputs:
         payload = encode(document)
@@ -251,7 +251,7 @@ def materialize(root: Path, output: Path, overwrite: bool) -> dict:
                 "generator": "Scripts/StructTrain/AxoneTimeLearner/generate_stage_configs.py",
                 "status": "source_prepared", "model_execution_performed": False,
                 "files": records}
-    write(output / "stage-source-manifest-v6.json", encode(manifest), overwrite)
+    write(output / "stage-source-manifest-v7.json", encode(manifest), overwrite)
     return {"files": len(records) + 1, "native_cases": 51, "historical_spans": len(HISTORY),
             "model_execution_performed": False}
 

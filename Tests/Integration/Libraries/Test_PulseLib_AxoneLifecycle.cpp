@@ -6,6 +6,8 @@
 #include "NAxoneTreeChain.h"
 #include "NAxoneDelay.h"
 #include "NAperiodicLink.h"
+#include "TimeLearner/ModelArchive.h"
+#include "TimeLearner/AxoneConductionObservation.h"
 #include "NPulseGenerator.h"
 #include "NPulseMembrane.h"
 #include "../../../Rdk/Core/Engine/UClassImageRegistry.h"
@@ -719,6 +721,89 @@ TEST_F(AxoneLifecycle, TreeCanBeReacquiredAfterWholeModelDestruction)
     EXPECT_EQ(next->ResolvePortPath("left"),"Left.Output");
     EXPECT_EQ(next->ResolvePortPath("later"),"Later.Output");
     EXPECT_EQ(next->GetComponentL<NAxoneChain>("Left",true)->NumSegments.GetData(),4);
+}
+
+TEST_F(AxoneLifecycle, TreeNativeSnapshotPreservesPortsParametersAndActualWaveforms)
+{
+    auto source=Take<NPulseGenerator>("NPGenerator","Source");
+    source->Frequency=10.;source->PulseLength=.001;source->Amplitude=1.;source->Delay=.01;
+    source->FrequencyDeviation=0.;source->AvgInterval=1.;
+    auto tree=Take<NAxoneTreeChain>("NAxoneTreeChain");tree->Topology=TreeTopology("NAxoneChainAndDelay");
+    ASSERT_TRUE(model->CreateLink("Source","Output","Axon","Input"));Init();
+    Zone(tree->GetPortComponent("left"),"Segment1.LTZone")->Threshold=.027;
+    tree->GetComponentL<NAxoneDelay>("Left.Delay1",true)->DelayTime=.007;
+    const NmsdkTools::ModelBoundarySources ports{{&source->Output,"source"}};
+    const auto identity=NmsdkTools::IdentifyModel(tree,ports);
+    ASSERT_TRUE(identity["valid"].toBool());
+    const auto snapshot=NmsdkTools::ExportAxoneTreeSnapshot(tree,ports);
+    const char* output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT");
+    Require(output!=nullptr,"axone_snapshot_owned_output_required");
+    const auto folder=QDir(QString::fromLocal8Bit(output)).filePath("AxoneTreeSnapshot");
+    Require(QDir().mkpath(folder),"axone_snapshot_output_directory");
+    QFile file(QDir(folder).filePath("heterogeneous-tree.json"));
+    Require(file.open(QIODevice::WriteOnly|QIODevice::NewOnly),"axone_snapshot_file_exists");
+    const auto bytes=QJsonDocument(snapshot).toJson();
+    Require(file.write(bytes)==bytes.size() && file.flush(),"axone_snapshot_file_write");file.close();
+    Require(file.open(QIODevice::ReadOnly),"axone_snapshot_file_read");
+    const auto restoredDocument=QJsonDocument::fromJson(file.readAll()).object();
+    ASSERT_EQ(restoredDocument,snapshot);
+    auto copy=dynamic_pointer_cast<NAxoneTreeChain>(NmsdkTools::ImportAxoneTreeSnapshot(restoredDocument,storage,environment,ports));
+    ASSERT_TRUE(copy);ASSERT_FALSE(copy->GetOwner());copy->Name="RestoredTree";
+    UEPtr<UContainer> base=copy;ASSERT_NE(model->AddComponent(base),ForbiddenId);
+    model->Reset();RequireInitialized(copy);
+    EXPECT_EQ(copy->ResolvePortPath("left"),"Left.Output");EXPECT_TRUE(copy->CheckPropertyAlias("right"));
+    EXPECT_DOUBLE_EQ(Zone(copy->GetPortComponent("left"),"Segment1.LTZone")->Threshold.GetData(),.027);
+    EXPECT_DOUBLE_EQ(copy->GetComponentL<NAxoneDelay>("Left.Delay1",true)->DelayTime.GetData(),.007);
+    EXPECT_EQ(NmsdkTools::IdentifyModel(tree,ports),identity);
+    EXPECT_EQ(NmsdkTools::IdentifyModel(copy,ports),identity);
+    const auto marker=model->OperationFailureSequence();
+    std::vector<double> input,originalOutput,restoredOutput;
+    std::ostringstream csv;csv.imbue(std::locale::classic());csv<<std::setprecision(17)<<"tick,time,source,original,restored\n";
+    for(unsigned tick=0;tick<=model->GetTimeStep()*8/100;++tick){
+        model->Calculate();Require(!model->HasOperationFailureSince(marker),"axone_snapshot_calculate");
+        input.push_back(Scalar(source->Output.GetData()));originalOutput.push_back(Scalar(tree->Output.GetData()));
+        restoredOutput.push_back(Scalar(copy->Output.GetData()));
+        EXPECT_DOUBLE_EQ(originalOutput.back(),restoredOutput.back());
+        for(const auto* port:{"left","right","trunk"})
+            EXPECT_DOUBLE_EQ(Scalar(tree->GetPortComponent(port)->Output.GetData()),Scalar(copy->GetPortComponent(port)->Output.GetData()));
+        csv<<tick<<','<<environment->GetTime().GetDoubleTime()<<','<<input.back()<<','<<originalOutput.back()<<','<<restoredOutput.back()<<'\n';
+        environment->IncreaseModelTimeByStep();
+    }
+    QFile trace(QDir(folder).filePath("heterogeneous-tree.csv"));
+    Require(trace.open(QIODevice::WriteOnly|QIODevice::NewOnly),"axone_snapshot_trace_exists");
+    const auto text=QByteArray::fromStdString(csv.str());Require(trace.write(text)==text.size() && trace.flush(),"axone_snapshot_trace_write");
+    EXPECT_EQ(NMSDK::TimeLearner::ExtractAxonePulseEvents(input,.5).size(),1u);
+    EXPECT_EQ(NMSDK::TimeLearner::ExtractAxonePulseEvents(originalOutput,.5).size(),1u);
+    EXPECT_EQ(NMSDK::TimeLearner::ExtractAxonePulseEvents(restoredOutput,.5).size(),1u);
+}
+
+TEST_F(AxoneLifecycle, TreeSnapshotRejectsWrongEnvelopeAndUnknownFields)
+{
+    auto tree=Take<NAxoneTreeChain>("NAxoneTreeChain");tree->Topology=TreeTopology();Init();
+    const auto snapshot=NmsdkTools::ExportAxoneTreeSnapshot(tree);
+    auto invalid=snapshot;invalid["kind"]="timelearner_model_archive";
+    EXPECT_THROW(NmsdkTools::ImportAxoneTreeSnapshot(invalid,storage,environment),NmsdkTools::ModelArchiveError);
+    invalid=snapshot;invalid["unrecognized_field"]=true;
+    EXPECT_THROW(NmsdkTools::ImportAxoneTreeSnapshot(invalid,storage,environment),NmsdkTools::ModelArchiveError);
+}
+
+TEST_F(AxoneLifecycle, TreeSnapshotRejectsGraphMismatchAfterEnvelopeDigestIsRecomputed)
+{
+    auto tree=Take<NAxoneTreeChain>("NAxoneTreeChain");tree->Topology=TreeTopology();Init();
+    auto snapshot=NmsdkTools::ExportAxoneTreeSnapshot(tree);
+    auto graph=snapshot["graph"].toObject();graph["component_class"]="NAxoneChain";snapshot["graph"]=graph;
+    snapshot.remove("sha256");snapshot["sha256"]=NmsdkTools::CanonicalModelDataSha256(snapshot);
+    const auto before=storage->CalcNumObjects("NAxoneTreeChain");
+    EXPECT_THROW(NmsdkTools::ImportAxoneTreeSnapshot(snapshot,storage,environment),NmsdkTools::ModelArchiveError);
+    EXPECT_EQ(storage->CalcNumObjects("NAxoneTreeChain"),before);
+}
+
+TEST_F(AxoneLifecycle, TreeSnapshotKeepsAxonalAndNeuronSnapshotTypesSeparate)
+{
+    auto chain=Take<NAxoneChain>("NAxoneChain","Linear");
+    auto tree=Take<NAxoneTreeChain>("NAxoneTreeChain");tree->Topology=TreeTopology();Init();
+    EXPECT_THROW(NmsdkTools::ExportAxoneTreeSnapshot(chain),NmsdkTools::ModelArchiveError);
+    EXPECT_THROW(NmsdkTools::ExportPhysicalGraphForEdit(tree),NmsdkTools::ModelArchiveError);
 }
 
 struct TreeCase { std::string id, carrier; unsigned frequency; };
