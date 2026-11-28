@@ -1517,6 +1517,77 @@ TEST(BoundedTrainingN1LocalTurn, SingletonDomainYieldsAndGlobalProbeBudgetStillS
     }
 }
 
+TEST(BoundedTrainingN1LocalTurn, SmallCandidateLimitDoesNotDisableNormalizationOfALateTimingReadyGeometry)
+{
+    for(const auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})
+    {
+        unsigned lateReadyCases=0;
+        for(const int readyLength:{3,4,5,6})
+        {
+            SCOPED_TRACE(int(routing));SCOPED_TRACE(readyLength);
+            const auto p=Protocol(2,routing);auto cfg=Configuration(2,Normalization::TipResistance);
+            cfg.bounds={{2,6,1,1,1.,100.},{1,1,1,1,10.,10.}};
+            cfg.maximumCandidatesPerInput=8;cfg.maximumProbes=64;cfg.maximumEdits=64;cfg.maximumSweeps=1;
+            cfg.resistanceSubdivisionDepth=8;
+            BoundedTrainingSession session(References(p),cfg,{{2,1,10.},{1,1,10.}},true);
+            DriveTraining(session,p,[&](const auto& a,auto& delay,auto& raw) {
+                delay[0]=a.parameters[0].length==readyLength?.13:.03;
+                raw[0]+=.001;
+            },[](const auto& a){return FairDomain(a);});
+            const auto& measured=session.Evidence();
+            const auto ready=std::find_if(measured.begin(),measured.end(),[&](const auto& e) {
+                return e.parameters.length==readyLength && e.withinTiming && !e.withinAmplitude;
+            });
+            if(ready==measured.end())continue;
+            const auto used=std::size_t(std::distance(measured.begin(),ready))+1;
+            ASSERT_LE(used,cfg.maximumCandidatesPerInput);
+            const auto remaining=cfg.maximumCandidatesPerInput-used;
+            if(remaining==0)continue;
+            if(remaining<4)++lateReadyCases;
+            const auto extra=std::min(std::size_t(2),remaining);
+            ASSERT_GE(std::size_t(std::distance(ready,measured.end())),extra+1);
+            std::set<double> resistances{ready->parameters.resistance};
+            for(std::size_t offset=1;offset<=extra;++offset)
+            {
+                const auto& next=*std::next(ready,offset);
+                EXPECT_EQ(next.parameters.length,readyLength);
+                EXPECT_TRUE(resistances.insert(next.parameters.resistance).second);
+                EXPECT_NE(next.anchorTrialId,ready->anchorTrialId);
+                EXPECT_NE(next.modelRevision,ready->modelRevision);
+                EXPECT_EQ(next.fullParameters[1],(InputParameters{1,1,10.}));
+            }
+            EXPECT_LE(session.IssuedProbes(),cfg.maximumProbes);
+            EXPECT_LE(session.AppliedEdits(),cfg.maximumEdits);
+            EXPECT_NE(session.Status(),TrainingStatus::Exact);EXPECT_FALSE(session.Certificate());
+        }
+        EXPECT_GT(lateReadyCases,0u);
+    }
+}
+
+TEST(BoundedTrainingN1LocalTurn, OneRemainingCompleteProbePairCanMeasureAnAlternativeResistance)
+{
+    for(const auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})
+    {
+        SCOPED_TRACE(int(routing));
+        const auto p=Protocol(2,routing);auto cfg=Configuration(2,Normalization::TipResistance);
+        cfg.bounds={{2,4,1,1,1.,100.},{1,1,1,1,10.,10.}};
+        cfg.maximumCandidatesPerInput=8;cfg.maximumProbes=7;cfg.maximumEdits=64;cfg.maximumSweeps=1;
+        cfg.resistanceSubdivisionDepth=8;
+        BoundedTrainingSession session(References(p),cfg,{{2,1,10.},{1,1,10.}},true);
+        DriveTraining(session,p,[](const auto&,auto& delay,auto& raw){delay[0]=.13;raw[0]+=.001;},
+            [](const auto& a){return FairDomain(a);});
+        const auto& measured=session.Evidence();ASSERT_GE(measured.size(),3u);
+        ASSERT_TRUE(measured[1].withinTiming);ASSERT_FALSE(measured[1].withinAmplitude);
+        EXPECT_EQ(measured[2].parameters.length,2);
+        EXPECT_NE(measured[2].parameters.resistance,measured[1].parameters.resistance);
+        EXPECT_NE(measured[2].anchorTrialId,measured[1].anchorTrialId);
+        EXPECT_EQ(session.Parameters()[1],(InputParameters{1,1,10.}));
+        EXPECT_LE(session.IssuedProbes(),cfg.maximumProbes);
+        EXPECT_LE(session.AppliedEdits(),cfg.maximumEdits);
+        EXPECT_EQ(session.Status(),TrainingStatus::BudgetExhausted);EXPECT_FALSE(session.Certificate());
+    }
+}
+
 TEST(BoundedTrainingBranchFamily, CoupledGrowthProposesDistantLengthsWithoutChangingTheAnchorOrGlobalBudgets)
 {
     const auto p=Protocol(4,ProbeRouting::BranchSoloBurst);auto cfg=Configuration(4,Normalization::TipResistance);
