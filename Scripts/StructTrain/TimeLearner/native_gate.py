@@ -44,9 +44,11 @@ def supported_specification(spec):
                 type(limits) is dict and set(limits) == {'memory_bytes', 'tasks'} and
                 type(limits['memory_bytes']) is int and 0 < limits['memory_bytes'] <= 2**63-1 and
                 type(limits['tasks']) is int and 0 < limits['tasks'] <= 2**31-1)
-    if spec['schema_version'] == 4:
+    if spec['schema_version'] in (4, 7):
         limits = spec.get('process_limits')
-        return (set(spec) == FIELDS | {'cooperative_runtime_capture', 'process_limits', 'worker_lock'} and
+        extra = {'artifact_directories'} if spec['schema_version'] == 7 else set()
+        return (set(spec) == FIELDS | {'cooperative_runtime_capture', 'process_limits', 'worker_lock'} | extra and
+                (spec['schema_version'] != 7 or artifact_directories_valid(spec['artifact_directories'])) and
                 spec['cooperative_runtime_capture'] is True and type(limits) is dict and
                 set(limits) == {'memory_bytes', 'maximum_processes'} and
                 type(limits['memory_bytes']) is int and 32*1024**2 <= limits['memory_bytes'] <= 64*1024**3 and
@@ -110,28 +112,38 @@ def audit_junit(path, expected, *, full_names=False):
             "sha256": hashlib.sha256(Path(path).read_bytes()).hexdigest()}
 
 
+def _filter_argument(spec):
+    expected = spec['expected_test_ids']
+    if spec['schema_version'] in (6, 7):
+        argument = gtest_full_names.filter_argument(expected)
+        # CreateProcessW limits the complete command to 32767 UTF-16 units.
+        # Reserve space for executable, XML and cooperative capture paths.
+        if spec['schema_version'] == 7:
+            require(len(argument.encode('utf-16-le')) <= 2*24*1024,
+                    'windows_native_gate_filter_budget')
+        return argument
+    require(type(expected) is list and bool(expected)
+            and all(type(x) is str and re.fullmatch(r'[A-Za-z_][A-Za-z0-9_]*/[A-Za-z_][A-Za-z0-9_]*', x)
+                    for x in expected) and len(expected) == len(set(expected)), 'invalid_native_gate_test_ids')
+    return '--gtest_filter='+':'.join(x.replace('/', '.') for x in expected)
+
+
 def run_native_gate(specification, output):
     specification = Path(specification).resolve(strict=True)
     spec = load(specification)
     require(supported_specification(spec), "unknown_native_gate_specification")
-    require(spec['schema_version'] != 4 or (os.name == 'nt' and spec['asan_options'] == ''),
+    require(spec['schema_version'] not in (4, 7) or (os.name == 'nt' and spec['asan_options'] == ''),
             'windows_native_gate_platform_or_asan_mismatch')
     expected = spec["expected_test_ids"]
-    full_names = spec['schema_version'] == 6
-    if full_names:
-        test_filter = gtest_full_names.filter_argument(expected)
-    else:
-        require(type(expected) is list and bool(expected)
-                and all(type(x) is str and re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*/[A-Za-z_][A-Za-z0-9_]*", x)
-                        for x in expected) and len(expected) == len(set(expected)), "invalid_native_gate_test_ids")
-        test_filter = '--gtest_filter='+':'.join(x.replace('/', '.') for x in expected)
+    full_names = spec['schema_version'] in (6, 7)
+    test_filter = _filter_argument(spec)
     require(type(spec["asan_options"]) is str and "\x00" not in spec["asan_options"], "invalid_native_gate_asan_options")
     wall = number(spec["maximum_wall_seconds"])
     require(wall > 0, "invalid_native_gate_wall_budget")
     if spec['schema_version'] in (3, 5, 6):
         require(1 <= wall <= 86400, 'invalid_contained_wall_budget')
     require(spec['schema_version'] != 5 or os.name == 'posix', 'native_gate_data_inputs_require_posix')
-    require(not full_names or os.name == 'posix', 'parameterized_native_gate_requires_posix')
+    require(spec['schema_version'] != 6 or os.name == 'posix', 'parameterized_native_gate_requires_posix')
 
     def resolve(key):
         value = spec[key]
@@ -178,7 +190,7 @@ def run_native_gate(specification, output):
         if spec['schema_version'] in (3, 5, 6):
             from .contained_runner import execute as contained_execute
             runner, limits = contained_execute, spec['process_limits']
-        if spec['schema_version'] == 4:
+        if spec['schema_version'] in (4, 7):
             from .windows_process import execute as windows_execute
             lock = Path(spec['worker_lock'])
             lock = (lock if lock.is_absolute() else specification.parent/lock).resolve()
@@ -203,7 +215,7 @@ def run_native_gate(specification, output):
         if spec['schema_version'] in (3, 5, 6):
             require(result.get('schema_version') == 2 and result.get('ownership_scope') == 'bound_cgroup' and
                     result.get('all_processes_closed') is True, 'native_gate_whole_group_closure_missing')
-        if spec['schema_version'] == 4:
+        if spec['schema_version'] in (4, 7):
             require(result.get('kind') == 'timelearner_windows_process_result' and
                     result.get('all_processes_closed') is True and result.get('validity') == 'valid' and
                     result.get('cooperative_capture') == 'completed', 'windows_native_gate_closure_or_capture_missing')
