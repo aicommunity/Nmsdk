@@ -1,0 +1,33 @@
+{
+  "kind": "timelearner_progress_metadata_reference",
+  "schema_version": 1,
+  "scope": "interim native observations; complete source-history audit still running",
+  "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+  "metadata_manifest": {
+    "path": "operations/timelearner/goal-progress-fr1071/metadata-manifest.json",
+    "bytes": 19675,
+    "sha256": "76487c19874314426b1ca1eff7f6f5f211d2396ba8542aa2f420e0ea142f6ee4"
+  },
+  "native_observation_summary": "operations/timelearner/goal-progress-fr1071/timelearner-Classic-Rs-actual-trial-summary-fr1048.json",
+  "native_execution_summary": "operations/timelearner/goal-progress-fr1071/timelearner-Classic-Rs-candidate-closed-native-fr1047.json",
+  "source_train_outcome": "budget_exhausted",
+  "training_completed": false,
+  "protocol": "historical_same_matrix",
+  "threshold": 0.008765648135529838,
+  "candidate_model_revision": "4828251e68816f070c724eee7fb2fdde615a035a877431e66ee1823cf175eeaa",
+  "provisional_counts": {"TP": 1, "FP": 0, "FN": 0, "TN": 7},
+  "target_native_spike_seconds_from_first_input": [0.4835],
+  "target_last_input_seconds_from_first_input": 0.48,
+  "actual_native_events_not_offline_predictions": true,
+  "full_source_history_audit_accepted": false,
+  "complete_primary_archive_published": false,
+  "independently_heldout_evaluation": false,
+  "robustness_verified": false,
+  "scientific_verdict": null,
+  "metadata_archive_is_not_a_full_primary_model_archive": true,
+  "all_six_workers_last_checked_UTC": "2026-11-28T13:42:30Z",
+  "documents": [
+    "Docs/StructTrain/TimeLearner/CurrentStatus-20261128.ru.md",
+    "Docs/StructTrain/TimeLearner/WindowsNativeInputs-20261128.ru.md"
+  ]
+}
