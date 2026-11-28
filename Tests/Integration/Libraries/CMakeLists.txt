@@ -166,6 +166,7 @@ add_executable(Test_PulseLib_StorageComponents
     Test_PulseLib_AxoneLifecycle.cpp
     Test_PulseLib_AxoneConductionObservation.cpp
     Test_PulseLib_AxoneSegmentDiagnostic.cpp
+    Test_PulseLib_AxoneLocalTimingRule.cpp
     Test_PulseLib_DeclaredWindowBasinAssignment.cpp
     Test_PulseLib_MatchedOmissionEvidence.cpp
     Test_PulseLib_MatchedOmissionAssignment.cpp
