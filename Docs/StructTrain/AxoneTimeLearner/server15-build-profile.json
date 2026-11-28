@@ -92,9 +92,13 @@
     "clone_prepared": true,
     "vcpkg_prepared": true,
     "configure": true,
-    "compilation": false,
+    "compilation": true,
     "native_tests": false,
-    "scientific_execution": false
+    "scientific_execution": false,
+    "event_assignment_checks": true,
+    "factory_diagnostic_checks": true,
+    "engineering_model_execution": true,
+    "native_tests_note": "Full baseline acceptance remains open; separately accepted 10 event-assignment and 9 finite-capture diagnostics."
   },
   "constraints": [
     "Build and native execution only on .15.",
@@ -148,6 +152,43 @@
       "error": "C2664: const UEPtr<NAxoneCommon> cannot implicitly convert to UEPtr<UContainer> in test helper functions.",
       "scientific_execution": false,
       "native_tests_executed": false
+    },
+    {
+      "id": "build-922da286-01",
+      "status": "completed",
+      "configure_exit": 0,
+      "build_exit": 0,
+      "deployment_exit": 0
+    },
+    {
+      "id": "native-922da286-02",
+      "status": "timeout_incomplete_preserved",
+      "maximum_wall_seconds": 1800,
+      "wall_seconds": 1802.4365702999985,
+      "all_processes_closed": true,
+      "runtime_provenance": "not_captured",
+      "scientific_execution": false
+    },
+    {
+      "id": "event-922da286-01",
+      "status": "passed",
+      "expected_cases": 10,
+      "runtime_provenance": "loaded_files_captured",
+      "scientific_execution": false
+    },
+    {
+      "id": "build-f942f52e-01",
+      "status": "completed",
+      "configure_exit": 0,
+      "build_exit": 0,
+      "deployment_exit": 0
+    },
+    {
+      "id": "factory-f942f52e-01",
+      "status": "passed_capture_contract",
+      "expected_cases": 9,
+      "runtime_provenance": "loaded_files_captured",
+      "full_P1_accepted": false
     }
   ]
 }
