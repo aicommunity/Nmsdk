@@ -70,7 +70,8 @@ def _prepare_physical_edit(plan_path,*,threshold_candidate):
     else:
         base=Path('C:/Projects/TimeLearnerWorker') if os.name=='nt' else Path(plan['output']).parent.parent
         allowed=(Path('C:/Projects/TimeLearnerWorker'),) if os.name=='nt' else (
-            Path('/home/user/timelearner-refactor'),Path('/media/user/Data/TimeLearnerRefactor'))
+            Path('/home/user/timelearner-refactor'),Path('/media/user/Data/TimeLearnerRefactor'),
+            Path('/home/user/Nmsdk-experiments'))
     area=base/('jobs' if os.name=='nt' else 'readbacks')
     controls=Path(plan['controls']);inputs=Path(plan['inputs']);output=Path(plan['output'])
     require(base in allowed and base.resolve(strict=True)==base and
@@ -221,9 +222,15 @@ def run(controls, *, cancel_file=None):
             'timelearner_prepared_physical_conversion','timelearner_prepared_physical_threshold') and
             type(spec['schema_version']) is int and spec['schema_version'] in (1,2) and
             (spec['schema_version']==1 or conversion or threshold_candidate), 'physical_export_worker_scope')
-    inputs = Path(spec['inputs']).resolve(strict=True)
-    output = Path(spec['output']).absolute()
-    base = Path(spec['execution_root']).resolve(strict=True)
+    declared_inputs = Path(spec['inputs'])
+    declared_output = Path(spec['output'])
+    declared_base = Path(spec['execution_root'])
+    inputs = declared_inputs.resolve(strict=True)
+    output = declared_output.absolute()
+    base = declared_base.resolve(strict=True)
+    require(inputs == declared_inputs and output == declared_output and
+            output.resolve(strict=False) == output and base == declared_base,
+            'physical_export_noncanonical_paths')
     if spec['schema_version']==2:
         from Scripts.StructTrain.TimeLearner.prepared_physical_evaluation import worker_root
         declared_base=worker_root(spec,explicit_schema=2,legacy_schemas=(1,))
@@ -231,7 +238,8 @@ def run(controls, *, cancel_file=None):
         allowed=(declared_base,)
     else:
         allowed = (Path('C:/Projects/TimeLearnerWorker'),) if os.name=='nt' else (
-            Path('/home/user/timelearner-refactor'),Path('/media/user/Data/TimeLearnerRefactor'))
+            Path('/home/user/timelearner-refactor'),Path('/media/user/Data/TimeLearnerRefactor'),
+            Path('/home/user/Nmsdk-experiments'))
     area = base/('jobs' if os.name=='nt' else 'readbacks')
     require(base in allowed and output.is_relative_to(area) and inputs.is_relative_to(area) and
             not output.exists(), 'physical_export_paths')
