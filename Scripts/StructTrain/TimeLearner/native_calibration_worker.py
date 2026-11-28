@@ -59,8 +59,12 @@ def _write(path, value):
 
 def _record(path, root):
     require(not path.is_symlink() and path.is_file(), "worker_artifact_missing_or_symlink")
-    raw = path.read_bytes()
-    return {"path": path.relative_to(root).as_posix(), "bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest()}
+    size, digest = 0, hashlib.sha256()
+    with path.open("rb") as stream:
+        for chunk in iter(lambda: stream.read(1024**2), b""):
+            size += len(chunk)
+            digest.update(chunk)
+    return {"path": path.relative_to(root).as_posix(), "bytes": size, "sha256": digest.hexdigest()}
 
 
 def _artifact_files(root):
