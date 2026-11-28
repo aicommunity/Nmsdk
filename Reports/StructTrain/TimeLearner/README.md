@@ -1,9 +1,12 @@
-27.11: [Classic: ранний ответ при изменении четвёртого импульса](../../../Docs/StructTrain/TimeLearner/ClassicFourthPulseHistoryResults-20261127.ru.md).
-
 28.11: [актуальная сводка](../../../Docs/StructTrain/TimeLearner/CurrentStatus-20261128.ru.md),
 [принятые третья и четвёртая серии Classic](Progress-20261128/Classic-third-fourth-independent-accepted-fr682.json).
 Первичные файлы и все рисунки находятся во внешнем архиве; этот раздел
 содержит проверенные компактные каталоги.
+[Все1274 исходных файла cap24 приняты](Progress-20261128/Classic-cap24-complete-primary-accepted-fr707.json).
+[Разбор измеренной истории](../../../Docs/StructTrain/TimeLearner/ClassicCap24SearchHistory-20261128.ru.md)
+не меняет исход budget_exhausted и не приписывает модели сертификат.
+
+27.11: [Classic: ранний ответ при изменении четвёртого импульса](../../../Docs/StructTrain/TimeLearner/ClassicFourthPulseHistoryResults-20261127.ru.md).
 Все64 наблюдения .12/.4 независимо приняты:
 [280 мс](Progress-20261127/Classic-fourth280-independent-fr153.json),
 [320 мс](Progress-20261127/Classic-fourth320-independent-fr159.json).
