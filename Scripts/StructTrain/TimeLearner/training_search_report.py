@@ -164,8 +164,11 @@ def analyze_search_history(path):
         report_version = 2
     _, after = _frozen(path, 16*1024**2)
     require(after == manifest_record, 'search_report_manifest_changed')
+    # Summary9 already projects this explicit negative claim. Assemble it once
+    # for both readers; the completed DATA audit does not attest a native run.
+    result['native_execution_attested'] = False
     return dict(kind='timelearner_native_search_history_report', schema_version=report_version,
         source_manifest=manifest_record, source_summary=summary_record,
         source_run_execution=manifest['execution'], source_run_validity=manifest['validity'],
         runtime_fingerprint=manifest['runtime_fingerprint'], data_audit=proof,
-        native_execution_attested=False, **result)
+        **result)
