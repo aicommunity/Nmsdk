@@ -1,0 +1,39 @@
+{
+  "kind": "timelearner_actual_crossplatform_response_comparison_reference",
+  "schema_version": 1,
+  "host": "user@10.245.1.8",
+  "controller": "D:/Projects/TimeLearnerWorker/jobs/Win8-scientific-DATA8-fr1176",
+  "native": "D:/Projects/TimeLearnerWorker/jobs/win8-classic-rs-scientific-data8-fr1176",
+  "source_reference": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/de/de69f9dee01fa72b57dd37df758e33659ef13b52b92d725b0b1bbe0029d99c60",
+    "sha256": "de69f9dee01fa72b57dd37df758e33659ef13b52b92d725b0b1bbe0029d99c60",
+    "bytes": 11975
+  },
+  "comparison": {
+    "path": "D:\\Projects\\TimeLearnerWorker\\jobs\\Win8-scientific-DATA8-fr1176\\comparison.json",
+    "sha256": "008f4e2e340a5b5a96505f39d298b804c35b3eebe0bb7242e3bf2246a9bb78dd",
+    "size": 11665
+  },
+  "all_eight_waveforms_histories_windows_and_events_preserved": true,
+  "absolute_tolerance": 1e-12,
+  "counts": {
+    "TP": 1,
+    "FP": 0,
+    "FN": 0,
+    "TN": 7,
+    "targets": 1,
+    "foils": 7,
+    "target_trials_with_outside_spikes": 0,
+    "accuracy": 1.0,
+    "target_hit_rate": 1.0,
+    "foil_response_rate": 0.0
+  },
+  "original_native_terminal_replay_equality_flag_not_rewritten": true,
+  "new_Train": false,
+  "new_independent_patterns": false,
+  "full_new_Windows_primary_and_independent_reader_pending": true,
+  "scientific_verdict": null
+}

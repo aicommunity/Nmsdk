@@ -1,0 +1,34 @@
+{
+  "kind": "timelearner_actual_Branch_physical_DATA_replay_evidence_reference",
+  "schema_version": 1,
+  "run_manifest": {
+    "path": "/home/user/Nmsdk-experiments/readbacks/Branch-Rs-cap24-physical-replay-fr1197/run-manifest.json",
+    "sha256": "417887c82068efde2404e2e8d0ddc784ddf41a52eb5d871ae3956f586588e4db",
+    "size": 56222
+  },
+  "comparison": {
+    "path": "/home/user/Nmsdk-experiments/readbacks/Branch-Rs-cap24-physical-replay-orchestration-fr1197/comparison.json",
+    "sha256": "36c84690c89d5a09a582bd775e81980672741fbff54783ed9eb4115daedf5cc0",
+    "size": 11776
+  },
+  "all_eight_full_waveforms_histories_windows_and_events_preserved": true,
+  "absolute_tolerance": 1e-12,
+  "counts": {
+    "TP": 1,
+    "FP": 0,
+    "FN": 0,
+    "TN": 7,
+    "targets": 1,
+    "foils": 7,
+    "target_trials_with_outside_spikes": 0,
+    "accuracy": 1.0,
+    "target_hit_rate": 1.0,
+    "foil_response_rate": 0.0
+  },
+  "model_revision": "170627d022391624946f8527270a93ac62e9fbfbbbefdfba35071c69834c8373",
+  "threshold": 0.08071095467753625,
+  "new_Train": false,
+  "new_independent_patterns": false,
+  "full_new_export_replay_primary_and_independent_reader_pending": true,
+  "scientific_verdict": null
+}
