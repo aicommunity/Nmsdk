@@ -1,0 +1,84 @@
+{
+  "kind": "timelearner_dendr_baseline_fleet_verification",
+  "schema_version": 1,
+  "UTC": "2026-11-28T11:55:07.116330+00:00",
+  "branches": [
+    "develop",
+    "dendr_timelearner"
+  ],
+  "expected": {
+    "Rdk": "33e9b664306b49ad93d2fd7886c249f1026407fa",
+    "PulseLib": "de113071f18f9be9321a14dc4e1a8fa2537a19f9",
+    "Bin": "402867ffcf2b9d6fc145bbe5e16f016e15269054",
+    "root": "492d38c55f2290d081c54ad59c5f0c95b871827d"
+  },
+  "origin_verified": true,
+  "remote_hosts": {
+    "11": {
+      "repositories": 8,
+      "all_refs_equal_expected": true,
+      "all_checkout_HEADs_preserved": true
+    },
+    "17": {
+      "repositories": 8,
+      "all_refs_equal_expected": true,
+      "all_checkout_HEADs_preserved": true
+    },
+    "14": {
+      "repositories": 8,
+      "all_refs_equal_expected": true,
+      "all_checkout_HEADs_preserved": true
+    },
+    "8": {
+      "repositories": 4,
+      "all_refs_equal_expected": true,
+      "all_checkout_HEADs_preserved": true
+    },
+    "12": {
+      "repositories": 4,
+      "all_refs_equal_expected": true,
+      "all_checkout_HEADs_preserved": true
+    },
+    "4": {
+      "repositories": 4,
+      "all_refs_equal_expected": true,
+      "all_checkout_HEADs_preserved": true
+    }
+  },
+  "remote_repository_count": 36,
+  "root_gitlinks_verified_on_each_root": true,
+  "local_owned_four_and_user_four_repositories_verified": true,
+  "user_main_checkout": "autoPreset",
+  "user_main_working_files_untouched": true,
+  "old_task_worktree_detached_with_identical_HEAD_index_and_files": true,
+  "base_does_not_imply_full_plan_acceptance": true,
+  "scientific_goal_unchanged": true,
+  "new_work_branch": "codex/timelearner-science-followup-20261128",
+  "whole_plan_fully_accepted_stages": [
+    0
+  ],
+  "whole_plan_partial_stages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "frozen_experiments_changed_or_restarted": false,
+  "evidence_archive": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/GitConsolidation-dendr-20261128-fr1010/metadata-manifest.json",
+    "bytes": 7034,
+    "sha256": "5db271493fa37ddbdee217f24bcedecc8e496770e18a59f8e1af61a675efb67c"
+  },
+  "evidence_kind": "operational_git_metadata_not_a_scientific_experiment",
+  "selected_strategy": "four explicit --no-ff current-branch merges into develop; child-first publication; root pins updated before new coordinated branch point",
+  "Elder_transport": "GitHub DNS lookup failed; verified fetch via temporary SSH loopback transport; no persistent network configuration changes",
+  "scope": "Canonical repository/common-Git copies enumerated in external evidence and the current worker SDKs. Frozen historical SDK working-tree commits remain pinned; this is branch/ref synchronization, not conversion of every historical checkout into the new model version."
+}
