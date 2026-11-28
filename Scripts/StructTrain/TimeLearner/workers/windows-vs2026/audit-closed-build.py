@@ -21,6 +21,15 @@ sys.dont_write_bytecode = True
 BASE = Path('C:/Projects/TimeLearnerWorker')
 
 
+def read_specification(value, requested=None):
+    global BASE
+    module_spec = importlib.util.spec_from_file_location('audit_worker_workspace',
+        Path(__file__).with_name('worker-workspace.py'))
+    helper = importlib.util.module_from_spec(module_spec);module_spec.loader.exec_module(helper)
+    path, specification, BASE = helper.load_specification(value, requested)
+    return path, specification
+
+
 def require(condition, reason):
     if not condition:
         raise RuntimeError(reason)
@@ -110,11 +119,11 @@ def original_build_outcome(terminal, result):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--specification', required=True, type=Path)
+    parser.add_argument('--worker-root', type=Path)
     args = parser.parse_args()
     require(os.name == 'nt' and __debug__, 'normal_windows_python_required')
     import msvcrt
-    specification = private_path(args.specification)
-    spec = json.loads(specification.read_bytes())
+    specification, spec = read_specification(args.specification, args.worker_root)
     require(spec['kind'] == 'timelearner_closed_windows_build_audit' and
             type(spec['schema_version']) is int and spec['schema_version'] == 1, 'unknown_audit_specification')
     require(digest(Path(__file__)) == spec['worker_sha256'], 'audit_worker_bytes_differ')

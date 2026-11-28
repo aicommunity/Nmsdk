@@ -57,12 +57,13 @@ def validation_plan(spec):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--specification', required=True, type=Path)
+    parser.add_argument('--worker-root', type=Path)
     args = parser.parse_args()
     module_spec = importlib.util.spec_from_file_location('closed_build_helpers', Path(__file__).with_name('audit-closed-build.py'))
     checks = importlib.util.module_from_spec(module_spec);module_spec.loader.exec_module(checks)
     require, private, digest, emit = checks.require, checks.private_path, checks.digest, checks.emit
     require(os.name == 'nt' and __debug__, 'normal_windows_python_required')
-    spec = json.loads(private(args.specification).read_bytes())
+    _, spec = checks.read_specification(args.specification, args.worker_root)
     require(spec['kind'] == 'timelearner_windows_native_validation', 'unknown_native_validation')
     plan = validation_plan(spec)
     require(digest(Path(__file__)) == spec['worker_sha256'], 'native_worker_changed')

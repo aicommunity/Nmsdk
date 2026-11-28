@@ -8,8 +8,8 @@ $ProgressPreference = 'SilentlyContinue'
 [Console]::OutputEncoding = [Text.UTF8Encoding]::new($false)
 Import-Module (Join-Path $PSScriptRoot 'GitPreparation.psm1') -Force
 if (Test-Path -LiteralPath $OutputDirectory) { throw 'Fresh test output required' }
-$output = [IO.Path]::GetFullPath($OutputDirectory)
-if (-not $output.StartsWith('C:\Projects\TimeLearnerWorker\jobs\',[StringComparison]::OrdinalIgnoreCase)) {
+$output = Get-PrivateSdkPath $OutputDirectory
+if ($output -notmatch '^[CD]:\\Projects\\TimeLearnerWorker\\jobs\\') {
     throw 'Test output must be in the private worker jobs directory'
 }
 $null = New-Item -ItemType Directory -Path $output

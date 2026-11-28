@@ -4,14 +4,42 @@ This is a build profile, not an admitted scientific worker. The Linux process,
 reservation, runtime-capture and publication implementations do not thereby
 support Windows. Do not run the existing managed pipeline with weakened checks.
 
-The separate vcpkg manifest pins the inspected registry revision and uses Qt5,
-matching the current Linux experiments. It supplies the required Charts, Svg,
+## Explicit C/D worker workspace (2026-11-28)
+
+The maintained profile is also used with the installed VS2022 toolset on .8.
+Its historical directory name does not choose the compiler: record the actual
+Visual Studio root, compiler bytes, vcpkg revision and installed status in each
+specification. The pinned Qt5 dependency manifest and triplet remain unchanged.
+
+An absent `worker_root` retains `C:/Projects/TimeLearnerWorker` for existing .14
+specifications. New .8 specifications explicitly set
+`worker_root: "D:/Projects/TimeLearnerWorker"`. Build, closed-build audit and native
+validation readers use that recorded root; an optional `--worker-root` must
+agree. Source preparation accepts only these two private workspaces and keeps
+its reparse, exact namespace, Git identity and existing-checkout checks.
+
+For D, record `launcher_python` as the actual `{path,size,sha256}` of the installed
+Python executable; the old C Python default stays unchanged. The optional
+`launcher_logon_type` is 2 (the original default) or 3 (interactive token).
+The launcher still refuses any active TimeLearner task; dependency preparation
+must finish before a new SDK build starts. Put installed dependencies, buildtrees,
+packages, downloads, binary cache, source, runtime and experiment outputs on D.
+Do not update the global vcpkg installation or old runtime to prepare a new job.
+
+Validate both the pure declaration controls and `WindowsWorkerRootActualTest`
+on the actual worker with `TIMELEARNER_WORKER_METADATA_ROOT` set to its C/D root.
+This is metadata validation, not a C++ build or scientific result.
+
+The separate vcpkg manifest pins the inspected registry revision and uses Qt5
+from the original Windows bootstrap. Current Linux workers also use Qt6;
+record the actual Qt/compiler/runtime for cross-platform comparisons.
+The manifest supplies the required Charts, Svg,
 SerialPort and test libraries without installing optional Qt WebEngine, OpenCV,
 Python or the embedded LLM. These exclusions concern build features, not neuron
 physics. Configure with RDK_USE_LLM=OFF, QT_MAJOR=5 and BUILD_TESTING=ON.
 
 Use a new source checkout with exact gitlinks, a new build/runtime/output root,
-MSVC x64 from VS2026 and Ninja. Set VCPKG_MANIFEST_DIR to this directory,
+MSVC x64 from the declared VS2022/VS2026 toolset and Ninja. Set VCPKG_MANIFEST_DIR to this directory,
 VCPKG_OVERLAY_TRIPLETS to its triplets directory and
 VCPKG_TARGET_TRIPLET=x64-windows-tl. The triplet builds Release dependencies only;
 use CMAKE_BUILD_TYPE=Release. This restriction applies to the target triplet.
@@ -85,7 +113,7 @@ omission implementation. They do not certify complete scientific experiments.
 commit, its actual submodule closure and the complete physical source namespace
 from a Git blob. They reject extra files, changed bytes, missing repositories and
 reparse directories. `Complete-PreparedGitClone` only completes an unborn clone
-inside `C:/Projects/TimeLearnerWorker`; it refuses an existing checkout and reads
+inside the declared C/D `Projects/TimeLearnerWorker` workspace; it refuses an existing checkout and reads
 long sparse specifications from Git blobs rather than a command-line JSON value.
 Native exit codes must equal zero, including signed Windows failures. PowerShell
 5.1 native stderr records are diagnostics, never part of an OID/JSON return value.
