@@ -25,7 +25,7 @@ if($WaitForAttemptId){
         Start-Sleep -Seconds 5
     }
 }
-$env:PATH='C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\cmd;C:\Windows\System32;C:\Windows'
+$env:PATH='C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\cmd;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32;C:\Windows'
 $setup="$data\Setup\prepare-$short-01"
 & $initializer -RootCommit $RootCommit -CloneRoot $sdk -EvidenceRoot $setup -ExpectedVolumeSerial 'CC129017'
 if($LASTEXITCODE){throw 'Source initialization failed'}
