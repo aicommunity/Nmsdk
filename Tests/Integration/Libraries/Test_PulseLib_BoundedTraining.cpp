@@ -1524,7 +1524,8 @@ TEST(BoundedTrainingN1LocalTurn, SmallCandidateLimitDoesNotDisableNormalizationO
         unsigned lateReadyCases=0;
         for(const int readyLength:{3,4,5,6})
         {
-            SCOPED_TRACE(int(routing));SCOPED_TRACE(readyLength);
+            SCOPED_TRACE(int(routing));
+            SCOPED_TRACE(readyLength);
             const auto p=Protocol(2,routing);auto cfg=Configuration(2,Normalization::TipResistance);
             cfg.bounds={{2,6,1,1,1.,100.},{1,1,1,1,10.,10.}};
             cfg.maximumCandidatesPerInput=8;cfg.maximumProbes=64;cfg.maximumEdits=64;cfg.maximumSweeps=1;
