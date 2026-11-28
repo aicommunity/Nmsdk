@@ -39,7 +39,9 @@ def render(source, output, *, matplotlib_libs=None):
                                   'unique_safe_measurement_figure_id_required');identities.add(identity)
         files=[]
         for suffix in ('png','svg'):
-            p=output/(identity+'.'+suffix);fig.savefig(p,dpi=220)
+            # Long Russian axis labels and the zero-tolerance explanation may
+            # extend beyond a fixed canvas even with constrained layout.
+            p=output/(identity+'.'+suffix);fig.savefig(p,dpi=220,bbox_inches='tight',pad_inches=.08)
             files.append(dict(name=p.name,bytes=p.stat().st_size,sha256=hashlib.sha256(p.read_bytes()).hexdigest()))
         plt.close(fig);records.append(dict(id=identity,files=files,source=row,details=details,visually_reviewed=False))
 
