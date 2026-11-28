@@ -1,7 +1,9 @@
-"""Run declared native checks through the existing Windows schema4 gate.
+"""Run declared native checks through the Windows native gate.
 
 Consumes a verified closed-build audit; never changes its original outcome.
-The native gate, JUnit audit and process backend come from the compiled SDK.
+Legacy validation imports its gate from the compiled SDK. Version3 explicitly
+binds a separate immutable Python gate source for declared DATA inputs; the
+compiled source, runtime and original closed-build audit remain unchanged.
 """
 import argparse
 import gzip
@@ -29,10 +31,31 @@ def validation_plan(spec):
     def wall(value):
         return type(value) in (int, float) and 0 < value <= 86400 and math.isfinite(value)
     version = spec.get('schema_version')
-    check(type(version) is int and version in (1, 2), 'unknown_native_validation')
+    check(type(version) is int and version in (1, 2, 3), 'unknown_native_validation')
+    check(version == 3 or not ({'data_inputs', 'artifact_directories',
+          'gate_source_root', 'gate_source_commit'} & set(spec)),
+          'native_validation_data_contract_requires_version3')
+    if version == 3:
+        check(type(spec.get('gate_source_root')) is str and
+              Path(spec['gate_source_root']).is_absolute() and
+              type(spec.get('gate_source_commit')) is str and
+              re.fullmatch(r'[0-9a-f]{40}', spec['gate_source_commit']),
+              'native_validation_gate_source_required')
+        from Scripts.StructTrain.TimeLearner import native_gate_inputs, gtest_full_names
+        from Scripts.StructTrain.TimeLearner.native_gate import artifact_directories_valid
+        check(native_gate_inputs.valid_windows_declarations(spec.get('data_inputs')) and
+              artifact_directories_valid(spec.get('artifact_directories')),
+              'native_validation_data_inputs_or_artifacts_invalid')
+
+        def ids(value):
+            try:
+                gtest_full_names.validate_names(value)
+                return True
+            except (ValueError, TypeError):
+                return False
     expected, maximum = spec.get('expected_test_ids'), spec.get('maximum_wall_seconds')
     check(ids(expected) and wall(maximum), 'invalid_native_validation_inventory_or_wall')
-    if version == 1:
+    if version == 1 or (version == 3 and 'partitions' not in spec):
         check('partitions' not in spec, 'undeclared_native_validation_partitions')
         return [{'name': 'single', 'expected_test_ids': list(expected), 'maximum_wall_seconds': maximum}]
     partitions = spec.get('partitions')
@@ -65,9 +88,16 @@ def main():
     require(os.name == 'nt' and __debug__, 'normal_windows_python_required')
     _, spec = checks.read_specification(args.specification, args.worker_root)
     require(spec['kind'] == 'timelearner_windows_native_validation', 'unknown_native_validation')
-    plan = validation_plan(spec)
     require(digest(Path(__file__)) == spec['worker_sha256'], 'native_worker_changed')
     source, runtime, audit, output = [private(spec[k]) for k in ('source_root','runtime_root','closed_build_audit','output_root')]
+    gate_source = source
+    if type(spec.get('schema_version')) is int and spec['schema_version'] == 3:
+        gate_source = private(spec['gate_source_root'])
+        require(Path(__file__).resolve().is_relative_to(gate_source) and
+                checks.git(gate_source, 'rev-parse', 'HEAD') == spec['gate_source_commit'],
+                'native_validation_gate_source_changed')
+        sys.path.insert(0, str(gate_source))
+    plan = validation_plan(spec)
     require(not output.exists() and not output.is_relative_to(source) and not output.is_relative_to(runtime) and
             not source.is_relative_to(output) and not runtime.is_relative_to(output), 'fresh_validation_output_required')
     output.mkdir(parents=True, exist_ok=False);passed = False; results = []
@@ -80,10 +110,15 @@ def main():
         require(json.loads((audit/'terminal.json').read_bytes())['audit_passed'] is True and
                 proof['source_commit'] == spec['source_commit'] and proof['compiled_tests_executed'] is False,
                 'closed_build_audit_not_valid')
-        sys.path.insert(0, str(source))
+        sys.path.insert(0, str(gate_source))
         from Scripts.StructTrain.TimeLearner.runtime import source_closure, file_record, build_flags, runtime_content_identity, digest_json
         from Scripts.StructTrain.TimeLearner.native_gate import run_native_gate
         import Scripts.StructTrain.TimeLearner.windows_process as backend
+        gate_before = None
+        if spec['schema_version'] == 3:
+            from Scripts.StructTrain.TimeLearner.owned_python_job import _source_snapshot
+            gate_before = _source_snapshot(gate_source, spec['gate_source_commit'])
+            emit(output, 'gate-source-before.json', gate_before)
         require(source_closure(source) == proof['source_closure'], 'audited_source_changed')
         helper_spec = importlib.util.spec_from_file_location('original_build_helpers', source/'Scripts/StructTrain/TimeLearner/workers/windows-vs2026/sdk-build.py')
         helper = importlib.util.module_from_spec(helper_spec);helper_spec.loader.exec_module(helper)
@@ -105,7 +140,8 @@ def main():
         manifest['runtime_fingerprint'] = digest_json(manifest['runtime_identity'])
         emit(output,'runtime.json',manifest)
         for partition in plan:
-            destination = output if spec['schema_version'] == 1 else output/partition['name']
+            single = spec['schema_version'] == 1 or (spec['schema_version'] == 3 and 'partitions' not in spec)
+            destination = output if single else output/partition['name']
             if destination != output:
                 destination.mkdir(exist_ok=False)
             require(helper.inventory(runtime) == runtime_inventory and source_closure(source) == proof['source_closure'],
@@ -115,6 +151,9 @@ def main():
                 'maximum_wall_seconds':partition['maximum_wall_seconds'],
                 'asan_options':'','cooperative_runtime_capture':True,'process_limits':spec['process_limits'],
                 'worker_lock':str(private(checks.BASE/'locks/worker.lock'))}
+            if spec['schema_version'] == 3:
+                gate.update(schema_version=8, data_inputs=spec['data_inputs'],
+                            artifact_directories=spec['artifact_directories'])
             emit(destination,'gate.json',gate)
             result = run_native_gate(destination/'gate.json',destination/'native-gate')
             emit(destination,'gate-result.json',result)
@@ -122,11 +161,15 @@ def main():
             require(helper.inventory(runtime) == runtime_inventory and source_closure(source) == proof['source_closure'],
                     'validation_changed_runtime_or_source')
             require(result['validity'] == 'valid' and result['assertion_status'] == 'passed', 'actual_native_checks_not_passed')
+        if gate_before is not None:
+            require(_source_snapshot(gate_source, spec['gate_source_commit']) == gate_before,
+                    'native_validation_gate_source_changed')
+            emit(output, 'gate-source-after.json', gate_before)
         passed = True
     except BaseException as error:
         emit(output,'exception.json',{'reason':str(error),'traceback':traceback.format_exc()})
     finally:
-        if spec['schema_version'] == 2:
+        if spec['schema_version'] in (2, 3):
             emit(output, 'suite-results.json', {'partitions': results, 'complete': passed,
                 'expected_cpp_cases': len(spec['expected_test_ids']), 'scientific_verdict': None})
         emit(output,'terminal.json',{'native_checks_passed':passed,'scientific_worker_admitted':False,

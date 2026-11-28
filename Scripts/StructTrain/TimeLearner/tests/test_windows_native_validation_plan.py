@@ -62,10 +62,36 @@ class WindowsNativeValidationPlanTest(unittest.TestCase):
                 VALIDATOR.validation_plan(spec)
 
     def test_unknown_versions_and_legacy_unconsumed_partitions_are_rejected(self):
-        for version in (True, 1.0, 0, 3):
+        for version in (True, 1.0, 0, 4):
             spec = suite(); spec['schema_version'] = version
             with self.subTest(version=version), self.assertRaises(RuntimeError):
                 VALIDATOR.validation_plan(spec)
         spec = suite(); spec['schema_version'] = 1
         with self.assertRaisesRegex(RuntimeError, 'undeclared'):
             VALIDATOR.validation_plan(spec)
+
+    def test_data_version3_uses_full_names_and_explicit_gate_source(self):
+        spec = {'schema_version': 3, 'expected_test_ids': ['Model.ActualGraph'],
+                'maximum_wall_seconds': 60, 'gate_source_root': str(WORKER.parents[4]),
+                'gate_source_commit': 'a'*40, 'artifact_directories': {},
+                'data_inputs': [{'name': 'classic-package6.qz',
+                    'path': str(WORKER.parent/'fixture.qz'), 'bytes': 323020, 'sha256': 'b'*64}]}
+        before = deepcopy(spec)
+        self.assertEqual(VALIDATOR.validation_plan(spec), [{'name': 'single',
+            'expected_test_ids': ['Model.ActualGraph'], 'maximum_wall_seconds': 60}])
+        self.assertEqual(spec, before)
+        for key in ('gate_source_root', 'gate_source_commit', 'data_inputs', 'artifact_directories'):
+            bad = deepcopy(spec); del bad[key]
+            with self.subTest(key=key), self.assertRaises(RuntimeError):
+                VALIDATOR.validation_plan(bad)
+        for change in (dict(expected_test_ids=['Model/ActualGraph']), dict(data_inputs=[]),
+                       dict(gate_source_commit='not-a-commit'),
+                       dict(artifact_directories={'PATH':'runtime'})):
+            with self.subTest(change=change), self.assertRaises(RuntimeError):
+                VALIDATOR.validation_plan(dict(spec, **change))
+
+    def test_legacy_validation_cannot_ignore_new_data_controls(self):
+        for key in ('data_inputs', 'artifact_directories', 'gate_source_root', 'gate_source_commit'):
+            bad = suite(); bad[key] = 'unconsumed'
+            with self.subTest(key=key), self.assertRaisesRegex(RuntimeError, 'requires_version3'):
+                VALIDATOR.validation_plan(bad)

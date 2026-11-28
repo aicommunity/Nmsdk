@@ -4,11 +4,15 @@ The outer job owns read reservations for the declared source files. This module
 captures bounded bytes, stages them inside the owned output and checks both
 copies after execution; it grants no execution or scientific authority.
 """
+import hashlib
+import json
+import os
 from pathlib import Path
 import re
+import stat
 
 from .collector_provenance import (RequiredFileRole, capture_required_file_roles,
-                                   frozen_digest, _frozen, _json)
+                                   CapturedFileRoles, frozen_digest, _canonical, _frozen, _json)
 from .native_evidence import require
 
 
@@ -49,7 +53,64 @@ def capture_inputs(rows, output):
     return capture_required_file_roles(requirements, maximum_total_bytes=MAXIMUM_TOTAL_BYTES)
 
 
+def valid_windows_declarations(rows):
+    """Reject Win32 device/normalized aliases before creating owned output."""
+    reserved = {'CON', 'PRN', 'AUX', 'NUL',
+                *('COM'+str(i) for i in range(1, 10)),
+                *('LPT'+str(i) for i in range(1, 10))}
+    return (valid_declarations(rows) and all(
+        not row['name'].endswith('.') and row['name'].split('.', 1)[0].upper() not in reserved
+        for row in rows))
+
+
+def _stage_windows(captured, output):
+    """Stage immutable required-file values, without POSIX dir_fd claims.
+
+    This is an owned-output integrity check, not kernel/process attestation.
+    The source and staged bytes are independently checked again after native
+    execution by verify_inputs, just as for the POSIX staging implementation.
+    """
+    require(os.name == 'nt' and type(captured) is CapturedFileRoles,
+            'windows_native_gate_staging_required')
+    descriptor = captured.descriptor  # validates every bound name and byte
+    declarations = [dict(name=r['staged_name'], path=r['source_path'],
+                         bytes=r['bytes'], sha256=r['sha256'])
+                    for r in descriptor['roles'].values()]
+    require(valid_windows_declarations(declarations), 'native_gate_data_input_declaration')
+    output = _canonical(Path(output).absolute())
+    require(output.is_dir(), 'native_gate_owned_output_not_directory')
+    staging = output/'native-inputs'
+    require(not staging.exists() and not staging.is_symlink() and not staging.is_junction(),
+            'native_gate_data_input_staging_exists')
+    root_identity = (output.stat().st_dev, output.stat().st_ino)
+    staging.mkdir(exist_ok=False)
+    require(_canonical(staging).parent == output, 'native_gate_data_input_staging_scope')
+    stage_identity = (staging.stat().st_dev, staging.stat().st_ino)
+    files = (*captured._files,
+             ('descriptor.json', (json.dumps(descriptor, indent=2, allow_nan=False)+'\n').encode()))
+    result = {}
+    for name, raw in files:
+        require((output.stat().st_dev, output.stat().st_ino) == root_identity and
+                (staging.stat().st_dev, staging.stat().st_ino) == stage_identity and
+                _canonical(staging).parent == output, 'native_gate_data_input_staging_changed')
+        path = staging/name
+        with path.open('xb') as stream:
+            stream.write(raw)
+            stream.flush()
+            os.fsync(stream.fileno())
+        actual, record = _frozen(path, MAXIMUM_INPUT_BYTES)
+        require(actual == raw and record['sha256'] == hashlib.sha256(raw).hexdigest(),
+                'native_gate_data_input_changed')
+        result['collector-file-inputs/'+name] = path
+    require((output.stat().st_dev, output.stat().st_ino) == root_identity and
+            (staging.stat().st_dev, staging.stat().st_ino) == stage_identity,
+            'native_gate_data_input_staging_changed')
+    return result
+
+
 def stage_inputs(captured, output):
+    if os.name == 'nt':
+        return _stage_windows(captured, output)
     return captured.materialize(output, Path(output)/'native-inputs')
 
 
@@ -58,7 +119,8 @@ def verify_inputs(captured, output):
     descriptor = captured.descriptor
     directory = Path(output)/'native-inputs'
     roles = descriptor['roles']
-    require(not directory.is_symlink() and directory.is_dir() and
+    require(not directory.is_symlink() and not getattr(directory, 'is_junction', lambda: False)() and
+            directory.is_dir() and
             {p.name for p in directory.iterdir()} ==
             {'descriptor.json', *(row['staged_name'] for row in roles.values())},
             'native_gate_data_input_namespace_changed')
@@ -67,6 +129,10 @@ def verify_inputs(captured, output):
     require(_json(raw_descriptor) == descriptor,
             'native_gate_data_input_descriptor_changed')
     for row in roles.values():
+        source, staged = Path(row['source_path']), directory/row['staged_name']
+        require(not os.path.samefile(source, staged) and
+                stat.S_ISREG(staged.lstat().st_mode) and staged.lstat().st_nlink == 1,
+                'native_gate_data_input_alias')
         for path in (Path(row['source_path']), directory/row['staged_name']):
             actual = frozen_digest(path, MAXIMUM_INPUT_BYTES)
             require(actual['bytes'] == row['bytes'] and actual['sha256'] == row['sha256'],

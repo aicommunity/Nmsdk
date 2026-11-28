@@ -68,7 +68,7 @@ class WindowsFullNameGate(unittest.TestCase):
         runtime = dict(loader_environment=dict(PATH='declared-runtime',
             LD_LIBRARY_PATH='not-a-windows-search-path', QT_QPA_PLATFORM='offscreen'))
         with _environment(dict(PATH='operator-path')):
-            for version in (4, 7):
+            for version in (4, 7, 8):
                 values = _loader_environment(dict(self.spec, schema_version=version), runtime)
                 self.assertNotIn('LD_LIBRARY_PATH', values)
                 with _environment(values):
@@ -76,6 +76,27 @@ class WindowsFullNameGate(unittest.TestCase):
                     self.assertEqual(os.environ['QT_QPA_PLATFORM'], 'offscreen')
                     self.assertNotIn('QT_PLUGIN_PATH', os.environ)
                 self.assertEqual(os.environ['PATH'], 'operator-path')
+
+    def test_schema8_requires_explicit_bounded_windows_safe_data(self):
+        from pathlib import Path
+        row = dict(name='classic-package6.qz', path=str(Path('fixture.qz').resolve()),
+                   bytes=323020, sha256='d58ce13f3759a9e7c38f65c2cdb3059bb7ddccbd152d7e4144564c1efa36b234')
+        spec = dict(self.spec, schema_version=8, data_inputs=[row])
+        self.assertTrue(supported_specification(spec))
+        self.assertEqual(_filter_argument(spec), _filter_argument(self.spec))
+        for bad in ([], [dict(row, name='NUL.qz')], [dict(row, name='COM1')],
+                    [dict(row, name='trailing.')], [dict(row, bytes=True)],
+                    [dict(row, sha256='bad')], [row, row]):
+            self.assertFalse(supported_specification(dict(spec, data_inputs=bad)))
+        absent = dict(spec); del absent['data_inputs']
+        self.assertFalse(supported_specification(absent))
+        for version in (4, 7):
+            self.assertFalse(supported_specification(dict(spec, schema_version=version)))
+
+    def test_schema8_retains_windows_filter_budget(self):
+        with self.assertRaisesRegex(EvidenceError, 'windows_native_gate_filter_budget'):
+            _filter_argument(dict(self.spec, schema_version=8,
+                expected_test_ids=['Suite.Case'+str(i)+'x'*500 for i in range(50)]))
 
     def test_linux_full_names_keep_library_path_and_do_not_replace_path(self):
         runtime = dict(loader_environment=dict(PATH='not-a-linux-loader-variable',
