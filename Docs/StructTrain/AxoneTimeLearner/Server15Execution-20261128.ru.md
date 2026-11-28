@@ -27,3 +27,7 @@ SDK C:\Projects\nmsdk-axone-timelearner заморожен на 922da2869. Runti
 NativeChecks/native-922da286-02 завершилась штатным timeout через 1802,44 с, returncode 1460, all_processes_closed=true. Кооперативная capture-точка не была достигнута, runtime_provenance=not_captured; gate validity=incomplete_test_observation, assertion_status=not_assessed. Поле complete=true в документе supervisor означает завершение управляющей функции, а не полноту 68 тестов. Полную P1 приёмку по этой попытке не выполнять.
 
 NativeChecks/event-922da286-01: 10 сценариев AxoneConductionObservation выполнены, native_checks_passed=true. Это инженерная проверка извлечения и временной ассоциации событий; она не подтверждает причинное проведение и обучение. Девять физических диагностических условий выполняются отдельно в factory-f942f52e-01.
+
+## Изолированный линейный набор
+
+linear-922da286-01 завершён: все 45 случаев наблюдались, validity=valid, 25 PASS/20 FAIL, кооперативная capture выполнена, Job закрыт. Первичные данные и анализ прошли readback; подробности в LinearBaselineResult-20261128.ru.md. Зафиксированы отдельные дефекты формы спайка и кэша NAxoneDelay. Подготовленная версия f25f8e24 включает исправление кэша, регрессию смены частоты, локальное правило и 54-условное сравнение регенерации. Snapshot fc1c3de7 был только подготовлен, сборка из него не запускалась; новая сборка должна использовать отдельный f25f8e24.

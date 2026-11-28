@@ -29,3 +29,5 @@
 Детализация будущей реализации: [контракт исполнения NNeuronAxoneTimeLearner](TrainerExecutionContract.ru.md).
 
 Фактическое исполнение: [журнал .15](Server15Execution-20261128.ru.md), [результат диагностики проведения](FactoryDiagnosticResult-20261128.ru.md). Базовая P1 приёмка имеет отказы; полный план остаётся открытым.
+
+[Изолированный линейный baseline и дефект кэша](LinearBaselineResult-20261128.ru.md).
