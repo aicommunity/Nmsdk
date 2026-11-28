@@ -99,7 +99,8 @@ def main():
             from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
             from Scripts.StructTrain.TimeLearner.runtime import applied_loader_environment
             base = Path(spec['execution_root']).resolve(strict=True)
-            require(base in (Path('/home/user/timelearner-refactor'), Path('/media/user/Data/TimeLearnerRefactor')) and
+            require(base in (Path('/home/user/timelearner-refactor'), Path('/media/user/Data/TimeLearnerRefactor'),
+                             Path('/home/user/Nmsdk-experiments')) and
                     output.is_relative_to(base/'readbacks') and inputs.is_relative_to(base/'readbacks'),
                     'prepared_worker_resource_scope')
             disk = spec['disk']
