@@ -1,0 +1,75 @@
+{
+  "kind": "independent_allpositions128_gallery_and_native9_evidence_acceptance_evidence",
+  "schema_version": 1,
+  "analysis": {
+    "kind": "independent_allpositions128_gallery_and_native9_evidence_acceptance",
+    "schema_version": 1,
+    "accepted_source_catalogs": {
+      "reader": {
+        "relative_path": "experiments/2026-11-28/Classic-allpositions128-reader-fr748.json",
+        "bytes": 21127,
+        "sha256": "f59bc30f932d42c3462873764be13c47b5e159a3794e28bfe0a4e1ff47b6bfa2",
+        "members": 46
+      },
+      "gallery": {
+        "relative_path": "experiments/2026-11-28/Classic-allpositions128-gallery-fr749.json",
+        "bytes": 21137,
+        "sha256": "63bc0c7d82e52cbd628c56ba69abda2a6055e00504e698cfef523c5c12705c9a",
+        "members": 718
+      },
+      "native9": {
+        "relative_path": "experiments/2026-11-28/Jump12-recorded-input-native9-fr750.json",
+        "bytes": 4009,
+        "sha256": "0a3e34b922365fca06bb416ee52d8ec1825b0e6f2e4f6477bf2bb0d28c98404c",
+        "members": 110
+      }
+    },
+    "all_member_counts": {
+      "reader": 46,
+      "gallery": 718,
+      "native9": 110
+    },
+    "all_members_verified": 874,
+    "observations": 128,
+    "case_audits_cross_checked": 16,
+    "expected_PNG": 256,
+    "expected_SVG": 256,
+    "actual_events_exactly_equal": true,
+    "own_controls_and_loaded_library_bytes_verified": true,
+    "native9": {
+      "observed": 9,
+      "passed": 8,
+      "failed": [
+        "NativeImageRestSnapshot.RepeatedArchiveAndPoolReuseAt20000"
+      ],
+      "JUnit_independently_parsed": true,
+      "failed_assertions_not_promoted": true
+    },
+    "primary975_was_independently_read_by_peer_not_recalculated_here": true,
+    "visual_review_complete": false,
+    "new_Train": false,
+    "new_native_calculation": false,
+    "whole_stage_accepted": false,
+    "scientific_verdict": null
+  },
+  "members": 31,
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/78/78736ea9a1fb686a1484704e219832cfc084ca6832cfdd47113601da9a3596ec",
+      "sha256": "78736ea9a1fb686a1484704e219832cfc084ca6832cfdd47113601da9a3596ec",
+      "bytes": 6038
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/54/54268222406f55f259e6eb4c0955bc2bb9bab34756feb3fc720580d4193568cf",
+      "sha256": "54268222406f55f259e6eb4c0955bc2bb9bab34756feb3fc720580d4193568cf",
+      "bytes": 6052776
+    }
+  },
+  "controls_commit": "de1ae5c579e7a619e68879da1c34484917ea97fa"
+}
