@@ -148,7 +148,7 @@ try {
         $previous = (& $git -C $CloneRoot rev-parse $RootBranch).Trim()
         if($previous -ne $RootCommit) {
             $active = @(Get-CimInstance Win32_Process | Where-Object {
-                $_.Name -in @('cmake.exe','ninja.exe','cl.exe','vcpkg.exe') -and $_.CommandLine -like '*nmsdk-axone*'
+                $_.Name -in @('cmake.exe','ninja.exe','cl.exe','vcpkg.exe','NeuroModelerConsole.exe','Test_PulseLib_StorageComponents.exe','python.exe','pythonw.exe') -and $_.CommandLine -like '*nmsdk-axone*'
             })
             if($active.Count) { throw 'An SDK operation is still active; do not update its sources.' }
             if(@(& $git -C $CloneRoot status --porcelain --untracked-files=all).Count) { throw 'Existing SDK has local changes.' }
@@ -181,6 +181,7 @@ try {
             Native-Step ("clone-"+$name) $git @('-c','core.longpaths=true','clone','--filter=blob:none','--no-checkout',$url,$target)
         }
         Configure-Clone $target
+        Native-Step ('fetch-'+$name) $git @('-C',$target,'fetch','--no-recurse-submodules','origin')
         if($relative -eq 'Bin') {
             Native-Step 'bin-sparse-init' $git @('-C',$target,'sparse-checkout','init','--cone')
             Native-Step 'bin-source-scope' $git @('-C',$target,'sparse-checkout','set','ClDesc','WatchPresets',
@@ -201,8 +202,13 @@ try {
                 if($LASTEXITCODE) {
                     Native-Step 'select-prepared-module' $git @('-C',$target,'switch','--create',$work,$pinned)
                 } else {
-                    if((& $git -C $target rev-parse $work).Trim() -ne $pinned) { throw 'Existing module work branch differs.' }
+                    $previousModule = (& $git -C $target rev-parse $work).Trim()
+                    & $git -C $target merge-base --is-ancestor $previousModule $pinned
+                    if($LASTEXITCODE) { throw 'Existing module work branch is not an ancestor of the pinned source.' }
                     Native-Step 'select-existing-module-work' $git @('-C',$target,'switch',$work)
+                    if($previousModule -ne $pinned) {
+                        Native-Step 'advance-owned-module-work' $git @('-C',$target,'merge','--ff-only',$pinned)
+                    }
                 }
                 Native-Step 'track-prepared-module' $git @('-C',$target,'branch',
                     '--set-upstream-to=origin/work/axone_timelearner/01-axon-lifecycle','work/axone_timelearner/01-axon-lifecycle')

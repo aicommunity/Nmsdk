@@ -71,7 +71,8 @@
     "logical_processors": 12,
     "memory_bytes": 34207805440,
     "python_planned_version": "3.13.17",
-    "python_installer_sha256": "5da012101ba2e17113a9a1cd901e9ce1441086f2b7ecb5de06ec94163899a190"
+    "python_installer_sha256": "5da012101ba2e17113a9a1cd901e9ce1441086f2b7ecb5de06ec94163899a190",
+    "python_version": "3.13.17"
   },
   "configuration": {
     "preset": "axone-win-v143-localqt",
@@ -89,8 +90,8 @@
   "acceptance": {
     "environment_read": true,
     "clone_prepared": true,
-    "vcpkg_prepared": false,
-    "configure": false,
+    "vcpkg_prepared": true,
+    "configure": true,
     "compilation": false,
     "native_tests": false,
     "scientific_execution": false
@@ -125,6 +126,28 @@
       "reason": "Selected global vcpkg root differs from effective reference cache root; outdated version database and promisor fetch error.",
       "compilation_started": false,
       "scientific_execution": false
+    },
+    {
+      "id": "bootstrap-c8c431c6-01",
+      "status": "completed",
+      "root_commit": "c8c431c65f1b3056625fe2f563d5441058b1d789",
+      "vcpkg_commit": "5cad485d1ddb649c8fa1022bf0b3908555e6e6ba",
+      "source_clean": true,
+      "submodules": 7
+    },
+    {
+      "id": "configure-c8c431c6-01",
+      "status": "completed",
+      "packages": 67,
+      "scientific_execution": false
+    },
+    {
+      "id": "build-c8c431c6-01",
+      "status": "failed_preserved",
+      "stage": "compile_native_test",
+      "error": "C2664: const UEPtr<NAxoneCommon> cannot implicitly convert to UEPtr<UContainer> in test helper functions.",
+      "scientific_execution": false,
+      "native_tests_executed": false
     }
   ]
 }

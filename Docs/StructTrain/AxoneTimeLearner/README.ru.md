@@ -25,3 +25,5 @@
 Подготовка следующего этапа: [исходники lifecycle, аксонного дерева и входы P1/P2](LocalSourcePreparation-20261128.ru.md). Runtime-приёмка ещё не выполнена.
 
 Сервер доступен; данные — E: на .15. [Профиль сборки по локальному эталону](Server15BuildProfile-20261128.ru.md).
+
+Детализация будущей реализации: [контракт исполнения NNeuronAxoneTimeLearner](TrainerExecutionContract.ru.md).

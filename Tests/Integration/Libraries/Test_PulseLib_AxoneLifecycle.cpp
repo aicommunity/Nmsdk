@@ -108,7 +108,7 @@ protected:
             RequireInitialized(node->GetComponentByIndex(index));
     }
 
-    void Rebuild(UEPtr<UContainer> node)
+    template<class T> void Rebuild(const UEPtr<T>& node)
     {
         const auto marker = node->OperationFailureSequence();
         node->Build();
@@ -116,9 +116,9 @@ protected:
                 "axone_lifecycle_rebuild");
     }
 
-    UEPtr<NLTZone> Zone(UEPtr<UContainer> node, const std::string& path = "LTZone")
+    template<class T> UEPtr<NLTZone> Zone(const UEPtr<T>& node, const std::string& path = "LTZone")
     {
-        auto zone = node->GetComponentL<NLTZone>(path, true);
+        auto zone = node->template GetComponentL<NLTZone>(path, true);
         Require(bool(zone), "axone_lifecycle_zone");
         return zone;
     }
