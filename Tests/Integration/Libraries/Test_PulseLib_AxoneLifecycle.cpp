@@ -78,7 +78,7 @@ protected:
             ADD_FAILURE() << phase << ": " << typeid(error).name()
                 << " type=" << error.GetType() << " number=" << error.GetNumber()
                 << " file=" << error.GetExFileName() << ":" << error.GetExLineNumber()
-                << " object=" << error.GetObjectName() << " message=" << error.GetMessage();
+                << " object=" << error.GetObjectName() << " message=" << error.what();
         }
         catch(const std::exception& error) { ADD_FAILURE() << phase << ": " << error.what(); }
         catch(...) { ADD_FAILURE() << phase << ": unknown native exception"; }
