@@ -96,13 +96,38 @@ try {
     try { Native-Step 'bootstrap-vcpkg' $env:ComSpec @('/d','/c','bootstrap-vcpkg.bat -disableMetrics') }
     finally { Pop-Location }
 
-    $pythonCandidates = @(Get-ChildItem -Path "$env:LOCALAPPDATA\Programs\Python\Python313\python.exe" -File -ErrorAction SilentlyContinue)
-    if(!$pythonCandidates.Count) {
-        $winget = (Get-Command winget -ErrorAction Stop).Source
-        Native-Step 'install-python313' $winget @('install','--exact','--id','Python.Python.3.13',
-            '--scope','user','--source','winget','--silent','--accept-source-agreements','--accept-package-agreements')
+    $pythonDirectory = Join-Path $env:LOCALAPPDATA 'Programs/Python/Python313'
+    $python = Join-Path $pythonDirectory 'python.exe'
+    if(!(Test-Path -LiteralPath $python)) {
+        $state.current_step = 'install-python31317'
+        Save-State
+        $installerDirectory = Join-Path $DataRoot 'Installers'
+        $null = [IO.Directory]::CreateDirectory($installerDirectory)
+        $installer = Join-Path $installerDirectory 'python-3.13.17-amd64.exe'
+        $installerUrl = 'https://www.python.org/ftp/python/3.13.17/python-3.13.17-amd64.exe'
+        $expectedHash = '5da012101ba2e17113a9a1cd901e9ce1441086f2b7ecb5de06ec94163899a190'
+        if(!(Test-Path -LiteralPath $installer)) {
+            [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+            Invoke-WebRequest -UseBasicParsing -Uri $installerUrl -OutFile $installer
+        }
+        $actualHash = (Get-FileHash -LiteralPath $installer -Algorithm SHA256).Hash.ToLowerInvariant()
+        if($actualHash -ne $expectedHash) { throw 'Official Python installer SHA256 differs.' }
+        $signature = Get-AuthenticodeSignature -LiteralPath $installer
+        if($signature.Status -ne 'Valid' -or $signature.SignerCertificate.Subject -notmatch 'Python Software Foundation') {
+            throw 'Python installer publisher/signature is not valid.'
+        }
+        $state.python_installer = [ordered]@{url=$installerUrl;sha256=$actualHash;
+            signer=$signature.SignerCertificate.Subject;version='3.13.17'}
+        Save-State
+        $installerArguments = @('/quiet','/norestart','InstallAllUsers=0','PrependPath=0',
+            'Include_launcher=0','Include_test=0','Include_doc=0','Include_tcltk=0','Include_pip=1',
+            ('TargetDir="'+$pythonDirectory+'"'),'/log',('"'+(Join-Path $EvidenceRoot 'python-installer.log')+'"'))
+        $process = Start-Process -FilePath $installer -ArgumentList $installerArguments -WindowStyle Hidden -Wait -PassThru
+        $state.steps += [ordered]@{name='install-python31317';exit_code=$process.ExitCode;
+            finished_utc=[DateTime]::UtcNow.ToString('o');restart_requested=($process.ExitCode -eq 3010)}
+        Save-State
+        if($process.ExitCode -notin @(0,3010)) { throw "Python installer failed: $($process.ExitCode)" }
     }
-    $python = Join-Path $env:LOCALAPPDATA 'Programs/Python/Python313/python.exe'
     if(!(Test-Path -LiteralPath $python)) { throw 'Installed Python 3.13 executable is missing.' }
     Native-Step 'python-version' $python @('--version')
     $state.python = $python

@@ -44,7 +44,8 @@
     "vcpkg_commit": "cc73782a88db48af17f8bfb8328d4cab3d4c246f",
     "manifest_baseline": "5cad485d1ddb649c8fa1022bf0b3908555e6e6ba",
     "compiler_version": "19.44.35230.0",
-    "source_modified": false
+    "source_modified": false,
+    "python_version": "3.13.7"
   },
   "server": {
     "ssh": "user@10.245.1.15",
@@ -63,7 +64,9 @@
     "vc_tools_version": "14.40.33807",
     "windows_sdk_version": "10.0.22621.0",
     "logical_processors": 12,
-    "memory_bytes": 34207805440
+    "memory_bytes": 34207805440,
+    "python_planned_version": "3.13.17",
+    "python_installer_sha256": "5da012101ba2e17113a9a1cd901e9ce1441086f2b7ecb5de06ec94163899a190"
   },
   "configuration": {
     "preset": "axone-win-v143-localqt",
@@ -81,7 +84,7 @@
   "acceptance": {
     "environment_read": true,
     "clone_prepared": false,
-    "vcpkg_prepared": false,
+    "vcpkg_prepared": true,
     "configure": false,
     "compilation": false,
     "native_tests": false,
@@ -92,5 +95,15 @@
     "Exact SDK root/submodule versions; no dirty source trees.",
     "Primary axonal data is on E: .15; do not counterfeit the M40 archive marker.",
     "No source-code or physical-model migration from the autoPreset reference checkout."
+  ],
+  "attempts": [
+    {
+      "id": "bootstrap-756d94cf-01",
+      "status": "failed_preserved",
+      "step": "install-python313",
+      "error_code": "0x8a15000f",
+      "vcpkg_bootstrap_completed": true,
+      "scientific_execution": false
+    }
   ]
 }
