@@ -149,6 +149,11 @@ TEST_F(AxoneTimeLearner,ManagedTerminalAlignmentRequiresFreshVerification){
     EXPECT_EQ(trainer->GetNumComponents(),0);EXPECT_EQ(source->GetOwner(),sourceOwner);EXPECT_EQ(tree->GetOwner(),treeOwner);
     EXPECT_EQ(NmsdkTools::IdentifyModel(neuron,terminals),receiverBefore);
     EXPECT_DOUBLE_EQ(source->Amplitude.GetData(),1.);EXPECT_DOUBLE_EQ(source->PulseLength.GetData(),.001);
+    auto delay=tree->GetComponentL<NAxoneDelay>("First.Delay1",true);ASSERT_TRUE(delay);
+    delay->DelayTime=delay->DelayTime.GetData()+.001;delay->Build();
+    EXPECT_FALSE(trainer->HasVerifiedTerminalAlignment());model->Calculate();
+    EXPECT_FALSE(trainer->TerminalAlignmentVerified.GetData());EXPECT_EQ(trainer->State.GetData(),"InvalidObservation");
+    Save("verification-invalidation.json",QJsonDocument(trainer->LastPresentation()).toJson());
 }
 TEST_F(AxoneTimeLearner,RejectsForeignTerminalConsumer){
     Physical();auto listener=Take<NAxoneDelay>("NAxoneDelay","OtherReceiver");listener->Init();

@@ -59,8 +59,8 @@ $snapshotCases=@('TreeNativeSnapshotPreservesPortsParametersAndActualWaveforms',
   'TreeSnapshotKeepsAxonalAndNeuronSnapshotTypesSeparate')
 $index=0
 foreach($name in $snapshotCases){$index++;Gate "tree-snapshot$index-$short-01" 'P1-native-contracts-v7.json' 'lifecycle' "AxoneLifecycle.$name"}
-Gate "terminal-controller-smoke-$short-01" 'P2-terminal-controller-v1.json' 'all' 'AxoneTimeLearner.ManagedTerminalAlignmentRequiresFreshVerification'
-Gate "terminal-controller-$short-01" 'P2-terminal-controller-v1.json'
+Gate "terminal-controller-smoke-$short-01" 'P2-terminal-controller-v2.json' 'all' 'AxoneTimeLearner.ManagedTerminalAlignmentRequiresFreshVerification'
+Gate "terminal-controller-$short-01" 'P2-terminal-controller-v2.json'
 foreach($attempt in $attempts){
     & $python -I -S -B $seal --data-root $data --archive-id $archive --attempt "$data\$($attempt.folder)\$($attempt.id)" --role $attempt.role --seal-id $attempt.id
     if($LASTEXITCODE){throw "Sealing failed: $($attempt.id)"}

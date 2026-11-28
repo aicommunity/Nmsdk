@@ -9,7 +9,7 @@ import re
 ROOT=Path(__file__).resolve().parents[3]
 CPP="Tests/Integration/Libraries/Test_PulseLib_AxoneTimeLearner.cpp"
 BASE="Bin/Configs/SpikeSamples/StructTrain/AxoneTimeLearner"
-DESTINATION=ROOT/BASE/"protocols/P2-terminal-controller-v1.json"
+DESTINATION=ROOT/BASE/"protocols/P2-terminal-controller-v2.json"
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
@@ -24,7 +24,8 @@ def main():
         sources.append({"workspace_path":source,"canonical_lf_bytes":len(payload),
                         "canonical_lf_sha256":hashlib.sha256(payload).hexdigest()})
     document={"kind":"axone_terminal_controller_contract","schema_version":1,
-              "protocol_id":"P2-terminal-controller-v1","status":"source_prepared",
+              "protocol_id":"P2-terminal-controller-v2","status":"source_prepared",
+              "supersedes_source_declaration":"P2-terminal-controller-v1; superseded by source review before native execution",
               "test_target":"Test_PulseLib_StorageComponents","source_records":sources,
               "expected_test_ids":["AxoneTimeLearner."+name for name in tests],
               "frequency_hz":2000,"window_s":.3,"source_isi_s":[.01,.08],"expected_source_ticks":[20,180],
@@ -45,7 +46,7 @@ def main():
                             "normalization":"not_implemented","is_trained":False},
               "artifact_subdirectory":"AxoneTimeLearner","maximum_wall_seconds":1800,
               "maximum_memory_bytes":2*1024**3,"native_execution_performed":False,"scientific_result":None,
-              "claim_scope":"Ownership, scheduler, guarded parameter edit, all-event terminal alignment and fresh verification. Not full neuronal learning, local plasticity, classification or a final carrier choice."}
+              "claim_scope":"Ownership, scheduler, guarded parameter edit, all-event terminal alignment, fresh verification and invalidation after edits. Not full neuronal learning, local plasticity, classification or a final carrier choice."}
     payload=(json.dumps(document,ensure_ascii=False,indent=2,allow_nan=False)+"\n").encode("utf-8")
     if DESTINATION.exists() and DESTINATION.read_bytes()!=payload and not args.overwrite:
         raise FileExistsError("publish a new version or explicitly regenerate unpublished inputs")
