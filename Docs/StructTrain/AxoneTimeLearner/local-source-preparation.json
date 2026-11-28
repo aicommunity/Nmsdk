@@ -1,0 +1,121 @@
+{
+  "kind": "axone_local_source_preparation",
+  "schema_version": 1,
+  "date": "2026-11-28",
+  "branch": "work/axone_timelearner/01-axon-lifecycle",
+  "status": "source_prepared_requires_native_validation",
+  "versions": {
+    "root_base": "b6f81343e6fea581b0724f36f0e689a7a43019c8",
+    "Bin": "c63f3cac15327c8464e36afb0b095e8f4b355fa3",
+    "PulseLib": "6a0f8416c312fa78a405dbd274fb6ef53b670eb2",
+    "Rdk": "5b1ab4f34ee24aec239aecc702154b8272bfc9b3"
+  },
+  "source_hash_policy": "UTF-8 text with CRLF normalized to LF; scientific runtime requires its separate exact-byte provenance",
+  "source_records": [
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_AxoneLifecycle.cpp",
+      "canonical_lf_bytes": 30939,
+      "canonical_lf_sha256": "f2a572dca4a181edec4d3fd18f190eba86a1f22b84744c4468086ffd3ea1ad46"
+    },
+    {
+      "path": "Tests/Integration/Libraries/CMakeLists.txt",
+      "canonical_lf_bytes": 16058,
+      "canonical_lf_sha256": "c354600d5f06d8c8a29e996c4a0d26e6a5f26ce1246cbf2ffc2b8a4bc107c92e"
+    },
+    {
+      "path": "Scripts/StructTrain/AxoneTimeLearner/generate_stage_configs.py",
+      "canonical_lf_bytes": 14041,
+      "canonical_lf_sha256": "1e78a213bc38a3a69ab7d3476be3f93f87000cb49ed34a61dfe99a4f25f8a6af"
+    },
+    {
+      "path": "Docs/StructTrain/AxoneTimeLearner/LocalSourcePreparation-20261128.ru.md",
+      "canonical_lf_bytes": 10198,
+      "canonical_lf_sha256": "a79a95905a73259757a9581352f0a0fbe78b0b41721f4060557aed882358f9cb"
+    },
+    {
+      "path": "Libraries/Nmsdk-PulseLib/Core/NAxoneTreeChain.cpp",
+      "canonical_lf_bytes": 14286,
+      "canonical_lf_sha256": "4f393d1224d55728010ecbf481c6cd9f7b4a432f11d1675a9dfefef7643b366f"
+    },
+    {
+      "path": "Libraries/Nmsdk-PulseLib/Core/NAxoneTreeChain.h",
+      "canonical_lf_bytes": 1949,
+      "canonical_lf_sha256": "29ab01b543f5f8375848ecbb7c9c5d4aa4eb44c7374dc0b7d40b206f8c1eb94c"
+    },
+    {
+      "path": "Libraries/Nmsdk-PulseLib/Core/NAxoneSegment.cpp",
+      "canonical_lf_bytes": 7855,
+      "canonical_lf_sha256": "68a3c6145fe9dd30eaab56178d5d5e14a16247d2c997e187cfc99f7679809f7b"
+    },
+    {
+      "path": "Libraries/Nmsdk-PulseLib/Core/NAxoneSegment.h",
+      "canonical_lf_bytes": 2202,
+      "canonical_lf_sha256": "f6dbbafeb2efe6a8da1c31b5893717833f6411a0f087900dd5e48b131caccab0"
+    },
+    {
+      "path": "Libraries/Nmsdk-PulseLib/Core/NAxoneChain.cpp",
+      "canonical_lf_bytes": 6730,
+      "canonical_lf_sha256": "204ebf70d394333298a52f98499e1ad6d719d2ec3eedfabc075c9dd73a8d0c4d"
+    },
+    {
+      "path": "Libraries/Nmsdk-PulseLib/Core/NAxoneChainAndDelay.cpp",
+      "canonical_lf_bytes": 8997,
+      "canonical_lf_sha256": "df62fa6f1abedf2c6ad8a0fb061b04115fdedb18274ae75c3eb28d7d88f41c8b"
+    },
+    {
+      "path": "Libraries/Nmsdk-PulseLib/Core/NAxoneDelay.cpp",
+      "canonical_lf_bytes": 2880,
+      "canonical_lf_sha256": "4fd0af1841d7aaf76172e38d8eb101f7f256b0bace3e9ac7987748e4bde98bbe"
+    },
+    {
+      "path": "Libraries/Nmsdk-PulseLib/Core/NAperiodicLink.cpp",
+      "canonical_lf_bytes": 2514,
+      "canonical_lf_sha256": "af08b936fb907674afdcb6766da8126cf202e6654640269b6d1cfa4a335dc336"
+    },
+    {
+      "path": "Libraries/Nmsdk-PulseLib/Core/NPulseLibrary.cpp",
+      "canonical_lf_bytes": 100589,
+      "canonical_lf_sha256": "0583c8d2c0c6539dc0216fa2e7cad37081e346182e6bea9f7d87d239ffdfdd1e"
+    },
+    {
+      "path": "Libraries/Nmsdk-PulseLib/Core/NPulseLibrary.h",
+      "canonical_lf_bytes": 6168,
+      "canonical_lf_sha256": "f8b293fc7e8fe61604860df8dc4585482690cd00d2ec36ff4c4d8a0dfd553387"
+    },
+    {
+      "path": "Bin/Configs/SpikeSamples/StructTrain/AxoneTimeLearner/stage-source-manifest.json",
+      "canonical_lf_bytes": 1266,
+      "canonical_lf_sha256": "3adba01a1a4fd9bfc2b9384567fbe41e83fe9060c59ae2fa3b06e738c415a4c0"
+    }
+  ],
+  "prepared": {
+    "component": "NAxoneTreeChain",
+    "lifecycle_scenarios": 14,
+    "topology_scenarios": 3,
+    "parametrized_linear_conditions": 45,
+    "parametrized_tree_conditions": 6,
+    "total_native_test_conditions": 68,
+    "P2_historical_spans": 5,
+    "P2_input_sequences": 75
+  },
+  "performed": {
+    "source_editing": true,
+    "source_input_materialization": true,
+    "static_git_and_digest_inspection": true,
+    "compilation": false,
+    "executable_tests": false,
+    "experiments": false,
+    "server_connection": false
+  },
+  "authoring_findings": [
+    "Effective Test pattern inputs reside in Parameters_00.xml overlays; embedded Model_00.xml datasets may differ.",
+    "CL100 Test Model_00.xml declares 8 samples but contains 1 sample block; the explicit parameters overlay contains 8 consistent blocks.",
+    "Rounded historical span50 input is preserved as 0.05000003 s."
+  ],
+  "pending": [
+    "Full P1 regular and irregular bursts, shape and refractory measurements, reset and file save/load regressions.",
+    "Native P2 materializer and explicit matched receiver/amplitude/window/threshold configuration.",
+    "NNeuronAxoneTimeLearner component and controller adapters.",
+    "Server validation, scientific P1-P8 series and acceptance through no-fast-forward merges."
+  ]
+}

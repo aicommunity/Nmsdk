@@ -1,6 +1,6 @@
 # Инструменты аксонного исследования
 
-На первом этапе реализовано только формирование исходных конфигов P1:
+Генераторы формируют только исходные конфиги, без исполнения модели:
 
 ```powershell
 python -I -S -B -X utf8 Scripts/StructTrain/AxoneTimeLearner/generate_component_configs.py
@@ -9,3 +9,11 @@ python -I -S -B -X utf8 Scripts/StructTrain/AxoneTimeLearner/generate_component_
 Программа не запускает модель или сборку. Она читает шаблоны из точного Git commit Bin, формирует 45 условий в Bin/Configs и сохраняет hashes файлов. Получение научных результатов требует отдельной серверной приёмки.
 
 Общие механизмы исполнения, измерений, ConditionSpec, архивирования и отчётности должны использоваться через проверенные адаптеры существующего TimeLearner. Отсутствующая команда не заменяется успешным stub.
+
+Следующий пакет формирует generate_stage_configs.py. Он сохраняет 51 native-условие P1 и исторические входы P2 для пяти длительностей, читает Model_00.xml и Parameters_00.xml из закреплённого Git commit Bin и явно сохраняет их различия. P2 пока не является готовым Console-проектом.
+
+```powershell
+python -I -S -B -X utf8 Scripts/StructTrain/AxoneTimeLearner/generate_stage_configs.py
+```
+
+Непроверенные исходники компонентов и GTest не запускаются генераторами. Протокол native-проверок включает hashes исходного файла тестов; его окончания строк закреплены в .gitattributes.
