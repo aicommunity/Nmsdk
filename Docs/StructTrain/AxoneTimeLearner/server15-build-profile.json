@@ -41,17 +41,22 @@
       "CMAKE_COMMAND": "C:/Program Files/CMake/bin/cmake.exe",
       "CMAKE_GENERATOR": "Ninja"
     },
-    "vcpkg_commit": "cc73782a88db48af17f8bfb8328d4cab3d4c246f",
+    "vcpkg_commit": "5cad485d1ddb649c8fa1022bf0b3908555e6e6ba",
     "manifest_baseline": "5cad485d1ddb649c8fa1022bf0b3908555e6e6ba",
     "compiler_version": "19.44.35230.0",
     "source_modified": false,
-    "python_version": "3.13.7"
+    "python_version": "3.13.7",
+    "global_vcpkg_root": "E:/vcpkg",
+    "global_vcpkg_commit": "cc73782a88db48af17f8bfb8328d4cab3d4c246f",
+    "vcpkg_root": "E:/Science-Repo/nmsdk-git/.deps/vcpkg-tool",
+    "vcpkg_tool_version": "2026-10-29-139f2e53438b1529e178f6295bc563f4e0de734f",
+    "vcpkg_root_evidence": "CMakeCache.txt Z_VCPKG_ROOT_DIR, git rev-parse HEAD and actual vcpkg.exe --version"
   },
   "server": {
     "ssh": "user@10.245.1.15",
     "computer": "AQUA3060",
     "clone_root": "C:/Projects/nmsdk-axone-timelearner",
-    "vcpkg_root": "C:/Projects/vcpkg",
+    "vcpkg_root": "C:/Projects/vcpkg-5cad",
     "data_root": "E:/Nmsdk-AxoneTimeLearner-Data",
     "data_share": "\\\\10.245.1.15\\E\\Nmsdk-AxoneTimeLearner-Data",
     "file_system": "NTFS",
@@ -83,8 +88,8 @@
   },
   "acceptance": {
     "environment_read": true,
-    "clone_prepared": false,
-    "vcpkg_prepared": true,
+    "clone_prepared": true,
+    "vcpkg_prepared": false,
     "configure": false,
     "compilation": false,
     "native_tests": false,
@@ -103,6 +108,22 @@
       "step": "install-python313",
       "error_code": "0x8a15000f",
       "vcpkg_bootstrap_completed": true,
+      "scientific_execution": false
+    },
+    {
+      "id": "bootstrap-650fb842-01",
+      "status": "completed",
+      "root_commit": "650fb842aaae5fed477f0d2f98ef0a28c573ae92",
+      "python_version": "3.13.17",
+      "source_clean": true,
+      "submodules": 7
+    },
+    {
+      "id": "configure-650fb842-01",
+      "status": "failed_preserved",
+      "stage": "vcpkg_version_resolution",
+      "reason": "Selected global vcpkg root differs from effective reference cache root; outdated version database and promisor fetch error.",
+      "compilation_started": false,
       "scientific_execution": false
     }
   ]

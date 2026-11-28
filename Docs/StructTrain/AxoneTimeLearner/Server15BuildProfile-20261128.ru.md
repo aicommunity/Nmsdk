@@ -6,7 +6,7 @@
 
 SSH: user@10.245.1.15, имя AQUA3060, Windows 10 Pro, 12 логических процессоров, около 32 GiB RAM. После форматирования через SSH подтверждены NTFS, VolumeSerialNumber CC129017 и общий ресурс E. Имя тома DataFat не описывает его текущую файловую систему.
 
-Исходники: C:\Projects\nmsdk-axone-timelearner. vcpkg: C:\Projects\vcpkg. Объекты компиляции и установленные зависимости находятся в отдельных каталогах C:\Projects. Runtime, первичные данные, конфиги запусков, журналы, архивы и кэши загрузок/бинарных пакетов — E:\Nmsdk-AxoneTimeLearner-Data. Доступ к данным: \\10.245.1.15\E\Nmsdk-AxoneTimeLearner-Data. Проверяется доступ именно из рабочего SSH-сеанса; существование share не считается доказательством доступа из другого сеанса.
+Исходники: C:\Projects\nmsdk-axone-timelearner. vcpkg: C:\Projects\vcpkg-5cad. Объекты компиляции и установленные зависимости находятся в отдельных каталогах C:\Projects. Runtime, первичные данные, конфиги запусков, журналы, архивы и кэши загрузок/бинарных пакетов — E:\Nmsdk-AxoneTimeLearner-Data. Доступ к данным: \\10.245.1.15\E\Nmsdk-AxoneTimeLearner-Data. Проверяется доступ именно из рабочего SSH-сеанса; существование share не считается доказательством доступа из другого сеанса.
 
 Сравнение возможностей файловых систем: [Microsoft](https://learn.microsoft.com/en-us/windows/win32/fileio/filesystem-functionality-comparison). Для NTFS не действует ограничение FAT32 в 4 GiB на файл. Форматирование выполнено пользователем, агент его не выполнял.
 
@@ -22,7 +22,7 @@ SSH: user@10.245.1.15, имя AQUA3060, Windows 10 Pro, 12 логических 
 | Qt | 5.15.2, msvc2019_64 | Тот же комплект и все необходимые модули |
 | CMake | 3.23.2 | C:\Qt\Tools\CMake_64\bin\cmake.exe, 3.29.3 |
 | Ninja | 1.13.1 | C:\Qt\Tools\Ninja\ninja.exe, 1.12.0 |
-| vcpkg checkout | cc73782a88db48af17f8bfb8328d4cab3d4c246f | Подготовить тот же commit |
+| Фактический vcpkg checkout из cache | 5cad485d1ddb649c8fa1022bf0b3908555e6e6ba | Тот же commit, полный snapshot |
 | Manifest baseline | 5cad485d1ddb649c8fa1022bf0b3908555e6e6ba | Закреплён в аксонном manifest |
 | Manifest features | llm;tests | То же; Qt берётся из C:\Qt |
 | Tests | BUILD_TESTING=ON | То же |
@@ -60,3 +60,9 @@ Build-Server15.ps1 выбирает toolset через vswhere, загружае
 Эталонный интерпретатор — Python 3.13.7. На .15 закреплён установщик Python 3.13.17 x64: [официальный выпуск](https://www.python.org/downloads/release/python-31317/), SHA256 `5da012101ba2e17113a9a1cd901e9ce1441086f2b7ecb5de06ec94163899a190`, обязательная действительная подпись Python Software Foundation. Установка per-user, без изменения PATH и автоматической перезагрузки; фактическая версия записывается в попытке. Различие patch-версии сохраняется в provenance.
 
 Первая подготовка остановилась после успешного bootstrap vcpkg на ошибке источника winget `0x8a15000f`; её initialization.json и журнал остаются в Setup/bootstrap-756d94cf-01 на E:. Источники winget не сбрасывались. Исправленный entrypoint использует непосредственно проверенный официальный установщик.
+
+## Уточнение фактического vcpkg root
+
+CMakeCache.txt содержит `Z_VCPKG_ROOT_DIR=E:/Science-Repo/nmsdk-git/.deps/vcpkg-tool`. Этот чистый checkout находится на 5cad485d… и использует vcpkg 2026-10-29-139f2e53438b1529e178f6295bc563f4e0de734f. Глобальный VCPKG_ROOT=E:\vcpkg указывает на другой checkout cc73782a… со старой базой версий и не является использованным инструментом эталонной сборки. Первоначальная попытка .15 воспроизвела эту глобальную переменную и остановилась до компиляции: отсутствовали запрошенные версии Boost 1.92.0/GTest 1.18.0 и возникла ошибка подгрузки promisor-объекта. Журналы configure-650fb842-01 сохранены.
+
+Для исправленной попытки используется отдельный C:\Projects\vcpkg-5cad: полный snapshot именно baseline commit, без скрытой подгрузки blobs. Старый checkout и неудачный build tree не удаляются. Новый configure получает собственные build/runtime/evidence каталоги. Пакеты и baseline не понижаются.

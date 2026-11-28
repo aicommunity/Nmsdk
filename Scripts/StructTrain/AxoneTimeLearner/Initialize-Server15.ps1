@@ -3,7 +3,7 @@ param(
     [Parameter(Mandatory=$true)][ValidatePattern('^[0-9a-f]{40}$')][string]$RootCommit,
     [string]$RootBranch = 'work/axone_timelearner/02-server-validation',
     [string]$CloneRoot = 'C:\Projects\nmsdk-axone-timelearner',
-    [string]$VcpkgRoot = 'C:\Projects\vcpkg',
+    [string]$VcpkgRoot = 'C:\Projects\vcpkg-5cad',
     [string]$DataRoot = 'E:\Nmsdk-AxoneTimeLearner-Data',
     [Parameter(Mandatory=$true)][string]$EvidenceRoot,
     [Parameter(Mandatory=$true)][string]$ExpectedVolumeSerial
@@ -45,7 +45,7 @@ if(Test-Path -LiteralPath $statePath) { throw 'Use a fresh initialization eviden
 $state = [ordered]@{kind='axone_server15_initialization';schema_version=1;
     created_utc=[DateTime]::UtcNow.ToString('o');pid=$PID;computer=$env:COMPUTERNAME;
     clone_root=$CloneRoot;data_root=$dataAbsolute;volume_serial=$ExpectedVolumeSerial;
-    root_commit=$RootCommit;root_branch=$RootBranch;vcpkg_commit='cc73782a88db48af17f8bfb8328d4cab3d4c246f';
+    root_commit=$RootCommit;root_branch=$RootBranch;vcpkg_commit='5cad485d1ddb649c8fa1022bf0b3908555e6e6ba';
     current_step='preflight';steps=@();completed=$false;error=$null}
 function Save-State {
     $temporary = Join-Path $EvidenceRoot 'initialization.json.tmp'
@@ -86,8 +86,10 @@ function Configure-Clone([string]$Directory) {
 try {
     $null = [IO.Directory]::CreateDirectory('C:\Projects')
     if(!(Test-Path -LiteralPath $VcpkgRoot)) {
-        Native-Step 'clone-vcpkg' $git @('-c','core.longpaths=true','clone','--filter=blob:none','--no-checkout',
-            'https://github.com/microsoft/vcpkg.git',$VcpkgRoot)
+        Native-Step 'initialize-vcpkg-registry' $git @('init',$VcpkgRoot)
+        Native-Step 'set-vcpkg-origin' $git @('-C',$VcpkgRoot,'remote','add','origin','https://github.com/microsoft/vcpkg.git')
+        # Fetch the complete baseline snapshot, not a promisor/partial tree.
+        Native-Step 'fetch-vcpkg-baseline' $git @('-C',$VcpkgRoot,'fetch','--depth','1','origin',$state.vcpkg_commit)
     }
     if(!(Test-Path -LiteralPath (Join-Path $VcpkgRoot '.git'))) { throw 'Existing vcpkg path is not a Git clone.' }
     Configure-Clone $VcpkgRoot
@@ -143,8 +145,20 @@ try {
     if($LASTEXITCODE) {
         Native-Step 'select-sdk-work' $git @('-C',$CloneRoot,'switch','--create',$RootBranch,$RootCommit)
     } else {
-        if((& $git -C $CloneRoot rev-parse $RootBranch).Trim() -ne $RootCommit) { throw 'Existing SDK work branch differs.' }
+        $previous = (& $git -C $CloneRoot rev-parse $RootBranch).Trim()
+        if($previous -ne $RootCommit) {
+            $active = @(Get-CimInstance Win32_Process | Where-Object {
+                $_.Name -in @('cmake.exe','ninja.exe','cl.exe','vcpkg.exe') -and $_.CommandLine -like '*nmsdk-axone*'
+            })
+            if($active.Count) { throw 'An SDK operation is still active; do not update its sources.' }
+            if(@(& $git -C $CloneRoot status --porcelain --untracked-files=all).Count) { throw 'Existing SDK has local changes.' }
+            & $git -C $CloneRoot merge-base --is-ancestor $previous $RootCommit
+            if($LASTEXITCODE) { throw 'Existing SDK work branch is not an ancestor of the published revision.' }
+        }
         Native-Step 'select-existing-sdk-work' $git @('-C',$CloneRoot,'switch',$RootBranch)
+        if($previous -ne $RootCommit) {
+            Native-Step 'advance-owned-sdk-work' $git @('-C',$CloneRoot,'-c','submodule.recurse=false','merge','--ff-only',$RootCommit)
+        }
     }
     Native-Step 'track-sdk-work' $git @('-C',$CloneRoot,'branch',('--set-upstream-to=origin/'+$RootBranch),$RootBranch)
     $actual = (& $git -C $CloneRoot rev-parse HEAD).Trim()
@@ -214,4 +228,4 @@ try {
 }
 $state.finished_utc = [DateTime]::UtcNow.ToString('o')
 Save-State
-Write-Output ($state | ConvertTo-Json -Depth 8)
+Write-Output ([ordered]@{completed=$state.completed;root_commit=$state.root_commit;step_count=@($state.steps).Count;data_root=$state.data_root;evidence=$statePath} | ConvertTo-Json -Compress)

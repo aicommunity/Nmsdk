@@ -86,7 +86,7 @@ try {
     if($LASTEXITCODE) { throw 'Cannot identify source commit.' }
     $vcpkgHead = & $git -C $VcpkgRoot rev-parse HEAD
     if($LASTEXITCODE) { throw 'Cannot identify vcpkg commit.' }
-    if($vcpkgHead -ne 'cc73782a88db48af17f8bfb8328d4cab3d4c246f') { throw 'Pinned reference vcpkg checkout differs.' }
+    if($vcpkgHead -ne '5cad485d1ddb649c8fa1022bf0b3908555e6e6ba') { throw 'Pinned reference vcpkg checkout differs.' }
     $submodules = @(& $git -C $repo submodule status --recursive)
     if($LASTEXITCODE -or @($submodules | Where-Object {$_ -match '^[+-U]'}).Count) {
         throw 'All declared submodule revisions must be initialized and exact.'
