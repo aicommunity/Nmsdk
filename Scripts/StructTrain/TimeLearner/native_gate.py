@@ -128,6 +128,13 @@ def _filter_argument(spec):
     return '--gtest_filter='+':'.join(x.replace('/', '.') for x in expected)
 
 
+def _loader_environment(spec, runtime):
+    names = (('PATH', 'QT_PLUGIN_PATH', 'QT_QPA_PLATFORM')
+             if spec['schema_version'] in (4, 7)
+             else ('LD_LIBRARY_PATH', 'QT_PLUGIN_PATH', 'QT_QPA_PLATFORM'))
+    return {name: runtime['loader_environment'].get(name) for name in names}
+
+
 def run_native_gate(specification, output):
     specification = Path(specification).resolve(strict=True)
     spec = load(specification)
@@ -170,9 +177,7 @@ def run_native_gate(specification, output):
     if captured_inputs is not None:
         native_gate_inputs.stage_inputs(captured_inputs, output)
         _write(output/"data-inputs-before.json", native_gate_inputs.verify_inputs(captured_inputs, output))
-    environment = {key: runtime["loader_environment"].get(key)
-                   for key in (("PATH", "QT_PLUGIN_PATH", "QT_QPA_PLATFORM") if spec['schema_version'] == 4
-                               else ("LD_LIBRARY_PATH", "QT_PLUGIN_PATH", "QT_QPA_PLATFORM"))}
+    environment = _loader_environment(spec, runtime)
     environment.update(ASAN_OPTIONS=spec["asan_options"],
                        TIMELEARNER_EXECUTION_OUTPUT=str(output/"native"),
                        TIMELEARNER_COMPOSITE_OUTPUT=str(output/"native-composite"))

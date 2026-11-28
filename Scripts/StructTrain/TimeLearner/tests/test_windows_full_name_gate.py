@@ -1,9 +1,11 @@
 """The production Windows gate preserves parameterized native test identities."""
+import os
 import unittest
 
 from ..gtest_full_names import parse_listing
 from ..native_evidence import EvidenceError
-from ..native_gate import _filter_argument, supported_specification
+from ..native_gate import (_environment, _filter_argument, _loader_environment,
+                           supported_specification)
 
 
 class WindowsFullNameGate(unittest.TestCase):
@@ -61,6 +63,29 @@ class WindowsFullNameGate(unittest.TestCase):
         self.assertTrue(_filter_argument(dict(self.spec, schema_version=6, expected_test_ids=names)))
         self.assertEqual(_filter_argument(dict(self.spec, expected_test_ids=names[:20])),
                          '--gtest_filter='+':'.join(names[:20]))
+
+    def test_full_name_windows_run_uses_declared_path_and_restores_operator_path(self):
+        runtime = dict(loader_environment=dict(PATH='declared-runtime',
+            LD_LIBRARY_PATH='not-a-windows-search-path', QT_QPA_PLATFORM='offscreen'))
+        with _environment(dict(PATH='operator-path')):
+            for version in (4, 7):
+                values = _loader_environment(dict(self.spec, schema_version=version), runtime)
+                self.assertNotIn('LD_LIBRARY_PATH', values)
+                with _environment(values):
+                    self.assertEqual(os.environ['PATH'], 'declared-runtime')
+                    self.assertEqual(os.environ['QT_QPA_PLATFORM'], 'offscreen')
+                    self.assertNotIn('QT_PLUGIN_PATH', os.environ)
+                self.assertEqual(os.environ['PATH'], 'operator-path')
+
+    def test_linux_full_names_keep_library_path_and_do_not_replace_path(self):
+        runtime = dict(loader_environment=dict(PATH='not-a-linux-loader-variable',
+            LD_LIBRARY_PATH='declared-linux-libraries', QT_QPA_PLATFORM='offscreen'))
+        values = _loader_environment(dict(self.spec, schema_version=6), runtime)
+        self.assertNotIn('PATH', values)
+        with _environment(dict(PATH='operator-path')):
+            with _environment(values):
+                self.assertEqual(os.environ['PATH'], 'operator-path')
+                self.assertEqual(os.environ['LD_LIBRARY_PATH'], 'declared-linux-libraries')
 
 
 if __name__ == '__main__':
