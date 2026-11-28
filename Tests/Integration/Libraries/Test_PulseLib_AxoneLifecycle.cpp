@@ -271,6 +271,49 @@ TEST_F(AxoneLifecycle, InvalidDelayIsRejectedWithoutChangingParameters)
     }
 }
 
+TEST_F(AxoneLifecycle, DelayFrequencyChangeFlushesOldGridAndRecomputesDefault)
+{
+    auto source = Take<NPulseGenerator>("NPGenerator", "Source");
+    auto delay = Take<NAxoneDelay>("NAxoneDelay");
+    source->Frequency = 10.; source->Amplitude = 1.;
+    source->PulseLength = .001; source->Delay = .01; source->FrequencyDeviation = 0.;
+    Require(model->CreateLink("Source", "Output", "Axon", "Input"), "delay_clock_source_link");
+    Init();
+    const auto marker = model->OperationFailureSequence();
+    bool emitted = false;
+    for(unsigned tick = 0; tick < 100 && !emitted; ++tick) {
+        model->Calculate();
+        Require(!model->HasOperationFailureSince(marker), "delay_clock_old_grid_calculate");
+        emitted = Scalar(source->Output.GetData()) > .5;
+        EXPECT_DOUBLE_EQ(Scalar(delay->Output.GetData()), 0.);
+        environment->IncreaseModelTimeByStep();
+    }
+    ASSERT_TRUE(emitted);
+    model->SetGlobalTimeStep(20000);
+    source->Frequency = 0.;
+    // Do not Reset: a queued old-grid pulse must be discarded by the component.
+    for(unsigned tick = 0; tick < 25; ++tick) {
+        model->Calculate();
+        Require(!model->HasOperationFailureSince(marker), "delay_clock_transition_calculate");
+        EXPECT_DOUBLE_EQ(Scalar(delay->Output.GetData()), 0.);
+        environment->IncreaseModelTimeByStep();
+    }
+    source->Frequency = 10.;
+    environment->GetTime().SetTime(ULongTime(0));
+    model->Reset();
+    int inputTick = -1, outputTick = -1;
+    for(int tick = 0; tick <= 800; ++tick) {
+        model->Calculate();
+        Require(!model->HasOperationFailureSince(marker), "delay_clock_new_grid_calculate");
+        if(inputTick < 0 && Scalar(source->Output.GetData()) > .5) inputTick = tick;
+        if(outputTick < 0 && Scalar(delay->Output.GetData()) > .5) outputTick = tick;
+        environment->IncreaseModelTimeByStep();
+    }
+    ASSERT_GE(inputTick, 0); ASSERT_GE(outputTick, 0);
+    EXPECT_EQ(outputTick-inputTick, 20);
+    EXPECT_DOUBLE_EQ(delay->DelayTime.GetData(), .001);
+}
+
 TEST_F(AxoneLifecycle, InvalidInternodeDelayIsRejectedBeforeChildChanges)
 {
     auto chain = Take<NAxoneChainAndDelay>("NAxoneChainAndDelay");

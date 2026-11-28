@@ -77,7 +77,9 @@ def declared_tests(recipe: dict, cpp: str, partition: str) -> list[str]:
         "linear": [case["gtest_filter"] for case in recipe["cases"] if not case["id"].startswith("tree_equivalence_")],
         "tree": [case["gtest_filter"] for case in recipe["cases"] if case["id"].startswith("tree_equivalence_")],
     }
-    require([len(groups[name]) for name in ("lifecycle", "linear", "tree")] == [17,45,6],
+    groups["delay"] = [case["gtest_filter"] for case in recipe["cases"] if case["carrier"] == "NAxoneDelay"]
+    require(len(groups["lifecycle"]) == len(recipe["lifecycle_cases"])+3 and
+            len(groups["linear"]) == 45 and len(groups["tree"]) == 6 and len(groups["delay"]) == 15,
             "axon_native_contract_inventory_changed")
     selected = sum((groups[name] for name in ("lifecycle", "linear", "tree")), []) if partition == "all" else groups[partition]
     require(len(selected) == len(set(selected)), "duplicate_axon_test_identity")
@@ -222,7 +224,7 @@ def main() -> int:
         parser.add_argument("--" + name, type=Path, required=True)
     parser.add_argument("--archive-id", required=True)
     parser.add_argument("--expected-root-commit", required=True)
-    parser.add_argument("--partition", choices=("lifecycle", "linear", "tree", "all"), default="all")
+    parser.add_argument("--partition", choices=("lifecycle", "linear", "tree", "delay", "all"), default="all")
     parser.add_argument("--case-id", help="One exact test identity already present in the declared partition.")
     parser.add_argument("--wall-seconds", type=int, default=1800)
     parser.add_argument("--memory-bytes", type=int, default=2 * 1024**3)
