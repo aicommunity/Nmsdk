@@ -122,13 +122,15 @@ def _project_summary(summary, model):
         **_recovery_history(summary, size))
 
 
-def analyze_search_history(path):
+def analyze_search_history(path, *, maximum_summary_bytes=64*1024**2):
     """Full production DATA audit, followed by a hash-bound summary projection.
 
     Summary9 retains its summary8 search transcript separately from the graph
     selected by terminal restoration. Other historical formats keep their own
     readers; no missing history is reconstructed from counters.
     """
+    require(type(maximum_summary_bytes) is int and 0 < maximum_summary_bytes <= 1024**3,
+            'search_report_invalid_summary_budget')
     path = Path(path).resolve(strict=True)
     manifest_raw, manifest_record = _frozen(path, 16*1024**2)
     manifest = parse_json_bytes(manifest_raw)
@@ -150,7 +152,7 @@ def analyze_search_history(path):
     require(name in ('train_stopped_state.json', 'train_learned_state.json'),
             'search_report_terminal_package')
     summary, summary_record = bound('native/'+name.replace('_state.json', '_summary.json'),
-                                    64*1024**2)
+                                    maximum_summary_bytes)
     job, _ = bound('input/job.json', 16*1024**2)
     require(summary['actual_model_revision'] == execution['model_revision'] and
             summary['outcome'] == execution['training_outcome'], 'search_report_terminal_binding')

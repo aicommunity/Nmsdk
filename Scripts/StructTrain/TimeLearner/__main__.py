@@ -12,6 +12,9 @@ from pathlib import Path
 def analyze(args: argparse.Namespace) -> dict:
     from .native_evidence import EvidenceError, audit_probe, load, require
     historical_analysis = getattr(args, 'historical_analysis', None)
+    maximum_summary_bytes = getattr(args, 'maximum_summary_bytes', None)
+    require(args.format == 'native-search-history' or maximum_summary_bytes is None,
+            'maximum_summary_bytes_is_only_for_native_search_history')
     require(args.format == 'pipeline-run' or historical_analysis is None,
             'historical_analysis_is_only_for_pipeline_run')
     require(args.format == "historical-selectivity" or getattr(args, "expected_trial_ids", None) is None,
@@ -108,7 +111,8 @@ def analyze(args: argparse.Namespace) -> dict:
         from .training_search_report import analyze_search_history
         require(args.output is None or not args.output.resolve().is_relative_to(source.parent),
                 'search_report_output_overlaps_original_run')
-        result = analyze_search_history(source)
+        result = analyze_search_history(source, maximum_summary_bytes=(64*1024**2 if
+            maximum_summary_bytes is None else maximum_summary_bytes))
     elif args.format == "posttune-transaction":
         from .posttune_transaction_evidence import audit_posttune_transaction
         from .learned_evidence import load_case
@@ -314,6 +318,8 @@ def main(argv: list[str] | None = None) -> int:
                          "training-v3-no-capacitance-history", "evaluation-v1-native-reset-policy"),
                          help="explicit archived analysis adapter for pipeline-run only; never changes new-job admission")
     analysis.add_argument("--output", type=Path, help="new output file; an existing file is never replaced")
+    analysis.add_argument("--maximum-summary-bytes", type=int,
+                          help="explicit native-search-history summary read budget; default64MiB, maximum1GiB")
     report = commands.add_parser("report", help="large native soma/input diagnostic figures with portable primary data")
     report.add_argument("source", type=Path, help="recognition evaluation spec")
     report.add_argument("--format", choices=("capacitance-search", "capacitance-region", "pipeline-run", "recognition-evaluation", "physical-model-evaluation", "recognition-transport", "threshold-candidate-evaluation", "probe", "probe-diagnostic", "legacy-posttune-freerun", "probe-set", "native-test-run", "native-archive-transfer-pair", "dataset-clock", "calibration-transaction", "calibration-run", "posttune-transaction", "posttune-run", "native-live-finalization", "frozen-order", "native-continuity"), default="recognition-evaluation")
