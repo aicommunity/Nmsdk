@@ -1,4 +1,4 @@
-"""Summarize a closed factory-segment diagnostic without changing physical parameters."""
+"""Summarize a closed segment diagnostic without changing physical parameters."""
 from __future__ import annotations
 import argparse
 import csv
@@ -51,6 +51,7 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--gate-root",type=Path,required=True)
     parser.add_argument("--output",type=Path,required=True)
+    parser.add_argument("--diagnostic",choices=("factory","regeneration"),default="factory")
     args=parser.parse_args()
     require(os.name=="nt" and socket.gethostname().upper()=="AQUA3060","server15_required")
     data=Path("E:/Nmsdk-AxoneTimeLearner-Data").resolve(strict=True)
@@ -61,13 +62,17 @@ def main():
     require(root.is_relative_to(data/"NativeChecks") and output.is_relative_to(data/"Experiments") and not output.exists(),
             "invalid_diagnostic_analysis_paths")
     gate=read(root/"result.json");process=read(root/"native-gate/process/result.json")
-    require(gate.get("native_checks_passed") is True and gate.get("expected_cases")==9 and
+    expected_count=9 if args.diagnostic=="factory" else 54
+    require(gate.get("native_checks_passed") is True and gate.get("expected_cases")==expected_count and
             process.get("all_processes_closed") is True and process.get("runtime_provenance")=="loaded_files_captured",
             "factory_gate_not_accepted")
-    folder=root/"native-gate/native/AxoneSegmentDiagnostic"
+    folder=root/("native-gate/native/AxoneSegmentDiagnostic" if args.diagnostic=="factory" else
+                 "native-gate/native/AxoneRegenerationDiagnostic")
     rows=[]
     for metadata in sorted(folder.glob("*.json")):
         record=read(metadata);frequency=record["frequency_hz"]
+        expected_kind="axone_factory_segment_diagnostic" if args.diagnostic=="factory" else "axone_regeneration_diagnostic"
+        require(record["kind"]==expected_kind,"unexpected_diagnostic_kind")
         with metadata.with_suffix(".csv").open(encoding="utf-8",newline="") as stream:
             reader=csv.DictReader(stream);values={name:[] for name in reader.fieldnames}
             for index,row in enumerate(reader):
@@ -87,15 +92,24 @@ def main():
                 "output_events":events(values[prefix+"segment_output"],frequency),
                 "ranges":{key[len(prefix):]:[min(value),max(value)] for key,value in values.items() if key.startswith(prefix)}})
         rows.append({"id":record["id"],"frequency_hz":frequency,"carrier":record["carrier"],
+                     "ltzone_profile":record.get("ltzone_profile","factory"),
+                     "declared_threshold":record.get("declared_threshold",.03),
                      "source_edges":count(values["source"]),"axon_edges":count(values["axon"]),
                      "source_events":events(values["source"],frequency),"axon_events":events(values["axon"],frequency),
                      "actual_source_emission_times":record["actual_source_emission_times"],
                      "child_frequencies_hz":sorted(set(frequencies(record["native_child_order"]))),
                      "segments":segments,"csv_sha256":sha(metadata.with_suffix(".csv")),
                      "metadata_sha256":sha(metadata)})
-    require(len(rows)==9,"missing_factory_diagnostic_case")
+    require(len(rows)==expected_count and len({row["id"] for row in rows})==expected_count,
+            "missing_or_duplicate_diagnostic_case")
+    if args.diagnostic=="regeneration":
+        expected={(frequency,carrier,profile,threshold) for frequency in (2000,20000,40000)
+                  for carrier in ("NAxoneSegment","NAxoneChain","NAxoneChainAndDelay")
+                  for profile in ("factory","stabilized") for threshold in (.01,.02,.03)}
+        require({(row["frequency_hz"],row["carrier"],row["ltzone_profile"],row["declared_threshold"])
+                 for row in rows}==expected,"regeneration_factorial_matrix_mismatch")
     output.mkdir(parents=True,exist_ok=False)
-    result={"kind":"axone_factory_diagnostic_analysis","schema_version":1,"gate_root":str(root),
+    result={"kind":"axone_"+args.diagnostic+"_diagnostic_analysis","schema_version":2,"gate_root":str(root),
             "gate_result_sha256":sha(root/"result.json"),"producer_sha256":sha(Path(__file__)),
             "rows":rows,"analysis_complete":True,"scientific_verdict":None,
             "claim_scope":"Ranges and event counts for the declared 80ms diagnostic; no physiological acceptance or full P1 verdict."}
