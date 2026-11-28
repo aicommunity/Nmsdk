@@ -96,12 +96,17 @@ def terminal(attempt, role):
                 "native_attempt_not_terminal")
         process = attempt/"native-gate/process"
         closure = "not_started"
+        process_evidence = {"execution": "not_started", "validity": "not_assessed",
+                            "runtime_provenance": "not_started", "cooperative_capture": "not_started"}
         if process.exists():
             owned = read(process/"result.json")
             require(owned.get("kind") == "timelearner_windows_process_result" and
                     owned.get("all_processes_closed") is True, "owned_native_processes_not_closed")
             closure = "bound_windows_job_closed"
-        return {"role": role, "process_closure": closure, "complete": document.get("complete"),
+            process_evidence = {name: owned.get(name) for name in
+                                ("execution", "validity", "runtime_provenance", "cooperative_capture")}
+        return {"role": role, "process_closure": closure, "process_evidence": process_evidence,
+                "complete": document.get("complete"),
                 "validity": document.get("gate", {}).get("validity"),
                 "assertion_status": document.get("gate", {}).get("assertion_status"),
                 "native_checks_passed": document.get("native_checks_passed"),
