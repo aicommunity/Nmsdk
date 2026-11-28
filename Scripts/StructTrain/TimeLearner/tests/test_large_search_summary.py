@@ -14,14 +14,14 @@ from ..training_search_report import analyze_search_history
 class ActualLargeSearchSummaryTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.run = Path(os.environ['TIMELEARNER_LARGE_SEARCH_PRIMARY']).resolve(strict=True)
+        cls.primary_root = Path(os.environ['TIMELEARNER_LARGE_SEARCH_PRIMARY']).resolve(strict=True)
 
     def test_full_production_cli_retains_actual_terminal_and_all_measured_candidates(self):
         from ..__main__ import main
         with tempfile.TemporaryDirectory() as directory:
             output = Path(directory)/'large-search-report.json'
             with contextlib.redirect_stdout(io.StringIO()):
-                code = main(['analyze', str(self.run/'run-manifest.json'),
+                code = main(['analyze', str(self.primary_root/'run-manifest.json'),
                              '--format', 'native-search-history',
                              '--maximum-summary-bytes', str(512*1024**2), '--output', str(output)])
             self.assertEqual(code, 0)
@@ -49,7 +49,7 @@ class ActualLargeSearchSummaryTest(unittest.TestCase):
 
     def test_legacy_default_does_not_silently_expand_its_read_budget(self):
         with self.assertRaisesRegex(EvidenceError, 'collector_file_type_or_size'):
-            analyze_search_history(self.run/'run-manifest.json')
+            analyze_search_history(self.primary_root/'run-manifest.json')
 
     def test_invalid_budgets_are_rejected_before_any_source_access(self):
         for budget in (True, False, 0, -1, 1.5, float('nan'), float('inf'), 1024**3+1):
