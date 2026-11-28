@@ -58,6 +58,15 @@ def run(controls):
         runtime_path = Path(q['runtime_manifest'])
         runtime = load(runtime_path)
         assert source_closure(Path(q['sdk_source'])) == runtime['source_closure']
+        execution_phases = q.get('execution_phases', list(CADENCE_PHASES))
+        assert type(execution_phases) is list and execution_phases
+        assert len(set(execution_phases)) == len(execution_phases) and set(execution_phases) <= set(CADENCE_PHASES)
+        registry = Reservations.open_existing(base/'resource-reservations.sqlite3')
+        capacity = registry.inspect()['capacity']
+        assert capacity['memory_bytes'] >= 8*1024**3 and capacity['disk_bytes'] >= q['maximum_new_bytes'], 'matrix_declared_demand_exceeds_worker_capacity'
+        assert shutil.disk_usage(base).free >= q['minimum_free_bytes']+q['maximum_new_bytes']
+        write(out/'resource-admission.json',dict(capacity=capacity,minimum_free_bytes=q['minimum_free_bytes'],
+            maximum_new_bytes=q['maximum_new_bytes'],declared_full_conditions=32,execution_phases=execution_phases))
         declaration = {k:q[k] for k in ['source_manifest','source_comparison','model_revision','threshold']}
         for key in ['source_manifest','source_comparison']:
             declaration[key+'_sha256'] = file_record(Path(q[key]))['sha256']
@@ -77,7 +86,8 @@ def run(controls):
         for args in [('add','.'),('commit','-qm','Freeze all32 cadence conditions before Calculate')]:
             subprocess.run(['git','-C',str(c),*args],check=True,capture_output=True)
         commit = subprocess.check_output(['git','-C',str(c),'rev-parse','HEAD']).decode().strip()
-        write(out/'declaration.json',dict(controls_commit=commit,cases=32,training_performed=False,
+        write(out/'declaration.json',dict(controls_commit=commit,cases=len(execution_phases),declared_full_conditions=32,
+            execution_phases=execution_phases,unexecuted_phases=[p for p in CADENCE_PHASES if p not in execution_phases],training_performed=False,
             threshold_selected=False,full_mode_matrix_accepted=False))
         registry = Reservations.open_existing(base/'resource-reservations.sqlite3')
         assert shutil.disk_usage(base).free >= q['minimum_free_bytes']+q['maximum_new_bytes']
@@ -104,7 +114,8 @@ def run(controls):
         monitor_thread.start()
         rows, paired = [], {}
         started = time.monotonic()
-        for phase, values in prepared.items():
+        for phase in execution_phases:
+            values = prepared[phase]
             assert not monitor_errors and time.monotonic()-started < q['maximum_matrix_wall_seconds']
             assert not(out/'cancel.request').exists()
             case = out/phase
@@ -139,8 +150,10 @@ def run(controls):
         assert not monitor_errors and _source_snapshot(actor,q['actor_commit']) == before
         write(out/'source-after.json',before)
         complete = [r for r in rows if r['validity']=='valid']
-        write(out/'terminal.json',dict(execution='completed',validity='valid' if len(complete)==32 else 'partial',
+        write(out/'terminal.json',dict(execution='completed',validity='valid' if len(complete)==len(execution_phases) else 'partial',
             rows=rows,completed_cadence_cases=len(complete),accepted_observations=8*len(complete),
+            declared_full_conditions=32,execution_phases=execution_phases,
+            unexecuted_phases=[p for p in CADENCE_PHASES if p not in execution_phases],
             model_revision=q['model_revision'],threshold=q['threshold'],new_Train=False,threshold_selected=False,
             full_primary_archival_pending=True,temporal_figures_pending=True,full_mode_matrix_accepted=False,scientific_verdict=None))
     except BaseException as error:
