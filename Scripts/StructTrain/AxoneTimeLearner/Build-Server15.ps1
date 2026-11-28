@@ -12,6 +12,7 @@ param(
     [string]$DataRoot = 'E:\Nmsdk-AxoneTimeLearner-Data',
     [string]$PythonExecutable = '',
     [string[]]$Targets = @('NeuroModelerConsole','Test_PulseLib_StorageComponents'),
+    [string[]]$PreflightTargets = @(),
     [int]$Jobs = 6
 )
 $ErrorActionPreference = 'Stop'
@@ -102,12 +103,12 @@ try {
         vc_tools_version=$env:VCToolsVersion; windows_sdk_version=$env:WindowsSDKVersion
         cmake=$CMakeExecutable; ninja=$NinjaExecutable; qt_root=$QtRoot
         build_root=$BuildRoot; runtime_root=$RuntimeRoot; dependency_root=$DependencyRoot
-        targets=$Targets; jobs=$Jobs; scientific_execution=$false; tests_executed=$false
+        targets=$Targets; preflight_targets=$PreflightTargets; jobs=$Jobs; scientific_execution=$false; tests_executed=$false
     }
     $planPath = Join-Path $EvidenceRoot 'build-attempt.json'
     if(Test-Path -LiteralPath $planPath) { throw 'Use a fresh evidence directory for each build attempt.' }
     [IO.File]::WriteAllText($planPath,($plan | ConvertTo-Json -Depth 8),[Text.UTF8Encoding]::new($false))
-    $result = [ordered]@{kind='axone_server15_build_result';schema_version=1;configure_exit=$null;build_exit=$null;deployment_exit=$null;completed=$false;error=$null}
+    $result = [ordered]@{kind='axone_server15_build_result';schema_version=1;configure_exit=$null;preflight_exits=@();build_exit=$null;deployment_exit=$null;completed=$false;error=$null}
     try {
         Push-Location $repo
         try {
@@ -127,6 +128,17 @@ try {
                 if($result.configure_exit) { throw "Configure failed: $($result.configure_exit)" }
             }
             if($Action -in @('build','all')) {
+                $preflightIndex=0
+                foreach($target in $PreflightTargets){
+                    $preflightIndex++
+                    $ErrorActionPreference='Continue'
+                    & $CMakeExecutable --build $BuildRoot --parallel 2 --target $target 2>&1 |
+                        ForEach-Object { $_.ToString() } | Tee-Object -FilePath (Join-Path $EvidenceRoot "preflight-$preflightIndex.log")
+                    $code=$LASTEXITCODE
+                    $ErrorActionPreference='Stop'
+                    $result.preflight_exits+=@{target=$target;exit_code=$code}
+                    if($code){throw "Object preflight failed: $target ($code)"}
+                }
                 $arguments = @('--build',$BuildRoot,'--parallel',"$Jobs",'--target') + $Targets
                 $ErrorActionPreference = 'Continue'
                 & $CMakeExecutable @arguments 2>&1 | ForEach-Object { $_.ToString() } |

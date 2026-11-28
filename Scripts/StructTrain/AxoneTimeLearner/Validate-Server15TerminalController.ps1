@@ -34,24 +34,42 @@ Copy-Item -LiteralPath $PSCommandPath -Destination "$setup\controller-producer.p
   prerequisite=$WaitForAttemptId;producer_sha256=(Get-FileHash -LiteralPath $PSCommandPath -Algorithm SHA256).Hash;
   data_root=$data;source_root=$sdk;runtime=$runtime;build=$build;started_utc=[DateTime]::UtcNow.ToString('o')} |
   ConvertTo-Json | Set-Content -LiteralPath "$setup\controller-invocation.json" -Encoding UTF8
+$syntaxCode=@'
+import ast,json,sys
+from pathlib import Path
+root=Path(sys.argv[1])
+names=['Run-Server15NativeGate.py','generate_terminal_controller_contract.py','generate_recovery_contract.py']
+for name in names:
+    p=root/'Scripts/StructTrain/AxoneTimeLearner'/name
+    ast.parse(p.read_text(encoding='utf-8-sig'),filename=str(p))
+print(json.dumps({'python_sources_parsed':len(names),'model_executed':False}))
+'@
+& $python -I -S -B -c $syntaxCode $sdk
+if($LASTEXITCODE){throw 'Python producer syntax check failed'}
 & "$sdk\Scripts\StructTrain\AxoneTimeLearner\Build-Server15.ps1" -Action all `
   -VcpkgRoot 'C:\Projects\vcpkg-5cad' -QtRoot 'C:\Qt\5.15.2\msvc2019_64' `
   -CMakeExecutable 'C:\Qt\Tools\CMake_64\bin\cmake.exe' -NinjaExecutable 'C:\Qt\Tools\Ninja\ninja.exe' `
   -BuildRoot $build -RuntimeRoot $runtime -DependencyRoot 'C:\Projects\nmsdk-axone-deps\v143-5cad-localqt-tests' `
-  -EvidenceRoot "$data\Builds\build-$short-01" -PythonExecutable $python -Jobs 6
+  -EvidenceRoot "$data\Builds\build-$short-01" -PythonExecutable $python -Jobs 6 -PreflightTargets @(
+    'Libraries/Nmsdk-PulseLib/CMakeFiles/Nmsdk-PulseLib.core.dir/Core/NNeuronAxoneTimeLearner.cpp.obj',
+    'Libraries/Nmsdk-PulseLib/CMakeFiles/Nmsdk-PulseLib.core.dir/Core/TimeLearner/ModelArchive.cpp.obj',
+    'Tests/Integration/Libraries/CMakeFiles/Test_PulseLib_StorageComponents.dir/Test_PulseLib_AxoneTimeLearner.cpp.obj',
+    'Tests/Integration/Libraries/CMakeFiles/Test_PulseLib_StorageComponents.dir/Test_PulseLib_AxoneLifecycle.cpp.obj',
+    'Tests/Integration/Libraries/CMakeFiles/Test_PulseLib_StorageComponents.dir/Test_PulseLib_AxoneRecoveryDiagnostic.cpp.obj')
 if($LASTEXITCODE){throw 'Build failed; preserve this attempt before a fresh correction'}
 $attempts=@(@{id="prepare-$short-01";folder='Setup';role='setup'},@{id="build-$short-01";folder='Builds';role='build'})
 $failed=@()
-function Gate([string]$id,[string]$protocol,[string]$partition='all',[string]$case=''){
+function Gate([string]$id,[string]$protocol,[string]$partition='all',[string]$case='',[int]$wallSeconds=1800){
     $arguments=@('-I','-S','-B',"$sdk\Scripts\StructTrain\AxoneTimeLearner\Run-Server15NativeGate.py",
       '--source-root',$sdk,'--runtime',$runtime,'--cache',"$build\CMakeCache.txt",'--protocol',
       "$sdk\Bin\Configs\SpikeSamples\StructTrain\AxoneTimeLearner\protocols\$protocol",'--data-root',$data,
       '--output',"$data\NativeChecks\$id",'--archive-id',$archive,'--expected-root-commit',$RootCommit,
-      '--partition',$partition,'--wall-seconds','1800','--memory-bytes','2147483648')
+      '--partition',$partition,'--wall-seconds',"$wallSeconds",'--memory-bytes','2147483648')
     if($case){$arguments+=@('--case-id',$case)}
     & $python @arguments
     $script:attempts+=@{id=$id;folder='NativeChecks';role='native'}
-    if($LASTEXITCODE){$script:failed+=$id}
+    $script:lastGatePassed=($LASTEXITCODE -eq 0)
+    if(!$script:lastGatePassed){$script:failed+=$id}
 }
 $snapshotCases=@('TreeNativeSnapshotPreservesPortsParametersAndActualWaveforms',
   'TreeSnapshotRejectsWrongEnvelopeAndUnknownFields',
@@ -59,8 +77,10 @@ $snapshotCases=@('TreeNativeSnapshotPreservesPortsParametersAndActualWaveforms',
   'TreeSnapshotKeepsAxonalAndNeuronSnapshotTypesSeparate')
 $index=0
 foreach($name in $snapshotCases){$index++;Gate "tree-snapshot$index-$short-01" 'P1-native-contracts-v7.json' 'lifecycle' "AxoneLifecycle.$name"}
-Gate "terminal-controller-smoke-$short-01" 'P2-terminal-controller-v2.json' 'all' 'AxoneTimeLearner.ManagedTerminalAlignmentRequiresFreshVerification'
-Gate "terminal-controller-$short-01" 'P2-terminal-controller-v2.json'
+Gate "terminal-controller-smoke-$short-01" 'P2-terminal-controller-v3.json' 'all' 'AxoneTimeLearner.ManagedTerminalAlignmentRequiresFreshVerification'
+Gate "terminal-controller-$short-01" 'P2-terminal-controller-v3.json'
+Gate "recovery-smoke-$short-01" 'P1-node-recovery-v1.json' 'all' 'P1Recovery/AxoneRecoveryDiagnostic.CapturesMatchedPairAndOmissionControls/f20000_c0_t0_gap4'
+if($lastGatePassed){Gate "node-recovery-$short-01" 'P1-node-recovery-v1.json' 'all' '' 7200}
 foreach($attempt in $attempts){
     & $python -I -S -B $seal --data-root $data --archive-id $archive --attempt "$data\$($attempt.folder)\$($attempt.id)" --role $attempt.role --seal-id $attempt.id
     if($LASTEXITCODE){throw "Sealing failed: $($attempt.id)"}
