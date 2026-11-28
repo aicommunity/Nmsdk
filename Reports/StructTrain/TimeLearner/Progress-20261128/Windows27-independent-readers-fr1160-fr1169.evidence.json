@@ -1,0 +1,58 @@
+{
+  "kind": "timelearner_Windows_native27_independent_archive_readback_reference",
+  "schema_version": 1,
+  "hosts": {
+    "14": {
+      "reader_catalog": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/8e/8ea4cdc929ac4c208de544c02e2feffad9dea7f7776a2b1939d682664d35e86c",
+        "sha256": "8ea4cdc929ac4c208de544c02e2feffad9dea7f7776a2b1939d682664d35e86c",
+        "bytes": 6996
+      },
+      "reader_catalog_path": "experiments/2026-11-28/Elder-Win14-native27-primary-reader-fr1160.json",
+      "members": 190,
+      "actual_native_cases": 27,
+      "passed": 27,
+      "skipped": 0
+    },
+    "8": {
+      "reader_catalog": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/46/46e071a384b99eac217a89aeda6be2df43110a68d63073ce162635c73631dcb6",
+        "sha256": "46e071a384b99eac217a89aeda6be2df43110a68d63073ce162635c73631dcb6",
+        "bytes": 8131
+      },
+      "reader_catalog_path": "experiments/2026-11-28/Elder-Win8-native27-primary-reader-fr1169.json",
+      "members": 191,
+      "actual_native_cases": 27,
+      "passed": 27,
+      "skipped": 0,
+      "corrected_primary_catalog": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/87/87adefcad4d0a1439f2d0664ad4a409fae3e80cf911d9072d1e76d7727808518",
+        "sha256": "87adefcad4d0a1439f2d0664ad4a409fae3e80cf911d9072d1e76d7727808518",
+        "bytes": 3842
+      },
+      "original_primary_catalog_positive_build_flag_retracted": true,
+      "original_build_execution": "descendants_remaining",
+      "subsequent_closed_source_and_runtime_audit_passed": true,
+      "failed_reader_fr1161_preserved": true
+    }
+  },
+  "actual_loaded_DLLs_each": 49,
+  "three_saved_DATA_cycles_each": true,
+  "six_nonzero_response_pairs_each": true,
+  "source_Git_import_fsck_and_frozen_bytes_verified": true,
+  "scientific_DATA8_jobs_started": {
+    "14": "fr1175",
+    "8": "fr1176"
+  },
+  "scientific_DATA8_outcomes_not_yet_known": true,
+  "new_Train": false
+}
