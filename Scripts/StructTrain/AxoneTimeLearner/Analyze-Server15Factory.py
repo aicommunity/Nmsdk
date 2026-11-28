@@ -27,6 +27,22 @@ def count(values):
     return sum(value>.5 and (index==0 or values[index-1]<=.5) for index,value in enumerate(values))
 
 
+def events(values,frequency):
+    result=[];high=False
+    for tick,value in enumerate(values):
+        if value>.5:
+            if not high:result.append({"onset_tick":tick,"end_tick":tick+1,"peak":value,"right_censored":False})
+            else:result[-1]["peak"]=max(result[-1]["peak"],value)
+            high=True
+        elif high:
+            result[-1]["end_tick"]=tick;high=False
+    if high:result[-1]["end_tick"]=len(values);result[-1]["right_censored"]=True
+    for event in result:
+        event["width_ticks"]=event["end_tick"]-event["onset_tick"]
+        event["width_s"]=event["width_ticks"]/frequency
+    return result
+
+
 def frequencies(nodes):
     return [node["frequency_hz"] for node in nodes]+[value for node in nodes for value in frequencies(node["children"])]
 
@@ -67,9 +83,12 @@ def main():
             prefix="s"+str(index+1)+"_"
             segments.append({"index":index+1,"threshold":p["threshold"],
                 "input_edges":count(values[prefix+"input"]),"output_edges":count(values[prefix+"segment_output"]),
+                "input_events":events(values[prefix+"input"],frequency),
+                "output_events":events(values[prefix+"segment_output"],frequency),
                 "ranges":{key[len(prefix):]:[min(value),max(value)] for key,value in values.items() if key.startswith(prefix)}})
         rows.append({"id":record["id"],"frequency_hz":frequency,"carrier":record["carrier"],
                      "source_edges":count(values["source"]),"axon_edges":count(values["axon"]),
+                     "source_events":events(values["source"],frequency),"axon_events":events(values["axon"],frequency),
                      "actual_source_emission_times":record["actual_source_emission_times"],
                      "child_frequencies_hz":sorted(set(frequencies(record["native_child_order"]))),
                      "segments":segments,"csv_sha256":sha(metadata.with_suffix(".csv")),
@@ -84,7 +103,9 @@ def main():
         json.dump(result,stream,ensure_ascii=False,indent=2,allow_nan=False);stream.write("\n")
     print(json.dumps([{"id":r["id"],"source_edges":r["source_edges"],"axon_edges":r["axon_edges"],
                        "frequencies":r["child_frequencies_hz"],"first_ltz_range":r["segments"][0]["ranges"]["ltz_potential"],
-                       "threshold":r["segments"][0]["threshold"]} for r in rows]))
+                       "threshold":r["segments"][0]["threshold"],
+                       "first_output_widths_s":[e["width_s"] for e in r["segments"][0]["output_events"]],
+                       "last_output_widths_s":[e["width_s"] for e in r["segments"][-1]["output_events"]]} for r in rows]))
 
 
 if __name__=="__main__":
