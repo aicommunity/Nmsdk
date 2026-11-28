@@ -7,7 +7,7 @@ from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[3]
 CPP="Tests/Integration/Libraries/Test_PulseLib_AxoneRecoveryDiagnostic.cpp"
-DESTINATION=ROOT/"Bin/Configs/SpikeSamples/StructTrain/AxoneTimeLearner/protocols/P1-node-recovery-v2.json"
+DESTINATION=ROOT/"Bin/Configs/SpikeSamples/StructTrain/AxoneTimeLearner/protocols/P1-node-recovery-v3.json"
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument("--overwrite",action="store_true")
@@ -24,8 +24,8 @@ def main():
     for source in (CPP,"Libraries/Nmsdk-PulseLib/Core/NPulseLTZoneCommon.h"):
         payload=(ROOT/source).read_bytes().replace(b"\r\n",b"\n")
         sources.append({"workspace_path":source,"canonical_lf_bytes":len(payload),"canonical_lf_sha256":hashlib.sha256(payload).hexdigest()})
-    document={"kind":"axone_recovery_diagnostic_contract","schema_version":1,"protocol_id":"P1-node-recovery-v2",
-              "supersedes_source_declaration":"P1-node-recovery-v1, replaced before native execution to use read-only LT input API",
+    document={"kind":"axone_recovery_diagnostic_contract","schema_version":1,"protocol_id":"P1-node-recovery-v3",
+              "supersedes_source_declaration":"P1-node-recovery-v2, replaced before execution: the existing assignment API requires nonempty input; silence records output without a fabricated pairing",
               "status":"source_prepared","test_target":"Test_PulseLib_StorageComponents",
               "source_records":sources,
               "cases":cases,"expected_test_ids":[case["expected_test_id"] for case in cases],
@@ -44,6 +44,7 @@ def main():
               "recorded_columns":["tick","time","source","inertial","exc_channel","inh_channel","soma_sum",
                                   "lt_input","lt_pre","lt_potential","output","feedback","exc_tau","inh_tau"],
               "event_threshold":.5,"temporal_association_lag_s":[0,.2],
+              "silent_association":"not_assessed_without_input_events; null pairing with actual spontaneous output retained",
               "artifact_subdirectory":"AxoneRecoveryDiagnostic","maximum_wall_seconds":7200,
               "maximum_memory_bytes":2*1024**3,"maximum_expected_primary_bytes":1024**3,
               "capture_verdict":"Complete finite capture, source controls and unchanged physical identity; output counts and refractory interval are measured, not required to succeed.",

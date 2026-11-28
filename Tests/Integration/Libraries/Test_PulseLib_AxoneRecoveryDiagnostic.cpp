@@ -128,11 +128,15 @@ TEST_P(AxoneRecoveryDiagnostic,CapturesMatchedPairAndOmissionControls){
         catch(...){reason="unknown_native_exception";failure=std::current_exception();}
         const auto sourceEvents=ExtractAxonePulseEvents(inputs,.5),outputEvents=ExtractAxonePulseEvents(outputs,.5);
         const auto after=NmsdkTools::IdentifyModel(axon,ports);
-        const auto match=AssignAxoneConductionEvents(sourceEvents,outputEvents,0,request.frequency/5);
+        // The shared assignment contract requires a real input event. A
+        // silent control measures spontaneous output and has no input pairing.
+        QJsonValue association(QJsonValue::Null);
+        if(!sourceEvents.empty())association=Association(AssignAxoneConductionEvents(sourceEvents,outputEvents,0,request.frequency/5),request.frequency);
         const int expected=phase=="silent"?0:(phase=="pair"?2:1);
         const QJsonObject row{{"phase",QString::fromStdString(phase)},{"complete",complete},{"error",QString::fromStdString(reason)},
             {"expected_source_events",expected},{"source_events",Events(sourceEvents)},{"output_events",Events(outputEvents)},
-            {"axon_identity_after",after},{"temporal_association",Association(match,request.frequency)}};
+            {"axon_identity_after",after},{"temporal_association",association},
+            {"association_status",sourceEvents.empty()?"not_assessed_without_input_events":"assessed"}};
         phases.append(row);Save(request.id+"_"+phase+".csv",QByteArray::fromStdString(csv.str()));
         Save(request.id+"_"+phase+".json",QJsonDocument(row).toJson());
         EXPECT_TRUE(complete);EXPECT_EQ(after,identity);EXPECT_EQ(sourceEvents.size(),std::size_t(expected));
