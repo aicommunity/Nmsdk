@@ -183,7 +183,7 @@ def run(seed):
                            traceback=traceback.format_exc(), design=design, scientific_verdict=None)
                 write(out/(phase+'-failure.json'),row)
                 rows.append(row)
-                write(out/'matrix-partial.json',dict(rows=rows,remaining_phases=[p for p,_,_ in declarations[len(rows):]]))
+                write(out/(phase+'-partial.json'),dict(rows=rows,remaining_phases=[p for p,_,_ in declarations[len(rows):]]))
                 process_result = base/'jobs'/(q['job_id']+'-'+phase)/'process-result.json'
                 safe_to_continue = not invocation_started or (process_result.exists() and
                     load(process_result).get('all_processes_closed') is True)
