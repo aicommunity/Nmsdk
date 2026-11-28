@@ -180,3 +180,6 @@ Bin/**/settings.qt
 
 # Axonal source build entrypoint, not an output directory.
 !/Scripts/StructTrain/AxoneTimeLearner/Build-Server15.ps1
+
+# Compact axonal attempt pointers; raw build data remains external.
+!/Docs/StructTrain/AxoneTimeLearner/Attempts/*.archive.json
