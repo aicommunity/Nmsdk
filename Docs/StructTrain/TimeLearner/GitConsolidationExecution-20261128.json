@@ -1,0 +1,111 @@
+{
+  "kind": "timelearner_git_consolidation_execution",
+  "schema_version": 1,
+  "UTC": "2026-11-28T11:45:50.108021+00:00",
+  "user_authorized": true,
+  "selected_strategy": "four_direct_current_into_updated_develop_merges_all_no_ff",
+  "scientific_goal_unchanged": true,
+  "whole_plan_accepted": false,
+  "fully_accepted_stages": [
+    0
+  ],
+  "partially_complete_stages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "new_base": "dendr_timelearner",
+  "root_source_branch": "codex/timelearner-revision6-source-20261128",
+  "root_source_commit": "811b563b358abaf3d6f0811981cfdfa289cfa8f1",
+  "root_previous_develop": "87e7da0205b6bb0d582f7b4f2551c935fd7f2350",
+  "root_merge_commit": "287464cba1137ca7350ca4730c56f8404285b4b8",
+  "children": {
+    "Rdk": {
+      "path": "E:/Science-Repo/rdk-class-image-portability",
+      "merge_commit": "33e9b664306b49ad93d2fd7886c249f1026407fa",
+      "parents": [
+        "10e9d05aa658dd2203c89bc84ba9166595b50014",
+        "26129caa576a6b727ee2d76718e9fe9b2674e811"
+      ],
+      "tree": "576187bf4ca23ff053f5e01cef53f3924c38e9e8",
+      "develop": "33e9b664306b49ad93d2fd7886c249f1026407fa",
+      "dendr_timelearner": "33e9b664306b49ad93d2fd7886c249f1026407fa",
+      "merged_source": "26129caa576a6b727ee2d76718e9fe9b2674e811"
+    },
+    "PulseLib": {
+      "path": "E:/Science-Repo/pulselib-capacitance-acceptance",
+      "merge_commit": "de113071f18f9be9321a14dc4e1a8fa2537a19f9",
+      "parents": [
+        "891259ea08d6f88ae1631737935a140e2380a625",
+        "f8ddbd0895e9da0c0c5348612869a3e2ca95a1b1"
+      ],
+      "tree": "81162cd86cc7b775ff719b079c474a6c1a275c99",
+      "develop": "de113071f18f9be9321a14dc4e1a8fa2537a19f9",
+      "dendr_timelearner": "de113071f18f9be9321a14dc4e1a8fa2537a19f9",
+      "merged_source": "f8ddbd0895e9da0c0c5348612869a3e2ca95a1b1"
+    },
+    "Bin": {
+      "path": "E:/Science-Repo/nmsdk-bin-script-retirement",
+      "merge_commit": "402867ffcf2b9d6fc145bbe5e16f016e15269054",
+      "parents": [
+        "b4f66eb137d3e1c19539890dbdee06faa3e1020b",
+        "2c285cb472134fc92394153c089603a830a03f70"
+      ],
+      "tree": "6762c6932209eb934273bab0250f3dc4c7172934",
+      "develop": "402867ffcf2b9d6fc145bbe5e16f016e15269054",
+      "dendr_timelearner": "402867ffcf2b9d6fc145bbe5e16f016e15269054",
+      "merged_source": "2c285cb472134fc92394153c089603a830a03f70"
+    }
+  },
+  "child_origin_heads_verified": {
+    "Rdk": {
+      "output": "To https://github.com/aicommunity/Rdk.git\n   10e9d05..33e9b66  develop -> develop\n * [new branch]      dendr_timelearner -> dendr_timelearner\n",
+      "advertised_refs": {
+        "refs/heads/dendr_timelearner": "33e9b664306b49ad93d2fd7886c249f1026407fa",
+        "refs/heads/develop": "33e9b664306b49ad93d2fd7886c249f1026407fa"
+      }
+    },
+    "PulseLib": {
+      "output": "To https://github.com/aicommunity/Nmsdk-PulseLib.git\n   891259e..de11307  develop -> develop\n * [new branch]      dendr_timelearner -> dendr_timelearner\n",
+      "advertised_refs": {
+        "refs/heads/dendr_timelearner": "de113071f18f9be9321a14dc4e1a8fa2537a19f9",
+        "refs/heads/develop": "de113071f18f9be9321a14dc4e1a8fa2537a19f9"
+      }
+    },
+    "Bin": {
+      "output": "To https://github.com/aicommunity/Nmsdk-Bin.git\n   b4f66eb1..402867ff  develop -> develop\n * [new branch]        dendr_timelearner -> dendr_timelearner\n",
+      "advertised_refs": {
+        "refs/heads/dendr_timelearner": "402867ffcf2b9d6fc145bbe5e16f016e15269054",
+        "refs/heads/develop": "402867ffcf2b9d6fc145bbe5e16f016e15269054"
+      }
+    }
+  },
+  "root_gitlinks": {
+    "Rdk": "33e9b664306b49ad93d2fd7886c249f1026407fa",
+    "Bin": "402867ffcf2b9d6fc145bbe5e16f016e15269054",
+    "Libraries/Nmsdk-PulseLib": "de113071f18f9be9321a14dc4e1a8fa2537a19f9"
+  },
+  "all_child_merge_trees_equal_previous_feature_trees": true,
+  "root_merge_tree_equal_previous_feature_tree": true,
+  "root_post_merge_changes": [
+    "exact three child merge-commit gitlinks",
+    ".gitmodules hints for these three repositories set to dendr_timelearner",
+    "AGENTS.md continuation workflow",
+    "this execution receipt"
+  ],
+  "other_submodule_gitlinks_changed": false,
+  "user_checkout_working_files_changed": false,
+  "live_experiment_sources_and_runtime_changed": false,
+  "unmerged_historical_and_negative_fixture_branches_not_selected": true,
+  "optional_Rdk_documentation_only_branch_not_selected": true,
+  "fleet_sync_receipt": "external operational evidence after final root commit; frozen working-tree commits remain pinned"
+}
