@@ -10,6 +10,7 @@ import importlib.util
 import json
 import os
 from pathlib import Path
+import re
 import subprocess
 import sys
 import traceback
@@ -41,6 +42,30 @@ def private_path(value, *, existing=False):
     if existing:
         require(path.exists(), 'missing_input:'+str(path))
     return path.resolve(strict=existing)
+
+
+def installed_dependencies(value, layout='worker_private'):
+    """Resolve the immutable install tree; build outputs stay in BASE.
+
+    The short D layout permits the already completed Qt installation without
+    moving it or lengthening its headers. The ordinary worker layout retains
+    its original contract. Both layouts receive the same complete before/after
+    dependency inventory and installed-status checks in main().
+    """
+    require(layout in ('worker_private', 'short_readonly_D'), 'unsupported_dependency_layout')
+    if layout == 'worker_private':
+        return private_path(value, existing=True)
+    path = Path(value).absolute()
+    require(BASE == Path('D:/Projects/TimeLearnerWorker') and
+            path.name == 'installed' and path.parent.parent == Path('D:/tl') and
+            re.fullmatch(r'deps-[A-Za-z0-9][A-Za-z0-9._-]*', path.parent.name) is not None,
+            'short_dependencies_outside_declared_layout')
+    require(not any(c in str(path) for c in '%&|<>^!\r\n\x00"'), 'unsafe_batch_path')
+    for parent in (path, *path.parents):
+        require(not parent.is_symlink() and not parent.is_junction(), 'reparse_path')
+    require(path.is_dir() and path.resolve(strict=True) == path and
+            (path/'vcpkg/status').is_file(), 'missing_installed_dependency_tree')
+    return path
 
 
 def git(repository, *arguments):
@@ -86,9 +111,12 @@ def main():
     require(os.name == 'nt' and __debug__, 'requires_normal_windows_python')
     spec_path, spec = read_specification(args.specification, args.worker_root)
     require(spec['kind'] == 'timelearner_private_windows_build' and
-            type(spec['schema_version']) is int and spec['schema_version'] == 1, 'unsupported_build_spec')
+            type(spec['schema_version']) is int and spec['schema_version'] in (1, 2), 'unsupported_build_spec')
+    require((spec['schema_version'] == 2) == ('dependency_layout' in spec),
+            'build_dependency_layout_version_mismatch')
     source = private_path(spec['source_root'], existing=True)
-    dependencies = private_path(spec['installed_dependencies'], existing=True)
+    dependencies = installed_dependencies(spec['installed_dependencies'],
+                                         spec.get('dependency_layout', 'worker_private'))
     build, runtime, output = [private_path(spec[key]) for key in ('build_root', 'runtime_root', 'output_root')]
     paths = [source, dependencies, build, runtime, output]
     require(all(a == b or not a.is_relative_to(b) for a in paths for b in paths), 'overlapping_build_paths')
